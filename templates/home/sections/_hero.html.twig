@@ -16,7 +16,7 @@
   .hero-carousel.hero-carousel-full {
     border: 0;
     border-radius: 0;
-    background: #05070d;
+    background: #071a3a;
     box-shadow: none;
   }
 
@@ -57,15 +57,18 @@
     position:absolute;
     inset: 0;
     background:
-      linear-gradient(90deg, rgba(16,32,64,.78) 0%, rgba(16,32,64,.44) 44%, rgba(16,32,64,.10) 100%),
-      linear-gradient(0deg, rgba(16,32,64,.34) 0%, transparent 48%);
+      linear-gradient(90deg, rgba(9,31,73,.80) 0%, rgba(49,95,187,.48) 44%, rgba(49,95,187,.12) 100%),
+      radial-gradient(760px circle at 78% 16%, rgba(255,145,0,.16), transparent 42%),
+      linear-gradient(0deg, rgba(9,31,73,.42) 0%, transparent 48%);
     pointer-events:none;
   }
 
   .hero-carousel-full .hero-slide::after {
     background:
-      linear-gradient(90deg, rgba(5,7,13,.84) 0%, rgba(5,7,13,.58) 42%, rgba(5,7,13,.12) 100%),
-      linear-gradient(0deg, rgba(5,7,13,.46) 0%, transparent 48%);
+      linear-gradient(90deg, rgba(7,26,58,.86) 0%, rgba(49,95,187,.58) 44%, rgba(49,95,187,.16) 100%),
+      radial-gradient(900px circle at 82% 12%, rgba(255,145,0,.20), transparent 42%),
+      radial-gradient(700px circle at 18% 92%, rgba(49,95,187,.26), transparent 44%),
+      linear-gradient(0deg, rgba(7,26,58,.52) 0%, transparent 48%);
   }
 
   .hero-overlay{
@@ -82,7 +85,7 @@
     pointer-events: auto;
     max-width: min(680px, 82vw);
     color: #fff;
-    background: rgba(16,32,64,.30);
+    background: rgba(9,31,73,.38);
     border: 1px solid rgba(255,255,255,.18);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -93,9 +96,10 @@
 
   .hero-carousel-full .hero-card {
     max-width: min(720px, 86vw);
-    background: rgba(5,7,13,.38);
+    background: linear-gradient(135deg, rgba(7,26,58,.56), rgba(49,95,187,.24));
+    border-color: rgba(255,255,255,.20);
     border-radius: 8px;
-    box-shadow: 0 24px 58px rgba(0,0,0,.28);
+    box-shadow: 0 24px 58px rgba(7,26,58,.36);
   }
 
   .hero-card:not(:has(.hero-kicker, .hero-title, .hero-text, .btn)){
@@ -127,9 +131,10 @@
 
   .hero-title{
     font-family: 'Montserrat', sans-serif;
-    font-weight: 900;
-    font-size: clamp(1.65rem, 3.8vw, 3.45rem);
-    line-height: 1;
+    font-weight: 600;
+    font-size: clamp(2rem, 3.1vw, 2.875rem);
+    line-height: 1.08;
+    color: #ff9100;
     margin: 0;
     text-shadow: 0 10px 30px rgba(0,0,0,.25);
   }
