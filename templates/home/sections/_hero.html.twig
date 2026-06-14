@@ -3,13 +3,21 @@
 <style>
   .hero-carousel{
     --pad: clamp(16px, 2.4vw, 32px);
-    border-radius: clamp(18px, 2.5vw, 30px);
+    font-family: 'Roboto', sans-serif;
+    border-radius: 8px;
     overflow: hidden;
     background:
-      linear-gradient(135deg, rgba(var(--bs-primary-rgb), .16), rgba(25,135,84,.10)),
+      linear-gradient(135deg, rgba(var(--bs-primary-rgb), .16), rgba(255,145,0,.14)),
       #fff;
-    border: 1px solid rgba(15,23,42,.10);
-    box-shadow: 0 28px 70px rgba(17,42,92,.18);
+    border: 1px solid rgba(16,24,40,.10);
+    box-shadow: 0 22px 58px rgba(16,24,40,.14);
+  }
+
+  .hero-carousel.hero-carousel-full {
+    border: 0;
+    border-radius: 0;
+    background: #05070d;
+    box-shadow: none;
   }
 
   .hero-carousel .carousel-inner{
@@ -24,6 +32,10 @@
     overflow: hidden;
   }
 
+  .hero-carousel-full .hero-slide {
+    min-height: clamp(520px, 72vh, 760px);
+  }
+
   .hero-img{
     width: 100%;
     height: clamp(360px, 52vw, 620px);
@@ -35,14 +47,25 @@
     height: clamp(360px, 52vw, 620px);
   }
 
+  .hero-carousel-full .hero-img,
+  .hero-carousel-full .hero-video {
+    height: clamp(520px, 72vh, 760px);
+  }
+
   .hero-slide::after{
     content:"";
     position:absolute;
     inset: 0;
     background:
-      linear-gradient(90deg, rgba(2,6,23,.78) 0%, rgba(2,6,23,.46) 42%, rgba(2,6,23,.12) 100%),
-      linear-gradient(0deg, rgba(2,6,23,.44) 0%, transparent 46%);
+      linear-gradient(90deg, rgba(16,32,64,.78) 0%, rgba(16,32,64,.44) 44%, rgba(16,32,64,.10) 100%),
+      linear-gradient(0deg, rgba(16,32,64,.34) 0%, transparent 48%);
     pointer-events:none;
+  }
+
+  .hero-carousel-full .hero-slide::after {
+    background:
+      linear-gradient(90deg, rgba(5,7,13,.84) 0%, rgba(5,7,13,.58) 42%, rgba(5,7,13,.12) 100%),
+      linear-gradient(0deg, rgba(5,7,13,.46) 0%, transparent 48%);
   }
 
   .hero-overlay{
@@ -59,13 +82,20 @@
     pointer-events: auto;
     max-width: min(680px, 82vw);
     color: #fff;
-    background: rgba(2,6,23,.34);
+    background: rgba(16,32,64,.30);
     border: 1px solid rgba(255,255,255,.18);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 22px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 8px;
     padding: clamp(18px, 2.6vw, 34px);
-    box-shadow: 0 24px 70px rgba(0,0,0,.26);
+    box-shadow: 0 18px 46px rgba(0,0,0,.22);
+  }
+
+  .hero-carousel-full .hero-card {
+    max-width: min(720px, 86vw);
+    background: rgba(5,7,13,.38);
+    border-radius: 8px;
+    box-shadow: 0 24px 58px rgba(0,0,0,.28);
   }
 
   .hero-card:not(:has(.hero-kicker, .hero-title, .hero-text, .btn)){
@@ -77,26 +107,35 @@
     align-items:center;
     gap:.55rem;
     font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
     letter-spacing: .10em;
     font-size: .78rem;
     text-transform: uppercase;
     color: rgba(255,255,255,.92);
     background: rgba(255,255,255,.14);
-    border: 1px solid rgba(255,255,255,.16);
+    border: 1px solid rgba(255,255,255,.18);
     padding: .35rem .7rem;
     border-radius: 999px;
     margin-bottom: .6rem;
   }
 
+  .hero-carousel-full .hero-kicker {
+    color: #fff;
+    background: rgba(255,145,0,.18);
+    border-color: rgba(255,145,0,.36);
+  }
+
   .hero-title{
+    font-family: 'Montserrat', sans-serif;
     font-weight: 900;
-    font-size: clamp(1.65rem, 4vw, 3.6rem);
-    line-height: .98;
+    font-size: clamp(1.65rem, 3.8vw, 3.45rem);
+    line-height: 1;
     margin: 0;
     text-shadow: 0 10px 30px rgba(0,0,0,.25);
   }
 
   .hero-text{
+    font-family: 'Roboto', sans-serif;
     margin: .55rem 0 1rem;
     color: rgba(255,255,255,.88);
     font-size: clamp(.98rem, 1.4vw, 1.14rem);
@@ -104,10 +143,11 @@
   }
 
   .hero-card .btn{
+    font-family: 'Montserrat', sans-serif;
     border-radius: 999px;
     padding: .72rem 1.15rem;
     font-weight: 800;
-    box-shadow: 0 12px 26px rgba(0,0,0,.16);
+    box-shadow: 0 10px 22px rgba(0,0,0,.14);
   }
 
   .btn-glass{
@@ -141,6 +181,7 @@
   .hero-carousel .carousel-indicators .active{
     opacity: 1;
     width: 48px;
+    background: #ff9100;
   }
 
   .hero-carousel .carousel-control-prev,
@@ -150,7 +191,7 @@
     top: 50%;
     transform: translateY(-50%);
     border-radius: 999px;
-    background: rgba(255,255,255,.14);
+    background: rgba(255,255,255,.12);
     border: 1px solid rgba(255,255,255,.20);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -160,7 +201,7 @@
 
   .hero-carousel .carousel-control-prev:hover,
   .hero-carousel .carousel-control-next:hover{
-    background: rgba(255,255,255,.22);
+    background: rgba(255,145,0,.92);
     opacity: 1;
   }
 
@@ -175,6 +216,9 @@
     .hero-carousel .carousel-control-prev,
     .hero-carousel .carousel-control-next{ display:none; }
     .hero-carousel .carousel-indicators{ right: 16px; left: 16px; justify-content:center; }
+    .hero-carousel-full .hero-slide,
+    .hero-carousel-full .hero-img,
+    .hero-carousel-full .hero-video{ height: 500px; min-height: 500px; }
   }
 
   .hero-admin-actions{
@@ -193,9 +237,9 @@
   }
 </style>
 
-<section class="container-fluid my-3">
+<section class="container-fluid {{ hero_full_width|default(false) ? 'p-0 m-0 hero-section-full' : 'my-3' }}">
   {% if slides is defined and slides|length > 0 %}
-    <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel" data-bs-interval="6500">
+    <div id="heroCarousel" class="carousel slide hero-carousel {{ hero_full_width|default(false) ? 'hero-carousel-full' : '' }}" data-bs-ride="carousel" data-bs-interval="6500">
 
       {# Indicators dynamiques #}
       <div class="carousel-indicators">
@@ -318,14 +362,7 @@
 
       </div>
 
-      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+
     </div>
 
     {# Bouton ajouter (uniquement admin) #}

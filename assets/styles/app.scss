@@ -1,4 +1,5 @@
 // 1) Bootswatch variables (choisis ton thème)
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap');
 @import "bootswatch/dist/cosmo/variables";
 
 // 2) Tes overrides (ici tu changes tes couleurs)
@@ -7,6 +8,10 @@ $secondary:#ff9100;
 $success: #20c997;
 $danger:  #f56363;
 $warning: #ff9307;
+$font-family-sans-serif: 'Roboto', sans-serif;
+$headings-font-family: 'Montserrat', sans-serif;
+$headings-font-weight: 500;
+$btn-font-family: 'Montserrat', sans-serif;
 
 // Tu peux aussi surcharger le map complet si tu veux
 // $theme-colors: (
@@ -22,3 +27,34 @@ $warning: #ff9307;
 // 4) Bootswatch style final
 
 @import "bootswatch/dist/cosmo/bootswatch";
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.navbar,
+.btn,
+.badge,
+.dropdown-menu,
+.form-label,
+.card-header {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0;
+}
