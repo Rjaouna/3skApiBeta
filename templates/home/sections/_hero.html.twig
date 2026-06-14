@@ -57,18 +57,19 @@
     position:absolute;
     inset: 0;
     background:
-      linear-gradient(90deg, rgba(9,31,73,.80) 0%, rgba(49,95,187,.48) 44%, rgba(49,95,187,.12) 100%),
-      radial-gradient(760px circle at 78% 16%, rgba(255,145,0,.16), transparent 42%),
-      linear-gradient(0deg, rgba(9,31,73,.42) 0%, transparent 48%);
+      linear-gradient(90deg, rgba(7,26,58,.76) 0%, rgba(49,95,187,.40) 46%, rgba(255,145,0,.08) 100%),
+      radial-gradient(760px circle at 78% 16%, rgba(255,145,0,.18), transparent 42%),
+      radial-gradient(720px circle at 12% 92%, rgba(49,95,187,.20), transparent 44%),
+      linear-gradient(0deg, rgba(7,26,58,.42) 0%, transparent 48%);
     pointer-events:none;
   }
 
   .hero-carousel-full .hero-slide::after {
     background:
-      linear-gradient(90deg, rgba(7,26,58,.86) 0%, rgba(49,95,187,.58) 44%, rgba(49,95,187,.16) 100%),
-      radial-gradient(900px circle at 82% 12%, rgba(255,145,0,.20), transparent 42%),
-      radial-gradient(700px circle at 18% 92%, rgba(49,95,187,.26), transparent 44%),
-      linear-gradient(0deg, rgba(7,26,58,.52) 0%, transparent 48%);
+      linear-gradient(90deg, rgba(7,26,58,.80) 0%, rgba(49,95,187,.48) 44%, rgba(255,145,0,.10) 100%),
+      radial-gradient(900px circle at 82% 12%, rgba(255,145,0,.22), transparent 42%),
+      radial-gradient(700px circle at 18% 92%, rgba(49,95,187,.24), transparent 44%),
+      linear-gradient(0deg, rgba(7,26,58,.48) 0%, transparent 48%);
   }
 
   .hero-overlay{
@@ -85,8 +86,9 @@
     pointer-events: auto;
     max-width: min(680px, 82vw);
     color: #fff;
-    background: rgba(9,31,73,.38);
-    border: 1px solid rgba(255,255,255,.18);
+    background: linear-gradient(135deg, rgba(7,26,58,.58), rgba(49,95,187,.18));
+    border: 1px solid rgba(255,255,255,.20);
+    border-left: 4px solid rgba(255,145,0,.92);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 8px;
@@ -96,8 +98,9 @@
 
   .hero-carousel-full .hero-card {
     max-width: min(720px, 86vw);
-    background: linear-gradient(135deg, rgba(7,26,58,.56), rgba(49,95,187,.24));
-    border-color: rgba(255,255,255,.20);
+    background: linear-gradient(135deg, rgba(7,26,58,.64), rgba(49,95,187,.26));
+    border-color: rgba(255,255,255,.22);
+    border-left-color: rgba(255,145,0,.95);
     border-radius: 8px;
     box-shadow: 0 24px 58px rgba(7,26,58,.36);
   }
@@ -125,8 +128,8 @@
 
   .hero-carousel-full .hero-kicker {
     color: #fff;
-    background: rgba(255,145,0,.18);
-    border-color: rgba(255,145,0,.36);
+    background: rgba(255,145,0,.24);
+    border-color: rgba(255,145,0,.48);
   }
 
   .hero-title{
@@ -134,17 +137,18 @@
     font-weight: 600;
     font-size: clamp(2rem, 3.1vw, 2.875rem);
     line-height: 1.08;
-    color: #ff9100;
+    color: #ffb13b;
     margin: 0;
-    text-shadow: 0 10px 30px rgba(0,0,0,.25);
+    text-shadow: 0 10px 30px rgba(7,26,58,.58);
   }
 
   .hero-text{
     font-family: 'Roboto', sans-serif;
     margin: .55rem 0 1rem;
-    color: rgba(255,255,255,.88);
+    color: rgba(244,248,255,.92);
     font-size: clamp(.98rem, 1.4vw, 1.14rem);
     max-width: 58ch;
+    text-shadow: 0 8px 24px rgba(7,26,58,.42);
   }
 
   .hero-card .btn{

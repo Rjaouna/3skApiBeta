@@ -640,23 +640,82 @@
 
   .public-footer {
     margin-top: 0;
-    border-top: 3px solid var(--public-orange);
+    border-top: 0;
+    padding-top: 5.75rem !important;
+    padding-bottom: 5.25rem !important;
+    background:
+      linear-gradient(135deg, #c85f00 0%, #ec7d00 48%, var(--public-orange) 100%);
+    color: #fff;
+    box-shadow:
+      inset 0 12px 0 rgba(5,7,13,.22),
+      inset 0 1px 0 rgba(255,255,255,.20);
+  }
+
+  .public-footer h3,
+  .public-footer h4 {
+    color: #fff;
+    text-shadow: 0 8px 24px rgba(61,27,0,.28);
+  }
+
+  .public-footer h4 {
+    position: relative;
+    padding-bottom: .7rem;
+  }
+
+  .public-footer h4::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 42px;
+    height: 3px;
     background: var(--public-navy);
-    color: rgba(255,255,255,.92);
+    border-radius: 999px;
+  }
+
+  .public-footer hr {
+    border-color: rgba(255,255,255,.34);
+    opacity: 1;
   }
 
   .public-footer a {
-    color: rgba(255,255,255,.82);
+    color: rgba(255,255,255,.9);
     text-decoration: none;
   }
 
   .public-footer a:hover {
-    color: #fff;
+    color: var(--public-navy);
     text-decoration: none;
   }
 
   .public-footer-muted {
-    color: rgba(255,255,255,.68);
+    color: rgba(255,255,255,.84);
+  }
+
+  .public-footer-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: min(100%, 285px);
+    min-height: 112px;
+    padding: .85rem 1.35rem;
+    margin-bottom: 1.25rem;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid rgba(255,255,255,.78);
+    box-shadow: 0 18px 38px rgba(61,27,0,.24);
+  }
+
+  .public-footer-logo:hover {
+    transform: translateY(-1px);
+  }
+
+  .public-footer-logo img {
+    display: block;
+    width: 100%;
+    max-width: 240px;
+    max-height: 88px;
+    object-fit: contain;
   }
 
   .public-footer-pill {
@@ -665,34 +724,38 @@
     gap: .5rem;
     padding: .55rem .9rem;
     border-radius: 999px;
-    border: 1px solid rgba(255,255,255,.18);
-    background: rgba(255,255,255,.08);
-    color: rgba(255,255,255,.92) !important;
+    border: 1px solid rgba(255,255,255,.76);
+    background: rgba(255,255,255,.94);
+    color: var(--public-navy) !important;
     font-weight: 900;
     text-decoration: none;
+    box-shadow: 0 10px 26px rgba(61,27,0,.20);
   }
 
   .public-footer-pill:hover {
-    background: var(--public-orange);
-    border-color: var(--public-orange);
+    background: var(--public-navy);
+    border-color: var(--public-navy);
+    color: #fff !important;
   }
 
   .public-footer-social a {
     width: 40px;
     height: 40px;
     border-radius: 8px;
-    border: 1px solid rgba(255,255,255,.16);
+    border: 1px solid rgba(255,255,255,.72);
     display: grid;
     place-items: center;
     text-decoration: none;
-    color: rgba(255,255,255,.9);
-    background: rgba(255,255,255,.08);
+    color: var(--public-navy);
+    background: rgba(255,255,255,.92);
+    box-shadow: 0 10px 26px rgba(61,27,0,.18);
   }
 
   .public-footer-social a:hover {
     transform: translateY(-1px);
-    background: var(--public-orange);
-    border-color: var(--public-orange);
+    background: var(--public-navy);
+    border-color: var(--public-navy);
+    color: #fff;
   }
 
   @media (max-width: 991px) {
@@ -737,6 +800,11 @@
   }
 
   @media (max-width: 575px) {
+    .public-footer {
+      padding-top: 4.25rem !important;
+      padding-bottom: 4rem !important;
+    }
+
     .public-topbar {
       font-size: 10px;
     }
@@ -1064,6 +1132,9 @@
     <div class="container">
       <div class="row g-4">
         <div class="col-12 col-lg-4">
+          <a class="public-footer-logo" href="#accueil" aria-label="3SK Parts Auto">
+            <img src="{{ asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto">
+          </a>
           <h3 class="h4 fw-bold mb-3">3SK Parts Auto</h3>
           <p class="public-footer-muted mb-3">Société basée à Casablanca, spécialisée dans l'importation, l'exportation et la distribution de pièces détachées automobiles.</p>
           <div class="d-flex flex-wrap gap-2">
