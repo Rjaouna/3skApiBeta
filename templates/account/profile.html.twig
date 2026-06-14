@@ -1,0 +1,505 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% set isAdmin = is_granted('ROLE_ADMIN') %}
+
+<style>
+  :root{
+    --oc-radius: 22px;
+    --oc-border: rgba(0,0,0,.10);
+    --oc-shadow: 0 14px 34px rgba(0,0,0,.08);
+    --oc-muted: rgba(0,0,0,.58);
+    --oc-text: rgba(0,0,0,.84);
+    --oc-glass: rgba(255,255,255,.82);
+    --oc-glass-2: rgba(255,255,255,.60);
+  }
+
+  body.theme-dark{
+    --oc-border: rgba(255,255,255,.14);
+    --oc-shadow: 0 18px 46px rgba(0,0,0,.35);
+    --oc-muted: rgba(255,255,255,.62);
+    --oc-text: rgba(255,255,255,.88);
+    --oc-glass: rgba(18,18,22,.76);
+    --oc-glass-2: rgba(18,18,22,.58);
+  }
+
+  .profile-page-hero{
+    border-radius: 24px;
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    padding: 18px;
+    background:
+      radial-gradient(900px circle at 10% 10%, rgba(var(--bs-primary-rgb), .16), transparent 40%),
+      radial-gradient(900px circle at 90% 30%, rgba(var(--bs-secondary-rgb), .14), transparent 38%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+  }
+
+  .profile-page-hero h3{
+    margin: 0;
+    font-weight: 950;
+    color: var(--oc-text);
+  }
+
+  .profile-page-hero .subtitle{
+    margin-top: 6px;
+    color: var(--oc-muted);
+    font-size: .92rem;
+    font-weight: 600;
+  }
+
+  .profile-page-actions{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .profile-page-actions .btn,
+  .profile-save-btn{
+    min-height: 48px;
+    border-radius: 14px;
+    font-weight: 900;
+    padding-inline: 18px;
+  }
+
+  .profile-card{
+    border-radius: var(--oc-radius);
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    background: var(--oc-glass);
+    backdrop-filter: blur(8px);
+  }
+
+  .profile-card .card-body{
+    padding: 18px;
+  }
+
+  .profile-section-title{
+    font-size: .82rem;
+    font-weight: 900;
+    color: var(--oc-muted);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+
+  .profile-label{
+    font-size: .82rem;
+    font-weight: 900;
+    color: var(--oc-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+
+  .profile-card .form-control,
+  .profile-card textarea{
+    min-height: 48px;
+    border-radius: 14px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.75);
+    color: var(--oc-text);
+    font-weight: 700;
+    box-shadow: none;
+  }
+
+  .profile-card textarea{
+    min-height: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .profile-card .form-control:focus,
+  .profile-card textarea:focus{
+    border-color: rgba(var(--bs-primary-rgb), .35);
+    box-shadow: 0 0 0 .22rem rgba(var(--bs-primary-rgb), .10);
+    background: rgba(255,255,255,.92);
+  }
+
+  body.theme-dark .profile-card .form-control,
+  body.theme-dark .profile-card textarea{
+    background: rgba(255,255,255,.06);
+    color: var(--oc-text);
+  }
+
+  body.theme-dark .profile-card .form-control:focus,
+  body.theme-dark .profile-card textarea:focus{
+    background: rgba(255,255,255,.08);
+  }
+
+  .profile-card .form-control[readonly],
+  .profile-card textarea[readonly]{
+    background: rgba(0,0,0,.04);
+    color: var(--oc-muted);
+    opacity: 1;
+    cursor: not-allowed;
+  }
+
+  body.theme-dark .profile-card .form-control[readonly],
+  body.theme-dark .profile-card textarea[readonly]{
+    background: rgba(255,255,255,.05);
+    color: var(--oc-muted);
+  }
+
+  .profile-card .form-control[readonly]:focus,
+  .profile-card textarea[readonly]:focus{
+    box-shadow: none;
+    border-color: var(--oc-border);
+  }
+
+  .profile-card .form-text{
+    color: var(--oc-muted);
+    font-weight: 600;
+  }
+
+  .profile-alert{
+    border-radius: 16px;
+    border: 1px solid transparent;
+    font-weight: 800;
+    padding: 12px 14px;
+  }
+
+  .profile-alert.alert-success{
+    background: rgba(25,135,84,.10);
+    border-color: rgba(25,135,84,.18);
+    color: rgba(20,110,68,.98);
+  }
+
+  .profile-alert.alert-danger{
+    background: rgba(220,53,69,.10);
+    border-color: rgba(220,53,69,.18);
+    color: rgba(176,32,46,.98);
+  }
+
+  .profile-warning{
+    border-radius: 18px;
+    border: 1px solid rgba(255,193,7,.28);
+    background: rgba(255,193,7,.10);
+    color: var(--oc-text);
+    font-weight: 700;
+    padding: 14px 16px;
+  }
+
+  .profile-info{
+    border-radius: 18px;
+    border: 1px solid rgba(13,110,253,.16);
+    background: rgba(13,110,253,.08);
+    color: var(--oc-text);
+    font-weight: 700;
+    padding: 14px 16px;
+  }
+
+  .profile-stat-card{
+    border-radius: 18px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.48);
+    padding: 14px;
+    height: 100%;
+  }
+
+  body.theme-dark .profile-stat-card{
+    background: rgba(255,255,255,.04);
+  }
+
+  .profile-stat-label{
+    font-size: .74rem;
+    color: var(--oc-muted);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    letter-spacing: .03em;
+  }
+
+  .profile-stat-value{
+    color: var(--oc-text);
+    font-weight: 950;
+    font-size: 1.2rem;
+    line-height: 1.2;
+  }
+
+  .profile-side-links{
+    display: grid;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .profile-side-links .btn{
+    min-height: 46px;
+    border-radius: 14px;
+    font-weight: 900;
+  }
+
+  @media (max-width: 767.98px){
+    .profile-page-actions{
+      width: 100%;
+    }
+
+    .profile-page-actions .btn,
+    .profile-save-btn{
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="container py-4" data-profile-token="{{ crudToken|e('html_attr') }}">
+  {% if app.request.query.get('fillRequired') == '1' %}
+    <div class="profile-warning mb-3">
+      <i class="fa-solid fa-triangle-exclamation me-2"></i>
+      Merci de compléter au minimum <strong>Société</strong>, <strong>Ville</strong> et <strong>Adresse 1</strong> avant de passer commande.
+    </div>
+  {% endif %}
+
+  {% if not isAdmin %}
+    <div class="profile-info mb-3">
+      <i class="fa-solid fa-circle-info me-2"></i>
+      Vous pouvez modifier uniquement <strong>Adresse 2</strong> et le <strong>mot de passe</strong>.
+    </div>
+  {% endif %}
+
+  <div class="profile-page-hero mb-3 d-flex align-items-start justify-content-between flex-wrap gap-2">
+    <div>
+      <h3>Mon profil</h3>
+    </div>
+
+    <div class="profile-page-actions">
+      <a class="btn btn-outline-secondary" href="{{ path('cart_index') }}">
+        <i class="fa-solid fa-cart-shopping me-2"></i>Mon panier
+      </a>
+      <a class="btn btn-outline-primary" href="{{ path('order_index') }}">
+        <i class="fa-solid fa-box-open me-2"></i>Mes commandes
+      </a>
+    </div>
+  </div>
+
+  <div class="alert alert-danger profile-alert d-none" id="profileError"></div>
+  <div class="alert alert-success profile-alert d-none" id="profileSuccess"></div>
+
+  <div class="row g-3">
+    <div class="col-lg-8">
+      <div class="profile-card">
+        <div class="card-body">
+          <div class="profile-section-title">Informations du compte</div>
+
+          <form id="profileForm" novalidate>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="profile-label">Email</label>
+                <input type="email" class="form-control" value="{{ app.user.email }}" readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label class="profile-label">Nouveau mot de passe <span class="text-muted small text-lowercase">(optionnel)</span></label>
+                <input type="password" class="form-control" id="f_password">
+              </div>
+
+              <div class="col-md-6">
+                <label class="profile-label">Société</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="f_companyName"
+                  value="{{ app.user.companyName ?? '' }}"
+                  {% if not isAdmin %}readonly{% endif %}
+                >
+              </div>
+
+              <div class="col-md-6">
+                <label class="profile-label">Code client</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="f_customerCode"
+                  value="{{ app.user.customerCode ?? '' }}"
+                  {% if not isAdmin %}readonly{% endif %}
+                >
+              </div>
+
+              <div class="col-md-8">
+                <label class="profile-label">Adresse 1</label>
+                <textarea
+                  class="form-control"
+                  id="f_address1"
+                  rows="2"
+                  {% if not isAdmin %}readonly{% endif %}
+                >{{ app.user.address1 ?? '' }}</textarea>
+              </div>
+
+              <div class="col-md-4">
+                <label class="profile-label">Ville</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="f_city"
+                  value="{{ app.user.city ?? '' }}"
+                  {% if not isAdmin %}readonly{% endif %}
+                >
+              </div>
+
+              <div class="col-12">
+                <label class="profile-label">Adresse 2</label>
+                <textarea class="form-control" id="f_address2" rows="2">{{ app.user.address2 ?? '' }}</textarea>
+              </div>
+
+              <div class="col-12 pt-1">
+                <button class="btn btn-primary profile-save-btn" id="btnSaveProfile" type="button">
+                  <i class="fa-solid fa-floppy-disk me-2"></i>Enregistrer
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="profile-card">
+        <div class="card-body">
+          <div class="profile-section-title">Mes commandes</div>
+
+          <div class="row g-2">
+            <div class="col-6">
+              <div class="profile-stat-card">
+                <div class="profile-stat-label">Nouveau</div>
+                <div class="profile-stat-value" id="count_new">{{ orderCounts.new ?? 0 }}</div>
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div class="profile-stat-card">
+                <div class="profile-stat-label">Préparation</div>
+                <div class="profile-stat-value" id="count_preparing">{{ orderCounts.preparing ?? 0 }}</div>
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div class="profile-stat-card">
+                <div class="profile-stat-label">Livraison</div>
+                <div class="profile-stat-value" id="count_shipping">{{ orderCounts.shipping ?? 0 }}</div>
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div class="profile-stat-card">
+                <div class="profile-stat-label">Terminée</div>
+                <div class="profile-stat-value" id="count_completed">{{ orderCounts.completed ?? 0 }}</div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="profile-stat-card">
+                <div class="profile-stat-label">Annulée</div>
+                <div class="profile-stat-value" id="count_cancelled">{{ orderCounts.cancelled ?? 0 }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-side-links">
+            <a class="btn btn-outline-primary" href="{{ path('order_index') }}">
+              <i class="fa-solid fa-box-open me-2"></i>Voir mes commandes
+            </a>
+            <a class="btn btn-outline-secondary" href="{{ path('cart_index') }}">
+              <i class="fa-solid fa-cart-shopping me-2"></i>Retour au panier
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const wrap = document.querySelector('[data-profile-token]');
+  const token = wrap?.getAttribute('data-profile-token') || '';
+  const isAdmin = {{ isAdmin ? 'true' : 'false' }};
+
+  const errorBox = document.getElementById('profileError');
+  const successBox = document.getElementById('profileSuccess');
+  const btnSave = document.getElementById('btnSaveProfile');
+
+  const f_companyName = document.getElementById('f_companyName');
+  const f_customerCode = document.getElementById('f_customerCode');
+  const f_address1 = document.getElementById('f_address1');
+  const f_address2 = document.getElementById('f_address2');
+  const f_city = document.getElementById('f_city');
+  const f_password = document.getElementById('f_password');
+
+  function showError(message){
+    if (!errorBox) return;
+    errorBox.textContent = message || '';
+    errorBox.classList.toggle('d-none', !message);
+    if (successBox) successBox.classList.add('d-none');
+  }
+
+  function showSuccess(message){
+    if (!successBox) return;
+    successBox.textContent = message || '';
+    successBox.classList.toggle('d-none', !message);
+    if (errorBox) errorBox.classList.add('d-none');
+  }
+
+  async function refreshOrderStats(){
+    try {
+      const res = await fetch('{{ path('order_stats') }}', {
+        headers: { 'Accept': 'application/json' }
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) return;
+
+      const counts = data.counts || {};
+      document.getElementById('count_new').textContent = counts.new || 0;
+      document.getElementById('count_preparing').textContent = counts.preparing || 0;
+      document.getElementById('count_shipping').textContent = counts.shipping || 0;
+      document.getElementById('count_completed').textContent = counts.completed || 0;
+      document.getElementById('count_cancelled').textContent = counts.cancelled || 0;
+    } catch(e){}
+  }
+
+  btnSave?.addEventListener('click', async () => {
+    showError('');
+    showSuccess('');
+    btnSave.disabled = true;
+
+    try {
+      const payload = {
+        _token: token,
+        address2: f_address2?.value?.trim() || '',
+        password: f_password?.value || ''
+      };
+
+      if (isAdmin) {
+        payload.companyName = f_companyName?.value?.trim() || '';
+        payload.customerCode = f_customerCode?.value?.trim() || '';
+        payload.address1 = f_address1?.value?.trim() || '';
+        payload.city = f_city?.value?.trim() || '';
+      }
+
+      const res = await fetch('{{ path('account_profile_update') }}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        showError(data.message || 'Erreur de mise à jour.');
+        return;
+      }
+
+      if (f_password) f_password.value = '';
+      showSuccess(data.message || 'Profil mis à jour.');
+      await refreshOrderStats();
+    } catch(e) {
+      showError('Erreur réseau.');
+    } finally {
+      btnSave.disabled = false;
+    }
+  });
+
+  refreshOrderStats();
+})();
+</script>
+{% endblock %}

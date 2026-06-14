@@ -1,0 +1,665 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% set globalDiscountRate = order.discountRate ?? null %}
+{% set globalDiscountAmount = order.discountAmountTtc ?? null %}
+{% set hasGlobalDiscount = globalDiscountAmount is not null and globalDiscountAmount != '0.00' and globalDiscountAmount != '0' %}
+
+{% set dynamicDiscountTotal = 0 %}
+{% set hasDynamicDiscount = false %}
+
+{% for line in order.lines %}
+  {% set currentLineDiscount = (line.discountAmountTtc ?? 0) + 0 %}
+  {% if currentLineDiscount > 0 %}
+    {% set hasDynamicDiscount = true %}
+    {% set dynamicDiscountTotal = dynamicDiscountTotal + currentLineDiscount %}
+  {% endif %}
+{% endfor %}
+
+{% set statusClass =
+  order.status == 'new' ? 'status-new' :
+  (order.status == 'preparing' ? 'status-preparing' :
+  (order.status == 'shipping' ? 'status-shipping' :
+  (order.status == 'completed' ? 'status-completed' : 'status-cancelled')))
+%}
+
+{% set statusIcon =
+  order.status == 'new' ? 'fa-file-circle-plus' :
+  (order.status == 'preparing' ? 'fa-boxes-packing' :
+  (order.status == 'shipping' ? 'fa-truck-fast' :
+  (order.status == 'completed' ? 'fa-circle-check' : 'fa-ban')))
+%}
+
+<style>
+  :root{
+    --oc-radius: 22px;
+    --oc-border: rgba(0,0,0,.10);
+    --oc-shadow: 0 14px 34px rgba(0,0,0,.08);
+    --oc-muted: rgba(0,0,0,.58);
+    --oc-text: rgba(0,0,0,.84);
+    --oc-glass: rgba(255,255,255,.82);
+    --oc-glass-2: rgba(255,255,255,.60);
+  }
+
+  body.theme-dark{
+    --oc-border: rgba(255,255,255,.14);
+    --oc-shadow: 0 18px 46px rgba(0,0,0,.35);
+    --oc-muted: rgba(255,255,255,.62);
+    --oc-text: rgba(255,255,255,.88);
+    --oc-glass: rgba(18,18,22,.76);
+    --oc-glass-2: rgba(18,18,22,.58);
+  }
+
+  .order-show-hero{
+    border-radius: 24px;
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    padding: 18px;
+    background:
+      radial-gradient(900px circle at 10% 10%, rgba(var(--bs-primary-rgb), .16), transparent 40%),
+      radial-gradient(900px circle at 90% 30%, rgba(var(--bs-secondary-rgb), .14), transparent 38%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+  }
+
+  .order-show-hero h3{
+    margin: 0;
+    font-weight: 950;
+    color: var(--oc-text);
+  }
+
+  .order-show-hero .subtitle{
+    margin-top: 6px;
+    color: var(--oc-muted);
+    font-size: .92rem;
+    font-weight: 600;
+  }
+
+  .order-show-card{
+    border-radius: var(--oc-radius);
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    background: var(--oc-glass);
+    backdrop-filter: blur(8px);
+  }
+
+  .order-show-card .card-body{
+    padding: 18px;
+  }
+
+  .section-title{
+    font-size: .82rem;
+    font-weight: 900;
+    color: var(--oc-muted);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+
+  .order-show-actions{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .order-show-actions .btn{
+    min-height: 46px;
+    border-radius: 14px;
+    font-weight: 900;
+    padding-inline: 16px;
+  }
+
+  .order-lines-table{
+    margin: 0;
+  }
+
+  .order-lines-table thead th{
+    border-bottom: 1px solid var(--oc-border);
+    color: var(--oc-muted);
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-weight: 900;
+    padding: 14px 12px;
+    white-space: nowrap;
+    background: transparent;
+  }
+
+  .order-lines-table tbody tr{
+    transition: background .12s ease, transform .12s ease;
+  }
+
+  .order-lines-table tbody tr:hover{
+    background: rgba(var(--bs-primary-rgb), .04);
+  }
+
+  .order-lines-table tbody td{
+    padding: 16px 12px;
+    border-color: rgba(0,0,0,.06);
+    vertical-align: middle;
+    color: var(--oc-text);
+  }
+
+  body.theme-dark .order-lines-table tbody td{
+    border-color: rgba(255,255,255,.08);
+  }
+
+  .line-code{
+    font-weight: 950;
+    color: var(--bs-primary);
+    line-height: 1.2;
+  }
+
+  .line-designation{
+    margin-top: 4px;
+    font-size: .84rem;
+    color: var(--oc-muted);
+    font-weight: 700;
+  }
+
+  .price-main,
+  .total-main{
+    font-weight: 900;
+    color: var(--oc-text);
+    white-space: nowrap;
+  }
+
+  .price-before,
+  .total-before{
+    margin-top: 4px;
+    font-size: .82rem;
+    color: var(--oc-muted);
+    text-decoration: line-through;
+    font-weight: 700;
+  }
+
+  .discount-value{
+    font-weight: 900;
+    color: var(--bs-danger);
+    white-space: nowrap;
+  }
+
+  .discount-subvalue{
+    margin-top: 4px;
+    font-size: .82rem;
+    color: var(--bs-danger);
+    font-weight: 700;
+  }
+
+  .summary-box,
+  .customer-box{
+    border-radius: 18px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.48);
+    padding: 14px;
+  }
+
+  body.theme-dark .summary-box,
+  body.theme-dark .customer-box{
+    background: rgba(255,255,255,.04);
+  }
+
+  .customer-box strong,
+  .summary-box strong{
+    color: var(--oc-text);
+  }
+
+  .customer-line{
+    color: var(--oc-text);
+    font-weight: 700;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+
+  .customer-line.muted{
+    color: var(--oc-muted);
+    font-weight: 700;
+  }
+
+  .summary-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .summary-row:last-child{
+    margin-bottom: 0;
+  }
+
+  .summary-label{
+    color: var(--oc-muted);
+    font-size: .88rem;
+    font-weight: 800;
+  }
+
+  .summary-value{
+    color: var(--oc-text);
+    font-size: .92rem;
+    font-weight: 900;
+    text-align: end;
+  }
+
+  .summary-total{
+    font-size: 1.15rem;
+    font-weight: 950;
+    color: var(--oc-text);
+  }
+
+  .meta-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 8px 12px;
+    border: 1px solid var(--oc-border);
+    background: var(--oc-glass-2);
+    color: var(--oc-text);
+    font-size: .82rem;
+    font-weight: 900;
+  }
+
+  .meta-badge i{
+    color: var(--bs-primary);
+  }
+
+  .status-pill{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: .78rem;
+    font-weight: 900;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+
+  .status-pill i{
+    font-size: .78rem;
+  }
+
+  .status-new{
+    background: rgba(13,110,253,.12);
+    color: rgba(13,110,253,1);
+    border-color: rgba(13,110,253,.18);
+  }
+
+  .status-preparing{
+    background: rgba(255,193,7,.16);
+    color: rgba(176,117,0,.98);
+    border-color: rgba(255,193,7,.24);
+  }
+
+  .status-shipping{
+    background: rgba(111,66,193,.14);
+    color: rgba(111,66,193,1);
+    border-color: rgba(111,66,193,.22);
+  }
+
+  .status-completed{
+    background: rgba(25,135,84,.12);
+    color: rgba(25,135,84,1);
+    border-color: rgba(25,135,84,.20);
+  }
+
+  .status-cancelled{
+    background: rgba(220,53,69,.12);
+    color: rgba(220,53,69,.98);
+    border-color: rgba(220,53,69,.20);
+  }
+
+  .mobile-lines{
+    display: none;
+  }
+
+  .mobile-line-card{
+    border-radius: 18px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.52);
+    padding: 14px;
+  }
+
+  body.theme-dark .mobile-line-card{
+    background: rgba(255,255,255,.04);
+  }
+
+  .mobile-line-top{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .mobile-line-code{
+    font-weight: 950;
+    color: var(--bs-primary);
+    line-height: 1.2;
+  }
+
+  .mobile-line-designation{
+    font-size: .82rem;
+    color: var(--oc-muted);
+    font-weight: 700;
+    margin-top: 4px;
+  }
+
+  .mobile-line-grid{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 10px;
+  }
+
+  .mobile-line-box{
+    border-radius: 14px;
+    border: 1px solid var(--oc-border);
+    padding: 10px 12px;
+    background: rgba(255,255,255,.55);
+  }
+
+  body.theme-dark .mobile-line-box{
+    background: rgba(18,18,22,.50);
+  }
+
+  .mobile-line-label{
+    font-size: .72rem;
+    color: var(--oc-muted);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .mobile-line-value{
+    font-size: .88rem;
+    color: var(--oc-text);
+    font-weight: 800;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+
+  .empty-lines{
+    border-radius: 20px;
+    border: 1px dashed var(--oc-border);
+    background: rgba(255,255,255,.42);
+    padding: 44px 18px;
+    text-align: center;
+    color: var(--oc-muted);
+  }
+
+  body.theme-dark .empty-lines{
+    background: rgba(255,255,255,.03);
+  }
+
+  .empty-lines i{
+    font-size: 2rem;
+    margin-bottom: 12px;
+    color: var(--bs-secondary);
+  }
+
+  @media (max-width: 991.98px){
+    .desktop-lines{
+      display: none;
+    }
+
+    .mobile-lines{
+      display: grid;
+      gap: 12px;
+    }
+  }
+</style>
+
+<div class="container py-4">
+  <div class="order-show-hero mb-3 d-flex align-items-start justify-content-between flex-wrap gap-3">
+    <div>
+      <h3>Commande {{ order.orderNumber }}</h3>
+      <div class="subtitle">{{ order.customerEmail }}</div>
+    </div>
+
+    <div class="d-flex align-items-center gap-2 flex-wrap">
+      <span class="status-pill {{ statusClass }}">
+        <i class="fa-solid {{ statusIcon }}"></i>
+        {{ order.statusLabel }}
+      </span>
+
+      <div class="meta-badge">
+        <i class="fa-solid fa-receipt"></i>
+        <span>Total : {{ order.totalTtc }} DH</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3 order-show-actions">
+    <a class="btn btn-outline-secondary" href="{{ path('admin_orders_index') }}">
+      <i class="fa-solid fa-arrow-left me-2"></i>Retour
+    </a>
+
+    {% if nextStatus %}
+      <form method="post" action="{{ path('admin_orders_advance', {id: order.id}) }}">
+        <input type="hidden" name="_token" value="{{ csrf_token('advance_order_' ~ order.id) }}">
+        <button class="btn btn-primary" type="submit">
+          <i class="fa-solid fa-forward-step me-2"></i>
+          Passer à {{ statusLabels[nextStatus] ?? nextStatus }}
+        </button>
+      </form>
+    {% endif %}
+
+    {% if order.status not in ['completed', 'cancelled'] %}
+      <form method="post" action="{{ path('admin_orders_cancel', {id: order.id}) }}">
+        <input type="hidden" name="_token" value="{{ csrf_token('cancel_order_' ~ order.id) }}">
+        <button class="btn btn-outline-danger" type="submit">
+          <i class="fa-solid fa-ban me-2"></i>Annuler
+        </button>
+      </form>
+    {% endif %}
+  </div>
+
+  <div class="row g-3">
+    <div class="col-lg-8">
+      <div class="order-show-card">
+        <div class="card-body">
+          <div class="section-title">Articles</div>
+
+          {% if order.lines is empty %}
+            <div class="empty-lines">
+              <i class="fa-solid fa-box-open"></i>
+              <div class="fw-bold mb-1">Aucune ligne</div>
+              <div class="small">Cette commande ne contient aucun article.</div>
+            </div>
+          {% else %}
+            <div class="table-responsive desktop-lines">
+              <table class="table order-lines-table align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>Article</th>
+                    <th class="text-end">Qté</th>
+                    <th class="text-end">PU TTC</th>
+                    <th class="text-end">Remise</th>
+                    <th class="text-end">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for line in order.lines %}
+                    {% set lineDiscountRate = line.discountRate ?? null %}
+                    {% set lineDiscountAmount = line.discountAmountTtc ?? null %}
+                    {% set lineUnitPriceFinal = line.unitPriceFinalTtc ?? line.unitPriceTtc %}
+                    {% set lineUnitPriceBefore = line.unitPriceBeforeDiscountTtc ?? null %}
+                    {% set lineTotalFinal = line.lineTotalFinalTtc ?? line.lineTotalTtc %}
+                    {% set lineTotalBefore = line.lineTotalBeforeDiscountTtc ?? null %}
+                    {% set hasLineDiscount = lineDiscountAmount is not null and lineDiscountAmount != '0.00' and lineDiscountAmount != '0' %}
+
+                    <tr>
+                      <td>
+                        <div class="line-code">{{ line.articleCode }}</div>
+                        <div class="line-designation">{{ line.designation ?: '—' }}</div>
+                      </td>
+
+                      <td class="text-end">
+                        <div class="price-main">{{ line.quantity }}</div>
+                      </td>
+
+                      <td class="text-end">
+                        <div class="price-main">{{ lineUnitPriceFinal }} DH</div>
+                        {% if hasLineDiscount and lineUnitPriceBefore %}
+                          <div class="price-before">{{ lineUnitPriceBefore }} DH</div>
+                        {% endif %}
+                      </td>
+
+                      <td class="text-end">
+                        {% if hasLineDiscount %}
+                          <div class="discount-value">
+                            {% if lineDiscountRate %}
+                              -{{ lineDiscountRate }}%
+                            {% else %}
+                              -{{ lineDiscountAmount }} DH
+                            {% endif %}
+                          </div>
+                          {% if lineDiscountRate and lineDiscountAmount %}
+                            <div class="discount-subvalue">-{{ lineDiscountAmount }} DH</div>
+                          {% endif %}
+                        {% else %}
+                          <span class="text-muted">—</span>
+                        {% endif %}
+                      </td>
+
+                      <td class="text-end">
+                        <div class="total-main">{{ lineTotalFinal }} DH</div>
+                        {% if hasLineDiscount and lineTotalBefore %}
+                          <div class="total-before">{{ lineTotalBefore }} DH</div>
+                        {% endif %}
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mobile-lines">
+              {% for line in order.lines %}
+                {% set lineDiscountRate = line.discountRate ?? null %}
+                {% set lineDiscountAmount = line.discountAmountTtc ?? null %}
+                {% set lineUnitPriceFinal = line.unitPriceFinalTtc ?? line.unitPriceTtc %}
+                {% set lineTotalFinal = line.lineTotalFinalTtc ?? line.lineTotalTtc %}
+                {% set hasLineDiscount = lineDiscountAmount is not null and lineDiscountAmount != '0.00' and lineDiscountAmount != '0' %}
+
+                <div class="mobile-line-card">
+                  <div class="mobile-line-top">
+                    <div>
+                      <div class="mobile-line-code">{{ line.articleCode }}</div>
+                      <div class="mobile-line-designation">{{ line.designation ?: '—' }}</div>
+                    </div>
+
+                    <div class="meta-badge">
+                      <i class="fa-solid fa-cubes"></i>
+                      <span>x{{ line.quantity }}</span>
+                    </div>
+                  </div>
+
+                  <div class="mobile-line-grid">
+                    <div class="mobile-line-box">
+                      <div class="mobile-line-label">PU TTC</div>
+                      <div class="mobile-line-value">{{ lineUnitPriceFinal }} DH</div>
+                    </div>
+
+                    <div class="mobile-line-box">
+                      <div class="mobile-line-label">Total</div>
+                      <div class="mobile-line-value">{{ lineTotalFinal }} DH</div>
+                    </div>
+
+                    <div class="mobile-line-box">
+                      <div class="mobile-line-label">Remise</div>
+                      <div class="mobile-line-value">
+                        {% if hasLineDiscount %}
+                          {% if lineDiscountRate %}
+                            -{{ lineDiscountRate }}%
+                          {% else %}
+                            -{{ lineDiscountAmount }} DH
+                          {% endif %}
+                        {% else %}
+                          —
+                        {% endif %}
+                      </div>
+                    </div>
+
+                    <div class="mobile-line-box">
+                      <div class="mobile-line-label">Montant remise</div>
+                      <div class="mobile-line-value">
+                        {% if hasLineDiscount %}
+                          -{{ lineDiscountAmount }} DH
+                        {% else %}
+                          —
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="d-grid gap-3">
+        <div class="order-show-card">
+          <div class="card-body">
+            <div class="section-title">Infos client</div>
+
+            <div class="customer-box">
+              <div class="customer-line"><strong>{{ order.companyName ?: '—' }}</strong></div>
+              <div class="customer-line">{{ order.address1 ?: '—' }}</div>
+              {% if order.address2 %}
+                <div class="customer-line">{{ order.address2 }}</div>
+              {% endif %}
+              <div class="customer-line">{{ order.city ?: '—' }}</div>
+              <div class="customer-line">{{ order.customerEmail }}</div>
+              <div class="customer-line muted">Code client : {{ order.customerCode ?: '—' }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-show-card">
+          <div class="card-body">
+            <div class="section-title">Résumé</div>
+
+            <div class="summary-box">
+              <div class="summary-row">
+                <span class="summary-label">Statut</span>
+                <span class="status-pill {{ statusClass }}">
+                  <i class="fa-solid {{ statusIcon }}"></i>
+                  {{ order.statusLabel }}
+                </span>
+              </div>
+
+              <div class="summary-row">
+                <span class="summary-label">Sous-total</span>
+                <span class="summary-value">{{ order.subtotalTtc }} DH</span>
+              </div>
+
+              {% if hasGlobalDiscount %}
+                <div class="summary-row">
+                  <span class="summary-label">Remise {{ globalDiscountRate }}%</span>
+                  <span class="summary-value text-danger">-{{ globalDiscountAmount }} DH</span>
+                </div>
+              {% elseif hasDynamicDiscount %}
+                <div class="summary-row">
+                  <span class="summary-label">Remises variables</span>
+                  <span class="summary-value text-danger">-{{ dynamicDiscountTotal|number_format(2, '.', '') }} DH</span>
+                </div>
+              {% endif %}
+
+              <hr>
+
+              <div class="summary-row mb-0">
+                <span class="summary-label fw-bold">Total final</span>
+                <span class="summary-total">{{ order.totalTtc }} DH</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,297 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+  :root{
+    --oc-radius: 22px;
+    --oc-border: rgba(0,0,0,.10);
+    --oc-shadow: 0 14px 34px rgba(0,0,0,.08);
+    --oc-muted: rgba(0,0,0,.58);
+    --oc-text: rgba(0,0,0,.84);
+    --oc-glass: rgba(255,255,255,.82);
+    --oc-glass-2: rgba(255,255,255,.60);
+  }
+
+  body.theme-dark{
+    --oc-border: rgba(255,255,255,.14);
+    --oc-shadow: 0 18px 46px rgba(0,0,0,.35);
+    --oc-muted: rgba(255,255,255,.62);
+    --oc-text: rgba(255,255,255,.88);
+    --oc-glass: rgba(18,18,22,.76);
+    --oc-glass-2: rgba(18,18,22,.58);
+  }
+
+  .import-page-hero{
+    border-radius: 24px;
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    padding: 18px;
+    background:
+      radial-gradient(900px circle at 10% 10%, rgba(var(--bs-primary-rgb), .16), transparent 40%),
+      radial-gradient(900px circle at 90% 30%, rgba(var(--bs-secondary-rgb), .14), transparent 38%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+  }
+
+  .import-page-hero h3{
+    margin: 0;
+    font-weight: 950;
+    color: var(--oc-text);
+  }
+
+  .import-page-hero .subtitle{
+    margin-top: 6px;
+    color: var(--oc-muted);
+    font-size: .92rem;
+    font-weight: 600;
+  }
+
+  .import-config-card{
+    border-radius: var(--oc-radius);
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    background: var(--oc-glass);
+    backdrop-filter: blur(8px);
+  }
+
+  .import-config-card .card-body{
+    padding: 18px;
+  }
+
+  .import-section-title{
+    font-size: .82rem;
+    font-weight: 900;
+    color: var(--oc-muted);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+
+  .import-meta-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .import-meta-box{
+    border-radius: 18px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.48);
+    padding: 14px;
+  }
+
+  body.theme-dark .import-meta-box{
+    background: rgba(255,255,255,.04);
+  }
+
+  .import-meta-label{
+    font-size: .74rem;
+    color: var(--oc-muted);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    letter-spacing: .03em;
+  }
+
+  .import-meta-value{
+    color: var(--oc-text);
+    font-weight: 800;
+    line-height: 1.45;
+    word-break: break-word;
+  }
+
+  .import-form-label{
+    font-size: .82rem;
+    font-weight: 900;
+    color: var(--oc-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+
+  .import-config-card .form-control{
+    min-height: 50px;
+    border-radius: 14px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.75);
+    color: var(--oc-text);
+    font-weight: 700;
+    box-shadow: none;
+  }
+
+  .import-config-card .form-control:focus{
+    border-color: rgba(var(--bs-primary-rgb), .35);
+    box-shadow: 0 0 0 .22rem rgba(var(--bs-primary-rgb), .10);
+    background: rgba(255,255,255,.92);
+  }
+
+  body.theme-dark .import-config-card .form-control{
+    background: rgba(255,255,255,.06);
+    color: var(--oc-text);
+  }
+
+  body.theme-dark .import-config-card .form-control:focus{
+    background: rgba(255,255,255,.08);
+  }
+
+  .import-actions{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+  }
+
+  .import-actions .btn{
+    min-height: 48px;
+    border-radius: 14px;
+    font-weight: 900;
+    padding-inline: 18px;
+  }
+
+  .import-message{
+    font-weight: 800;
+    min-height: 24px;
+  }
+
+  .import-meta-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 8px 12px;
+    border: 1px solid var(--oc-border);
+    background: var(--oc-glass-2);
+    color: var(--oc-text);
+    font-size: .82rem;
+    font-weight: 900;
+  }
+
+  .import-meta-badge i{
+    color: var(--bs-primary);
+  }
+
+  @media (max-width: 767.98px){
+    .import-actions .btn{
+      width: 100%;
+    }
+
+    .import-message{
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="container py-4">
+  <div class="import-page-hero mb-3 d-flex align-items-start justify-content-between flex-wrap gap-2">
+    <div>
+      <h3>Configuration fichier import</h3>
+      <div class="subtitle">Définis le chemin et le nom du fichier source utilisé pour l’import.</div>
+    </div>
+
+    <div class="import-meta-badge">
+      <i class="fa-solid fa-file-import"></i>
+      <span>Source active</span>
+    </div>
+  </div>
+
+  <div class="import-config-card">
+    <div class="card-body">
+      <div class="import-section-title">Configuration actuelle</div>
+
+      <div class="import-meta-grid">
+        <div class="import-meta-box">
+          <div class="import-meta-label">Chemin</div>
+          <div class="import-meta-value" id="dirText">{{ source ? source.directoryPath : '-' }}</div>
+        </div>
+
+        <div class="import-meta-box">
+          <div class="import-meta-label">Nom du fichier</div>
+          <div class="import-meta-value" id="nameText">{{ source ? source.fileName : '-' }}</div>
+        </div>
+
+        <div class="import-meta-box">
+          <div class="import-meta-label">Chemin complet</div>
+          <div class="import-meta-value" id="fullText">{{ source ? source.fullPath : '-' }}</div>
+        </div>
+      </div>
+
+      <div class="import-section-title">Modifier la source</div>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="import-form-label">Dossier source</label>
+          <input
+            class="form-control"
+            id="directoryPath"
+            placeholder="/var/www/..."
+            value="{{ source ? source.directoryPath : '' }}"
+          >
+        </div>
+
+        <div class="col-md-6">
+          <label class="import-form-label">Nom du fichier</label>
+          <input
+            class="form-control"
+            id="fileName"
+            placeholder="articles.csv"
+            value="{{ source ? source.fileName : '' }}"
+          >
+        </div>
+      </div>
+
+      <div class="import-actions">
+        <button class="btn btn-primary" id="saveBtn" type="button">
+          <i class="fa-solid fa-floppy-disk me-2"></i>Enregistrer
+        </button>
+
+        <span class="import-message" id="saveMsg"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var CSRF = "{{ csrf }}";
+
+document.getElementById('saveBtn').addEventListener('click', async () => {
+  const dir = document.getElementById('directoryPath').value.trim();
+  const name = document.getElementById('fileName').value.trim();
+  const msg = document.getElementById('saveMsg');
+  const btn = document.getElementById('saveBtn');
+
+  msg.textContent = "Enregistrement...";
+  msg.className = "import-message text-muted";
+  btn.disabled = true;
+
+  try {
+    const res = await fetch("{{ path('import_source_save') }}", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({_token: CSRF, directoryPath: dir, fileName: name})
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok || !data.ok) {
+      msg.textContent = data.message || "Erreur";
+      msg.className = "import-message text-danger";
+      btn.disabled = false;
+      return;
+    }
+
+    msg.textContent = data.message;
+    msg.className = "import-message text-success";
+
+    document.getElementById('dirText').textContent = dir || '-';
+    document.getElementById('nameText').textContent = name || '-';
+    document.getElementById('fullText').textContent = data.fullPath || '-';
+  } catch (e) {
+    msg.textContent = "Erreur réseau";
+    msg.className = "import-message text-danger";
+  } finally {
+    btn.disabled = false;
+  }
+});
+</script>
+{% endblock %}

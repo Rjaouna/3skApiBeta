@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Nouvelle commande {{ order.orderNumber }}</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f7fb; font-family:Arial, Helvetica, sans-serif; color:#1f2937;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#f4f7fb; margin:0; padding:30px 0;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="680" cellspacing="0" cellpadding="0" border="0" style="width:680px; max-width:680px; background:#ffffff; border-radius:24px; overflow:hidden; box-shadow:0 10px 35px rgba(15,23,42,0.08);">
+
+          <tr>
+            <td style="padding:0; background:linear-gradient(135deg, #0d6efd 0%, #3b82f6 55%, #60a5fa 100%);">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td style="padding:32px 36px 18px 36px;">
+                    <div style="display:inline-block; padding:8px 14px; border-radius:999px; background:rgba(255,255,255,0.16); color:#ffffff; font-size:12px; font-weight:700; letter-spacing:0.4px; text-transform:uppercase;">
+                      Nouvelle commande
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:0 36px 30px 36px;">
+                    <h1 style="margin:0; font-size:30px; line-height:1.2; color:#ffffff; font-weight:800;">
+                      Commande {{ order.orderNumber }}
+                    </h1>
+                    <p style="margin:10px 0 0 0; font-size:15px; line-height:1.6; color:rgba(255,255,255,0.92);">
+                      Une nouvelle commande vient d’être enregistrée sur votre boutique.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:30px 36px 10px 36px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td valign="top" style="width:50%; padding-right:10px;">
+                    <div style="border:1px solid #e5e7eb; border-radius:18px; padding:20px; background:#f9fafb;">
+                      <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:#6b7280; margin-bottom:14px;">
+                        Informations client
+                      </div>
+
+                      <p style="margin:0 0 10px 0; font-size:14px; color:#111827;">
+                        <strong>Email :</strong><br>
+                        <span style="color:#374151;">{{ order.customerEmail }}</span>
+                      </p>
+
+                      <p style="margin:0 0 10px 0; font-size:14px; color:#111827;">
+                        <strong>Société :</strong><br>
+                        <span style="color:#374151;">{{ order.companyName ?: '—' }}</span>
+                      </p>
+
+                      <p style="margin:0; font-size:14px; color:#111827;">
+                        <strong>Ville :</strong><br>
+                        <span style="color:#374151;">{{ order.city ?: '—' }}</span>
+                      </p>
+                    </div>
+                  </td>
+
+                  <td valign="top" style="width:50%; padding-left:10px;">
+                    <div style="border:1px solid #dbeafe; border-radius:18px; padding:20px; background:linear-gradient(180deg, #eff6ff 0%, #f8fbff 100%);">
+                      <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:#6b7280; margin-bottom:14px;">
+                        Résumé commande
+                      </div>
+
+                      <p style="margin:0 0 10px 0; font-size:14px; color:#111827;">
+                        <strong>Référence :</strong><br>
+                        <span style="color:#374151;">{{ order.orderNumber }}</span>
+                      </p>
+
+                      <p style="margin:0 0 10px 0; font-size:14px; color:#111827;">
+                        <strong>Nombre de lignes :</strong><br>
+                        <span style="color:#374151;">{{ order.lines|length }}</span>
+                      </p>
+
+                      <div style="margin-top:16px; padding:14px 16px; border-radius:16px; background:#0f172a; color:#ffffff;">
+                        <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.5px; opacity:0.75; margin-bottom:6px;">
+                          Montant total
+                        </div>
+                        <div style="font-size:28px; font-weight:800; line-height:1;">
+                          {{ order.totalTtc }} DH
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:18px 36px 10px 36px;">
+              <h2 style="margin:0; font-size:20px; color:#111827; font-weight:800;">
+                Détail des articles
+              </h2>
+              <p style="margin:8px 0 0 0; font-size:14px; color:#6b7280; line-height:1.6;">
+                Retrouvez ci-dessous les produits inclus dans cette commande.
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:18px 36px 30px 36px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="border-collapse:separate; border-spacing:0 12px;">
+                <thead>
+                  <tr>
+                    <th align="left" style="padding:0 16px 6px 16px; font-size:12px; text-transform:uppercase; letter-spacing:0.6px; color:#6b7280;">
+                      Article
+                    </th>
+                    <th align="center" style="padding:0 16px 6px 16px; font-size:12px; text-transform:uppercase; letter-spacing:0.6px; color:#6b7280;">
+                      Qté
+                    </th>
+                    <th align="right" style="padding:0 16px 6px 16px; font-size:12px; text-transform:uppercase; letter-spacing:0.6px; color:#6b7280;">
+                      Total
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for line in order.lines %}
+                    <tr>
+                      <td colspan="3" style="padding:0;">
+                        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:18px;">
+                          <tr>
+                            <td style="padding:16px 18px;" valign="top">
+                              <div style="font-size:15px; font-weight:800; color:#0d6efd; margin-bottom:4px;">
+                                {{ line.articleCode }}
+                              </div>
+                              <div style="font-size:14px; color:#374151; line-height:1.5;">
+                                {{ line.designation ?: '—' }}
+                              </div>
+                            </td>
+
+                            <td width="90" align="center" valign="middle" style="padding:16px 10px; font-size:15px; font-weight:700; color:#111827;">
+                              {{ line.quantity }}
+                            </td>
+
+                            <td width="130" align="right" valign="middle" style="padding:16px 18px; font-size:16px; font-weight:800; color:#111827;">
+                              {{ line.lineTotalTtc }} DH
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:0 36px 36px 36px;">
+              <div style="border-top:1px solid #e5e7eb; padding-top:22px;">
+                <p style="margin:0; font-size:13px; line-height:1.7; color:#6b7280;">
+                  Cet email a été généré automatiquement par votre application.<br>
+                  Merci de traiter cette commande dans les meilleurs délais.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

@@ -1,0 +1,473 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+  :root{
+    --oc-radius: 22px;
+    --oc-border: rgba(0,0,0,.10);
+    --oc-shadow: 0 14px 34px rgba(0,0,0,.08);
+    --oc-muted: rgba(0,0,0,.58);
+    --oc-text: rgba(0,0,0,.84);
+    --oc-glass: rgba(255,255,255,.82);
+    --oc-glass-2: rgba(255,255,255,.60);
+  }
+
+  body.theme-dark{
+    --oc-border: rgba(255,255,255,.14);
+    --oc-shadow: 0 18px 46px rgba(0,0,0,.35);
+    --oc-muted: rgba(255,255,255,.62);
+    --oc-text: rgba(255,255,255,.88);
+    --oc-glass: rgba(18,18,22,.76);
+    --oc-glass-2: rgba(18,18,22,.58);
+  }
+
+  .profile-page-hero{
+    border-radius: 24px;
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    padding: 18px;
+    background:
+      radial-gradient(900px circle at 10% 10%, rgba(var(--bs-primary-rgb), .16), transparent 40%),
+      radial-gradient(900px circle at 90% 30%, rgba(var(--bs-secondary-rgb), .14), transparent 38%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+  }
+
+  .profile-page-hero h3{
+    margin: 0;
+    font-weight: 950;
+    color: var(--oc-text);
+  }
+
+  .profile-page-hero .subtitle{
+    margin-top: 6px;
+    color: var(--oc-muted);
+    font-size: .92rem;
+    font-weight: 600;
+  }
+
+  .profile-save-btn{
+    min-height: 48px;
+    border-radius: 14px;
+    font-weight: 900;
+    padding-inline: 18px;
+  }
+
+  .profile-card{
+    border-radius: var(--oc-radius);
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    background: var(--oc-glass);
+    backdrop-filter: blur(8px);
+  }
+
+  .profile-card .card-body{
+    padding: 18px;
+  }
+
+  .profile-section-title{
+    font-size: .82rem;
+    font-weight: 900;
+    color: var(--oc-muted);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+
+  .profile-label{
+    font-size: .82rem;
+    font-weight: 900;
+    color: var(--oc-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+
+  .profile-card .form-control,
+  .profile-card textarea{
+    min-height: 48px;
+    border-radius: 14px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.75);
+    color: var(--oc-text);
+    font-weight: 700;
+    box-shadow: none;
+  }
+
+  .profile-card textarea{
+    min-height: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .profile-card .form-control:focus,
+  .profile-card textarea:focus{
+    border-color: rgba(var(--bs-primary-rgb), .35);
+    box-shadow: 0 0 0 .22rem rgba(var(--bs-primary-rgb), .10);
+    background: rgba(255,255,255,.92);
+  }
+
+  body.theme-dark .profile-card .form-control,
+  body.theme-dark .profile-card textarea{
+    background: rgba(255,255,255,.06);
+    color: var(--oc-text);
+  }
+
+  body.theme-dark .profile-card .form-control:focus,
+  body.theme-dark .profile-card textarea:focus{
+    background: rgba(255,255,255,.08);
+  }
+
+  .profile-card .form-control:disabled{
+    background: rgba(0,0,0,.04);
+    color: var(--oc-muted);
+    opacity: 1;
+  }
+
+  body.theme-dark .profile-card .form-control:disabled{
+    background: rgba(255,255,255,.05);
+    color: var(--oc-muted);
+  }
+
+  .profile-card .form-text{
+    color: var(--oc-muted);
+    font-weight: 600;
+  }
+
+  .profile-alert{
+    border-radius: 16px;
+    border: 1px solid transparent;
+    font-weight: 800;
+    padding: 12px 14px;
+  }
+
+  .profile-alert.alert-success{
+    background: rgba(25,135,84,.10);
+    border-color: rgba(25,135,84,.18);
+    color: rgba(20,110,68,.98);
+  }
+
+  .profile-alert.alert-danger{
+    background: rgba(220,53,69,.10);
+    border-color: rgba(220,53,69,.18);
+    color: rgba(176,32,46,.98);
+  }
+
+  .profile-status-box{
+    border-radius: 18px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.48);
+    padding: 14px;
+  }
+
+  body.theme-dark .profile-status-box{
+    background: rgba(255,255,255,.04);
+  }
+
+  .account-status-pill{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 110px;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: .8rem;
+    font-weight: 900;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+
+  .account-status-active{
+    background: rgba(25,135,84,.12);
+    color: rgba(25,135,84,1);
+    border-color: rgba(25,135,84,.20);
+  }
+
+  .account-status-inactive{
+    background: rgba(108,117,125,.14);
+    color: rgba(73,80,87,1);
+    border-color: rgba(108,117,125,.20);
+  }
+
+  body.theme-dark .account-status-inactive{
+    color: rgba(222,226,230,.88);
+    border-color: rgba(255,255,255,.14);
+    background: rgba(255,255,255,.06);
+  }
+
+  .password-side-box{
+    border-radius: 18px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.48);
+    padding: 14px;
+  }
+
+  body.theme-dark .password-side-box{
+    background: rgba(255,255,255,.04);
+  }
+
+  .password-tip{
+    color: var(--oc-muted);
+    font-weight: 600;
+    font-size: .88rem;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 767.98px){
+    .profile-save-btn{
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="container py-4" data-profile-token="{{ profileToken|e('html_attr') }}">
+  <div class="profile-page-hero mb-3 d-flex align-items-start justify-content-between flex-wrap gap-2">
+    <div>
+      <h3>Mon profil</h3>
+      <div class="subtitle">Gère les informations de ton compte et ton mot de passe.</div>
+    </div>
+
+    <button class="btn btn-primary profile-save-btn" id="btnSaveProfile" type="button">
+      <i class="fa-solid fa-floppy-disk me-2"></i>Enregistrer
+    </button>
+  </div>
+
+  <div class="alert alert-success profile-alert d-none" id="profileSuccess"></div>
+  <div class="alert alert-danger profile-alert d-none" id="profileError"></div>
+
+  <div class="row g-3">
+    <div class="col-lg-8">
+      <div class="profile-card">
+        <div class="card-body">
+          <div class="profile-section-title">Informations du compte</div>
+
+          <div class="row g-3">
+            <div class="col-md-8">
+              <label class="profile-label">Adresse email</label>
+              <input type="email" class="form-control" id="f_email" disabled>
+              <div class="form-text">L’email ne peut pas être modifié.</div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="profile-label">Statut du compte</label>
+              <div class="profile-status-box">
+                <span class="account-status-pill account-status-inactive" id="accountStatusBadge">
+                  <i class="fa-solid fa-circle-pause"></i>—
+                </span>
+              </div>
+              <div class="form-text mt-2">Le statut n’est pas modifiable par l’utilisateur.</div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="profile-label">Société</label>
+              <input type="text" class="form-control" id="f_companyName">
+            </div>
+
+            <div class="col-md-6">
+              <label class="profile-label">Code client</label>
+              <input type="text" class="form-control" id="f_customerCode">
+            </div>
+
+            <div class="col-md-6">
+              <label class="profile-label">Ville</label>
+              <input type="text" class="form-control" id="f_city">
+            </div>
+
+            <div class="col-12">
+              <label class="profile-label">Adresse 1</label>
+              <textarea class="form-control" id="f_address1" rows="2"></textarea>
+            </div>
+
+            <div class="col-12">
+              <label class="profile-label">Adresse 2</label>
+              <textarea class="form-control" id="f_address2" rows="2"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="profile-card">
+        <div class="card-body">
+          <div class="profile-section-title">Sécurité</div>
+
+          <div class="password-side-box mb-3">
+            <div class="fw-bold mb-1" style="color: var(--oc-text);">Changer le mot de passe</div>
+            <div class="password-tip">
+              Laisse les champs vides si tu ne veux pas modifier ton mot de passe.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="profile-label">Mot de passe actuel</label>
+            <input type="password" class="form-control" id="f_currentPassword">
+          </div>
+
+          <div class="mb-3">
+            <label class="profile-label">Nouveau mot de passe</label>
+            <input type="password" class="form-control" id="f_newPassword">
+          </div>
+
+          <div class="mb-0">
+            <label class="profile-label">Confirmer le nouveau mot de passe</label>
+            <input type="password" class="form-control" id="f_confirmPassword">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const wrap = document.querySelector('[data-profile-token]');
+  const PROFILE_TOKEN = wrap?.getAttribute('data-profile-token') || '';
+
+  const API_GET = "{{ path('api_profile_get') }}";
+  const API_UPDATE = "{{ path('api_profile_update') }}";
+
+  const btnSave = document.getElementById('btnSaveProfile');
+  const successBox = document.getElementById('profileSuccess');
+  const errorBox = document.getElementById('profileError');
+
+  const f_email = document.getElementById('f_email');
+  const f_companyName = document.getElementById('f_companyName');
+  const f_customerCode = document.getElementById('f_customerCode');
+  const f_city = document.getElementById('f_city');
+  const f_address1 = document.getElementById('f_address1');
+  const f_address2 = document.getElementById('f_address2');
+
+  const f_currentPassword = document.getElementById('f_currentPassword');
+  const f_newPassword = document.getElementById('f_newPassword');
+  const f_confirmPassword = document.getElementById('f_confirmPassword');
+
+  const accountStatusBadge = document.getElementById('accountStatusBadge');
+
+  function showSuccess(message){
+    if (!successBox) return;
+    successBox.textContent = message || '';
+    successBox.classList.remove('d-none');
+    errorBox?.classList.add('d-none');
+  }
+
+  function showError(message){
+    if (!errorBox) return;
+    errorBox.textContent = message || '';
+    errorBox.classList.remove('d-none');
+    successBox?.classList.add('d-none');
+  }
+
+  function clearMessages(){
+    successBox?.classList.add('d-none');
+    errorBox?.classList.add('d-none');
+  }
+
+  function fillForm(user){
+    if (!user) return;
+
+    if (f_email) f_email.value = user.email || '';
+    if (f_companyName) f_companyName.value = user.companyName || '';
+    if (f_customerCode) f_customerCode.value = user.customerCode || '';
+    if (f_city) f_city.value = user.city || '';
+    if (f_address1) f_address1.value = user.address1 || '';
+    if (f_address2) f_address2.value = user.address2 || '';
+
+    if (accountStatusBadge) {
+      if (user.isActive) {
+        accountStatusBadge.innerHTML = '<i class="fa-solid fa-circle-check"></i>Actif';
+        accountStatusBadge.className = 'account-status-pill account-status-active';
+      } else {
+        accountStatusBadge.innerHTML = '<i class="fa-solid fa-circle-pause"></i>Inactif';
+        accountStatusBadge.className = 'account-status-pill account-status-inactive';
+      }
+    }
+  }
+
+  function clearPasswordFields(){
+    if (f_currentPassword) f_currentPassword.value = '';
+    if (f_newPassword) f_newPassword.value = '';
+    if (f_confirmPassword) f_confirmPassword.value = '';
+  }
+
+  async function loadProfile(){
+    clearMessages();
+
+    try {
+      const res = await fetch(API_GET, {
+        headers: { 'Accept': 'application/json' }
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        showError(data.message || 'Impossible de charger le profil');
+        return;
+      }
+
+      fillForm(data.user || {});
+    } catch (e) {
+      showError('Erreur réseau');
+    }
+  }
+
+  async function saveProfile(){
+    clearMessages();
+
+    const newPassword = f_newPassword?.value || '';
+    const confirmPassword = f_confirmPassword?.value || '';
+
+    if (newPassword !== '' && newPassword !== confirmPassword) {
+      showError('La confirmation du nouveau mot de passe ne correspond pas');
+      return;
+    }
+
+    const payload = {
+      _token: PROFILE_TOKEN,
+      companyName: f_companyName?.value || '',
+      customerCode: f_customerCode?.value || '',
+      city: f_city?.value || '',
+      address1: f_address1?.value || '',
+      address2: f_address2?.value || '',
+      currentPassword: f_currentPassword?.value || '',
+      newPassword: newPassword
+    };
+
+    const oldHtml = btnSave.innerHTML;
+    btnSave.disabled = true;
+    btnSave.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>Enregistrement...`;
+
+    try {
+      const res = await fetch(API_UPDATE, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        showError(data.message || 'Erreur lors de la mise à jour');
+        return;
+      }
+
+      fillForm(data.user || {});
+      clearPasswordFields();
+      showSuccess(data.message || 'Profil mis à jour');
+    } catch (e) {
+      showError('Erreur réseau');
+    } finally {
+      btnSave.disabled = false;
+      btnSave.innerHTML = oldHtml;
+    }
+  }
+
+  btnSave?.addEventListener('click', saveProfile);
+
+  loadProfile();
+})();
+</script>
+{% endblock %}

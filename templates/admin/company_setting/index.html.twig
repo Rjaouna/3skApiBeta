@@ -1,0 +1,488 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+  :root{
+    --oc-radius: 22px;
+    --oc-border: rgba(0,0,0,.10);
+    --oc-shadow: 0 14px 34px rgba(0,0,0,.08);
+    --oc-muted: rgba(0,0,0,.58);
+    --oc-text: rgba(0,0,0,.84);
+    --oc-glass: rgba(255,255,255,.82);
+    --oc-glass-2: rgba(255,255,255,.60);
+  }
+
+  body.theme-dark{
+    --oc-border: rgba(255,255,255,.14);
+    --oc-shadow: 0 18px 46px rgba(0,0,0,.35);
+    --oc-muted: rgba(255,255,255,.62);
+    --oc-text: rgba(255,255,255,.88);
+    --oc-glass: rgba(18,18,22,.76);
+    --oc-glass-2: rgba(18,18,22,.58);
+  }
+
+  .settings-page-hero{
+    border-radius: 24px;
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    padding: 18px;
+    background:
+      radial-gradient(900px circle at 10% 10%, rgba(var(--bs-primary-rgb), .16), transparent 40%),
+      radial-gradient(900px circle at 90% 30%, rgba(var(--bs-secondary-rgb), .14), transparent 38%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+  }
+
+  .settings-page-hero h3{
+    margin: 0;
+    font-weight: 950;
+    color: var(--oc-text);
+  }
+
+  .settings-page-hero .subtitle{
+    margin-top: 6px;
+    color: var(--oc-muted);
+    font-size: .92rem;
+    font-weight: 600;
+  }
+
+  .settings-card{
+    border-radius: var(--oc-radius);
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    background: var(--oc-glass);
+    backdrop-filter: blur(8px);
+  }
+
+  .settings-card .card-body{
+    padding: 18px;
+  }
+
+  .settings-section-title{
+    font-size: .82rem;
+    font-weight: 900;
+    color: var(--oc-muted);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+
+  .settings-label{
+    font-size: .82rem;
+    font-weight: 900;
+    color: var(--oc-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+
+  .settings-card .form-control,
+  .settings-card .form-select,
+  .settings-card textarea{
+    min-height: 48px;
+    border-radius: 14px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.75);
+    color: var(--oc-text);
+    font-weight: 700;
+    box-shadow: none;
+  }
+
+  .settings-card textarea{
+    min-height: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .settings-card .form-control:focus,
+  .settings-card .form-select:focus,
+  .settings-card textarea:focus{
+    border-color: rgba(var(--bs-primary-rgb), .35);
+    box-shadow: 0 0 0 .22rem rgba(var(--bs-primary-rgb), .10);
+    background: rgba(255,255,255,.92);
+  }
+
+  body.theme-dark .settings-card .form-control,
+  body.theme-dark .settings-card .form-select,
+  body.theme-dark .settings-card textarea{
+    background: rgba(255,255,255,.06);
+    color: var(--oc-text);
+  }
+
+  body.theme-dark .settings-card .form-control:focus,
+  body.theme-dark .settings-card .form-select:focus,
+  body.theme-dark .settings-card textarea:focus{
+    background: rgba(255,255,255,.08);
+  }
+
+  .settings-card .form-text{
+    color: var(--oc-muted);
+    font-weight: 600;
+  }
+
+  .settings-card .btn{
+    min-height: 48px;
+    border-radius: 14px;
+    font-weight: 900;
+    padding-inline: 18px;
+  }
+
+  .settings-alert{
+    border-radius: 16px;
+    border: 1px solid transparent;
+    font-weight: 800;
+    padding: 12px 14px;
+  }
+
+  .settings-alert.alert-danger{
+    background: rgba(220,53,69,.10);
+    border-color: rgba(220,53,69,.18);
+    color: rgba(176,32,46,.98);
+  }
+
+  .settings-alert.alert-success{
+    background: rgba(25,135,84,.10);
+    border-color: rgba(25,135,84,.18);
+    color: rgba(20,110,68,.98);
+  }
+
+  .settings-switch-grid{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 12px;
+  }
+
+  .settings-switch-card{
+    border-radius: 16px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.52);
+    padding: 14px;
+    height: 100%;
+  }
+
+  body.theme-dark .settings-switch-card{
+    background: rgba(255,255,255,.04);
+  }
+
+  .settings-switch-card .form-check{
+    margin: 0;
+  }
+
+  .settings-switch-card .form-check-input{
+    width: 2.8rem;
+    height: 1.45rem;
+    cursor: pointer;
+  }
+
+  .settings-switch-card .form-check-label{
+    color: var(--oc-text);
+    font-weight: 800;
+    line-height: 1.4;
+    cursor: pointer;
+  }
+
+  .settings-side-box{
+    border-radius: 18px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.48);
+    padding: 14px;
+  }
+
+  body.theme-dark .settings-side-box{
+    background: rgba(255,255,255,.04);
+  }
+
+  .settings-tip-list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .settings-tip-list li{
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    color: var(--oc-text);
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
+  .settings-tip-list li + li{
+    margin-top: 12px;
+  }
+
+  .settings-tip-list i{
+    margin-top: 2px;
+    color: var(--bs-primary);
+  }
+
+  .settings-meta-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 8px 12px;
+    border: 1px solid var(--oc-border);
+    background: var(--oc-glass-2);
+    color: var(--oc-text);
+    font-size: .82rem;
+    font-weight: 900;
+  }
+
+  .settings-meta-badge i{
+    color: var(--bs-primary);
+  }
+
+  @media (max-width: 991.98px){
+    .settings-switch-grid{
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="container py-4" data-setting-token="{{ crudToken|e('html_attr') }}">
+  <div class="settings-page-hero mb-3 d-flex align-items-start justify-content-between flex-wrap gap-2">
+    <div>
+      <h3>Configuration 3sk parts auto</h3>
+      <div class="subtitle">Gestion des informations société et email.</div>
+    </div>
+
+    <div class="settings-meta-badge">
+      <i class="fa-solid fa-gear"></i>
+      <span>Configuration active : default</span>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-lg-8">
+      <div class="settings-card">
+        <div class="card-body">
+          <div class="alert alert-danger settings-alert d-none" id="settingError"></div>
+          <div class="alert alert-success settings-alert d-none" id="settingSuccess"></div>
+
+          <form id="settingForm" novalidate>
+            <div class="settings-section-title">Informations générales</div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="settings-label">Nom société *</label>
+                <input type="text" class="form-control" id="f_companyName" value="{{ setting.companyName }}">
+              </div>
+
+              <div class="col-md-6">
+                <label class="settings-label">Raison sociale</label>
+                <input type="text" class="form-control" id="f_legalName" value="{{ setting.legalName ?? '' }}">
+              </div>
+
+              <div class="col-md-6">
+                <label class="settings-label">Email expéditeur</label>
+                <input type="email" class="form-control" id="f_emailFrom" value="{{ setting.emailFrom ?? '' }}">
+              </div>
+
+              <div class="col-md-6">
+                <label class="settings-label">Nom expéditeur</label>
+                <input type="text" class="form-control" id="f_emailFromName" value="{{ setting.emailFromName ?? '' }}">
+              </div>
+
+              <div class="col-md-6">
+                <label class="settings-label">Reply-To</label>
+                <input type="email" class="form-control" id="f_replyToEmail" value="{{ setting.replyToEmail ?? '' }}">
+              </div>
+
+              <div class="col-md-6">
+                <label class="settings-label">Téléphone</label>
+                <input type="text" class="form-control" id="f_phone" value="{{ setting.phone ?? '' }}">
+              </div>
+
+              <div class="col-md-8">
+                <label class="settings-label">Adresse 1</label>
+                <textarea class="form-control" id="f_address1" rows="2">{{ setting.address1 ?? '' }}</textarea>
+              </div>
+
+              <div class="col-md-4">
+                <label class="settings-label">Ville</label>
+                <input type="text" class="form-control" id="f_city" value="{{ setting.city ?? '' }}">
+              </div>
+
+              <div class="col-12">
+                <label class="settings-label">Adresse 2</label>
+                <textarea class="form-control" id="f_address2" rows="2">{{ setting.address2 ?? '' }}</textarea>
+              </div>
+
+              <div class="col-md-4">
+                <label class="settings-label">Code postal</label>
+                <input type="text" class="form-control" id="f_postalCode" value="{{ setting.postalCode ?? '' }}">
+              </div>
+
+              <div class="col-md-4">
+                <label class="settings-label">Pays</label>
+                <input type="text" class="form-control" id="f_country" value="{{ setting.country ?? '' }}">
+              </div>
+
+              <div class="col-md-4">
+                <label class="settings-label">Site web</label>
+                <input type="text" class="form-control" id="f_website" value="{{ setting.website ?? '' }}">
+              </div>
+
+              <div class="col-12">
+                <label class="settings-label">Emails de notification</label>
+                <textarea class="form-control" id="f_notificationEmails" rows="5" placeholder="Un email par ligne">{{ setting.notificationEmailsAsText }}</textarea>
+                <div class="form-text">Exemple : commandes@3skpartsauto.com</div>
+              </div>
+
+              <div class="col-12">
+                <div class="settings-section-title mb-2">Emails automatiques</div>
+
+                <div class="settings-switch-grid">
+                  <div class="settings-switch-card">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="f_sendOrderEmailToAdmin" {% if setting.sendOrderEmailToAdmin %}checked{% endif %}>
+                      <label class="form-check-label" for="f_sendOrderEmailToAdmin">
+                        Envoyer email nouvelle commande à l’admin
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="settings-switch-card">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="f_sendOrderEmailToCustomer" {% if setting.sendOrderEmailToCustomer %}checked{% endif %}>
+                      <label class="form-check-label" for="f_sendOrderEmailToCustomer">
+                        Envoyer email confirmation au client
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 pt-1">
+                <button class="btn btn-primary" id="btnSaveSetting" type="button">
+                  <i class="fa-solid fa-floppy-disk me-2"></i>Enregistrer
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="settings-card">
+        <div class="card-body">
+          <div class="settings-section-title">Conseils</div>
+
+          <div class="settings-side-box">
+            <ul class="settings-tip-list">
+              <li>
+                <i class="fa-solid fa-envelope-circle-check"></i>
+                <span>Mets un vrai email expéditeur pour les confirmations.</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-bell"></i>
+                <span>Ajoute un ou plusieurs emails de notification admin.</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>Le service email utilisera cette fiche automatiquement.</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-database"></i>
+                <span>Une seule configuration est utilisée : code <strong>default</strong>.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const wrap = document.querySelector('[data-setting-token]');
+  const token = wrap?.getAttribute('data-setting-token') || '';
+
+  const errorBox = document.getElementById('settingError');
+  const successBox = document.getElementById('settingSuccess');
+  const btnSave = document.getElementById('btnSaveSetting');
+
+  const f_companyName = document.getElementById('f_companyName');
+  const f_legalName = document.getElementById('f_legalName');
+  const f_emailFrom = document.getElementById('f_emailFrom');
+  const f_emailFromName = document.getElementById('f_emailFromName');
+  const f_replyToEmail = document.getElementById('f_replyToEmail');
+  const f_phone = document.getElementById('f_phone');
+  const f_address1 = document.getElementById('f_address1');
+  const f_address2 = document.getElementById('f_address2');
+  const f_city = document.getElementById('f_city');
+  const f_postalCode = document.getElementById('f_postalCode');
+  const f_country = document.getElementById('f_country');
+  const f_website = document.getElementById('f_website');
+  const f_notificationEmails = document.getElementById('f_notificationEmails');
+  const f_sendOrderEmailToAdmin = document.getElementById('f_sendOrderEmailToAdmin');
+  const f_sendOrderEmailToCustomer = document.getElementById('f_sendOrderEmailToCustomer');
+
+  function showError(message){
+    if (!errorBox) return;
+    errorBox.textContent = message || '';
+    errorBox.classList.toggle('d-none', !message);
+    if (successBox) successBox.classList.add('d-none');
+  }
+
+  function showSuccess(message){
+    if (!successBox) return;
+    successBox.textContent = message || '';
+    successBox.classList.toggle('d-none', !message);
+    if (errorBox) errorBox.classList.add('d-none');
+  }
+
+  btnSave?.addEventListener('click', async () => {
+    showError('');
+    showSuccess('');
+    btnSave.disabled = true;
+
+    try {
+      const payload = {
+        _token: token,
+        companyName: f_companyName?.value?.trim() || '',
+        legalName: f_legalName?.value?.trim() || '',
+        emailFrom: f_emailFrom?.value?.trim() || '',
+        emailFromName: f_emailFromName?.value?.trim() || '',
+        replyToEmail: f_replyToEmail?.value?.trim() || '',
+        phone: f_phone?.value?.trim() || '',
+        address1: f_address1?.value?.trim() || '',
+        address2: f_address2?.value?.trim() || '',
+        city: f_city?.value?.trim() || '',
+        postalCode: f_postalCode?.value?.trim() || '',
+        country: f_country?.value?.trim() || '',
+        website: f_website?.value?.trim() || '',
+        notificationEmails: f_notificationEmails?.value || '',
+        sendOrderEmailToAdmin: !!f_sendOrderEmailToAdmin?.checked,
+        sendOrderEmailToCustomer: !!f_sendOrderEmailToCustomer?.checked
+      };
+
+      const res = await fetch('{{ path('admin_company_setting_update') }}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        showError(data.message || 'Erreur lors de l’enregistrement.');
+        btnSave.disabled = false;
+        return;
+      }
+
+      showSuccess(data.message || 'Configuration enregistrée.');
+    } catch (e) {
+      showError('Erreur réseau.');
+    } finally {
+      btnSave.disabled = false;
+    }
+  });
+})();
+</script>
+{% endblock %}

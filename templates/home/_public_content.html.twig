@@ -1,0 +1,546 @@
+<style>
+  .public-topbar {
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    background:
+      radial-gradient(800px circle at 10% 20%, rgba(13,110,253,.16), transparent 40%),
+      radial-gradient(900px circle at 90% 40%, rgba(25,135,84,.14), transparent 38%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+    color: rgba(0,0,0,.78);
+    font-size: .92rem;
+  }
+
+  .public-topbar a {
+    color: rgba(0,0,0,.78);
+    text-decoration: none;
+    font-weight: 800;
+  }
+
+  .public-topbar a:hover {
+    color: rgba(13,110,253,.92);
+  }
+
+  .public-navbar {
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    background: rgba(255,255,255,.96);
+    backdrop-filter: blur(10px);
+  }
+
+  .public-navbar .navbar-brand,
+  .public-navbar .nav-link {
+    color: rgba(0,0,0,.78);
+    font-weight: 900;
+  }
+
+  .public-navbar .navbar-brand img {
+    height: 52px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .public-navbar .nav-link:hover,
+  .public-navbar .nav-link:focus {
+    color: rgba(13,110,253,.92);
+  }
+
+  .public-navbar .navbar-toggler {
+    border-color: rgba(0,0,0,.10);
+    border-radius: 14px;
+    background: rgba(255,255,255,.72);
+  }
+
+  .public-slider-shell {
+    background:
+      radial-gradient(900px circle at 10% 0%, rgba(13,110,253,.10), transparent 42%),
+      radial-gradient(900px circle at 88% 18%, rgba(25,135,84,.10), transparent 40%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+  }
+
+  .public-hero-panel {
+    margin-top: -3rem;
+    position: relative;
+    z-index: 3;
+  }
+
+  .public-overlay-card {
+    border: 0;
+    border-radius: 1.75rem;
+    box-shadow: 0 28px 60px rgba(17, 42, 92, .22);
+    overflow: hidden;
+  }
+
+  .public-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .45rem .9rem;
+    border-radius: 999px;
+    background: rgba(13,110,253,.08);
+    color: rgba(13,110,253,.92);
+    font-size: .8rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .public-display {
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: .96;
+    letter-spacing: -.04em;
+  }
+
+  .public-lead {
+    color: rgba(33, 37, 41, .72);
+    font-size: 1.05rem;
+    max-width: 58ch;
+  }
+
+  .public-pill-stat {
+    border: 0;
+    border-radius: 1.25rem;
+    box-shadow: 0 14px 34px rgba(0,0,0,.08);
+    background: rgba(255,255,255,.86);
+  }
+
+  .public-section {
+    padding: 5rem 0;
+  }
+
+  .public-section-dark {
+    background: linear-gradient(135deg, var(--bs-primary) 0%, color-mix(in srgb, var(--bs-primary) 78%, #000 22%) 100%);
+    color: #fff;
+  }
+
+  .public-section-title {
+    font-size: clamp(2rem, 3vw, 3.1rem);
+    letter-spacing: -.03em;
+    line-height: 1;
+  }
+
+  .public-copy {
+    color: rgba(33, 37, 41, .72);
+  }
+
+  .public-section-dark .public-copy {
+    color: rgba(255,255,255,.75);
+  }
+
+  .public-service-card,
+  .public-value-card,
+  .public-contact-card,
+  .public-news-card {
+    border: 0;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 20px 44px rgba(0,0,0,.08);
+    height: 100%;
+  }
+
+  .public-service-card img,
+  .public-news-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+  }
+
+  .public-value-card {
+    background: linear-gradient(135deg, rgba(13,110,253,.95) 0%, rgba(25,135,84,.92) 100%);
+    color: #fff;
+  }
+
+  .public-value-card .text-muted,
+  .public-value-card .public-copy {
+    color: rgba(255,255,255,.82) !important;
+  }
+
+  .public-logo-strip img {
+    max-height: 104px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: .85;
+  }
+
+  .public-highlight-panel {
+    background: linear-gradient(135deg, rgba(13,110,253,.92) 0%, rgba(25,135,84,.88) 100%);
+    border-radius: 2rem;
+    overflow: hidden;
+  }
+
+  .public-highlight-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 320px;
+  }
+
+  .public-contact-map {
+    min-height: 260px;
+    width: 100%;
+    border: 0;
+  }
+
+  .public-footer {
+    margin-top: 34px;
+    border-top: 1px solid rgba(0,0,0,.10);
+    background:
+      radial-gradient(900px circle at 12% 0%, rgba(13,110,253,.10), transparent 40%),
+      radial-gradient(900px circle at 88% 18%, rgba(25,135,84,.10), transparent 40%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+    color: rgba(2,6,23,.86);
+  }
+
+  .public-footer a {
+    color: rgba(2,6,23,.80);
+    text-decoration: none;
+  }
+
+  .public-footer a:hover {
+    color: rgba(220,53,69,.95);
+    text-decoration: none;
+  }
+
+  .public-footer-muted {
+    color: rgba(2,6,23,.58);
+  }
+
+  .public-footer-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .55rem .9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,.10);
+    background: rgba(255,255,255,.55);
+    color: rgba(2,6,23,.86);
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .public-footer-social a {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,.10);
+    display: grid;
+    place-items: center;
+    text-decoration: none;
+    color: rgba(2,6,23,.86);
+    background: rgba(255,255,255,.55);
+    transition: transform .10s ease, border-color .12s ease, background .12s ease;
+  }
+
+  .public-footer-social a:hover {
+    transform: translateY(-1px);
+    border-color: rgba(13,110,253,.25);
+    background: rgba(13,110,253,.06);
+  }
+
+  @media (max-width: 991px) {
+    .public-hero-panel {
+      margin-top: 0;
+    }
+
+    .public-section {
+      padding: 3.5rem 0;
+    }
+
+    .public-service-card img,
+    .public-news-card img {
+      height: 220px;
+    }
+  }
+</style>
+
+<div class="bg-white">
+  <div class="public-topbar py-2">
+    <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center gap-2">
+      <div class="d-flex flex-column flex-md-row gap-2 gap-md-4 text-center text-lg-start">
+        <a href="tel:+212522713572">Tel: +212 5 22 71 35 72</a>
+        <a href="mailto:3sk.partsauto@gmail.com">3sk.partsauto@gmail.com</a>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <a href="#contact">Devenir client</a>
+        <a href="{{ path('app_login') }}" class="fw-semibold">Se connecter</a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg public-navbar sticky-top shadow-sm">
+    <div class="container py-2">
+      <a class="navbar-brand" href="#accueil">
+        <img src="{{ asset('img/logo-3sk-partsauto.jpeg') }}" alt="3SK Parts Auto">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#publicHomeNav" aria-controls="publicHomeNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="publicHomeNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+          <li class="nav-item"><a class="nav-link fw-semibold" href="#accueil">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="#qui-sommes-nous">Qui sommes-nous</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="#marques">Marques</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="#contact">Contact</a></li>
+          <li class="nav-item mt-2 mt-lg-0">
+            <a href="{{ path('app_login') }}" class="btn btn-primary rounded-pill px-4 fw-bold">Espace client</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section id="accueil" class="public-slider-shell">
+    {% include 'home/sections/_hero.html.twig' with { hero_full_width: true } %}
+  </section>
+
+  <section class="public-hero-panel pb-5">
+    <div class="container">
+      <div class="card public-overlay-card">
+        <div class="card-body p-4 p-lg-5">
+          <div class="row align-items-center g-4">
+            <div class="col-12 col-lg-7">
+              <span class="public-kicker">3SK Parts Auto - Casablanca</span>
+              <h1 class="public-display fw-bold text-dark mt-3 mb-3">Pieces Carrosserie pour les professionnels de l’automobile</h1>
+              <p class="public-lead mb-4">
+                Basée à Casablanca depuis 2014, 3SK Parts Auto accompagne les acteurs de la rechange automobile avec une offre orientée
+                pièces détachées et accessoires, ainsi qu'un espace client dédié pour consulter le catalogue et préparer les commandes.
+              </p>
+              <div class="d-flex flex-wrap gap-2">
+                <a href="#contact" class="btn btn-outline-secondary btn-lg rounded-pill px-4">Nous contacter</a>
+                <a href="{{ path('app_login') }}" class="btn btn-primary btn-lg rounded-pill px-4">Acceder a l'espace client</a>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-5">
+              <div class="row g-3">
+                <div class="col-12">
+                  <div class="card public-pill-stat">
+                    <div class="card-body">
+                      <div class="small text-uppercase text-primary fw-bold mb-2">Activité</div>
+                      <p class="mb-0 text-body-secondary"> importateur et distributeur de pièces carrosseries automobiles</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-12">
+                  <div class="card public-pill-stat">
+                    <div class="card-body">
+                      <div class="small text-uppercase text-secondary fw-bold mb-2">Implantation</div>
+                      <p class="mb-0 text-body-secondary">Casablanca, au service d'une clientèle professionnelle.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-12">
+                  <div class="card public-pill-stat">
+                    <div class="card-body">
+                      <div class="small text-uppercase text-primary fw-bold mb-2">Espace client</div>
+                      <p class="mb-0 text-body-secondary">Catalogue, panier et suivi des commandes dans un seul espace.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="qui-sommes-nous" class="public-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-12 col-lg-6">
+          <img src="{{ asset('img/home-public/about-company-3sk.png') }}" alt="Présentation entreprise" class="img-fluid rounded-5 shadow">
+        </div>
+        <div class="col-12 col-lg-6">
+          <span class="badge text-bg-primary rounded-pill mb-3 px-3 py-2">Qui sommes-nous</span>
+          <h2 class="public-section-title fw-bold text-dark mb-3">3SK Parts Auto, un acteur de la pièce détachée à Casablanca.</h2>
+          <p class="public-copy fs-5">
+            3SK Parts Auto est une SARL marocaine créée en 2014, spécialisée dans l'achat, la vente,
+            l'importation et l'exportation de pièces détachées et accessoires pour automobiles.
+          </p>
+          <p class="public-copy mb-4">
+            L'entreprise intervient également sur les besoins liés aux tracteurs, engins agricoles, motos et cycles,
+            avec une activité orientée représentation, fourniture et distribution de composants pour véhicules.
+          </p>
+          <div class="row g-3">
+            <div class="col-12 col-sm-4">
+              <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body">
+                  <div class="h3 text-primary fw-bold">2014</div>
+                  <div class="text-body-secondary small">Année de création</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-4">
+              <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body">
+                  <div class="h3 text-secondary fw-bold">B2B</div>
+                  <div class="text-body-secondary small">Clientèle professionnelle</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-4">
+              <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body">
+                  <div class="h3 text-primary fw-bold">1M</div>
+                  <div class="text-body-secondary small">Capital social en DHS</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="public-section public-section-dark">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-12 col-lg-5">
+          <span class="badge bg-secondary rounded-pill mb-3 px-3 py-2">Services</span>
+          <h2 class="public-section-title fw-bold mb-3">Une offre construite pour les besoins du terrain.</h2>
+          <p class="public-copy mb-4">
+            3SK Parts Auto s'adresse aux professionnels qui recherchent un interlocuteur capable de centraliser
+            l'accès aux références, de fluidifier la préparation des commandes et de simplifier la relation commerciale.
+          </p>
+          <ul class="list-group list-group-flush rounded-4 overflow-hidden shadow">
+            <li class="list-group-item py-3">Distribution de pièces détachées et accessoires pour l'automobile</li>
+            <li class="list-group-item py-3">Organisation claire des références pour faciliter la préparation des commandes</li>
+            <li class="list-group-item py-3">Activité d'import-export pour approvisionner l'offre</li>
+            <li class="list-group-item py-3">Espace client pour consulter le catalogue et préparer les achats</li>
+          </ul>
+        </div>
+        <div class="col-12 col-lg-7">
+          <div class="public-highlight-panel">
+            <div class="row g-0 align-items-stretch">
+              <div class="col-12 col-lg-6">
+                <img src="{{ asset('img/home-public/services-highlight.jpg') }}" alt="Service client">
+              </div>
+              <div class="col-12 col-lg-6">
+                <div class="p-4 p-lg-5 h-100 d-flex flex-column justify-content-center">
+                  <div class="display-6 fw-bold text-white mb-3">Un stock organisé pour répondre rapidement aux besoins de vos commandes.</div>
+                  <p class="mb-4">
+                    3SK Parts Auto s'appuie sur une organisation claire des références et des rayonnages pour faciliter la préparation,
+                    la disponibilité produit et la réactivité auprès des professionnels de l'automobile.
+                  </p>
+                  <a href="{{ path('app_login') }}" class="btn btn-light rounded-pill px-4 align-self-start text-primary fw-bold">Espace client</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="marques" class="public-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="badge text-bg-secondary rounded-pill mb-3 px-3 py-2">Nos marques phares</span>
+        <h2 class="public-section-title fw-bold text-dark mb-3">Des marques qui soutiennent une offre de rechange structurée</h2>
+      </div>
+      <div class="row g-4 public-logo-strip justify-content-center align-items-center">
+        <div class="col-6 col-md-3 col-lg-2 text-center"><img src="{{ asset('img/home-public/brand-1.png') }}" alt="Marque 1"></div>
+        <div class="col-6 col-md-3 col-lg-2 text-center"><img src="{{ asset('img/home-public/brand-2.png') }}" alt="Marque 2"></div>
+        <div class="col-6 col-md-3 col-lg-2 text-center"><img src="{{ asset('img/home-public/brand-3.png') }}" alt="Marque 3"></div>
+        <div class="col-6 col-md-3 col-lg-2 text-center"><img src="{{ asset('img/home-public/brand-4.png') }}" alt="Marque 4"></div>
+        <div class="col-6 col-md-3 col-lg-2 text-center"><img src="{{ asset('img/home-public/brand-5.png') }}" alt="Marque 5"></div>
+        <div class="col-6 col-md-3 col-lg-2 text-center"><img src="{{ asset('img/home-public/brand-6.png') }}" alt="Marque 6"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="public-section bg-white border-top">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-12 col-lg-6">
+          <div class="card public-contact-card">
+            <div class="row g-0 h-100">
+              <div class="col-12 col-lg-6">
+                <img src="{{ asset('img/home-public/contact-cover.jpg') }}" alt="Contact" class="img-fluid h-100 w-100" style="object-fit: cover; min-height: 320px;">
+              </div>
+              <div class="col-12 col-lg-6">
+                <div class="card-body p-4 p-lg-5">
+                  <span class="badge text-bg-primary rounded-pill mb-3 px-3 py-2">Contact</span>
+                  <h2 class="h2 fw-bold text-dark mb-3">Nous contacter</h2>
+                  <p class="text-body-secondary mb-4">Retrouvez 3SK Parts Auto à Casablanca pour vos demandes commerciales et vos besoins en pièces détachées.</p>
+                  <ul class="list-unstyled mb-0">
+                    <li class="mb-3"><strong>Adresse</strong><br>Hay Ennasr 2 N6 Lahraouine Casablanca, Casablanca, Maroc</li>
+                    <li class="mb-3"><strong>Téléphone</strong><br>+212 5 22 71 35 72</li>
+                    <li class="mb-3"><strong>Email</strong><br>3sk.partsauto@gmail.com</li>
+                    <li><strong>Site web</strong><br>www.3skpartsauto.com</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <div class="card public-contact-card h-100">
+            <div class="card-body p-4 p-lg-5 d-flex flex-column h-100">
+              <h2 class="h2 fw-bold text-dark mb-3">Un accès simple pour les clients déjà référencés</h2>
+              <p class="text-body-secondary mb-4">
+                L'espace client permet de retrouver rapidement le catalogue, de constituer un panier et de suivre les commandes
+                dans un environnement dédié à l'activité professionnelle.
+              </p>
+              <div class="d-flex flex-wrap gap-2 mb-4">
+                <a href="{{ path('app_login') }}" class="btn btn-primary btn-lg rounded-pill px-4">Entrer dans l'espace client</a>
+                <a href="#qui-sommes-nous" class="btn btn-outline-secondary btn-lg rounded-pill px-4">En savoir plus</a>
+              </div>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.055043948555!2d-7.573125823839388!3d33.532628744987875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda632e2decd39c3%3A0x747033ca50f85a28!2sHay%20Ennasr%202!5e1!3m2!1sfr!2sus!4v1781437722232!5m2!1sfr!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="public-footer py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-12 col-lg-4">
+          <h3 class="h4 fw-bold mb-3">3SK Parts Auto</h3>
+          <p class="public-footer-muted mb-3">Société basée à Casablanca, spécialisée dans l'importation, l'exportation et la distribution de pièces détachées automobiles.</p>
+          <div class="d-flex flex-wrap gap-2">
+            <a class="public-footer-pill" href="tel:+212522713572">+212 5 22 71 35 72</a>
+            <a class="public-footer-pill" href="mailto:3sk.partsauto@gmail.com">3sk.partsauto@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+          <h4 class="h6 text-uppercase fw-bold mb-3">Navigation</h4>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#accueil">Accueil</a></li>
+            <li class="mb-2"><a href="#qui-sommes-nous">Qui sommes-nous</a></li>
+            <li class="mb-2"><a href="#services">Services</a></li>
+            <li class="mb-2"><a href="#marques">Marques</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+          <h4 class="h6 text-uppercase fw-bold mb-3">Coordonnées</h4>
+          <ul class="list-unstyled mb-3">
+            <li class="mb-2">Casablanca, Maroc</li>
+            <li class="mb-2">+212 5 22 71 35 72</li>
+            <li class="mb-2">3sk.partsauto@gmail.com</li>
+            <li>www.3skpartsauto.com</li>
+          </ul>
+          <div class="d-flex gap-2 public-footer-social">
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4">
+
+      <div class="d-flex flex-column flex-lg-row justify-content-between gap-2 small public-footer-muted">
+        <span>3SK Parts Auto.</span>
+      </div>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,987 @@
+<style>
+  :root{ --r: 1.25rem; }
+
+  .home-hero{
+    border-radius: calc(var(--r) + .5rem);
+    padding: 1.25rem;
+    background:
+      radial-gradient(900px circle at 12% 10%, rgba(13,110,253,.18), transparent 40%),
+      radial-gradient(900px circle at 88% 25%, rgba(25,135,84,.16), transparent 38%),
+      radial-gradient(900px circle at 30% 120%, rgba(255,193,7,.14), transparent 35%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+    border: 1px solid rgba(0,0,0,.06);
+  }
+
+  .home-section{
+    margin-bottom: 2.25rem;
+  }
+
+  .home-section-head{
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .home-section-head h2{
+    font-size: 1.65rem;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -.02em;
+    color: #111827;
+  }
+
+  .home-section-head p{
+    margin: .35rem 0 0 0;
+    color: rgba(0,0,0,.55);
+    font-size: .95rem;
+  }
+
+  .home-toolbar{
+    max-width: 520px;
+    margin: 0 auto 1.1rem auto;
+  }
+
+  .home-toolbar .input-group-text{
+    border-radius: 999px 0 0 999px;
+    border: 1px solid rgba(0,0,0,.10);
+    background: rgba(255,255,255,.92);
+  }
+
+  .home-toolbar .form-control{
+    border-radius: 0 999px 999px 0;
+    border: 1px solid rgba(0,0,0,.10);
+    border-left: 0;
+    background: rgba(255,255,255,.96);
+    height: 46px;
+  }
+
+  .home-toolbar .form-control:focus{
+    box-shadow: 0 0 0 .2rem rgba(13,110,253,.12);
+    border-color: rgba(13,110,253,.18);
+  }
+
+  .home-grid{
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .8rem;
+  }
+
+  @media (min-width: 768px){
+    .home-grid{
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .home-actions{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:.6rem;
+    flex-wrap:wrap;
+    margin-top: 1.1rem;
+  }
+
+  .home-btn-soft{
+    border-radius: 999px;
+    min-width: 140px;
+    font-weight: 700;
+    box-shadow: 0 8px 22px rgba(0,0,0,.05);
+  }
+
+  .home-hidden-ui{
+    display:none !important;
+  }
+
+  .stepper{
+    display:flex;
+    gap:.5rem;
+    flex-wrap:wrap;
+  }
+
+  .step-pill{
+    font-size: .86rem;
+    padding: .35rem .6rem;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,.10);
+    background: rgba(255,255,255,.65);
+    color: rgba(0,0,0,.7);
+  }
+
+  .step-pill.active{
+    background: rgba(253, 13, 13, 0.12);
+    border-color: rgba(253, 13, 13, 0.25);
+    color: rgba(253, 13, 13, 0.95);
+    font-weight: 600;
+  }
+
+  .step-pill.done{
+    background: rgba(25,135,84,.12);
+    border-color: rgba(25,135,84,.25);
+    color: rgba(25,135,84,.95);
+    font-weight: 600;
+  }
+
+  .step-pill.disabled{
+    opacity: .55;
+    background: rgba(0,0,0,.04);
+    border-style: dashed;
+  }
+
+  .crumbs{
+    margin-top: .6rem;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4rem;
+  }
+
+  .crumb{
+    border-radius: 999px;
+    padding: .25rem .55rem;
+    border: 1px solid rgba(0,0,0,.10);
+    background: rgba(255,255,255,.7);
+    font-size: .86rem;
+  }
+
+  .chip{
+    width:100%;
+    text-align:left;
+    border-radius: var(--r);
+    border: 1px solid rgba(0,0,0,.10);
+    background: rgba(255,255,255,.85);
+    padding: .85rem .85rem;
+    transition: transform .08s ease, border-color .12s ease, box-shadow .12s ease;
+    cursor:pointer;
+  }
+
+  .chip:hover{
+    transform: translateY(-1px);
+    border-color: rgba(13,110,253,.22);
+    box-shadow: 0 10px 20px rgba(0,0,0,.06);
+  }
+
+  .chip.active{
+    border: solid 2px #315fbb;
+    box-shadow: 0 10px 20px rgba(13,110,253,.10);
+    color: #315fbb;
+  }
+
+  .chip-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:.5rem;
+  }
+
+  .chip-label{
+    font-weight: 800;
+    font-size: .95rem;
+    line-height: 1.1;
+  }
+
+  .chip-mini{
+    font-size:.78rem;
+    color: rgba(0,0,0,.55);
+    margin-top:.25rem;
+  }
+
+  .chip-tag{
+    font-size:.72rem;
+    padding: .18rem .45rem;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,.10);
+    background: rgba(255,255,255,.7);
+    color: rgba(0,0,0,.65);
+    white-space:nowrap;
+  }
+
+  .chip-vehicle{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: .7rem;
+    padding: .70rem .70rem;
+  }
+
+  .chip-vehicle .chip-left{
+    min-width:0;
+    flex:1;
+  }
+
+  .chip-vehicle .chip-label{
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+
+  .chip-vehicle .chip-mini{
+    margin-top:.22rem;
+  }
+
+  .chip-logoWrap{
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,.10);
+    background: rgba(0,0,0,.03);
+    display:grid;
+    place-items:center;
+    flex: 0 0 auto;
+  }
+
+  .chip-logo{
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    border-radius: 14px;
+  }
+
+  .skeleton{
+    border-radius: var(--r);
+    height: 68px;
+    background: linear-gradient(90deg, rgba(0,0,0,.04), rgba(0,0,0,.08), rgba(0,0,0,.04));
+    background-size: 200% 100%;
+    animation: sk 1.2s infinite;
+    border: 1px solid rgba(0,0,0,.06);
+  }
+
+  @keyframes sk {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .home-order-switch{
+    display:flex;
+    justify-content:center;
+    gap:.5rem;
+    flex-wrap:wrap;
+    margin-bottom:.9rem;
+  }
+
+  .home-order-switch .btn{
+    border-radius:999px;
+  }
+</style>
+
+{% include 'home/sections/_hero.html.twig' %}
+
+<div class="container py-4">
+
+
+  <section class="home-section"
+           data-facet
+           data-mode="vehicleByBrand"
+           data-limit="8"
+           data-order-a='["vehicleBrand","vehicle"]'
+           data-order-b='["vehicleBrand","vehicle"]'
+           data-title="Véhicules par marque">
+
+    <div class="home-section-head">
+      <h2 data-titlebox></h2>
+      <p>Choisissez une marque connue puis un modèle</p>
+    </div>
+
+    <div class="home-toolbar">
+      <div class="input-group input-group-sm">
+        <span class="input-group-text">🔎</span>
+        <input class="form-control" placeholder="Rechercher une marque ou un modèle…" data-search>
+      </div>
+    </div>
+
+    <div class="home-grid" data-grid></div>
+
+    <div class="home-actions">
+      <button class="btn btn-outline-secondary home-btn-soft" data-back disabled>← Retour</button>
+      <button class="btn btn-outline-danger home-btn-soft" data-reset>Reset</button>
+      <button class="btn btn-primary home-btn-soft" data-go disabled>Voir les articles →</button>
+    </div>
+
+    <div class="home-hidden-ui">
+      <span data-badge></span>
+      <div data-stepper></div>
+      <div data-crumbs></div>
+    </div>
+  </section>
+  {% include 'home/sections/_new_articles.html.twig' %}
+
+</div>
+
+<script>
+class FacetBlock {
+  constructor(root){
+    this.root = root;
+    this.mode = root.dataset.mode || 'family';
+    this.limit = parseInt(root.dataset.limit || '8', 10);
+
+    this.orderA = JSON.parse(root.dataset.orderA || '[]');
+    this.orderB = JSON.parse(root.dataset.orderB || '[]');
+    this.orderMode = 'A';
+    this.order = [...this.orderA];
+
+    this.state = { brand:'', family:'', vehicle:'', vehicleBrand:'' };
+    this.stepIndex = 0;
+    this.unavailableKey = null;
+
+    this.items = [];
+    this.filtered = [];
+    this.allVehiclesCache = null;
+
+    this.badge = root.querySelector('[data-badge]');
+    this.stepper = root.querySelector('[data-stepper]');
+    this.crumbs = root.querySelector('[data-crumbs]');
+    this.search = root.querySelector('[data-search]');
+    this.grid = root.querySelector('[data-grid]');
+
+    this.backBtn = root.querySelector('.home-actions [data-back]');
+    this.resetBtn = root.querySelector('.home-actions [data-reset]');
+    this.goBtn = root.querySelector('.home-actions [data-go]');
+
+    const title = root.dataset.title || '';
+    const titleBox = root.querySelector('[data-titlebox]');
+    if (titleBox) titleBox.textContent = title;
+
+    root.querySelectorAll('[data-order]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        this.orderMode = btn.dataset.order;
+        this.order = this.orderMode === 'A' ? [...this.orderA] : [...this.orderB];
+
+        const firstKey = this.order[0];
+        const keep = this.state[firstKey];
+
+        this.state = { brand:'', family:'', vehicle:'', vehicleBrand:'' };
+        if (keep) this.state[firstKey] = keep;
+
+        this.stepIndex = 0;
+        this.unavailableKey = null;
+
+        this.renderOrderButtons();
+        this.refresh();
+      });
+    });
+
+    if (this.search) this.search.addEventListener('input', ()=> this.applyFilter());
+    if (this.backBtn) this.backBtn.addEventListener('click', ()=> this.back());
+    if (this.resetBtn) this.resetBtn.addEventListener('click', ()=> this.reset());
+    if (this.goBtn) this.goBtn.addEventListener('click', ()=> this.go());
+
+    this.renderOrderButtons();
+    this.refresh();
+  }
+
+  renderOrderButtons(){
+    this.root.querySelectorAll('[data-order]').forEach(b=>{
+      b.classList.toggle('active', b.dataset.order === this.orderMode);
+    });
+  }
+
+  labelForKey(k){
+    if (k === 'brand') return 'Marque';
+    if (k === 'family') return 'Famille';
+    if (k === 'vehicleBrand') return 'Marque';
+    return 'Véhicule';
+  }
+
+  prettify(k, v){
+    if (!v) return '';
+    let s = String(v).trim();
+    s = s.replace(/_/g, ' ').replace(/\s+/g, ' ');
+
+    if (k === 'family' || k === 'vehicle') {
+      s = s.toLowerCase().replace(/\b\w/g, m => m.toUpperCase());
+    }
+
+    if (k === 'brand') {
+      s = s.toUpperCase();
+    }
+
+    return s;
+  }
+
+  setBadge(text, kind='light'){
+    if (!this.badge) return;
+    this.badge.textContent = text;
+    this.badge.className = `badge facet-badge text-bg-${kind}`;
+  }
+
+  currentKey(){
+    return this.order[this.stepIndex];
+  }
+
+  goAllowed(){
+    if (this.unavailableKey) {
+      return this.order.filter(k => k !== this.unavailableKey).every(k => !!this.state[k]);
+    }
+    return this.order.every(k => !!this.state[k]);
+  }
+
+  renderStepper(){
+    if (!this.stepper) return;
+
+    this.stepper.innerHTML = '';
+    this.order.forEach((k, i)=>{
+      const pill = document.createElement('span');
+
+      let cls = '';
+      if (k === this.unavailableKey) cls = 'disabled';
+      else if (i < this.stepIndex) cls = 'done';
+      else if (i === this.stepIndex) cls = 'active';
+
+      pill.className = 'step-pill ' + cls;
+      pill.textContent = `${i+1}. ${this.labelForKey(k)}`;
+      this.stepper.appendChild(pill);
+    });
+  }
+
+  renderCrumbs(){
+    if (!this.crumbs) return;
+
+    this.crumbs.innerHTML = '';
+    this.order.forEach(k=>{
+      if (!this.state[k]) return;
+      const b = document.createElement('span');
+      b.className = 'crumb';
+      b.textContent = `${this.labelForKey(k)}: ${this.displayValueForKey(k, this.state[k])}`;
+      this.crumbs.appendChild(b);
+    });
+  }
+
+  displayValueForKey(key, value){
+    if (key === 'vehicleBrand') {
+      return this.vehicleBrandLabel(value);
+    }
+    return this.prettify(key, value);
+  }
+
+  applyFilter(){
+    const q = (this.search?.value || '').trim().toLowerCase();
+    const key = this.currentKey();
+
+    this.filtered = q
+      ? this.items.filter(it => {
+          const label = String(it.label || this.displayValueForKey(key, it.value) || '').toLowerCase();
+          return label.includes(q);
+        })
+      : [...this.items];
+
+    this.renderGrid();
+  }
+
+  skeleton(){
+    if (!this.grid) return;
+
+    this.grid.innerHTML = '';
+    for (let i=0; i<8; i++){
+      const sk = document.createElement('div');
+      sk.className = 'skeleton';
+      this.grid.appendChild(sk);
+    }
+  }
+
+  async refresh(){
+    this.renderStepper();
+    this.renderCrumbs();
+
+    if (this.backBtn) this.backBtn.disabled = this.stepIndex === 0;
+    if (this.goBtn) this.goBtn.disabled = !this.goAllowed();
+
+    this.setBadge('CHARGEMENT', 'light');
+    this.skeleton();
+
+    if (this.search) this.search.value = '';
+
+    try{
+      const prev = this.buildPrev(this.stepIndex);
+      this.items = await this.fetchOptions(this.currentKey(), prev);
+      this.filtered = [...this.items];
+
+      if (this.unavailableKey === this.currentKey()) this.unavailableKey = null;
+
+      this.setBadge('', 'light');
+      this.renderStepper();
+      this.renderCrumbs();
+      this.renderGrid();
+
+      if (this.goBtn) this.goBtn.disabled = !this.goAllowed();
+      if (this.backBtn) this.backBtn.disabled = this.stepIndex === 0;
+    } catch(e){
+      this.setBadge('ERROR', 'danger');
+      if (this.grid) {
+        this.grid.innerHTML = `<div class="text-danger small">Erreur: ${this.escape(e.message || e)}</div>`;
+      }
+      if (this.goBtn) this.goBtn.disabled = true;
+    }
+  }
+
+  renderGrid(){
+    if (!this.grid) return;
+
+    this.grid.innerHTML = '';
+
+    if (!this.filtered.length){
+      this.grid.innerHTML = `<div class="text-muted small">Aucun résultat.</div>`;
+      return;
+    }
+
+    const key = this.currentKey();
+    const selected = this.state[key];
+
+    const IMG_DIR = "{{ asset('img')|e('js') }}".replace(/\/$/, '');
+    const DEFAULT_IMG = "{{ asset('img/default.png')|e('js') }}";
+
+    const fileNameFromText = (v)=>{
+      let s = String(v || '').trim();
+      try { s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); } catch(e){}
+      s = s.toLowerCase();
+      s = s.replace(/&/g, 'and');
+      s = s.replace(/[^a-z0-9]+/g, '_');
+      s = s.replace(/^_+|_+$/g, '');
+      return s ? (s + '.png') : '';
+    };
+
+    this.filtered.slice(0, this.limit).forEach(item=>{
+      const v = item.value;
+      const count = item.count;
+      const pretty = item.label || this.displayValueForKey(key, v);
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+
+      const isVehicleChip = (key === 'vehicle' || key === 'vehicleBrand');
+      btn.className = 'chip' + (isVehicleChip ? ' chip-vehicle' : '') + (v === selected ? ' active' : '');
+
+      if (isVehicleChip){
+        const imageKey = item.imageKey || pretty;
+        const file = fileNameFromText(imageKey);
+        const logo = file ? (IMG_DIR + '/' + file) : DEFAULT_IMG;
+
+        let miniText = 'Clique pour sélectionner • Re-clique pour retirer';
+
+        if (key === 'vehicleBrand') {
+          miniText = `Voir les modèles de ${this.escape(pretty)}`;
+        } else if (key === 'vehicle' && this.mode === 'vehicleByBrand') {
+          miniText = `Explorer les ${count} article(s) pour ce modèle`;
+        } else {
+          miniText = `Explorer les ${count} article(s)`;
+        }
+
+        btn.innerHTML = `
+          <div class="chip-left">
+            <div class="chip-top">
+              <div class="chip-label">${this.escape(pretty)}</div>
+              <span class="chip-tag">${count} art.</span>
+            </div>
+            <div class="chip-mini">${miniText}</div>
+          </div>
+          <div class="chip-logoWrap" aria-hidden="true">
+            <img class="chip-logo" src="${this.escape(logo)}" alt=""
+                 loading="lazy"
+                 onerror="this.onerror=null;this.src='${this.escape(DEFAULT_IMG)}'">
+          </div>
+        `;
+      } else {
+        btn.innerHTML = `
+          <div class="chip-top">
+            <div class="chip-label">${this.escape(pretty)}</div>
+            <span class="chip-tag">${count} art.</span>
+          </div>
+          <div class="chip-mini">Clique pour sélectionner • Re-clique pour retirer</div>
+        `;
+      }
+
+      btn.addEventListener('click', ()=> this.select(v));
+      this.grid.appendChild(btn);
+    });
+  }
+
+  buildPrev(uptoExclusiveIndex){
+    const prev = {};
+    for (let i=0; i<uptoExclusiveIndex; i++){
+      const k = this.order[i];
+      if (this.state[k]) prev[k] = this.state[k];
+    }
+    return prev;
+  }
+
+  async select(value){
+    const key = this.currentKey();
+    this.unavailableKey = null;
+
+    if (this.state[key] === value){
+      this.state[key] = '';
+      for (let i=this.stepIndex+1; i<this.order.length; i++){
+        this.state[this.order[i]] = '';
+      }
+      await this.refresh();
+      return;
+    }
+
+    this.state[key] = value;
+    for (let i=this.stepIndex+1; i<this.order.length; i++){
+      this.state[this.order[i]] = '';
+    }
+
+    if (this.stepIndex < this.order.length - 1) {
+      const nextKey = this.order[this.stepIndex + 1];
+      const prevForNext = this.buildPrev(this.stepIndex + 1);
+      prevForNext[key] = this.state[key];
+
+      try {
+        const nextItems = await this.fetchOptions(nextKey, prevForNext);
+
+        if (!nextItems.length) {
+          this.unavailableKey = nextKey;
+          this.setBadge(`Aucun ${this.labelForKey(nextKey).toLowerCase()} — filtrage direct`, 'warning');
+
+          this.renderStepper();
+          this.renderCrumbs();
+          this.renderGrid();
+
+          if (this.goBtn) this.goBtn.disabled = !this.goAllowed();
+          if (this.backBtn) this.backBtn.disabled = this.stepIndex === 0;
+          return;
+        }
+
+        this.stepIndex++;
+        await this.refresh();
+        return;
+      } catch (e) {
+        this.stepIndex++;
+        await this.refresh();
+        return;
+      }
+    }
+
+    await this.refresh();
+  }
+
+  back(){
+    if (this.stepIndex === 0) return;
+
+    const current = this.order[this.stepIndex];
+    this.state[current] = '';
+    this.stepIndex--;
+
+    for (let i=this.stepIndex+1; i<this.order.length; i++){
+      this.state[this.order[i]] = '';
+    }
+
+    this.unavailableKey = null;
+    this.refresh();
+  }
+
+  reset(){
+    this.state = { brand:'', family:'', vehicle:'', vehicleBrand:'' };
+    this.stepIndex = 0;
+    this.unavailableKey = null;
+    this.refresh();
+  }
+
+  go(){
+    if (!this.goAllowed()) return;
+
+    const url = new URL('{{ path("articles_page") }}', window.location.origin);
+
+    if (this.state.family) url.searchParams.set('family', this.state.family);
+    if (this.state.brand) url.searchParams.set('brand', this.state.brand);
+    if (this.state.vehicle) url.searchParams.set('vehicle', this.state.vehicle);
+
+    window.location.href = url.toString();
+  }
+
+  endpointFor(key){
+    if (key === 'brand') return '/api/catalog/brands';
+    if (key === 'family') return '/api/catalog/families';
+    return '/api/catalog/vehicles';
+  }
+
+  async fetchOptions(key, prev){
+    if (this.mode === 'vehicleByBrand') {
+      return this.fetchVehicleByBrandOptions(key, prev);
+    }
+
+    const url = new URL(this.endpointFor(key), window.location.origin);
+
+    if (key === 'brand'){
+      if (prev.family) url.searchParams.set('family', prev.family);
+      if (prev.vehicle) url.searchParams.set('vehicle', prev.vehicle);
+    }
+
+    if (key === 'family'){
+      if (prev.brand) url.searchParams.set('brand', prev.brand);
+      if (prev.vehicle) url.searchParams.set('vehicle', prev.vehicle);
+    }
+
+    if (key === 'vehicle'){
+      if (prev.brand) url.searchParams.set('brand', prev.brand);
+      if (prev.family) url.searchParams.set('family', prev.family);
+    }
+
+    const res = await fetch(url.toString());
+    const data = await res.json().catch(()=> ({}));
+
+    if (!res.ok || !data.ok) {
+      throw new Error(data.message || 'Erreur API');
+    }
+
+    return Array.isArray(data.items) ? data.items : [];
+  }
+
+  async fetchVehicleByBrandOptions(key, prev){
+    const items = await this.fetchAllVehiclesCatalog();
+
+    if (key === 'vehicleBrand') {
+      const brandMap = new Map();
+
+      items.forEach(item => {
+        const meta = this.extractVehicleMeta(item.value);
+        const count = Number(item.count || 0);
+
+        if (!this.isKnownVehicleBrand(meta.brandKey)) return;
+
+        if (!brandMap.has(meta.brandKey)) {
+          brandMap.set(meta.brandKey, {
+            value: meta.brandKey,
+            label: meta.brandLabel,
+            count: 0,
+            imageKey: meta.brandLabel
+          });
+        }
+
+        brandMap.get(meta.brandKey).count += count;
+      });
+
+      return Array.from(brandMap.values()).sort((a, b) =>
+        String(a.label).localeCompare(String(b.label), 'fr', { sensitivity: 'base' })
+      );
+    }
+
+    if (key === 'vehicle') {
+      const selectedBrand = this.normalizeBrandKey(prev.vehicleBrand || '');
+
+      return items
+        .map(item => {
+          const meta = this.extractVehicleMeta(item.value);
+          return {
+            value: item.value,
+            label: meta.modelLabel || meta.fullLabel,
+            count: Number(item.count || 0),
+            imageKey: meta.brandLabel,
+            brandKey: meta.brandKey,
+            hasModel: meta.hasModel
+          };
+        })
+        .filter(item =>
+          this.isKnownVehicleBrand(item.brandKey) &&
+          item.brandKey === selectedBrand &&
+          item.hasModel
+        )
+        .sort((a, b) =>
+          String(a.label).localeCompare(String(b.label), 'fr', { sensitivity: 'base' })
+        );
+    }
+
+    return [];
+  }
+
+  async fetchAllVehiclesCatalog(){
+    if (this.allVehiclesCache) return this.allVehiclesCache;
+
+    const url = new URL('/api/catalog/vehicles', window.location.origin);
+    const res = await fetch(url.toString());
+    const data = await res.json().catch(()=> ({}));
+
+    if (!res.ok || !data.ok) {
+      throw new Error(data.message || 'Erreur API véhicules');
+    }
+
+    this.allVehiclesCache = Array.isArray(data.items) ? data.items : [];
+    return this.allVehiclesCache;
+  }
+
+  normalizeBrandKey(value){
+  let normalized = String(value || '')
+    .trim()
+    .toUpperCase()
+    .replace(/-/g, ' ')
+    .replace(/\s+/g, ' ');
+
+  const aliases = {
+    'VW': 'VOLKSWAGEN',
+    'MERCEDES-BENZ': 'MERCEDES BENZ',
+    'DS AUTOMOBILES': 'DS'
+  };
+
+  return aliases[normalized] || normalized;
+}
+
+  getKnownVehicleBrands(){
+    return new Set([
+      'ABARTH',
+      'ALFA ROMEO',
+      'ALPINE',
+      'ASTON MARTIN',
+      'AUDI',
+      'BENTLEY',
+      'BMW',
+      'BYD',
+      'CADILLAC',
+      'CHEVROLET',
+      'CHRYSLER',
+      'CITROEN',
+      'CUPRA',
+      'DACIA',
+      'DAEWOO',
+      'DFSK',
+      'DODGE',
+      'DS',
+      'DS AUTOMOBILES',
+      'FERRARI',
+      'FIAT',
+      'FORD',
+      'GEELY',
+      'GMC',
+      'GREAT WALL',
+      'HONDA',
+      'HUMMER',
+      'HYUNDAI',
+      'INFINITI',
+      'ISUZU',
+      'IVECO',
+      'JAGUAR',
+      'JEEP',
+      'KGM',
+      'KIA',
+      'LADA',
+      'LAMBORGHINI',
+      'LANCIA',
+      'LAND ROVER',
+      'LEXUS',
+      'MAN',
+      'MASERATI',
+      'MAZDA',
+      'MCLAREN',
+      'MERCEDES',
+      'MERCEDES BENZ',
+      'MG',
+      'MINI',
+      'MITSUBISHI',
+      'NISSAN',
+      'OPEL',
+      'PEUGEOT',
+      'PORSCHE',
+      'RANGE ROVER',
+      'RENAULT',
+      'ROLLS ROYCE',
+      'ROVER',
+      'SEAT',
+      'SKODA',
+      'SMART',
+      'SSANGYONG',
+      'SUBARU',
+      'SUZUKI',
+      'TESLA',
+      'TOYOTA',
+      'VOLKSWAGEN',
+      'VOLVO'
+    ]);
+  }
+
+  isKnownVehicleBrand(brandKey){
+    return this.getKnownVehicleBrands().has(this.normalizeBrandKey(brandKey));
+  }
+
+  vehicleBrandLabel(brandKey){
+    const normalized = this.normalizeBrandKey(brandKey);
+
+    const forcedLabels = {
+      'ALFA ROMEO': 'Alfa Romeo',
+      'ASTON MARTIN': 'Aston Martin',
+      'DS': 'DS',
+      'DS AUTOMOBILES': 'DS',
+      'GMC': 'GMC',
+      'GREAT WALL': 'Great Wall',
+      'KGM': 'KGM',
+      'LAND ROVER': 'Land Rover',
+      'MAN': 'MAN',
+      'MG': 'MG',
+      'MINI': 'MINI',
+      'MERCEDES': 'Mercedes',
+      'MERCEDES BENZ': 'Mercedes',
+      'RANGE ROVER': 'Range Rover',
+      'ROLLS ROYCE': 'Rolls-Royce',
+      'SEAT': 'SEAT',
+      'BMW': 'BMW',
+      'BYD': 'BYD'
+    };
+
+    if (forcedLabels[normalized]) {
+      return forcedLabels[normalized];
+    }
+
+    return normalized
+      .split(' ')
+      .filter(Boolean)
+      .map(part => part.charAt(0) + part.slice(1).toLowerCase())
+      .join(' ');
+  }
+
+  extractVehicleMeta(rawValue){
+    const raw = String(rawValue || '')
+      .trim()
+      .replace(/_/g, ' ')
+      .replace(/\s+/g, ' ');
+
+    const normalized = this.normalizeBrandKey(raw);
+
+    const multiWordBrands = [
+      'ALFA ROMEO',
+      'ASTON MARTIN',
+      'DS AUTOMOBILES',
+      'GREAT WALL',
+      'LAND ROVER',
+      'MERCEDES BENZ',
+      'RANGE ROVER',
+      'ROLLS ROYCE'
+    ].sort((a, b) => b.length - a.length);
+
+    let brandKey = '';
+
+    for (const candidate of multiWordBrands) {
+      if (normalized === candidate || normalized.startsWith(candidate + ' ')) {
+        brandKey = candidate;
+        break;
+      }
+    }
+
+    if (!brandKey) {
+      brandKey = normalized.split(' ')[0] || normalized;
+    }
+
+    const rawClean = raw.replace(/-/g, ' ');
+    const rawWords = rawClean.split(' ').filter(Boolean);
+    const brandWordCount = brandKey.split(' ').length;
+
+    let modelRaw = rawWords.slice(brandWordCount).join(' ').trim();
+    const hasModel = !!modelRaw;
+
+    return {
+      brandKey: this.normalizeBrandKey(brandKey),
+      brandLabel: this.vehicleBrandLabel(brandKey),
+      modelLabel: hasModel ? this.prettify('vehicle', modelRaw) : '',
+      fullLabel: this.prettify('vehicle', raw),
+      hasModel
+    };
+  }
+
+  escape(s){
+    return String(s).replace(/[&<>"']/g, m => ({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;',
+      "'":'&#39;'
+    }[m]));
+  }
+}
+
+document.querySelectorAll('[data-facet]').forEach(el => new FacetBlock(el));
+</script>

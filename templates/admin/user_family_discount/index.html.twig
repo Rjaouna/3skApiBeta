@@ -1,0 +1,496 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+  :root{
+    --ufd-radius: 22px;
+    --ufd-border: rgba(0,0,0,.10);
+    --ufd-shadow: 0 14px 34px rgba(0,0,0,.08);
+    --ufd-muted: rgba(0,0,0,.58);
+    --ufd-text: rgba(0,0,0,.84);
+    --ufd-glass: rgba(255,255,255,.82);
+    --ufd-glass-2: rgba(255,255,255,.60);
+  }
+
+  body.theme-dark{
+    --ufd-border: rgba(255,255,255,.14);
+    --ufd-shadow: 0 18px 46px rgba(0,0,0,.35);
+    --ufd-muted: rgba(255,255,255,.62);
+    --ufd-text: rgba(255,255,255,.88);
+    --ufd-glass: rgba(18,18,22,.76);
+    --ufd-glass-2: rgba(18,18,22,.58);
+  }
+
+  .ufd-page-hero{
+    border-radius: 24px;
+    border: 1px solid var(--ufd-border);
+    box-shadow: var(--ufd-shadow);
+    padding: 18px;
+    background:
+      radial-gradient(900px circle at 10% 10%, rgba(var(--bs-primary-rgb), .16), transparent 40%),
+      radial-gradient(900px circle at 90% 30%, rgba(var(--bs-secondary-rgb), .14), transparent 38%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+  }
+
+  .ufd-page-hero h3{
+    margin: 0;
+    font-weight: 950;
+    color: var(--ufd-text);
+  }
+
+  .ufd-page-hero .subtitle{
+    margin-top: 6px;
+    color: var(--ufd-muted);
+    font-size: .92rem;
+    font-weight: 600;
+  }
+
+  .ufd-count-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 8px 12px;
+    border: 1px solid var(--ufd-border);
+    background: var(--ufd-glass-2);
+    color: var(--ufd-text);
+    font-size: .82rem;
+    font-weight: 900;
+  }
+
+  .ufd-count-badge i{
+    color: var(--bs-primary);
+  }
+
+  .ufd-info-band{
+    border-radius: 18px;
+    border: 1px solid rgba(var(--bs-info-rgb), .18);
+    background: rgba(var(--bs-info-rgb), .10);
+    color: var(--ufd-text);
+    padding: 14px 16px;
+    font-weight: 700;
+  }
+
+  .ufd-table-card{
+    border-radius: var(--ufd-radius);
+    border: 1px solid var(--ufd-border);
+    box-shadow: var(--ufd-shadow);
+    background: var(--ufd-glass);
+    backdrop-filter: blur(8px);
+  }
+
+  .ufd-table-card .card-body{
+    padding: 18px;
+  }
+
+  .ufd-table thead th{
+    border-bottom: 1px solid var(--ufd-border);
+    color: var(--ufd-muted);
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-weight: 900;
+    padding: 14px 12px;
+    white-space: nowrap;
+    background: transparent;
+  }
+
+  .ufd-table tbody tr:hover{
+    background: rgba(var(--bs-primary-rgb), .04);
+  }
+
+  .ufd-table tbody td{
+    padding: 16px 12px;
+    border-color: rgba(0,0,0,.06);
+    vertical-align: middle;
+    color: var(--ufd-text);
+  }
+
+  body.theme-dark .ufd-table tbody td{
+    border-color: rgba(255,255,255,.08);
+  }
+
+  .ufd-user{
+    font-weight: 900;
+    color: var(--ufd-text);
+    line-height: 1.2;
+  }
+
+  .ufd-company{
+    margin-top: 4px;
+    font-size: .82rem;
+    color: var(--ufd-muted);
+    font-weight: 700;
+  }
+
+  .ufd-family{
+    font-weight: 950;
+    color: var(--bs-primary);
+  }
+
+  .ufd-rate-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 8px 12px;
+    background: rgba(25,135,84,.12);
+    color: rgba(25,135,84,1);
+    border: 1px solid rgba(25,135,84,.20);
+    font-weight: 900;
+  }
+
+  .ufd-updated{
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .ufd-action-btn{
+    border-radius: 12px;
+    font-weight: 900;
+    padding-inline: 14px;
+  }
+
+  .ufd-empty{
+    border-radius: 20px;
+    border: 1px dashed var(--ufd-border);
+    background: rgba(255,255,255,.42);
+    padding: 44px 18px;
+    text-align: center;
+    color: var(--ufd-muted);
+  }
+
+  body.theme-dark .ufd-empty{
+    background: rgba(255,255,255,.03);
+  }
+
+  .ufd-empty i{
+    font-size: 2rem;
+    margin-bottom: 12px;
+    color: var(--bs-secondary);
+  }
+
+  .ufd-mobile-list{
+    display: none;
+  }
+
+  .ufd-mobile-card{
+    border-radius: 18px;
+    border: 1px solid var(--ufd-border);
+    background: rgba(255,255,255,.52);
+    padding: 14px;
+  }
+
+  body.theme-dark .ufd-mobile-card{
+    background: rgba(255,255,255,.04);
+  }
+
+  .ufd-mobile-top{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .ufd-mobile-grid{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .ufd-mobile-box{
+    border-radius: 14px;
+    border: 1px solid var(--ufd-border);
+    padding: 10px 12px;
+    background: rgba(255,255,255,.55);
+  }
+
+  body.theme-dark .ufd-mobile-box{
+    background: rgba(18,18,22,.50);
+  }
+
+  .ufd-mobile-label{
+    font-size: .72rem;
+    color: var(--ufd-muted);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .ufd-mobile-value{
+    font-size: .88rem;
+    color: var(--ufd-text);
+    font-weight: 800;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+
+  .ufd-mobile-actions{
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .ufd-inline-alert{
+    border-radius: 16px;
+    padding: 12px 14px;
+    font-weight: 800;
+    border: 1px solid transparent;
+    margin-bottom: 16px;
+  }
+
+  .ufd-inline-alert-success{
+    background: rgba(25,135,84,.12);
+    color: rgba(25,135,84,1);
+    border-color: rgba(25,135,84,.20);
+  }
+
+  .ufd-inline-alert-danger{
+    background: rgba(220,53,69,.12);
+    color: rgba(220,53,69,.98);
+    border-color: rgba(220,53,69,.20);
+  }
+
+  @media (max-width: 991.98px){
+    .ufd-desktop-table{
+      display: none;
+    }
+
+    .ufd-mobile-list{
+      display: grid;
+      gap: 12px;
+    }
+  }
+</style>
+
+<div class="container py-4">
+  <div class="ufd-page-hero mb-3 d-flex align-items-start justify-content-between flex-wrap gap-2">
+    <div>
+      <h3>Remises personnelles</h3>
+      <div class="subtitle">Gestion des remises par utilisateur et famille.</div>
+    </div>
+
+    <div class="d-flex gap-2 flex-wrap">
+  <div class="ufd-count-badge">
+    <i class="fa-solid fa-tags"></i>
+    <span>{{ discounts|length }} remise{{ discounts|length > 1 ? 's' : '' }}</span>
+  </div>
+
+  <a href="{{ path('admin_category_reduction_index') }}"
+     class="btn btn-outline-primary ufd-action-btn d-inline-flex align-items-center gap-2">
+    <i class="fa-solid fa-layer-group"></i>
+    <span>Réductions par catégorie</span>
+  </a>
+
+  <a href="{{ path('admin_user_family_discount_new') }}" class="btn btn-primary ufd-action-btn">
+    <i class="fa-solid fa-plus me-2"></i>Nouvelle remise
+  </a>
+</div>
+  </div>
+
+  <div id="ufdNoticeMount"></div>
+
+  <div class="ufd-info-band mb-3">
+    La famille doit correspondre à la valeur <strong>FamilyName</strong> des articles.
+  </div>
+
+  <div class="ufd-table-card">
+    <div class="card-body">
+      {% if discounts is empty %}
+        <div class="ufd-empty">
+          <i class="fa-solid fa-inbox"></i>
+          <div class="fw-bold mb-1">Aucune remise personnelle</div>
+          <div class="small">Aucune remise n’est enregistrée pour le moment.</div>
+        </div>
+      {% else %}
+        <div class="table-responsive ufd-desktop-table">
+          <table class="table ufd-table align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Utilisateur</th>
+                <th>Société</th>
+                <th>Catégorie</th>
+                <th>Remise</th>
+                <th>Mis à jour</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for discount in discounts %}
+                <tr>
+                  <td>
+                    <div class="ufd-user">{{ discount.user.email }}</div>
+                  </td>
+
+                  <td>
+                    <div class="ufd-company">{{ discount.user.companyName ?: '—' }}</div>
+                  </td>
+
+                  <td>
+                    <div class="ufd-family">{{ discount.familyName }}</div>
+                  </td>
+
+                  <td>
+                    <span class="ufd-rate-badge">
+                      <i class="fa-solid fa-percent"></i>
+                      {{ discount.discountRate }}%
+                    </span>
+                  </td>
+
+                  <td>
+                    <div class="ufd-updated">{{ discount.updatedAt ? discount.updatedAt|date('d/m/Y H:i') : '—' }}</div>
+                  </td>
+
+                  <td class="text-end">
+                    <div class="d-inline-flex gap-2">
+                      <a href="{{ path('admin_user_family_discount_edit', {id: discount.id}) }}"
+                         class="btn btn-sm btn-outline-primary ufd-action-btn">
+                        <i class="fa-solid fa-pen-to-square me-1"></i>Modifier
+                      </a>
+
+                      <form method="post"
+                            action="{{ path('admin_user_family_discount_delete', {id: discount.id}) }}"
+                            class="js-ufd-delete-form d-inline-block"
+                            data-confirm="Supprimer cette remise ?">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete_user_family_discount_' ~ discount.id) }}">
+                        <button class="btn btn-sm btn-outline-danger ufd-action-btn" type="submit">
+                          <i class="fa-solid fa-trash me-1"></i>Supprimer
+                        </button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ufd-mobile-list">
+          {% for discount in discounts %}
+            <div class="ufd-mobile-card">
+              <div class="ufd-mobile-top">
+                <div>
+                  <div class="ufd-user">{{ discount.user.email }}</div>
+                  <div class="ufd-company">{{ discount.user.companyName ?: '—' }}</div>
+                </div>
+
+                <span class="ufd-rate-badge">
+                  <i class="fa-solid fa-percent"></i>
+                  {{ discount.discountRate }}%
+                </span>
+              </div>
+
+              <div class="ufd-mobile-grid">
+                <div class="ufd-mobile-box">
+                  <div class="ufd-mobile-label">Catégorie</div>
+                  <div class="ufd-mobile-value">{{ discount.familyName }}</div>
+                </div>
+
+                <div class="ufd-mobile-box">
+                  <div class="ufd-mobile-label">Mis à jour</div>
+                  <div class="ufd-mobile-value">{{ discount.updatedAt ? discount.updatedAt|date('d/m/Y H:i') : '—' }}</div>
+                </div>
+              </div>
+
+              <div class="ufd-mobile-actions">
+                <a href="{{ path('admin_user_family_discount_edit', {id: discount.id}) }}"
+                   class="btn btn-sm btn-outline-primary ufd-action-btn">
+                  <i class="fa-solid fa-pen-to-square me-1"></i>Modifier
+                </a>
+
+                <form method="post"
+                      action="{{ path('admin_user_family_discount_delete', {id: discount.id}) }}"
+                      class="js-ufd-delete-form d-inline-block"
+                      data-confirm="Supprimer cette remise ?">
+                  <input type="hidden" name="_token" value="{{ csrf_token('delete_user_family_discount_' ~ discount.id) }}">
+                  <button class="btn btn-sm btn-outline-danger ufd-action-btn" type="submit">
+                    <i class="fa-solid fa-trash me-1"></i>Supprimer
+                  </button>
+                </form>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const noticeMount = document.getElementById('ufdNoticeMount');
+
+    const showNotice = (message, type = 'success') => {
+      if (!noticeMount) {
+        return;
+      }
+
+      noticeMount.innerHTML = `
+        <div class="ufd-inline-alert ufd-inline-alert-${type}">
+          ${message}
+        </div>
+      `;
+    };
+
+    const savedNotice = sessionStorage.getItem('ufd_notice');
+    if (savedNotice) {
+      try {
+        const parsed = JSON.parse(savedNotice);
+        showNotice(parsed.message || 'Opération effectuée.', parsed.type || 'success');
+      } catch (e) {
+      }
+      sessionStorage.removeItem('ufd_notice');
+    }
+
+    document.querySelectorAll('.js-ufd-delete-form').forEach(form => {
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const confirmText = form.dataset.confirm || 'Supprimer cet élément ?';
+        if (!window.confirm(confirmText)) {
+          return;
+        }
+
+        const button = form.querySelector('button[type="submit"]');
+        if (button) {
+          button.disabled = true;
+        }
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest',
+              'Accept': 'application/json'
+            }
+          });
+
+          const data = await response.json();
+
+          if (data.ok) {
+            sessionStorage.setItem('ufd_notice', JSON.stringify({
+              type: 'success',
+              message: data.message || 'Remise supprimée.'
+            }));
+
+            window.location.reload();
+            return;
+          }
+
+          showNotice(data.message || 'Impossible de supprimer cette remise.', 'danger');
+        } catch (error) {
+          showNotice('Une erreur réseau est survenue. Merci de réessayer.', 'danger');
+        } finally {
+          if (button) {
+            button.disabled = false;
+          }
+        }
+      });
+    });
+  });
+</script>
+{% endblock %}

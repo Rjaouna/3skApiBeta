@@ -1,0 +1,916 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+  :root{
+    --pc-radius: 18px;
+    --pc-border: rgba(0,0,0,.10);
+    --pc-shadow: 0 14px 34px rgba(0,0,0,.08);
+    --pc-muted: rgba(0,0,0,.58);
+  }
+  body.theme-dark{
+    --pc-border: rgba(255,255,255,.14);
+    --pc-shadow: 0 18px 46px rgba(0,0,0,.35);
+    --pc-muted: rgba(255,255,255,.65);
+  }
+  .cart-message{
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: .92rem;
+    font-weight: 700;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 8px 18px rgba(0,0,0,.06);
+  }
+
+  .cart-message.success{
+    background: rgba(25,135,84,.10);
+    color: rgba(25,135,84,1);
+    border-color: rgba(25,135,84,.18);
+  }
+
+  .cart-message.warning{
+    background: rgba(255,193,7,.14);
+    color: rgba(176,117,0,.98);
+    border-color: rgba(255,193,7,.24);
+  }
+
+  .cart-message.error{
+    background: rgba(220,53,69,.10);
+    color: rgba(220,53,69,.98);
+    border-color: rgba(220,53,69,.20);
+  }
+
+  body.theme-dark .cart-message.success{
+    background: rgba(25,135,84,.18);
+    color: #9ee3b4;
+  }
+
+  body.theme-dark .cart-message.warning{
+    background: rgba(255,193,7,.18);
+    color: #ffd666;
+  }
+
+  body.theme-dark .cart-message.error{
+    background: rgba(220,53,69,.18);
+    color: #ff9aa2;
+  }
+
+  .page-hero{
+    border-radius: 22px;
+    border: 1px solid var(--pc-border);
+    box-shadow: var(--pc-shadow);
+    padding: 16px;
+    background:
+      radial-gradient(900px circle at 10% 10%, rgba(var(--bs-primary-rgb), .16), transparent 40%),
+      radial-gradient(900px circle at 90% 30%, rgba(var(--bs-secondary-rgb), .14), transparent 38%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+  }
+
+  .product-detail-card{
+    border-radius: 22px;
+    border: 1px solid var(--pc-border);
+    box-shadow: var(--pc-shadow);
+    background: rgba(255,255,255,.78);
+    backdrop-filter: blur(8px);
+    overflow: hidden;
+  }
+  body.theme-dark .product-detail-card{
+    background: rgba(18,18,22,.70);
+  }
+
+  .top-product-wrap{
+    padding: 18px;
+  }
+
+  .top-product-grid{
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+
+  .detail-image-wrap{
+    border-radius: 20px;
+    border: 1px solid var(--pc-border);
+    background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.70));
+    padding: 18px;
+    min-height: 340px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .detail-image{
+    width: 100%;
+    max-height: 360px;
+    object-fit: contain;
+    border-radius: 18px;
+    background: #fff;
+    padding: 16px;
+    border: 1px solid rgba(0,0,0,.06);
+  }
+
+  .detail-summary{
+    border-radius: 20px;
+    border: 1px solid var(--pc-border);
+    background: rgba(255,255,255,.55);
+    padding: 20px;
+  }
+  body.theme-dark .detail-summary{
+    background: rgba(18,18,22,.42);
+  }
+
+  .detail-ref{
+    font-size: 1.65rem;
+    font-weight: 950;
+    color: var(--bs-primary);
+    line-height: 1.1;
+  }
+
+  .detail-title{
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-top: 8px;
+    color: rgba(0,0,0,.82);
+  }
+  body.theme-dark .detail-title{
+    color: rgba(255,255,255,.90);
+  }
+
+  .detail-chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top: 14px;
+  }
+
+  .meta-chip{
+    border: 1px solid rgb(255 145 0);
+    background: rgb(255 145 0);
+    border-radius: 999px;
+    padding: 2px 10px;
+    font-weight: 700;
+    color: #fff;
+    font-size: .82rem;
+  }
+
+  .discount-chip{
+    background: rgba(220,53,69,.12);
+    color: rgba(220,53,69,.98);
+    border: 1px solid rgba(220,53,69,.24);
+  }
+
+  body.theme-dark .discount-chip{
+    background: rgba(220,53,69,.18);
+    color: #ffb3bd;
+    border-color: rgba(220,53,69,.28);
+  }
+
+  .detail-price{
+    margin-top: 18px;
+    line-height: 1.1;
+  }
+
+  .detail-price-old{
+    display:block;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: rgba(0,0,0,.48);
+    text-decoration: line-through;
+    margin-bottom: 8px;
+  }
+
+  body.theme-dark .detail-price-old{
+    color: rgba(255,255,255,.45);
+  }
+
+  .detail-price-new{
+    display:block;
+    font-size: 2rem;
+    font-weight: 950;
+    color: rgba(220,53,69,.98);
+  }
+
+  .detail-price-normal{
+    display:block;
+    font-size: 2rem;
+    font-weight: 950;
+  }
+
+  .detail-price small{
+    font-size: .9rem;
+    color: var(--pc-muted);
+    font-weight: 800;
+  }
+
+  .related-grid{
+    display:grid;
+    grid-template-columns: repeat(5, minmax(0,1fr));
+    gap:14px;
+  }
+
+  .related-card{
+    border: 1px solid var(--pc-border);
+    border-radius: 18px;
+    background: rgba(255,255,255,.55);
+    overflow: hidden;
+    transition: transform .12s ease, box-shadow .12s ease;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 8px 20px rgba(0,0,0,.05);
+  }
+  .related-card:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(0,0,0,.10);
+  }
+  body.theme-dark .related-card{
+    background: rgba(18,18,22,.42);
+  }
+
+  .related-card__imgwrap{
+    padding: 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,.92), transparent);
+  }
+
+  .related-card__img{
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 14px;
+    padding: 10px;
+    border: 1px solid rgba(0,0,0,.06);
+  }
+
+  .related-card__body{
+    padding: 12px;
+  }
+
+  .related-card__ref{
+    font-weight: 950;
+    color: var(--bs-primary);
+    font-size: .95rem;
+    line-height: 1.2;
+  }
+
+  .related-card__title{
+    margin-top: 6px;
+    font-size: .80rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.35;
+    min-height: 42px;
+  }
+
+  .related-card__meta{
+    margin-top: 8px;
+    font-size: .72rem;
+    color: var(--pc-muted);
+  }
+
+  .related-card__price{
+    margin-top: 10px;
+  }
+
+  .related-card__price-old{
+    display:block;
+    font-size: .82rem;
+    font-weight: 800;
+    color: rgba(0,0,0,.48);
+    text-decoration: line-through;
+    margin-bottom: 4px;
+  }
+
+  body.theme-dark .related-card__price-old{
+    color: rgba(255,255,255,.45);
+  }
+
+  .related-card__price-new{
+    display:block;
+    font-size: 1rem;
+    font-weight: 950;
+    color: rgba(220,53,69,.98);
+  }
+
+  .related-card__price-normal{
+    display:block;
+    font-size: 1rem;
+    font-weight: 950;
+  }
+
+  .related-empty{
+    padding: 0 18px 18px;
+    color: var(--pc-muted);
+    font-size: .92rem;
+  }
+
+  @media (max-width: 1199px){
+    .related-grid{
+      grid-template-columns: repeat(3, minmax(0,1fr));
+    }
+  }
+
+  @media (max-width: 767px){
+    .related-grid{
+      grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+  }
+
+  .stock-box{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 12px;
+    border-radius: 999px;
+    font-weight: 900;
+    background: rgba(25,135,84,.10);
+    color: rgba(25,135,84,1);
+    border: 1px solid rgba(25,135,84,.18);
+    margin-top: 14px;
+  }
+
+  .stock-box.low{
+    background: rgba(255,193,7,.12);
+    color: rgba(176,117,0,.98);
+    border-color: rgba(255,193,7,.22);
+  }
+
+  .stock-box.out{
+    background: rgba(220,53,69,.10);
+    color: rgba(220,53,69,.98);
+    border-color: rgba(220,53,69,.20);
+  }
+
+  .cart-actions{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    flex-wrap:wrap;
+    margin-top: 18px;
+  }
+
+  .qty-stepper{
+    display:flex;
+    align-items:stretch;
+    height: 46px;
+    border: 1px solid var(--pc-border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(255,255,255,.92);
+    width: fit-content;
+  }
+  body.theme-dark .qty-stepper{ background: rgba(18,18,22,.70); }
+
+  .qty-btn{
+    width: 46px;
+    border: 0;
+    background: transparent;
+    display:grid;
+    place-items:center;
+    font-weight: 900;
+  }
+
+  .qty-field{
+    width: 60px;
+    border: 0;
+    outline: none;
+    text-align: center;
+    font-weight: 950;
+    background: transparent;
+  }
+
+  .addcart{
+    height: 46px;
+    border-radius: 10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 8px;
+    padding: 0 16px;
+    font-weight: 900;
+    border: 1px solid #dee2e6;
+    background: #ecf0f1;
+  }
+  .addcart:hover{ background: rgba(190,190,190,.64); }
+
+  .divider-title{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin: 20px 18px 0;
+  }
+
+  .divider-title h5{
+    margin: 0;
+    font-weight: 900;
+  }
+
+  .detail-grid{
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap:14px;
+    padding: 18px;
+  }
+
+  .detail-item{
+    border: 1px solid var(--pc-border);
+    border-radius: 16px;
+    padding: 14px 16px;
+    background: rgba(255,255,255,.46);
+  }
+  body.theme-dark .detail-item{
+    background: rgba(18,18,22,.34);
+  }
+
+  .detail-label{
+    font-size: .78rem;
+    font-weight: 900;
+    color: var(--pc-muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    letter-spacing: .02em;
+  }
+
+  .detail-value{
+    font-size: .96rem;
+    font-weight: 800;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+
+  .back-link{
+    text-decoration:none;
+    font-weight:700;
+  }
+
+  @media (max-width: 991px){
+    .top-product-grid{
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 767px){
+    .detail-grid{
+      grid-template-columns: 1fr;
+    }
+
+    .detail-price-new,
+    .detail-price-normal{
+      font-size: 1.6rem;
+    }
+
+    .detail-ref{
+      font-size: 1.35rem;
+    }
+  }
+</style>
+
+{% set imageUrl = asset('ebpsynch/' ~ article.uniqueId ~ '.png') %}
+{% set fallbackImg = asset('img/default-piece.png') %}
+
+{% set stock = article.realStock %}
+{% set stockClass = stock == 0 ? 'out' : (stock < 5 ? 'low' : '') %}
+
+{% set reductionRate = article.reduction is not empty ? (article.reduction|replace({',': '.'}) + 0) : 0 %}
+{% set hasReduction = reductionRate > 0 %}
+{% set reducedPriceTtc = hasReduction ? (article.salePriceVatIncluded * (1 - reductionRate / 100)) : article.salePriceVatIncluded %}
+
+<div class="container py-4">
+  <div class="page-hero mb-3 d-flex align-items-start justify-content-between flex-wrap gap-2">
+    <div>
+      <a
+        href="{{ path('articles_page') }}"
+        class="back-link text-decoration-none"
+        onclick="if (window.history.length > 1) { event.preventDefault(); window.history.back(); }"
+      >
+        <i class="fa-solid fa-arrow-left me-2"></i>Retour
+      </a>
+      <h3 class="mb-1 mt-2">Produit</h3>
+      <div class="text-muted small">Photo, prix, stock et détails complets</div>
+    </div>
+  </div>
+
+  <div class="product-detail-card">
+    <div class="top-product-wrap">
+      <div class="top-product-grid">
+        <div class="detail-image-wrap">
+          <img
+            src="{{ imageUrl }}"
+            alt="{{ article.id }}"
+            class="detail-image"
+            onerror="this.onerror=null;this.src='{{ fallbackImg }}';"
+          >
+        </div>
+
+        <div class="detail-summary">
+          <div class="detail-ref">{{ article.id }}</div>
+          <div class="detail-title">{{ article.desComClear ?: 'Sans désignation' }}</div>
+
+          <div class="detail-chips">
+            {% if article.familyName %}
+              <span class="meta-chip">{{ article.familyName }}</span>
+            {% endif %}
+            {% if article.xxMarque %}
+              <span class="meta-chip">{{ article.xxMarque }}</span>
+            {% endif %}
+            {% if article.xxVehicule %}
+              <span class="meta-chip">{{ article.xxVehicule }}</span>
+            {% endif %}
+            {% if article.xxPosition %}
+              <span class="meta-chip">Pos: {{ article.xxPosition }}</span>
+            {% endif %}
+            {% if article.xxAnnee %}
+              <span class="meta-chip">{{ article.xxAnnee }}</span>
+            {% endif %}
+            {% if hasReduction %}
+              <span class="meta-chip discount-chip">-{{ reductionRate|number_format(0, '.', ' ') }}%</span>
+            {% endif %}
+          </div>
+
+          <div class="detail-price">
+            {% if hasReduction %}
+              <span class="detail-price-old">
+                {{ article.salePriceVatIncluded|number_format(2, '.', ' ') }} DH <small>[TTC]</small>
+              </span>
+              <span class="detail-price-new">
+                {{ reducedPriceTtc|number_format(2, '.', ' ') }} DH <small>[TTC remisé]</small>
+              </span>
+            {% else %}
+              <span class="detail-price-normal">
+                {{ article.salePriceVatIncluded|number_format(2, '.', ' ') }} DH <small>[TTC]</small>
+              </span>
+            {% endif %}
+          </div>
+
+          <div class="mt-2 text-muted small">
+            Prix HT : {{ article.salePriceVatExcluded|number_format(2, '.', ' ') }} DH
+          </div>
+
+          <span class="stock-box {{ stockClass }}" id="stockBadgeBox">
+            <i class="fa-solid fa-cubes-stacked"></i>
+            Stock : <span id="stockBadgeValue">{{ stock > 20 ? '+20' : stock }}</span>
+          </span>
+
+          <div class="cart-actions">
+            <div class="qty-stepper" data-qty-stepper>
+              <button class="qty-btn" type="button" data-qty-minus>
+                <i class="fa-solid fa-minus"></i>
+              </button>
+              <input class="qty-field" type="text" inputmode="numeric" value="1" data-qty-input>
+              <button class="qty-btn" type="button" data-qty-plus>
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+
+            <button class="addcart" type="button" id="addToCartBtn">
+              <i class="fa-solid fa-cart-plus"></i>
+              Ajouter au panier
+            </button>
+          </div>
+
+          <div id="stockMsg" class="cart-message d-none"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider-title">
+      <h5>Détail article</h5>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-item">
+        <div class="detail-label">Référence</div>
+        <div class="detail-value">{{ article.id ?: '—' }}</div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-label">Désignation</div>
+        <div class="detail-value">{{ article.desComClear ?: '—' }}</div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-label">Famille</div>
+        <div class="detail-value">{{ article.familyName ?: '—' }}</div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-label">Marque</div>
+        <div class="detail-value">{{ article.xxMarque ?: '—' }}</div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-label">Véhicule</div>
+        <div class="detail-value">{{ article.xxVehicule ?: '—' }}</div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-label">Position</div>
+        <div class="detail-value">{{ article.xxPosition ?: '—' }}</div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-label">Année</div>
+        <div class="detail-value">{{ article.xxAnnee ?: '—' }}</div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-label">Prix HT</div>
+        <div class="detail-value">{{ article.salePriceVatExcluded|number_format(2, '.', ' ') }} DH</div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-label">Prix TTC</div>
+        <div class="detail-value">
+          {% if hasReduction %}
+            <div style="text-decoration: line-through; opacity:.6;">
+              {{ article.salePriceVatIncluded|number_format(2, '.', ' ') }} DH
+            </div>
+            <div class="text-danger fw-bold">
+              {{ reducedPriceTtc|number_format(2, '.', ' ') }} DH
+            </div>
+          {% else %}
+            {{ article.salePriceVatIncluded|number_format(2, '.', ' ') }} DH
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if article.familyName %}
+    <div class="divider-title my-4">
+      <h5>Articles de la même famille</h5>
+    </div>
+
+    {% if relatedArticles is not empty %}
+      <div class="related-grid">
+        {% for rel in relatedArticles %}
+          {% set relImage = asset('ebpsynch/' ~ rel.uniqueId ~ '.png') %}
+          {% set relReductionRate = rel.reduction is not empty ? (rel.reduction|replace({',': '.'}) + 0) : 0 %}
+          {% set relHasReduction = relReductionRate > 0 %}
+          {% set relReducedPriceTtc = relHasReduction ? (rel.salePriceVatIncluded * (1 - relReductionRate / 100)) : rel.salePriceVatIncluded %}
+
+          <a href="{{ path('article_show', { code: rel.id }) }}" class="related-card">
+            <div class="related-card__imgwrap">
+              <img
+                src="{{ relImage }}"
+                alt="{{ rel.id }}"
+                class="related-card__img"
+                onerror="this.onerror=null;this.src='{{ fallbackImg }}';"
+              >
+            </div>
+
+            <div class="related-card__body">
+              <div class="related-card__ref">{{ rel.id }}</div>
+
+              <div class="related-card__title">
+                {{ rel.desComClear ?: 'Sans désignation' }}
+              </div>
+
+              <div class="related-card__meta">
+                {% if rel.xxMarque %}{{ rel.xxMarque }}{% endif %}
+                {% if rel.xxPosition %} • Pos: {{ rel.xxPosition }}{% endif %}
+                {% if relHasReduction %} • -{{ relReductionRate|number_format(0, '.', ' ') }}%{% endif %}
+              </div>
+
+              <div class="related-card__price">
+                {% if relHasReduction %}
+                  <span class="related-card__price-old">
+                    {{ rel.salePriceVatIncluded|number_format(2, '.', ' ') }} DH
+                  </span>
+                  <span class="related-card__price-new">
+                    {{ relReducedPriceTtc|number_format(2, '.', ' ') }} DH
+                  </span>
+                {% else %}
+                  <span class="related-card__price-normal">
+                    {{ rel.salePriceVatIncluded|number_format(2, '.', ' ') }} DH
+                  </span>
+                {% endif %}
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="related-empty">
+        Aucun autre article trouvé dans cette famille.
+      </div>
+    {% endif %}
+  {% endif %}
+</div>
+
+<script>
+(function(){
+  const code = {{ article.id|json_encode|raw }};
+  const stock = {{ article.realStock|default(0) }};
+  const qtyField = document.querySelector('[data-qty-input]');
+  const btnMinus = document.querySelector('[data-qty-minus]');
+  const btnPlus = document.querySelector('[data-qty-plus]');
+  const addBtn = document.getElementById('addToCartBtn');
+  const msgEl = document.getElementById('stockMsg');
+  const stockBadgeValue = document.getElementById('stockBadgeValue');
+  const stockBadgeBox = document.getElementById('stockBadgeBox');
+
+  function safeJsonParse(s, fallback){
+    try { return JSON.parse(s); } catch(e){ return fallback; }
+  }
+
+  function normalizeCartObj(obj){
+    if (!obj || typeof obj !== 'object') return {};
+    const out = {};
+    for (const [k, v] of Object.entries(obj)){
+      if (!k) continue;
+      if (typeof v === 'number') out[k] = Math.max(0, Math.floor(v));
+      else if (v && typeof v === 'object' && v.qty != null) out[k] = { ...v, qty: Math.max(0, Math.floor(Number(v.qty) || 0)) };
+      else out[k] = Math.max(0, Math.floor(Number(v) || 0));
+    }
+    return out;
+  }
+
+  function getCart(){
+    const raw = safeJsonParse(localStorage.getItem('cart') || '{}', {});
+    return normalizeCartObj(raw);
+  }
+
+  function getCartQtyFromObj(obj, code){
+    const v = obj?.[code];
+    if (v == null) return 0;
+    if (typeof v === 'number') return v;
+    if (typeof v === 'object' && v.qty != null) return Number(v.qty) || 0;
+    return Number(v) || 0;
+  }
+
+  function setCartQtyInObj(obj, code, nextQty){
+    const v = obj?.[code];
+    if (v && typeof v === 'object') obj[code].qty = nextQty;
+    else obj[code] = nextQty;
+  }
+
+  function writeCart(obj){
+    localStorage.setItem('cart', JSON.stringify(normalizeCartObj(obj)));
+    window.dispatchEvent(new CustomEvent('cart:changed'));
+    if (typeof window.refreshHeaderCounts === 'function'){
+      try { window.refreshHeaderCounts(); } catch(e){}
+    }
+  }
+
+  function showMsg(text, type = 'success'){
+    if (!msgEl) return;
+
+    const icons = {
+      success: 'fa-circle-check',
+      warning: 'fa-triangle-exclamation',
+      error: 'fa-circle-xmark'
+    };
+
+    msgEl.className = `cart-message ${type}`;
+    msgEl.innerHTML = `<i class="fa-solid ${icons[type] || icons.success}"></i><span>${text}</span>`;
+    msgEl.classList.remove('d-none');
+
+    clearTimeout(msgEl._t);
+    msgEl._t = setTimeout(() => {
+      msgEl.classList.add('d-none');
+    }, 2600);
+  }
+
+  function sanitizeQty(){
+    if (!qtyField) return 1;
+    qtyField.value = (qtyField.value || '').replace(/\D+/g,'') || '1';
+    let v = parseInt(qtyField.value, 10);
+    if (!isFinite(v) || v < 1) v = 1;
+    return v;
+  }
+
+  function getAvailNow(){
+    const cart = getCart();
+    const currentInCart = getCartQtyFromObj(cart, code);
+    return Math.max(0, stock - currentInCart);
+  }
+
+  function refreshStockDisplay(){
+    const available = getAvailNow();
+
+    if (stockBadgeValue){
+      stockBadgeValue.textContent = available > 20 ? '+20' : String(available);
+    }
+
+    if (stockBadgeBox){
+      stockBadgeBox.classList.remove('out', 'low');
+
+      if (available <= 0){
+        stockBadgeBox.classList.add('out');
+      } else if (available < 5){
+        stockBadgeBox.classList.add('low');
+      }
+    }
+  }
+
+  function setUI(){
+    const max = getAvailNow();
+    let v = sanitizeQty();
+
+    if (max > 0) v = Math.min(v, max);
+    qtyField.value = String(v);
+
+    const disabledAll = max <= 0;
+
+    qtyField.disabled = disabledAll;
+    addBtn.disabled = disabledAll;
+    btnMinus.disabled = disabledAll || v <= 1;
+    btnPlus.disabled = disabledAll || v >= max;
+
+    refreshStockDisplay();
+  }
+
+  btnMinus?.addEventListener('click', () => {
+    const cur = sanitizeQty();
+    qtyField.value = String(Math.max(1, cur - 1));
+    setUI();
+  });
+
+  btnPlus?.addEventListener('click', () => {
+    const cur = sanitizeQty();
+    qtyField.value = String(cur + 1);
+    setUI();
+  });
+
+  qtyField?.addEventListener('input', () => {
+    sanitizeQty();
+    setUI();
+  });
+
+  addBtn?.addEventListener('click', async () => {
+    setUI();
+
+    const max = getAvailNow();
+    if (max <= 0){
+      showMsg('Stock indisponible.', 'error');
+      return;
+    }
+
+    const qty = Math.max(1, sanitizeQty());
+    if (qty > max){
+      showMsg('Stock disponible : ' + max, 'warning');
+      qtyField.value = String(max);
+      setUI();
+      return;
+    }
+
+    const oldHtml = addBtn.innerHTML;
+    addBtn.disabled = true;
+    addBtn.innerHTML = `<span class="spinner-border spinner-border-sm" role="status"></span>`;
+
+    try{
+      const res = await fetch('/api/cart/add', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
+        body: JSON.stringify({ code, qty })
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.status === 401){
+        showMsg('Connectez-vous pour ajouter au panier.', 'warning');
+      } else if (res.ok && data.ok){
+        const cart = getCart();
+        const current = getCartQtyFromObj(cart, code);
+        const next = current + qty;
+
+        setCartQtyInObj(cart, code, next);
+        writeCart(cart);
+
+        qtyField.value = '1';
+        setUI();
+
+        if (data.cartAlert?.showBadge) {
+          showMsg('Attention : plusieurs paniers demandent cet article.', 'warning');
+        } else {
+          showMsg('Article ajouté au panier avec succès.', 'success');
+        }
+      } else {
+        showMsg(data?.message || 'Erreur lors de l’ajout au panier.', 'error');
+      }
+    } catch(e){
+      showMsg('Erreur réseau, veuillez réessayer.', 'error');
+    } finally {
+      addBtn.innerHTML = oldHtml;
+      setUI();
+    }
+  });
+
+  window.addEventListener('cart:changed', setUI);
+  window.addEventListener('cart:cleared', setUI);
+  window.addEventListener('storage', (e) => {
+    if (!e || !e.key || e.key === 'cart'){
+      setUI();
+    }
+  });
+
+  setUI();
+})();
+</script>
+{% endblock %}

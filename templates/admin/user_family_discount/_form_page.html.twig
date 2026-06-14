@@ -1,0 +1,418 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+  :root{
+    --ufd-radius: 22px;
+    --ufd-border: rgba(0,0,0,.10);
+    --ufd-shadow: 0 14px 34px rgba(0,0,0,.08);
+    --ufd-muted: rgba(0,0,0,.58);
+    --ufd-text: rgba(0,0,0,.84);
+    --ufd-glass: rgba(255,255,255,.82);
+    --ufd-glass-2: rgba(255,255,255,.60);
+  }
+
+  body.theme-dark{
+    --ufd-border: rgba(255,255,255,.14);
+    --ufd-shadow: 0 18px 46px rgba(0,0,0,.35);
+    --ufd-muted: rgba(255,255,255,.62);
+    --ufd-text: rgba(255,255,255,.88);
+    --ufd-glass: rgba(18,18,22,.76);
+    --ufd-glass-2: rgba(18,18,22,.58);
+  }
+
+  .ufd-page-hero{
+    border-radius: 24px;
+    border: 1px solid var(--ufd-border);
+    box-shadow: var(--ufd-shadow);
+    padding: 18px;
+    background:
+      radial-gradient(900px circle at 10% 10%, rgba(var(--bs-primary-rgb), .16), transparent 40%),
+      radial-gradient(900px circle at 90% 30%, rgba(var(--bs-secondary-rgb), .14), transparent 38%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+  }
+
+  .ufd-page-hero h3{
+    margin: 0;
+    font-weight: 950;
+    color: var(--ufd-text);
+  }
+
+  .ufd-page-hero .subtitle{
+    margin-top: 6px;
+    color: var(--ufd-muted);
+    font-size: .92rem;
+    font-weight: 600;
+  }
+
+  .ufd-count-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 8px 12px;
+    border: 1px solid var(--ufd-border);
+    background: var(--ufd-glass-2);
+    color: var(--ufd-text);
+    font-size: .82rem;
+    font-weight: 900;
+  }
+
+  .ufd-count-badge i{
+    color: var(--bs-primary);
+  }
+
+  .ufd-page-card{
+    border-radius: var(--ufd-radius);
+    border: 1px solid var(--ufd-border);
+    box-shadow: var(--ufd-shadow);
+    background: var(--ufd-glass);
+    backdrop-filter: blur(8px);
+  }
+
+  .ufd-page-card .card-body{
+    padding: 18px;
+  }
+
+  .ufd-info-band{
+    border-radius: 18px;
+    border: 1px solid rgba(var(--bs-info-rgb), .18);
+    background: rgba(var(--bs-info-rgb), .10);
+    color: var(--ufd-text);
+    padding: 14px 16px;
+    font-weight: 700;
+  }
+
+  .ufd-form-card{
+    border-radius: 18px;
+    border: 1px solid var(--ufd-border);
+    background: rgba(255,255,255,.45);
+  }
+
+  body.theme-dark .ufd-form-card{
+    background: rgba(255,255,255,.03);
+  }
+
+  .ufd-form-card .card-body{
+    padding: 18px;
+  }
+
+  .ufd-form-label{
+    display: block;
+    font-size: .82rem;
+    font-weight: 900;
+    color: var(--ufd-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+
+  .ufd-form-control,
+  .ufd-form-select{
+    min-height: 50px;
+    border-radius: 14px;
+    border: 1px solid var(--ufd-border);
+    background: rgba(255,255,255,.78);
+    color: var(--ufd-text);
+    font-weight: 700;
+    box-shadow: none !important;
+  }
+
+  body.theme-dark .ufd-form-control,
+  body.theme-dark .ufd-form-select{
+    background: rgba(255,255,255,.06);
+    color: var(--ufd-text);
+  }
+
+  .ufd-form-control:focus,
+  .ufd-form-select:focus{
+    border-color: rgba(var(--bs-primary-rgb), .42);
+    box-shadow: 0 0 0 .2rem rgba(var(--bs-primary-rgb), .12) !important;
+  }
+
+  .ufd-form-help{
+    margin-top: 7px;
+    font-size: .78rem;
+    color: var(--ufd-muted);
+    font-weight: 700;
+  }
+
+  .ufd-form-error{
+    margin-top: 7px;
+    color: var(--bs-danger);
+    font-size: .82rem;
+    font-weight: 700;
+  }
+
+  .ufd-family-menu{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% - 2px);
+    z-index: 30;
+    margin-top: 6px;
+    border-radius: 16px;
+    border: 1px solid var(--ufd-border);
+    box-shadow: var(--ufd-shadow);
+    background: var(--ufd-glass);
+    backdrop-filter: blur(8px);
+    overflow: hidden;
+  }
+
+  .ufd-family-item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 14px;
+    border: 0;
+    background: transparent;
+    color: var(--ufd-text);
+    font-weight: 800;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .ufd-family-item:hover{
+    background: rgba(var(--bs-primary-rgb), .08);
+  }
+
+  .ufd-family-item i{
+    color: var(--bs-primary);
+  }
+
+  .ufd-inline-alert{
+    border-radius: 16px;
+    padding: 12px 14px;
+    font-weight: 800;
+    border: 1px solid transparent;
+  }
+
+  .ufd-inline-alert-success{
+    background: rgba(25,135,84,.12);
+    color: rgba(25,135,84,1);
+    border-color: rgba(25,135,84,.20);
+  }
+
+  .ufd-inline-alert-danger{
+    background: rgba(220,53,69,.12);
+    color: rgba(220,53,69,.98);
+    border-color: rgba(220,53,69,.20);
+  }
+
+  .ufd-action-btn{
+    min-height: 48px;
+    border-radius: 14px;
+    font-weight: 900;
+    padding-inline: 18px;
+  }
+</style>
+
+<div class="container py-4">
+  <div class="ufd-page-hero mb-3 d-flex align-items-start justify-content-between flex-wrap gap-2">
+    <div>
+      <h3>{{ page_title }}</h3>
+      <div class="subtitle">{{ page_subtitle }}</div>
+    </div>
+
+    <div class="ufd-count-badge">
+      <i class="fa-solid fa-tags"></i>
+      <span>Remise personnelle</span>
+    </div>
+  </div>
+
+  <div id="ufdPageNotice"></div>
+
+  <div class="ufd-info-band mb-3">
+    La catégorie saisie doit correspondre à la valeur <strong>FamilyName</strong> de tes articles.
+  </div>
+
+  <div class="ufd-page-card">
+    <div class="card-body">
+      <div id="userFamilyDiscountFormMount">
+        {% include 'admin/user_family_discount/_form.html.twig' with {
+          form: form,
+          submit_label: submit_label,
+          cancel_url: path('admin_user_family_discount_index')
+        } %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.initUserFamilyDiscountForm = function(rootElement) {
+    const mount = rootElement instanceof HTMLElement
+      ? rootElement
+      : document.getElementById('userFamilyDiscountFormMount');
+
+    if (!mount) {
+      return;
+    }
+
+    const form = mount.querySelector('.js-user-family-discount-form');
+    if (!form) {
+      return;
+    }
+
+    const pageNotice = document.getElementById('ufdPageNotice');
+    const familyInput = form.querySelector('.js-family-input');
+    const familyMenu = form.querySelector('.js-family-menu');
+    const suggestUrl = form.dataset.suggestUrl;
+    const submitBtn = form.querySelector('.js-submit-btn');
+
+    const showNotice = (message, type = 'success') => {
+      if (!pageNotice) {
+        return;
+      }
+
+      pageNotice.innerHTML = `
+        <div class="ufd-inline-alert ufd-inline-alert-${type} mb-3">
+          ${message}
+        </div>
+      `;
+    };
+
+    const hideMenu = () => {
+      if (!familyMenu) {
+        return;
+      }
+
+      familyMenu.classList.add('d-none');
+      familyMenu.innerHTML = '';
+    };
+
+    const renderFamilySuggestions = (items) => {
+      if (!familyMenu || !familyInput) {
+        return;
+      }
+
+      if (!Array.isArray(items) || items.length === 0) {
+        hideMenu();
+        return;
+      }
+
+      familyMenu.innerHTML = items.map(item => `
+        <button type="button" class="ufd-family-item js-family-choice" data-value="${String(item).replace(/"/g, '&quot;')}">
+          <i class="fa-solid fa-layer-group"></i>
+          <span>${item}</span>
+        </button>
+      `).join('');
+
+      familyMenu.classList.remove('d-none');
+
+      familyMenu.querySelectorAll('.js-family-choice').forEach(button => {
+        button.addEventListener('click', () => {
+          familyInput.value = button.dataset.value || '';
+          hideMenu();
+          familyInput.focus();
+        });
+      });
+    };
+
+    let debounceTimer = null;
+
+    const fetchSuggestions = () => {
+      if (!familyInput || !suggestUrl) {
+        return;
+      }
+
+      const q = familyInput.value.trim();
+
+      if (q.length < 1) {
+        hideMenu();
+        return;
+      }
+
+      const url = new URL(suggestUrl, window.location.origin);
+      url.searchParams.set('q', q);
+
+      fetch(url.toString(), {
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        renderFamilySuggestions((data.items || []).slice(0, 3));
+      })
+      .catch(() => {
+        hideMenu();
+      });
+    };
+
+    if (familyInput) {
+      familyInput.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(fetchSuggestions, 220);
+      });
+
+      familyInput.addEventListener('focus', () => {
+        if (familyInput.value.trim().length > 0) {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(fetchSuggestions, 120);
+        }
+      });
+    }
+
+    document.addEventListener('click', (event) => {
+      if (!form.contains(event.target)) {
+        hideMenu();
+      }
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+      }
+
+      hideMenu();
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method || 'POST',
+          body: new FormData(form),
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Accept': 'application/json'
+          }
+        });
+
+        const data = await response.json();
+
+        if (data.ok) {
+          sessionStorage.setItem('ufd_notice', JSON.stringify({
+            type: 'success',
+            message: data.message || 'Enregistré avec succès.'
+          }));
+
+          window.location.href = data.redirect || '{{ path('admin_user_family_discount_index') }}';
+          return;
+        }
+
+        if (data.html) {
+          mount.innerHTML = data.html;
+          window.initUserFamilyDiscountForm(mount);
+          return;
+        }
+
+        showNotice(data.message || 'Impossible d’enregistrer la remise.', 'danger');
+      } catch (error) {
+        showNotice('Une erreur réseau est survenue. Merci de réessayer.', 'danger');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+        }
+      }
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const mount = document.getElementById('userFamilyDiscountFormMount');
+    window.initUserFamilyDiscountForm(mount);
+  });
+</script>
+{% endblock %}

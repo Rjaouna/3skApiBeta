@@ -1,0 +1,417 @@
+{# templates/security/login.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<style>
+  :root{
+    --brand-primary: var(--bs-primary);
+    --brand-black: #1b1b1b;
+    --brand-soft: rgba(255,255,255,.78);
+    --brand-border: rgba(0,0,0,.10);
+    --brand-shadow: 0 18px 50px rgba(0,0,0,.12);
+    --brand-muted: rgba(0,0,0,.58);
+  }
+
+  body.theme-dark{
+    --brand-soft: rgba(18,18,22,.76);
+    --brand-border: rgba(255,255,255,.12);
+    --brand-shadow: 0 24px 70px rgba(0,0,0,.50);
+    --brand-muted: rgba(255,255,255,.66);
+  }
+
+  .login-bg-video{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    width:100vw;
+    height:100vh;
+    object-fit:cover;
+    pointer-events:none;
+  }
+
+  .login-page{
+    min-height: calc(100vh - 120px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:30px 0;
+    position:relative;
+    z-index:1;
+  }
+
+  .login-page::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+      radial-gradient(900px circle at 15% 10%, rgba(var(--bs-primary-rgb), .10), transparent 38%),
+      radial-gradient(1000px circle at 90% 15%, rgba(0,0,0,.10), transparent 35%),
+      radial-gradient(800px circle at 50% 100%, rgba(var(--bs-primary-rgb), .08), transparent 36%);
+    z-index:0;
+  }
+
+  .login-stack{
+    position:relative;
+    z-index:1;
+    width:min(560px, 94vw);
+  }
+
+  .login-brand{
+    text-align:center;
+    margin-bottom:16px;
+  }
+
+  .login-brand-logo{
+    max-width:360px;
+    width:100%;
+    height:auto;
+    display:inline-block;
+  }
+
+  .login-brand-subtitle{
+    margin-top:10px;
+    color:var(--brand-muted);
+    font-weight:700;
+    font-size:.95rem;
+  }
+
+  .login-card{
+    border-radius:26px;
+    border:1px solid var(--brand-border);
+    background:
+      radial-gradient(800px circle at 10% 10%, rgba(var(--bs-primary-rgb), .08), transparent 40%),
+      radial-gradient(900px circle at 90% 10%, rgba(0,0,0,.06), transparent 38%),
+      var(--brand-soft);
+    box-shadow:var(--brand-shadow);
+    backdrop-filter:blur(10px);
+    overflow:hidden;
+  }
+
+  .login-head{
+    padding:22px 22px 18px;
+    border-bottom:1px solid rgba(0,0,0,.06);
+    background:
+      linear-gradient(135deg, rgba(var(--bs-primary-rgb), .08), transparent 45%),
+      linear-gradient(225deg, rgba(0,0,0,.05), transparent 40%);
+  }
+
+  body.theme-dark .login-head{
+    border-bottom-color:rgba(255,255,255,.08);
+  }
+
+  .login-title-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+
+  .login-icon{
+    width:52px;
+    height:52px;
+    border-radius:18px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg, rgba(var(--bs-primary-rgb), .14), rgba(0,0,0,.08));
+    border:1px solid rgba(var(--bs-primary-rgb), .18);
+    color:var(--bs-primary);
+    font-size:1.05rem;
+    flex:0 0 52px;
+  }
+
+  .login-title{
+    margin:0;
+    font-size:1.45rem;
+    font-weight:900;
+    color:var(--brand-black);
+  }
+
+  body.theme-dark .login-title{
+    color:rgba(255,255,255,.92);
+  }
+
+  .login-subtitle{
+    margin-top:2px;
+    color:var(--brand-muted);
+    font-weight:700;
+    font-size:.92rem;
+  }
+
+  .login-body{
+    padding:22px;
+  }
+
+  .form-label{
+    font-weight:900;
+    margin-bottom:8px;
+  }
+
+  .input-shell{
+    position:relative;
+  }
+
+  .input-icon{
+    position:absolute;
+    left:14px;
+    top:50%;
+    transform:translateY(-50%);
+    color:rgba(0,0,0,.42);
+    z-index:2;
+  }
+
+  body.theme-dark .input-icon{
+    color:rgba(255,255,255,.46);
+  }
+
+  .login-control{
+    height:54px;
+    border-radius:16px;
+    border:1px solid rgba(0,0,0,.10);
+    background:rgba(255,255,255,.88);
+    padding-left:42px;
+    font-weight:700;
+    box-shadow:none !important;
+  }
+
+  .login-control:focus{
+    border-color:rgba(var(--bs-primary-rgb), .35);
+    box-shadow:0 0 0 .22rem rgba(var(--bs-primary-rgb), .12) !important;
+    background:#fff;
+  }
+
+  body.theme-dark .login-control{
+    background:rgba(22,22,28,.88);
+    border-color:rgba(255,255,255,.10);
+    color:rgba(255,255,255,.92);
+  }
+
+  body.theme-dark .login-control::placeholder{
+    color:rgba(255,255,255,.42);
+  }
+
+  .password-toggle{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    border:0;
+    background:transparent;
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    color:rgba(0,0,0,.45);
+  }
+
+  body.theme-dark .password-toggle{
+    color:rgba(255,255,255,.55);
+  }
+
+  .password-toggle:hover{
+    background:rgba(0,0,0,.05);
+  }
+
+  body.theme-dark .password-toggle:hover{
+    background:rgba(255,255,255,.06);
+  }
+
+  .login-btn{
+    height:54px;
+    border:0;
+    border-radius:16px;
+    font-weight:900;
+    letter-spacing:.01em;
+    background:linear-gradient(135deg, var(--bs-primary), var(--bs-primary));
+    box-shadow:0 12px 24px rgba(var(--bs-primary-rgb), .22);
+  }
+
+  .login-btn:hover{
+    background:linear-gradient(135deg, var(--bs-primary), var(--bs-primary));
+    filter:brightness(1.05);
+    transform:translateY(-1px);
+  }
+
+  .login-btn:active{
+    transform:translateY(0);
+  }
+
+  .login-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-top:16px;
+    flex-wrap:wrap;
+  }
+
+  .login-muted{
+    color:var(--brand-muted);
+    font-weight:700;
+    font-size:.92rem;
+  }
+
+  .login-link{
+    color:var(--bs-primary);
+    font-weight:900;
+    text-decoration:none;
+  }
+
+  .login-link:hover{
+    text-decoration:underline;
+  }
+
+  .login-sep{
+    margin:16px 0 0;
+    border-top:1px solid rgba(0,0,0,.06);
+    padding-top:16px;
+  }
+
+  body.theme-dark .login-sep{
+    border-top-color:rgba(255,255,255,.08);
+  }
+
+  .login-note{
+    text-align:center;
+    font-size:.88rem;
+    color:var(--brand-muted);
+    font-weight:700;
+  }
+
+  @media (max-width: 575px){
+    .login-card{
+      border-radius:22px;
+    }
+
+    .login-head,
+    .login-body{
+      padding:18px;
+    }
+
+    .login-brand-logo{
+      max-width:280px;
+    }
+
+    .login-title{
+      font-size:1.2rem;
+    }
+  }
+</style>
+
+<video class="login-bg-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+  <source src="{{ asset('videos/7186026_Paint_Ink_1280x720.mp4') }}" type="video/mp4">
+</video>
+
+<div class="container login-page">
+  <div class="login-stack">
+
+    <div class="login-card">
+      <div class="login-head">
+        <div class="login-title-row">
+          <div class="login-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <div>
+            <h1 class="login-title">Connexion</h1>
+            <div class="login-subtitle">Accédez à votre compte 3SK Parts Auto</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="login-body">
+        <form method="post" novalidate>
+          {% if error %}
+            <div class="alert alert-danger mb-3">
+              {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+          {% endif %}
+
+          {% if app.user %}
+            <div class="alert alert-info mb-3">
+              Vous êtes déjà connecté en tant que <strong>{{ app.user.userIdentifier }}</strong>.
+              <a href="{{ logout_path() }}" class="ms-1">Déconnexion</a>
+            </div>
+          {% endif %}
+
+          <div class="mb-3">
+            <label for="inputEmail" class="form-label">Email</label>
+            <div class="input-shell">
+              <i class="fa-solid fa-envelope input-icon"></i>
+              <input
+                type="email"
+                value="{{ last_username }}"
+                name="email"
+                id="inputEmail"
+                class="form-control login-control"
+                placeholder="ex : client@gmail.com"
+                autocomplete="email"
+                required
+                autofocus
+              >
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <label for="inputPassword" class="form-label">Mot de passe</label>
+            <div class="input-shell">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input
+                type="password"
+                name="password"
+                id="inputPassword"
+                class="form-control login-control"
+                placeholder="Votre mot de passe"
+                autocomplete="current-password"
+                required
+              >
+              <button type="button" class="password-toggle" id="togglePassword" aria-label="Afficher le mot de passe">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+          <div class="d-grid mt-3">
+            <button class="btn login-btn text-white" type="submit">
+              <i class="fa-solid fa-right-to-bracket me-2"></i>
+              Se connecter
+            </button>
+          </div>
+
+          <div class="login-footer">
+            <span class="login-muted">Besoin d’aide ?</span>
+            <a class="login-link" href="#">
+              Mot de passe oublié
+            </a>
+          </div>
+
+          <div class="login-sep">
+            <div class="login-note">
+              Plateforme d’importation et distribution de pièces détachées automobiles
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  const btn = document.getElementById('togglePassword');
+  const input = document.getElementById('inputPassword');
+
+  if (!btn || !input) return;
+
+  btn.addEventListener('click', function () {
+    const isPassword = input.getAttribute('type') === 'password';
+    input.setAttribute('type', isPassword ? 'text' : 'password');
+    btn.innerHTML = isPassword
+      ? '<i class="fa-solid fa-eye-slash"></i>'
+      : '<i class="fa-solid fa-eye"></i>';
+  });
+})();
+</script>
+{% endblock %}

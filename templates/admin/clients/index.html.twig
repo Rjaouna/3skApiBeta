@@ -1,0 +1,820 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+  :root{
+    --oc-radius: 22px;
+    --oc-border: rgba(0,0,0,.10);
+    --oc-shadow: 0 14px 34px rgba(0,0,0,.08);
+    --oc-muted: rgba(0,0,0,.58);
+    --oc-text: rgba(0,0,0,.84);
+    --oc-glass: rgba(255,255,255,.82);
+    --oc-glass-2: rgba(255,255,255,.60);
+  }
+
+  body.theme-dark{
+    --oc-border: rgba(255,255,255,.14);
+    --oc-shadow: 0 18px 46px rgba(0,0,0,.35);
+    --oc-muted: rgba(255,255,255,.62);
+    --oc-text: rgba(255,255,255,.88);
+    --oc-glass: rgba(18,18,22,.76);
+    --oc-glass-2: rgba(18,18,22,.58);
+  }
+
+  .clients-page-hero{
+    border-radius: 24px;
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    padding: 18px;
+    background:
+      radial-gradient(900px circle at 10% 10%, rgba(var(--bs-primary-rgb), .16), transparent 40%),
+      radial-gradient(900px circle at 90% 30%, rgba(var(--bs-secondary-rgb), .14), transparent 38%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+  }
+
+  .clients-page-hero h3{
+    margin: 0;
+    font-weight: 950;
+    color: var(--oc-text);
+  }
+
+  .clients-page-hero .subtitle{
+    margin-top: 6px;
+    color: var(--oc-muted);
+    font-size: .92rem;
+    font-weight: 600;
+  }
+
+  .clients-main-card{
+    border-radius: var(--oc-radius);
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    background: var(--oc-glass);
+    backdrop-filter: blur(8px);
+  }
+
+  .clients-main-card .card-body{
+    padding: 18px;
+  }
+
+  .clients-toolbar{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  .clients-search-wrap{
+    flex: 1 1 420px;
+    min-width: 260px;
+  }
+
+  .clients-search{
+    min-height: 50px;
+    border-radius: 14px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.75);
+    color: var(--oc-text);
+    font-weight: 700;
+    box-shadow: none;
+  }
+
+  .clients-search:focus{
+    border-color: rgba(var(--bs-primary-rgb), .35);
+    box-shadow: 0 0 0 .22rem rgba(var(--bs-primary-rgb), .10);
+    background: rgba(255,255,255,.92);
+  }
+
+  body.theme-dark .clients-search{
+    background: rgba(255,255,255,.06);
+    color: var(--oc-text);
+  }
+
+  body.theme-dark .clients-search:focus{
+    background: rgba(255,255,255,.08);
+  }
+
+  .clients-btn{
+    min-height: 48px;
+    border-radius: 14px;
+    font-weight: 900;
+    padding-inline: 18px;
+  }
+
+  .clients-count-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 8px 12px;
+    border: 1px solid var(--oc-border);
+    background: var(--oc-glass-2);
+    color: var(--oc-text);
+    font-size: .82rem;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+
+  .clients-count-badge i{
+    color: var(--bs-primary);
+  }
+
+  .clients-alert{
+    border-radius: 16px;
+    border: 1px solid transparent;
+    font-weight: 800;
+    padding: 12px 14px;
+  }
+
+  .clients-table{
+    margin: 0;
+  }
+
+  .clients-table thead th{
+    border-bottom: 1px solid var(--oc-border);
+    color: var(--oc-muted);
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-weight: 900;
+    padding: 14px 12px;
+    white-space: nowrap;
+    background: transparent;
+  }
+
+  .clients-table tbody tr{
+    transition: background .12s ease, transform .12s ease;
+  }
+
+  .clients-table tbody tr:hover{
+    background: rgba(var(--bs-primary-rgb), .04);
+  }
+
+  .clients-table tbody td{
+    padding: 16px 12px;
+    border-color: rgba(0,0,0,.06);
+    vertical-align: middle;
+    color: var(--oc-text);
+  }
+
+  body.theme-dark .clients-table tbody td{
+    border-color: rgba(255,255,255,.08);
+  }
+
+  .client-email{
+    font-weight: 900;
+    color: var(--oc-text);
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  .client-address{
+    margin-top: 4px;
+    font-size: .82rem;
+    color: var(--oc-muted);
+    font-weight: 700;
+  }
+
+  .client-company,
+  .client-code,
+  .client-city{
+    font-weight: 800;
+    color: var(--oc-text);
+  }
+
+  .client-actions{
+    display: inline-flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+
+  .client-action-btn{
+    border-radius: 12px;
+    min-width: 38px;
+    font-weight: 900;
+  }
+
+  .client-status-pill{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: .78rem;
+    font-weight: 900;
+    min-width: 94px;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+
+  .client-status-active{
+    background: rgba(25,135,84,.12);
+    color: rgba(25,135,84,1);
+    border-color: rgba(25,135,84,.20);
+  }
+
+  .client-status-inactive{
+    background: rgba(108,117,125,.14);
+    color: rgba(73,80,87,1);
+    border-color: rgba(108,117,125,.20);
+  }
+
+  body.theme-dark .client-status-inactive{
+    color: rgba(222,226,230,.88);
+    border-color: rgba(255,255,255,.14);
+    background: rgba(255,255,255,.06);
+  }
+
+  .clients-empty{
+    border-radius: 20px;
+    border: 1px dashed var(--oc-border);
+    background: rgba(255,255,255,.42);
+    padding: 44px 18px;
+    text-align: center;
+    color: var(--oc-muted);
+  }
+
+  body.theme-dark .clients-empty{
+    background: rgba(255,255,255,.03);
+  }
+
+  .clients-empty i{
+    font-size: 2rem;
+    margin-bottom: 12px;
+    color: var(--bs-secondary);
+  }
+
+  .client-modal .modal-content{
+    border-radius: 24px;
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    background: var(--oc-glass);
+    backdrop-filter: blur(10px);
+  }
+
+  .client-modal .modal-header,
+  .client-modal .modal-footer{
+    border-color: rgba(0,0,0,.06);
+    padding: 16px 18px;
+  }
+
+  body.theme-dark .client-modal .modal-header,
+  body.theme-dark .client-modal .modal-footer{
+    border-color: rgba(255,255,255,.08);
+  }
+
+  .client-modal .modal-title{
+    font-weight: 950;
+    color: var(--oc-text);
+  }
+
+  .client-modal .modal-body{
+    padding: 18px;
+  }
+
+  .client-modal-label{
+    font-size: .82rem;
+    font-weight: 900;
+    color: var(--oc-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+
+  .client-modal .form-control,
+  .client-modal textarea{
+    min-height: 48px;
+    border-radius: 14px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.75);
+    color: var(--oc-text);
+    font-weight: 700;
+    box-shadow: none;
+  }
+
+  .client-modal textarea{
+    min-height: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .client-modal .form-control:focus,
+  .client-modal textarea:focus{
+    border-color: rgba(var(--bs-primary-rgb), .35);
+    box-shadow: 0 0 0 .22rem rgba(var(--bs-primary-rgb), .10);
+    background: rgba(255,255,255,.92);
+  }
+
+  body.theme-dark .client-modal .form-control,
+  body.theme-dark .client-modal textarea{
+    background: rgba(255,255,255,.06);
+    color: var(--oc-text);
+  }
+
+  body.theme-dark .client-modal .form-control:focus,
+  body.theme-dark .client-modal textarea:focus{
+    background: rgba(255,255,255,.08);
+  }
+
+  .client-switch-card{
+    border-radius: 16px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.52);
+    padding: 14px;
+  }
+
+  body.theme-dark .client-switch-card{
+    background: rgba(255,255,255,.04);
+  }
+
+  .client-switch-card .form-check{
+    margin: 0;
+  }
+
+  .client-switch-card .form-check-input{
+    width: 2.8rem;
+    height: 1.45rem;
+    cursor: pointer;
+  }
+
+  .client-switch-card .form-check-label{
+    color: var(--oc-text);
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  @media (max-width: 767.98px){
+    .clients-toolbar{
+      align-items: stretch;
+    }
+
+    .clients-search-wrap{
+      flex-basis: 100%;
+    }
+
+    .clients-btn{
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="container py-4" data-crud-token="{{ crudToken|e('html_attr') }}">
+  <div class="clients-page-hero mb-3 d-flex align-items-start justify-content-between flex-wrap gap-2">
+    <div>
+      <h3>Gestion des clients</h3>
+      <div class="subtitle">Administration, recherche et mise à jour des comptes clients.</div>
+    </div>
+
+    <button class="btn btn-primary clients-btn" id="btnNewClient" type="button">
+      <i class="fa-solid fa-plus me-2"></i>Nouveau client
+    </button>
+  </div>
+
+  <div class="clients-main-card">
+    <div class="card-body">
+      <div class="clients-toolbar">
+        <div class="clients-search-wrap">
+          <input
+            type="text"
+            class="form-control clients-search"
+            id="searchInput"
+            placeholder="Recherche par email, société, code client, ville..."
+          >
+        </div>
+
+        <button class="btn btn-outline-secondary clients-btn" id="btnReload" type="button">
+          <i class="fa-solid fa-rotate-right me-2"></i>Actualiser
+        </button>
+
+        <span class="clients-count-badge" id="clientsCount">
+          <i class="fa-solid fa-users"></i>
+          <span>0 client</span>
+        </span>
+      </div>
+
+      <div class="alert alert-danger clients-alert d-none" id="pageError"></div>
+
+      <div class="table-responsive">
+        <table class="table clients-table align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Société</th>
+              <th>Code client</th>
+              <th>Ville</th>
+              <th>Statut</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="clientsTbody">
+            <tr>
+              <td colspan="6" class="text-muted">Chargement…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade client-modal" id="clientModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="clientModalTitle">Nouveau client</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="alert alert-danger clients-alert d-none" id="formError"></div>
+
+        <form id="clientForm" novalidate>
+          <input type="hidden" id="clientId">
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="client-modal-label">Email</label>
+              <input type="email" class="form-control" id="f_email" required>
+            </div>
+
+            <div class="col-md-6">
+              <label class="client-modal-label">
+                Mot de passe <span class="text-muted small text-lowercase">(laisser vide pour ne pas changer)</span>
+              </label>
+              <input type="password" class="form-control" id="f_password">
+            </div>
+
+            <div class="col-md-6">
+              <label class="client-modal-label">Société</label>
+              <input type="text" class="form-control" id="f_companyName">
+            </div>
+
+            <div class="col-md-6">
+              <label class="client-modal-label">Code client</label>
+              <input type="text" class="form-control" id="f_customerCode">
+            </div>
+
+            <div class="col-md-8">
+              <label class="client-modal-label">Adresse 1</label>
+              <textarea class="form-control" id="f_address1" rows="2"></textarea>
+            </div>
+
+            <div class="col-md-4">
+              <label class="client-modal-label">Ville</label>
+              <input type="text" class="form-control" id="f_city">
+            </div>
+
+            <div class="col-12">
+              <label class="client-modal-label">Adresse 2</label>
+              <textarea class="form-control" id="f_address2" rows="2"></textarea>
+            </div>
+
+            <div class="col-12">
+              <div class="client-switch-card">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="f_isActive" checked>
+                  <label class="form-check-label" for="f_isActive">Compte actif</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary clients-btn" type="button" data-bs-dismiss="modal">Annuler</button>
+        <button class="btn btn-primary clients-btn" type="button" id="btnSaveClient">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const wrap = document.querySelector('[data-crud-token]');
+  const CRUD_TOKEN = wrap?.getAttribute('data-crud-token') || '';
+
+  const tbody = document.getElementById('clientsTbody');
+  const pageError = document.getElementById('pageError');
+  const formError = document.getElementById('formError');
+  const clientsCount = document.getElementById('clientsCount');
+  const searchInput = document.getElementById('searchInput');
+  const btnReload = document.getElementById('btnReload');
+  const btnNewClient = document.getElementById('btnNewClient');
+  const btnSaveClient = document.getElementById('btnSaveClient');
+
+  const clientId = document.getElementById('clientId');
+  const f_email = document.getElementById('f_email');
+  const f_password = document.getElementById('f_password');
+  const f_companyName = document.getElementById('f_companyName');
+  const f_customerCode = document.getElementById('f_customerCode');
+  const f_address1 = document.getElementById('f_address1');
+  const f_address2 = document.getElementById('f_address2');
+  const f_city = document.getElementById('f_city');
+  const f_isActive = document.getElementById('f_isActive');
+
+  const modalEl = document.getElementById('clientModal');
+  const modalTitle = document.getElementById('clientModalTitle');
+  let modal = null;
+
+  if (window.bootstrap && modalEl) {
+    modal = new bootstrap.Modal(modalEl);
+  } else {
+    console.error('Bootstrap JS non chargé : la modale client ne peut pas s’ouvrir.');
+  }
+
+  const API_LIST = "{{ path('admin_clients_list') }}";
+  const API_CREATE = "{{ path('admin_clients_create') }}";
+  const API_UPDATE_PATTERN = "{{ path('admin_clients_update', {id: 999999}) }}";
+  const API_DELETE_PATTERN = "{{ path('admin_clients_delete', {id: 999999}) }}";
+
+  let currentItems = [];
+  let searchTimer = null;
+
+  function esc(s){
+    return String(s ?? '').replace(/[&<>"']/g, m => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[m]));
+  }
+
+  function setPageError(message){
+    if (!pageError) return;
+    if (!message) {
+      pageError.classList.add('d-none');
+      pageError.textContent = '';
+      return;
+    }
+    pageError.classList.remove('d-none');
+    pageError.textContent = message;
+  }
+
+  function setFormError(message){
+    if (!formError) return;
+    if (!message) {
+      formError.classList.add('d-none');
+      formError.textContent = '';
+      return;
+    }
+    formError.classList.remove('d-none');
+    formError.textContent = message;
+  }
+
+  function resetForm(){
+    clientId.value = '';
+    f_email.value = '';
+    f_password.value = '';
+    f_companyName.value = '';
+    f_customerCode.value = '';
+    f_address1.value = '';
+    f_address2.value = '';
+    f_city.value = '';
+    f_isActive.checked = true;
+    setFormError('');
+  }
+
+  function fillForm(item){
+    clientId.value = item.id ?? '';
+    f_email.value = item.email ?? '';
+    f_password.value = '';
+    f_companyName.value = item.companyName ?? '';
+    f_customerCode.value = item.customerCode ?? '';
+    f_address1.value = item.address1 ?? '';
+    f_address2.value = item.address2 ?? '';
+    f_city.value = item.city ?? '';
+    f_isActive.checked = !!item.isActive;
+  }
+
+  function getPayload(){
+    return {
+      _token: CRUD_TOKEN,
+      email: f_email.value.trim(),
+      password: f_password.value,
+      companyName: f_companyName.value.trim(),
+      customerCode: f_customerCode.value.trim(),
+      address1: f_address1.value.trim(),
+      address2: f_address2.value.trim(),
+      city: f_city.value.trim(),
+      isActive: f_isActive.checked
+    };
+  }
+
+  function updateUrl(id){
+    return API_UPDATE_PATTERN.replace('999999', String(id));
+  }
+
+  function deleteUrl(id){
+    return API_DELETE_PATTERN.replace('999999', String(id));
+  }
+
+  function renderRows(items){
+    currentItems = items || [];
+
+    if (clientsCount) {
+      const total = currentItems.length;
+      clientsCount.innerHTML = `
+        <i class="fa-solid fa-users"></i>
+        <span>${total} ${total > 1 ? 'clients' : 'client'}</span>
+      `;
+    }
+
+    if (!tbody) return;
+
+    if (!currentItems.length) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="6">
+            <div class="clients-empty my-2">
+              <i class="fa-solid fa-user-slash"></i>
+              <div class="fw-bold mb-1">Aucun client trouvé</div>
+              <div class="small">Aucun client ne correspond à la recherche actuelle.</div>
+            </div>
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = currentItems.map(item => `
+      <tr>
+        <td>
+          <div class="client-email">${esc(item.email || '')}</div>
+          <div class="client-address">${esc(item.address1 || '')}</div>
+        </td>
+        <td>
+          <div class="client-company">${esc(item.companyName || '—')}</div>
+        </td>
+        <td>
+          <div class="client-code">${esc(item.customerCode || '—')}</div>
+        </td>
+        <td>
+          <div class="client-city">${esc(item.city || '—')}</div>
+        </td>
+        <td>
+          ${
+            item.isActive
+              ? '<span class="client-status-pill client-status-active"><i class="fa-solid fa-circle-check"></i>Actif</span>'
+              : '<span class="client-status-pill client-status-inactive"><i class="fa-solid fa-circle-pause"></i>Inactif</span>'
+          }
+        </td>
+        <td class="text-end">
+          <div class="client-actions">
+            <button class="btn btn-outline-primary btn-sm client-action-btn" type="button" data-edit="${item.id}">
+              <i class="fa-solid fa-pen"></i>
+            </button>
+            <button class="btn btn-outline-danger btn-sm client-action-btn" type="button" data-delete="${item.id}">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+
+    tbody.querySelectorAll('[data-edit]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = Number(btn.getAttribute('data-edit'));
+        const item = currentItems.find(x => Number(x.id) === id);
+        if (!item) return;
+
+        resetForm();
+        fillForm(item);
+        modalTitle.textContent = 'Modifier le client';
+        if (modal) modal.show();
+      });
+    });
+
+    tbody.querySelectorAll('[data-delete]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = Number(btn.getAttribute('data-delete'));
+        const item = currentItems.find(x => Number(x.id) === id);
+        if (!item) return;
+
+        const ok = confirm(`Supprimer le client ${item.email} ?`);
+        if (!ok) return;
+
+        btn.disabled = true;
+
+        try {
+          const res = await fetch(deleteUrl(id), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ _token: CRUD_TOKEN })
+          });
+
+          const data = await res.json().catch(() => ({}));
+
+          if (!res.ok || !data.ok) {
+            alert(data.message || 'Erreur lors de la suppression');
+            btn.disabled = false;
+            return;
+          }
+
+          await loadClients();
+        } catch (e) {
+          alert('Erreur réseau');
+          btn.disabled = false;
+        }
+      });
+    });
+  }
+
+  async function loadClients(){
+    setPageError('');
+    if (tbody) {
+      tbody.innerHTML = `<tr><td colspan="6" class="text-muted">Chargement…</td></tr>`;
+    }
+
+    try {
+      const q = searchInput?.value?.trim() || '';
+      const url = new URL(API_LIST, window.location.origin);
+      if (q) url.searchParams.set('q', q);
+
+      const res = await fetch(url.toString(), {
+        headers: { 'Accept': 'application/json' }
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        setPageError(data.message || 'Impossible de charger les clients');
+        if (tbody) {
+          tbody.innerHTML = `<tr><td colspan="6" class="text-danger">Erreur chargement</td></tr>`;
+        }
+        return;
+      }
+
+      renderRows(data.items || []);
+    } catch (e) {
+      setPageError('Erreur réseau');
+      if (tbody) {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-danger">Erreur réseau</td></tr>`;
+      }
+    }
+  }
+
+  btnNewClient?.addEventListener('click', () => {
+    resetForm();
+    modalTitle.textContent = 'Nouveau client';
+
+    if (modal) {
+      modal.show();
+    } else {
+      alert('Bootstrap JS non chargé');
+    }
+  });
+
+  btnReload?.addEventListener('click', loadClients);
+
+  searchInput?.addEventListener('input', () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(loadClients, 300);
+  });
+
+  btnSaveClient?.addEventListener('click', async () => {
+    setFormError('');
+
+    const payload = getPayload();
+    const isEdit = clientId.value !== '';
+    const url = isEdit ? updateUrl(clientId.value) : API_CREATE;
+
+    if (!payload.email) {
+      setFormError('Email obligatoire');
+      return;
+    }
+
+    if (!isEdit && payload.password.trim().length < 6) {
+      setFormError('Le mot de passe doit contenir au moins 6 caractères');
+      return;
+    }
+
+    btnSaveClient.disabled = true;
+
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        setFormError(data.message || 'Erreur enregistrement');
+        btnSaveClient.disabled = false;
+        return;
+      }
+
+      if (modal) modal.hide();
+      await loadClients();
+    } catch (e) {
+      setFormError('Erreur réseau');
+    } finally {
+      btnSaveClient.disabled = false;
+    }
+  });
+
+  loadClients();
+})();
+</script>
+{% endblock %}

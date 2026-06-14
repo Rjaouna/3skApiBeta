@@ -1,0 +1,484 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+  :root{
+    --oc-radius: 22px;
+    --oc-border: rgba(0,0,0,.10);
+    --oc-shadow: 0 14px 34px rgba(0,0,0,.08);
+    --oc-muted: rgba(0,0,0,.58);
+    --oc-text: rgba(0,0,0,.84);
+    --oc-glass: rgba(255,255,255,.82);
+    --oc-glass-2: rgba(255,255,255,.60);
+  }
+
+  body.theme-dark{
+    --oc-border: rgba(255,255,255,.14);
+    --oc-shadow: 0 18px 46px rgba(0,0,0,.35);
+    --oc-muted: rgba(255,255,255,.62);
+    --oc-text: rgba(255,255,255,.88);
+    --oc-glass: rgba(18,18,22,.76);
+    --oc-glass-2: rgba(18,18,22,.58);
+  }
+
+  .orders-page-hero{
+    border-radius: 24px;
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    padding: 18px;
+    background:
+      radial-gradient(900px circle at 10% 10%, rgba(var(--bs-primary-rgb), .16), transparent 40%),
+      radial-gradient(900px circle at 90% 30%, rgba(var(--bs-secondary-rgb), .14), transparent 38%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+  }
+
+  .orders-page-hero h3{
+    margin: 0;
+    font-weight: 950;
+    color: var(--oc-text);
+  }
+
+  .orders-page-hero .subtitle{
+    margin-top: 6px;
+    color: var(--oc-muted);
+    font-size: .92rem;
+    font-weight: 600;
+  }
+
+  .orders-page-actions{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .orders-page-actions .btn{
+    min-height: 46px;
+    border-radius: 14px;
+    font-weight: 900;
+    padding-inline: 16px;
+  }
+
+  .orders-summary-card,
+  .orders-table-card{
+    border-radius: var(--oc-radius);
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    background: var(--oc-glass);
+    backdrop-filter: blur(8px);
+  }
+
+  .orders-summary-card .card-body,
+  .orders-table-card .card-body{
+    padding: 18px;
+  }
+
+  .order-stat-card{
+    border-radius: 18px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.48);
+    padding: 14px;
+    height: 100%;
+  }
+
+  body.theme-dark .order-stat-card{
+    background: rgba(255,255,255,.04);
+  }
+
+  .order-stat-label{
+    font-size: .74rem;
+    color: var(--oc-muted);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    letter-spacing: .03em;
+  }
+
+  .order-stat-value{
+    color: var(--oc-text);
+    font-weight: 950;
+    font-size: 1.2rem;
+    line-height: 1.2;
+  }
+
+  .orders-table{
+    margin: 0;
+  }
+
+  .orders-table thead th{
+    border-bottom: 1px solid var(--oc-border);
+    color: var(--oc-muted);
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-weight: 900;
+    padding: 14px 12px;
+    white-space: nowrap;
+    background: transparent;
+  }
+
+  .orders-table tbody tr{
+    transition: background .12s ease;
+  }
+
+  .orders-table tbody tr:hover{
+    background: rgba(var(--bs-primary-rgb), .04);
+  }
+
+  .orders-table tbody td{
+    padding: 16px 12px;
+    border-color: rgba(0,0,0,.06);
+    vertical-align: middle;
+    color: var(--oc-text);
+  }
+
+  body.theme-dark .orders-table tbody td{
+    border-color: rgba(255,255,255,.08);
+  }
+
+  .order-number{
+    font-weight: 950;
+    color: var(--bs-primary);
+    line-height: 1.2;
+  }
+
+  .order-date{
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .order-total{
+    font-weight: 950;
+    font-size: 1rem;
+    color: var(--oc-text);
+    white-space: nowrap;
+  }
+
+  .order-action-btn{
+    border-radius: 12px;
+    font-weight: 900;
+    padding-inline: 14px;
+  }
+
+  .status-pill{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: .78rem;
+    font-weight: 900;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+
+  .status-pill i{
+    font-size: .78rem;
+  }
+
+  .status-new{
+    background: rgba(13,110,253,.12);
+    color: rgba(13,110,253,1);
+    border-color: rgba(13,110,253,.18);
+  }
+
+  .status-preparing{
+    background: rgba(255,193,7,.16);
+    color: rgba(176,117,0,.98);
+    border-color: rgba(255,193,7,.24);
+  }
+
+  .status-shipping{
+    background: rgba(111,66,193,.14);
+    color: rgba(111,66,193,1);
+    border-color: rgba(111,66,193,.22);
+  }
+
+  .status-completed{
+    background: rgba(25,135,84,.12);
+    color: rgba(25,135,84,1);
+    border-color: rgba(25,135,84,.20);
+  }
+
+  .status-cancelled{
+    background: rgba(220,53,69,.12);
+    color: rgba(220,53,69,.98);
+    border-color: rgba(220,53,69,.20);
+  }
+
+  .empty-orders{
+    border-radius: 20px;
+    border: 1px dashed var(--oc-border);
+    background: rgba(255,255,255,.42);
+    padding: 44px 18px;
+    text-align: center;
+    color: var(--oc-muted);
+  }
+
+  body.theme-dark .empty-orders{
+    background: rgba(255,255,255,.03);
+  }
+
+  .empty-orders i{
+    font-size: 2rem;
+    margin-bottom: 12px;
+    color: var(--bs-secondary);
+  }
+
+  .mobile-orders{
+    display: none;
+  }
+
+  .mobile-order-card{
+    border-radius: 18px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.52);
+    padding: 14px;
+  }
+
+  body.theme-dark .mobile-order-card{
+    background: rgba(255,255,255,.04);
+  }
+
+  .mobile-order-top{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .mobile-order-number{
+    font-weight: 950;
+    color: var(--bs-primary);
+    line-height: 1.2;
+  }
+
+  .mobile-order-date{
+    font-size: .82rem;
+    color: var(--oc-muted);
+    font-weight: 700;
+    margin-top: 4px;
+  }
+
+  .mobile-order-grid{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .mobile-order-box{
+    border-radius: 14px;
+    border: 1px solid var(--oc-border);
+    padding: 10px 12px;
+    background: rgba(255,255,255,.55);
+  }
+
+  body.theme-dark .mobile-order-box{
+    background: rgba(18,18,22,.50);
+  }
+
+  .mobile-order-label{
+    font-size: .72rem;
+    color: var(--oc-muted);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .mobile-order-value{
+    font-size: .88rem;
+    color: var(--oc-text);
+    font-weight: 800;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+
+  .mobile-order-actions{
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 991.98px){
+    .desktop-orders{
+      display: none;
+    }
+
+    .mobile-orders{
+      display: grid;
+      gap: 12px;
+    }
+  }
+
+  @media (max-width: 767.98px){
+    .orders-page-actions{
+      width: 100%;
+    }
+
+    .orders-page-actions .btn{
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="container py-4">
+  <div class="orders-page-hero mb-3 d-flex align-items-start justify-content-between flex-wrap gap-2">
+    <div>
+      <h3>Mes commandes</h3>
+      <div class="subtitle">Suivi de vos commandes et de leurs statuts.</div>
+    </div>
+
+    <div class="orders-page-actions">
+      <a class="btn btn-outline-secondary" href="{{ path('account_profile') }}">
+        <i class="fa-solid fa-user me-2"></i>Mon profil
+      </a>
+      <a class="btn btn-outline-primary" href="{{ path('cart_index') }}">
+        <i class="fa-solid fa-cart-shopping me-2"></i>Mon panier
+      </a>
+    </div>
+  </div>
+
+  <div class="orders-summary-card mb-3">
+    <div class="card-body">
+      <div class="row g-2">
+        {% for status, label in labels %}
+          <div class="col-6 col-md-4 col-xl">
+            <div class="order-stat-card">
+              <div class="order-stat-label">{{ label }}</div>
+              <div class="order-stat-value">{{ counts[status] ?? 0 }}</div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="orders-table-card">
+    <div class="card-body">
+      {% if orders is empty %}
+        <div class="empty-orders">
+          <i class="fa-solid fa-inbox"></i>
+          <div class="fw-bold mb-1">Aucune commande</div>
+          <div class="small">Vous n’avez pas encore passé de commande.</div>
+        </div>
+      {% else %}
+        <div class="table-responsive desktop-orders">
+          <table class="table orders-table align-middle mb-0">
+            <thead>
+              <tr>
+                <th>N° commande</th>
+                <th>Date</th>
+                <th>Statut</th>
+                <th class="text-end">Total</th>
+                <th class="text-end">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in orders %}
+                {% set statusClass =
+                  order.status == 'new' ? 'status-new' :
+                  (order.status == 'preparing' ? 'status-preparing' :
+                  (order.status == 'shipping' ? 'status-shipping' :
+                  (order.status == 'completed' ? 'status-completed' : 'status-cancelled')))
+                %}
+
+                {% set statusIcon =
+                  order.status == 'new' ? 'fa-file-circle-plus' :
+                  (order.status == 'preparing' ? 'fa-boxes-packing' :
+                  (order.status == 'shipping' ? 'fa-truck-fast' :
+                  (order.status == 'completed' ? 'fa-circle-check' : 'fa-ban')))
+                %}
+
+                <tr>
+                  <td>
+                    <div class="order-number">{{ order.orderNumber }}</div>
+                  </td>
+
+                  <td>
+                    <div class="order-date">
+                      {{ order.createdAt ? order.createdAt|date('d/m/Y H:i') : '—' }}
+                    </div>
+                  </td>
+
+                  <td>
+                    <span class="status-pill {{ statusClass }}">
+                      <i class="fa-solid {{ statusIcon }}"></i>
+                      {{ order.statusLabel }}
+                    </span>
+                  </td>
+
+                  <td class="text-end">
+                    <div class="order-total">{{ order.totalTtc }} DH</div>
+                  </td>
+
+                  <td class="text-end">
+                    <a class="btn btn-outline-primary btn-sm order-action-btn"
+                       href="{{ path('order_show', {id: order.id}) }}">
+                      <i class="fa-solid fa-eye me-1"></i>Voir
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mobile-orders">
+          {% for order in orders %}
+            {% set statusClass =
+              order.status == 'new' ? 'status-new' :
+              (order.status == 'preparing' ? 'status-preparing' :
+              (order.status == 'shipping' ? 'status-shipping' :
+              (order.status == 'completed' ? 'status-completed' : 'status-cancelled')))
+            %}
+
+            {% set statusIcon =
+              order.status == 'new' ? 'fa-file-circle-plus' :
+              (order.status == 'preparing' ? 'fa-boxes-packing' :
+              (order.status == 'shipping' ? 'fa-truck-fast' :
+              (order.status == 'completed' ? 'fa-circle-check' : 'fa-ban')))
+            %}
+
+            <div class="mobile-order-card">
+              <div class="mobile-order-top">
+                <div>
+                  <div class="mobile-order-number">{{ order.orderNumber }}</div>
+                  <div class="mobile-order-date">
+                    {{ order.createdAt ? order.createdAt|date('d/m/Y H:i') : '—' }}
+                  </div>
+                </div>
+
+                <span class="status-pill {{ statusClass }}">
+                  <i class="fa-solid {{ statusIcon }}"></i>
+                  {{ order.statusLabel }}
+                </span>
+              </div>
+
+              <div class="mobile-order-grid">
+                <div class="mobile-order-box">
+                  <div class="mobile-order-label">Date</div>
+                  <div class="mobile-order-value">
+                    {{ order.createdAt ? order.createdAt|date('d/m/Y H:i') : '—' }}
+                  </div>
+                </div>
+
+                <div class="mobile-order-box">
+                  <div class="mobile-order-label">Total</div>
+                  <div class="mobile-order-value">{{ order.totalTtc }} DH</div>
+                </div>
+              </div>
+
+              <div class="mobile-order-actions">
+                <a class="btn btn-outline-primary btn-sm order-action-btn"
+                   href="{{ path('order_show', {id: order.id}) }}">
+                  <i class="fa-solid fa-eye me-1"></i>Voir
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

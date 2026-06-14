@@ -1,0 +1,24 @@
+// 1) Bootswatch variables (choisis ton thème)
+@import "bootswatch/dist/cosmo/variables";
+
+// 2) Tes overrides (ici tu changes tes couleurs)
+$primary: #315fbb;
+$secondary:#ff9100;
+$success: #20c997;
+$danger:  #f56363;
+$warning: #ff9307;
+
+// Tu peux aussi surcharger le map complet si tu veux
+// $theme-colors: (
+//   "primary": $primary,
+//   "success": $success,
+//   "danger":  $danger,
+//   "warning": $warning
+// );
+
+// 3) Bootstrap
+@import "bootstrap/scss/bootstrap";
+
+// 4) Bootswatch style final
+
+@import "bootswatch/dist/cosmo/bootswatch";

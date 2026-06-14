@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Import utilisateurs WordPress{% endblock %}
+{% block page_title %}Import utilisateurs WordPress{% endblock %}
+
+{% block body %}
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="card admin-card">
+            <div class="card-header">
+                Importer un CSV WordPress
+            </div>
+            <div class="card-body">
+                <form id="wpImportForm" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="{{ csrf_token('wp_user_import') }}">
+
+                    <div class="mb-3">
+                        <label for="csvFile" class="form-label">Fichier CSV</label>
+                        <input
+                            type="file"
+                            class="form-control"
+                            id="csvFile"
+                            name="file"
+                            accept=".csv"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="importBtn">
+                        <i class="fa-solid fa-file-import me-2"></i>Importer
+                    </button>
+                </form>
+
+                <div id="importResult" class="mt-4"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('wpImportForm');
+    const result = document.getElementById('importResult');
+    const btn = document.getElementById('importBtn');
+
+    if (!form) {
+        console.error('Formulaire introuvable');
+        return;
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        result.innerHTML = `<div class="alert alert-info">Envoi du fichier...</div>`;
+        btn.disabled = true;
+
+        try {
+            const formData = new FormData(form);
+
+            const response = await fetch('{{ path('admin_users_wp_import_ajax') }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+
+            const rawText = await response.text();
+            let data = null;
+
+            try {
+                data = JSON.parse(rawText);
+            } catch (e) {
+                result.innerHTML = `
+                    <div class="alert alert-danger">La réponse du serveur n'est pas du JSON.</div>
+                    <pre class="bg-light p-3 border rounded">${rawText.replace(/</g, '&lt;')}</pre>
+                `;
+                return;
+            }
+
+            if (!response.ok || !data.ok) {
+                result.innerHTML = `
+                    <div class="alert alert-danger">
+                        ${data.message ?? 'Erreur pendant l’import.'}
+                    </div>
+                    <pre class="bg-light p-3 border rounded">${JSON.stringify(data, null, 2)}</pre>
+                `;
+                return;
+            }
+
+            result.innerHTML = `
+                <div class="alert alert-success">${data.message}</div>
+                <pre class="bg-light p-3 border rounded">${JSON.stringify(data, null, 2)}</pre>
+            `;
+        } catch (error) {
+            result.innerHTML = `
+                <div class="alert alert-danger">Erreur JS / réseau : ${error.message}</div>
+            `;
+            console.error(error);
+        } finally {
+            btn.disabled = false;
+        }
+    });
+});
+</script>
+{% endblock %}

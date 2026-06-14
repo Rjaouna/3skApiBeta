@@ -1,0 +1,598 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+  .reduction-page-hero{
+    border-radius: 24px;
+    padding: 20px;
+    border: 1px solid rgba(0,0,0,.08);
+    background:
+      radial-gradient(700px circle at 10% 10%, rgba(var(--bs-primary-rgb), .12), transparent 40%),
+      radial-gradient(700px circle at 90% 20%, rgba(var(--bs-secondary-rgb), .10), transparent 35%),
+      rgba(255,255,255,.9);
+    box-shadow: 0 14px 34px rgba(0,0,0,.06);
+  }
+
+  body.theme-dark .reduction-page-hero{
+    border-color: rgba(255,255,255,.10);
+    background:
+      radial-gradient(700px circle at 10% 10%, rgba(var(--bs-primary-rgb), .18), transparent 40%),
+      radial-gradient(700px circle at 90% 20%, rgba(var(--bs-secondary-rgb), .12), transparent 35%),
+      rgba(18,18,22,.82);
+  }
+
+  .reduction-shell{
+    border-radius: 24px;
+    border: 1px solid rgba(0,0,0,.08);
+    background: rgba(255,255,255,.92);
+    box-shadow: 0 14px 34px rgba(0,0,0,.06);
+    overflow: hidden;
+  }
+
+  body.theme-dark .reduction-shell{
+    border-color: rgba(255,255,255,.10);
+    background: rgba(18,18,22,.84);
+  }
+
+  .reduction-toolbar{
+    padding: 18px;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    background: rgba(0,0,0,.015);
+  }
+
+  body.theme-dark .reduction-toolbar{
+    border-bottom-color: rgba(255,255,255,.08);
+    background: rgba(255,255,255,.02);
+  }
+
+  .reduction-stat{
+    border-radius: 18px;
+    padding: 14px 16px;
+    border: 1px solid rgba(0,0,0,.08);
+    background: rgba(255,255,255,.82);
+    box-shadow: 0 8px 20px rgba(0,0,0,.04);
+  }
+
+  body.theme-dark .reduction-stat{
+    border-color: rgba(255,255,255,.08);
+    background: rgba(255,255,255,.04);
+  }
+
+  .reduction-stat__label{
+    font-size: .78rem;
+    font-weight: 800;
+    color: rgba(0,0,0,.55);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+
+  body.theme-dark .reduction-stat__label{
+    color: rgba(255,255,255,.56);
+  }
+
+  .reduction-stat__value{
+    font-size: 1.2rem;
+    font-weight: 950;
+    margin-top: 4px;
+  }
+
+  .bulk-panel{
+    border-radius: 20px;
+    padding: 16px;
+    border: 1px solid rgba(0,0,0,.08);
+    background:
+      radial-gradient(500px circle at 0% 0%, rgba(var(--bs-primary-rgb), .10), transparent 45%),
+      rgba(255,255,255,.88);
+  }
+
+  body.theme-dark .bulk-panel{
+    border-color: rgba(255,255,255,.08);
+    background:
+      radial-gradient(500px circle at 0% 0%, rgba(var(--bs-primary-rgb), .16), transparent 45%),
+      rgba(255,255,255,.04);
+  }
+
+  .bulk-title{
+    font-weight: 900;
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
+  .bulk-subtitle{
+    font-size: .84rem;
+    color: rgba(0,0,0,.58);
+    margin-bottom: 14px;
+  }
+
+  body.theme-dark .bulk-subtitle{
+    color: rgba(255,255,255,.58);
+  }
+
+  .family-table-wrap{
+    padding: 18px;
+  }
+
+  .family-table thead th{
+    font-size: .82rem;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: rgba(0,0,0,.60);
+    border-bottom-width: 1px;
+  }
+
+  body.theme-dark .family-table thead th{
+    color: rgba(255,255,255,.58);
+  }
+
+  .family-table tbody tr{
+    transition: background .12s ease, transform .08s ease;
+  }
+
+  .family-table tbody tr:hover{
+    background: rgba(var(--bs-primary-rgb), .04);
+  }
+
+  .family-name{
+    font-weight: 900;
+    font-size: .96rem;
+  }
+
+  .family-count{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 900;
+    background: rgba(0,0,0,.06);
+  }
+
+  body.theme-dark .family-count{
+    background: rgba(255,255,255,.08);
+  }
+
+  .reduction-input-group .form-control{
+    font-weight: 900;
+    text-align: center;
+    border-radius: 14px 0 0 14px !important;
+    min-height: 44px;
+  }
+
+  .reduction-input-group .input-group-text{
+    border-radius: 0 14px 14px 0 !important;
+    font-weight: 900;
+    min-width: 52px;
+    justify-content: center;
+  }
+
+  .reduction-save-btn{
+    min-width: 130px;
+    border-radius: 12px;
+    font-weight: 800;
+  }
+
+  .family-search{
+    min-height: 46px;
+    border-radius: 14px;
+  }
+
+  .reduction-alert{
+    border-radius: 16px;
+    font-weight: 700;
+  }
+
+  .bulk-btn{
+    min-height: 46px;
+    border-radius: 14px;
+    font-weight: 900;
+    box-shadow: 0 8px 18px rgba(0,0,0,.06);
+  }
+
+  .current-cycle-badge{
+    font-size: .90rem;
+    font-weight: 900;
+    padding: 6px 10px;
+    border-radius: 999px;
+  }
+</style>
+
+<div class="container py-4">
+  <div class="reduction-page-hero mb-3">
+    <div class="d-flex align-items-start justify-content-between flex-wrap gap-3">
+  <div>
+    <h3 class="mb-1">Réductions par catégorie</h3>
+    <div class="text-muted small">
+      Renseigne un pourcentage par catégorie. Le signe % s’affiche automatiquement.
+    </div>
+  </div>
+
+  <div class="d-flex flex-wrap gap-2">
+    <a class="btn btn-outline-primary d-inline-flex align-items-center gap-2 px-3"
+       href="{{ path('admin_user_family_discount_index') }}"
+       style="border-radius: 14px; font-weight: 800;">
+      <i class="fa-solid fa-tags"></i>
+      <span>Remises personnelles</span>
+    </a>
+
+    <a class="btn btn-outline-secondary d-inline-flex align-items-center gap-2 px-3"
+       href="{{ path('admin_clients_index') }}"
+       style="border-radius: 14px; font-weight: 800;">
+      <i class="fa-solid fa-arrow-left"></i>
+      <span>Retour</span>
+    </a>
+  </div>
+</div>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <div class="col-md-4">
+      <div class="reduction-stat">
+        <div class="reduction-stat__label">Catégories</div>
+        <div class="reduction-stat__value">{{ categories|length }}</div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="reduction-stat">
+        <div class="reduction-stat__label">Mode global</div>
+        <div class="reduction-stat__value">Gestion rapide</div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="reduction-stat">
+        <div class="reduction-stat__label">Cycle automatique</div>
+        <div class="reduction-stat__value">5% → 80%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reduction-shell">
+    <div class="reduction-toolbar">
+      <div class="row g-3 align-items-stretch">
+        <div class="col-lg-5">
+          <div class="bulk-panel h-100">
+            <div class="bulk-title">Application globale</div>
+            <div class="bulk-subtitle">
+              Un clic applique la valeur courante à tous les articles puis prépare automatiquement la suivante.
+            </div>
+
+            <div class="d-flex align-items-center gap-2 flex-wrap mb-3">
+              <span class="badge text-bg-primary current-cycle-badge" id="currentCycleBadge">Prochaine valeur : 5%</span>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex">
+              <button type="button" class="btn btn-primary bulk-btn flex-fill" id="bulkApplyBtn">
+                Tout mettre à 5%
+              </button>
+              <button type="button" class="btn btn-outline-danger bulk-btn flex-fill" id="bulkResetBtn">
+                Réinitialiser tout à 0%
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="h-100 d-flex flex-column justify-content-between">
+            <div>
+              <label class="form-label fw-semibold mb-2">Recherche rapide</label>
+              <input
+                type="text"
+                class="form-control family-search"
+                id="familySearchInput"
+                placeholder="Rechercher une catégorie..."
+              >
+            </div>
+
+            <div class="mt-3">
+              <div class="alert alert-success reduction-alert d-none mb-2" id="reductionSuccess"></div>
+              <div class="alert alert-danger reduction-alert d-none mb-0" id="reductionError"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="family-table-wrap">
+      {% if categories is empty %}
+        <div class="text-muted">Aucune catégorie trouvée.</div>
+      {% else %}
+        <div class="table-responsive">
+          <table class="table align-middle family-table mb-0">
+            <thead>
+              <tr>
+                <th>Catégorie</th>
+                <th style="width: 140px;">Articles</th>
+                <th style="width: 220px;">Réduction</th>
+                <th style="width: 180px;">État</th>
+                <th style="width: 160px;"></th>
+              </tr>
+            </thead>
+            <tbody id="familyReductionTable">
+              {% for item in categories %}
+                <tr data-family-row data-family-name="{{ item.family|lower }}">
+                  <td>
+                    <div class="family-name">{{ item.family }}</div>
+                  </td>
+
+                  <td>
+                    <span class="family-count">{{ item.itemsCount }}</span>
+                  </td>
+
+                  <td>
+                    <div class="input-group reduction-input-group">
+                      <input
+                        type="number"
+                        min="0"
+                        max="100"
+                        step="0.01"
+                        class="form-control"
+                        value="{{ item.reduction ?? '' }}"
+                        data-reduction-input
+                      >
+                      <span class="input-group-text">%</span>
+                    </div>
+                  </td>
+
+                  <td>
+                    {% if item.isMixed %}
+                      <span class="badge text-bg-warning" data-current-badge>Valeurs mixtes</span>
+                    {% elseif item.reduction is not null and item.reduction != '' %}
+                      <span class="badge text-bg-success" data-current-badge>{{ item.reduction }}%</span>
+                    {% else %}
+                      <span class="badge text-bg-secondary" data-current-badge>Aucune</span>
+                    {% endif %}
+                  </td>
+
+                  <td>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-sm reduction-save-btn"
+                      data-save-reduction
+                      data-family="{{ item.family }}"
+                    >
+                      Enregistrer
+                    </button>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const saveToken = '{{ saveToken }}';
+  const bulkToken = '{{ bulkToken }}';
+
+  const successBox = document.getElementById('reductionSuccess');
+  const errorBox = document.getElementById('reductionError');
+  const searchInput = document.getElementById('familySearchInput');
+  const bulkApplyBtn = document.getElementById('bulkApplyBtn');
+  const bulkResetBtn = document.getElementById('bulkResetBtn');
+  const currentCycleBadge = document.getElementById('currentCycleBadge');
+
+  const cycleValues = [];
+  for (let i = 5; i <= 80; i += 5) {
+    cycleValues.push(i);
+  }
+
+  let cycleIndex = 0;
+
+  function showSuccess(message){
+    if (!successBox) return;
+    successBox.textContent = message || '';
+    successBox.classList.toggle('d-none', !message);
+    if (errorBox) errorBox.classList.add('d-none');
+  }
+
+  function showError(message){
+    if (!errorBox) return;
+    errorBox.textContent = message || '';
+    errorBox.classList.toggle('d-none', !message);
+    if (successBox) successBox.classList.add('d-none');
+  }
+
+  function nextCycleValue(){
+    return cycleValues[cycleIndex] || 5;
+  }
+
+  function refreshCycleUi(){
+    const value = nextCycleValue();
+
+    if (bulkApplyBtn) {
+      bulkApplyBtn.textContent = `Tout mettre à ${value}%`;
+    }
+
+    if (currentCycleBadge) {
+      currentCycleBadge.textContent = `Prochaine valeur : ${value}%`;
+    }
+  }
+
+  function formatDisplayReduction(value){
+    if (value === null || value === undefined || value === '') {
+      return null;
+    }
+    return `${value}%`;
+  }
+
+  function updateRowBadge(row, reduction, forceMixed = false){
+    const badge = row.querySelector('[data-current-badge]');
+    const input = row.querySelector('[data-reduction-input]');
+    if (!badge) return;
+
+    if (input) {
+      input.value = reduction ?? '';
+    }
+
+    if (forceMixed) {
+      badge.className = 'badge text-bg-warning';
+      badge.textContent = 'Valeurs mixtes';
+      return;
+    }
+
+    if (reduction !== null && reduction !== undefined && reduction !== '') {
+      if (String(reduction) === '0') {
+        badge.className = 'badge text-bg-secondary';
+        badge.textContent = '0%';
+      } else {
+        badge.className = 'badge text-bg-success';
+        badge.textContent = `${reduction}%`;
+      }
+    } else {
+      badge.className = 'badge text-bg-secondary';
+      badge.textContent = 'Aucune';
+    }
+  }
+
+  async function saveReduction(family, reduction){
+    const res = await fetch('{{ path('admin_category_reduction_save') }}', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        _token: saveToken,
+        family: family,
+        reduction: reduction
+      })
+    });
+
+    return {
+      status: res.status,
+      data: await res.json().catch(() => ({}))
+    };
+  }
+
+  async function bulkReduction(mode, reduction){
+    const res = await fetch('{{ path('admin_category_reduction_bulk') }}', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        _token: bulkToken,
+        mode: mode,
+        reduction: reduction
+      })
+    });
+
+    return {
+      status: res.status,
+      data: await res.json().catch(() => ({}))
+    };
+  }
+
+  document.querySelectorAll('[data-save-reduction]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const row = btn.closest('[data-family-row]');
+      if (!row) return;
+
+      const input = row.querySelector('[data-reduction-input]');
+      const family = btn.dataset.family || '';
+      const reduction = (input?.value || '').trim();
+
+      btn.disabled = true;
+
+      try {
+        const result = await saveReduction(family, reduction);
+
+        if (result.status >= 400 || !result.data.ok) {
+          showError(result.data.message || 'Erreur lors de l’enregistrement.');
+          return;
+        }
+
+        updateRowBadge(row, result.data.reduction ?? null, false);
+        showSuccess(result.data.message || 'Réduction enregistrée.');
+      } catch (e) {
+        showError('Erreur réseau.');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-reduction-input]').forEach(input => {
+    input.addEventListener('keydown', function(e){
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const row = input.closest('[data-family-row]');
+        const btn = row?.querySelector('[data-save-reduction]');
+        btn?.click();
+      }
+    });
+  });
+
+  bulkApplyBtn?.addEventListener('click', async () => {
+    const value = nextCycleValue();
+
+    bulkApplyBtn.disabled = true;
+    if (bulkResetBtn) bulkResetBtn.disabled = true;
+
+    try {
+      const result = await bulkReduction('apply', value);
+
+      if (result.status >= 400 || !result.data.ok) {
+        showError(result.data.message || 'Erreur lors de l’application globale.');
+        return;
+      }
+
+      document.querySelectorAll('[data-family-row]').forEach(row => {
+        updateRowBadge(row, result.data.reduction ?? String(value), false);
+      });
+
+      showSuccess(result.data.message || 'Réduction globale appliquée.');
+
+      cycleIndex = (cycleIndex + 1) % cycleValues.length;
+      refreshCycleUi();
+    } catch (e) {
+      showError('Erreur réseau.');
+    } finally {
+      bulkApplyBtn.disabled = false;
+      if (bulkResetBtn) bulkResetBtn.disabled = false;
+    }
+  });
+
+  bulkResetBtn?.addEventListener('click', async () => {
+    bulkResetBtn.disabled = true;
+    if (bulkApplyBtn) bulkApplyBtn.disabled = true;
+
+    try {
+      const result = await bulkReduction('reset', '0');
+
+      if (result.status >= 400 || !result.data.ok) {
+        showError(result.data.message || 'Erreur lors de la réinitialisation.');
+        return;
+      }
+
+      document.querySelectorAll('[data-family-row]').forEach(row => {
+        updateRowBadge(row, '0', false);
+      });
+
+      showSuccess(result.data.message || 'Toutes les réductions ont été remises à 0%.');
+    } catch (e) {
+      showError('Erreur réseau.');
+    } finally {
+      bulkResetBtn.disabled = false;
+      if (bulkApplyBtn) bulkApplyBtn.disabled = false;
+    }
+  });
+
+  searchInput?.addEventListener('input', () => {
+    const q = (searchInput.value || '').trim().toLowerCase();
+
+    document.querySelectorAll('[data-family-row]').forEach(row => {
+      const family = row.getAttribute('data-family-name') || '';
+      row.classList.toggle('d-none', q !== '' && !family.includes(q));
+    });
+  });
+
+  refreshCycleUi();
+})();
+</script>
+{% endblock %}

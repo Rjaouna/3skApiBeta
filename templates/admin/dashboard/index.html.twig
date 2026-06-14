@@ -1,0 +1,778 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+  :root{
+    --db-radius: 22px;
+    --db-border: rgba(0,0,0,.10);
+    --db-shadow: 0 14px 34px rgba(0,0,0,.08);
+    --db-muted: rgba(0,0,0,.58);
+    --db-text: rgba(0,0,0,.84);
+    --db-glass: rgba(255,255,255,.82);
+    --db-glass-2: rgba(255,255,255,.60);
+  }
+
+  body.theme-dark{
+    --db-border: rgba(255,255,255,.14);
+    --db-shadow: 0 18px 46px rgba(0,0,0,.35);
+    --db-muted: rgba(255,255,255,.62);
+    --db-text: rgba(255,255,255,.88);
+    --db-glass: rgba(18,18,22,.76);
+    --db-glass-2: rgba(18,18,22,.58);
+  }
+
+  .dash-hero,
+  .dash-card{
+    border-radius: var(--db-radius);
+    border: 1px solid var(--db-border);
+    box-shadow: var(--db-shadow);
+    background: var(--db-glass);
+    backdrop-filter: blur(8px);
+  }
+
+  .dash-hero{
+    padding: 18px;
+    background:
+      radial-gradient(900px circle at 10% 10%, rgba(var(--bs-primary-rgb), .16), transparent 40%),
+      radial-gradient(900px circle at 90% 30%, rgba(var(--bs-secondary-rgb), .14), transparent 38%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+  }
+
+  .dash-hero h3{
+    margin: 0;
+    font-weight: 950;
+    color: var(--db-text);
+  }
+
+  .dash-hero .subtitle{
+    margin-top: 6px;
+    color: var(--db-muted);
+    font-size: .92rem;
+    font-weight: 600;
+  }
+
+  .dash-card .card-body{
+    padding: 18px;
+  }
+
+  .dash-section-title{
+    font-size: .82rem;
+    font-weight: 900;
+    color: var(--db-muted);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+
+  .dash-kpi{
+    border-radius: 18px;
+    border: 1px solid var(--db-border);
+    background: rgba(255,255,255,.48);
+    padding: 14px;
+    height: 100%;
+  }
+
+  body.theme-dark .dash-kpi{
+    background: rgba(255,255,255,.04);
+  }
+
+  .dash-kpi-label{
+    font-size: .74rem;
+    color: var(--db-muted);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    letter-spacing: .03em;
+  }
+
+  .dash-kpi-value{
+    color: var(--db-text);
+    font-weight: 950;
+    font-size: 1.2rem;
+    line-height: 1.2;
+  }
+
+  .dash-mini-grid{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 12px;
+  }
+
+  .dash-mini-card{
+    border-radius: 18px;
+    border: 1px solid var(--db-border);
+    background: rgba(255,255,255,.48);
+    padding: 14px;
+  }
+
+  body.theme-dark .dash-mini-card{
+    background: rgba(255,255,255,.04);
+  }
+
+  .dash-mini-title{
+    font-size: .76rem;
+    color: var(--db-muted);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .dash-mini-line{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: .88rem;
+  }
+
+  .dash-mini-line:last-child{
+    margin-bottom: 0;
+  }
+
+  .dash-table{
+    margin: 0;
+  }
+
+  .dash-table thead th{
+    border-bottom: 1px solid var(--db-border);
+    color: var(--db-muted);
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-weight: 900;
+    padding: 14px 12px;
+    white-space: nowrap;
+    background: transparent;
+  }
+
+  .dash-table tbody td{
+    padding: 14px 12px;
+    border-color: rgba(0,0,0,.06);
+    vertical-align: middle;
+    color: var(--db-text);
+  }
+
+  body.theme-dark .dash-table tbody td{
+    border-color: rgba(255,255,255,.08);
+  }
+
+  .dash-chart-wrap{
+    position: relative;
+    min-height: 320px;
+  }
+
+  .dash-loading{
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--db-muted);
+    font-weight: 800;
+  }
+
+  .dash-error{
+    border-radius: 18px;
+    background: rgba(220,53,69,.10);
+    border: 1px solid rgba(220,53,69,.18);
+    color: rgba(220,53,69,.95);
+    padding: 14px 16px;
+    font-weight: 800;
+  }
+
+  .dash-muted{
+    color: var(--db-muted);
+    font-weight: 700;
+  }
+
+  .dash-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 8px 12px;
+    border: 1px solid var(--db-border);
+    background: var(--db-glass-2);
+    color: var(--db-text);
+    font-size: .82rem;
+    font-weight: 900;
+  }
+
+  @media (max-width: 991.98px){
+    .dash-mini-grid{
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container-fluid py-4">
+  <div class="dash-hero mb-3 d-flex align-items-start justify-content-between flex-wrap gap-2">
+    <div>
+      <h3>Dashboard statistique</h3>
+      <div class="subtitle">Vue globale paniers, commandes, catégories et stock.</div>
+    </div>
+
+    <div class="dash-badge" id="generatedAtBadge">
+      Chargement…
+    </div>
+  </div>
+
+  <div id="dashboardError" class="dash-error d-none mb-3"></div>
+
+  <div class="row g-3 mb-3" id="mainKpis">
+    <div class="col-6 col-lg-3"><div class="dash-kpi"><div class="dash-loading">Chargement…</div></div></div>
+    <div class="col-6 col-lg-3"><div class="dash-kpi"><div class="dash-loading">Chargement…</div></div></div>
+    <div class="col-6 col-lg-3"><div class="dash-kpi"><div class="dash-loading">Chargement…</div></div></div>
+    <div class="col-6 col-lg-3"><div class="dash-kpi"><div class="dash-loading">Chargement…</div></div></div>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <div class="col-lg-6">
+      <div class="card dash-card h-100">
+        <div class="card-body">
+          <div class="dash-section-title">Statistique panier · par client</div>
+          <div class="table-responsive">
+            <table class="table dash-table align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th class="text-end">Paniers</th>
+                  <th class="text-end">Lignes</th>
+                  <th class="text-end">Qté</th>
+                </tr>
+              </thead>
+              <tbody id="cartByCustomerBody">
+                <tr><td colspan="4" class="dash-muted">Chargement…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card dash-card h-100">
+        <div class="card-body">
+          <div class="dash-section-title">Statistique panier · par article</div>
+          <div class="table-responsive">
+            <table class="table dash-table align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>Article</th>
+                  <th class="text-end">Paniers</th>
+                  <th class="text-end">Clients</th>
+                  <th class="text-end">Qté</th>
+                </tr>
+              </thead>
+              <tbody id="cartByArticleBody">
+                <tr><td colspan="4" class="dash-muted">Chargement…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card dash-card mb-3">
+    <div class="card-body">
+      <div class="dash-section-title">Commandes · Résumé jour / semaine / mois</div>
+      <div class="dash-mini-grid" id="ordersSummaryGrid">
+        <div class="dash-mini-card"><div class="dash-loading">Chargement…</div></div>
+        <div class="dash-mini-card"><div class="dash-loading">Chargement…</div></div>
+        <div class="dash-mini-card"><div class="dash-loading">Chargement…</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <div class="col-lg-4">
+      <div class="card dash-card">
+        <div class="card-body">
+          <div class="dash-section-title">Commandes · 30 derniers jours</div>
+          <div class="dash-chart-wrap">
+            <canvas id="dailyChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card dash-card">
+        <div class="card-body">
+          <div class="dash-section-title">Commandes · 12 dernières semaines</div>
+          <div class="dash-chart-wrap">
+            <canvas id="weeklyChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card dash-card">
+        <div class="card-body">
+          <div class="dash-section-title">Commandes · 12 derniers mois</div>
+          <div class="dash-chart-wrap">
+            <canvas id="monthlyChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <div class="col-lg-4">
+      <div class="card dash-card h-100">
+        <div class="card-body">
+          <div class="dash-section-title">Catégories · aujourd’hui</div>
+          <div class="table-responsive">
+            <table class="table dash-table align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>Catégorie</th>
+                  <th class="text-end">Cmd</th>
+                  <th class="text-end">Qté</th>
+                  <th class="text-end">Total</th>
+                </tr>
+              </thead>
+              <tbody id="catDayBody">
+                <tr><td colspan="4" class="dash-muted">Chargement…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card dash-card h-100">
+        <div class="card-body">
+          <div class="dash-section-title">Catégories · semaine</div>
+          <div class="table-responsive">
+            <table class="table dash-table align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>Catégorie</th>
+                  <th class="text-end">Cmd</th>
+                  <th class="text-end">Qté</th>
+                  <th class="text-end">Total</th>
+                </tr>
+              </thead>
+              <tbody id="catWeekBody">
+                <tr><td colspan="4" class="dash-muted">Chargement…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card dash-card h-100">
+        <div class="card-body">
+          <div class="dash-section-title">Catégories · mois</div>
+          <div class="table-responsive">
+            <table class="table dash-table align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>Catégorie</th>
+                  <th class="text-end">Cmd</th>
+                  <th class="text-end">Qté</th>
+                  <th class="text-end">Total</th>
+                </tr>
+              </thead>
+              <tbody id="catMonthBody">
+                <tr><td colspan="4" class="dash-muted">Chargement…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-lg-5">
+      <div class="card dash-card h-100">
+        <div class="card-body">
+          <div class="dash-section-title">Stock · valorisation</div>
+          <div class="row g-2" id="stockSummaryGrid">
+            <div class="col-12"><div class="dash-kpi"><div class="dash-loading">Chargement…</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-7">
+      <div class="card dash-card h-100">
+        <div class="card-body">
+          <div class="dash-section-title">Stock · top familles</div>
+          <div class="table-responsive">
+            <table class="table dash-table align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>Famille</th>
+                  <th class="text-end">Articles</th>
+                  <th class="text-end">Unités</th>
+                  <th class="text-end">Val. TTC remisée</th>
+                </tr>
+              </thead>
+              <tbody id="stockFamilyBody">
+                <tr><td colspan="4" class="dash-muted">Chargement…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const endpoint = "{{ path('api_admin_dashboard_stats') }}";
+
+  const generatedAtBadge = document.getElementById('generatedAtBadge');
+  const dashboardError = document.getElementById('dashboardError');
+
+  const mainKpis = document.getElementById('mainKpis');
+  const ordersSummaryGrid = document.getElementById('ordersSummaryGrid');
+  const stockSummaryGrid = document.getElementById('stockSummaryGrid');
+
+  const cartByCustomerBody = document.getElementById('cartByCustomerBody');
+  const cartByArticleBody = document.getElementById('cartByArticleBody');
+
+  const catDayBody = document.getElementById('catDayBody');
+  const catWeekBody = document.getElementById('catWeekBody');
+  const catMonthBody = document.getElementById('catMonthBody');
+  const stockFamilyBody = document.getElementById('stockFamilyBody');
+
+  const charts = {
+    daily: null,
+    weekly: null,
+    monthly: null
+  };
+
+  function esc(s){
+    return String(s ?? '').replace(/[&<>"']/g, m => ({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;',
+      "'":'&#39;'
+    }[m]));
+  }
+
+  function money(v){
+    const n = Number(v || 0);
+    return isFinite(n) ? n.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' DH' : '0,00 DH';
+  }
+
+  function integer(v){
+    const n = Number(v || 0);
+    return isFinite(n) ? n.toLocaleString('fr-FR') : '0';
+  }
+
+  function dateTimeLabel(value){
+    if (!value) return '—';
+    try {
+      return new Date(value).toLocaleString('fr-FR');
+    } catch(e){
+      return value;
+    }
+  }
+
+  function showError(message){
+    dashboardError.classList.remove('d-none');
+    dashboardError.textContent = message;
+  }
+
+  function hideError(){
+    dashboardError.classList.add('d-none');
+    dashboardError.textContent = '';
+  }
+
+  function renderMainKpis(data){
+    const cartSummary = data?.cart?.summary || {};
+    const orderMonth = data?.orders?.summary?.month || {};
+    const stockSummary = data?.stock?.summary || {};
+
+    mainKpis.innerHTML = `
+      <div class="col-6 col-lg-3">
+        <div class="dash-kpi">
+          <div class="dash-kpi-label">Paniers ouverts</div>
+          <div class="dash-kpi-value">${integer(cartSummary.openCartsCount)}</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="dash-kpi">
+          <div class="dash-kpi-label">Qté en paniers</div>
+          <div class="dash-kpi-value">${integer(cartSummary.itemsQty)}</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="dash-kpi">
+          <div class="dash-kpi-label">CA mois</div>
+          <div class="dash-kpi-value">${money(orderMonth.total)}</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="dash-kpi">
+          <div class="dash-kpi-label">Stock TTC remisé</div>
+          <div class="dash-kpi-value">${money(stockSummary.valueTtcWithReduction)}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderOrdersSummary(data){
+    const summary = data?.orders?.summary || {};
+    const blocks = [
+      { title: 'Aujourd’hui', value: summary.day || {} },
+      { title: 'Cette semaine', value: summary.week || {} },
+      { title: 'Ce mois', value: summary.month || {} }
+    ];
+
+    ordersSummaryGrid.innerHTML = blocks.map(block => `
+      <div class="dash-mini-card">
+        <div class="dash-mini-title">${esc(block.title)}</div>
+        <div class="dash-mini-line"><span>Commandes</span><strong>${integer(block.value.ordersCount)}</strong></div>
+        <div class="dash-mini-line"><span>Sous-total</span><strong>${money(block.value.subtotal)}</strong></div>
+        <div class="dash-mini-line"><span>Remises</span><strong class="text-danger">${money(block.value.discount)}</strong></div>
+        <div class="dash-mini-line"><span>Total final</span><strong>${money(block.value.total)}</strong></div>
+      </div>
+    `).join('');
+  }
+
+  function renderStockSummary(data){
+    const s = data?.stock?.summary || {};
+
+    stockSummaryGrid.innerHTML = `
+      <div class="col-6">
+        <div class="dash-kpi">
+          <div class="dash-kpi-label">Articles</div>
+          <div class="dash-kpi-value">${integer(s.articlesCount)}</div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="dash-kpi">
+          <div class="dash-kpi-label">Articles en stock</div>
+          <div class="dash-kpi-value">${integer(s.inStockArticlesCount)}</div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="dash-kpi">
+          <div class="dash-kpi-label">Unités stockées</div>
+          <div class="dash-kpi-value">${integer(s.totalUnits)}</div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="dash-kpi">
+          <div class="dash-kpi-label">Articles rupture</div>
+          <div class="dash-kpi-value">${integer(s.outOfStockArticlesCount)}</div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="dash-kpi">
+          <div class="dash-kpi-label">Valorisation TTC sans réduction</div>
+          <div class="dash-kpi-value">${money(s.valueTtcWithoutReduction)}</div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="dash-kpi">
+          <div class="dash-kpi-label">Valorisation TTC avec réduction</div>
+          <div class="dash-kpi-value">${money(s.valueTtcWithReduction)}</div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="dash-kpi">
+          <div class="dash-kpi-label">Impact réduction TTC</div>
+          <div class="dash-kpi-value text-danger">${money(s.valueTtcReductionAmount)}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderCartByCustomer(rows){
+    if (!rows.length) {
+      cartByCustomerBody.innerHTML = `<tr><td colspan="4" class="dash-muted">Aucune donnée.</td></tr>`;
+      return;
+    }
+
+    cartByCustomerBody.innerHTML = rows.map(row => `
+      <tr>
+        <td>
+          <div class="fw-bold">${esc(row.companyName || '—')}</div>
+          <div class="small dash-muted">${esc(row.email || '')}</div>
+        </td>
+        <td class="text-end">${integer(row.cartsCount)}</td>
+        <td class="text-end">${integer(row.linesCount)}</td>
+        <td class="text-end">${integer(row.itemsQty)}</td>
+      </tr>
+    `).join('');
+  }
+
+  function renderCartByArticle(rows){
+    if (!rows.length) {
+      cartByArticleBody.innerHTML = `<tr><td colspan="4" class="dash-muted">Aucune donnée.</td></tr>`;
+      return;
+    }
+
+    cartByArticleBody.innerHTML = rows.map(row => `
+      <tr>
+        <td>
+          <div class="fw-bold">${esc(row.code || '—')}</div>
+          <div class="small dash-muted">${esc(row.designation || '')}</div>
+          <div class="small dash-muted">${esc(row.familyName || '')}</div>
+        </td>
+        <td class="text-end">${integer(row.cartsCount)}</td>
+        <td class="text-end">${integer(row.customersCount)}</td>
+        <td class="text-end">${integer(row.itemsQty)}</td>
+      </tr>
+    `).join('');
+  }
+
+  function renderCategoryTable(tbody, rows){
+    if (!rows.length) {
+      tbody.innerHTML = `<tr><td colspan="4" class="dash-muted">Aucune donnée.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = rows.map(row => `
+      <tr>
+        <td>${esc(row.category || 'Non classée')}</td>
+        <td class="text-end">${integer(row.ordersCount)}</td>
+        <td class="text-end">${integer(row.quantity)}</td>
+        <td class="text-end">${money(row.total)}</td>
+      </tr>
+    `).join('');
+  }
+
+  function renderStockFamilies(rows){
+    if (!rows.length) {
+      stockFamilyBody.innerHTML = `<tr><td colspan="4" class="dash-muted">Aucune donnée.</td></tr>`;
+      return;
+    }
+
+    stockFamilyBody.innerHTML = rows.map(row => `
+      <tr>
+        <td>${esc(row.familyName || 'Non classée')}</td>
+        <td class="text-end">${integer(row.articlesCount)}</td>
+        <td class="text-end">${integer(row.totalUnits)}</td>
+        <td class="text-end">${money(row.valueTtcWithReduction)}</td>
+      </tr>
+    `).join('');
+  }
+
+  function buildChart(canvasId, key, rows, title){
+    const canvas = document.getElementById(canvasId);
+    if (!canvas || typeof Chart === 'undefined') {
+      return;
+    }
+
+    if (charts[key]) {
+      charts[key].destroy();
+      charts[key] = null;
+    }
+
+    const labels = rows.map(item => item.label);
+    const totals = rows.map(item => Number(item.total || 0));
+    const ordersCounts = rows.map(item => Number(item.ordersCount || 0));
+
+    charts[key] = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          {
+            type: 'bar',
+            label: 'Total final',
+            data: totals,
+            yAxisID: 'y',
+            borderWidth: 1
+          },
+          {
+            type: 'line',
+            label: 'Nombre de commandes',
+            data: ordersCounts,
+            yAxisID: 'y1',
+            tension: 0.25
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          title: {
+            display: false,
+            text: title
+          },
+          legend: {
+            display: true
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            position: 'left'
+          },
+          y1: {
+            beginAtZero: true,
+            position: 'right',
+            grid: {
+              drawOnChartArea: false
+            }
+          }
+        }
+      }
+    });
+  }
+
+  async function loadDashboard(){
+    hideError();
+
+    try {
+      const res = await fetch(endpoint, {
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        showError(data.message || 'Impossible de charger les statistiques.');
+        return;
+      }
+
+      generatedAtBadge.textContent = 'Mise à jour : ' + dateTimeLabel(data.generatedAt);
+
+      renderMainKpis(data);
+      renderOrdersSummary(data);
+      renderStockSummary(data);
+
+      renderCartByCustomer(data.cart?.byCustomer || []);
+      renderCartByArticle(data.cart?.byArticle || []);
+
+      renderCategoryTable(catDayBody, data.categories?.topDay || []);
+      renderCategoryTable(catWeekBody, data.categories?.topWeek || []);
+      renderCategoryTable(catMonthBody, data.categories?.topMonth || []);
+
+      renderStockFamilies(data.stock?.topFamilies || []);
+
+      buildChart('dailyChart', 'daily', data.orders?.series?.daily || [], '30 derniers jours');
+      buildChart('weeklyChart', 'weekly', data.orders?.series?.weekly || [], '12 dernières semaines');
+      buildChart('monthlyChart', 'monthly', data.orders?.series?.monthly || [], '12 derniers mois');
+    } catch (e) {
+      showError('Erreur réseau pendant le chargement du dashboard.');
+    }
+  }
+
+  loadDashboard();
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,1019 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+  :root{
+    --oc-radius: 22px;
+    --oc-border: rgba(0,0,0,.10);
+    --oc-shadow: 0 14px 34px rgba(0,0,0,.08);
+    --oc-muted: rgba(0,0,0,.58);
+    --oc-text: rgba(0,0,0,.84);
+    --oc-glass: rgba(255,255,255,.82);
+    --oc-glass-2: rgba(255,255,255,.60);
+  }
+
+  body.theme-dark{
+    --oc-border: rgba(255,255,255,.14);
+    --oc-shadow: 0 18px 46px rgba(0,0,0,.35);
+    --oc-muted: rgba(255,255,255,.62);
+    --oc-text: rgba(255,255,255,.88);
+    --oc-glass: rgba(18,18,22,.76);
+    --oc-glass-2: rgba(18,18,22,.58);
+  }
+
+  .cart-page-hero{
+    border-radius: 24px;
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    padding: 18px;
+    background:
+      radial-gradient(900px circle at 10% 10%, rgba(var(--bs-primary-rgb), .16), transparent 40%),
+      radial-gradient(900px circle at 90% 30%, rgba(var(--bs-secondary-rgb), .14), transparent 38%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+  }
+
+  .cart-page-hero h3{
+    margin: 0;
+    font-weight: 950;
+    color: var(--oc-text);
+  }
+
+  .cart-page-hero .subtitle{
+    margin-top: 6px;
+    color: var(--oc-muted);
+    font-size: .92rem;
+    font-weight: 600;
+  }
+
+  .cart-page-actions{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .cart-page-actions .btn{
+    min-height: 46px;
+    border-radius: 14px;
+    font-weight: 900;
+    padding-inline: 16px;
+  }
+
+  .cart-main-card,
+  .cart-summary-card{
+    border-radius: var(--oc-radius);
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    backdrop-filter: blur(8px);
+  }
+
+  .cart-main-card{
+    background: var(--oc-glass);
+  }
+
+  .cart-main-card .card-body{
+    padding: 18px;
+  }
+
+  .cart-table{
+    margin: 0;
+  }
+
+  .cart-table thead th{
+    border-bottom: 1px solid var(--oc-border);
+    color: var(--oc-muted);
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-weight: 900;
+    padding: 14px 12px;
+    white-space: nowrap;
+    background: transparent;
+  }
+
+  .cart-table tbody tr{
+    transition: background .12s ease;
+  }
+
+  .cart-table tbody tr:hover{
+    background: rgba(var(--bs-primary-rgb), .04);
+  }
+
+  .cart-table tbody td{
+    padding: 16px 12px;
+    border-color: rgba(0,0,0,.06);
+    vertical-align: middle;
+    color: var(--oc-text);
+  }
+
+  body.theme-dark .cart-table tbody td{
+    border-color: rgba(255,255,255,.08);
+  }
+
+  .cart-summary-card{
+    background:
+      radial-gradient(600px circle at 10% 10%, rgba(var(--bs-primary-rgb), .10), transparent 40%),
+      radial-gradient(600px circle at 90% 20%, rgba(var(--bs-secondary-rgb), .08), transparent 35%),
+      var(--oc-glass);
+    padding: 18px;
+  }
+
+  .cart-summary-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:14px;
+  }
+
+  .cart-summary-kicker{
+    font-size:.74rem;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color: var(--oc-muted);
+  }
+
+  .cart-summary-title{
+    font-size:1.02rem;
+    font-weight:950;
+    line-height:1.1;
+    color: var(--oc-text);
+  }
+
+  .cart-summary-badge{
+    padding:6px 10px;
+    border-radius:999px;
+    background:rgba(220,53,69,.12);
+    color:rgba(220,53,69,.95);
+    border:1px solid rgba(220,53,69,.18);
+    font-size:.78rem;
+    font-weight:950;
+    white-space:nowrap;
+  }
+
+  .cart-summary-badge.d-none{
+    display:none !important;
+  }
+
+  .cart-discount-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    margin-top:6px;
+    padding:3px 8px;
+    border-radius:999px;
+    background:rgba(220,53,69,.10);
+    color:rgba(220,53,69,.95);
+    border:1px solid rgba(220,53,69,.16);
+    font-size:.72rem;
+    font-weight:900;
+    white-space:nowrap;
+  }
+
+  .cart-summary-grid{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:10px;
+    margin-bottom:12px;
+  }
+
+  .cart-summary-box{
+    border-radius:16px;
+    border:1px solid var(--oc-border);
+    background: rgba(255,255,255,.58);
+    padding:12px;
+  }
+
+  body.theme-dark .cart-summary-box{
+    background: rgba(18,18,22,.52);
+  }
+
+  .cart-summary-label{
+    display:block;
+    font-size:.78rem;
+    font-weight:800;
+    color: var(--oc-muted);
+    margin-bottom:4px;
+  }
+
+  .cart-summary-value{
+    display:block;
+    font-size:1rem;
+    font-weight:950;
+    color: var(--oc-text);
+  }
+
+  .cart-summary-line{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:10px 0 8px 0;
+    border-top:1px dashed var(--oc-border);
+    font-size:.92rem;
+    color: var(--oc-text);
+  }
+
+  .cart-summary-total{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:4px;
+    padding:12px 14px;
+    border-radius:18px;
+    background:linear-gradient(135deg, rgba(13,110,253,.12), rgba(13,110,253,.04));
+    border:1px solid rgba(13,110,253,.18);
+    color: var(--oc-text);
+  }
+
+  .cart-summary-total span{
+    font-size:.90rem;
+    font-weight:900;
+  }
+
+  .cart-summary-total strong{
+    font-size:1.28rem;
+    font-weight:950;
+  }
+
+  .cart-summary-foot{
+    margin-top:10px;
+    font-size:.78rem;
+    font-weight:800;
+    color: var(--oc-muted);
+    text-align:center;
+  }
+
+  .cart-stock-box{
+    margin-top:14px;
+    border-radius:18px;
+    border:1px solid rgba(255,193,7,.35);
+    background:rgba(255,243,205,.9);
+    padding:12px;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:10px;
+    align-items:start;
+  }
+
+  body.theme-dark .cart-stock-box{
+    background:rgba(90,70,20,.35);
+    border-color:rgba(255,193,7,.25);
+  }
+
+  .cart-stock-box__icon{
+    width:34px;
+    height:34px;
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+    background:rgba(255,193,7,.18);
+    color:#b7791f;
+    font-size:1rem;
+  }
+
+  .cart-stock-box__content{
+    min-width:0;
+  }
+
+  .cart-stock-box__title{
+    font-weight:950;
+    margin-bottom:2px;
+    color: var(--oc-text);
+  }
+
+  .cart-stock-box__text{
+    font-size:.84rem;
+    color:rgba(0,0,0,.68);
+    margin-bottom:10px;
+  }
+
+  body.theme-dark .cart-stock-box__text{
+    color:rgba(255,255,255,.76);
+  }
+
+  .cart-item-warning{
+    margin-top:8px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+  }
+
+  .cart-qty-stepper{
+    display:flex;
+    align-items:stretch;
+    height:40px;
+    border:1px solid var(--oc-border);
+    border-radius:12px;
+    overflow:hidden;
+    background:rgba(255,255,255,.92);
+    width:170px;
+  }
+
+  body.theme-dark .cart-qty-stepper{
+    background:rgba(18,18,22,.70);
+  }
+
+  .cart-qty-btn{
+    width:40px;
+    border:0;
+    background:transparent;
+    display:grid;
+    place-items:center;
+    font-weight:900;
+    color:rgba(0,0,0,.65);
+    transition:background .12s ease, color .12s ease;
+  }
+
+  body.theme-dark .cart-qty-btn{
+    color:rgba(255,255,255,.75);
+  }
+
+  .cart-qty-btn:hover{
+    background:rgba(0,0,0,.05);
+  }
+
+  body.theme-dark .cart-qty-btn:hover{
+    background:rgba(255,255,255,.06);
+  }
+
+  .cart-qty-btn:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+  }
+
+  .cart-qty-field{
+    flex:1;
+    min-width:0;
+    border:0;
+    outline:none;
+    text-align:center;
+    font-weight:950;
+    background:transparent;
+    color:rgba(0,0,0,.85);
+  }
+
+  body.theme-dark .cart-qty-field{
+    color:rgba(255,255,255,.90);
+  }
+
+  .cart-qty-field:disabled{
+    opacity:.6;
+  }
+
+  .cart-alert{
+    border-radius: 16px;
+    border: 1px solid transparent;
+    font-weight: 800;
+    padding: 12px 14px;
+  }
+
+  .cart-modal .modal-content{
+    border-radius: 24px;
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    background: var(--oc-glass);
+    backdrop-filter: blur(10px);
+  }
+
+  .cart-modal .modal-header,
+  .cart-modal .modal-footer{
+    border-color: rgba(0,0,0,.06);
+    padding: 16px 18px;
+  }
+
+  body.theme-dark .cart-modal .modal-header,
+  body.theme-dark .cart-modal .modal-footer{
+    border-color: rgba(255,255,255,.08);
+  }
+
+  .cart-modal .modal-title{
+    font-weight: 950;
+    color: var(--oc-text);
+  }
+
+  .cart-modal .modal-body{
+    padding: 18px;
+    color: var(--oc-text);
+  }
+
+  .cart-modal .btn{
+    min-height: 46px;
+    border-radius: 14px;
+    font-weight: 900;
+    padding-inline: 16px;
+  }
+
+  @media (max-width: 767.98px){
+    .cart-page-actions{
+      width: 100%;
+    }
+
+    .cart-page-actions .btn{
+      flex: 1 1 100%;
+    }
+
+    .cart-summary-grid{
+      grid-template-columns: 1fr;
+    }
+
+    .cart-qty-stepper{
+      width: 100%;
+      max-width: 190px;
+    }
+  }
+</style>
+
+<div class="container py-4">
+  <div class="cart-page-hero mb-3 d-flex align-items-start justify-content-between flex-wrap gap-2">
+    <div>
+      <h3>Mon panier</h3>
+      <div class="subtitle">Vérifiez vos articles avant validation.</div>
+    </div>
+
+    <div class="cart-page-actions">
+      <button class="btn btn-outline-danger btn-sm" id="clearCartBtn">Vider</button>
+      <button class="btn btn-primary btn-sm" id="checkoutBtnTop" type="button" disabled>Valider</button>
+    </div>
+  </div>
+
+  <div class="alert alert-warning cart-alert d-none" id="needLogin">
+    Vous devez être connecté pour utiliser le panier.
+  </div>
+
+  <div class="row g-3">
+    <div class="col-lg-8">
+      <div class="card cart-main-card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table cart-table align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>Article</th>
+                  <th style="width:240px;">Qté</th>
+                  <th class="text-end">PU TTC</th>
+                  <th class="text-end">Total</th>
+                  <th style="width:60px;"></th>
+                </tr>
+              </thead>
+              <tbody id="cartTbody">
+                <tr><td colspan="5" class="text-muted">Chargement…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="cart-summary-card">
+        <div class="cart-summary-head">
+          <div>
+            <div class="cart-summary-kicker">Panier</div>
+            <div class="cart-summary-title">Résumé de commande</div>
+          </div>
+          <div class="cart-summary-badge d-none" id="sumBadge"></div>
+        </div>
+
+        <div class="cart-summary-grid">
+          <div class="cart-summary-box">
+            <span class="cart-summary-label">Articles</span>
+            <strong class="cart-summary-value" id="sumQty">0</strong>
+          </div>
+
+          <div class="cart-summary-box">
+            <span class="cart-summary-label">Sous-total</span>
+            <strong class="cart-summary-value" id="sumSubtotal">0.00 DH</strong>
+          </div>
+        </div>
+
+        <div class="cart-summary-line">
+          <span>Remise</span>
+          <strong class="text-danger" id="sumDiscount">-0.00 DH</strong>
+        </div>
+
+        <div class="cart-summary-total">
+          <span>Total final</span>
+          <strong id="sumTotal">0.00 DH</strong>
+        </div>
+
+        <div class="cart-summary-foot" id="sumFoot">
+          0 article dans votre panier
+        </div>
+
+        <div class="cart-stock-box d-none" id="stockIssueBox">
+          <div class="cart-stock-box__icon">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div class="cart-stock-box__content">
+            <div class="cart-stock-box__title">Ajustement nécessaire</div>
+            <div class="cart-stock-box__text" id="stockIssueText">
+              Certaines quantités dépassent le stock disponible.
+            </div>
+          </div>
+          <button class="btn btn-warning btn-sm" id="fixAllBtn" type="button">
+            Tout ajuster
+          </button>
+        </div>
+
+        <div class="mt-3 d-grid gap-2">
+          <button class="btn btn-primary btn-lg" id="checkoutBtn" type="button" disabled>
+            Passer commande
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form id="checkoutForm" method="post" action="{{ path('order_checkout') }}" class="d-none">
+    <input type="hidden" name="_token" value="{{ csrf_token('checkout_order') }}">
+  </form>
+</div>
+
+<div class="modal fade cart-modal" id="checkoutConfirmModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmer la commande</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-2">Vous êtes sur le point de valider votre commande.</p>
+        <p class="text-muted small mb-0">
+          Le stock sera vérifié une dernière fois et votre panier sera vidé après création de la commande.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Annuler</button>
+        <button class="btn btn-primary" type="button" id="confirmCheckoutBtn">Confirmer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const tbody = document.getElementById('cartTbody');
+  const sumQty = document.getElementById('sumQty');
+  const sumSubtotal = document.getElementById('sumSubtotal');
+  const sumDiscount = document.getElementById('sumDiscount');
+  const sumTotal = document.getElementById('sumTotal');
+  const sumFoot = document.getElementById('sumFoot');
+  const sumBadge = document.getElementById('sumBadge');
+  const needLogin = document.getElementById('needLogin');
+  const clearBtn = document.getElementById('clearCartBtn');
+  const checkoutBtnTop = document.getElementById('checkoutBtnTop');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  const stockIssueBox = document.getElementById('stockIssueBox');
+  const stockIssueText = document.getElementById('stockIssueText');
+  const fixAllBtn = document.getElementById('fixAllBtn');
+  const checkoutForm = document.getElementById('checkoutForm');
+  const confirmCheckoutBtn = document.getElementById('confirmCheckoutBtn');
+  const confirmModalEl = document.getElementById('checkoutConfirmModal');
+  const confirmModal = (window.bootstrap && confirmModalEl) ? new window.bootstrap.Modal(confirmModalEl) : null;
+
+  const FALLBACK_IMG = "{{ asset('img/default-piece.png')|e('js') }}";
+
+  function esc(s){
+    return String(s ?? '').replace(/[&<>"']/g, m => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[m]));
+  }
+
+  function num(v){
+    const n = Number(String(v ?? '').replace(',', '.'));
+    return isFinite(n) ? n : 0;
+  }
+
+  function setCheckoutState(enabled){
+    if (checkoutBtnTop) checkoutBtnTop.disabled = !enabled;
+    if (checkoutBtn) checkoutBtn.disabled = !enabled;
+    if (confirmCheckoutBtn) confirmCheckoutBtn.disabled = !enabled;
+  }
+
+  function openCheckoutModal(){
+    if (checkoutBtn?.disabled) return;
+
+    if (confirmModal) {
+      confirmModal.show();
+      return;
+    }
+
+    const ok = confirm('Confirmer le passage de la commande ?');
+    if (ok && checkoutForm) {
+      checkoutForm.submit();
+    }
+  }
+
+  function setStockIssueState(data){
+    const hasIssue = !!(data && data.hasStockIssue);
+    const issuesCount = Number(data?.issuesCount || 0);
+
+    if (!stockIssueBox || !stockIssueText) return;
+
+    if (!hasIssue){
+      stockIssueBox.classList.add('d-none');
+      stockIssueText.textContent = '';
+      return;
+    }
+
+    stockIssueBox.classList.remove('d-none');
+    stockIssueText.textContent =
+      issuesCount > 1
+        ? `${issuesCount} articles dépassent le stock actuel. Merci d’ajuster les quantités avant de valider.`
+        : `1 article dépasse le stock actuel. Merci d’ajuster la quantité avant de valider.`;
+  }
+
+  function syncLocalCartFromServer(data){
+    const items = data?.items || [];
+    const obj = {};
+
+    items.forEach(it => {
+      const code = String(it.code || '').trim();
+      if (!code) return;
+      const q = Math.max(0, Math.floor(Number(it.qty || 0)));
+      obj[code] = q;
+    });
+
+    try {
+      localStorage.setItem('cart', JSON.stringify(obj));
+    } catch(e){}
+
+    if (typeof window.refreshHeaderCounts === 'function'){
+      try { window.refreshHeaderCounts(); } catch(e){}
+    }
+  }
+
+  async function fetchCart(){
+    const res = await fetch('/api/cart', { headers: { 'Accept':'application/json' } });
+    const data = await res.json().catch(()=> ({}));
+
+    if (res.status === 401){
+      setCheckoutState(false);
+      setStockIssueState({ hasStockIssue: false });
+
+      if (sumQty) sumQty.textContent = '0';
+      if (sumSubtotal) sumSubtotal.textContent = '0.00 DH';
+      if (sumDiscount) sumDiscount.textContent = '-0.00 DH';
+      if (sumTotal) sumTotal.textContent = '0.00 DH';
+      if (sumFoot) sumFoot.textContent = '0 article dans votre panier';
+      if (sumBadge) {
+        sumBadge.textContent = '';
+        sumBadge.classList.add('d-none');
+      }
+
+      needLogin?.classList.remove('d-none');
+      if (tbody) tbody.innerHTML = `<tr><td colspan="5" class="text-muted">Panier indisponible (non connecté).</td></tr>`;
+      return null;
+    }
+
+    if (!res.ok || !data.ok){
+      setCheckoutState(false);
+      if (tbody) tbody.innerHTML = `<tr><td colspan="5" class="text-danger">Erreur panier</td></tr>`;
+      return null;
+    }
+
+    needLogin?.classList.add('d-none');
+    return data;
+  }
+
+  async function apiUpdate(code, qty){
+    const res = await fetch('/api/cart/update', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+      body: JSON.stringify({ code, qty })
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    return {
+      ok: res.ok && !!data.ok,
+      status: res.status,
+      data
+    };
+  }
+
+  async function apiRemove(code){
+    const res = await fetch('/api/cart/remove', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+      body: JSON.stringify({ code })
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    return {
+      ok: res.ok && !!data.ok,
+      status: res.status,
+      data
+    };
+  }
+
+  async function apiClear(){
+    const res = await fetch('/api/cart/clear', {
+      method:'POST',
+      headers:{ 'Accept':'application/json' }
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    return {
+      ok: res.ok && !!data.ok,
+      status: res.status,
+      data
+    };
+  }
+
+  async function adjustOne(code, qty){
+    const result = await apiUpdate(code, qty);
+    await render();
+    return result.ok;
+  }
+
+  async function adjustAllStockIssues(items){
+    const issues = (items || []).filter(it => !!it.stockExceeded);
+
+    if (!issues.length) return;
+
+    if (fixAllBtn) fixAllBtn.disabled = true;
+
+    try {
+      for (const it of issues) {
+        const targetQty = Math.max(0, Number(it.availableQty || 0));
+        await apiUpdate(it.code, targetQty);
+      }
+    } finally {
+      if (fixAllBtn) fixAllBtn.disabled = false;
+    }
+
+    await render();
+  }
+
+  function renderRows(items){
+    if (!tbody) return;
+
+    if (!items.length) {
+      setCheckoutState(false);
+      setStockIssueState({ hasStockIssue: false });
+
+      if (sumQty) sumQty.textContent = '0';
+      if (sumSubtotal) sumSubtotal.textContent = '0.00 DH';
+      if (sumDiscount) sumDiscount.textContent = '-0.00 DH';
+      if (sumTotal) sumTotal.textContent = '0.00 DH';
+      if (sumFoot) sumFoot.textContent = '0 article dans votre panier';
+      if (sumBadge) {
+        sumBadge.textContent = '';
+        sumBadge.classList.add('d-none');
+      }
+
+      tbody.innerHTML = `<tr><td colspan="5" class="text-muted">Panier vide.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = '';
+
+    items.forEach(it => {
+      const code = String(it.code || '').trim();
+      const qty = Math.max(0, Math.floor(Number(it.qty || 0)));
+      const stock = Math.max(0, Math.floor(Number(it.realStock || 0)));
+      const stockExceeded = !!it.stockExceeded;
+      const img = it.imageUrl ? it.imageUrl : FALLBACK_IMG;
+      const adjustLabel = stock > 0 ? `Ajuster à ${stock}` : 'Retirer';
+      const reductionLabel = String(it.reductionLabel || '').trim();
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>
+          <div class="d-flex gap-2 align-items-center">
+            <img src="${esc(img)}"
+                 onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"
+                 style="width:54px;height:54px;object-fit:contain;border-radius:12px;border:1px solid rgba(0,0,0,.08);padding:6px;background:#fff;">
+            <div>
+              <div class="fw-bold">${esc(code)}</div>
+              <div class="small text-muted">${esc(it.designation || '')}</div>
+              ${reductionLabel ? `<div class="cart-discount-chip">${reductionLabel}</div>` : ``}
+
+              ${stockExceeded ? `
+                <div class="cart-item-warning">
+                  <span class="badge text-bg-warning">
+                    Stock actuel : ${stock} / Dans votre panier : ${qty}
+                  </span>
+                  <button class="btn btn-warning btn-sm" type="button" data-adjust data-code="${esc(code)}" data-target="${stock}">
+                    ${adjustLabel}
+                  </button>
+                </div>
+                <div class="small text-warning mt-1">${esc(it.stockMessage || 'Quantité à ajuster')}</div>
+              ` : ''}
+            </div>
+          </div>
+        </td>
+
+        <td>
+          <div class="cart-qty-stepper" data-stepper data-code="${esc(code)}" data-max="${stock}">
+            <button class="cart-qty-btn" type="button" data-minus aria-label="Diminuer">
+              <i class="fa-solid fa-minus"></i>
+            </button>
+
+            <input class="cart-qty-field" type="text" inputmode="numeric" value="${esc(qty)}" data-input>
+
+            <button class="cart-qty-btn" type="button" data-plus aria-label="Augmenter">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </td>
+
+        <td class="text-end">
+          <div class="fw-bold">${esc(it.unitPriceFinalTtc || it.unitPriceTtc)} DH</div>
+          ${reductionLabel ? `<div class="small text-muted text-decoration-line-through">${esc(it.unitPriceTtc)} DH</div>` : ``}
+        </td>
+
+        <td class="text-end">
+          <div class="fw-bold">${esc(it.lineTotal)} DH</div>
+          ${reductionLabel ? `<div class="small text-danger">-${esc(it.lineDiscount)} DH</div>` : ``}
+        </td>
+
+        <td class="text-end">
+          <button class="cart-remove-btn" data-remove data-code="${esc(code)}"><i class="fa-solid fa-trash"></i></button>
+        </td>
+      `;
+
+      tbody.appendChild(tr);
+    });
+
+    tbody.querySelectorAll('[data-stepper]').forEach(stepper => {
+      const code = stepper.getAttribute('data-code');
+      const max = Math.max(0, parseInt(stepper.getAttribute('data-max') || '0', 10) || 0);
+      const input = stepper.querySelector('[data-input]');
+      const minus = stepper.querySelector('[data-minus]');
+      const plus  = stepper.querySelector('[data-plus]');
+
+      let lock = false;
+
+      const getVal = () => {
+        const v = String(input?.value || '0').replace(/\D+/g,'');
+        const n = parseInt(v || '0', 10);
+        return isFinite(n) ? n : 0;
+      };
+
+      const setButtons = (n) => {
+        if (minus) minus.disabled = (n <= 0);
+        if (plus) plus.disabled = (max <= 0 || n >= max);
+      };
+
+      const commit = async (nextQty) => {
+        if (lock) return;
+        lock = true;
+
+        if (minus) minus.disabled = true;
+        if (plus) plus.disabled = true;
+        if (input) input.disabled = true;
+
+        try{
+          const result = await apiUpdate(code, nextQty);
+          await render();
+
+          if (!result.ok && result.data?.message) {
+            alert(result.data.message);
+          }
+        } finally {
+          lock = false;
+        }
+      };
+
+      minus?.addEventListener('click', async () => {
+        const cur = getVal();
+        const next = Math.max(0, cur - 1);
+        if (input) input.value = String(next);
+        setButtons(next);
+        await commit(next);
+      });
+
+      plus?.addEventListener('click', async () => {
+        const cur = getVal();
+        const next = cur + 1;
+        if (input) input.value = String(next);
+        setButtons(next);
+        await commit(next);
+      });
+
+      input?.addEventListener('input', () => {
+        input.value = String(getVal());
+        setButtons(getVal());
+      });
+
+      input?.addEventListener('change', async () => {
+        let next = getVal();
+        if (max > 0 && next > max) {
+          next = max;
+          input.value = String(next);
+        }
+        setButtons(next);
+        await commit(next);
+      });
+
+      setButtons(getVal());
+    });
+
+    tbody.querySelectorAll('[data-remove]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const code = btn.getAttribute('data-code');
+        btn.disabled = true;
+        await apiRemove(code);
+        await render();
+      });
+    });
+
+    tbody.querySelectorAll('[data-adjust]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const code = btn.getAttribute('data-code');
+        const target = Math.max(0, Number(btn.getAttribute('data-target') || 0));
+        btn.disabled = true;
+        await adjustOne(code, target);
+      });
+    });
+  }
+
+  async function render(){
+    const data = await fetchCart();
+    if (!data) return;
+
+    const items = data.items || [];
+    const qty = Number(data.totalQty || 0);
+    const hasStockIssue = !!data.hasStockIssue;
+
+    setCheckoutState(items.length > 0 && !hasStockIssue);
+    setStockIssueState(data);
+
+    if (sumQty) sumQty.textContent = String(qty);
+
+    const subtotal = num(data.totalBeforeDiscount ?? data.subtotalTtc ?? 0);
+    const discount = num(data.totalDiscount ?? 0);
+    const finalTotal = num(data.totalFinal ?? data.total ?? data.totalAmount ?? data.totalTtc ?? 0);
+
+    if (sumSubtotal) sumSubtotal.textContent = subtotal.toFixed(2) + ' DH';
+    if (sumDiscount) sumDiscount.textContent = '-' + discount.toFixed(2) + ' DH';
+    if (sumTotal) sumTotal.textContent = finalTotal.toFixed(2) + ' DH';
+
+    const summaryReductionText = String(data.summaryReductionText || '').trim();
+    if (sumBadge) {
+      if (summaryReductionText !== '') {
+        sumBadge.textContent = summaryReductionText;
+        sumBadge.classList.remove('d-none');
+      } else {
+        sumBadge.textContent = '';
+        sumBadge.classList.add('d-none');
+      }
+    }
+
+    if (sumFoot) {
+      if (hasStockIssue) {
+        sumFoot.textContent = 'Veuillez ajuster les quantités signalées avant validation.';
+      } else {
+        sumFoot.textContent = qty + (qty > 1 ? ' articles dans votre panier' : ' article dans votre panier');
+      }
+    }
+
+    syncLocalCartFromServer(data);
+    renderRows(items);
+  }
+
+  clearBtn?.addEventListener('click', async ()=> {
+    clearBtn.disabled = true;
+    const result = await apiClear();
+    clearBtn.disabled = false;
+
+    if (result.ok) {
+      try { localStorage.setItem('cart', JSON.stringify({})); } catch(e){}
+      if (typeof window.refreshHeaderCounts === 'function'){
+        try { window.refreshHeaderCounts(); } catch(e){}
+      }
+    }
+
+    await render();
+  });
+
+  fixAllBtn?.addEventListener('click', async () => {
+    const data = await fetchCart();
+    if (!data) return;
+    await adjustAllStockIssues(data.items || []);
+  });
+
+  checkoutBtnTop?.addEventListener('click', openCheckoutModal);
+  checkoutBtn?.addEventListener('click', openCheckoutModal);
+
+  confirmCheckoutBtn?.addEventListener('click', () => {
+    if (!checkoutForm || checkoutBtn?.disabled) return;
+
+    confirmCheckoutBtn.disabled = true;
+    checkoutBtn.disabled = true;
+    checkoutBtnTop.disabled = true;
+
+    checkoutForm.submit();
+  });
+
+  render();
+})();
+</script>
+{% endblock %}

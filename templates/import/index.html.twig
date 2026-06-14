@@ -1,0 +1,494 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+  :root{
+    --oc-radius: 22px;
+    --oc-border: rgba(0,0,0,.10);
+    --oc-shadow: 0 14px 34px rgba(0,0,0,.08);
+    --oc-muted: rgba(0,0,0,.58);
+    --oc-text: rgba(0,0,0,.84);
+    --oc-glass: rgba(255,255,255,.82);
+    --oc-glass-2: rgba(255,255,255,.60);
+  }
+
+  body.theme-dark{
+    --oc-border: rgba(255,255,255,.14);
+    --oc-shadow: 0 18px 46px rgba(0,0,0,.35);
+    --oc-muted: rgba(255,255,255,.62);
+    --oc-text: rgba(255,255,255,.88);
+    --oc-glass: rgba(18,18,22,.76);
+    --oc-glass-2: rgba(18,18,22,.58);
+  }
+
+  .import-page-hero{
+    border-radius: 24px;
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    padding: 18px;
+    background:
+      radial-gradient(900px circle at 10% 10%, rgba(var(--bs-primary-rgb), .16), transparent 40%),
+      radial-gradient(900px circle at 90% 30%, rgba(var(--bs-secondary-rgb), .14), transparent 38%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+  }
+
+  .import-page-hero h3{
+    margin: 0;
+    font-weight: 950;
+    color: var(--oc-text);
+  }
+
+  .import-page-hero .subtitle{
+    margin-top: 6px;
+    color: var(--oc-muted);
+    font-size: .92rem;
+    font-weight: 600;
+  }
+
+  .import-actions{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .import-actions .btn{
+    min-height: 46px;
+    border-radius: 14px;
+    font-weight: 900;
+    padding-inline: 16px;
+  }
+
+  .import-card{
+    border-radius: var(--oc-radius);
+    border: 1px solid var(--oc-border);
+    box-shadow: var(--oc-shadow);
+    background: var(--oc-glass);
+    backdrop-filter: blur(8px);
+  }
+
+  .import-card .card-body{
+    padding: 18px;
+  }
+
+  .import-section-title{
+    font-size: .82rem;
+    font-weight: 900;
+    color: var(--oc-muted);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+
+  .import-file-box{
+    border-radius: 18px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.48);
+    padding: 14px;
+  }
+
+  body.theme-dark .import-file-box{
+    background: rgba(255,255,255,.04);
+  }
+
+  .import-file-label{
+    font-size: .74rem;
+    color: var(--oc-muted);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    letter-spacing: .03em;
+  }
+
+  .import-file-value{
+    color: var(--oc-text);
+    font-weight: 800;
+    line-height: 1.45;
+    word-break: break-word;
+  }
+
+  .status-pill{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: .78rem;
+    font-weight: 900;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+
+  .status-ready{
+    background: rgba(108,117,125,.14);
+    color: rgba(73,80,87,1);
+    border-color: rgba(108,117,125,.20);
+  }
+
+  .status-running{
+    background: rgba(13,110,253,.12);
+    color: rgba(13,110,253,1);
+    border-color: rgba(13,110,253,.18);
+  }
+
+  .status-done{
+    background: rgba(25,135,84,.12);
+    color: rgba(25,135,84,1);
+    border-color: rgba(25,135,84,.20);
+  }
+
+  .status-error{
+    background: rgba(220,53,69,.12);
+    color: rgba(220,53,69,.98);
+    border-color: rgba(220,53,69,.20);
+  }
+
+  .import-warning{
+    border-radius: 18px;
+    border: 1px solid rgba(255,193,7,.28);
+    background: rgba(255,193,7,.10);
+    color: var(--oc-text);
+    font-weight: 700;
+    padding: 14px 16px;
+  }
+
+  .import-progress-wrap{
+    border-radius: 18px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.42);
+    padding: 14px;
+  }
+
+  body.theme-dark .import-progress-wrap{
+    background: rgba(255,255,255,.03);
+  }
+
+  .import-progress{
+    height: 28px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(0,0,0,.06);
+  }
+
+  body.theme-dark .import-progress{
+    background: rgba(255,255,255,.08);
+  }
+
+  .import-progress .progress-bar{
+    font-weight: 900;
+    font-size: .82rem;
+  }
+
+  .import-stats-grid{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .import-stat-card{
+    border-radius: 18px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.48);
+    padding: 14px;
+  }
+
+  body.theme-dark .import-stat-card{
+    background: rgba(255,255,255,.04);
+  }
+
+  .import-stat-label{
+    font-size: .74rem;
+    color: var(--oc-muted);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    letter-spacing: .03em;
+  }
+
+  .import-stat-value{
+    color: var(--oc-text);
+    font-weight: 950;
+    font-size: 1.2rem;
+    line-height: 1.2;
+  }
+
+  .import-message-box,
+  .import-log-box{
+    border-radius: 18px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.48);
+    padding: 14px;
+  }
+
+  body.theme-dark .import-message-box,
+  body.theme-dark .import-log-box{
+    background: rgba(255,255,255,.04);
+  }
+
+  .import-message-text{
+    color: var(--oc-text);
+    font-weight: 800;
+    line-height: 1.45;
+    word-break: break-word;
+  }
+
+  .import-log{
+    height: 160px;
+    overflow: auto;
+    font-size: .85rem;
+    color: var(--oc-text);
+    line-height: 1.45;
+    word-break: break-word;
+  }
+
+  .import-log > div + div{
+    margin-top: 6px;
+  }
+
+  @media (max-width: 991.98px){
+    .import-stats-grid{
+      grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+  }
+
+  @media (max-width: 767.98px){
+    .import-actions{
+      width: 100%;
+    }
+
+    .import-actions .btn,
+    .import-actions a{
+      width: 100%;
+    }
+
+    .import-stats-grid{
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="container py-4">
+  <div class="import-page-hero mb-3 d-flex align-items-start justify-content-between flex-wrap gap-3">
+    <div>
+      <h3>Import Articles (AJAX)</h3>
+      <div class="subtitle">Insert / Update / Skip + progression fiable</div>
+    </div>
+
+    <div class="import-actions">
+      <a class="btn btn-outline-secondary" href="{{ path('import_source_index') }}">
+        <i class="fa-solid fa-gear me-2"></i>Configurer le fichier
+      </a>
+      <button class="btn btn-success" id="btnStart" {% if not source %}disabled{% endif %}>
+        <i class="fa-solid fa-play me-2"></i>Démarrer
+      </button>
+      <button class="btn btn-outline-danger" id="btnStop" disabled>
+        <i class="fa-solid fa-stop me-2"></i>Stop
+      </button>
+    </div>
+  </div>
+
+  {% if not source %}
+    <div class="import-warning mb-3">
+      <i class="fa-solid fa-triangle-exclamation me-2"></i>
+      Aucune configuration trouvée. Clique sur “Configurer le fichier”.
+    </div>
+  {% else %}
+    <div class="import-card mb-3">
+      <div class="card-body">
+        <div class="row g-3 align-items-center">
+          <div class="col-md-8">
+            <div class="import-file-box">
+              <div class="import-file-label">Fichier source</div>
+              <div class="import-file-value">{{ source.fullPath }}</div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="import-file-box h-100">
+              <div class="import-file-label">Statut</div>
+              <div>
+                <span id="statusBadge" class="status-pill status-ready">
+                  <i class="fa-solid fa-clock"></i>READY
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="import-card">
+    <div class="card-body">
+      <div class="import-section-title">Progression</div>
+
+      <div class="import-progress-wrap">
+        <div class="progress import-progress">
+          <div id="bar" class="progress-bar" style="width:0%;">0%</div>
+        </div>
+      </div>
+
+      <div class="import-stats-grid">
+        <div class="import-stat-card">
+          <div class="import-stat-label">Lues</div>
+          <div class="import-stat-value"><span id="read">0</span> / <span id="total">0</span></div>
+        </div>
+
+        <div class="import-stat-card">
+          <div class="import-stat-label">Insérées</div>
+          <div class="import-stat-value" id="ins">0</div>
+        </div>
+
+        <div class="import-stat-card">
+          <div class="import-stat-label">Mises à jour</div>
+          <div class="import-stat-value" id="upd">0</div>
+        </div>
+
+        <div class="import-stat-card">
+          <div class="import-stat-label">Ignorées</div>
+          <div class="import-stat-value" id="skp">0</div>
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <div class="import-section-title mb-2">Message</div>
+        <div class="import-message-box">
+          <div id="msg" class="import-message-text">—</div>
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <div class="import-section-title mb-2">Log</div>
+        <div class="import-log-box">
+          <div id="log" class="import-log"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var CSRF = "{{ csrf }}";
+var jobId = null;
+var stopped = false;
+
+const el = (id) => document.getElementById(id);
+
+function setBadge(status){
+  const b = el('statusBadge');
+  if(!b) return;
+
+  let icon = 'fa-clock';
+  let cls = 'status-ready';
+
+  if (status === 'RUNNING') {
+    icon = 'fa-rotate';
+    cls = 'status-running';
+  } else if (status === 'DONE') {
+    icon = 'fa-circle-check';
+    cls = 'status-done';
+  } else if (status === 'ERROR') {
+    icon = 'fa-triangle-exclamation';
+    cls = 'status-error';
+  }
+
+  b.className = 'status-pill ' + cls;
+  b.innerHTML = `<i class="fa-solid ${icon}"></i>${status}`;
+}
+
+function setProgress(processed, total){
+  const bar = el('bar');
+  let percent = total > 0 ? Math.floor((processed / total) * 100) : 0;
+  percent = Math.max(0, Math.min(100, percent));
+  bar.style.width = percent + "%";
+  bar.textContent = percent + "%";
+  bar.classList.toggle('progress-bar-striped', percent < 100);
+  bar.classList.toggle('progress-bar-animated', percent < 100);
+}
+
+function logLine(text){
+  const box = el('log');
+  const div = document.createElement('div');
+  div.textContent = text;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function render(data){
+  el('read').textContent = data.processedRows ?? 0;
+  el('total').textContent = data.totalRows ?? 0;
+  el('ins').textContent = data.insertedRows ?? 0;
+  el('upd').textContent = data.updatedRows ?? 0;
+  el('skp').textContent = data.skippedRows ?? 0;
+  el('msg').textContent = data.message ?? '—';
+  setBadge(data.status ?? 'READY');
+  setProgress(data.processedRows ?? 0, data.totalRows ?? 0);
+}
+
+async function start(){
+  stopped = false;
+  el('btnStart').disabled = true;
+  el('btnStop').disabled = false;
+
+  logLine("Start…");
+
+  const res = await fetch("{{ path('import_start') }}", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({_token: CSRF})
+  });
+
+  const data = await res.json().catch(()=> ({}));
+  if(!res.ok || !data.ok){
+    alert(data.message || "Erreur start");
+    el('btnStart').disabled = false;
+    el('btnStop').disabled = true;
+    return;
+  }
+
+  jobId = data.jobId;
+  render(data);
+  logLine("Job #" + jobId + " RUNNING");
+
+  stepLoop();
+}
+
+async function stepLoop(){
+  if(stopped) return;
+
+  const res = await fetch(`/admin/import/step/${jobId}`, {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({_token: CSRF, limit: 350})
+  });
+
+  const data = await res.json().catch(()=> ({}));
+  if(!res.ok || !data.ok){
+    render(data);
+    logLine("ERROR: " + (data.message || "Erreur"));
+    el('btnStart').disabled = false;
+    el('btnStop').disabled = true;
+    return;
+  }
+
+  render(data);
+
+  if(data.done){
+    logLine("DONE: " + (data.message || ""));
+    el('btnStart').disabled = false;
+    el('btnStop').disabled = true;
+    return;
+  }
+
+  setTimeout(stepLoop, 120);
+}
+
+el('btnStart')?.addEventListener('click', start);
+el('btnStop')?.addEventListener('click', () => {
+  stopped = true;
+  el('btnStart').disabled = false;
+  el('btnStop').disabled = true;
+  logLine("STOP demandé par l’utilisateur");
+});
+</script>
+{% endblock %}

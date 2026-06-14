@@ -1,0 +1,74 @@
+{{ form_start(form, {
+  attr: {
+    class: 'js-user-family-discount-form',
+    novalidate: 'novalidate',
+    'data-suggest-url': path('admin_user_family_discount_family_suggestions')
+  }
+}) }}
+
+  {% if form.vars.errors|length > 0 %}
+    <div class="ufd-inline-alert ufd-inline-alert-danger mb-3">
+      {{ form_errors(form) }}
+    </div>
+  {% endif %}
+
+  <div class="ufd-form-card">
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-lg-6">
+          <label class="ufd-form-label" for="{{ form.user.vars.id }}">Utilisateur</label>
+          {{ form_widget(form.user, {
+            attr: form.user.vars.attr|merge({
+              class: ((form.user.vars.attr.class|default('')) ~ ' form-select ufd-form-select')|trim
+            })
+          }) }}
+          <div class="ufd-form-error">
+            {{ form_errors(form.user) }}
+          </div>
+        </div>
+
+        <div class="col-lg-6 position-relative">
+          <label class="ufd-form-label" for="{{ form.familyName.vars.id }}">Catégorie / famille</label>
+          {{ form_widget(form.familyName, {
+            attr: form.familyName.vars.attr|merge({
+              class: ((form.familyName.vars.attr.class|default('')) ~ ' form-control ufd-form-control js-family-input')|trim,
+              autocomplete: 'off'
+            })
+          }) }}
+          <div class="ufd-form-help">
+            {{ form.familyName.vars.help }}
+          </div>
+          <div class="ufd-family-menu js-family-menu d-none"></div>
+          <div class="ufd-form-error">
+            {{ form_errors(form.familyName) }}
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label class="ufd-form-label" for="{{ form.discountRate.vars.id }}">Remise (%)</label>
+          {{ form_widget(form.discountRate, {
+            attr: form.discountRate.vars.attr|merge({
+              class: ((form.discountRate.vars.attr.class|default('')) ~ ' form-control ufd-form-control')|trim
+            })
+          }) }}
+          <div class="ufd-form-error">
+            {{ form_errors(form.discountRate) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{ form_rest(form) }}
+
+  <div class="mt-3 d-flex flex-wrap gap-2">
+    <button class="btn btn-primary ufd-action-btn js-submit-btn" type="submit">
+      <i class="fa-solid fa-floppy-disk me-2"></i>{{ submit_label|default('Enregistrer') }}
+    </button>
+
+    <a href="{{ cancel_url|default(path('admin_user_family_discount_index')) }}" class="btn btn-outline-secondary ufd-action-btn">
+      <i class="fa-solid fa-arrow-left me-2"></i>Retour
+    </a>
+  </div>
+
+{{ form_end(form, { render_rest: false }) }}
