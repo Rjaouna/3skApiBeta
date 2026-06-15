@@ -529,52 +529,46 @@ class FacetBlock {
     const key = this.currentKey();
     const selected = this.state[key];
 
-    const IMG_DIR = "{{ asset('img')|e('js') }}".replace(/\/$/, '');
-    const LOGO_VERSION = '20260615-1';
-    const versionedLogoUrl = (url) => {
-      if (!url) return '';
-      return `${url}${String(url).includes('?') ? '&' : '?'}v=${LOGO_VERSION}`;
-    };
-    const DEFAULT_IMG = versionedLogoUrl("{{ asset('img/default-piece.png')|e('js') }}");
+    const IMG_DIR = '/img';
     const VEHICLE_LOGOS = {
-      'ALFA ROMEO': "{{ asset('img/alfa_romeo.png')|e('js') }}",
-      'AUDI': "{{ asset('img/audi.png')|e('js') }}",
-      'BMW': "{{ asset('img/bmw.png')|e('js') }}",
-      'BYD': "{{ asset('img/byd.png')|e('js') }}",
-      'CHEVROLET': "{{ asset('img/chevrolet.png')|e('js') }}",
-      'CITROEN': "{{ asset('img/citroen.png')|e('js') }}",
-      'CUPRA': "{{ asset('img/cupra.png')|e('js') }}",
-      'DACIA': "{{ asset('img/dacia.png')|e('js') }}",
-      'DAIHATSU': "{{ asset('img/daihatsu.png')|e('js') }}",
-      'FIAT': "{{ asset('img/fiat.png')|e('js') }}",
-      'FORD': "{{ asset('img/ford.png')|e('js') }}",
-      'HONDA': "{{ asset('img/honda.png')|e('js') }}",
-      'HYUNDAI': "{{ asset('img/hyundai.png')|e('js') }}",
-      'ISUZU': "{{ asset('img/isuzu.png')|e('js') }}",
-      'IVECO': "{{ asset('img/iveco.png')|e('js') }}",
-      'JAGUAR': "{{ asset('img/jaguar.png')|e('js') }}",
-      'JEEP': "{{ asset('img/jeep.png')|e('js') }}",
-      'KIA': "{{ asset('img/kia.png')|e('js') }}",
-      'LANCIA': "{{ asset('img/lancia.png')|e('js') }}",
-      'LAND ROVER': "{{ asset('img/land_rover.png')|e('js') }}",
-      'MERCEDES': "{{ asset('img/mercedes.png')|e('js') }}",
-      'MERCEDES BENZ': "{{ asset('img/mercedes_benz.png')|e('js') }}",
-      'MINI': "{{ asset('img/mini.png')|e('js') }}",
-      'MITSUBISHI': "{{ asset('img/mitsubishi.png')|e('js') }}",
-      'NISSAN': "{{ asset('img/nissan.png')|e('js') }}",
-      'NOUVEAUTE': "{{ asset('img/nouveaute.png')|e('js') }}",
-      'OPEL': "{{ asset('img/opel.png')|e('js') }}",
-      'PEUGEOT': "{{ asset('img/peugeot.png')|e('js') }}",
-      'PORSCHE': "{{ asset('img/porsche.png')|e('js') }}",
-      'RANGE ROVER': "{{ asset('img/range_rover.png')|e('js') }}",
-      'RENAULT': "{{ asset('img/renault.png')|e('js') }}",
-      'SEAT': "{{ asset('img/seat.png')|e('js') }}",
-      'SKODA': "{{ asset('img/skoda.png')|e('js') }}",
-      'SSANGYONG': "{{ asset('img/ssangyong.png')|e('js') }}",
-      'SUZUKI': "{{ asset('img/suzuki.png')|e('js') }}",
-      'TOYOTA': "{{ asset('img/toyota.png')|e('js') }}",
-      'VOLKSWAGEN': "{{ asset('img/volkswagen.png')|e('js') }}",
-      'VOLVO': "{{ asset('img/volvo.png')|e('js') }}"
+      'ALFA ROMEO': '/img/alfa_romeo.png',
+      'AUDI': '/img/audi.png',
+      'BMW': '/img/bmw.png',
+      'BYD': '/img/byd.png',
+      'CHEVROLET': '/img/chevrolet.png',
+      'CITROEN': '/img/citroen.png',
+      'CUPRA': '/img/cupra.png',
+      'DACIA': '/img/dacia.png',
+      'DAIHATSU': '/img/daihatsu.png',
+      'FIAT': '/img/fiat.png',
+      'FORD': '/img/ford.png',
+      'HONDA': '/img/honda.png',
+      'HYUNDAI': '/img/hyundai.png',
+      'ISUZU': '/img/isuzu.png',
+      'IVECO': '/img/iveco.png',
+      'JAGUAR': '/img/jaguar.png',
+      'JEEP': '/img/jeep.png',
+      'KIA': '/img/kia.png',
+      'LANCIA': '/img/lancia.png',
+      'LAND ROVER': '/img/land_rover.png',
+      'MERCEDES': '/img/mercedes.png',
+      'MERCEDES BENZ': '/img/mercedes_benz.png',
+      'MINI': '/img/mini.png',
+      'MITSUBISHI': '/img/mitsubishi.png',
+      'NISSAN': '/img/nissan.png',
+      'NOUVEAUTE': '/img/nouveaute.png',
+      'OPEL': '/img/opel.png',
+      'PEUGEOT': '/img/peugeot.png',
+      'PORSCHE': '/img/porsche.png',
+      'RANGE ROVER': '/img/range_rover.png',
+      'RENAULT': '/img/renault.png',
+      'SEAT': '/img/seat.png',
+      'SKODA': '/img/skoda.png',
+      'SSANGYONG': '/img/ssangyong.png',
+      'SUZUKI': '/img/suzuki.png',
+      'TOYOTA': '/img/toyota.png',
+      'VOLKSWAGEN': '/img/volkswagen.png',
+      'VOLVO': '/img/volvo.png'
     };
 
     const fileNameFromText = (v)=>{
@@ -608,8 +602,7 @@ class FacetBlock {
         const file = fileNameFromText(imageKey);
         const knownLogo = VEHICLE_LOGOS[normalizedImageKey] || '';
         const logo = knownLogo
-          ? versionedLogoUrl(knownLogo)
-          : (file ? versionedLogoUrl(IMG_DIR + '/' + file) : DEFAULT_IMG);
+          || (file ? (IMG_DIR + '/' + file) : '');
 
         let miniText = 'Clique pour sélectionner • Re-clique pour retirer';
 
@@ -633,8 +626,7 @@ class FacetBlock {
           </div>
           <div class="chip-logoWrap" aria-hidden="true">
             <img class="chip-logo" src="${this.escape(logo)}" alt=""
-                 loading="lazy"
-                 onerror="this.onerror=null;this.src='${this.escape(DEFAULT_IMG)}'">
+                 loading="lazy">
           </div>
         `;
       } else {
