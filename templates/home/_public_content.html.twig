@@ -1236,33 +1236,110 @@
     border-color: #fff;
   }
 
-  .public-contact-v2 .contact-details {
-    margin-top: 2rem;
-    border-top: 1px solid rgba(16,24,40,.12);
-  }
-
-  .public-contact-v2 .contact-line {
+  .public-contact-v2 .contact-form {
     display: grid;
-    grid-template-columns: 38px 1fr;
-    gap: .85rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid rgba(16,24,40,.12);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem 1.25rem;
+    margin-top: 2rem;
   }
 
-  .public-contact-v2 .contact-line i {
-    color: var(--public-orange);
-    padding-top: .2rem;
+  .public-contact-v2 .contact-form-field {
+    min-width: 0;
   }
 
-  .public-contact-v2 .contact-line strong {
+  .public-contact-v2 .contact-form-field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .public-contact-v2 .contact-form label {
     display: block;
+    margin-bottom: .5rem;
     color: var(--public-ink);
-    font-size: .85rem;
+    font-size: .72rem;
+    font-weight: 800;
     text-transform: uppercase;
   }
 
-  .public-contact-v2 .contact-line span {
-    color: var(--public-muted);
+  .public-contact-v2 .contact-form-control {
+    width: 100%;
+    min-height: 50px;
+    padding: .8rem .9rem;
+    border: 1px solid rgba(16,24,40,.16);
+    border-radius: 4px;
+    outline: 0;
+    background: #fff;
+    color: var(--public-ink);
+    font: inherit;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+
+  .public-contact-v2 textarea.contact-form-control {
+    min-height: 135px;
+    resize: vertical;
+  }
+
+  .public-contact-v2 .contact-form-control:focus {
+    border-color: var(--public-blue);
+    box-shadow: 0 0 0 3px rgba(49,95,187,.12);
+  }
+
+  .public-contact-v2 .contact-form-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .65rem;
+    min-height: 50px;
+    padding: .8rem 1.5rem;
+    border: 1px solid var(--public-orange);
+    border-radius: 4px;
+    background: var(--public-orange);
+    color: #fff;
+    font-weight: 800;
+    transition: background .15s ease, border-color .15s ease;
+  }
+
+  .public-contact-v2 .contact-form-submit:hover {
+    background: #e36d0a;
+    border-color: #e36d0a;
+  }
+
+  .public-contact-v2 .contact-form-submit:disabled {
+    cursor: wait;
+    opacity: .7;
+  }
+
+  .public-contact-v2 .contact-form-status {
+    display: none;
+    padding: .85rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: .9rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .public-contact-v2 .contact-form-status.is-visible {
+    display: block;
+  }
+
+  .public-contact-v2 .contact-form-status.is-success {
+    border-color: rgba(25,135,84,.25);
+    background: rgba(25,135,84,.09);
+    color: #146c43;
+  }
+
+  .public-contact-v2 .contact-form-status.is-error {
+    border-color: rgba(220,53,69,.25);
+    background: rgba(220,53,69,.08);
+    color: #b02a37;
+  }
+
+  .public-contact-v2 .contact-form-honeypot {
+    position: absolute !important;
+    left: -10000px !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
   }
 
   @media (max-width: 991px) {
@@ -1296,6 +1373,14 @@
       height: 340px;
       min-height: 340px;
       flex: none;
+    }
+
+    .public-contact-v2 .contact-form {
+      grid-template-columns: 1fr;
+    }
+
+    .public-contact-v2 .contact-form-field-wide {
+      grid-column: auto;
     }
 
     .public-contact-v2 .contact-pane-dark {
@@ -1949,30 +2034,115 @@
             <span class="section-eyebrow">Contact</span>
             <h2 class="section-heading">Nous contacter</h2>
             <p class="section-copy mt-4 mb-0">Retrouvez 3SK Parts Auto à Casablanca pour vos demandes commerciales et vos besoins en pièces détachées.</p>
-            <div class="contact-details">
-              <div class="contact-line">
-                <i class="fa-solid fa-location-dot"></i>
-                <div><strong>Adresse</strong><span>Hay Ennasr 2 N6 Lahraouine Casablanca, Casablanca, Maroc</span></div>
+
+            <form class="contact-form" method="post" action="{{ path('home_contact') }}" data-contact-form>
+              <input type="hidden" name="_token" value="{{ csrf_token('public_contact') }}">
+
+              <div class="contact-form-honeypot" aria-hidden="true">
+                <label for="contact_website">Site web</label>
+                <input id="contact_website" name="website" type="text" tabindex="-1" autocomplete="off">
               </div>
-              <div class="contact-line">
-                <i class="fa-solid fa-phone"></i>
-                <div><strong>Téléphone</strong><span>+212 5 22 71 35 72</span></div>
+
+              <div class="contact-form-field">
+                <label for="contact_name">Nom / Raison sociale *</label>
+                <input class="contact-form-control" id="contact_name" name="name" type="text" maxlength="150" autocomplete="name" required>
               </div>
-              <div class="contact-line">
-                <i class="fa-solid fa-envelope"></i>
-                <div><strong>Email</strong><span>3sk.partsauto@gmail.com</span></div>
+
+              <div class="contact-form-field">
+                <label for="contact_email">Email *</label>
+                <input class="contact-form-control" id="contact_email" name="email" type="email" maxlength="180" autocomplete="email" required>
               </div>
-              <div class="contact-line">
-                <i class="fa-solid fa-globe"></i>
-                <div><strong>Site web</strong><span>www.3skpartsauto.com</span></div>
+
+              <div class="contact-form-field">
+                <label for="contact_phone">Téléphone</label>
+                <input class="contact-form-control" id="contact_phone" name="phone" type="tel" maxlength="50" autocomplete="tel">
               </div>
-            </div>
+
+              <div class="contact-form-field">
+                <label for="contact_subject">Sujet *</label>
+                <input class="contact-form-control" id="contact_subject" name="subject" type="text" minlength="3" maxlength="180" required>
+              </div>
+
+              <div class="contact-form-field contact-form-field-wide">
+                <label for="contact_message">Message *</label>
+                <textarea class="contact-form-control" id="contact_message" name="message" minlength="10" maxlength="5000" required></textarea>
+              </div>
+
+              <div class="contact-form-field contact-form-field-wide">
+                <button class="contact-form-submit" type="submit" data-contact-submit>
+                  <i class="fa-solid fa-paper-plane"></i>
+                  <span data-contact-submit-label>Envoyer le message</span>
+                </button>
+              </div>
+
+              <div class="contact-form-field contact-form-field-wide">
+                <div class="contact-form-status" role="status" aria-live="polite" data-contact-status></div>
+              </div>
+            </form>
           </div>
           <iframe class="contact-map" title="Localisation de 3SK Parts Auto" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.055043948555!2d-7.573125823839388!3d33.532628744987875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda632e2decd39c3%3A0x747033ca50f85a28!2sHay%20Ennasr%202!5e1!3m2!1sfr!2sus!4v1781437722232!5m2!1sfr!2sus" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </section>
   </main>
+
+  <script>
+    (() => {
+      const form = document.querySelector('[data-contact-form]');
+      if (!form) return;
+
+      const submitButton = form.querySelector('[data-contact-submit]');
+      const submitLabel = form.querySelector('[data-contact-submit-label]');
+      const statusBox = form.querySelector('[data-contact-status]');
+      const defaultLabel = submitLabel ? submitLabel.textContent : '';
+
+      const showStatus = (message, type) => {
+        if (!statusBox) return;
+        statusBox.textContent = message;
+        statusBox.className = `contact-form-status is-visible ${type === 'success' ? 'is-success' : 'is-error'}`;
+      };
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (!form.reportValidity()) return;
+
+        if (statusBox) {
+          statusBox.textContent = '';
+          statusBox.className = 'contact-form-status';
+        }
+
+        if (submitButton) submitButton.disabled = true;
+        if (submitLabel) submitLabel.textContent = 'Envoi en cours...';
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+              'Accept': 'application/json',
+              'X-Requested-With': 'XMLHttpRequest'
+            }
+          });
+
+          const data = await response.json().catch(() => ({}));
+          const message = data.message || 'Une erreur est survenue pendant l’envoi.';
+
+          if (!response.ok || !data.ok) {
+            throw new Error(message);
+          }
+
+          form.reset();
+          showStatus(message, 'success');
+        } catch (error) {
+          showStatus(error.message || 'Le message n’a pas pu être envoyé.', 'error');
+        } finally {
+          if (submitButton) submitButton.disabled = false;
+          if (submitLabel) submitLabel.textContent = defaultLabel;
+        }
+      });
+    })();
+  </script>
 
   {% include 'home/sections/_stats_strip.html.twig' %}
 

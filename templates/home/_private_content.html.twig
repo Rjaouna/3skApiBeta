@@ -530,7 +530,47 @@ class FacetBlock {
     const selected = this.state[key];
 
     const IMG_DIR = "{{ asset('img')|e('js') }}".replace(/\/$/, '');
-    const DEFAULT_IMG = "{{ asset('img/default.png')|e('js') }}";
+    const DEFAULT_IMG = "{{ asset('img/default-piece.png')|e('js') }}";
+    const VEHICLE_LOGOS = {
+      'ALFA ROMEO': "{{ asset('img/alfa_romeo.png')|e('js') }}",
+      'AUDI': "{{ asset('img/audi.png')|e('js') }}",
+      'BMW': "{{ asset('img/bmw.png')|e('js') }}",
+      'BYD': "{{ asset('img/byd.png')|e('js') }}",
+      'CHEVROLET': "{{ asset('img/chevrolet.png')|e('js') }}",
+      'CITROEN': "{{ asset('img/citroen.png')|e('js') }}",
+      'CUPRA': "{{ asset('img/cupra.png')|e('js') }}",
+      'DACIA': "{{ asset('img/dacia.png')|e('js') }}",
+      'DAIHATSU': "{{ asset('img/daihatsu.png')|e('js') }}",
+      'FIAT': "{{ asset('img/fiat.png')|e('js') }}",
+      'FORD': "{{ asset('img/ford.png')|e('js') }}",
+      'HONDA': "{{ asset('img/honda.png')|e('js') }}",
+      'HYUNDAI': "{{ asset('img/hyundai.png')|e('js') }}",
+      'ISUZU': "{{ asset('img/isuzu.png')|e('js') }}",
+      'IVECO': "{{ asset('img/iveco.png')|e('js') }}",
+      'JAGUAR': "{{ asset('img/jaguar.png')|e('js') }}",
+      'JEEP': "{{ asset('img/jeep.png')|e('js') }}",
+      'KIA': "{{ asset('img/kia.png')|e('js') }}",
+      'LANCIA': "{{ asset('img/lancia.png')|e('js') }}",
+      'LAND ROVER': "{{ asset('img/land_rover.png')|e('js') }}",
+      'MERCEDES': "{{ asset('img/mercedes.png')|e('js') }}",
+      'MERCEDES BENZ': "{{ asset('img/mercedes_benz.png')|e('js') }}",
+      'MINI': "{{ asset('img/mini.png')|e('js') }}",
+      'MITSUBISHI': "{{ asset('img/mitsubishi.png')|e('js') }}",
+      'NISSAN': "{{ asset('img/nissan.png')|e('js') }}",
+      'NOUVEAUTE': "{{ asset('img/nouveaute.png')|e('js') }}",
+      'OPEL': "{{ asset('img/opel.png')|e('js') }}",
+      'PEUGEOT': "{{ asset('img/peugeot.png')|e('js') }}",
+      'PORSCHE': "{{ asset('img/porsche.png')|e('js') }}",
+      'RANGE ROVER': "{{ asset('img/range_rover.png')|e('js') }}",
+      'RENAULT': "{{ asset('img/renault.png')|e('js') }}",
+      'SEAT': "{{ asset('img/seat.png')|e('js') }}",
+      'SKODA': "{{ asset('img/skoda.png')|e('js') }}",
+      'SSANGYONG': "{{ asset('img/ssangyong.png')|e('js') }}",
+      'SUZUKI': "{{ asset('img/suzuki.png')|e('js') }}",
+      'TOYOTA': "{{ asset('img/toyota.png')|e('js') }}",
+      'VOLKSWAGEN': "{{ asset('img/volkswagen.png')|e('js') }}",
+      'VOLVO': "{{ asset('img/volvo.png')|e('js') }}"
+    };
 
     const fileNameFromText = (v)=>{
       let s = String(v || '').trim();
@@ -555,8 +595,14 @@ class FacetBlock {
 
       if (isVehicleChip){
         const imageKey = item.imageKey || pretty;
+        const normalizedImageKey = String(imageKey || '')
+          .trim()
+          .toUpperCase()
+          .replace(/[_-]+/g, ' ')
+          .replace(/\s+/g, ' ');
         const file = fileNameFromText(imageKey);
-        const logo = file ? (IMG_DIR + '/' + file) : DEFAULT_IMG;
+        const logo = VEHICLE_LOGOS[normalizedImageKey]
+          || (file ? (IMG_DIR + '/' + file) : DEFAULT_IMG);
 
         let miniText = 'Clique pour sélectionner • Re-clique pour retirer';
 

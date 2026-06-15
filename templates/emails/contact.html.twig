@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <title>Nouveau message de contact</title>
+  </head>
+  <body style="margin:0;padding:0;background:#f3f5f8;font-family:Arial,sans-serif;color:#172033;">
+    <div style="max-width:680px;margin:0 auto;padding:32px 18px;">
+      <div style="background:#315fbb;padding:22px 26px;border-top:4px solid #ff9100;color:#fff;">
+        <div style="font-size:22px;font-weight:700;">3SK Parts Auto</div>
+        <div style="margin-top:6px;color:rgba(255,255,255,.8);">Nouveau message depuis le site</div>
+      </div>
+
+      <div style="background:#fff;padding:28px 26px;border:1px solid #e2e6ec;border-top:0;">
+        <table role="presentation" style="width:100%;border-collapse:collapse;">
+          <tr>
+            <td style="padding:9px 0;width:150px;color:#6b7280;font-weight:700;">Nom / Société</td>
+            <td style="padding:9px 0;">{{ contactName }}</td>
+          </tr>
+          <tr>
+            <td style="padding:9px 0;color:#6b7280;font-weight:700;">Email</td>
+            <td style="padding:9px 0;"><a href="mailto:{{ contactEmail }}">{{ contactEmail }}</a></td>
+          </tr>
+          <tr>
+            <td style="padding:9px 0;color:#6b7280;font-weight:700;">Téléphone</td>
+            <td style="padding:9px 0;">{{ contactPhone ?: 'Non renseigné' }}</td>
+          </tr>
+          <tr>
+            <td style="padding:9px 0;color:#6b7280;font-weight:700;">Sujet</td>
+            <td style="padding:9px 0;">{{ contactSubject }}</td>
+          </tr>
+        </table>
+
+        <div style="margin-top:22px;padding-top:22px;border-top:1px solid #e2e6ec;">
+          <div style="margin-bottom:10px;color:#6b7280;font-weight:700;">Message</div>
+          <div style="line-height:1.7;white-space:pre-line;">{{ contactMessage }}</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
