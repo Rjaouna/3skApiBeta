@@ -530,7 +530,12 @@ class FacetBlock {
     const selected = this.state[key];
 
     const IMG_DIR = "{{ asset('img')|e('js') }}".replace(/\/$/, '');
-    const DEFAULT_IMG = "{{ asset('img/default-piece.png')|e('js') }}";
+    const LOGO_VERSION = '20260615-1';
+    const versionedLogoUrl = (url) => {
+      if (!url) return '';
+      return `${url}${String(url).includes('?') ? '&' : '?'}v=${LOGO_VERSION}`;
+    };
+    const DEFAULT_IMG = versionedLogoUrl("{{ asset('img/default-piece.png')|e('js') }}");
     const VEHICLE_LOGOS = {
       'ALFA ROMEO': "{{ asset('img/alfa_romeo.png')|e('js') }}",
       'AUDI': "{{ asset('img/audi.png')|e('js') }}",
@@ -601,8 +606,10 @@ class FacetBlock {
           .replace(/[_-]+/g, ' ')
           .replace(/\s+/g, ' ');
         const file = fileNameFromText(imageKey);
-        const logo = VEHICLE_LOGOS[normalizedImageKey]
-          || (file ? (IMG_DIR + '/' + file) : DEFAULT_IMG);
+        const knownLogo = VEHICLE_LOGOS[normalizedImageKey] || '';
+        const logo = knownLogo
+          ? versionedLogoUrl(knownLogo)
+          : (file ? versionedLogoUrl(IMG_DIR + '/' + file) : DEFAULT_IMG);
 
         let miniText = 'Clique pour sélectionner • Re-clique pour retirer';
 
