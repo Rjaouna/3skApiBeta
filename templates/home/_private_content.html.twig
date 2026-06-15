@@ -754,6 +754,10 @@ class FacetBlock {
       return this.fetchVehicleByBrandOptions(key, prev);
     }
 
+    if (this.mode === 'vehicleThenBrand' && key === 'vehicle') {
+      return this.fetchParentVehicleBrands();
+    }
+
     const url = new URL(this.endpointFor(key), window.location.origin);
 
     if (key === 'brand'){
@@ -779,6 +783,35 @@ class FacetBlock {
     }
 
     return Array.isArray(data.items) ? data.items : [];
+  }
+
+  async fetchParentVehicleBrands(){
+    const items = await this.fetchAllVehiclesCatalog();
+    const brandMap = new Map();
+
+    items.forEach(item => {
+      const meta = this.extractVehicleMeta(item.value);
+      if (!this.isKnownVehicleBrand(meta.brandKey)) return;
+
+      const count = Number(item.count || 0);
+      const brandKey = this.normalizeBrandKey(meta.brandKey);
+
+      if (!brandMap.has(brandKey)) {
+        brandMap.set(brandKey, {
+          value: this.vehicleFilterValue(brandKey),
+          label: this.vehicleBrandLabel(brandKey),
+          count: 0,
+          imageKey: brandKey
+        });
+      }
+
+      brandMap.get(brandKey).count += count;
+    });
+
+    return Array.from(brandMap.values()).sort((a, b) => {
+      if (b.count !== a.count) return b.count - a.count;
+      return String(a.label).localeCompare(String(b.label), 'fr', { sensitivity: 'base' });
+    });
   }
 
   async fetchVehicleByBrandOptions(key, prev){
@@ -854,20 +887,30 @@ class FacetBlock {
   }
 
   normalizeBrandKey(value){
-  let normalized = String(value || '')
-    .trim()
-    .toUpperCase()
-    .replace(/-/g, ' ')
-    .replace(/\s+/g, ' ');
+    let normalized = String(value || '')
+      .trim()
+      .toUpperCase()
+      .replace(/-/g, ' ')
+      .replace(/\s+/g, ' ');
 
-  const aliases = {
-    'VW': 'VOLKSWAGEN',
-    'MERCEDES-BENZ': 'MERCEDES BENZ',
-    'DS AUTOMOBILES': 'DS'
-  };
+    const aliases = {
+      'VW': 'VOLKSWAGEN',
+      'DS AUTOMOBILES': 'DS'
+    };
 
-  return aliases[normalized] || normalized;
-}
+    return aliases[normalized] || normalized;
+  }
+
+  vehicleFilterValue(brandKey){
+    const normalized = this.normalizeBrandKey(brandKey);
+
+    const filters = {
+      'MERCEDES BENZ': 'MERCEDES',
+      'DS': 'DS'
+    };
+
+    return filters[normalized] || normalized;
+  }
 
   getKnownVehicleBrands(){
     return new Set([
@@ -886,6 +929,7 @@ class FacetBlock {
       'CUPRA',
       'DACIA',
       'DAEWOO',
+      'DAIHATSU',
       'DFSK',
       'DODGE',
       'DS',
