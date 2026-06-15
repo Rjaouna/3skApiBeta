@@ -1,241 +1,270 @@
-{# templates/partials/_footer.html.twig #}
-
 <style>
-  :root{
-    --ft-border: rgba(255,255,255,.2);
-    --ft-text: #ffffff;
-    --ft-muted: rgba(255,255,255,.75);
-    --ft-bg: var(--bs-primary);
-    --ft-bg2: rgba(255,255,255,.1);
-    --ft-link: rgba(255,255,255,.85);
+  .connected-footer {
+    margin-top: 0;
+    padding: 5.5rem 0 4.5rem;
+    border-top: 4px solid #ff9100;
+    background: #315fbb;
+    color: #fff;
   }
 
-  .site-footer{
-    margin-top: 34px;
-    border-top: 1px solid var(--ft-border);
-    background: var(--bs-primary);
-    color: var(--ft-text);
+  .connected-footer h3 {
+    color: #fff;
   }
 
-  .ft-top{
-    padding: 26px 0 18px;
+  .connected-footer h4 {
+    position: relative;
+    padding-bottom: .7rem;
+    color: #ff9100;
   }
 
-  .ft-brand{
-    display:flex;
-    align-items:center;
-    gap: 12px;
-    text-decoration:none;
-    color: inherit;
+  .connected-footer h4::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 42px;
+    height: 3px;
+    background: #fff;
   }
 
-  .ft-logo{
-    height: 44px;
-    width: 150px;
+  .connected-footer a {
+    color: rgba(255, 255, 255, .9);
+    text-decoration: none;
+    transition: color .15s ease, background .15s ease, border-color .15s ease, transform .15s ease;
+  }
+
+  .connected-footer a:hover {
+    color: #ff9100;
+  }
+
+  .connected-footer-muted {
+    color: rgba(255, 255, 255, .76);
+  }
+
+  .connected-footer-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: min(100%, 285px);
+    min-height: 112px;
+    padding: .85rem 1.35rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid rgba(16, 24, 40, .09);
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 18px 38px rgba(16, 24, 40, .12);
+  }
+
+  .connected-footer-logo img {
+    display: block;
+    width: 100%;
+    max-width: 240px;
+    max-height: 88px;
     object-fit: contain;
   }
 
-  .ft-desc{
-    margin: 6px 0 0;
-    color: var(--ft-muted);
-    font-weight: 300;
-    max-width: 52ch;
-  }
-
-  .ft-title{
-    font-weight: 950;
-    letter-spacing: .02em;
-    margin-bottom: 10px;
-    color: #ff9100;
-    font-size: 1.5rem;
-  }
-
-  .ft-list{
-    list-style:none;
-    padding:0;
-    margin:0;
-    display:grid;
-    gap: 8px;
-  }
-
-  .ft-link{
-    display:inline-flex;
-    align-items:center;
-    gap: 10px;
-    padding: 6px 0;
-    color: var(--ft-link);
-    text-decoration:none;
-    font-weight: 300;
-    transition: color .12s ease, transform .12s ease, opacity .12s ease;
-  }
-
-  .ft-link:hover{
-    color: #ffffff;
-    transform: translateX(2px);
-  }
-
-  .ft-link i{
-    opacity:.85;
-    width: 18px;
-    text-align:center;
-  }
-
-  .ft-meta{
-    color: var(--ft-muted);
-    font-weight: 300;
-    line-height: 1.35;
-  }
-
-  .ft-pillbar{
-    display:flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 12px;
-  }
-
-  .ft-pill{
-    display:inline-flex;
-    align-items:center;
-    gap: 8px;
-    padding: 9px 12px;
+  .connected-footer-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .55rem .9rem;
+    border: 1px solid rgba(255, 255, 255, .34);
     border-radius: 999px;
-    border: 1px solid var(--ft-border);
-    background: rgba(255,255,255,.1);
-    color: #ffffff;
-    text-decoration:none;
-    font-weight: 700;
-    backdrop-filter: blur(6px);
+    background: rgba(255, 255, 255, .1);
+    color: #fff !important;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    box-shadow: 0 10px 24px rgba(16, 24, 40, .14);
   }
 
-  .ft-divider{
-    height: 1px;
-    background: var(--ft-border);
+  .connected-footer-pill:hover {
+    border-color: #ff9100;
+    background: #ff9100;
+    color: #fff !important;
   }
 
-  .ft-bottom{
-    padding: 14px 0 18px;
-    color: var(--ft-muted);
-    font-weight: 300;
-    font-size: .92rem;
+  .connected-footer-list {
+    display: grid;
+    gap: .7rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
   }
 
-  .ft-social a{
-    width: 40px; 
+  .connected-footer-list a {
+    display: inline-flex;
+    align-items: center;
+    gap: .65rem;
+  }
+
+  .connected-footer-list i {
+    width: 18px;
+    color: #ff9100;
+    text-align: center;
+  }
+
+  .connected-footer-social a {
+    display: grid;
+    width: 40px;
     height: 40px;
-    border-radius: 14px;
-    border: 1px solid var(--ft-border);
-    display:grid;
-    place-items:center;
-    text-decoration:none;
-    color: #ffffff;
-    background: rgba(255,255,255,.1);
-    transition: transform .10s ease, border-color .12s ease, background .12s ease;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, .34);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .1);
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(16, 24, 40, .14);
   }
 
-  .ft-social a:hover{
+  .connected-footer-social a:hover {
+    border-color: #ff9100;
+    background: #ff9100;
+    color: #fff;
     transform: translateY(-1px);
-    border-color: rgba(255,255,255,.35);
-    background: rgba(255,255,255,.2);
   }
 
-  @media (max-width: 575.98px){
-    .ft-top{ padding-top: 22px; }
-    .ft-logo{ width: 130px; }
+  .connected-footer-account {
+    height: 100%;
+    padding: 1.5rem;
+    border: 1px solid rgba(16, 24, 40, .12);
+    border-radius: 8px;
+    background: #080a0f;
+    color: #fff;
+    box-shadow: 0 18px 38px rgba(16, 24, 40, .18);
+  }
+
+  .connected-footer-account h4 {
+    color: #ff9100;
+  }
+
+  .connected-footer-account p {
+    color: rgba(255, 255, 255, .72);
+  }
+
+  .connected-footer-account .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .55rem;
+    min-height: 46px;
+    border: 1px solid #ff9100 !important;
+    border-radius: 6px !important;
+    background: #ff9100 !important;
+    color: #fff !important;
+    font-weight: 800;
+  }
+
+  .connected-footer-account .btn:hover {
+    border-color: #fff !important;
+    background: #fff !important;
+    color: #080a0f !important;
+  }
+
+  .connected-footer-account a:not(.btn) {
+    color: #fff !important;
+    font-weight: 700;
+  }
+
+  .connected-footer-account a:not(.btn):hover {
+    color: #ff9100 !important;
+  }
+
+  .connected-footer hr {
+    border-color: rgba(255, 255, 255, .28);
+    opacity: 1;
+  }
+
+  .app-connected.theme-dark .connected-footer {
+    background: #315fbb;
+    color: #fff;
+  }
+
+  .app-connected.theme-dark .connected-footer h3 {
+    color: #fff;
+  }
+
+  .app-connected.theme-dark .connected-footer-muted,
+  .app-connected.theme-dark .connected-footer a {
+    color: rgba(255, 255, 255, .88);
+  }
+
+  @media (max-width: 767.98px) {
+    .connected-footer {
+      padding: 4rem 0 3rem;
+    }
   }
 </style>
 
-<footer class="site-footer">
-  <div class="container">
-
-    <div class="ft-top">
-      <div class="row g-4 align-items-start">
-
-        <div class="col-12 col-lg-5">
-          <a class="ft-brand" href="{{ path('home') }}">
-            <div class="d-none d-sm-block">
-              <div class="fw-bold" style="font-weight:950;">3sk parts auto</div>
-              <div class="small" style="color:var(--ft-muted); font-weight:800;">
-                Pièces & accessoires • Casablanca
-              </div>
-            </div>
+<footer class="connected-footer">
+  <div class="container-fluid px-4 px-xl-5">
+    <div class="row g-4">
+      <div class="col-12 col-lg-3">
+        <a class="connected-footer-logo" href="{{ path('home') }}" aria-label="3SK Parts Auto">
+          <img src="{{ asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto">
+        </a>
+        <h3 class="h4 fw-bold mb-3">3SK Parts Auto</h3>
+        <p class="connected-footer-muted mb-3">
+          Importation, distribution et accompagnement des professionnels de la pièce détachée automobile.
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <a class="connected-footer-pill" href="tel:+212522713572">
+            <i class="fa-solid fa-phone"></i>
+            +212 5 22 71 35 72
           </a>
+          <a class="connected-footer-pill" href="mailto:3sk.partsauto@gmail.com">
+            <i class="fa-solid fa-envelope"></i>
+            3sk.partsauto@gmail.com
+          </a>
+        </div>
+      </div>
 
-          <p class="ft-desc">
-            Catalogue clair, disponibilité rapide et commande simple.
-            Besoin d’une référence ? On vous répond vite.
+      <div class="col-12 col-md-6 col-lg-3">
+        <h4 class="h6 text-uppercase fw-bold mb-3">Catalogue</h4>
+        <ul class="connected-footer-list">
+          <li><a href="{{ path('home') }}"><i class="fa-solid fa-house"></i>Accueil</a></li>
+          <li><a href="{{ path('articles_page') }}"><i class="fa-solid fa-boxes-stacked"></i>Articles</a></li>
+          <li><a href="{{ path('articles_page', { new: 1, newDays: 5 }) }}"><i class="fa-solid fa-bolt"></i>Nouveautés</a></li>
+          <li><a href="{{ path('cart_index') }}"><i class="fa-solid fa-cart-shopping"></i>Panier</a></li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h4 class="h6 text-uppercase fw-bold mb-3">Coordonnées</h4>
+        <ul class="connected-footer-list connected-footer-muted">
+          <li><span><i class="fa-solid fa-location-dot me-2 text-primary"></i>Casablanca, Maroc</span></li>
+          <li><span><i class="fa-solid fa-phone me-2 text-primary"></i>+212 5 22 71 35 72</span></li>
+          <li><span><i class="fa-solid fa-envelope me-2 text-primary"></i>3sk.partsauto@gmail.com</span></li>
+          <li><span><i class="fa-solid fa-globe me-2 text-primary"></i>www.3skpartsauto.com</span></li>
+        </ul>
+        <div class="d-flex gap-2 mt-3 connected-footer-social">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="connected-footer-account">
+          <h4 class="h6 text-uppercase fw-bold mb-3">Mon compte</h4>
+          <p class="mb-4">
+            Retrouvez votre catalogue, vos paniers, vos commandes et les informations de votre compte professionnel.
           </p>
-
-          <div class="ft-pillbar">
-            <a class="ft-pill" href="tel:+212522994484">
-              <i class="fa-solid fa-phone"></i><span>+212 522 99 44 84</span>
-            </a>
-            <a class="ft-pill" href="mailto:contact@3skpartsauto.com">
-              <i class="fa-solid fa-envelope"></i><span>contact@3skpartsauto.ma</span>
-            </a>
+          <a href="{{ path('account_profile') }}" class="btn w-100 mb-3">
+            <i class="fa-solid fa-user"></i>
+            Accéder à mon profil
+          </a>
+          <div class="d-flex flex-column gap-2">
+            <a href="{{ path('order_index') }}"><i class="fa-solid fa-box-open me-2"></i>Mes commandes</a>
+            <a href="{{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket me-2"></i>Déconnexion</a>
           </div>
-        </div>
-
-        <div class="col-6 col-lg-2">
-          <div class="ft-title">Catalogue</div>
-          <ul class="ft-list">
-            <li><a class="ft-link" href="{{ path('articles_page') }}"><i class="fa-solid fa-boxes-stacked"></i>Articles</a></li>
-            <li><a class="ft-link" href="{{ path('articles_page', { new: 1, newDays: 5 }) }}"><i class="fa-solid fa-bolt"></i>Nouveautés</a></li>
-            <li><a class="ft-link" href="{{ path('articles_page') }}#categories"><i class="fa-solid fa-list"></i>Catégories</a></li>
-            <li><a class="ft-link" href="{{ path('cart_index') }}"><i class="fa-solid fa-cart-shopping"></i>Panier</a></li>
-          </ul>
-        </div>
-
-        <div class="col-6 col-lg-2">
-          <div class="ft-title">Compte</div>
-          <ul class="ft-list">
-            <li><a class="ft-link" href="{{ path('cart_index') }}"><i class="fa-solid fa-receipt"></i>Mes commandes</a></li>
-
-            {% if app.user %}
-              <li><a class="ft-link" href="#"><i class="fa-solid fa-id-card"></i>Mon profil</a></li>
-              <li><a class="ft-link" href="{{ path('app_logout') }}" style="color:#ffdddd;">
-                <i class="fa-solid fa-right-from-bracket"></i>Déconnexion
-              </a></li>
-            {% else %}
-              <li><a class="ft-link" href="{{ path('app_login') }}"><i class="fa-solid fa-right-to-bracket"></i>Connexion</a></li>
-              <li><a class="ft-link" href="#"><i class="fa-solid fa-user-plus"></i>Créer un compte</a></li>
-            {% endif %}
-          </ul>
-        </div>
-
-        <div class="col-12 col-lg-3">
-          <div class="ft-title">Infos</div>
-          <div class="ft-meta">
-            <div class="mb-2">
-              <i class="fa-solid fa-location-dot me-2"></i>
-             Hay Ennasr 2 N6 Lahraouine Casablanca, Casablanca, Morocco
-            </div>
-            <div>
-              <i class="fa-regular fa-clock me-2"></i>
-              Lun–Ven : 09:00 → 18:30 • Sam : 09:00 → 13:00
-            </div>
-          </div>
-
-          <div class="d-flex gap-2 mt-3 ft-social">
-            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="ft-divider"></div>
-
-    <div class="ft-bottom">
-      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-        <div>© {{ "now"|date("Y") }} 3sk parts auto • Tous droits réservés.</div>
-        <div class="d-flex gap-3 flex-wrap">
-          <a href="#" class="text-decoration-none" style="color:#ffffff;">Mentions légales</a>
-          <a href="#" class="text-decoration-none" style="color:#ffffff;">Confidentialité</a>
         </div>
       </div>
     </div>
 
+    <hr class="my-4">
+
+    <div class="d-flex flex-column flex-lg-row justify-content-between gap-2 small connected-footer-muted">
+      <span>3SK Parts Auto.</span>
+      <span>Casablanca, Maroc</span>
+    </div>
   </div>
 </footer>

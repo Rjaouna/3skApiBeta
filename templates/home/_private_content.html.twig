@@ -269,21 +269,21 @@
 
   <section class="home-section"
            data-facet
-           data-mode="vehicleByBrand"
+           data-mode="vehicleThenBrand"
            data-limit="8"
-           data-order-a='["vehicleBrand","vehicle"]'
-           data-order-b='["vehicleBrand","vehicle"]'
+           data-order-a='["vehicle","brand"]'
+           data-order-b='["vehicle","brand"]'
            data-title="Véhicules par marque">
 
     <div class="home-section-head">
       <h2 data-titlebox></h2>
-      <p>Choisissez une marque connue puis un modèle</p>
+      <p>Choisissez une marque de véhicule puis une sous-marque</p>
     </div>
 
     <div class="home-toolbar">
       <div class="input-group input-group-sm">
         <span class="input-group-text">🔎</span>
-        <input class="form-control" placeholder="Rechercher une marque ou un modèle…" data-search>
+        <input class="form-control" placeholder="Rechercher une marque ou une sous-marque…" data-search>
       </div>
     </div>
 
@@ -374,6 +374,11 @@ class FacetBlock {
   }
 
   labelForKey(k){
+    if (this.mode === 'vehicleThenBrand') {
+      if (k === 'vehicle') return 'Marque';
+      if (k === 'brand') return 'Sous-marque';
+    }
+
     if (k === 'brand') return 'Marque';
     if (k === 'family') return 'Famille';
     if (k === 'vehicleBrand') return 'Marque';
@@ -557,6 +562,8 @@ class FacetBlock {
 
         if (key === 'vehicleBrand') {
           miniText = `Voir les modèles de ${this.escape(pretty)}`;
+        } else if (key === 'vehicle' && this.mode === 'vehicleThenBrand') {
+          miniText = `Voir les sous-marques de ${this.escape(pretty)}`;
         } else if (key === 'vehicle' && this.mode === 'vehicleByBrand') {
           miniText = `Explorer les ${count} article(s) pour ce modèle`;
         } else {
@@ -578,12 +585,16 @@ class FacetBlock {
           </div>
         `;
       } else {
+        const miniText = (key === 'brand' && this.mode === 'vehicleThenBrand')
+          ? `Sélectionner cette sous-marque pour afficher ses ${count} article(s)`
+          : 'Clique pour sélectionner • Re-clique pour retirer';
+
         btn.innerHTML = `
           <div class="chip-top">
             <div class="chip-label">${this.escape(pretty)}</div>
             <span class="chip-tag">${count} art.</span>
           </div>
-          <div class="chip-mini">Clique pour sélectionner • Re-clique pour retirer</div>
+          <div class="chip-mini">${miniText}</div>
         `;
       }
 

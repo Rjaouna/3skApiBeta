@@ -1,0 +1,145 @@
+<style>
+  .site-stats-strip {
+    width: 100%;
+    padding: 3.4rem 0;
+    background: #eceeef;
+    border-top: 1px solid rgba(17, 24, 39, .07);
+  }
+
+  .site-stats-strip__grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1.75rem;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .site-stats-strip__item {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    align-items: start;
+    gap: .85rem;
+    min-width: 0;
+  }
+
+  .site-stats-strip__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    color: #315fbb;
+    font-size: 1.75rem;
+  }
+
+  .site-stats-strip__value {
+    display: block;
+    color: #111;
+    font-family: "Montserrat", Arial, sans-serif;
+    font-size: 2.1rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .site-stats-strip__label {
+    display: block;
+    margin-top: .65rem;
+    color: #747b84;
+    font-family: "Montserrat", Arial, sans-serif;
+    font-size: .7rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .site-stats-strip__label::after {
+    content: "";
+    display: block;
+    width: 42px;
+    height: 2px;
+    margin-top: .8rem;
+    background: #ff9100;
+  }
+
+  @media (max-width: 991.98px) {
+    .site-stats-strip__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      max-width: 760px;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .site-stats-strip {
+      padding: 2.5rem 0;
+    }
+
+    .site-stats-strip__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2rem 1rem;
+      padding: 0 1.1rem;
+    }
+
+    .site-stats-strip__item {
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: .65rem;
+    }
+
+    .site-stats-strip__icon {
+      width: 34px;
+      height: 34px;
+      font-size: 1.4rem;
+    }
+
+    .site-stats-strip__value {
+      font-size: 1.55rem;
+    }
+  }
+</style>
+
+{% set stats = [
+  {
+    icon: 'fa-boxes-stacked',
+    value: homeStats.totalReferences|default(0)|number_format(0, ',', ' '),
+    label: 'Références catalogue'
+  },
+  {
+    icon: 'fa-warehouse',
+    value: homeStats.stockedReferences|default(0)|number_format(0, ',', ' '),
+    label: 'Références en stock'
+  },
+  {
+    icon: 'fa-car-side',
+    value: homeStats.vehicleBrands|default(0)|number_format(0, ',', ' '),
+    label: 'Marques véhicules'
+  },
+  {
+    icon: 'fa-layer-group',
+    value: homeStats.productBrands|default(0)|number_format(0, ',', ' '),
+    label: 'Marques partenaires'
+  },
+  {
+    icon: 'fa-calendar-check',
+    value: '2014',
+    label: 'Année de création'
+  }
+] %}
+
+<section class="site-stats-strip" aria-label="3SK Parts Auto en chiffres">
+  <div class="site-stats-strip__grid">
+    {% for stat in stats %}
+      <div class="site-stats-strip__item">
+        <span class="site-stats-strip__icon" aria-hidden="true">
+          <i class="fa-solid {{ stat.icon }}"></i>
+        </span>
+        <div>
+          <strong class="site-stats-strip__value">{{ stat.value }}</strong>
+          <span class="site-stats-strip__label">{{ stat.label }}</span>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>

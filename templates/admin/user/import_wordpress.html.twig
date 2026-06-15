@@ -4,9 +4,15 @@
 {% block page_title %}Import utilisateurs WordPress{% endblock %}
 
 {% block body %}
-<div class="row g-4">
-    <div class="col-lg-8">
-        <div class="card admin-card">
+<div class="container-fluid py-4">
+    <div class="simple-page-hero mb-3">
+        <h1 class="h4 mb-1">Import utilisateurs WordPress</h1>
+        <div class="text-muted small">Importer les comptes clients depuis un fichier CSV.</div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="card admin-card">
             <div class="card-header">
                 Importer un CSV WordPress
             </div>
@@ -32,6 +38,7 @@
                 </form>
 
                 <div id="importResult" class="mt-4"></div>
+            </div>
             </div>
         </div>
     </div>

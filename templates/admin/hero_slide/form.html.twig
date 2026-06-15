@@ -3,10 +3,13 @@
 
 {% block body %}
 <div class="container px-3 px-lg-4 my-4" style="max-width:900px;">
-  <h1 class="h4 mb-3">{{ title }}</h1>
+  <div class="simple-page-hero mb-3">
+    <h1 class="h4 mb-0">{{ title }}</h1>
+  </div>
 
-  {{ form_start(form) }}
-    <div class="row g-3">
+  <div class="simple-form-card">
+    {{ form_start(form) }}
+      <div class="row g-3">
       <div class="col-12">
         {{ form_row(form.imageFile) }}
         {% if slide is defined and slide.image %}
@@ -33,15 +36,16 @@
       <div class="col-12 col-md-6">{{ form_row(form.secondaryLabel) }}</div>
       <div class="col-12 col-md-6">{{ form_row(form.secondaryUrl) }}</div>
 
-      <div class="col-12 d-flex gap-2">
-        <button class="btn btn-primary rounded-pill px-4" type="submit">
-          <i class="bi bi-check2 me-2"></i>Enregistrer
-        </button>
-        <a href="{{ path('admin_hero_slide_index') }}" class="btn btn-outline-secondary rounded-pill px-4">
-          Retour
-        </a>
+        <div class="col-12 d-flex gap-2">
+          <button class="btn btn-primary rounded-pill px-4" type="submit">
+            <i class="bi bi-check2 me-2"></i>Enregistrer
+          </button>
+          <a href="{{ path('admin_hero_slide_index') }}" class="btn btn-outline-secondary rounded-pill px-4">
+            Retour
+          </a>
+        </div>
       </div>
-    </div>
-  {{ form_end(form) }}
+    {{ form_end(form) }}
+  </div>
 </div>
 {% endblock %}

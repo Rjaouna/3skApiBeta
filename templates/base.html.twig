@@ -17,7 +17,7 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body>
+    <body class="{{ app.user ? 'app-connected' : 'app-public' }}">
     <style>
    .whatsapp-float {
     position: fixed;
@@ -79,6 +79,10 @@
 {% block body %}{% endblock %}
 
 {% if app.user %}
+  {% include 'partials/_connected_theme.html.twig' %}
+  {% if app.request.attributes.get('_route') == 'home' %}
+    {% include 'home/sections/_stats_strip.html.twig' %}
+  {% endif %}
   {% include 'partials/_footer.html.twig' %}
 {% endif %}
 
