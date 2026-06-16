@@ -1698,10 +1698,36 @@
           </div>
           <p class="section-copy">Une sélection de partenaires et de références reconnues pour accompagner les besoins des professionnels.</p>
         </div>
+        {% set brandLogos = [
+          { name: 'DEPO', file: 'logo-depo-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'PHIRA', file: 'logo-phira-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'POLIPLAST', file: 'logo-poliplast-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'YIH SHENG', file: 'logo-yih-sheng-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'EURO BUMP', file: 'logo-euro-bump-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'DE-GA', file: 'logo-de-ga-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'ANTAI', file: 'logo-antai-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'ISAM', file: 'logo-isam-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'AP', file: 'logo-ap-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'EURO STAMP', file: 'logo-euro-stamp-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'MAXEM', file: 'logo-maxem-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'PLEKSAN', file: 'logo-pleksan-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'FOWYAD', file: 'logo-fowyad-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'ORAN', file: 'logo-oran-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'PRASCO', file: 'logo-prasco-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'PULO', file: 'logo-pulo-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'RESHING AUTOPARTS', file: 'logo-reshing-autoparts-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'ROOT', file: 'logo-root-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'TYG', file: 'logo-tyg-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'VIEW MAX', file: 'logo-view-max-pieces-carrosserie-3sk-parts-auto.jpg' }
+        ] %}
         <div class="brand-row">
-          {% for i in 1..6 %}
+          {% for brand in brandLogos %}
             <div class="brand-item">
-              <img src="{{ asset('img/home-public/brand-' ~ i ~ '.png') }}" alt="Marque {{ i }}">
+              <img
+                src="{{ asset('img/logo-marques-home-hors-ligne/' ~ brand.file) }}"
+                alt="Logo {{ brand.name }} pièces carrosserie 3SK Parts Auto"
+                loading="lazy"
+              >
             </div>
           {% endfor %}
         </div>
