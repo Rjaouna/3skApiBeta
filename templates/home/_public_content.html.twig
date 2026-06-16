@@ -6,8 +6,8 @@
   .public-home {
     --public-blue: #315fbb;
     --public-blue-dark: #102e63;
-    --public-navy: #05070d;
-    --public-navy-2: #0d1931;
+    --public-navy: #102e63;
+    --public-navy-2: #23498f;
     --public-orange: #ff9100;
     --public-ink: #101828;
     --public-muted: #667085;
@@ -51,233 +51,11 @@
     padding-block: .68rem;
   }
 
-  .public-site-header {
-    position: sticky;
-    top: 0;
-    z-index: 1030;
-    box-shadow: 0 12px 34px rgba(0,0,0,.28);
-  }
-
-  .public-topbar {
-    position: relative;
-    overflow: hidden;
-    background: var(--public-navy);
-    border-bottom: 1px solid rgba(255,255,255,.78);
-    color: rgba(255,255,255,.84);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    min-height: 37px;
-    text-transform: uppercase;
-  }
-
-  .public-topbar .container,
-  .public-topbar .container-fluid {
-    position: relative;
-    z-index: 1;
-  }
-
-  .public-topbar a {
-    color: rgba(255,255,255,.9);
-    text-decoration: none;
-    font-weight: 600;
-    line-height: 1;
-    white-space: nowrap;
-  }
-
-  .public-topbar a:hover {
-    color: #fff;
-  }
-
-  .public-topbar-contact {
-    min-height: 37px;
-  }
-
-  .public-topbar-contact a + a::before {
-    content: "";
-    display: inline-block;
-    width: 1px;
-    height: 12px;
-    margin: 0 14px 0 10px;
-    background: rgba(255,255,255,.38);
-    vertical-align: middle;
-  }
-
-  .public-topbar-actions {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: .85rem;
-    min-height: 37px;
-    padding: 0 1.05rem;
-    margin-block: -0.5rem;
-    background: rgba(255,145,0,.88);
-    color: #fff;
-  }
-
-  .public-topbar-actions::before,
-  .public-topbar-actions::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-  }
-
-  .public-topbar-actions::before {
-    right: 100%;
-    border-width: 0 13px 37px 0;
-    border-color: transparent rgba(255,145,0,.88) transparent transparent;
-  }
-
-  .public-topbar-actions::after {
-    left: 100%;
-    border-width: 37px 0 0 11px;
-    border-color: transparent transparent transparent rgba(255,145,0,.88);
-  }
-
-  .public-topbar-actions a {
-    display: inline-flex;
-    align-items: center;
-    gap: .42rem;
-    color: #fff;
-  }
-
-  .public-topbar-actions a:hover {
-    color: rgba(255,255,255,.82);
-  }
-
-  .public-topbar-separator {
-    width: 1px;
-    height: 12px;
-    background: rgba(255,255,255,.55);
-  }
-
-  .public-navbar {
-    border-bottom: 1px solid rgba(255,255,255,.08);
-    background: #000;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: none;
-  }
-
-  .public-navbar .navbar-brand {
-    --logo-panel-height: 100px;
-    --logo-panel-angle: 34px;
-    position: relative;
-    isolation: isolate;
-    display: inline-flex;
-    align-items: center;
-    min-height: var(--logo-panel-height);
-    background: #fff;
-    border-radius: 0;
-    padding: 0rem 1.35rem;
-    margin-left: 1.25rem;
-    margin-right: 1.55rem;
-    box-shadow: none;
-  }
-
-  .public-navbar .navbar-brand::before,
-  .public-navbar .navbar-brand::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-  }
-
-  .public-navbar .navbar-brand::before {
-    right: 100%;
-    border-width: 0 var(--logo-panel-angle) var(--logo-panel-height) 0;
-    border-color: transparent #fff transparent transparent;
-  }
-
-  .public-navbar .navbar-brand::after {
-    left: 100%;
-    border-width: var(--logo-panel-height) 0 0 var(--logo-panel-angle);
-    border-color: transparent transparent transparent #fff;
-  }
-
-  .public-navbar .navbar-brand img {
-    height: 100px;
-    width: auto;
-    object-fit: contain;
-    display: block;
-  }
-
-  .public-navbar .nav-link {
-    color: #fff;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .015em;
-    text-transform: uppercase;
-    position: relative;
-    padding: 1.75rem 0 !important;
-    margin: 0 1.05rem;
-  }
-
-  .public-navbar .nav-link::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 1.3rem;
-    height: 2px;
-    border-radius: 0;
-    background: var(--public-orange);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform .16s ease;
-  }
-
-  .public-navbar .nav-link:hover,
-  .public-navbar .nav-link:focus {
-    color: rgba(255,255,255,.62);
-  }
-
-  .public-navbar .nav-link:hover::after,
-  .public-navbar .nav-link:focus::after {
-    transform: scaleX(1);
-  }
-
-  .public-navbar .navbar-toggler {
-    border-color: rgba(255,255,255,.20);
-    border-radius: 0;
-    background: rgba(255,255,255,.10);
-  }
-
-  .public-navbar .navbar-toggler-icon {
-    filter: invert(1);
-  }
-
   .public-home .btn-primary {
     background: linear-gradient(135deg, var(--public-blue), var(--public-blue-dark));
     border-color: var(--public-blue);
     font-weight: 800;
     box-shadow: 0 12px 24px rgba(49,95,187,.18);
-  }
-
-  .public-menu-cta {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: 0 !important;
-    background: var(--public-orange) !important;
-    border-color: var(--public-orange) !important;
-    color: #fff !important;
-    box-shadow: none !important;
-    font-size: 11px;
-    line-height: 1;
-    text-transform: uppercase;
-  }
-
-  .public-menu-cta:hover {
-    background: #fff !important;
-    border-color: #fff !important;
-    color: #000 !important;
   }
 
   .public-home .btn-primary:hover {
@@ -510,7 +288,7 @@
   }
 
   .public-highlight-panel {
-    background: linear-gradient(135deg, var(--public-blue-dark), #07101f);
+    background: linear-gradient(135deg, rgba(16,46,99,.94), rgba(49,95,187,.72));
     border: 1px solid rgba(255,255,255,.18);
     border-left: 4px solid var(--public-orange);
     border-radius: 8px;
@@ -562,7 +340,7 @@
     top: 50%;
     transform: translateY(-50%);
     border-radius: 999px;
-    background: rgba(0,0,0,.28);
+    background: rgba(49,95,187,.28);
     border: 1px solid rgba(255,255,255,.18);
     opacity: .92;
     margin-inline: 14px;
@@ -748,9 +526,14 @@
     height: 100%;
     padding: 1.35rem;
     border-radius: 8px;
-    border: 1px solid rgba(16,24,40,.10);
-    background: linear-gradient(145deg, var(--public-navy), var(--public-navy-2));
-    box-shadow: 0 18px 38px rgba(16,24,40,.16);
+    border: 1px solid rgba(255,255,255,.22);
+    border-left: 4px solid var(--public-orange);
+    background:
+      linear-gradient(135deg, rgba(16,46,99,.92), rgba(49,95,187,.70)),
+      rgba(255,255,255,.08);
+    box-shadow: 0 18px 38px rgba(16,24,40,.14);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .public-footer-account p {
@@ -780,7 +563,7 @@
   .public-footer-login-btn:hover {
     background: #fff !important;
     border-color: #fff !important;
-    color: var(--public-navy) !important;
+    color: var(--public-blue) !important;
     transform: translateY(-1px);
   }
 
@@ -1476,27 +1259,6 @@
       padding: 4rem 0;
     }
 
-    .public-navbar .nav-link::after {
-      display: none;
-    }
-
-    .public-navbar .nav-link {
-      margin: 0;
-      padding: .85rem 0 !important;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-
-    .public-navbar .navbar-collapse {
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-    }
-
-    .public-menu-cta {
-      width: 100%;
-      justify-content: center;
-      padding-block: .9rem !important;
-    }
-
     .public-service-card img,
     .public-news-card img {
       height: 220px;
@@ -1507,36 +1269,6 @@
     .public-footer {
       padding-top: 4.25rem !important;
       padding-bottom: 4rem !important;
-    }
-
-    .public-topbar {
-      font-size: 10px;
-    }
-
-    .public-topbar-contact a + a::before,
-    .public-topbar-actions::before,
-    .public-topbar-actions::after {
-      display: none;
-    }
-
-    .public-topbar-actions {
-      width: 100%;
-      justify-content: center;
-      margin-block: 0;
-      padding: .7rem 1rem;
-      border-radius: 0;
-    }
-
-    .public-navbar .navbar-brand img {
-      height: 58px;
-    }
-
-    .public-navbar .navbar-brand {
-      --logo-panel-height: 68px;
-      --logo-panel-angle: 20px;
-      margin-left: 1rem;
-      margin-right: 1rem;
-      padding: .32rem 1rem;
     }
 
     .public-display {
@@ -1554,48 +1286,11 @@
   }
 </style>
 
-<div class="public-home">
-  <header class="public-site-header">
-    <div class="public-topbar py-2">
-      <div class="container-fluid px-4 px-xl-5 d-flex flex-column flex-lg-row justify-content-between align-items-center gap-2">
-        <div class="public-topbar-contact d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-lg-start text-center text-lg-start">
-          <a href="tel:+212522713572"><i class="fa-solid fa-phone me-1"></i>Tel: +212 5 22 71 35 72</a>
-          <a href="mailto:3sk.partsauto@gmail.com"><i class="fa-solid fa-envelope me-1"></i>3sk.partsauto@gmail.com</a>
-        </div>
-        <div class="d-flex align-items-center justify-content-center">
-          <div class="public-topbar-actions">
-            <a href="{{ path('app_login') }}" class="fw-semibold"><i class="fa-solid fa-unlock-keyhole"></i>Se connecter</a>
-            <span class="public-topbar-separator" aria-hidden="true"></span>
-            <a href="#contact"><i class="fa-solid fa-user-plus"></i>Devenir client</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <nav class="navbar navbar-expand-lg public-navbar">
-      <div class="container-fluid px-4 px-xl-5 py-2">
-        <a class="navbar-brand" href="#accueil">
-          <img src="{{ asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#publicHomeNav" aria-controls="publicHomeNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="publicHomeNav">
-          <ul class="navbar-nav ms-auto align-items-lg-center">
-            <li class="nav-item"><a class="nav-link fw-semibold" href="#accueil">Accueil</a></li>
-            <li class="nav-item"><a class="nav-link fw-semibold" href="#qui-sommes-nous">Qui sommes-nous</a></li>
-            <li class="nav-item"><a class="nav-link fw-semibold" href="#services">Services</a></li>
-            <li class="nav-item"><a class="nav-link fw-semibold" href="#marques">Marques</a></li>
-            <li class="nav-item"><a class="nav-link fw-semibold" href="#contact">Contact</a></li>
-            <li class="nav-item mt-2 mt-lg-0">
-              <a href="{{ path('app_login') }}" class="btn btn-primary public-menu-cta px-4 fw-bold"><i class="fa-solid fa-arrow-right-to-bracket me-2"></i>Espace client</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
+<div class="public-home public-shell">
+  {% include 'partials/_public_header.html.twig' with {
+    public_header_is_home: true,
+    public_header_nav_id: 'publicHomeNav'
+  } %}
 
   <section id="accueil" class="public-slider-shell">
     {% include 'home/sections/_hero.html.twig' with { hero_full_width: true } %}

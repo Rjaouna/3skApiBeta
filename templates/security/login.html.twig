@@ -33,221 +33,6 @@
     transition: color .15s ease, background .15s ease, border-color .15s ease, transform .15s ease;
   }
 
-  .login-public-shell .public-site-header{
-    position:sticky;
-    top:0;
-    z-index:1030;
-    box-shadow:0 12px 34px rgba(0,0,0,.28);
-  }
-
-  .login-public-shell .public-topbar{
-    position:relative;
-    overflow:hidden;
-    background:#05070d;
-    border-bottom:1px solid rgba(255,255,255,.78);
-    color:rgba(255,255,255,.84);
-    font-family:'Montserrat', sans-serif;
-    font-size:11px;
-    min-height:37px;
-    text-transform:uppercase;
-  }
-
-  .login-public-shell .public-topbar a{
-    color:rgba(255,255,255,.9);
-    text-decoration:none;
-    font-weight:600;
-    line-height:1;
-    white-space:nowrap;
-  }
-
-  .login-public-shell .public-topbar a:hover{
-    color:#fff;
-  }
-
-  .login-public-shell .public-topbar-contact{
-    min-height:37px;
-  }
-
-  .login-public-shell .public-topbar-contact a + a::before{
-    content:"";
-    display:inline-block;
-    width:1px;
-    height:12px;
-    margin:0 14px 0 10px;
-    background:rgba(255,255,255,.38);
-    vertical-align:middle;
-  }
-
-  .login-public-shell .public-topbar-actions{
-    position:relative;
-    display:inline-flex;
-    align-items:center;
-    gap:.85rem;
-    min-height:37px;
-    padding:0 1.05rem;
-    margin-block:-0.5rem;
-    background:rgba(var(--bs-secondary-rgb), .88);
-    color:#fff;
-  }
-
-  .login-public-shell .public-topbar-actions::before,
-  .login-public-shell .public-topbar-actions::after{
-    content:"";
-    position:absolute;
-    top:0;
-    width:0;
-    height:0;
-    border-style:solid;
-  }
-
-  .login-public-shell .public-topbar-actions::before{
-    right:100%;
-    border-width:0 13px 37px 0;
-    border-color:transparent rgba(var(--bs-secondary-rgb), .88) transparent transparent;
-  }
-
-  .login-public-shell .public-topbar-actions::after{
-    left:100%;
-    border-width:37px 0 0 11px;
-    border-color:transparent transparent transparent rgba(var(--bs-secondary-rgb), .88);
-  }
-
-  .login-public-shell .public-topbar-actions a{
-    display:inline-flex;
-    align-items:center;
-    gap:.42rem;
-    color:#fff;
-  }
-
-  .login-public-shell .public-topbar-actions a:hover{
-    color:rgba(255,255,255,.82);
-  }
-
-  .login-public-shell .public-topbar-separator{
-    width:1px;
-    height:12px;
-    background:rgba(255,255,255,.55);
-  }
-
-  .login-public-shell .public-navbar{
-    border-bottom:1px solid rgba(255,255,255,.08);
-    background:#000;
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-  }
-
-  .login-public-shell .public-navbar .navbar-brand{
-    --logo-panel-height:112px;
-    --logo-panel-angle:34px;
-    position:relative;
-    isolation:isolate;
-    display:inline-flex;
-    align-items:center;
-    min-height:var(--logo-panel-height);
-    background:#fff;
-    border-radius:0;
-    padding:.38rem 1.35rem;
-    margin-left:1.25rem;
-    margin-right:1.55rem;
-    box-shadow:none;
-  }
-
-  .login-public-shell .public-navbar .navbar-brand::before,
-  .login-public-shell .public-navbar .navbar-brand::after{
-    content:"";
-    position:absolute;
-    top:0;
-    width:0;
-    height:0;
-    border-style:solid;
-  }
-
-  .login-public-shell .public-navbar .navbar-brand::before{
-    right:100%;
-    border-width:0 var(--logo-panel-angle) var(--logo-panel-height) 0;
-    border-color:transparent #fff transparent transparent;
-  }
-
-  .login-public-shell .public-navbar .navbar-brand::after{
-    left:100%;
-    border-width:var(--logo-panel-height) 0 0 var(--logo-panel-angle);
-    border-color:transparent transparent transparent #fff;
-  }
-
-  .login-public-shell .public-navbar .navbar-brand img{
-    height:100px;
-    width:auto;
-    object-fit:contain;
-    display:block;
-  }
-
-  .login-public-shell .public-navbar .nav-link{
-    color:#fff;
-    font-family:'Montserrat', sans-serif;
-    font-size:11px;
-    font-weight:600;
-    letter-spacing:.015em;
-    text-transform:uppercase;
-    position:relative;
-    padding:1.75rem 0 !important;
-    margin:0 1.05rem;
-  }
-
-  .login-public-shell .public-navbar .nav-link::after{
-    content:"";
-    position:absolute;
-    left:0;
-    right:0;
-    bottom:1.3rem;
-    height:2px;
-    background:var(--bs-secondary);
-    transform:scaleX(0);
-    transform-origin:left;
-    transition:transform .16s ease;
-  }
-
-  .login-public-shell .public-navbar .nav-link:hover,
-  .login-public-shell .public-navbar .nav-link:focus{
-    color:rgba(255,255,255,.62);
-  }
-
-  .login-public-shell .public-navbar .nav-link:hover::after,
-  .login-public-shell .public-navbar .nav-link:focus::after{
-    transform:scaleX(1);
-  }
-
-  .login-public-shell .public-menu-cta{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:0 !important;
-    background:var(--bs-secondary) !important;
-    border-color:var(--bs-secondary) !important;
-    color:#fff !important;
-    box-shadow:none !important;
-    font-family:'Montserrat', sans-serif;
-    font-size:11px;
-    line-height:1;
-    text-transform:uppercase;
-    padding-block:.68rem;
-  }
-
-  .login-public-shell .public-menu-cta:hover{
-    background:#fff !important;
-    border-color:#fff !important;
-    color:#000 !important;
-  }
-
-  .login-public-shell .public-navbar .navbar-toggler{
-    border-color:rgba(255,255,255,.20);
-    border-radius:0;
-    background:rgba(255,255,255,.10);
-  }
-
-  .login-public-shell .public-navbar .navbar-toggler-icon{
-    filter:invert(1);
-  }
-
   .login-public-shell .public-footer{
     border-top:4px solid var(--bs-secondary);
     padding-top:5.75rem !important;
@@ -353,9 +138,14 @@
     height:100%;
     padding:1.35rem;
     border-radius:8px;
-    border:1px solid rgba(16,24,40,.10);
-    background:linear-gradient(145deg, #05070d, #0d1931);
-    box-shadow:0 18px 38px rgba(16,24,40,.16);
+    border:1px solid rgba(255,255,255,.22);
+    border-left:4px solid var(--bs-secondary);
+    background:
+      linear-gradient(135deg, rgba(16,46,99,.92), rgba(49,95,187,.70)),
+      rgba(255,255,255,.08);
+    box-shadow:0 18px 38px rgba(16,24,40,.14);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
   }
 
   .login-public-shell .public-footer-account p{
@@ -385,7 +175,7 @@
   .login-public-shell .public-footer-login-btn:hover{
     background:#fff !important;
     border-color:#fff !important;
-    color:#05070d !important;
+    color:var(--bs-primary) !important;
     transform:translateY(-1px);
   }
 
@@ -467,23 +257,24 @@
 
   .login-card{
     border-radius:8px;
-    border:1px solid rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.22);
     border-top:4px solid var(--bs-secondary);
     background:
-      radial-gradient(760px circle at 100% 0%, rgba(var(--bs-primary-rgb), .22), transparent 42%),
-      radial-gradient(620px circle at 0% 100%, rgba(var(--bs-secondary-rgb), .16), transparent 42%),
-      linear-gradient(180deg, rgba(0,0,0,.86) 0%, rgba(5,7,13,.88) 54%, rgba(13,25,49,.88) 100%);
-    box-shadow:0 28px 72px rgba(0,0,0,.38);
+      radial-gradient(760px circle at 100% 0%, rgba(var(--bs-secondary-rgb), .22), transparent 42%),
+      radial-gradient(620px circle at 0% 100%, rgba(255,255,255,.12), transparent 42%),
+      linear-gradient(135deg, rgba(16,46,99,.86), rgba(49,95,187,.56));
+    box-shadow:0 28px 72px rgba(16,46,99,.34);
     backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
     overflow:hidden;
   }
 
   .login-head{
     padding:18px 24px 14px;
-    border-bottom:1px solid rgba(255,255,255,.12);
+    border-bottom:1px solid rgba(255,255,255,.20);
     background:
-      linear-gradient(135deg, rgba(var(--bs-secondary-rgb), .14), transparent 45%),
-      linear-gradient(225deg, rgba(var(--bs-primary-rgb), .12), transparent 42%);
+      linear-gradient(135deg, rgba(var(--bs-secondary-rgb), .20), transparent 45%),
+      linear-gradient(225deg, rgba(255,255,255,.10), transparent 42%);
   }
 
   body.theme-dark .login-head{
@@ -522,7 +313,7 @@
 
   .login-subtitle{
     margin-top:2px;
-    color:rgba(255,255,255,.68);
+    color:rgba(255,255,255,.82);
     font-weight:700;
     font-size:.92rem;
   }
@@ -557,8 +348,8 @@
   .login-control{
     height:54px;
     border-radius:8px;
-    border:1px solid rgba(255,255,255,.16);
-    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.26);
+    background:rgba(255,255,255,.13);
     color:#fff;
     padding-left:42px;
     font-weight:700;
@@ -566,24 +357,24 @@
   }
 
   .login-control::placeholder{
-    color:rgba(255,255,255,.48);
+    color:rgba(255,255,255,.58);
   }
 
   .login-control:focus{
     border-color:rgba(var(--bs-secondary-rgb), .68);
     box-shadow:0 0 0 .22rem rgba(var(--bs-secondary-rgb), .14) !important;
-    background:rgba(255,255,255,.12);
+    background:rgba(255,255,255,.18);
     color:#fff;
   }
 
   body.theme-dark .login-control{
-    background:rgba(22,22,28,.88);
-    border-color:rgba(255,255,255,.10);
+    background:rgba(255,255,255,.13);
+    border-color:rgba(255,255,255,.26);
     color:rgba(255,255,255,.92);
   }
 
   body.theme-dark .login-control::placeholder{
-    color:rgba(255,255,255,.42);
+    color:rgba(255,255,255,.58);
   }
 
   .password-toggle{
@@ -604,12 +395,12 @@
   }
 
   .password-toggle:hover{
-    background:rgba(255,145,0,.14);
+    background:rgba(255,145,0,.18);
     color:#fff;
   }
 
   body.theme-dark .password-toggle:hover{
-    background:rgba(255,255,255,.06);
+    background:rgba(255,145,0,.18);
   }
 
   .login-btn{
@@ -642,7 +433,7 @@
   }
 
   .login-muted{
-    color:rgba(255,255,255,.66);
+    color:rgba(255,255,255,.78);
     font-weight:700;
     font-size:.92rem;
   }
@@ -676,61 +467,10 @@
     }
   }
 
-  @media (max-width: 991px){
-    .login-public-shell .public-navbar .nav-link{
-      margin:0;
-      padding:.85rem 0 !important;
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-
-    .login-public-shell .public-navbar .nav-link::after{
-      display:none;
-    }
-
-    .login-public-shell .public-navbar .navbar-collapse{
-      padding-top:1rem;
-      padding-bottom:1rem;
-    }
-
-    .login-public-shell .public-menu-cta{
-      width:100%;
-      padding-block:.9rem !important;
-    }
-  }
-
   @media (max-width: 575px){
     .login-public-shell .public-footer{
       padding-top:4.25rem !important;
       padding-bottom:4rem !important;
-    }
-
-    .login-public-shell .public-topbar{
-      font-size:10px;
-    }
-
-    .login-public-shell .public-topbar-contact a + a::before,
-    .login-public-shell .public-topbar-actions::before,
-    .login-public-shell .public-topbar-actions::after{
-      display:none;
-    }
-
-    .login-public-shell .public-topbar-actions{
-      width:100%;
-      justify-content:center;
-      margin-block:0;
-      padding:.7rem 1rem;
-    }
-
-    .login-public-shell .public-navbar .navbar-brand{
-      --logo-panel-height:68px;
-      --logo-panel-angle:20px;
-      margin-left:1rem;
-      margin-right:1rem;
-      padding:.32rem 1rem;
-    }
-
-    .login-public-shell .public-navbar .navbar-brand img{
-      height:58px;
     }
   }
 </style>
@@ -740,48 +480,10 @@
 </video>
 <div class="login-video-overlay" aria-hidden="true"></div>
 
-<div class="login-public-shell">
-  <header class="public-site-header">
-    <div class="public-topbar py-2">
-      <div class="container-fluid px-4 px-xl-5 d-flex flex-column flex-lg-row justify-content-between align-items-center gap-2">
-        <div class="public-topbar-contact d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-lg-start text-center text-lg-start">
-          <a href="tel:+212522713572"><i class="fa-solid fa-phone me-1"></i>Tel: +212 5 22 71 35 72</a>
-          <a href="mailto:3sk.partsauto@gmail.com"><i class="fa-solid fa-envelope me-1"></i>3sk.partsauto@gmail.com</a>
-        </div>
-        <div class="d-flex align-items-center justify-content-center">
-          <div class="public-topbar-actions">
-            <a href="{{ path('app_login') }}" class="fw-semibold"><i class="fa-solid fa-unlock-keyhole"></i>Se connecter</a>
-            <span class="public-topbar-separator" aria-hidden="true"></span>
-            <a href="{{ path('home') }}#contact"><i class="fa-solid fa-user-plus"></i>Devenir client</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <nav class="navbar navbar-expand-lg public-navbar">
-      <div class="container-fluid px-4 px-xl-5 py-2">
-        <a class="navbar-brand" href="{{ path('home') }}#accueil">
-          <img src="{{ asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#publicLoginNav" aria-controls="publicLoginNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="publicLoginNav">
-          <ul class="navbar-nav ms-auto align-items-lg-center">
-            <li class="nav-item"><a class="nav-link fw-semibold" href="{{ path('home') }}#accueil">Accueil</a></li>
-            <li class="nav-item"><a class="nav-link fw-semibold" href="{{ path('home') }}#qui-sommes-nous">Qui sommes-nous</a></li>
-            <li class="nav-item"><a class="nav-link fw-semibold" href="{{ path('home') }}#services">Services</a></li>
-            <li class="nav-item"><a class="nav-link fw-semibold" href="{{ path('home') }}#marques">Marques</a></li>
-            <li class="nav-item"><a class="nav-link fw-semibold" href="{{ path('home') }}#contact">Contact</a></li>
-            <li class="nav-item mt-2 mt-lg-0">
-              <a href="{{ path('app_login') }}" class="btn btn-primary public-menu-cta px-4 fw-bold"><i class="fa-solid fa-arrow-right-to-bracket me-2"></i>Espace client</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
+<div class="login-public-shell public-shell">
+  {% include 'partials/_public_header.html.twig' with {
+    public_header_nav_id: 'publicLoginNav'
+  } %}
 </div>
 
 <div class="container login-page">

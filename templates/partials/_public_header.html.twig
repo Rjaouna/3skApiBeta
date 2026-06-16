@@ -1,0 +1,335 @@
+{% set public_header_is_home = public_header_is_home|default(false) %}
+{% set public_header_nav_id = public_header_nav_id|default('publicMainNav') %}
+{% set public_header_anchor_prefix = public_header_is_home ? '' : path('home') %}
+
+<style>
+  .public-shell {
+    --public-blue: #315fbb;
+    --public-blue-dark: #102e63;
+    --public-orange: #ff9100;
+    --public-ink: #101828;
+    --public-border: rgba(16,24,40,.10);
+  }
+
+  .public-shell .public-site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    box-shadow: 0 10px 28px rgba(16,24,40,.08);
+  }
+
+  .public-shell .public-topbar {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border-bottom: 1px solid rgba(49,95,187,.12);
+    color: var(--public-ink);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    min-height: 37px;
+    text-transform: uppercase;
+  }
+
+  .public-shell .public-topbar .container,
+  .public-shell .public-topbar .container-fluid {
+    position: relative;
+    z-index: 1;
+  }
+
+  .public-shell .public-topbar a {
+    color: var(--public-blue);
+    text-decoration: none;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .public-shell .public-topbar a:hover {
+    color: var(--public-orange);
+  }
+
+  .public-shell .public-topbar-contact {
+    min-height: 37px;
+  }
+
+  .public-shell .public-topbar-contact a + a::before {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 12px;
+    margin: 0 14px 0 10px;
+    background: rgba(49,95,187,.2);
+    vertical-align: middle;
+  }
+
+  .public-shell .public-topbar-actions {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: .85rem;
+    min-height: 37px;
+    padding: 0 1.05rem;
+    margin-block: -0.5rem;
+    background: rgba(255,145,0,.88);
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(255,145,0,.14);
+  }
+
+  .public-shell .public-topbar-actions::before,
+  .public-shell .public-topbar-actions::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+
+  .public-shell .public-topbar-actions::before {
+    right: 100%;
+    border-width: 0 13px 37px 0;
+    border-color: transparent rgba(255,145,0,.88) transparent transparent;
+  }
+
+  .public-shell .public-topbar-actions::after {
+    left: 100%;
+    border-width: 37px 0 0 11px;
+    border-color: transparent transparent transparent rgba(255,145,0,.88);
+  }
+
+  .public-shell .public-topbar-actions a {
+    display: inline-flex;
+    align-items: center;
+    gap: .42rem;
+    color: #fff;
+  }
+
+  .public-shell .public-topbar-actions a:hover {
+    color: rgba(255,255,255,.82);
+  }
+
+  .public-shell .public-topbar-separator {
+    width: 1px;
+    height: 12px;
+    background: rgba(255,255,255,.55);
+  }
+
+  .public-shell .public-navbar {
+    border-bottom: 1px solid rgba(49,95,187,.12);
+    background: #fff;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: none;
+  }
+
+  .public-shell .public-navbar .navbar-brand {
+    --logo-panel-height: 100px;
+    --logo-panel-angle: 34px;
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--logo-panel-height);
+    background: #fff;
+    border-radius: 0;
+    padding: 0 1.35rem;
+    margin-left: 1.25rem;
+    margin-right: 1.55rem;
+    box-shadow: 0 10px 24px rgba(49,95,187,.12);
+  }
+
+  .public-shell .public-navbar .navbar-brand::before,
+  .public-shell .public-navbar .navbar-brand::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+
+  .public-shell .public-navbar .navbar-brand::before {
+    right: 100%;
+    border-width: 0 var(--logo-panel-angle) var(--logo-panel-height) 0;
+    border-color: transparent #fff transparent transparent;
+  }
+
+  .public-shell .public-navbar .navbar-brand::after {
+    left: 100%;
+    border-width: var(--logo-panel-height) 0 0 var(--logo-panel-angle);
+    border-color: transparent transparent transparent #fff;
+  }
+
+  .public-shell .public-navbar .navbar-brand img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .public-shell .public-navbar .nav-link {
+    color: var(--public-blue);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .015em;
+    text-transform: uppercase;
+    position: relative;
+    padding: 1.75rem 0 !important;
+    margin: 0 1.05rem;
+  }
+
+  .public-shell .public-navbar .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 1.3rem;
+    height: 2px;
+    border-radius: 0;
+    background: var(--public-orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .16s ease;
+  }
+
+  .public-shell .public-navbar .nav-link:hover,
+  .public-shell .public-navbar .nav-link:focus {
+    color: var(--public-orange);
+  }
+
+  .public-shell .public-navbar .nav-link:hover::after,
+  .public-shell .public-navbar .nav-link:focus::after {
+    transform: scaleX(1);
+  }
+
+  .public-shell .public-navbar .navbar-toggler {
+    border-color: rgba(49,95,187,.22);
+    border-radius: 0;
+    background: rgba(49,95,187,.06);
+  }
+
+  .public-shell .public-navbar .navbar-toggler-icon {
+    filter: none;
+  }
+
+  .public-shell .public-menu-cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0 !important;
+    background: var(--public-orange) !important;
+    border-color: var(--public-orange) !important;
+    color: #fff !important;
+    box-shadow: none !important;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    line-height: 1;
+    text-transform: uppercase;
+    padding-block: .68rem;
+  }
+
+  .public-shell .public-menu-cta:hover {
+    background: var(--public-blue) !important;
+    border-color: var(--public-blue) !important;
+    color: #fff !important;
+  }
+
+  @media (max-width: 991px) {
+    .public-shell .public-navbar .nav-link {
+      margin: 0;
+      padding: .85rem 0 !important;
+      border-bottom: 1px solid rgba(49,95,187,.12);
+    }
+
+    .public-shell .public-navbar .nav-link::after {
+      display: none;
+    }
+
+    .public-shell .public-navbar .navbar-collapse {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .public-shell .public-menu-cta {
+      width: 100%;
+      padding-block: .9rem !important;
+    }
+  }
+
+  @media (max-width: 575px) {
+    .public-shell .public-topbar {
+      font-size: 10px;
+    }
+
+    .public-shell .public-topbar-contact a + a::before,
+    .public-shell .public-topbar-actions::before,
+    .public-shell .public-topbar-actions::after {
+      display: none;
+    }
+
+    .public-shell .public-topbar-actions {
+      width: 100%;
+      justify-content: center;
+      margin-block: 0;
+      padding: .7rem 1rem;
+      border-radius: 0;
+    }
+
+    .public-shell .public-navbar .navbar-brand {
+      --logo-panel-height: 68px;
+      --logo-panel-angle: 20px;
+      margin-left: 1rem;
+      margin-right: 1rem;
+      padding: .32rem 1rem;
+    }
+
+    .public-shell .public-navbar .navbar-brand img {
+      height: 58px;
+    }
+  }
+</style>
+
+<header class="public-site-header">
+  <div class="public-topbar py-2">
+    <div class="container-fluid px-4 px-xl-5 d-flex flex-column flex-lg-row justify-content-between align-items-center gap-2">
+      <div class="public-topbar-contact d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-lg-start text-center text-lg-start">
+        <a href="tel:+212522713572"><i class="fa-solid fa-phone me-1"></i>Tel: +212 5 22 71 35 72</a>
+        <a href="mailto:3sk.partsauto@gmail.com"><i class="fa-solid fa-envelope me-1"></i>3sk.partsauto@gmail.com</a>
+      </div>
+      <div class="d-flex align-items-center justify-content-center">
+        <div class="public-topbar-actions">
+          <a href="{{ path('app_login') }}" class="fw-semibold"><i class="fa-solid fa-unlock-keyhole"></i>Se connecter</a>
+          <span class="public-topbar-separator" aria-hidden="true"></span>
+          <a href="{{ public_header_anchor_prefix }}#contact"><i class="fa-solid fa-user-plus"></i>Devenir client</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg public-navbar">
+    <div class="container-fluid px-4 px-xl-5 py-2">
+      <a class="navbar-brand" href="{{ public_header_anchor_prefix }}#accueil">
+        <img src="{{ asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#{{ public_header_nav_id }}" aria-controls="{{ public_header_nav_id }}" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="{{ public_header_nav_id }}">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link fw-semibold" href="{{ public_header_anchor_prefix }}#accueil">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="{{ public_header_anchor_prefix }}#qui-sommes-nous">Qui sommes-nous</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="{{ public_header_anchor_prefix }}#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="{{ public_header_anchor_prefix }}#marques">Marques</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="{{ public_header_anchor_prefix }}#contact">Contact</a></li>
+          <li class="nav-item mt-2 mt-lg-0">
+            <a href="{{ path('app_login') }}" class="btn btn-primary public-menu-cta px-4 fw-bold"><i class="fa-solid fa-arrow-right-to-bracket me-2"></i>Espace client</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

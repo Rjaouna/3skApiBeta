@@ -125,11 +125,16 @@
   .connected-footer-account {
     height: 100%;
     padding: 1.5rem;
-    border: 1px solid rgba(16, 24, 40, .12);
+    border: 1px solid rgba(255, 255, 255, .22);
+    border-left: 4px solid #ff9100;
     border-radius: 8px;
-    background: #080a0f;
+    background:
+      linear-gradient(135deg, rgba(16, 46, 99, .92), rgba(49, 95, 187, .70)),
+      rgba(255, 255, 255, .08);
     color: #fff;
-    box-shadow: 0 18px 38px rgba(16, 24, 40, .18);
+    box-shadow: 0 18px 38px rgba(16, 24, 40, .14);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .connected-footer-account h4 {
@@ -156,7 +161,7 @@
   .connected-footer-account .btn:hover {
     border-color: #fff !important;
     background: #fff !important;
-    color: #080a0f !important;
+    color: #315fbb !important;
   }
 
   .connected-footer-account a:not(.btn) {

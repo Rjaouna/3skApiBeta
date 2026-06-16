@@ -5,7 +5,9 @@
     --app-orange-dark: #df7600;
     --app-blue: #315fbb;
     --app-blue-dark: #23498f;
-    --app-black: #080a0f;
+    --app-black: #102e63;
+    --app-panel-blue: linear-gradient(135deg, rgba(16, 46, 99, .96) 0%, rgba(49, 95, 187, .86) 58%, rgba(255, 145, 0, .16) 100%);
+    --app-panel-blue-soft: linear-gradient(135deg, rgba(49, 95, 187, .12), rgba(255, 145, 0, .08));
     --app-ink: #101828;
     --app-muted: #667085;
     --app-line: #dfe3e8;
@@ -57,7 +59,7 @@
   }
 
   .app-connected .site__header {
-    box-shadow: 0 10px 28px rgba(0, 0, 0, .2);
+    box-shadow: 0 10px 28px rgba(16, 24, 40, .08);
   }
 
   .app-connected .site__header,
@@ -65,29 +67,29 @@
   .app-connected .site__header .header-topbar,
   .app-connected .site__header .header__navbar,
   .app-connected .site__header .header-nav {
-    --hd-border: rgba(255, 255, 255, .14);
-    --hd-shadow: 0 16px 38px rgba(0, 0, 0, .28);
-    --hd-glass: #080a0f;
-    --hd-glass2: rgba(255, 255, 255, .08);
-    --hd-text: rgba(255, 255, 255, .94);
-    --hd-muted: rgba(255, 255, 255, .64);
-    background: var(--app-black) !important;
-    color: #fff;
+    --hd-border: rgba(49, 95, 187, .14);
+    --hd-shadow: 0 14px 34px rgba(16, 24, 40, .08);
+    --hd-glass: #fff;
+    --hd-glass2: rgba(49, 95, 187, .07);
+    --hd-text: var(--app-ink);
+    --hd-muted: var(--app-muted);
+    background: #fff !important;
+    color: var(--app-ink);
   }
 
   .app-connected .site__header .header-topbar {
-    border-bottom-color: rgba(255, 255, 255, .14) !important;
-    background: #05070b !important;
+    border-bottom-color: rgba(49, 95, 187, .12) !important;
+    background: #fff !important;
   }
 
   .app-connected .site__header .topbar-row {
-    color: #fff;
+    color: var(--app-ink);
   }
 
   .app-connected .site__header .account-name,
   .app-connected .site__header .topbar-welcome,
   .app-connected .site__header .topbar-phone {
-    color: #fff !important;
+    color: var(--app-ink) !important;
   }
 
   .app-connected .site__header .account-name {
@@ -95,18 +97,23 @@
   }
 
   .app-connected .site__header .topbar-phone {
-    border: 1px solid rgba(255, 255, 255, .15);
+    border: 1px solid rgba(49, 95, 187, .18);
     border-radius: var(--app-radius);
-    background: rgba(255, 255, 255, .07);
+    background: rgba(49, 95, 187, .06);
+    color: var(--app-blue) !important;
+  }
+
+  .app-connected .site__header .topbar-phone i {
+    color: var(--app-orange);
   }
 
   .app-connected .site__header .hd-iconbtn,
   .app-connected .site__header .admin-settings-btn,
   .app-connected .site__header .mobile-menu-toggle {
-    border-color: rgba(255, 255, 255, .16) !important;
+    border-color: rgba(49, 95, 187, .22) !important;
     border-radius: var(--app-radius) !important;
-    background: rgba(255, 255, 255, .08) !important;
-    color: #fff !important;
+    background: #fff !important;
+    color: var(--app-blue) !important;
   }
 
   .app-connected .site__header .hd-iconbtn:hover,
@@ -114,11 +121,12 @@
   .app-connected .site__header .mobile-menu-toggle:hover {
     border-color: var(--app-orange) !important;
     background: var(--app-orange) !important;
+    color: #fff !important;
   }
 
   .app-connected .site__header .theme-switch {
-    border-color: rgba(255, 255, 255, .2) !important;
-    background: rgba(255, 145, 0, .32) !important;
+    border-color: rgba(49, 95, 187, .22) !important;
+    background: rgba(49, 95, 187, .12) !important;
   }
 
   .app-connected .site__header .header-main-row {
@@ -140,7 +148,7 @@
     background: #fff;
     border: 0;
     border-radius: 0;
-    box-shadow: none;
+    box-shadow: 0 10px 24px rgba(49, 95, 187, .12);
     text-decoration: none;
   }
 
@@ -182,9 +190,9 @@
 
   .app-connected .site__header .header-search .search-input {
     height: 48px;
-    border: 1px solid rgba(255, 255, 255, .18) !important;
+    border: 1px solid rgba(49, 95, 187, .2) !important;
     border-radius: var(--app-radius) !important;
-    background: #fff !important;
+    background: #f8fafc !important;
     color: var(--app-ink) !important;
   }
 
@@ -199,26 +207,26 @@
 
   .app-connected .site__header .voice-search-btn {
     border-radius: 6px;
-    background: #f2f4f7;
+    background: rgba(255, 145, 0, .12);
   }
 
   .app-connected .site__header .indicator-btn {
     min-height: 48px;
-    border: 1px solid rgba(255, 255, 255, .15);
+    border: 1px solid rgba(49, 95, 187, .18);
     border-radius: var(--app-radius);
-    background: rgba(255, 255, 255, .07);
-    color: #fff;
+    background: #fff;
+    color: var(--app-ink);
   }
 
   .app-connected .site__header .indicator-btn:hover {
     border-color: rgba(255, 145, 0, .7);
-    background: rgba(255, 145, 0, .12);
+    background: rgba(255, 145, 0, .08);
   }
 
   .app-connected .site__header .indicator-title,
   .app-connected .site__header .indicator-value,
   .app-connected .site__header .indicator-cart #cartTotalMini {
-    color: #fff !important;
+    color: var(--app-ink) !important;
   }
 
   .app-connected .site__header .indicator-icon {
@@ -229,7 +237,7 @@
 
   .app-connected .site__header .header__navbar {
     padding: 0;
-    border-top-color: rgba(255, 255, 255, .12);
+    border-top-color: rgba(49, 95, 187, .12);
     border-bottom: 3px solid var(--app-orange);
   }
 
@@ -240,8 +248,8 @@
   .app-connected .site__header .main-menu__link {
     min-height: 44px;
     padding: 7px 12px;
-    border-right: 1px solid rgba(255, 255, 255, .1);
-    color: rgba(255, 255, 255, .88);
+    border-right: 1px solid rgba(49, 95, 187, .12);
+    color: var(--app-blue);
     font-size: .76rem;
     text-transform: uppercase;
   }
@@ -322,9 +330,10 @@
     border: 0 !important;
     border-left: 5px solid var(--app-orange) !important;
     border-radius: var(--app-radius) !important;
-    background: var(--app-black) !important;
-    box-shadow: 0 16px 36px rgba(8, 10, 15, .18) !important;
+    background: var(--app-panel-blue) !important;
+    box-shadow: 0 18px 42px rgba(49, 95, 187, .20) !important;
     color: #fff !important;
+    overflow: hidden;
   }
 
   .app-connected .page-hero h1,
@@ -460,8 +469,12 @@
   .app-connected .hero-card {
     border-left: 4px solid var(--app-orange) !important;
     border-radius: var(--app-radius) !important;
-    background: rgba(8, 10, 15, .84) !important;
-    box-shadow: 0 18px 42px rgba(0, 0, 0, .24) !important;
+    border-color: rgba(255, 255, 255, .22) !important;
+    border-left-color: var(--app-orange) !important;
+    background: linear-gradient(135deg, rgba(16, 46, 99, .64), rgba(49, 95, 187, .28)) !important;
+    box-shadow: 0 24px 58px rgba(7, 26, 58, .34) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .app-connected .hero-title {
@@ -540,9 +553,10 @@
   }
 
   .app-connected .card-header {
-    border-bottom: 1px solid var(--app-line);
-    background: var(--app-black);
-    color: #fff;
+    border-bottom: 1px solid rgba(49, 95, 187, .16);
+    border-left: 4px solid var(--app-orange);
+    background: var(--app-panel-blue-soft);
+    color: var(--app-blue-dark);
     font-weight: 800;
   }
 
@@ -617,8 +631,8 @@
   }
 
   .app-connected .table thead th {
-    border-color: rgba(255, 255, 255, .12) !important;
-    background: var(--app-black) !important;
+    border-color: rgba(255, 255, 255, .16) !important;
+    background: linear-gradient(135deg, var(--app-blue-dark), var(--app-blue)) !important;
     color: #fff !important;
     font-size: .72rem !important;
     font-weight: 700 !important;
@@ -717,8 +731,8 @@
   }
 
   .app-connected .btn-outline-secondary:hover {
-    border-color: var(--app-black) !important;
-    background: var(--app-black) !important;
+    border-color: var(--app-blue-dark) !important;
+    background: var(--app-blue-dark) !important;
     color: #fff !important;
   }
 
@@ -762,8 +776,8 @@
   }
 
   .app-connected #cartOffcanvas .offcanvas-header {
-    border-bottom: 1px solid #dfe3e8;
-    background: #080a0f;
+    border-bottom: 3px solid var(--app-orange);
+    background: var(--app-panel-blue);
     color: #fff;
   }
 
