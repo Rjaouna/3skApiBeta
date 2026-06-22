@@ -43,6 +43,39 @@
     object-fit: cover;
   }
 
+  .hero-img--ken-burns {
+    --ken-burns-start-x: -1.25%;
+    --ken-burns-start-y: .5%;
+    --ken-burns-end-x: 1.25%;
+    --ken-burns-end-y: -.75%;
+    backface-visibility: hidden;
+    transform: translate3d(var(--ken-burns-start-x), var(--ken-burns-start-y), 0) scale(1.045);
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  .hero-carousel .carousel-item:nth-child(even) .hero-img--ken-burns {
+    --ken-burns-start-x: 1.25%;
+    --ken-burns-start-y: -.5%;
+    --ken-burns-end-x: -1.25%;
+    --ken-burns-end-y: .75%;
+  }
+
+  .hero-carousel .carousel-item.active .hero-img--ken-burns,
+  .hero-carousel .carousel-item-next .hero-img--ken-burns,
+  .hero-carousel .carousel-item-prev .hero-img--ken-burns {
+    animation: hero-ken-burns 7s ease-out both;
+  }
+
+  @keyframes hero-ken-burns {
+    from {
+      transform: translate3d(var(--ken-burns-start-x), var(--ken-burns-start-y), 0) scale(1.045);
+    }
+    to {
+      transform: translate3d(var(--ken-burns-end-x), var(--ken-burns-end-y), 0) scale(1.13);
+    }
+  }
+
   .hero-video{
     height: clamp(360px, 52vw, 620px);
   }
@@ -230,6 +263,17 @@
     .hero-carousel-full .hero-video{ height: 500px; min-height: 500px; }
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .hero-img--ken-burns,
+    .hero-carousel .carousel-item.active .hero-img--ken-burns,
+    .hero-carousel .carousel-item-next .hero-img--ken-burns,
+    .hero-carousel .carousel-item-prev .hero-img--ken-burns {
+      animation: none;
+      transform: none;
+      will-change: auto;
+    }
+  }
+
   .hero-admin-actions{
     position:absolute;
     top: calc(var(--pad) + 10px);
@@ -284,7 +328,7 @@
                 </video>
               {% else %}
                 <img src="{{ mediaPath }}"
-                     class="hero-img"
+                     class="hero-img hero-img--ken-burns"
                      alt="{{ s.altText|default(s.title|default('Slide')) }}"
                      loading="lazy">
               {% endif %}

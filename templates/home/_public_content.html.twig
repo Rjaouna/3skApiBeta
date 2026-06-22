@@ -642,8 +642,10 @@
   }
 
   .public-intro-v2 {
+    --intro-parallax-y: 0px;
     position: relative;
     isolation: isolate;
+    overflow: hidden;
     background: #fff;
     border-bottom: 1px solid rgba(16,24,40,.08);
   }
@@ -652,12 +654,17 @@
     content: "";
     position: absolute;
     z-index: -1;
-    top: 2rem;
-    right: -5%;
-    width: min(650px, 48vw);
-    aspect-ratio: 4 / 3;
-    background: url('{{ asset('img/bg-section/about-parts.png') }}') center / contain no-repeat;
-    opacity: .055;
+    top: -9%;
+    right: 0;
+    bottom: -9%;
+    width: min(680px, 48vw);
+    background: url('{{ asset('img/bg-section/stock-cartons-depo-pieces-carrosserie-3sk-parts-auto.png') }}') center / cover no-repeat;
+    opacity: .09;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .45) 24%, #000 52%, #000 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .45) 24%, #000 52%, #000 100%);
+    transform: translate3d(0, var(--intro-parallax-y), 0) scale(1.04);
+    transform-origin: center;
+    will-change: transform;
     pointer-events: none;
   }
 
@@ -717,7 +724,10 @@
 
   .public-about-v2 .about-visual {
     position: relative;
-    min-height: 470px;
+    width: min(100%, 500px);
+    aspect-ratio: 3 / 4;
+    min-height: 0;
+    margin-inline: auto;
     overflow: hidden;
     border-radius: 8px;
     background: #f4f6f8;
@@ -727,8 +737,10 @@
   .public-about-v2 .about-visual img {
     width: 100%;
     height: 100%;
-    min-height: 470px;
+    min-height: 0;
+    display: block;
     object-fit: cover;
+    object-position: center;
   }
 
   .public-about-v2 .about-visual::after {
@@ -840,16 +852,25 @@
     line-height: 1.2;
   }
 
-  .public-services-v2 .public-stock-carousel,
+  .public-services-v2 .public-stock-carousel {
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+    background: #fff;
+  }
+
   .public-services-v2 .public-stock-carousel .carousel-inner,
   .public-services-v2 .public-stock-carousel .carousel-item {
-    min-height: 360px;
+    height: 100%;
+    min-height: 0;
   }
 
   .public-services-v2 .public-stock-carousel img {
     width: 100%;
-    height: 360px;
-    object-fit: cover;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+    background: #fff;
   }
 
   .public-brands-v2 {
@@ -1187,14 +1208,20 @@
     }
 
     .public-intro-v2::after {
-      width: 100%;
-      right: -35%;
-      opacity: .035;
+      top: 0;
+      right: -16%;
+      bottom: 0;
+      width: 92%;
+      opacity: .05;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .5) 28%, #000 62%, #000 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .5) 28%, #000 62%, #000 100%);
+      transform: none;
+      will-change: auto;
     }
 
     .public-about-v2 .about-visual,
     .public-about-v2 .about-visual img {
-      min-height: 290px;
+      min-height: 0;
     }
 
     .public-about-v2 .about-metrics {
@@ -1216,8 +1243,17 @@
     .public-services-v2 .public-stock-carousel .carousel-inner,
     .public-services-v2 .public-stock-carousel .carousel-item,
     .public-services-v2 .public-stock-carousel img {
-      height: 300px;
-      min-height: 300px;
+      min-height: 0;
+    }
+
+    .public-services-v2 .public-stock-carousel {
+      height: auto;
+    }
+
+    .public-services-v2 .public-stock-carousel .carousel-inner,
+    .public-services-v2 .public-stock-carousel .carousel-item,
+    .public-services-v2 .public-stock-carousel img {
+      height: 100%;
     }
 
     .public-brands-v2 .brands-heading {
@@ -1582,7 +1618,9 @@
         <div class="row align-items-center g-5">
           <div class="col-12 col-lg-6">
             <div class="about-visual">
-              <img src="{{ asset('img/bg-section/about-parts.png') }}" alt="Pièces automobiles 3SK Parts Auto">
+              <img src="{{ asset('img/bg-section/stock-entrepot-pieces-carrosserie-automobile-3sk-parts-auto.jpeg') }}"
+                   alt="Stock de pièces carrosserie dans l'entrepôt 3SK Parts Auto"
+                   loading="lazy">
             </div>
           </div>
           <div class="col-12 col-lg-6">
@@ -1811,6 +1849,34 @@
   </main>
 
   <script>
+    (() => {
+      const introSection = document.querySelector('.public-intro-v2');
+      const parallaxEnabled = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)');
+
+      if (!introSection || !parallaxEnabled.matches) return;
+
+      let animationFrame = null;
+
+      const updateIntroParallax = () => {
+        const bounds = introSection.getBoundingClientRect();
+        const sectionCenter = bounds.top + (bounds.height / 2);
+        const viewportCenter = window.innerHeight / 2;
+        const offset = Math.max(-28, Math.min(28, (viewportCenter - sectionCenter) * .08));
+
+        introSection.style.setProperty('--intro-parallax-y', `${offset}px`);
+        animationFrame = null;
+      };
+
+      const requestIntroParallaxUpdate = () => {
+        if (animationFrame !== null) return;
+        animationFrame = window.requestAnimationFrame(updateIntroParallax);
+      };
+
+      window.addEventListener('scroll', requestIntroParallaxUpdate, { passive: true });
+      window.addEventListener('resize', requestIntroParallaxUpdate, { passive: true });
+      updateIntroParallax();
+    })();
+
     (() => {
       const form = document.querySelector('[data-contact-form]');
       if (!form) return;
