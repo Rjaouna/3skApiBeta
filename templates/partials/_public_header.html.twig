@@ -15,18 +15,18 @@
     position: sticky;
     top: 0;
     z-index: 1030;
-    box-shadow: 0 10px 28px rgba(16,24,40,.08);
+    filter: drop-shadow(0 12px 24px rgba(16,24,40,.08));
   }
 
   .public-shell .public-topbar {
     position: relative;
     overflow: hidden;
     background: #fff;
-    border-bottom: 1px solid rgba(49,95,187,.12);
+    border-bottom: 2px solid var(--public-blue);
     color: var(--public-ink);
     font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    min-height: 37px;
+    font-size: 13px;
+    min-height: 54px;
     text-transform: uppercase;
   }
 
@@ -39,9 +39,14 @@
   .public-shell .public-topbar a {
     color: var(--public-blue);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1;
     white-space: nowrap;
+  }
+
+  .public-shell .public-topbar-contact i {
+    margin-right: .5rem !important;
+    font-size: 1.05rem;
   }
 
   .public-shell .public-topbar a:hover {
@@ -49,15 +54,15 @@
   }
 
   .public-shell .public-topbar-contact {
-    min-height: 37px;
+    min-height: 54px;
   }
 
   .public-shell .public-topbar-contact a + a::before {
     content: "";
     display: inline-block;
     width: 1px;
-    height: 12px;
-    margin: 0 14px 0 10px;
+    height: 22px;
+    margin: 0 22px 0 18px;
     background: rgba(49,95,187,.2);
     vertical-align: middle;
   }
@@ -66,102 +71,71 @@
     position: relative;
     display: inline-flex;
     align-items: center;
-    gap: .85rem;
-    min-height: 37px;
-    padding: 0 1.05rem;
-    margin-block: -0.5rem;
-    background: rgba(255,145,0,.88);
-    color: #fff;
-    box-shadow: 0 10px 24px rgba(255,145,0,.14);
+    gap: .9rem;
+    min-height: 54px;
+    color: var(--public-orange);
   }
 
   .public-shell .public-topbar-actions::before,
   .public-shell .public-topbar-actions::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-  }
-
-  .public-shell .public-topbar-actions::before {
-    right: 100%;
-    border-width: 0 13px 37px 0;
-    border-color: transparent rgba(255,145,0,.88) transparent transparent;
-  }
-
-  .public-shell .public-topbar-actions::after {
-    left: 100%;
-    border-width: 37px 0 0 11px;
-    border-color: transparent transparent transparent rgba(255,145,0,.88);
+    display: none;
   }
 
   .public-shell .public-topbar-actions a {
     display: inline-flex;
     align-items: center;
-    gap: .42rem;
-    color: #fff;
+    justify-content: center;
+    gap: .55rem;
+    min-height: 42px;
+    padding: .75rem 1.15rem;
+    border: 1px solid rgba(16,24,40,.05);
+    border-radius: 999px;
+    color: var(--public-orange);
+    background: #fff;
+    box-shadow: 0 8px 22px rgba(16,24,40,.12);
+    transition: color .18s ease, background .18s ease, transform .18s ease, box-shadow .18s ease;
   }
 
   .public-shell .public-topbar-actions a:hover {
-    color: rgba(255,255,255,.82);
+    color: #fff;
+    background: var(--public-orange);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 26px rgba(255,145,0,.22);
   }
 
   .public-shell .public-topbar-separator {
     width: 1px;
-    height: 12px;
-    background: rgba(255,255,255,.55);
+    height: 26px;
+    background: rgba(16,24,40,.14);
   }
 
   .public-shell .public-navbar {
-    border-bottom: 1px solid rgba(49,95,187,.12);
+    min-height: 146px;
+    border: 0;
+    border-radius: 0 0 32px 32px;
     background: #fff;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    box-shadow: none;
+    box-shadow: 0 14px 32px rgba(16,24,40,.08);
+    overflow: hidden;
   }
 
   .public-shell .public-navbar .navbar-brand {
-    --logo-panel-height: 100px;
-    --logo-panel-angle: 34px;
-    position: relative;
-    isolation: isolate;
     display: inline-flex;
     align-items: center;
-    min-height: var(--logo-panel-height);
-    background: #fff;
-    border-radius: 0;
-    padding: 0 1.35rem;
-    margin-left: 1.25rem;
-    margin-right: 1.55rem;
-    box-shadow: 0 10px 24px rgba(49,95,187,.12);
+    min-height: 124px;
+    padding: 0;
+    margin-left: 2rem;
+    margin-right: 2.5rem;
   }
 
   .public-shell .public-navbar .navbar-brand::before,
   .public-shell .public-navbar .navbar-brand::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-  }
-
-  .public-shell .public-navbar .navbar-brand::before {
-    right: 100%;
-    border-width: 0 var(--logo-panel-angle) var(--logo-panel-height) 0;
-    border-color: transparent #fff transparent transparent;
-  }
-
-  .public-shell .public-navbar .navbar-brand::after {
-    left: 100%;
-    border-width: var(--logo-panel-height) 0 0 var(--logo-panel-angle);
-    border-color: transparent transparent transparent #fff;
+    display: none;
   }
 
   .public-shell .public-navbar .navbar-brand img {
-    height: 100px;
+    height: 118px;
     width: auto;
     object-fit: contain;
     display: block;
@@ -170,13 +144,13 @@
   .public-shell .public-navbar .nav-link {
     color: var(--public-blue);
     font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .015em;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0;
     text-transform: uppercase;
     position: relative;
-    padding: 1.75rem 0 !important;
-    margin: 0 1.05rem;
+    padding: 2.55rem 0 !important;
+    margin: 0 1.25rem;
   }
 
   .public-shell .public-navbar .nav-link::after {
@@ -184,8 +158,8 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 1.3rem;
-    height: 2px;
+    bottom: 1.95rem;
+    height: 3px;
     border-radius: 0;
     background: var(--public-orange);
     transform: scaleX(0);
@@ -198,8 +172,13 @@
     color: var(--public-orange);
   }
 
+  .public-shell .public-navbar .nav-link.active {
+    color: var(--public-blue);
+  }
+
   .public-shell .public-navbar .nav-link:hover::after,
-  .public-shell .public-navbar .nav-link:focus::after {
+  .public-shell .public-navbar .nav-link:focus::after,
+  .public-shell .public-navbar .nav-link.active::after {
     transform: scaleX(1);
   }
 
@@ -219,16 +198,30 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    border-radius: 0 !important;
+    min-height: 58px;
+    border-radius: 10px !important;
     background: var(--public-orange) !important;
     border-color: var(--public-orange) !important;
     color: #fff !important;
-    box-shadow: none !important;
+    box-shadow: 0 10px 24px rgba(255,145,0,.18) !important;
     font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
+    font-size: 15px;
     line-height: 1;
     text-transform: uppercase;
-    padding-block: .68rem;
+    padding: 1.1rem 1.8rem !important;
+  }
+
+  .public-shell .public-menu-cta-item {
+    display: flex;
+    align-items: center;
+  }
+
+  .public-shell .public-menu-cta-item::before {
+    content: "";
+    width: 1px;
+    height: 34px;
+    margin: 0 1.6rem 0 .8rem;
+    background: rgba(16,24,40,.18);
   }
 
   .public-shell .public-menu-cta:hover {
@@ -237,7 +230,49 @@
     color: #fff !important;
   }
 
+  @media (min-width: 992px) and (max-width: 1299px) {
+    .public-shell .public-navbar .navbar-brand {
+      min-height: 92px;
+      margin-left: .75rem;
+      margin-right: 1.25rem;
+    }
+
+    .public-shell .public-navbar .navbar-brand img {
+      height: 84px;
+    }
+
+    .public-shell .public-navbar .nav-link {
+      font-size: 11.5px;
+      margin: 0 .58rem;
+    }
+
+    .public-shell .public-menu-cta {
+      min-height: 48px;
+      font-size: 11.5px;
+      padding: .85rem 1rem !important;
+    }
+
+    .public-shell .public-menu-cta-item::before {
+      margin-inline: .65rem 1rem;
+    }
+  }
+
   @media (max-width: 991px) {
+    .public-shell .public-navbar {
+      min-height: 84px;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .public-shell .public-navbar .navbar-brand {
+      min-height: 68px;
+      margin-left: .5rem;
+      margin-right: 1rem;
+    }
+
+    .public-shell .public-navbar .navbar-brand img {
+      height: 66px;
+    }
+
     .public-shell .public-navbar .nav-link {
       margin: 0;
       padding: .85rem 0 !important;
@@ -257,11 +292,15 @@
       width: 100%;
       padding-block: .9rem !important;
     }
+
+    .public-shell .public-menu-cta-item::before {
+      display: none;
+    }
   }
 
   @media (max-width: 575px) {
     .public-shell .public-topbar {
-      font-size: 10px;
+      font-size: 11px;
     }
 
     .public-shell .public-topbar-contact a + a::before,
@@ -272,18 +311,24 @@
 
     .public-shell .public-topbar-actions {
       width: 100%;
+      min-height: 0;
+      flex-wrap: wrap;
       justify-content: center;
       margin-block: 0;
       padding: .7rem 1rem;
       border-radius: 0;
     }
 
+    .public-shell .public-topbar-actions a {
+      min-height: 38px;
+      padding: .65rem .9rem;
+    }
+
     .public-shell .public-navbar .navbar-brand {
-      --logo-panel-height: 68px;
-      --logo-panel-angle: 20px;
-      margin-left: 1rem;
+      min-height: 62px;
+      margin-left: .25rem;
       margin-right: 1rem;
-      padding: .32rem 1rem;
+      padding: 0;
     }
 
     .public-shell .public-navbar .navbar-brand img {
@@ -320,12 +365,12 @@
 
       <div class="collapse navbar-collapse" id="{{ public_header_nav_id }}">
         <ul class="navbar-nav ms-auto align-items-lg-center">
-          <li class="nav-item"><a class="nav-link fw-semibold" href="{{ public_header_anchor_prefix }}#accueil">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold {{ public_header_is_home ? 'active' : '' }}" href="{{ public_header_anchor_prefix }}#accueil" {{ public_header_is_home ? 'aria-current="page"' : '' }}>Accueil</a></li>
           <li class="nav-item"><a class="nav-link fw-semibold" href="{{ public_header_anchor_prefix }}#qui-sommes-nous">Qui sommes-nous</a></li>
           <li class="nav-item"><a class="nav-link fw-semibold" href="{{ public_header_anchor_prefix }}#services">Services</a></li>
           <li class="nav-item"><a class="nav-link fw-semibold" href="{{ public_header_anchor_prefix }}#marques">Marques</a></li>
           <li class="nav-item"><a class="nav-link fw-semibold" href="{{ public_header_anchor_prefix }}#contact">Contact</a></li>
-          <li class="nav-item mt-2 mt-lg-0">
+          <li class="nav-item public-menu-cta-item mt-2 mt-lg-0">
             <a href="{{ path('app_login') }}" class="btn btn-primary public-menu-cta px-4 fw-bold"><i class="fa-solid fa-arrow-right-to-bracket me-2"></i>Espace client</a>
           </li>
         </ul>
