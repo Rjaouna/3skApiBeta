@@ -139,6 +139,15 @@ class Clients1ImportCommand extends Command
         $errors = [];
         $generatedEmails = 0;
         $processedSinceFlush = 0;
+        $generatedEmailRegistry = [];
+        $defaultPasswordHash = null;
+
+        if (!$dryRun && $defaultPassword !== null) {
+            $defaultPasswordHash = $this->passwordHasher->hashPassword(new User(), $defaultPassword);
+        }
+
+        $progressBar = $io->createProgressBar(count($rows));
+        $progressBar->start();
 
         foreach ($rows as $lineNumber => $row) {
             try {
@@ -176,6 +185,8 @@ class Clients1ImportCommand extends Command
                         continue;
                     } else {
                         $email = $this->buildGeneratedEmail($fullName, $customerCode, $lineNumber, $generatedEmailDomain);
+                        $email = $this->deduplicateGeneratedEmail($email, $fullName, $customerCode, $lineNumber, $generatedEmailDomain, $generatedEmailRegistry);
+                        $generatedEmailRegistry[$email] = true;
                         $generatedEmails++;
                     }
                 }
@@ -213,8 +224,12 @@ class Clients1ImportCommand extends Command
 
                 $plainPassword = $this->normalizeText($data['password'] ?? null);
                 if (!$dryRun && ($isNew || $plainPassword !== null)) {
-                    $plainPassword ??= $defaultPassword ?: bin2hex(random_bytes(8));
-                    $user->setPassword($this->passwordHasher->hashPassword($user, $plainPassword));
+                    if ($plainPassword === null && $defaultPasswordHash !== null) {
+                        $user->setPassword($defaultPasswordHash);
+                    } else {
+                        $plainPassword ??= bin2hex(random_bytes(8));
+                        $user->setPassword($this->passwordHasher->hashPassword($user, $plainPassword));
+                    }
                 } elseif ($dryRun && $isNew) {
                     $user->setPassword('dry-run-password');
                 }
@@ -239,8 +254,13 @@ class Clients1ImportCommand extends Command
                 $errors[] = sprintf('Ligne %d : %s', $lineNumber, $exception->getMessage());
                 $this->entityManager->clear();
                 $processedSinceFlush = 0;
+            } finally {
+                $progressBar->advance();
             }
         }
+
+        $progressBar->finish();
+        $io->newLine(2);
 
         if (!$dryRun && $processedSinceFlush > 0) {
             $this->entityManager->flush();
@@ -578,6 +598,31 @@ class Clients1ImportCommand extends Command
         }
 
         return sprintf('%s@%s', $slug, $domain);
+    }
+
+    /**
+     * @param array<string, bool> $registry
+     */
+    private function deduplicateGeneratedEmail(
+        string $email,
+        ?string $fullName,
+        ?string $customerCode,
+        int $lineNumber,
+        string $domain,
+        array $registry
+    ): string {
+        if (!isset($registry[$email]) && !($this->userRepository->findOneBy(['email' => $email]) instanceof User)) {
+            return $email;
+        }
+
+        $source = trim(sprintf('%s %s', (string) ($fullName ?: 'client'), (string) ($customerCode ?: 'ligne-' . $lineNumber)));
+        $deduplicated = $this->buildGeneratedEmail($source, null, $lineNumber, $domain);
+
+        if (!isset($registry[$deduplicated]) && !($this->userRepository->findOneBy(['email' => $deduplicated]) instanceof User)) {
+            return $deduplicated;
+        }
+
+        return $this->buildGeneratedEmail($source . ' ' . $lineNumber, null, $lineNumber, $domain);
     }
 
     private function normalizeHeader(string $value): string
