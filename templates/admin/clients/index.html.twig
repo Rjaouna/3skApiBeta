@@ -129,18 +129,37 @@
 
   .clients-table{
     margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .clients-table thead,
+  .clients-table thead tr{
+    background: var(--bs-tertiary-bg, #f8f9fa) !important;
   }
 
   .clients-table thead th{
+    --bs-table-bg: var(--bs-tertiary-bg, #f8f9fa);
+    --bs-table-color: var(--oc-muted);
     border-bottom: 1px solid var(--oc-border);
-    color: var(--oc-muted);
-    font-size: .78rem;
+    color: var(--oc-muted) !important;
+    font-size: .72rem;
     text-transform: uppercase;
     letter-spacing: .04em;
     font-weight: 900;
-    padding: 14px 12px;
+    padding: 12px;
     white-space: nowrap;
-    background: transparent;
+    background: var(--bs-tertiary-bg, #f8f9fa) !important;
+    background-color: var(--bs-tertiary-bg, #f8f9fa) !important;
+    box-shadow: none !important;
+  }
+
+  .clients-table thead th:first-child{
+    border-top-left-radius: 14px;
+  }
+
+  .clients-table thead th:last-child{
+    border-top-right-radius: 14px;
   }
 
   .clients-table tbody tr{
@@ -162,25 +181,48 @@
     border-color: rgba(255,255,255,.08);
   }
 
-  .client-email{
+  .client-primary-name{
     font-weight: 900;
     color: var(--oc-text);
     line-height: 1.2;
     word-break: break-word;
   }
 
-  .client-address{
-    margin-top: 4px;
-    font-size: .82rem;
+  .client-secondary-email{
+    margin-top: 5px;
     color: var(--oc-muted);
-    font-weight: 700;
+    font-size: .80rem;
+    font-weight: 500;
+    line-height: 1.25;
+    word-break: break-word;
   }
 
-  .client-company,
+  .client-address{
+    margin-top: 3px;
+    font-size: .78rem;
+    color: var(--oc-muted);
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
   .client-code,
   .client-city{
     font-weight: 800;
     color: var(--oc-text);
+  }
+
+  .clients-filter-select{
+    min-height: 44px;
+    border-radius: 14px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.72);
+    color: var(--oc-text);
+    font-weight: 800;
+    box-shadow: none;
+  }
+
+  body.theme-dark .clients-filter-select{
+    background: rgba(255,255,255,.06);
   }
 
   .client-actions{
@@ -219,6 +261,27 @@
     background: rgba(108,117,125,.14);
     color: rgba(73,80,87,1);
     border-color: rgba(108,117,125,.20);
+  }
+
+  .clients-pagination{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+
+  .clients-page-info{
+    color: var(--oc-muted);
+    font-size: .84rem;
+    font-weight: 700;
+  }
+
+  .clients-page-btn{
+    min-height: 40px;
+    border-radius: 12px;
+    font-weight: 900;
   }
 
   body.theme-dark .client-status-inactive{
@@ -357,6 +420,23 @@
     .clients-btn{
       width: 100%;
     }
+
+    .clients-filter-select{
+      width: 100%;
+    }
+
+    .clients-pagination{
+      justify-content: stretch;
+    }
+
+    .clients-page-btn{
+      flex: 1 1 0;
+    }
+
+    .clients-page-info{
+      width: 100%;
+      text-align: center;
+    }
   }
 </style>
 
@@ -384,6 +464,20 @@
           >
         </div>
 
+        <select class="form-select clients-filter-select" id="statusFilter" aria-label="Filtrer par statut">
+          <option value="">Tous les statuts</option>
+          <option value="1">Actifs</option>
+          <option value="0">Inactifs</option>
+        </select>
+
+        <input
+          type="text"
+          class="form-control clients-filter-select"
+          id="cityFilter"
+          placeholder="Ville"
+          aria-label="Filtrer par ville"
+        >
+
         <button class="btn btn-outline-secondary clients-btn" id="btnReload" type="button">
           <i class="fa-solid fa-rotate-right me-2"></i>Actualiser
         </button>
@@ -400,8 +494,7 @@
         <table class="table clients-table align-middle mb-0">
           <thead>
             <tr>
-              <th>Email</th>
-              <th>Société</th>
+              <th>Client</th>
               <th>Code client</th>
               <th>Ville</th>
               <th>Statut</th>
@@ -410,11 +503,13 @@
           </thead>
           <tbody id="clientsTbody">
             <tr>
-              <td colspan="6" class="text-muted">Chargement…</td>
+              <td colspan="5" class="text-muted">Chargement…</td>
             </tr>
           </tbody>
         </table>
       </div>
+
+      <div class="clients-pagination d-none" id="clientsPagination"></div>
     </div>
   </div>
 </div>
@@ -501,6 +596,9 @@
   const formError = document.getElementById('formError');
   const clientsCount = document.getElementById('clientsCount');
   const searchInput = document.getElementById('searchInput');
+  const statusFilter = document.getElementById('statusFilter');
+  const cityFilter = document.getElementById('cityFilter');
+  const clientsPagination = document.getElementById('clientsPagination');
   const btnReload = document.getElementById('btnReload');
   const btnNewClient = document.getElementById('btnNewClient');
   const btnSaveClient = document.getElementById('btnSaveClient');
@@ -531,6 +629,7 @@
   const API_DELETE_PATTERN = "{{ path('admin_clients_delete', {id: 999999}) }}";
 
   let currentItems = [];
+  let currentPage = 1;
   let searchTimer = null;
 
   function esc(s){
@@ -608,11 +707,45 @@
     return API_DELETE_PATTERN.replace('999999', String(id));
   }
 
-  function renderRows(items){
+  function renderPagination(meta){
+    if (!clientsPagination) return;
+
+    const total = Number(meta?.total || 0);
+    const page = Number(meta?.page || 1);
+    const pages = Number(meta?.pages || 1);
+    const limit = Number(meta?.limit || 20);
+
+    if (total <= limit || pages <= 1) {
+      clientsPagination.classList.add('d-none');
+      clientsPagination.innerHTML = '';
+      return;
+    }
+
+    clientsPagination.classList.remove('d-none');
+    clientsPagination.innerHTML = `
+      <button class="btn btn-outline-secondary clients-page-btn" type="button" data-page-prev ${page <= 1 ? 'disabled' : ''}>
+        <i class="fa-solid fa-chevron-left me-1"></i>Précédent
+      </button>
+      <div class="clients-page-info">Page ${page} / ${pages} · ${total} clients</div>
+      <button class="btn btn-outline-secondary clients-page-btn" type="button" data-page-next ${page >= pages ? 'disabled' : ''}>
+        Suivant<i class="fa-solid fa-chevron-right ms-1"></i>
+      </button>
+    `;
+
+    clientsPagination.querySelector('[data-page-prev]')?.addEventListener('click', () => {
+      if (currentPage > 1) loadClients(currentPage - 1);
+    });
+
+    clientsPagination.querySelector('[data-page-next]')?.addEventListener('click', () => {
+      if (currentPage < pages) loadClients(currentPage + 1);
+    });
+  }
+
+  function renderRows(items, meta = {}){
     currentItems = items || [];
 
     if (clientsCount) {
-      const total = currentItems.length;
+      const total = Number(meta.total ?? currentItems.length);
       clientsCount.innerHTML = `
         <i class="fa-solid fa-users"></i>
         <span>${total} ${total > 1 ? 'clients' : 'client'}</span>
@@ -624,7 +757,7 @@
     if (!currentItems.length) {
       tbody.innerHTML = `
         <tr>
-          <td colspan="6">
+          <td colspan="5">
             <div class="clients-empty my-2">
               <i class="fa-solid fa-user-slash"></i>
               <div class="fw-bold mb-1">Aucun client trouvé</div>
@@ -633,17 +766,20 @@
           </td>
         </tr>
       `;
+      renderPagination(meta);
       return;
     }
 
-    tbody.innerHTML = currentItems.map(item => `
+    tbody.innerHTML = currentItems.map(item => {
+      const displayName = item.companyName || item.email || '—';
+      const secondaryEmail = item.companyName && item.email ? item.email : '';
+
+      return `
       <tr>
         <td>
-          <div class="client-email">${esc(item.email || '')}</div>
-          <div class="client-address">${esc(item.address1 || '')}</div>
-        </td>
-        <td>
-          <div class="client-company">${esc(item.companyName || '—')}</div>
+          <div class="client-primary-name">${esc(displayName)}</div>
+          ${secondaryEmail ? `<div class="client-secondary-email">${esc(secondaryEmail)}</div>` : ''}
+          <div class="client-address">${esc(item.address1 || item.address2 || '')}</div>
         </td>
         <td>
           <div class="client-code">${esc(item.customerCode || '—')}</div>
@@ -669,7 +805,8 @@
           </div>
         </td>
       </tr>
-    `).join('');
+    `;
+    }).join('');
 
     tbody.querySelectorAll('[data-edit]').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -690,7 +827,7 @@
         const item = currentItems.find(x => Number(x.id) === id);
         if (!item) return;
 
-        const ok = confirm(`Supprimer le client ${item.email} ?`);
+        const ok = confirm(`Supprimer le client ${item.companyName || item.email || ''} ?`);
         if (!ok) return;
 
         btn.disabled = true;
@@ -717,18 +854,26 @@
         }
       });
     });
+
+    renderPagination(meta);
   }
 
-  async function loadClients(){
+  async function loadClients(page = currentPage){
+    currentPage = Math.max(1, Number(page) || 1);
     setPageError('');
     if (tbody) {
-      tbody.innerHTML = `<tr><td colspan="6" class="text-muted">Chargement…</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="5" class="text-muted">Chargement…</td></tr>`;
     }
 
     try {
       const q = searchInput?.value?.trim() || '';
+      const active = statusFilter?.value || '';
+      const city = cityFilter?.value?.trim() || '';
       const url = new URL(API_LIST, window.location.origin);
       if (q) url.searchParams.set('q', q);
+      if (active !== '') url.searchParams.set('active', active);
+      if (city) url.searchParams.set('city', city);
+      url.searchParams.set('page', String(currentPage));
 
       const res = await fetch(url.toString(), {
         headers: { 'Accept': 'application/json' }
@@ -739,16 +884,17 @@
       if (!res.ok || !data.ok) {
         setPageError(data.message || 'Impossible de charger les clients');
         if (tbody) {
-          tbody.innerHTML = `<tr><td colspan="6" class="text-danger">Erreur chargement</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="5" class="text-danger">Erreur chargement</td></tr>`;
         }
         return;
       }
 
-      renderRows(data.items || []);
+      currentPage = Number(data.page || currentPage);
+      renderRows(data.items || [], data);
     } catch (e) {
       setPageError('Erreur réseau');
       if (tbody) {
-        tbody.innerHTML = `<tr><td colspan="6" class="text-danger">Erreur réseau</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" class="text-danger">Erreur réseau</td></tr>`;
       }
     }
   }
@@ -764,11 +910,18 @@
     }
   });
 
-  btnReload?.addEventListener('click', loadClients);
+  btnReload?.addEventListener('click', () => loadClients(currentPage));
 
   searchInput?.addEventListener('input', () => {
     clearTimeout(searchTimer);
-    searchTimer = setTimeout(loadClients, 300);
+    searchTimer = setTimeout(() => loadClients(1), 300);
+  });
+
+  statusFilter?.addEventListener('change', () => loadClients(1));
+
+  cityFilter?.addEventListener('input', () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => loadClients(1), 300);
   });
 
   btnSaveClient?.addEventListener('click', async () => {

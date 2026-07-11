@@ -273,14 +273,26 @@
 
         <div class="col-lg-7">
           <div class="h-100 d-flex flex-column justify-content-between">
-            <div>
-              <label class="form-label fw-semibold mb-2">Recherche rapide</label>
-              <input
-                type="text"
-                class="form-control family-search"
-                id="familySearchInput"
-                placeholder="Rechercher une catégorie..."
-              >
+            <div class="row g-2">
+              <div class="col-12 col-md-7">
+                <label class="form-label fw-semibold mb-2">Recherche rapide</label>
+                <input
+                  type="text"
+                  class="form-control family-search"
+                  id="familySearchInput"
+                  placeholder="Rechercher une catégorie..."
+                >
+              </div>
+
+              <div class="col-12 col-md-5">
+                <label class="form-label fw-semibold mb-2">État</label>
+                <select class="form-select family-search" id="familyStateFilter">
+                  <option value="">Tous</option>
+                  <option value="set">Avec réduction</option>
+                  <option value="empty">Sans réduction</option>
+                  <option value="mixed">Valeurs mixtes</option>
+                </select>
+              </div>
             </div>
 
             <div class="mt-3">
@@ -309,7 +321,11 @@
             </thead>
             <tbody id="familyReductionTable">
               {% for item in categories %}
-                <tr data-family-row data-family-name="{{ item.family|lower }}">
+                <tr
+                  data-family-row
+                  data-family-name="{{ item.family|lower }}"
+                  data-family-state="{{ item.isMixed ? 'mixed' : ((item.reduction is not null and item.reduction != '') ? 'set' : 'empty') }}"
+                >
                   <td>
                     <div class="family-name">{{ item.family }}</div>
                   </td>
@@ -371,6 +387,7 @@
   const successBox = document.getElementById('reductionSuccess');
   const errorBox = document.getElementById('reductionError');
   const searchInput = document.getElementById('familySearchInput');
+  const stateFilter = document.getElementById('familyStateFilter');
   const bulkApplyBtn = document.getElementById('bulkApplyBtn');
   const bulkResetBtn = document.getElementById('bulkResetBtn');
   const currentCycleBadge = document.getElementById('currentCycleBadge');
@@ -431,6 +448,7 @@
     if (forceMixed) {
       badge.className = 'badge text-bg-warning';
       badge.textContent = 'Valeurs mixtes';
+      row.setAttribute('data-family-state', 'mixed');
       return;
     }
 
@@ -438,13 +456,16 @@
       if (String(reduction) === '0') {
         badge.className = 'badge text-bg-secondary';
         badge.textContent = '0%';
+        row.setAttribute('data-family-state', 'empty');
       } else {
         badge.className = 'badge text-bg-success';
         badge.textContent = `${reduction}%`;
+        row.setAttribute('data-family-state', 'set');
       }
     } else {
       badge.className = 'badge text-bg-secondary';
       badge.textContent = 'Aucune';
+      row.setAttribute('data-family-state', 'empty');
     }
   }
 
@@ -583,14 +604,20 @@
     }
   });
 
-  searchInput?.addEventListener('input', () => {
+  function applyFamilyFilters(){
     const q = (searchInput.value || '').trim().toLowerCase();
+    const state = stateFilter?.value || '';
 
     document.querySelectorAll('[data-family-row]').forEach(row => {
       const family = row.getAttribute('data-family-name') || '';
-      row.classList.toggle('d-none', q !== '' && !family.includes(q));
+      const rowState = row.getAttribute('data-family-state') || '';
+      const visible = (q === '' || family.includes(q)) && (state === '' || state === rowState);
+      row.classList.toggle('d-none', !visible);
     });
-  });
+  }
+
+  searchInput?.addEventListener('input', applyFamilyFilters);
+  stateFilter?.addEventListener('change', applyFamilyFilters);
 
   refreshCycleUi();
 })();

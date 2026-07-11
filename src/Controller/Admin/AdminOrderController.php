@@ -21,10 +21,27 @@ class AdminOrderController extends AbstractController
     public function index(Request $request, CustomerOrderRepository $orderRepository)
     {
         $status = trim((string) $request->query->get('status', ''));
+        $query = trim((string) $request->query->get('q', ''));
+        $dateFromRaw = trim((string) $request->query->get('dateFrom', ''));
+        $dateToRaw = trim((string) $request->query->get('dateTo', ''));
+        $city = trim((string) $request->query->get('city', ''));
+
+        $dateFrom = $dateFromRaw !== '' ? \DateTimeImmutable::createFromFormat('!Y-m-d H:i:s', $dateFromRaw . ' 00:00:00') : null;
+        $dateTo = $dateToRaw !== '' ? \DateTimeImmutable::createFromFormat('!Y-m-d H:i:s', $dateToRaw . ' 23:59:59') : null;
 
         return $this->render('admin/order/index.html.twig', [
-            'orders' => $orderRepository->findAdminList($status !== '' ? $status : null),
+            'orders' => $orderRepository->findAdminList(
+                $status !== '' ? $status : null,
+                $query !== '' ? $query : null,
+                $dateFrom ?: null,
+                $dateTo ?: null,
+                $city !== '' ? $city : null
+            ),
             'currentStatus' => $status,
+            'currentQuery' => $query,
+            'currentDateFrom' => $dateFromRaw,
+            'currentDateTo' => $dateToRaw,
+            'currentCity' => $city,
             'labels' => CustomerOrder::getStatusLabels(),
             'statuses' => CustomerOrder::getAvailableStatuses(),
         ]);

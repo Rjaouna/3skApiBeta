@@ -79,6 +79,41 @@
     backdrop-filter: blur(8px);
   }
 
+  .ufd-filter-card{
+    border-radius: 20px;
+    border: 1px solid var(--ufd-border);
+    background: rgba(255,255,255,.62);
+    padding: 14px;
+  }
+
+  body.theme-dark .ufd-filter-card{
+    background: rgba(255,255,255,.04);
+  }
+
+  .ufd-filter-label{
+    font-size: .78rem;
+    font-weight: 900;
+    color: var(--ufd-muted);
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    margin-bottom: 6px;
+  }
+
+  .ufd-filter-card .form-control,
+  .ufd-filter-card .form-select{
+    min-height: 44px;
+    border-radius: 14px;
+    border: 1px solid var(--ufd-border);
+    background: rgba(255,255,255,.75);
+    color: var(--ufd-text);
+    font-weight: 800;
+  }
+
+  body.theme-dark .ufd-filter-card .form-control,
+  body.theme-dark .ufd-filter-card .form-select{
+    background: rgba(255,255,255,.06);
+  }
+
   .ufd-table-card .card-body{
     padding: 18px;
   }
@@ -297,6 +332,31 @@
     La famille doit correspondre à la valeur <strong>FamilyName</strong> des articles.
   </div>
 
+  <div class="ufd-filter-card mb-3">
+    <div class="row g-2 align-items-end">
+      <div class="col-12 col-lg-6">
+        <label class="ufd-filter-label" for="ufdSearchInput">Recherche</label>
+        <input type="search" class="form-control" id="ufdSearchInput" placeholder="Client, email, société, catégorie...">
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <label class="ufd-filter-label" for="ufdRateFilter">Remise</label>
+        <select class="form-select" id="ufdRateFilter">
+          <option value="">Toutes</option>
+          <option value="0-9">Moins de 10%</option>
+          <option value="10-29">10% à 29%</option>
+          <option value="30-100">30% et plus</option>
+        </select>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <button class="btn btn-outline-secondary w-100 ufd-action-btn" type="button" id="ufdResetFilters">
+          <i class="fa-solid fa-rotate-left me-1"></i>Réinitialiser
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div class="ufd-table-card">
     <div class="card-body">
       {% if discounts is empty %}
@@ -320,7 +380,11 @@
             </thead>
             <tbody>
               {% for discount in discounts %}
-                <tr>
+                <tr
+                  data-ufd-item
+                  data-rate="{{ discount.discountRate }}"
+                  data-search="{{ (discount.user.email ~ ' ' ~ (discount.user.companyName ?: '') ~ ' ' ~ discount.familyName ~ ' ' ~ discount.discountRate)|lower|e('html_attr') }}"
+                >
                   <td>
                     <div class="ufd-user">{{ discount.user.email }}</div>
                   </td>
@@ -370,7 +434,12 @@
 
         <div class="ufd-mobile-list">
           {% for discount in discounts %}
-            <div class="ufd-mobile-card">
+            <div
+              class="ufd-mobile-card"
+              data-ufd-item
+              data-rate="{{ discount.discountRate }}"
+              data-search="{{ (discount.user.email ~ ' ' ~ (discount.user.companyName ?: '') ~ ' ' ~ discount.familyName ~ ' ' ~ discount.discountRate)|lower|e('html_attr') }}"
+            >
               <div class="ufd-mobile-top">
                 <div>
                   <div class="ufd-user">{{ discount.user.email }}</div>
@@ -422,6 +491,9 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const noticeMount = document.getElementById('ufdNoticeMount');
+    const searchInput = document.getElementById('ufdSearchInput');
+    const rateFilter = document.getElementById('ufdRateFilter');
+    const resetFilters = document.getElementById('ufdResetFilters');
 
     const showNotice = (message, type = 'success') => {
       if (!noticeMount) {
@@ -444,6 +516,33 @@
       }
       sessionStorage.removeItem('ufd_notice');
     }
+
+    const applyFilters = () => {
+      const q = (searchInput?.value || '').trim().toLowerCase();
+      const rateRange = rateFilter?.value || '';
+
+      document.querySelectorAll('[data-ufd-item]').forEach(item => {
+        const haystack = item.getAttribute('data-search') || '';
+        const rate = Number(item.getAttribute('data-rate') || 0);
+        const matchesText = q === '' || haystack.includes(q);
+        let matchesRate = true;
+
+        if (rateRange) {
+          const [min, max] = rateRange.split('-').map(Number);
+          matchesRate = rate >= min && rate <= max;
+        }
+
+        item.classList.toggle('d-none', !(matchesText && matchesRate));
+      });
+    };
+
+    searchInput?.addEventListener('input', applyFilters);
+    rateFilter?.addEventListener('change', applyFilters);
+    resetFilters?.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      if (rateFilter) rateFilter.value = '';
+      applyFilters();
+    });
 
     document.querySelectorAll('.js-ufd-delete-form').forEach(form => {
       form.addEventListener('submit', async (event) => {

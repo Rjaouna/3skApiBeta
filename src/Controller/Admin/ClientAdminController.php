@@ -29,6 +29,10 @@ class ClientAdminController extends AbstractController
     public function list(Request $request, UserRepository $userRepository): JsonResponse
     {
         $q = mb_strtolower(trim((string)$request->query->get('q', '')));
+        $active = trim((string)$request->query->get('active', ''));
+        $city = mb_strtolower(trim((string)$request->query->get('city', '')));
+        $page = max(1, (int) $request->query->get('page', 1));
+        $limit = 20;
 
         $users = $userRepository->findBy([], ['id' => 'DESC']);
 
@@ -60,13 +64,33 @@ class ClientAdminController extends AbstractController
                 }
             }
 
+            if ($active === '1' && !$row['isActive']) {
+                continue;
+            }
+
+            if ($active === '0' && $row['isActive']) {
+                continue;
+            }
+
+            if ($city !== '' && !str_contains(mb_strtolower((string) ($row['city'] ?? '')), $city)) {
+                continue;
+            }
+
             $items[] = $row;
         }
+
+        $total = count($items);
+        $pages = max(1, (int) ceil($total / $limit));
+        $page = min($page, $pages);
+        $items = array_slice($items, ($page - 1) * $limit, $limit);
 
         return $this->json([
             'ok' => true,
             'items' => $items,
-            'total' => count($items),
+            'total' => $total,
+            'page' => $page,
+            'pages' => $pages,
+            'limit' => $limit,
         ]);
     }
 

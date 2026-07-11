@@ -14,7 +14,13 @@ class CustomerOrderRepository extends ServiceEntityRepository
         parent::__construct($registry, CustomerOrder::class);
     }
 
-    public function findAdminList(?string $status = null): array
+    public function findAdminList(
+        ?string $status = null,
+        ?string $query = null,
+        ?\DateTimeInterface $dateFrom = null,
+        ?\DateTimeInterface $dateTo = null,
+        ?string $city = null
+    ): array
     {
         $qb = $this->createQueryBuilder('o')
             ->leftJoin('o.customer', 'c')->addSelect('c')
@@ -24,6 +30,28 @@ class CustomerOrderRepository extends ServiceEntityRepository
         if ($status !== null && $status !== '') {
             $qb->andWhere('o.status = :status')
                ->setParameter('status', $status);
+        }
+
+        $query = trim((string) $query);
+        if ($query !== '') {
+            $qb->andWhere('LOWER(o.orderNumber) LIKE :query OR LOWER(o.customerEmail) LIKE :query OR LOWER(o.companyName) LIKE :query OR LOWER(o.customerCode) LIKE :query')
+               ->setParameter('query', '%' . mb_strtolower($query) . '%');
+        }
+
+        if ($dateFrom !== null) {
+            $qb->andWhere('o.createdAt >= :dateFrom')
+               ->setParameter('dateFrom', $dateFrom);
+        }
+
+        if ($dateTo !== null) {
+            $qb->andWhere('o.createdAt <= :dateTo')
+               ->setParameter('dateTo', $dateTo);
+        }
+
+        $city = trim((string) $city);
+        if ($city !== '') {
+            $qb->andWhere('LOWER(o.city) LIKE :city')
+               ->setParameter('city', '%' . mb_strtolower($city) . '%');
         }
 
         return $qb->getQuery()->getResult();
