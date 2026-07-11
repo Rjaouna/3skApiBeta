@@ -1,62 +1,291 @@
 {% extends 'base.html.twig' %}
-{% block title %}Hero Slides{% endblock %}
+{% block title %}Slides hero{% endblock %}
 
 {% block body %}
+<style>
+  .slide-admin-hero{
+    border-radius: 24px;
+    border: 1px solid var(--bs-border-color);
+    background:
+      radial-gradient(800px circle at 8% 10%, rgba(var(--bs-primary-rgb), .14), transparent 42%),
+      linear-gradient(180deg, var(--bs-body-bg), var(--bs-tertiary-bg));
+    box-shadow: var(--app-shadow, 0 16px 34px rgba(15,23,42,.08));
+    padding: 18px;
+  }
+
+  .slide-admin-hero h1{
+    font-size: 1.25rem;
+    font-weight: 900;
+    margin: 0;
+    color: var(--bs-body-color);
+  }
+
+  .slide-admin-hero p{
+    margin: 5px 0 0;
+    color: var(--bs-secondary-color);
+    font-size: .92rem;
+    font-weight: 600;
+  }
+
+  .slide-count-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    border: 1px solid var(--bs-border-color);
+    background: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    padding: 8px 12px;
+    font-size: .82rem;
+    font-weight: 800;
+  }
+
+  .slide-admin-grid{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .slide-admin-card{
+    border: 1px solid var(--bs-border-color);
+    border-radius: 22px;
+    background: var(--bs-body-bg);
+    box-shadow: var(--app-shadow-sm, 0 8px 20px rgba(15,23,42,.08));
+    overflow: hidden;
+  }
+
+  .slide-media{
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--bs-tertiary-bg);
+  }
+
+  .slide-media img,
+  .slide-media video{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .slide-media::after{
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 54%;
+    background: linear-gradient(0deg, rgba(0,0,0,.52), transparent);
+    pointer-events: none;
+  }
+
+  .slide-status-row{
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .slide-status{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: .76rem;
+    font-weight: 900;
+    backdrop-filter: blur(8px);
+  }
+
+  .slide-status-active{
+    background: rgba(var(--bs-success-rgb), .18);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.24);
+  }
+
+  .slide-status-inactive{
+    background: rgba(var(--bs-secondary-rgb), .28);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.22);
+  }
+
+  .slide-pin{
+    color: #fff;
+    font-size: .78rem;
+    font-weight: 800;
+    opacity: .88;
+  }
+
+  .slide-body{
+    padding: 14px;
+  }
+
+  .slide-title{
+    font-weight: 900;
+    color: var(--bs-body-color);
+    line-height: 1.22;
+  }
+
+  .slide-subtitle{
+    margin-top: 5px;
+    color: var(--bs-secondary-color);
+    font-size: .86rem;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .slide-meta{
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--bs-border-color);
+    color: var(--bs-secondary-color);
+    font-size: .78rem;
+    font-weight: 700;
+  }
+
+  .slide-actions{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .slide-actions .btn{
+    border-radius: 12px;
+    font-weight: 800;
+  }
+
+  .slide-empty{
+    border-radius: 22px;
+    border: 1px dashed var(--bs-border-color);
+    background: var(--bs-tertiary-bg);
+    padding: 38px 18px;
+    text-align: center;
+    color: var(--bs-secondary-color);
+  }
+
+  @media (max-width: 1199.98px){
+    .slide-admin-grid{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 767.98px){
+    .slide-admin-grid{
+      grid-template-columns: 1fr;
+    }
+
+    .slide-admin-hero{
+      border-radius: 18px;
+    }
+
+    .slide-admin-hero .btn{
+      width: 100%;
+    }
+  }
+</style>
+
 <div class="container px-3 px-lg-4 my-4">
-  <div class="simple-page-hero d-flex justify-content-between align-items-center mb-3">
-    <h1 class="h4 mb-0">Slides (Hero)</h1>
-    <a href="{{ path('admin_hero_slide_new') }}" class="btn btn-primary rounded-pill">
-      <i class="fa-solid fa-plus me-2"></i>Ajouter
-    </a>
+  <div class="slide-admin-hero mb-3 d-flex justify-content-between align-items-start flex-wrap gap-3">
+    <div>
+      <h1>Gestion des slides</h1>
+      <p>Organisez les visuels affichés dans le grand slider de l’accueil.</p>
+    </div>
+
+    <div class="d-flex align-items-center gap-2 flex-wrap">
+      <span class="slide-count-badge">
+        <i class="fa-solid fa-images"></i>
+        {{ slides|length }} slide{{ slides|length > 1 ? 's' : '' }}
+      </span>
+      <a href="{{ path('admin_hero_slide_new') }}" class="btn btn-primary rounded-pill px-3">
+        <i class="fa-solid fa-plus me-2"></i>Ajouter
+      </a>
+    </div>
   </div>
 
-  <div class="row g-3">
-    {% for s in slides %}
-      <div class="col-12 col-md-6 col-xl-4">
-        <div class="card border-0 shadow-sm" style="border-radius:18px; overflow:hidden;">
+  {% if slides is empty %}
+    <div class="slide-empty">
+      <i class="fa-solid fa-image fa-2x mb-3"></i>
+      <div class="fw-bold mb-1">Aucun slide</div>
+      <div class="small mb-3">Ajoutez un premier visuel pour animer l’accueil.</div>
+      <a href="{{ path('admin_hero_slide_new') }}" class="btn btn-primary rounded-pill px-4">
+        Créer un slide
+      </a>
+    </div>
+  {% else %}
+    <div class="slide-admin-grid">
+      {% for s in slides %}
+        <article class="slide-admin-card">
           {% set mediaPath = asset('img/slides/' ~ s.image) %}
           {% set mediaExtension = s.image|split('.')|last|lower %}
-          {% if mediaExtension in ['mp4', 'webm'] %}
-            <video src="{{ mediaPath }}" muted loop playsinline controls preload="metadata" style="width:100%; height:220px; object-fit:cover;"></video>
-          {% else %}
-            <img src="{{ mediaPath }}" alt="" style="width:100%; height:220px; object-fit:cover;">
-          {% endif %}
-          <div class="card-body">
-            <div class="fw-bold">{{ s.title ?: '—' }}</div>
-            <div class="text-muted small">{{ s.subtitle ?: '' }}</div>
 
-            <div class="d-flex gap-2 mt-3">
-              <a href="{{ path('admin_hero_slide_edit', {id: s.id}) }}" class="btn btn-outline-secondary btn-sm rounded-pill">
+          <div class="slide-media">
+            {% if mediaExtension in ['mp4', 'webm'] %}
+              <video src="{{ mediaPath }}" muted loop playsinline controls preload="metadata"></video>
+            {% else %}
+              <img src="{{ mediaPath }}" alt="{{ s.title ?: 'Slide' }}" loading="lazy">
+            {% endif %}
+
+            <div class="slide-status-row">
+              {% if s.enabled %}
+                <span class="slide-status slide-status-active">
+                  <i class="fa-solid fa-circle-check"></i>Actif
+                </span>
+              {% else %}
+                <span class="slide-status slide-status-inactive">
+                  <i class="fa-solid fa-circle-pause"></i>Masqué
+                </span>
+              {% endif %}
+
+              {% if s.pinnedAt %}
+                <span class="slide-pin">
+                  <i class="fa-solid fa-thumbtack me-1"></i>Mis en avant
+                </span>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="slide-body">
+            <div class="slide-title">{{ s.title ?: 'Slide sans titre' }}</div>
+            {% if s.subtitle %}
+              <div class="slide-subtitle">{{ s.subtitle }}</div>
+            {% endif %}
+
+            <div class="slide-meta">
+              Dernière mise en avant : {{ (s.pinnedAt ?: s.createdAt)|date('d/m/Y H:i') }}
+            </div>
+
+            <div class="slide-actions">
+              <a href="{{ path('admin_hero_slide_edit', {id: s.id}) }}" class="btn btn-outline-secondary btn-sm">
                 <i class="fa-solid fa-pen"></i>
               </a>
 
-              <form method="post" action="{{ path('admin_hero_slide_delete', {id:s.id}) }}"
-                    onsubmit="return confirm('Supprimer ce slide ?');">
-                <input type="hidden" name="_token" value="{{ csrf_token('delete_slide_' ~ s.id) }}">
-                <button class="btn btn-outline-danger btn-sm rounded-pill" type="submit">
-                  <i class="fa-solid fa-trash"></i>
-                </button>
-              </form>
-
               <form method="post" action="{{ path('admin_hero_slide_bump', {id:s.id}) }}">
                 <input type="hidden" name="_token" value="{{ csrf_token('bump_slide_' ~ s.id) }}">
-                <button class="btn btn-outline-primary btn-sm rounded-pill" type="submit" title="Mettre en avant">
+                <button class="btn btn-outline-primary btn-sm w-100" type="submit" title="Mettre en avant">
                   <i class="fa-solid fa-star"></i>
                 </button>
               </form>
 
-              <span class="ms-auto small text-muted">
-                {{ (s.pinnedAt ?: s.createdAt)|date('d/m/Y H:i') }}
-              </span>
+              <form method="post" action="{{ path('admin_hero_slide_delete', {id:s.id}) }}"
+                    onsubmit="return confirm('Supprimer ce slide ?');">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete_slide_' ~ s.id) }}">
+                <button class="btn btn-outline-danger btn-sm w-100" type="submit">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </form>
             </div>
           </div>
-        </div>
-      </div>
-    {% else %}
-      <div class="col-12">
-        <div class="alert alert-light border">Aucun slide.</div>
-      </div>
-    {% endfor %}
-  </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% endif %}
 </div>
 {% endblock %}

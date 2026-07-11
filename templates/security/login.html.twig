@@ -473,6 +473,144 @@
       padding-bottom:4rem !important;
     }
   }
+
+  /* Login refresh: same light blue/orange identity as the public home. */
+  .login-bg-video{
+    opacity: .10;
+    filter: grayscale(.12) saturate(.92) contrast(1.04);
+  }
+
+  .login-video-overlay{
+    background:
+      radial-gradient(920px circle at 12% 6%, rgba(var(--bs-primary-rgb), .14), transparent 42%),
+      radial-gradient(760px circle at 90% 14%, rgba(var(--bs-secondary-rgb), .14), transparent 40%),
+      linear-gradient(135deg, rgba(255,255,255,.94), rgba(248,250,252,.90) 58%, rgba(255,247,237,.86));
+  }
+
+  .login-video-overlay::after{
+    background: rgba(255,255,255,.24);
+  }
+
+  .login-page{
+    padding: 38px 0 42px;
+  }
+
+  .login-page::before{
+    background:
+      radial-gradient(780px circle at 14% 10%, rgba(var(--bs-primary-rgb), .10), transparent 44%),
+      radial-gradient(680px circle at 86% 20%, rgba(var(--bs-secondary-rgb), .12), transparent 42%);
+  }
+
+  .login-stack{
+    width: min(560px, 94vw);
+  }
+
+  .login-card{
+    border-radius: 22px;
+    border: 1px solid rgba(16,24,40,.10);
+    border-top: 4px solid var(--bs-secondary);
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 24px 64px rgba(16,24,40,.14);
+    color: #111827;
+  }
+
+  .login-head{
+    padding: 20px 24px 15px;
+    border-bottom: 1px solid rgba(16,24,40,.08);
+    background:
+      linear-gradient(135deg, rgba(var(--bs-primary-rgb), .08), transparent 46%),
+      linear-gradient(225deg, rgba(var(--bs-secondary-rgb), .10), transparent 42%),
+      #fff;
+  }
+
+  .login-icon{
+    border-radius: 16px;
+    background: rgba(var(--bs-primary-rgb), .09);
+    border-color: rgba(var(--bs-primary-rgb), .16);
+    color: var(--bs-primary);
+  }
+
+  .login-title{
+    color: var(--bs-primary);
+  }
+
+  .login-subtitle,
+  .login-muted{
+    color: #667085;
+  }
+
+  .login-body{
+    padding: 20px 24px 24px;
+  }
+
+  .form-label{
+    color: #111827;
+  }
+
+  .input-icon{
+    color: rgba(var(--bs-primary-rgb), .70);
+  }
+
+  .login-control{
+    border: 1px solid rgba(16,24,40,.12);
+    background: #fff;
+    color: #111827;
+  }
+
+  .login-control::placeholder{
+    color: #98a2b3;
+  }
+
+  .login-control:focus{
+    border-color: rgba(var(--bs-primary-rgb), .55);
+    background: #fff;
+    color: #111827;
+    box-shadow: 0 0 0 .22rem rgba(var(--bs-primary-rgb), .12) !important;
+  }
+
+  .password-toggle{
+    color: #667085;
+  }
+
+  .password-toggle:hover{
+    background: rgba(var(--bs-primary-rgb), .08);
+    color: var(--bs-primary);
+  }
+
+  .login-btn{
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--bs-primary), #214f9f);
+    box-shadow: 0 16px 32px rgba(var(--bs-primary-rgb), .22);
+  }
+
+  .login-btn:hover{
+    background: linear-gradient(135deg, #214f9f, var(--bs-primary));
+  }
+
+  .login-link{
+    color: var(--bs-primary);
+  }
+
+  .login-public-shell .public-footer{
+    background: #fff !important;
+    border-top: 1px solid rgba(16,24,40,.08) !important;
+    color: #111827 !important;
+    box-shadow: none !important;
+  }
+
+  .login-public-shell .public-footer h4::after{
+    display: none !important;
+  }
+
+  @media (max-width: 575px){
+    .login-card{
+      border-radius: 18px;
+    }
+
+    .login-page{
+      padding: 26px 0 30px;
+    }
+  }
 </style>
 
 <video class="login-bg-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
@@ -577,39 +715,16 @@
 
 <div class="login-public-shell">
   <footer class="public-footer py-5">
-    <div class="container-fluid px-4 px-xl-5">
-      <div class="row g-4">
+    <div class="container-fluid px-4 px-xl-5 public-footer-inner">
+      <div class="row g-4 align-items-stretch">
         <div class="col-12 col-lg-3">
           <a class="public-footer-logo" href="{{ path('home') }}#accueil" aria-label="3SK Parts Auto">
             <img src="{{ asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto">
           </a>
-          <h3 class="h4 fw-bold mb-3">3SK Parts Auto</h3>
-          <p class="public-footer-muted mb-3">Société basée à Casablanca, spécialisée dans l'importation, l'exportation et la distribution de pièces détachées automobiles.</p>
-          <div class="d-flex flex-wrap gap-2">
-            <a class="public-footer-pill" href="tel:+212522713572">+212 5 22 71 35 72</a>
-            <a class="public-footer-pill" href="mailto:3sk.partsauto@gmail.com">3sk.partsauto@gmail.com</a>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-3">
-          <h4 class="h6 text-uppercase fw-bold mb-3">Navigation</h4>
-          <ul class="list-unstyled mb-0">
-            <li class="mb-2"><a href="{{ path('home') }}#accueil">Accueil</a></li>
-            <li class="mb-2"><a href="{{ path('home') }}#qui-sommes-nous">Qui sommes-nous</a></li>
-            <li class="mb-2"><a href="{{ path('home') }}#services">Services</a></li>
-            <li class="mb-2"><a href="{{ path('home') }}#marques">Marques</a></li>
-            <li><a href="{{ path('home') }}#contact">Contact</a></li>
-          </ul>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-3">
-          <h4 class="h6 text-uppercase fw-bold mb-3">Coordonnées</h4>
-          <ul class="list-unstyled mb-3">
-            <li class="mb-2"><a href="https://www.google.com/maps/search/?api=1&query=33.528667,-7.550028" target="_blank" rel="noopener">Casablanca, Maroc</a></li>
-            <li class="mb-2">+212 5 22 71 35 72</li>
-            <li class="mb-2">3sk.partsauto@gmail.com</li>
-            <li>www.3skpartsauto.com</li>
-          </ul>
+          <p class="fw-bold mb-2">Pièces et accessoires auto</p>
+          <p class="public-footer-muted mb-3">190, Boulevard Moulay Ismail - Casablanca, Maroc</p>
+          <p class="mb-2"><strong>Service client :</strong> <a href="tel:+212522713572">+212 5 22 71 35 72</a></p>
+          <p class="mb-3"><strong>Email :</strong> <a href="mailto:3sk.partsauto@gmail.com">3sk.partsauto@gmail.com</a></p>
           <div class="d-flex gap-2 public-footer-social">
             <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -617,23 +732,53 @@
           </div>
         </div>
 
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="public-footer-account">
-            <h4 class="h6 text-uppercase fw-bold mb-3">Connexion compte</h4>
-            <p class="mb-4">Accédez rapidement à votre espace client pour consulter le catalogue, préparer vos paniers et suivre vos commandes.</p>
-            <a href="{{ path('app_login') }}" class="btn public-footer-login-btn w-100 fw-bold mb-3">
-              <i class="fa-solid fa-right-to-bracket"></i>
-              Se connecter
-            </a>
-            <a href="{{ path('home') }}#contact" class="fw-bold">Devenir client</a>
+        <div class="col-12 col-md-6 col-lg-2">
+          <div class="public-footer-card">
+            <h4 class="h6 fw-bold mb-3">Transaction sécurisée</h4>
+            <div class="public-payment-row mb-4">
+              <span class="public-payment-badge">CMI</span>
+              <span class="public-payment-badge is-mastercard"><span>Mastercard</span></span>
+              <span class="public-payment-badge">VISA</span>
+            </div>
+
+            <h4 class="h6 fw-bold mb-3">Besoin d'aide ?</h4>
+            <ul class="public-footer-list">
+              <li><a href="{{ path('home') }}#qui-sommes-nous"><i class="fa-solid fa-circle-info"></i>À propos</a></li>
+              <li><a href="{{ path('home') }}#services"><i class="fa-solid fa-file-lines"></i>Services</a></li>
+              <li><a href="{{ path('home') }}#contact"><i class="fa-solid fa-headset"></i>Contact</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-2">
+          <div class="public-footer-card">
+            <h4 class="h6 fw-bold mb-3">Navigation</h4>
+            <ul class="public-footer-list">
+              <li><a href="{{ path('home') }}#accueil"><i class="fa-solid fa-house"></i>Accueil</a></li>
+              <li><a href="{{ path('home') }}#marques"><i class="fa-solid fa-tags"></i>Marques</a></li>
+              <li><a href="{{ path('home') }}#contact"><i class="fa-solid fa-paper-plane"></i>Demande de contact</a></li>
+              <li><a href="{{ path('app_login') }}"><i class="fa-solid fa-right-to-bracket"></i>Espace client</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-5">
+          <div class="public-footer-map">
+            <iframe
+              title="Localisation 3SK Parts Auto Casablanca"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=33.528667,-7.550028&z=12&output=embed">
+            </iframe>
           </div>
         </div>
       </div>
 
       <hr class="my-4">
 
-      <div class="d-flex flex-column flex-lg-row justify-content-between gap-2 small public-footer-muted">
-        <span>3SK Parts Auto.</span>
+      <div class="public-footer-bottom">
+        <span>3SK Parts Auto - Tous droits réservés {{ "now"|date("Y") }}</span>
+        <span>Distribution de pièces détachées automobiles à Casablanca</span>
       </div>
     </div>
   </footer>

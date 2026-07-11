@@ -421,84 +421,105 @@
 
   .public-footer {
     margin-top: 0;
-    border-top: 4px solid var(--public-orange);
-    padding-top: 5.75rem !important;
-    padding-bottom: 5.25rem !important;
-    background: var(--public-blue);
-    color: #fff;
-    box-shadow:
-      inset 0 1px 0 rgba(255,145,0,.34),
-      inset 0 1px 0 rgba(255,255,255,.18);
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(16,24,40,.08);
+    padding-top: 3rem !important;
+    padding-bottom: 1.3rem !important;
+    background: #fff;
+    color: var(--public-ink);
+  }
+
+  .public-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+    background: linear-gradient(90deg, var(--public-blue), var(--public-orange), var(--public-blue));
+    opacity: .95;
+  }
+
+  .public-footer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -5%;
+    bottom: 0;
+    width: min(46vw, 680px);
+    background:
+      linear-gradient(90deg, #fff 0%, rgba(255,255,255,.78) 34%, rgba(255,255,255,.28) 100%),
+      url('{{ asset('img/bg-section/stock-entrepot-pieces-carrosserie-automobile-3sk-parts-auto.jpeg') }}') center right / cover no-repeat;
+    opacity: .16;
+    pointer-events: none;
+  }
+
+  .public-footer-inner {
+    position: relative;
+    z-index: 1;
   }
 
   .public-footer h3 {
-    color: #fff;
+    color: var(--public-ink);
     text-shadow: none;
+    letter-spacing: -.02em;
   }
 
   .public-footer h4 {
-    color: var(--public-orange);
+    color: var(--public-ink);
     text-shadow: none;
-  }
-
-  .public-footer h4 {
-    position: relative;
-    padding-bottom: .7rem;
+    font-size: 1.02rem;
+    letter-spacing: -.01em;
+    text-transform: uppercase;
+    margin-bottom: .85rem;
   }
 
   .public-footer h4::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 42px;
-    height: 3px;
-    background: #fff;
-    border-radius: 999px;
+    display: none;
   }
 
   .public-footer hr {
-    border-color: rgba(255,255,255,.28);
+    border-color: rgba(16,24,40,.10);
     opacity: 1;
   }
 
   .public-footer a {
-    color: rgba(255,255,255,.9);
+    color: var(--public-muted);
     text-decoration: none;
   }
 
   .public-footer a:hover {
-    color: var(--public-orange);
+    color: var(--public-blue);
     text-decoration: none;
   }
 
   .public-footer-muted {
-    color: rgba(255,255,255,.76);
+    color: var(--public-muted);
+    line-height: 1.65;
   }
 
   .public-footer-logo {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: min(100%, 285px);
-    min-height: 112px;
-    padding: .85rem 1.35rem;
-    margin-bottom: 1.25rem;
-    border-radius: 8px;
-    background: #fff;
-    border: 1px solid rgba(16,24,40,.09);
-    box-shadow: 0 18px 38px rgba(16,24,40,.12);
+    width: min(100%, 235px);
+    min-height: 70px;
+    padding: .65rem 0;
+    margin-bottom: .9rem;
+    border-radius: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
   }
 
   .public-footer-logo:hover {
-    transform: translateY(-1px);
+    transform: none;
   }
 
   .public-footer-logo img {
     display: block;
     width: 100%;
-    max-width: 240px;
-    max-height: 88px;
+    max-width: 210px;
+    max-height: 64px;
     object-fit: contain;
   }
 
@@ -506,42 +527,71 @@
     display: inline-flex;
     align-items: center;
     gap: .5rem;
-    padding: .55rem .9rem;
+    padding: .52rem .78rem;
     border-radius: 999px;
-    border: 1px solid rgba(255,255,255,.34);
-    background: rgba(255,255,255,.1);
-    color: #fff !important;
-    font-weight: 900;
+    border: 1px solid rgba(49,95,187,.12);
+    background: #fff;
+    color: var(--public-ink) !important;
+    font-size: .84rem;
+    font-weight: 700;
     text-decoration: none;
-    box-shadow: 0 10px 24px rgba(16,24,40,.14);
+    box-shadow: 0 8px 20px rgba(16,24,40,.06);
   }
 
   .public-footer-pill:hover {
-    background: var(--public-orange);
-    border-color: var(--public-orange);
-    color: #fff !important;
+    background: rgba(49,95,187,.06);
+    border-color: rgba(49,95,187,.24);
+    color: var(--public-blue) !important;
+  }
+
+  .public-footer-list {
+    display: grid;
+    gap: .45rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .public-footer-list a,
+  .public-footer-list span {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    color: var(--public-muted);
+    font-size: .92rem;
+    line-height: 1.35;
+  }
+
+  .public-footer-list i {
+    width: 17px;
+    color: rgba(49,95,187,.55);
+    text-align: center;
+  }
+
+  .public-footer-list a:hover {
+    color: var(--public-blue);
+    transform: translateX(2px);
+  }
+
+  .public-footer-list a:hover i {
+    color: var(--public-orange);
   }
 
   .public-footer-account {
     height: 100%;
-    padding: 1.35rem;
-    border-radius: 8px;
-    border: 1px solid rgba(255,255,255,.22);
-    border-left: 4px solid var(--public-orange);
-    background:
-      linear-gradient(135deg, rgba(16,46,99,.92), rgba(49,95,187,.70)),
-      rgba(255,255,255,.08);
-    box-shadow: 0 18px 38px rgba(16,24,40,.14);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    padding: 1.15rem;
+    border-radius: 18px;
+    border: 1px solid rgba(16,24,40,.08);
+    background: #fff;
+    box-shadow: 0 16px 36px rgba(16,24,40,.08);
   }
 
   .public-footer-account p {
-    color: rgba(255,255,255,.72);
+    color: var(--public-muted);
   }
 
   .public-footer-account a:not(.public-footer-login-btn) {
-    color: #fff;
+    color: var(--public-blue);
   }
 
   .public-footer-account a:not(.public-footer-login-btn):hover {
@@ -553,38 +603,193 @@
     align-items: center;
     justify-content: center;
     gap: .55rem;
-    border-radius: 8px !important;
-    background: var(--public-orange) !important;
-    border-color: var(--public-orange) !important;
+    min-height: 48px;
+    border-radius: 14px !important;
+    background: var(--public-blue) !important;
+    border-color: var(--public-blue) !important;
     color: #fff !important;
-    box-shadow: 0 12px 26px rgba(0,0,0,.22);
+    font-weight: 900;
+    box-shadow: 0 16px 30px rgba(49,95,187,.20);
   }
 
   .public-footer-login-btn:hover {
-    background: #fff !important;
-    border-color: #fff !important;
-    color: var(--public-blue) !important;
+    background: var(--public-orange) !important;
+    border-color: var(--public-orange) !important;
+    color: #111827 !important;
     transform: translateY(-1px);
   }
 
   .public-footer-social a {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    border: 1px solid rgba(255,255,255,.34);
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 1px solid rgba(16,24,40,.08);
     display: grid;
     place-items: center;
     text-decoration: none;
-    color: #fff;
-    background: rgba(255,255,255,.1);
-    box-shadow: 0 10px 24px rgba(16,24,40,.14);
+    color: var(--public-ink);
+    background: #fff;
+    box-shadow: none;
   }
 
   .public-footer-social a:hover {
     transform: translateY(-1px);
-    background: var(--public-orange);
-    border-color: var(--public-orange);
+    background: var(--public-blue);
+    border-color: var(--public-blue);
     color: #fff;
+  }
+
+  .public-footer-card {
+    height: 100%;
+    padding: .25rem 0 0;
+    border-radius: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .public-payment-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .65rem;
+    align-items: center;
+  }
+
+  .public-payment-badge {
+    min-width: 62px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid rgba(16,24,40,.10);
+    background: #fff;
+    color: var(--public-ink);
+    font-size: .76rem;
+    font-weight: 900;
+    letter-spacing: .02em;
+    box-shadow: 0 8px 20px rgba(16,24,40,.06);
+  }
+
+  .public-payment-badge.is-mastercard {
+    color: #1f2937;
+    position: relative;
+  }
+
+  .public-payment-badge.is-mastercard::before,
+  .public-payment-badge.is-mastercard::after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: 9px;
+  }
+
+  .public-payment-badge.is-mastercard::before {
+    left: 15px;
+    background: #eb001b;
+  }
+
+  .public-payment-badge.is-mastercard::after {
+    left: 28px;
+    background: rgba(247,158,27,.88);
+  }
+
+  .public-payment-badge.is-mastercard span {
+    position: relative;
+    z-index: 1;
+    font-size: 0;
+  }
+
+  .public-footer-map {
+    height: 100%;
+    min-height: 285px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(16,24,40,.08);
+    background: #dbeafe;
+    box-shadow: 0 18px 42px rgba(16,24,40,.10);
+  }
+
+  .public-footer-map iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 285px;
+    border: 0;
+  }
+
+  .public-cookie-banner {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 1080;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    padding: 1rem 1.25rem;
+    background: rgba(15,23,42,.96);
+    color: #fff;
+    box-shadow: 0 -18px 42px rgba(15,23,42,.24);
+  }
+
+  .public-cookie-banner.is-visible {
+    display: flex;
+  }
+
+  .public-cookie-text {
+    max-width: 980px;
+    margin: 0;
+    color: rgba(255,255,255,.90);
+    font-size: .92rem;
+    font-weight: 700;
+    line-height: 1.55;
+    text-align: center;
+  }
+
+  .public-cookie-text a {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .public-cookie-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: .65rem;
+    flex-shrink: 0;
+  }
+
+  .public-cookie-btn {
+    min-height: 42px;
+    padding: .65rem 1.05rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    font-size: .82rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .public-cookie-btn.is-accept {
+    background: var(--public-orange);
+    color: #111827;
+  }
+
+  .public-cookie-btn.is-decline {
+    background: transparent;
+    border-color: rgba(255,255,255,.22);
+    color: rgba(255,255,255,.82);
+  }
+
+  .public-footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    color: var(--public-muted);
+    font-size: .86rem;
   }
 
   /* Public content refresh: header and hero carousel intentionally unchanged. */
@@ -1303,8 +1508,49 @@
 
   @media (max-width: 575px) {
     .public-footer {
-      padding-top: 4.25rem !important;
-      padding-bottom: 4rem !important;
+      padding-top: 2.4rem !important;
+      padding-bottom: 1.2rem !important;
+    }
+
+    .public-footer::after {
+      width: 100%;
+      right: -38%;
+      opacity: .08;
+    }
+
+    .public-footer-card {
+      padding: 0;
+    }
+
+    .public-footer-logo {
+      min-height: auto;
+      justify-content: flex-start;
+    }
+
+    .public-footer-map,
+    .public-footer-map iframe {
+      min-height: 220px;
+    }
+
+    .public-cookie-banner {
+      align-items: stretch;
+      flex-direction: column;
+      gap: .85rem;
+      padding: .95rem;
+    }
+
+    .public-cookie-text {
+      text-align: left;
+      font-size: .84rem;
+    }
+
+    .public-cookie-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .public-cookie-btn {
+      width: 100%;
     }
 
     .public-display {
@@ -1842,7 +2088,6 @@
               </div>
             </form>
           </div>
-          <iframe class="contact-map" title="Localisation de 3SK Parts Auto" src="https://www.google.com/maps?q=33.528667,-7.550028&hl=fr&z=16&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </section>
@@ -1937,39 +2182,16 @@
   {% include 'home/sections/_stats_strip.html.twig' %}
 
   <footer class="public-footer py-5">
-    <div class="container-fluid px-4 px-xl-5">
-      <div class="row g-4">
+    <div class="container-fluid px-4 px-xl-5 public-footer-inner">
+      <div class="row g-4 align-items-stretch">
         <div class="col-12 col-lg-3">
           <a class="public-footer-logo" href="#accueil" aria-label="3SK Parts Auto">
             <img src="{{ asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto">
           </a>
-          <h3 class="h4 fw-bold mb-3">3SK Parts Auto</h3>
-          <p class="public-footer-muted mb-3">Société basée à Casablanca, spécialisée dans l'importation, l'exportation et la distribution de pièces détachées automobiles.</p>
-          <div class="d-flex flex-wrap gap-2">
-            <a class="public-footer-pill" href="tel:+212522713572">+212 5 22 71 35 72</a>
-            <a class="public-footer-pill" href="mailto:3sk.partsauto@gmail.com">3sk.partsauto@gmail.com</a>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-3">
-          <h4 class="h6 text-uppercase fw-bold mb-3">Navigation</h4>
-          <ul class="list-unstyled mb-0">
-            <li class="mb-2"><a href="#accueil">Accueil</a></li>
-            <li class="mb-2"><a href="#qui-sommes-nous">Qui sommes-nous</a></li>
-            <li class="mb-2"><a href="#services">Services</a></li>
-            <li class="mb-2"><a href="#marques">Marques</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-3">
-          <h4 class="h6 text-uppercase fw-bold mb-3">Coordonnées</h4>
-          <ul class="list-unstyled mb-3">
-            <li class="mb-2"><a href="https://www.google.com/maps/search/?api=1&query=33.528667,-7.550028" target="_blank" rel="noopener">Casablanca, Maroc</a></li>
-            <li class="mb-2">+212 5 22 71 35 72</li>
-            <li class="mb-2">3sk.partsauto@gmail.com</li>
-            <li>www.3skpartsauto.com</li>
-          </ul>
+          <p class="fw-bold mb-2">Pièces et accessoires auto</p>
+          <p class="public-footer-muted mb-3">190, Boulevard Moulay Ismail - Casablanca, Maroc</p>
+          <p class="mb-2"><strong>Service client :</strong> <a href="tel:+212522713572">+212 5 22 71 35 72</a></p>
+          <p class="mb-3"><strong>Email :</strong> <a href="mailto:3sk.partsauto@gmail.com">3sk.partsauto@gmail.com</a></p>
           <div class="d-flex gap-2 public-footer-social">
             <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -1977,24 +2199,99 @@
           </div>
         </div>
 
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="public-footer-account">
-            <h4 class="h6 text-uppercase fw-bold mb-3">Connexion compte</h4>
-            <p class="mb-4">Accédez rapidement à votre espace client pour consulter le catalogue, préparer vos paniers et suivre vos commandes.</p>
-            <a href="{{ path('app_login') }}" class="btn public-footer-login-btn w-100 fw-bold mb-3">
-              <i class="fa-solid fa-right-to-bracket"></i>
-              Se connecter
-            </a>
-            <a href="#contact" class="fw-bold">Devenir client</a>
+        <div class="col-12 col-md-6 col-lg-2">
+          <div class="public-footer-card">
+            <h4 class="h6 fw-bold mb-3">Transaction sécurisée</h4>
+            <div class="public-payment-row mb-4">
+              <span class="public-payment-badge">CMI</span>
+              <span class="public-payment-badge is-mastercard"><span>Mastercard</span></span>
+              <span class="public-payment-badge">VISA</span>
+            </div>
+
+            <h4 class="h6 fw-bold mb-3">Besoin d'aide ?</h4>
+            <ul class="public-footer-list">
+              <li><a href="#qui-sommes-nous"><i class="fa-solid fa-circle-info"></i>À propos</a></li>
+              <li><a href="#services"><i class="fa-solid fa-file-lines"></i>Services</a></li>
+              <li><a href="#contact"><i class="fa-solid fa-headset"></i>Contact</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-2">
+          <div class="public-footer-card">
+            <h4 class="h6 fw-bold mb-3">Navigation</h4>
+            <ul class="public-footer-list">
+              <li><a href="#accueil"><i class="fa-solid fa-house"></i>Accueil</a></li>
+              <li><a href="#marques"><i class="fa-solid fa-tags"></i>Marques</a></li>
+              <li><a href="#contact"><i class="fa-solid fa-paper-plane"></i>Demande de contact</a></li>
+              <li><a href="{{ path('app_login') }}"><i class="fa-solid fa-right-to-bracket"></i>Espace client</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-5">
+          <div class="public-footer-map">
+            <iframe
+              title="Localisation 3SK Parts Auto Casablanca"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=33.528667,-7.550028&z=12&output=embed">
+            </iframe>
           </div>
         </div>
       </div>
 
       <hr class="my-4">
 
-      <div class="d-flex flex-column flex-lg-row justify-content-between gap-2 small public-footer-muted">
-        <span>3SK Parts Auto.</span>
+      <div class="public-footer-bottom">
+        <span>3SK Parts Auto - Tous droits réservés {{ "now"|date("Y") }}</span>
+        <span>Distribution de pièces détachées automobiles à Casablanca</span>
       </div>
     </div>
   </footer>
+
+  <div class="public-cookie-banner" id="publicCookieBanner" role="region" aria-label="Gestion des cookies">
+    <p class="public-cookie-text">
+      Nous utilisons les cookies pour vous offrir une meilleure expérience utilisateur et mesurer l'utilisation du site.
+      En savoir plus dans notre politique de confidentialité.
+    </p>
+    <div class="public-cookie-actions">
+      <button type="button" class="public-cookie-btn is-decline" data-cookie-choice="declined">Refuser</button>
+      <button type="button" class="public-cookie-btn is-accept" data-cookie-choice="accepted">Autoriser</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const banner = document.getElementById('publicCookieBanner');
+      if (!banner) return;
+
+      const storageKey = '3sk_cookie_consent';
+      let savedChoice = null;
+
+      try {
+        savedChoice = window.localStorage.getItem(storageKey);
+      } catch (error) {
+        savedChoice = 'unavailable';
+      }
+
+      if (!savedChoice) {
+        window.setTimeout(function () {
+          banner.classList.add('is-visible');
+        }, 500);
+      }
+
+      banner.addEventListener('click', function (event) {
+        const target = event.target instanceof Element ? event.target : event.target.parentElement;
+        const button = target ? target.closest('[data-cookie-choice]') : null;
+        if (!button) return;
+
+        try {
+          window.localStorage.setItem(storageKey, button.dataset.cookieChoice || 'accepted');
+        } catch (error) {}
+
+        banner.classList.remove('is-visible');
+      });
+    })();
+  </script>
 </div>
