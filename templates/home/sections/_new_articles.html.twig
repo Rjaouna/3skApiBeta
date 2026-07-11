@@ -21,7 +21,7 @@
   [data-new-section] .latest-arrivals-title{
     margin: 0;
     font-size: 2rem;
-    font-weight: 800;
+    font-weight: 550;
     letter-spacing: -0.02em;
     color: #1f2937;
   }
@@ -132,7 +132,7 @@
     padding: 2px 4px;
     border: 1px solid rgba(0,0,0,.10);
     background: rgba(255,255,255,.80);
-    font-weight: 900;
+    font-weight: 600;
     font-size: .78rem;
     z-index: 4;
   }
@@ -192,7 +192,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-weight: 900;
+    font-weight: 600;
     font-size: 1.2rem;
   }
 
@@ -204,7 +204,7 @@
   [data-new-section] .designation{
     display: block;
     margin-top: 6px;
-    font-weight: 900;
+    font-weight: 600;
     font-size: .82rem;
     color: rgba(0,0,0,.75);
     text-decoration: none;
@@ -246,7 +246,7 @@
     display: flex;
     align-items: baseline;
     gap: 8px;
-    font-weight: 950;
+    font-weight: 650;
   }
 
   [data-new-section] .price-ttc{
@@ -256,7 +256,7 @@
   [data-new-section] .price-label{
     font-size: .78rem;
     color: var(--pc-muted);
-    font-weight: 900;
+    font-weight: 600;
   }
 
   [data-new-section] .bottomFooterWrapper{
@@ -287,7 +287,7 @@
     background: transparent;
     display: grid;
     place-items: center;
-    font-weight: 900;
+    font-weight: 600;
     color: rgba(0,0,0,.65);
     transition: background .12s ease, color .12s ease;
     flex: 0 0 44px;
@@ -315,7 +315,7 @@
     border: 0;
     outline: none;
     text-align: center;
-    font-weight: 950;
+    font-weight: 650;
     background: transparent;
     color: rgba(0,0,0,.85);
   }
@@ -339,7 +339,7 @@
     padding: 0 5px;
     border: 1px solid #dee2e6;
     background: #ecf0f1;
-    font-weight: 900;
+    font-weight: 600;
   }
 
   [data-new-section] .addcart:hover{
@@ -362,7 +362,7 @@
     justify-content: center;
     font-size: .78rem;
     line-height: 1;
-    font-weight: 900;
+    font-weight: 600;
     color: inherit;
   }
 
@@ -415,7 +415,7 @@
   .latest-arrivals-title{
     margin: 0;
     font-size: 2rem;
-    font-weight: 800;
+    font-weight: 550;
     letter-spacing: -0.02em;
     color: #1f2937;
   }
@@ -650,7 +650,7 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
 
 card.innerHTML = `
   <div class="wishlist-button" title="Stock disponible" style="${stockStyle(availableStock)}">
-    <span data-stock-badge style="font-weight:950; font-size:.92rem; line-height:1;">${esc(stockDisplay)}</span>
+    <span data-stock-badge style="font-weight: 650; font-size:.92rem; line-height:1;">${esc(stockDisplay)}</span>
   </div>
 
   <div class="product-card__image">

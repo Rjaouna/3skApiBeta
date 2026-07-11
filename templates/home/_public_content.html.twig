@@ -54,7 +54,7 @@
   .public-home .btn-primary {
     background: linear-gradient(135deg, var(--public-blue), var(--public-blue-dark));
     border-color: var(--public-blue);
-    font-weight: 800;
+    font-weight: 550;
     box-shadow: 0 12px 24px rgba(49,95,187,.18);
   }
 
@@ -68,7 +68,7 @@
     color: var(--public-blue);
     border-color: rgba(49,95,187,.24);
     background: #fff;
-    font-weight: 800;
+    font-weight: 550;
   }
 
   .public-home .btn-outline-secondary:hover {
@@ -139,7 +139,7 @@
     color: var(--public-blue-dark);
     border: 1px solid rgba(255,145,0,.30);
     font-size: .8rem;
-    font-weight: 800;
+    font-weight: 550;
     letter-spacing: 0;
     text-transform: uppercase;
   }
@@ -200,7 +200,7 @@
   .public-home .badge {
     border-radius: 8px !important;
     letter-spacing: 0;
-    font-weight: 800;
+    font-weight: 550;
     text-transform: uppercase;
   }
 
@@ -608,7 +608,7 @@
     background: var(--public-blue) !important;
     border-color: var(--public-blue) !important;
     color: #fff !important;
-    font-weight: 900;
+    font-weight: 600;
     box-shadow: 0 16px 30px rgba(49,95,187,.20);
   }
 
@@ -666,7 +666,7 @@
     background: #fff;
     color: var(--public-ink);
     font-size: .76rem;
-    font-weight: 900;
+    font-weight: 600;
     letter-spacing: .02em;
     box-shadow: 0 8px 20px rgba(16,24,40,.06);
   }
@@ -767,7 +767,7 @@
     border-radius: 10px;
     border: 1px solid transparent;
     font-size: .82rem;
-    font-weight: 900;
+    font-weight: 600;
     text-transform: uppercase;
   }
 
@@ -820,7 +820,7 @@
     color: var(--public-orange);
     font-family: 'Montserrat', sans-serif;
     font-size: .78rem;
-    font-weight: 800;
+    font-weight: 550;
     text-transform: uppercase;
   }
 
@@ -1265,7 +1265,7 @@
     margin-bottom: .5rem;
     color: var(--public-ink);
     font-size: .72rem;
-    font-weight: 800;
+    font-weight: 550;
     text-transform: uppercase;
   }
 
@@ -1303,7 +1303,7 @@
     border-radius: 4px;
     background: var(--public-orange);
     color: #fff;
-    font-weight: 800;
+    font-weight: 550;
     transition: background .15s ease, border-color .15s ease;
   }
 
@@ -1990,6 +1990,7 @@
           { name: 'EURO BUMP', file: 'logo-euro-bump-pieces-carrosserie-3sk-parts-auto.jpg' },
           { name: 'DE-GA', file: 'logo-de-ga-pieces-carrosserie-3sk-parts-auto.jpg' },
           { name: 'ANTAI', file: 'logo-antai-pieces-carrosserie-3sk-parts-auto.jpg' },
+          { name: 'SP', file: 'logo-sp-pieces-carrosserie-3sk-parts-auto.png' },
           { name: 'ISAM', file: 'logo-isam-pieces-carrosserie-3sk-parts-auto.jpg' },
           { name: 'ITSA', file: 'logo-itsa-passion-for-plastics-pieces-carrosserie-3sk-parts-auto.jpg' },
           { name: 'FAROLON', file: 'logo-farolon-pieces-carrosserie-3sk-parts-auto.jpg' },
@@ -2181,75 +2182,11 @@
 
   {% include 'home/sections/_stats_strip.html.twig' %}
 
-  <footer class="public-footer py-5">
-    <div class="container-fluid px-4 px-xl-5 public-footer-inner">
-      <div class="row g-4 align-items-stretch">
-        <div class="col-12 col-lg-3">
-          <a class="public-footer-logo" href="#accueil" aria-label="3SK Parts Auto">
-            <img src="{{ asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto">
-          </a>
-          <p class="fw-bold mb-2">Pièces et accessoires auto</p>
-          <p class="public-footer-muted mb-3">190, Boulevard Moulay Ismail - Casablanca, Maroc</p>
-          <p class="mb-2"><strong>Service client :</strong> <a href="tel:+212522713572">+212 5 22 71 35 72</a></p>
-          <p class="mb-3"><strong>Email :</strong> <a href="mailto:3sk.partsauto@gmail.com">3sk.partsauto@gmail.com</a></p>
-          <div class="d-flex gap-2 public-footer-social">
-            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-2">
-          <div class="public-footer-card">
-            <h4 class="h6 fw-bold mb-3">Transaction sécurisée</h4>
-            <div class="public-payment-row mb-4">
-              <span class="public-payment-badge">CMI</span>
-              <span class="public-payment-badge is-mastercard"><span>Mastercard</span></span>
-              <span class="public-payment-badge">VISA</span>
-            </div>
-
-            <h4 class="h6 fw-bold mb-3">Besoin d'aide ?</h4>
-            <ul class="public-footer-list">
-              <li><a href="#qui-sommes-nous"><i class="fa-solid fa-circle-info"></i>À propos</a></li>
-              <li><a href="#services"><i class="fa-solid fa-file-lines"></i>Services</a></li>
-              <li><a href="#contact"><i class="fa-solid fa-headset"></i>Contact</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-2">
-          <div class="public-footer-card">
-            <h4 class="h6 fw-bold mb-3">Navigation</h4>
-            <ul class="public-footer-list">
-              <li><a href="#accueil"><i class="fa-solid fa-house"></i>Accueil</a></li>
-              <li><a href="#marques"><i class="fa-solid fa-tags"></i>Marques</a></li>
-              <li><a href="#contact"><i class="fa-solid fa-paper-plane"></i>Demande de contact</a></li>
-              <li><a href="{{ path('app_login') }}"><i class="fa-solid fa-right-to-bracket"></i>Espace client</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-12 col-lg-5">
-          <div class="public-footer-map">
-            <iframe
-              title="Localisation 3SK Parts Auto Casablanca"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=33.528667,-7.550028&z=12&output=embed">
-            </iframe>
-          </div>
-        </div>
-      </div>
-
-      <hr class="my-4">
-
-      <div class="public-footer-bottom">
-        <span>3SK Parts Auto - Tous droits réservés {{ "now"|date("Y") }}</span>
-        <span>Distribution de pièces détachées automobiles à Casablanca</span>
-      </div>
-    </div>
-  </footer>
-
+  {% include 'partials/_site_footer.html.twig' with {
+    footer_connected: false,
+    footer_home_href: '#accueil',
+    footer_anchor_prefix: ''
+  } %}
   <div class="public-cookie-banner" id="publicCookieBanner" role="region" aria-label="Gestion des cookies">
     <p class="public-cookie-text">
       Nous utilisons les cookies pour vous offrir une meilleure expérience utilisateur et mesurer l'utilisation du site.

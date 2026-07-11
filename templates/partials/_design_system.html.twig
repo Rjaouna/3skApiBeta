@@ -47,6 +47,121 @@
       radial-gradient(780px circle at 100% 0%, rgba(255,145,0,.08), transparent 36%),
       var(--brand-bg) !important;
     color: var(--brand-ink);
+    font-weight: 400;
+  }
+
+  /* Typography cleanup: calmer, clearer hierarchy across the whole interface. */
+  body,
+  p,
+  li,
+  td,
+  input,
+  textarea,
+  select,
+  .small,
+  .text-muted,
+  .public-footer-muted,
+  .connected-footer-muted {
+    font-weight: 400 !important;
+  }
+
+  h1,
+  .h1,
+  .display-1,
+  .display-2,
+  .display-3,
+  .display-4,
+  .display-5,
+  .display-6,
+  .public-display {
+    font-weight: 700 !important;
+    letter-spacing: -.025em !important;
+  }
+
+  h2,
+  .h2,
+  .public-section-title,
+  .section-heading,
+  .page-title,
+  .cart-page-title,
+  .orders-page-title,
+  .profile-page-title,
+  .dash-title {
+    font-weight: 650 !important;
+    letter-spacing: -.018em !important;
+  }
+
+  h3,
+  h4,
+  h5,
+  h6,
+  .h3,
+  .h4,
+  .h5,
+  .h6,
+  .card-title,
+  .modal-title,
+  .section-title {
+    font-weight: 600 !important;
+    letter-spacing: -.01em !important;
+  }
+
+  strong,
+  b,
+  .fw-bold,
+  .fw-semibold,
+  .fw-bolder,
+  .fw-medium,
+  .font-bold,
+  .font-semibold {
+    font-weight: 600 !important;
+  }
+
+  .btn,
+  button,
+  .badge,
+  .form-label,
+  .dropdown-item,
+  .nav-link,
+  .main-menu__link,
+  .public-footer-list a,
+  .connected-footer-list a,
+  .site-footer__list a,
+  .table thead th,
+  .table th,
+  th {
+    font-weight: 550 !important;
+    letter-spacing: 0 !important;
+  }
+
+  .table tbody td,
+  .table td,
+  .form-text,
+  .help-text,
+  .public-section-copy,
+  .section-copy,
+  .hero-text,
+  .card-text {
+    font-weight: 400 !important;
+  }
+
+  .badge,
+  .label,
+  .meta-badge,
+  .status-badge {
+    font-weight: 550 !important;
+  }
+
+  [style*="font-weight:950"],
+  [style*="font-weight: 950"],
+  [style*="font-weight:900"],
+  [style*="font-weight: 900"] {
+    font-weight: 600 !important;
+  }
+
+  [style*="font-weight:800"],
+  [style*="font-weight: 800"] {
+    font-weight: 550 !important;
   }
 
   body.app-public,
@@ -83,7 +198,7 @@
     min-height: 42px;
     border-radius: var(--brand-radius-sm) !important;
     font-family: "Montserrat", sans-serif;
-    font-weight: 850 !important;
+    font-weight: 550 !important;
     letter-spacing: 0;
     display: inline-flex;
     align-items: center;
@@ -256,7 +371,7 @@
     background: #fff !important;
     color: var(--brand-ink) !important;
     box-shadow: none !important;
-    font-weight: 650;
+    font-weight: 400;
   }
 
   textarea.form-control,
@@ -279,14 +394,14 @@
   .profile-label {
     color: var(--brand-muted) !important;
     font-size: .78rem;
-    font-weight: 850 !important;
-    letter-spacing: .04em;
+    font-weight: 500 !important;
+    letter-spacing: .035em;
     text-transform: uppercase;
   }
 
   .invalid-feedback,
   .form-error-message {
-    font-weight: 750;
+    font-weight: 500;
     color: #dc3545;
   }
 
@@ -310,7 +425,7 @@
     font-size: .74rem !important;
     letter-spacing: .045em !important;
     text-transform: uppercase;
-    font-weight: 900 !important;
+    font-weight: 550 !important;
   }
 
   .table tbody td,
@@ -335,7 +450,7 @@
   .meta-chip,
   .badge-pill {
     border-radius: 999px !important;
-    font-weight: 900 !important;
+    font-weight: 550 !important;
     letter-spacing: 0;
   }
 
@@ -374,7 +489,7 @@
     border-radius: var(--brand-radius-sm) !important;
     border-width: 1px !important;
     box-shadow: var(--brand-shadow-sm);
-    font-weight: 750;
+    font-weight: 400;
   }
 
   .alert-success {
@@ -502,6 +617,7 @@
     color: #fff !important;
   }
 
+  .site-footer,
   .connected-footer,
   .public-footer {
     position: relative !important;
@@ -511,6 +627,7 @@
     border-top: 1px solid rgba(49,95,187,.12) !important;
   }
 
+  .site-footer::before,
   .connected-footer::before,
   .public-footer::before,
   .login-public-shell .public-footer::before {
@@ -522,6 +639,7 @@
     opacity: .95 !important;
   }
 
+  .site-footer::after,
   .connected-footer::after,
   .public-footer::after,
   .login-public-shell .public-footer::after {
@@ -539,13 +657,20 @@
     pointer-events: none !important;
   }
 
+  .site-footer > .container-fluid,
   .connected-footer > .container-fluid,
   .public-footer > .container-fluid {
     position: relative !important;
     z-index: 1 !important;
   }
 
+  .site-footer h3,
+  .site-footer h4,
+  .site-footer a,
+  .site-footer__muted,
+  .site-footer__bottom,
   .connected-footer h3,
+  .site-footer h4,
   .connected-footer h4,
   .connected-footer a,
   .connected-footer-muted,
@@ -567,12 +692,14 @@
     color: var(--brand-ink) !important;
   }
 
+  .site-footer a:hover,
   .connected-footer a:hover,
   .login-public-shell .public-footer a:hover,
   .public-footer a:hover {
     color: var(--brand-orange) !important;
   }
 
+  .site-footer__logo,
   .connected-footer-logo,
   .login-public-shell .public-footer-logo,
   .public-footer-logo {
@@ -585,6 +712,7 @@
     justify-content: flex-start !important;
   }
 
+  .site-footer__logo img,
   .connected-footer-logo img,
   .login-public-shell .public-footer-logo img,
   .public-footer-logo img {
@@ -779,6 +907,7 @@
     border-color: rgba(255,145,0,.22) !important;
     color: #9a4f00 !important;
     font-size: .66rem !important;
+    font-weight: 550 !important;
     letter-spacing: .08em !important;
   }
 
@@ -788,7 +917,7 @@
     font-size: clamp(1.42rem, 2.8vw, 2.25rem) !important;
     line-height: 1.04 !important;
     letter-spacing: -.03em !important;
-    font-weight: 900 !important;
+    font-weight: 700 !important;
     text-shadow: 0 1px 0 rgba(255,255,255,.68) !important;
   }
 
@@ -892,6 +1021,104 @@
   .public-cookie-btn.is-decline {
     border-color: rgba(49,95,187,.22) !important;
     color: var(--brand-blue) !important;
+  }
+
+  /* Typography cleanup layer: keeps hierarchy elegant across legacy screens. */
+  .app-public [class*="title"],
+  .app-public [class*="heading"],
+  .app-public [class*="section-title"],
+  .app-connected [class*="title"],
+  .app-connected [class*="heading"],
+  .app-connected [class*="section-title"],
+  .app-connected [class*="page-title"],
+  .app-connected [class*="hero"] h1,
+  .app-connected [class*="hero"] h2,
+  .app-connected [class*="hero"] h3 {
+    font-weight: 600 !important;
+    letter-spacing: -.012em !important;
+  }
+
+  .app-public .public-display,
+  .app-public h1,
+  .app-connected h1,
+  .app-connected .display-1,
+  .app-connected .display-2,
+  .app-connected .display-3,
+  .app-connected .display-4,
+  .app-connected .display-5,
+  .app-connected .display-6 {
+    font-weight: 700 !important;
+    letter-spacing: -.024em !important;
+  }
+
+  .app-public [class*="label"],
+  .app-public [class*="meta"],
+  .app-public [class*="subtitle"],
+  .app-public [class*="description"],
+  .app-connected [class*="label"],
+  .app-connected [class*="meta"],
+  .app-connected [class*="subtitle"],
+  .app-connected [class*="description"],
+  .app-connected [class*="helper"],
+  .app-connected [class*="muted"] {
+    font-weight: 400 !important;
+  }
+
+  .app-public [class*="name"],
+  .app-connected [class*="name"],
+  .app-public [class*="code"],
+  .app-connected [class*="code"] {
+    font-weight: 550 !important;
+  }
+
+  .app-public [class*="price"],
+  .app-public [class*="amount"],
+  .app-public [class*="total"],
+  .app-public [class*="value"],
+  .app-connected [class*="price"],
+  .app-connected [class*="amount"],
+  .app-connected [class*="total"],
+  .app-connected [class*="value"] {
+    font-weight: 650 !important;
+  }
+
+  .app-public .btn,
+  .app-public .nav-link,
+  .app-public .dropdown-item,
+  .app-connected .btn,
+  .app-connected .nav-link,
+  .app-connected .dropdown-item,
+  .app-connected .settings-btn,
+  .app-connected .admin-settings-btn,
+  .app-connected .admin-settings-item,
+  .app-connected .account-menu-item,
+  .app-connected .indicator-title {
+    font-weight: 550 !important;
+  }
+
+  .app-public .table th,
+  .app-public .table thead th,
+  .app-connected .table th,
+  .app-connected .table thead th,
+  .app-connected [class*="table"] thead th {
+    font-weight: 550 !important;
+  }
+
+  .app-public .badge,
+  .app-public [class*="badge"],
+  .app-public [class*="pill"],
+  .app-connected .badge,
+  .app-connected [class*="badge"],
+  .app-connected [class*="pill"],
+  .app-connected [class*="status"] {
+    font-weight: 550 !important;
+  }
+
+  .app-public .alert,
+  .app-connected .alert,
+  .app-public .card-text,
+  .app-connected .card-text {
+    font-weight: 400 !important;
   }
 
   @media (prefers-reduced-motion: no-preference) {

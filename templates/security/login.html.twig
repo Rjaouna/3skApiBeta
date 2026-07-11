@@ -123,7 +123,7 @@
     border:1px solid rgba(255,255,255,.34);
     background:rgba(255,255,255,.1);
     color:#fff !important;
-    font-weight:900;
+    font-weight:600;
     text-decoration:none;
     box-shadow:0 10px 24px rgba(16,24,40,.14);
   }
@@ -303,7 +303,7 @@
   .login-title{
     margin:0;
     font-size:1.45rem;
-    font-weight:900;
+    font-weight:650;
     color:#fff;
   }
 
@@ -314,7 +314,7 @@
   .login-subtitle{
     margin-top:2px;
     color:rgba(255,255,255,.82);
-    font-weight:700;
+    font-weight:400;
     font-size:.92rem;
   }
 
@@ -323,7 +323,7 @@
   }
 
   .form-label{
-    font-weight:900;
+    font-weight:500;
     margin-bottom:8px;
     color:rgba(255,255,255,.88);
   }
@@ -352,7 +352,7 @@
     background:rgba(255,255,255,.13);
     color:#fff;
     padding-left:42px;
-    font-weight:700;
+    font-weight:400;
     box-shadow:none !important;
   }
 
@@ -407,7 +407,7 @@
     height:54px;
     border:0;
     border-radius:8px;
-    font-weight:900;
+    font-weight:600;
     letter-spacing:.01em;
     background:linear-gradient(135deg, #d96d00, var(--bs-secondary));
     box-shadow:0 14px 30px rgba(var(--bs-secondary-rgb), .28);
@@ -434,13 +434,13 @@
 
   .login-muted{
     color:rgba(255,255,255,.78);
-    font-weight:700;
+    font-weight:400;
     font-size:.92rem;
   }
 
   .login-link{
     color:var(--bs-secondary);
-    font-weight:900;
+    font-weight:550;
     text-decoration:none;
   }
 
@@ -714,74 +714,11 @@
 </div>
 
 <div class="login-public-shell">
-  <footer class="public-footer py-5">
-    <div class="container-fluid px-4 px-xl-5 public-footer-inner">
-      <div class="row g-4 align-items-stretch">
-        <div class="col-12 col-lg-3">
-          <a class="public-footer-logo" href="{{ path('home') }}#accueil" aria-label="3SK Parts Auto">
-            <img src="{{ asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto">
-          </a>
-          <p class="fw-bold mb-2">Pièces et accessoires auto</p>
-          <p class="public-footer-muted mb-3">190, Boulevard Moulay Ismail - Casablanca, Maroc</p>
-          <p class="mb-2"><strong>Service client :</strong> <a href="tel:+212522713572">+212 5 22 71 35 72</a></p>
-          <p class="mb-3"><strong>Email :</strong> <a href="mailto:3sk.partsauto@gmail.com">3sk.partsauto@gmail.com</a></p>
-          <div class="d-flex gap-2 public-footer-social">
-            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-2">
-          <div class="public-footer-card">
-            <h4 class="h6 fw-bold mb-3">Transaction sécurisée</h4>
-            <div class="public-payment-row mb-4">
-              <span class="public-payment-badge">CMI</span>
-              <span class="public-payment-badge is-mastercard"><span>Mastercard</span></span>
-              <span class="public-payment-badge">VISA</span>
-            </div>
-
-            <h4 class="h6 fw-bold mb-3">Besoin d'aide ?</h4>
-            <ul class="public-footer-list">
-              <li><a href="{{ path('home') }}#qui-sommes-nous"><i class="fa-solid fa-circle-info"></i>À propos</a></li>
-              <li><a href="{{ path('home') }}#services"><i class="fa-solid fa-file-lines"></i>Services</a></li>
-              <li><a href="{{ path('home') }}#contact"><i class="fa-solid fa-headset"></i>Contact</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-2">
-          <div class="public-footer-card">
-            <h4 class="h6 fw-bold mb-3">Navigation</h4>
-            <ul class="public-footer-list">
-              <li><a href="{{ path('home') }}#accueil"><i class="fa-solid fa-house"></i>Accueil</a></li>
-              <li><a href="{{ path('home') }}#marques"><i class="fa-solid fa-tags"></i>Marques</a></li>
-              <li><a href="{{ path('home') }}#contact"><i class="fa-solid fa-paper-plane"></i>Demande de contact</a></li>
-              <li><a href="{{ path('app_login') }}"><i class="fa-solid fa-right-to-bracket"></i>Espace client</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-12 col-lg-5">
-          <div class="public-footer-map">
-            <iframe
-              title="Localisation 3SK Parts Auto Casablanca"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=33.528667,-7.550028&z=12&output=embed">
-            </iframe>
-          </div>
-        </div>
-      </div>
-
-      <hr class="my-4">
-
-      <div class="public-footer-bottom">
-        <span>3SK Parts Auto - Tous droits réservés {{ "now"|date("Y") }}</span>
-        <span>Distribution de pièces détachées automobiles à Casablanca</span>
-      </div>
-    </div>
-  </footer>
+  {% include 'partials/_site_footer.html.twig' with {
+    footer_connected: false,
+    footer_home_href: path('home'),
+    footer_anchor_prefix: path('home')
+  } %}
 </div>
 
 <script>
