@@ -33,7 +33,7 @@
     display: block !important;
     background:
       linear-gradient(90deg, #fff 0%, rgba(255,255,255,.78) 34%, rgba(255,255,255,.28) 100%),
-      url('{{ asset('img/bg-section/stock-entrepot-pieces-carrosserie-automobile-3sk-parts-auto.jpeg') }}') center right / cover no-repeat !important;
+      url('{{ optimized_asset('img/bg-section/stock-entrepot-pieces-carrosserie-automobile-3sk-parts-auto.jpeg') }}') center right / cover no-repeat !important;
     opacity: .16 !important;
     pointer-events: none !important;
   }
@@ -284,7 +284,7 @@
     <div class="row g-4 align-items-stretch">
       <div class="col-12 col-lg-3">
         <a class="site-footer__logo public-footer-logo connected-footer-logo" href="{{ footer_home_href }}" aria-label="3SK Parts Auto">
-          <img src="{{ asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto">
+          <img src="{{ optimized_asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto" loading="lazy" decoding="async">
         </a>
         <p class="site-footer__lead mb-2">Pièces et accessoires auto</p>
         <p class="site-footer__muted public-footer-muted connected-footer-muted mb-3">190, Boulevard Moulay Ismail - Casablanca, Maroc</p>

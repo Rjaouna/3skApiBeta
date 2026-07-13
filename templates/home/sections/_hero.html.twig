@@ -563,8 +563,10 @@
             <div class="hero-slide">
 
               {% set mediaPath = asset('img/slides/' ~ s.image) %}
+              {% set optimizedMediaPath = optimized_asset('img/slides/' ~ s.image) %}
               {% set mediaExtension = s.image|split('.')|last|lower %}
               {% set videoExtensions = ['mp4', 'webm'] %}
+              {% set heroPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAAAAACw=' %}
 
               {% if mediaExtension in videoExtensions %}
                 <video class="hero-img hero-video"
@@ -572,15 +574,24 @@
                        muted
                        loop
                        playsinline
-                       preload="metadata"
+                       preload="none"
+                       data-hero-lazy-video
                        aria-label="{{ s.altText|default(s.title|default('Slide')) }}">
-                  <source src="{{ mediaPath }}" type="{{ mediaExtension == 'webm' ? 'video/webm' : 'video/mp4' }}">
+                  <source data-src="{{ mediaPath }}" type="{{ mediaExtension == 'webm' ? 'video/webm' : 'video/mp4' }}">
                 </video>
               {% else %}
-                <img src="{{ mediaPath }}"
+                <img src="{{ loop.first ? optimizedMediaPath : heroPlaceholder }}"
                      class="hero-img hero-img--ken-burns"
                      alt="{{ s.altText|default(s.title|default('Slide')) }}"
-                     loading="lazy">
+                     width="1600"
+                     height="460"
+                     decoding="async"
+                     loading="{{ loop.first ? 'eager' : 'lazy' }}"
+                     fetchpriority="{{ loop.first ? 'high' : 'auto' }}"
+                     {% if not loop.first %}
+                       data-src="{{ optimizedMediaPath }}"
+                       data-hero-lazy
+                     {% endif %}>
               {% endif %}
 
               {# ✅ Actions admin (edit / delete / mise en avant) #}
