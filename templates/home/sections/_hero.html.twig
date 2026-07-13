@@ -339,7 +339,7 @@
 
   .hero-overlay{
     padding-block: var(--hero-pad);
-    padding-inline: max(1rem, calc((100vw - 1320px) / 2 + 1.5rem));
+    padding-inline: max(24px, calc((100vw - 1320px) / 2));
     align-items: center;
   }
 
@@ -495,7 +495,7 @@
 
     .hero-overlay{
       align-items: flex-end;
-      padding: 16px 14px 48px;
+      padding: 16px 24px 48px;
     }
 
     .hero-title{
@@ -520,10 +520,22 @@
     }
 
     .hero-carousel .carousel-indicators{
-      left: 18px;
+      left: 24px;
       right: 18px;
       bottom: 24px;
       justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 575px){
+    .hero-overlay{
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+
+    .hero-carousel .carousel-indicators{
+      left: 14px;
+      right: 14px;
     }
   }
 </style>
