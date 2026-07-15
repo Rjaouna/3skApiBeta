@@ -194,6 +194,30 @@
     padding-right: clamp(1rem, 2vw, 2rem) !important;
   }
 
+  body.app-connected .container,
+  body.app-connected .container-sm,
+  body.app-connected .container-md,
+  body.app-connected .container-lg,
+  body.app-connected .container-xl,
+  body.app-connected .container-xxl,
+  body.app-connected .container-fluid {
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: clamp(1rem, 2vw, 2rem) !important;
+    padding-right: clamp(1rem, 2vw, 2rem) !important;
+  }
+
+  body.app-connected .site__header > .container,
+  body.app-connected .site__header > .container-fluid,
+  body.app-connected .site-footer > .container,
+  body.app-connected .site-footer > .container-fluid,
+  body.app-connected .connected-footer > .container,
+  body.app-connected .connected-footer > .container-fluid {
+    max-width: none !important;
+  }
+
   .btn {
     min-height: 42px;
     border-radius: var(--brand-radius-sm) !important;
@@ -1156,6 +1180,17 @@
     .app-public .container-fluid,
     .app-connected .container-fluid,
     .container {
+      padding-left: .85rem !important;
+      padding-right: .85rem !important;
+    }
+
+    body.app-connected .container,
+    body.app-connected .container-sm,
+    body.app-connected .container-md,
+    body.app-connected .container-lg,
+    body.app-connected .container-xl,
+    body.app-connected .container-xxl,
+    body.app-connected .container-fluid {
       padding-left: .85rem !important;
       padding-right: .85rem !important;
     }
