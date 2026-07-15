@@ -389,7 +389,7 @@
 <section class="latest-arrivals-section mb-5" data-new-section>
   <div class="text-center mb-4">
     <h2 class="latest-arrivals-title">Dernier arrivage</h2>
-    <div class="latest-arrivals-subtitle">Découvrez les nouveautés récemment ajoutées</div>
+    <div class="latest-arrivals-subtitle">Découvrez les arrivages récemment ajoutés au catalogue</div>
   </div>
 
   <div class="product-grid" data-new-grid>
@@ -401,7 +401,7 @@
   <div class="alert alert-danger mt-3 d-none" data-new-error></div>
 
   <div class="mt-4 text-center">
-    <a href="{{ path('articles_page', { new: 1, newDays: 35 }) }}" class="latest-arrivals-link">
+    <a href="{{ path('articles_page', { new: 1, newDays: 90 }) }}" class="latest-arrivals-link">
       Voir tout →
     </a>
   </div>
@@ -595,7 +595,7 @@
       url.searchParams.set('page', '1');
       url.searchParams.set('limit', '5');
       url.searchParams.set('new', '1');
-      url.searchParams.set('newDays', '35');
+      url.searchParams.set('newDays', '90');
 
       const res = await fetch(url.toString(), { headers: { 'Accept':'application/json' } });
       const text = await res.text();

@@ -2023,11 +2023,11 @@ body.theme-dark .voice-search-btn.is-listening{
 </div>
 
           <div class="d-none d-lg-flex align-items-center gap-2">
-            <a class="indicator-btn indicator-deals" href="{{ path('articles_page', {'new': 1, 'newDays': 35}) }}">
+            <a class="indicator-btn indicator-deals" href="{{ path('articles_page', {'new': 1, 'newDays': 90}) }}">
               <span class="indicator-icon"><i class="fa-solid fa-truck-fast fa-xl"></i></span>
               <span class="d-flex flex-column">
                 <span class="indicator-title">Nouveaux Deals</span>
-                <span class="indicator-value">5 derniers jours</span>
+                <span class="indicator-value">Arrivages récents</span>
               </span>
             </a>
 
@@ -2108,7 +2108,7 @@ body.theme-dark .voice-search-btn.is-listening{
     <span>Catalogue</span>
   </a>
 
-  <a class="mobile-menu-quick__item" href="{{ path('articles_page', {'new': 1}) }}">
+  <a class="mobile-menu-quick__item" href="{{ path('articles_page', {'new': 1, 'newDays': 90}) }}">
     <i class="fa-solid fa-bolt"></i>
     <span>Nouveautés</span>
   </a>
