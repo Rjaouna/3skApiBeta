@@ -646,26 +646,35 @@
     margin-bottom: 0;
   }
 
+  .app-connected .table thead,
+  .app-connected .table thead tr,
   .app-connected .table thead th {
-    border-color: rgba(255, 255, 255, .16) !important;
-    background: linear-gradient(135deg, var(--app-blue-dark), var(--app-blue)) !important;
-    color: #fff !important;
-    font-size: .72rem !important;
-    font-weight: 700 !important;
-    text-transform: uppercase;
-  }
-
-  .app-connected .clients-table thead,
-  .app-connected .clients-table thead tr,
-  .app-connected .clients-table thead th {
     background: var(--bs-gray-100, #f3f4f6) !important;
     background-color: var(--bs-gray-100, #f3f4f6) !important;
     background-image: none !important;
   }
 
-  .app-connected .clients-table thead th {
+  .app-connected .table thead th {
+    --bs-table-bg: var(--bs-gray-100, #f3f4f6);
+    --bs-table-color: var(--bs-gray-600, #667085);
     border-color: var(--bs-gray-200, #e5e7eb) !important;
+    border-bottom: 1px solid var(--bs-gray-200, #e5e7eb) !important;
     color: var(--bs-gray-600, #667085) !important;
+    font-size: .72rem !important;
+    font-weight: 600 !important;
+    letter-spacing: .04em;
+    padding: 12px !important;
+    white-space: nowrap;
+    text-transform: uppercase;
+    box-shadow: none !important;
+  }
+
+  .app-connected .table thead th:first-child {
+    border-top-left-radius: 14px;
+  }
+
+  .app-connected .table thead th:last-child {
+    border-top-right-radius: 14px;
   }
 
   .app-connected .table tbody td {
@@ -795,16 +804,31 @@
   }
 
   .app-connected #cartOffcanvas {
+    --bs-offcanvas-width: min(96vw, 430px);
     --hd-text: #101828;
     --hd-muted: #667085;
     --hd-border: #dfe3e8;
     --hd-glass2: #f7f8fa;
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: auto !important;
+    width: var(--bs-offcanvas-width) !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    z-index: 1085 !important;
+    border-radius: 0 !important;
     border-left: 1px solid #dfe3e8;
     background: #fff !important;
     color: #101828 !important;
   }
 
   .app-connected #cartOffcanvas .offcanvas-header {
+    flex: 0 0 auto !important;
     border-bottom: 3px solid var(--app-orange);
     background: var(--app-panel-blue);
     color: #fff;
@@ -820,8 +844,16 @@
   }
 
   .app-connected #cartOffcanvas .offcanvas-body {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
     background: #f3f5f7;
     color: #101828;
+  }
+
+  .app-connected .offcanvas-backdrop {
+    z-index: 1075 !important;
   }
 
   .app-connected #cartOffcanvas .cart-summary-card {
@@ -881,6 +913,18 @@
   .app-connected #cartOffcanvas .cart-qty {
     border-color: #dfe3e8;
     background: #f3f5f7 !important;
+  }
+
+  @media (max-width: 575.98px) {
+    .app-connected #cartOffcanvas {
+      --bs-offcanvas-width: 100vw;
+      width: 100vw !important;
+      max-width: 100vw !important;
+    }
+
+    .app-connected #cartOffcanvas .offcanvas-body {
+      padding: 14px !important;
+    }
   }
 
   .app-connected .pagination .page-link {

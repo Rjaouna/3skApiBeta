@@ -42,6 +42,19 @@
     linear-gradient(180deg, rgba(0,0,0,.02), transparent);
 }
 
+.articles-reset-btn{
+  border-color: rgba(49, 95, 187, .35) !important;
+  color: var(--app-blue, var(--bs-primary)) !important;
+  background: rgba(255,255,255,.86) !important;
+}
+
+.articles-reset-btn:hover,
+.articles-reset-btn:focus{
+  border-color: var(--app-blue, var(--bs-primary)) !important;
+  background: rgba(49, 95, 187, .08) !important;
+  color: var(--app-blue, var(--bs-primary)) !important;
+}
+
     .filters-card{
       border-radius: 22px;
       border: 1px solid var(--pc-border);
@@ -637,7 +650,7 @@ body.theme-dark .empty-results-box{
       </div>
 
       <div class="d-flex gap-2 flex-wrap">
-        <a class="btn btn-outline-secondary" href="{{ path('articles_page') }}">Reset</a>
+        <a class="btn btn-outline-secondary articles-reset-btn" href="{{ path('articles_page') }}">Reset</a>
         <a class="btn btn-outline-primary" href="{{ path('articles_page', { new: 1, newDays: 90 }) }}">
           Arrivages récents
         </a>
