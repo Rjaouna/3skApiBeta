@@ -24,7 +24,7 @@
   .site__header{
     position: sticky;
     top: 0;
-    z-index: 1025;
+    z-index: 1060;
   }
 
   .header-wrap{
@@ -1401,7 +1401,7 @@
     display:block;
     height: 2px;
     border-radius: 999px;
-    background: var(--hd-text);
+    background: currentColor;
   }
 
   .mobile-menu-toggle__bars span:nth-child(2){
@@ -1410,12 +1410,29 @@
   }
 
   .mobile-menu-offcanvas{
+    --bs-offcanvas-width: min(92vw, 380px);
+    --hd-border: #dfe3e8;
+    --hd-shadow: 0 18px 40px rgba(16,24,40,.14);
+    --hd-glass: #fff;
+    --hd-glass2: #f8f9fa;
+    --hd-text: #101828;
+    --hd-muted: #667085;
+    width: var(--bs-offcanvas-width) !important;
+    max-width: 92vw;
+    min-height: 100dvh;
+    z-index: 1085 !important;
     border-left: 0 !important;
     border-right: 1px solid var(--hd-border);
     background:
       radial-gradient(700px circle at 10% 10%, rgba(var(--bs-primary-rgb), .12), transparent 40%),
       radial-gradient(700px circle at 90% 20%, rgba(var(--bs-secondary-rgb), .10), transparent 36%),
       var(--hd-glass) !important;
+    color: var(--hd-text) !important;
+  }
+
+  .mobile-menu-offcanvas.show,
+  .mobile-menu-offcanvas.showing{
+    visibility: visible !important;
   }
 
   .mobile-menu-offcanvas .offcanvas-header{
@@ -1437,6 +1454,8 @@
 
   .mobile-menu-body{
     padding: 0 16px 18px 16px !important;
+    overflow-y: auto;
+    background: transparent !important;
   }
 
   .mobile-menu-hero{
@@ -1616,6 +1635,54 @@
     min-height: 44px;
     border-radius: 14px;
     font-weight: 600;
+  }
+
+  #mainMenuOffcanvas.mobile-menu-offcanvas,
+  body.theme-dark #mainMenuOffcanvas.mobile-menu-offcanvas{
+    background:
+      radial-gradient(700px circle at 10% 10%, rgba(var(--bs-primary-rgb), .10), transparent 40%),
+      #fff !important;
+    color: #101828 !important;
+  }
+
+  #mainMenuOffcanvas .mobile-menu-hero,
+  #mainMenuOffcanvas .mobile-menu-quick__item,
+  #mainMenuOffcanvas .mobile-menu-cats,
+  #mainMenuOffcanvas .mobile-menu-help,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-hero,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-quick__item,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-cats,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-help{
+    background: #fff !important;
+    color: #101828 !important;
+    border-color: #dfe3e8 !important;
+  }
+
+  #mainMenuOffcanvas .mobile-menu-brand__title,
+  #mainMenuOffcanvas .mobile-menu-section__title strong,
+  #mainMenuOffcanvas .mobile-menu-help__title,
+  #mainMenuOffcanvas .mobile-menu-cats .list-group-item,
+  #mainMenuOffcanvas .mobile-menu-quick__item,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-brand__title,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-section__title strong,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-help__title,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-cats .list-group-item,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-quick__item{
+    color: #101828 !important;
+  }
+
+  #mainMenuOffcanvas .mobile-menu-brand__subtitle,
+  #mainMenuOffcanvas .mobile-menu-section__title span,
+  #mainMenuOffcanvas .mobile-menu-help__text,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-brand__subtitle,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-section__title span,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-help__text{
+    color: #667085 !important;
+  }
+
+  #mainMenuOffcanvas .mobile-menu-brand__logo,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-brand__logo{
+    background: #fff !important;
   }
 
   @media (max-width: 991.98px){
@@ -2080,10 +2147,10 @@ body.theme-dark .voice-search-btn.is-listening{
       <div class="mobile-menu-hero">
         <div class="mobile-menu-brand">
           <div class="mobile-menu-brand__logo">
-            <img src="{{ asset('/img/logo-min.png') }}" alt="Hopic" onerror="this.style.display='none'">
+            <img src="{{ optimized_asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto" onerror="this.style.display='none'">
           </div>
           <div>
-            <div class="mobile-menu-brand__title">Hopic</div>
+            <div class="mobile-menu-brand__title">3SK Parts Auto</div>
             <div class="mobile-menu-brand__subtitle">
               Catalogue, catégories et accès rapide à vos produits
             </div>

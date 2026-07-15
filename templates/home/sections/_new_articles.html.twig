@@ -103,13 +103,22 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 40px;
+    min-width: 40px;
+    width: auto;
     height: 40px;
+    padding: 0 10px;
     border-radius: 14px;
     background: rgba(255,255,255,.82);
     display: grid;
     place-items: center;
     z-index: 5;
+    white-space: nowrap;
+  }
+
+  [data-new-section] .wishlist-button [data-stock-badge]{
+    font-weight: 650;
+    font-size: .78rem;
+    line-height: 1;
   }
 
   body.theme-dark [data-new-section] .wishlist-button{
@@ -458,6 +467,7 @@
 
 <script>
 (function(){
+  const canSeeExactStock = {{ is_granted('ROLE_ADMIN') ? 'true' : 'false' }};
   const section = document.querySelector('[data-new-section]');
   if (!section) return;
 
@@ -549,7 +559,7 @@
 
     const stockBadge = card.querySelector('[data-stock-badge]');
     if (stockBadge) {
-      stockBadge.textContent = available > 20 ? '+20' : String(available);
+      stockBadge.textContent = stockLabel(available);
     }
 
     const stockBox = card.querySelector('.wishlist-button');
@@ -570,10 +580,22 @@
   });
 
  function stockStyle(stock){
+  if (!canSeeExactStock) {
+    return stock > 0 ? `color: rgba(25,135,84,.98);` : `color: rgba(220,53,69,.98);`;
+  }
+
   if (stock === 0) return `color: rgba(220,53,69,.98);`;
   if (stock < 5)  return `color: rgba(176,117,0,.98);`;
   if (stock > 10) return `color: rgba(25,135,84,.98);`;
   return ``;
+}
+
+function stockLabel(stock){
+  if (canSeeExactStock) {
+    return stock > 20 ? '+20' : String(stock);
+  }
+
+  return stock > 0 ? 'En stock' : 'Rupture';
 }
 
   function skeletons(){
@@ -633,10 +655,10 @@
 
         const img = (base && uid) ? (base + '/' + uid + '.png') : DEFAULT_IMG;
 
-     const stock = Math.max(0, Number(a.RealStock || 0));
+const stock = Math.max(0, Number(a.RealStock || 0));
 const inCartQty = getCartQtyFromObj(cartObj, code);
 const availableStock = Math.max(0, stock - inCartQty);
-const stockDisplay = (availableStock > 20) ? '+20' : String(availableStock);
+const stockDisplay = stockLabel(availableStock);
 
         // ✅ dans "Nouveautés" => badge toujours affiché
         const isNew = (a.isNew !== undefined) ? !!a.isNew : true;
@@ -649,8 +671,8 @@ const reduction = String(a.reduction ?? '').trim();
 const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
 
 card.innerHTML = `
-  <div class="wishlist-button" title="Stock disponible" style="${stockStyle(availableStock)}">
-    <span data-stock-badge style="font-weight: 650; font-size:.92rem; line-height:1;">${esc(stockDisplay)}</span>
+  <div class="wishlist-button" title="${availableStock > 0 ? 'Stock disponible' : 'Rupture de stock'}" style="${stockStyle(availableStock)}">
+    <span data-stock-badge>${esc(stockDisplay)}</span>
   </div>
 
   <div class="product-card__image">
@@ -842,7 +864,7 @@ card.innerHTML = `
 
   const stockBadge = card.querySelector('[data-stock-badge]');
   if (stockBadge) {
-    stockBadge.textContent = available > 20 ? '+20' : String(available);
+    stockBadge.textContent = stockLabel(available);
   }
 
   const stockBox = card.querySelector('.wishlist-button');
