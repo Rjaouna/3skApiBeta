@@ -443,13 +443,76 @@
   .dash-table thead th,
   .order-lines-table thead th,
   .clients-table thead th {
+    --bs-table-bg: var(--bs-tertiary-bg, #f8f9fa);
+    --bs-table-color: var(--bs-secondary-color, #667085);
     border: 0 !important;
-    background: #eef2f7 !important;
-    color: #475467 !important;
+    border-bottom: 1px solid var(--bs-border-color, #dee2e6) !important;
+    background: var(--bs-tertiary-bg, #f8f9fa) !important;
+    background-color: var(--bs-tertiary-bg, #f8f9fa) !important;
+    background-image: none !important;
+    color: var(--bs-secondary-color, #667085) !important;
     font-size: .74rem !important;
     letter-spacing: .045em !important;
     text-transform: uppercase;
-    font-weight: 550 !important;
+    font-weight: 600 !important;
+    padding: 12px !important;
+    white-space: nowrap;
+    box-shadow: none !important;
+  }
+
+  .table thead,
+  .table thead tr,
+  .orders-table thead,
+  .orders-table thead tr,
+  .cart-table thead,
+  .cart-table thead tr,
+  .dash-table thead,
+  .dash-table thead tr,
+  .order-lines-table thead,
+  .order-lines-table thead tr,
+  .clients-table thead,
+  .clients-table thead tr {
+    background: var(--bs-tertiary-bg, #f8f9fa) !important;
+    background-color: var(--bs-tertiary-bg, #f8f9fa) !important;
+    background-image: none !important;
+  }
+
+  .table thead th:first-child,
+  .orders-table thead th:first-child,
+  .cart-table thead th:first-child,
+  .dash-table thead th:first-child,
+  .order-lines-table thead th:first-child,
+  .clients-table thead th:first-child {
+    border-top-left-radius: 14px !important;
+  }
+
+  .table thead th:last-child,
+  .orders-table thead th:last-child,
+  .cart-table thead th:last-child,
+  .dash-table thead th:last-child,
+  .order-lines-table thead th:last-child,
+  .clients-table thead th:last-child {
+    border-top-right-radius: 14px !important;
+  }
+
+  .app-connected table thead,
+  .app-connected table thead tr,
+  .app-connected table thead th {
+    background: var(--bs-tertiary-bg, #f8f9fa) !important;
+    background-color: var(--bs-tertiary-bg, #f8f9fa) !important;
+    background-image: none !important;
+  }
+
+  .app-connected table thead th {
+    color: var(--bs-secondary-color, #667085) !important;
+    border-bottom: 1px solid var(--bs-border-color, #dee2e6) !important;
+    font-size: .74rem !important;
+    font-weight: 600 !important;
+    letter-spacing: .045em !important;
+    text-transform: uppercase;
+    padding: 12px !important;
+    white-space: nowrap;
+    box-shadow: none !important;
   }
 
   .table tbody td,
@@ -544,6 +607,58 @@
     border: 1px solid var(--brand-border) !important;
     border-radius: calc(var(--brand-radius) + 4px) !important;
     box-shadow: 0 26px 72px rgba(16,24,40,.22) !important;
+  }
+
+  .modal-backdrop {
+    z-index: 12000 !important;
+  }
+
+  .modal {
+    z-index: 12010 !important;
+  }
+
+  .modal-dialog {
+    margin-top: 1.25rem !important;
+    margin-bottom: 1.25rem !important;
+    max-height: calc(100dvh - 2.5rem);
+  }
+
+  .modal-dialog-scrollable .modal-content,
+  .modal-dialog .modal-content {
+    max-height: calc(100dvh - 2.5rem);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .modal-header,
+  .modal-footer {
+    flex: 0 0 auto;
+  }
+
+  .modal-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  @media (max-width: 575.98px) {
+    .modal-dialog {
+      margin: .75rem !important;
+      max-height: calc(100dvh - 1.5rem);
+    }
+
+    .modal-dialog-scrollable .modal-content,
+    .modal-dialog .modal-content {
+      max-height: calc(100dvh - 1.5rem);
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+      padding: 14px !important;
+    }
   }
 
   .product-card,

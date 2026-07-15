@@ -310,6 +310,8 @@
   }
 
   .client-modal .modal-content{
+    max-height: calc(100dvh - 2.5rem);
+    overflow: hidden;
     border-radius: 24px;
     border: 1px solid var(--oc-border);
     box-shadow: var(--oc-shadow);
@@ -335,6 +337,7 @@
 
   .client-modal .modal-body{
     padding: 18px;
+    overflow-y: auto;
   }
 
   .client-modal-label{
@@ -348,7 +351,7 @@
 
   .client-modal .form-control,
   .client-modal textarea{
-    min-height: 48px;
+    min-height: 44px;
     border-radius: 14px;
     border: 1px solid var(--oc-border);
     background: rgba(255,255,255,.75);
@@ -409,6 +412,24 @@
   }
 
   @media (max-width: 767.98px){
+    .client-modal .modal-dialog{
+      margin: .75rem;
+    }
+
+    .client-modal .modal-content{
+      max-height: calc(100dvh - 1.5rem);
+    }
+
+    .client-modal .modal-header,
+    .client-modal .modal-footer,
+    .client-modal .modal-body{
+      padding: 14px;
+    }
+
+    .client-modal .row{
+      --bs-gutter-y: .75rem;
+    }
+
     .clients-toolbar{
       align-items: stretch;
     }
