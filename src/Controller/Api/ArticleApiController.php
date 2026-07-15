@@ -172,6 +172,103 @@ class ArticleApiController extends AbstractController
         return $this->json($payload);
     }
 
+    #[Route('/search/suggestions', name: 'search_suggestions', methods: ['GET'])]
+    public function suggestions(Request $request, EntityManagerInterface $em): JsonResponse
+    {
+        $query = trim((string) $request->query->get('q', ''));
+        $limit = max(4, min(10, (int) $request->query->get('limit', 8)));
+
+        if (mb_strlen($query, 'UTF-8') < 2) {
+            return $this->json([
+                'ok' => true,
+                'query' => $query,
+                'items' => [],
+                'searchUrl' => $this->generateUrl('articles_page', ['q' => $query]),
+            ]);
+        }
+
+        $normalizedQuery = $this->normalizeSuggestionText($query);
+        $tokens = $this->suggestionTokens($normalizedQuery);
+        $fragments = $this->suggestionFragments($query, $tokens);
+
+        if ($normalizedQuery === '' || $fragments === []) {
+            return $this->json([
+                'ok' => true,
+                'query' => $query,
+                'items' => [],
+                'searchUrl' => $this->generateUrl('articles_page', ['q' => $query]),
+            ]);
+        }
+
+        $qb = $em->getRepository(Article::class)->createQueryBuilder('a');
+        $orX = $qb->expr()->orX();
+        $fields = [
+            'a.id',
+            'a.desComClear',
+            'a.uniqueId',
+            'a.xxVehicule',
+            'a.xxMarque',
+            'a.familyName',
+            'a.xxPosition',
+            'a.xxAnnee',
+        ];
+
+        foreach ($fragments as $index => $fragment) {
+            $parameter = 'fragment' . $index;
+            foreach ($fields as $field) {
+                $orX->add($qb->expr()->like($field, ':' . $parameter));
+            }
+            $qb->setParameter($parameter, '%' . $fragment . '%');
+        }
+
+        $candidates = $qb
+            ->andWhere($orX)
+            ->orderBy('a.sysModifiedDate', 'DESC')
+            ->setMaxResults(140)
+            ->getQuery()
+            ->getResult();
+
+        $scored = [];
+        foreach ($candidates as $article) {
+            if (!$article instanceof Article || !$article->getId()) {
+                continue;
+            }
+
+            $score = $this->scoreSuggestionArticle($article, $normalizedQuery, $tokens);
+            if ($score < 18) {
+                continue;
+            }
+
+            $scored[] = [
+                'score' => $score,
+                'stock' => $article->getRealStock(),
+                'article' => $article,
+            ];
+        }
+
+        usort($scored, static function (array $a, array $b): int {
+            if ($a['score'] === $b['score']) {
+                return $b['stock'] <=> $a['stock'];
+            }
+
+            return $b['score'] <=> $a['score'];
+        });
+
+        $items = [];
+        foreach (array_slice($scored, 0, $limit) as $row) {
+            /** @var Article $article */
+            $article = $row['article'];
+            $items[] = $this->normalizeSuggestion($article, (int) $row['score']);
+        }
+
+        return $this->json([
+            'ok' => true,
+            'query' => $query,
+            'items' => $items,
+            'searchUrl' => $this->generateUrl('articles_page', ['q' => $query]),
+        ]);
+    }
+
     private function normalize(
         Article $article,
         ?\DateTimeImmutable $cutoffForNew,
@@ -356,5 +453,170 @@ SQL;
         }
 
         return (string) ($_ENV['IMAGES_BASE_URL'] ?? getenv('IMAGES_BASE_URL') ?? '/ebpsynch');
+    }
+
+    private function normalizeSuggestion(Article $article, int $score): array
+    {
+        $code = (string) $article->getId();
+        $title = trim((string) $article->getDesComClear()) ?: $code;
+        $meta = array_values(array_filter([
+            $article->getFamilyName(),
+            $article->getXxMarque(),
+            $article->getXxVehicule(),
+            $article->getXxAnnee(),
+        ], static fn (?string $value): bool => trim((string) $value) !== ''));
+
+        return [
+            'type' => 'article',
+            'code' => $code,
+            'title' => $title,
+            'meta' => implode(' · ', $meta),
+            'stock' => $article->getRealStock(),
+            'score' => $score,
+            'url' => $this->generateUrl('article_show', ['code' => $code]),
+        ];
+    }
+
+    private function suggestionFragments(string $query, array $tokens): array
+    {
+        $fragments = [trim($query)];
+
+        foreach ($tokens as $token) {
+            $fragments[] = $token;
+            $length = strlen($token);
+
+            if ($length >= 4) {
+                $fragments[] = substr($token, 0, 3);
+            }
+
+            if ($length >= 6) {
+                $fragments[] = substr($token, 0, 4);
+            }
+        }
+
+        $fragments = array_map(static fn (string $value): string => trim($value), $fragments);
+        $fragments = array_filter($fragments, static fn (string $value): bool => mb_strlen($value, 'UTF-8') >= 2);
+
+        return array_values(array_unique($fragments));
+    }
+
+    private function suggestionTokens(string $normalizedQuery): array
+    {
+        $tokens = preg_split('/\s+/', $normalizedQuery) ?: [];
+        $tokens = array_filter($tokens, static fn (string $token): bool => strlen($token) >= 2);
+
+        return array_values(array_unique($tokens));
+    }
+
+    private function scoreSuggestionArticle(Article $article, string $normalizedQuery, array $tokens): int
+    {
+        $code = $this->normalizeSuggestionText((string) $article->getId());
+        $title = $this->normalizeSuggestionText((string) $article->getDesComClear());
+        $haystack = $this->normalizeSuggestionText(implode(' ', [
+            $article->getId(),
+            $article->getDesComClear(),
+            $article->getFamilyName(),
+            $article->getXxMarque(),
+            $article->getXxVehicule(),
+            $article->getXxPosition(),
+            $article->getXxAnnee(),
+        ]));
+
+        if ($normalizedQuery === '') {
+            return 0;
+        }
+
+        $score = 0;
+
+        if ($code === $normalizedQuery) {
+            $score += 1000;
+        } elseif (str_starts_with($code, $normalizedQuery)) {
+            $score += 760;
+        } elseif (str_contains($code, $normalizedQuery)) {
+            $score += 620;
+        }
+
+        if ($title === $normalizedQuery) {
+            $score += 720;
+        } elseif (str_contains($title, $normalizedQuery)) {
+            $score += 420;
+        } elseif (str_contains($haystack, $normalizedQuery)) {
+            $score += 320;
+        }
+
+        $words = preg_split('/\s+/', $haystack) ?: [];
+        foreach ($tokens as $token) {
+            if (str_contains($haystack, $token)) {
+                $score += 85;
+                continue;
+            }
+
+            $score += $this->bestFuzzyTokenScore($token, $words);
+        }
+
+        if ($article->getRealStock() > 0) {
+            $score += 10;
+        }
+
+        return $score;
+    }
+
+    private function bestFuzzyTokenScore(string $token, array $words): int
+    {
+        $best = 0;
+        $tokenLength = strlen($token);
+
+        foreach ($words as $word) {
+            $word = trim((string) $word);
+            $wordLength = strlen($word);
+
+            if ($wordLength < 2) {
+                continue;
+            }
+
+            if (str_starts_with($word, $token) || str_starts_with($token, $word)) {
+                $best = max($best, 58);
+                continue;
+            }
+
+            $distance = levenshtein($token, $word);
+            $maxLength = max($tokenLength, $wordLength);
+
+            if ($maxLength >= 4 && $distance <= 1) {
+                $best = max($best, 52);
+                continue;
+            }
+
+            if ($maxLength >= 5 && $distance <= 2) {
+                $best = max($best, 34);
+            }
+
+            similar_text($token, $word, $percent);
+            if ($percent >= 78) {
+                $best = max($best, 30);
+            } elseif ($percent >= 68) {
+                $best = max($best, 20);
+            }
+        }
+
+        return $best;
+    }
+
+    private function normalizeSuggestionText(string $value): string
+    {
+        $value = trim($value);
+        if ($value === '') {
+            return '';
+        }
+
+        $transliterated = @iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $value);
+        if (is_string($transliterated) && $transliterated !== '') {
+            $value = $transliterated;
+        }
+
+        $value = strtolower($value);
+        $value = preg_replace('/[^a-z0-9]+/', ' ', $value) ?? $value;
+
+        return trim(preg_replace('/\s+/', ' ', $value) ?? $value);
     }
 }
