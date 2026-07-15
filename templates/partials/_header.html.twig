@@ -1921,14 +1921,13 @@ body.theme-dark .voice-search-btn.is-listening{
                   style="text-transform: uppercase;"
                   {% if app.request.attributes.get('_route') == 'articles_page' and not app.request.query.get('family') %}aria-current="page"{% endif %}
                 >
-                  <i class="fa-solid fa-boxes-stacked"></i>&nbsp;&nbsp;
                   <span>Catalogue</span>
                 </a>
               </li>
 
               <li class="main-menu__item" id="navCatsLoading">
                 <span class="main-menu__link" style="opacity:.65">
-                  <i class="fa-solid fa-spinner fa-spin"></i>&nbsp;&nbsp;Chargement…
+                  Chargement…
                 </span>
               </li>
             </ul>
@@ -2398,8 +2397,6 @@ body.theme-dark .voice-search-btn.is-listening{
             const li = document.createElement('li');
             li.className = 'main-menu__item cat-item';
 
-            const icon = iconForCategoryFA(it.value);
-
             const isActiveCategory =
               currentPath === articlesUrl &&
               currentFamily.toLowerCase() === String(it.value).toLowerCase();
@@ -2411,7 +2408,6 @@ body.theme-dark .voice-search-btn.is-listening{
                 title="${esc(it.value)}"
                 ${isActiveCategory ? 'aria-current="page"' : ''}
               >
-                <i class="fa-solid ${icon}"></i>&nbsp;&nbsp;
                 <span>${esc(it.value)}</span>
               </a>
             `;
@@ -2448,7 +2444,7 @@ body.theme-dark .voice-search-btn.is-listening{
 
       if (loadingLi){
         loadingLi.innerHTML = `<span class="main-menu__link" style="opacity:.65;color:#dc3545">
-          <i class="fa-solid fa-triangle-exclamation"></i>&nbsp;&nbsp;Impossible de charger
+          Impossible de charger
         </span>`;
       }
 

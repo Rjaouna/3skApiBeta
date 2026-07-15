@@ -241,17 +241,33 @@
     border-bottom: 3px solid var(--app-orange);
   }
 
+  .app-connected .site__header .header__navbar > .container-fluid {
+    justify-content: center !important;
+  }
+
+  .app-connected .site__header .header__navbar-menu,
+  .app-connected .site__header .main-menu {
+    width: 100%;
+  }
+
   .app-connected .site__header .main-menu__list {
-    gap: 0;
+    justify-content: center;
+    gap: 6px;
   }
 
   .app-connected .site__header .main-menu__link {
     min-height: 44px;
-    padding: 7px 12px;
-    border-right: 1px solid rgba(49, 95, 187, .12);
+    justify-content: center;
+    padding: 7px 14px;
+    border: 1px solid rgba(49, 95, 187, .12);
+    border-radius: var(--app-radius);
     color: var(--app-blue);
     font-size: .76rem;
     text-transform: uppercase;
+  }
+
+  .app-connected .site__header .main-menu__link > i {
+    display: none !important;
   }
 
   .app-connected .site__header .main-menu__link:hover,
