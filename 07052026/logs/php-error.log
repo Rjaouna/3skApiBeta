@@ -1,0 +1,9 @@
+[28-Mar-2026 11:52:52 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'skpiecesauto_3sk154poed'@'localhost' (using password: YES) in /home/www/catalogue.3skpartsauto.com/config/bootstrap.php:95
+Stack trace:
+#0 /home/www/catalogue.3skpartsauto.com/config/bootstrap.php(95): PDO->__construct()
+#1 /home/www/catalogue.3skpartsauto.com/login.php(38): db()
+#2 {main}
+  thrown in /home/www/catalogue.3skpartsauto.com/config/bootstrap.php on line 95
+[09-Apr-2026 08:46:41 UTC] PHP Notice:  session_start(): ps_files_cleanup_dir: opendir(/tmp) failed: Permission denied (13) in /home/www/catalogue.3skpartsauto.com/config/bootstrap.php on line 73
+[02-May-2026 16:18:00 UTC] PHP Notice:  session_start(): ps_files_cleanup_dir: opendir(/tmp) failed: Permission denied (13) in /home/www/catalogue.3skpartsauto.com/config/bootstrap.php on line 73
+[07-May-2026 07:25:48 UTC] PHP Notice:  session_start(): ps_files_cleanup_dir: opendir(/tmp) failed: Permission denied (13) in /home/www/catalogue.3skpartsauto.com/config/bootstrap.php on line 73
