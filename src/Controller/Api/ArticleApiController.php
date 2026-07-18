@@ -54,16 +54,7 @@ class ArticleApiController extends AbstractController
 
         $qb = $em->getRepository(Article::class)->createQueryBuilder('a');
 
-        if ($q !== '') {
-            $qb->andWhere(
-                'a.id LIKE :q
-                 OR a.desComClear LIKE :q
-                 OR a.uniqueId LIKE :q
-                 OR a.xxVehicule LIKE :q
-                 OR a.xxMarque LIKE :q
-                 OR a.familyName LIKE :q'
-            )->setParameter('q', '%' . $q . '%');
-        }
+        $catalogSearchTokens = $this->catalogSearchTokens($q);
 
         if ($family !== '') {
             $qb->andWhere('a.familyName = :family')->setParameter('family', $family);
@@ -111,14 +102,30 @@ class ArticleApiController extends AbstractController
                 ->setParameter('cutoff', $cutoff);
         }
 
-        $total = $this->countTotal($qb);
+        if ($catalogSearchTokens !== []) {
+            /** @var Article[] $candidates */
+            $candidates = $qb->getQuery()->getResult();
+            $items = [];
 
-        $qb->orderBy('a.sysModifiedDate', 'DESC')
-            ->setFirstResult(($page - 1) * $limit)
-            ->setMaxResults($limit);
+            foreach ($candidates as $candidate) {
+                if ($this->matchesCatalogSearch($candidate, $catalogSearchTokens)) {
+                    $items[] = $candidate;
+                }
+            }
 
-        /** @var Article[] $items */
-        $items = $qb->getQuery()->getResult();
+            $this->sortLikeLegacyCatalog($items);
+            $total = count($items);
+            $items = array_slice($items, ($page - 1) * $limit, $limit);
+        } else {
+            $total = $this->countTotal($qb);
+
+            $qb->orderBy('a.sysModifiedDate', 'DESC')
+                ->setFirstResult(($page - 1) * $limit)
+                ->setMaxResults($limit);
+
+            /** @var Article[] $items */
+            $items = $qb->getQuery()->getResult();
+        }
 
         $currentUser = $this->getUser();
         $currentUser = $currentUser instanceof User ? $currentUser : null;
@@ -349,6 +356,74 @@ class ArticleApiController extends AbstractController
         $countQb->select('COUNT(a.uniqueId)');
 
         return (int) $countQb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * Reproduit la recherche du catalogue historique 07052026 :
+     * chaque mot saisi doit etre present dans le bloc texte de l'article.
+     *
+     * @return list<string>
+     */
+    private function catalogSearchTokens(string $query): array
+    {
+        $query = mb_strtolower(trim($query), 'UTF-8');
+        if ($query === '') {
+            return [];
+        }
+
+        $tokens = preg_split('/\s+/', $query) ?: [];
+        $tokens = array_filter($tokens, static fn (string $token): bool => $token !== '');
+
+        return array_values($tokens);
+    }
+
+    /**
+     * Meme composition que buildSearchBlob() dans 07052026/index.php.
+     */
+    private function buildLegacyCatalogSearchBlob(Article $article): string
+    {
+        return mb_strtolower(implode(' ', [
+            (string) $article->getDesComClear(),
+            (string) $article->getId(),
+            (string) $article->getXxMarque(),
+            (string) $article->getXxVehicule(),
+            (string) $article->getFamilyName(),
+            (string) $article->getXxPosition(),
+            (string) $article->getXxAnnee(),
+        ]), 'UTF-8');
+    }
+
+    /**
+     * @param list<string> $tokens
+     */
+    private function matchesCatalogSearch(Article $article, array $tokens): bool
+    {
+        $blob = $this->buildLegacyCatalogSearchBlob($article);
+
+        foreach ($tokens as $token) {
+            if (!str_contains($blob, $token)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Tri "Pertinence" du catalogue historique : stock decroissant puis designation.
+     *
+     * @param list<Article> $items
+     */
+    private function sortLikeLegacyCatalog(array &$items): void
+    {
+        usort($items, static function (Article $a, Article $b): int {
+            $stockDiff = $b->getRealStock() <=> $a->getRealStock();
+            if ($stockDiff !== 0) {
+                return $stockDiff;
+            }
+
+            return strcasecmp((string) $a->getDesComClear(), (string) $b->getDesComClear());
+        });
     }
 
     private function getYearBounds(EntityManagerInterface $em): array
