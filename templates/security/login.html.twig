@@ -495,7 +495,10 @@
   }
 
   .login-page{
-    padding: 38px clamp(16px, 3vw, 42px) 42px;
+    padding:
+      clamp(68px, 7vw, 96px)
+      clamp(16px, 3vw, 42px)
+      clamp(72px, 7vw, 104px);
   }
 
   .login-page::before{
@@ -518,7 +521,7 @@
   }
 
   .login-head{
-    padding: 20px 24px 15px;
+    padding: 24px 28px 18px;
     border-bottom: 1px solid rgba(16,24,40,.08);
     background:
       linear-gradient(135deg, rgba(var(--bs-primary-rgb), .08), transparent 46%),
@@ -543,7 +546,7 @@
   }
 
   .login-body{
-    padding: 20px 24px 24px;
+    padding: 28px 28px 32px;
   }
 
   .form-label{
@@ -611,7 +614,15 @@
     }
 
     .login-page{
-      padding: 26px 14px 30px;
+      padding: 42px 14px 48px;
+    }
+
+    .login-head{
+      padding: 20px 18px 15px;
+    }
+
+    .login-body{
+      padding: 24px 18px 28px;
     }
   }
 </style>
@@ -702,13 +713,8 @@
               Se connecter
             </button>
           </div>
+          
 
-          <div class="login-footer">
-            <span class="login-muted">Besoin d’aide ?</span>
-            <a class="login-link" href="#">
-              Mot de passe oublié
-            </a>
-          </div>
         </form>
       </div>
     </div>
