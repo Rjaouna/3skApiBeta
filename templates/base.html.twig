@@ -186,6 +186,8 @@
 {% endfor %}
 {% block body %}{% endblock %}
 
+{% include 'partials/_phone_contact_modal.html.twig' %}
+
 {% if app.user %}
   {% include 'partials/_connected_theme.html.twig' %}
   {% if app.request.attributes.get('_route') == 'home' %}

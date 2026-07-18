@@ -228,11 +228,14 @@
   }
 
   .login-page{
+    width:100%;
+    max-width:none;
+    margin:0;
     min-height: auto;
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:42px 0 46px;
+    padding:42px clamp(16px, 3vw, 42px) 46px;
     position:relative;
     z-index:2;
   }
@@ -492,7 +495,7 @@
   }
 
   .login-page{
-    padding: 38px 0 42px;
+    padding: 38px clamp(16px, 3vw, 42px) 42px;
   }
 
   .login-page::before{
@@ -608,7 +611,7 @@
     }
 
     .login-page{
-      padding: 26px 0 30px;
+      padding: 26px 14px 30px;
     }
   }
 </style>
@@ -624,7 +627,7 @@
   } %}
 </div>
 
-<div class="container login-page">
+<div class="login-page">
   <div class="login-stack">
     <div class="login-card">
       <div class="login-head">

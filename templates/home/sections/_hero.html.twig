@@ -339,7 +339,10 @@
 
   .hero-overlay{
     padding-block: var(--hero-pad);
-    padding-inline: max(24px, calc((100vw - 1320px) / 2));
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding-inline: clamp(16px, 3vw, 42px);
     align-items: center;
   }
 
@@ -678,15 +681,6 @@
 
 
     </div>
-
-    {# Bouton ajouter (uniquement admin) #}
-    {% if is_granted('ROLE_ADMIN') %}
-      <div class="d-flex justify-content-end mt-2">
-        <a href="{{ path('admin_hero_slide_new') }}" class="btn btn-outline-primary rounded-pill px-3">
-          <i class="fa-solid fa-circle-plus me-2"></i>Ajouter un slide
-        </a>
-      </div>
-    {% endif %}
 
   {% else %}
     {# Aucun slide #}

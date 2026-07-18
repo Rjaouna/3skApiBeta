@@ -174,6 +174,13 @@
     box-shadow: 0 8px 20px rgba(16,24,40,.06) !important;
   }
 
+  .site-footer .public-payment-badge img {
+    display: block !important;
+    max-width: 54px !important;
+    max-height: 28px !important;
+    object-fit: contain !important;
+  }
+
   .site-footer .public-payment-badge.is-mastercard {
     color: #1f2937 !important;
     position: relative !important;
@@ -286,9 +293,9 @@
         <a class="site-footer__logo public-footer-logo connected-footer-logo" href="{{ footer_home_href }}" aria-label="3SK Parts Auto">
           <img src="{{ optimized_asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto" loading="lazy" decoding="async">
         </a>
-        <p class="site-footer__lead mb-2">Pièces et accessoires auto</p>
+        <p class="site-footer__lead mb-2">IMPORTATEUR ET DISTRIBUTEUR DE PIECES AUTOMOBILES CARROSSERIES ET ACCESSOIRES</p>
         <p class="site-footer__muted public-footer-muted connected-footer-muted mb-3">HAY ENNASR 2 Nr 6 lahraouyine Casablanca</p>
-        <p class="mb-2"><strong>Service client :</strong> <a href="tel:+212522713572">+212 5 22 71 35 72/77</a></p>
+        <p class="mb-2"><strong>Service client :</strong> <button class="phone-contact-trigger" type="button" data-bs-toggle="modal" data-bs-target="#phoneContactModal">Voir les numeros</button></p>
         <p class="mb-3"><strong>Email :</strong> <a href="mailto:3sk.partsauto@gmail.com">3sk.partsauto@gmail.com</a></p>
         <div class="d-flex gap-2 site-footer__social public-footer-social connected-footer-social">
           <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
@@ -301,9 +308,13 @@
         <div class="site-footer__block public-footer-card">
           <h4 class="h6 mb-3">Transaction sécurisée</h4>
           <div class="public-payment-row mb-4">
-            <span class="public-payment-badge">CMI</span>
+            <span class="public-payment-badge">
+              <img src="{{ asset('img/payment/cmi.svg') }}" alt="CMI" loading="lazy" decoding="async">
+            </span>
             <span class="public-payment-badge is-mastercard"><span>Mastercard</span></span>
-            <span class="public-payment-badge">VISA</span>
+            <span class="public-payment-badge">
+              <img src="{{ asset('img/payment/visa.svg') }}" alt="VISA" loading="lazy" decoding="async">
+            </span>
           </div>
 
           <h4 class="h6 mb-3">Besoin d'aide ?</h4>
@@ -343,7 +354,7 @@
 
     <div class="site-footer__bottom public-footer-bottom connected-footer-muted">
       <span>3SK Parts Auto - Tous droits réservés {{ "now"|date("Y") }}</span>
-      <span>Distribution de pièces carrosserie et accessoires pour automobiles à Casablanca</span>
+      <span>Importateur et distributeur de pièces automobiles, carrosseries et accessoires</span>
     </div>
   </div>
 </footer>

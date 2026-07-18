@@ -1675,10 +1675,10 @@ body.theme-dark .voice-search-btn.is-listening{
             </span>
           </div>
 
-          <a class="topbar-phone d-none d-md-flex" href="tel:+212522994484">
+          <button class="topbar-phone phone-contact-trigger d-none d-md-flex" type="button" data-bs-toggle="modal" data-bs-target="#phoneContactModal">
             <i class="fa-solid fa-square-phone"></i>
-            <span>+212 5 22 71 35 72/77</span>
-          </a>
+            <span>Nous appeler</span>
+          </button>
 
           <div class="topbar-spacer"></div>
 
@@ -1814,7 +1814,7 @@ body.theme-dark .voice-search-btn.is-listening{
                     <span class="admin-settings-item__icon">
                       <i class="fa-solid fa-building"></i>
                     </span>
-                    <span>Configuration Hopic</span>
+                    <span>Configuration 3sk</span>
                   </a>
                 </li>
 
@@ -1842,6 +1842,15 @@ body.theme-dark .voice-search-btn.is-listening{
                       <i class="fa-solid fa-box-open"></i>
                     </span>
                     <span>Gestion des commandes</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a class="dropdown-item admin-settings-item" href="{{ path('admin_hero_slide_index') }}">
+                    <span class="admin-settings-item__icon">
+                      <i class="fa-solid fa-images"></i>
+                    </span>
+                    <span>Gestion slides</span>
                   </a>
                 </li>
 
@@ -2034,10 +2043,10 @@ body.theme-dark .voice-search-btn.is-listening{
     <span>Nouveautés</span>
   </a>
 
-  <a class="mobile-menu-quick__item" href="tel:+212522994484">
+  <button class="mobile-menu-quick__item phone-contact-trigger" type="button" data-bs-toggle="modal" data-bs-target="#phoneContactModal">
     <i class="fa-solid fa-phone-volume"></i>
     <span>Contact</span>
-  </a>
+  </button>
 
   {% if is_granted('ROLE_ADMIN') %}
     <a class="mobile-menu-quick__item" href="{{ path('admin_dashboard_index') }}">
@@ -2066,9 +2075,9 @@ body.theme-dark .voice-search-btn.is-listening{
         </div>
 
         <div class="mobile-menu-help__actions">
-          <a class="btn btn-primary text-light" href="tel:+212522994484">
+          <button class="btn btn-primary text-light phone-contact-trigger" type="button" data-bs-toggle="modal" data-bs-target="#phoneContactModal">
             <i class="fa-solid fa-phone me-2"></i>Appeler
-          </a>
+          </button>
           <a class="btn btn-outline-secondary" href="{{ path('articles_page') }}">
             <i class="fa-solid fa-magnifying-glass me-2"></i>Voir le catalogue
           </a>

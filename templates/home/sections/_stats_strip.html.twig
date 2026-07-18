@@ -67,6 +67,12 @@
     text-transform: uppercase;
   }
 
+  body.app-public .site-stats-strip__grid {
+    width: 100%;
+    max-width: none;
+    padding-inline: clamp(16px, 3vw, 42px);
+  }
+
   .site-stats-strip__label::after {
     content: "";
     display: block;
@@ -82,6 +88,10 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
       max-width: 760px;
     }
+
+    body.app-public .site-stats-strip__grid {
+      max-width: none;
+    }
   }
 
   @media (max-width: 575.98px) {
@@ -93,6 +103,10 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: .75rem;
       padding: 0 1.1rem;
+    }
+
+    body.app-public .site-stats-strip__grid {
+      padding-inline: 14px;
     }
 
     .site-stats-strip__item {

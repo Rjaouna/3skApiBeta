@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 80" role="img" aria-labelledby="title desc">
+  <title id="title">VISA</title>
+  <desc id="desc">Logo VISA stylise pour moyen de paiement.</desc>
+  <rect width="160" height="80" rx="16" fill="#ffffff"/>
+  <g transform="translate(18 20)">
+    <path d="M8 6h19l-13 36H-5z" fill="#1a4db3"/>
+    <path d="M34 6h14l-8 36H26z" fill="#1a4db3"/>
+    <path d="M57 7c8-2 21-1 29 3l-4 10c-7-3-15-4-18-2-2 1-2 3 2 5l7 3c10 4 14 10 11 18-4 12-22 14-38 7l4-10c10 5 20 5 22 1 1-2-1-4-6-6l-7-3c-9-4-13-10-10-18 2-4 5-7 8-8z" fill="#1a4db3"/>
+    <path d="M105 6h15l16 36h-14l-2-6h-17l-4 6H85zm4 21h9l-4-11z" fill="#1a4db3"/>
+    <path d="M2 50h132" stroke="#f7b600" stroke-width="6" stroke-linecap="round"/>
+  </g>
+</svg>

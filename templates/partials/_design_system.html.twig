@@ -803,6 +803,17 @@
     z-index: 1 !important;
   }
 
+  body.app-public .login-public-shell .site-footer > .container-fluid,
+  body.app-public .login-public-shell .public-footer > .container-fluid,
+  body.app-public .login-public-shell .site-footer__inner {
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: clamp(16px, 3vw, 42px) !important;
+    padding-right: clamp(16px, 3vw, 42px) !important;
+  }
+
   .site-footer h3,
   .site-footer h4,
   .site-footer a,
@@ -1016,9 +1027,12 @@
   }
 
   .hero-overlay {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
     align-items: center !important;
     padding-block: clamp(1rem, 3vw, 2.4rem) !important;
-    padding-inline: max(1rem, calc((100vw - 1320px) / 2 + 1.5rem)) !important;
+    padding-inline: clamp(16px, 3vw, 42px) !important;
   }
 
   .hero-card,
@@ -1348,6 +1362,27 @@
       padding-top: 2.4rem !important;
       padding-bottom: 2rem !important;
     }
+  }
+
+  body.app-public .public-slider-shell > .container-fluid,
+  body.app-public .public-slider-shell > .hero-section-full,
+  body.app-connected .connected-slider-shell > .container-fluid,
+  body.app-connected .connected-slider-shell > .hero-section-full {
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  body.app-public .public-slider-shell .hero-carousel,
+  body.app-connected .connected-slider-shell .hero-carousel {
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    border-radius: 0 !important;
   }
 </style>
 
