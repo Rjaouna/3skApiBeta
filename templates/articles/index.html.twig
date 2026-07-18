@@ -814,6 +814,8 @@ body.theme-dark .empty-results-box{
       const statusLine = document.getElementById('statusLine');
       const resultMeta = document.getElementById('resultMeta');
       const apiError = document.getElementById('apiError');
+      const headerSearchInput = document.getElementById('InputRechercheProduit');
+      const headerSearchForm = document.getElementById('searchFormHeader');
       const canSeeExactStock = {{ is_granted('ROLE_ADMIN') ? 'true' : 'false' }};
 
       const FALLBACK_IMG = "{{ asset('img/default-piece.png')|e('js') }}";
@@ -825,6 +827,9 @@ body.theme-dark .empty-results-box{
       let yearBoundsInitialized = false;
 
       let facetsLoaded = false;
+      let articleLoadController = null;
+      let articleLoadSerial = 0;
+      let keywordTimer = null;
 
       let state = {
         page: 1,
@@ -1238,7 +1243,7 @@ body.theme-dark .empty-results-box{
     <div class="empty-results-actions">
       <a class="empty-results-btn empty-results-btn--phone" href="tel:+212522713572">
         <i class="fa-solid fa-phone-volume"></i>
-        <span>+212 522 71 35 72</span>
+        <span>+212 522 71 35 72/77</span>
       </a>
 
       <a class="empty-results-btn empty-results-btn--whatsapp"
@@ -1526,15 +1531,27 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
       }
 
       async function load(){
+        const currentLoadSerial = ++articleLoadSerial;
+        if (articleLoadController) {
+          articleLoadController.abort();
+        }
+        articleLoadController = new AbortController();
+
         if (apiError) apiError.classList.add('d-none');
         skeletons();
         if (statusLine) statusLine.textContent = 'Chargement…';
 
         try{
-          const res = await fetch(buildUrl(), { headers: { 'Accept': 'application/json' } });
+          const res = await fetch(buildUrl(), {
+            headers: { 'Accept': 'application/json' },
+            signal: articleLoadController.signal
+          });
           const text = await res.text();
 
           const data = safeJsonParse(text, {});
+          if (currentLoadSerial !== articleLoadSerial) {
+            return;
+          }
 
           if (!res.ok || !data.ok){
             if (apiError){
@@ -1604,6 +1621,10 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
           render(data.items || [], data.imagesBaseUrl || '');
           initTooltips(grid);
         } catch(e){
+          if (e.name === 'AbortError') {
+            return;
+          }
+
           if (apiError){
             apiError.classList.remove('d-none');
             apiError.innerHTML = `<div class="fw-bold">Erreur JS</div><div class="small">${esc(e.message || e)}</div>`;
@@ -1620,6 +1641,35 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
       if (f_family) f_family.value = state.family;
       if (f_brand)  f_brand.value = state.brand;
       if (f_vehicle)f_vehicle.value = state.vehicle;
+      if (f_q) f_q.value = state.q;
+      if (headerSearchInput && headerSearchInput.value !== state.q) {
+        headerSearchInput.value = state.q;
+      }
+
+      function applyKeywordSearch(query){
+        const normalizedQuery = String(query || '').trim();
+
+        state.page = 1;
+        state.q = normalizedQuery;
+
+        if (f_q && f_q.value !== normalizedQuery) {
+          f_q.value = normalizedQuery;
+        }
+
+        if (headerSearchInput && headerSearchInput.value !== normalizedQuery) {
+          headerSearchInput.value = normalizedQuery;
+        }
+
+        syncUrlToBrowser();
+        load();
+      }
+
+      function scheduleKeywordSearch(query){
+        clearTimeout(keywordTimer);
+        keywordTimer = setTimeout(() => {
+          applyKeywordSearch(query);
+        }, 300);
+      }
 
       applyBtn?.addEventListener('click', () => {
         state.page = 1;
@@ -1642,6 +1692,7 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
         state.onlyNew = false;
 
         if (f_q) f_q.value = '';
+        if (headerSearchInput) headerSearchInput.value = '';
         if (f_family) f_family.value = '';
         if (f_brand) f_brand.value = '';
         if (f_vehicle) f_vehicle.value = '';
@@ -1659,15 +1710,18 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
       prevBtnBottom?.addEventListener('click', () => { if (state.page > 1){ state.page--; load(); } });
       nextBtnBottom?.addEventListener('click', () => { state.page++; load(); });
 
-      let t = null;
       f_q?.addEventListener('input', () => {
-        clearTimeout(t);
-        t = setTimeout(() => {
-          state.page = 1;
-          state.q = (f_q.value || '').trim();
-          syncUrlToBrowser();
-          load();
-        }, 350);
+        scheduleKeywordSearch(f_q.value);
+      });
+
+      headerSearchInput?.addEventListener('input', () => {
+        scheduleKeywordSearch(headerSearchInput.value);
+      });
+
+      headerSearchForm?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        clearTimeout(keywordTimer);
+        applyKeywordSearch(headerSearchInput?.value || '');
       });
 
       syncUrlToBrowser();

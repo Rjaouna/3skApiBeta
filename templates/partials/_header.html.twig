@@ -823,141 +823,6 @@
     width: 100%;
   }
 
-  .header-search .search-suggestions{
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: calc(100% + 8px);
-    z-index: 2300;
-    display: none;
-    max-height: min(420px, 72vh);
-    overflow: auto;
-    padding: 8px;
-    border: 1px solid var(--hd-border);
-    border-radius: 18px;
-    background: rgba(255,255,255,.98);
-    box-shadow: 0 18px 46px rgba(16, 24, 40, .16);
-  }
-
-  .header-search .search-suggestions.is-open{
-    display: block;
-  }
-
-  body.theme-dark .header-search .search-suggestions{
-    background: rgba(18,18,22,.98);
-    border-color: rgba(255,255,255,.12);
-    box-shadow: 0 20px 54px rgba(0,0,0,.40);
-  }
-
-  .search-suggestions__head{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 6px 8px 8px;
-    color: var(--hd-muted);
-    font-size: .76rem;
-  }
-
-  .search-suggestions__head strong{
-    color: var(--hd-text);
-    font-weight: 650;
-  }
-
-  .search-suggestion-item{
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 10px;
-    width: 100%;
-    padding: 10px 11px;
-    border-radius: 14px;
-    color: var(--hd-text);
-    text-decoration: none;
-    border: 1px solid transparent;
-    transition: background .14s ease, border-color .14s ease, transform .12s ease;
-  }
-
-  .search-suggestion-item:hover,
-  .search-suggestion-item.is-active{
-    background: rgba(var(--bs-primary-rgb), .08);
-    border-color: rgba(var(--bs-primary-rgb), .16);
-    color: var(--hd-text);
-    transform: translateY(-1px);
-  }
-
-  body.theme-dark .search-suggestion-item:hover,
-  body.theme-dark .search-suggestion-item.is-active{
-    background: rgba(255,255,255,.06);
-    border-color: rgba(255,255,255,.12);
-  }
-
-  .search-suggestion-item__title{
-    display: block;
-    overflow: hidden;
-    color: var(--hd-text);
-    font-size: .9rem;
-    font-weight: 650;
-    line-height: 1.25;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .search-suggestion-item__meta{
-    display: block;
-    margin-top: 3px;
-    overflow: hidden;
-    color: var(--hd-muted);
-    font-size: .76rem;
-    line-height: 1.25;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .search-suggestion-item__code{
-    align-self: start;
-    padding: 4px 7px;
-    border-radius: 999px;
-    background: rgba(var(--bs-primary-rgb), .10);
-    color: var(--bs-primary);
-    font-size: .72rem;
-    font-weight: 700;
-    white-space: nowrap;
-  }
-
-  .search-suggestions__empty,
-  .search-suggestions__loading{
-    padding: 14px 12px;
-    color: var(--hd-muted);
-    font-size: .84rem;
-  }
-
-  .search-suggestions__footer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 6px;
-    padding-top: 8px;
-    border-top: 1px solid rgba(0,0,0,.06);
-  }
-
-  body.theme-dark .search-suggestions__footer{
-    border-top-color: rgba(255,255,255,.08);
-  }
-
-  .search-suggestions__all{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 38px;
-    border-radius: 12px;
-    background: rgba(var(--bs-primary-rgb), .10);
-    color: var(--bs-primary);
-    font-size: .82rem;
-    font-weight: 650;
-    text-decoration: none;
-  }
-
   .header-search .search-ico{
     position: absolute;
     left: 14px;
@@ -1812,7 +1677,7 @@ body.theme-dark .voice-search-btn.is-listening{
 
           <a class="topbar-phone d-none d-md-flex" href="tel:+212522994484">
             <i class="fa-solid fa-square-phone"></i>
-            <span>+212 522 99 44 84</span>
+            <span>+212 5 22 71 35 72/77</span>
           </a>
 
           <div class="topbar-spacer"></div>
@@ -2065,10 +1930,7 @@ body.theme-dark .voice-search-btn.is-listening{
              type="search"
              placeholder="Entrez un mot-clé ou un numéro de pièce"
              autocomplete="off"
-             value="{{ app.request.query.get('q', '')|e('html_attr') }}"
-             aria-autocomplete="list"
-             aria-expanded="false"
-             aria-controls="headerSearchSuggestions">
+             value="{{ app.request.query.get('q', '')|e('html_attr') }}">
 
       <button type="button"
               class="voice-search-btn"
@@ -2077,7 +1939,6 @@ body.theme-dark .voice-search-btn.is-listening{
               title="Recherche vocale">
         <i class="fa-solid fa-microphone"></i>
       </button>
-      <div class="search-suggestions" id="headerSearchSuggestions" role="listbox" aria-label="Suggestions de recherche" aria-live="polite"></div>
     </div>
   </form>
 </div>
@@ -2751,195 +2612,7 @@ body.theme-dark .voice-search-btn.is-listening{
   loadNotifications();
 })();
 </script>
-<script>
-(function(){
-  const form = document.getElementById('searchFormHeader');
-  const input = document.getElementById('InputRechercheProduit');
-  const panel = document.getElementById('headerSearchSuggestions');
 
-  if (!form || !input || !panel) return;
-
-  const suggestionsUrl = "{{ path('api_search_suggestions')|e('js') }}";
-  const articlesUrl = "{{ path('articles_page')|e('js') }}";
-  const minChars = 2;
-  let timer = null;
-  let controller = null;
-  let activeIndex = -1;
-
-  function esc(value){
-    return String(value ?? '').replace(/[&<>"']/g, function(char){
-      return ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[char];
-    });
-  }
-
-  function searchUrl(query){
-    const url = new URL(articlesUrl, window.location.origin);
-    if (query) url.searchParams.set('q', query);
-    return url.toString();
-  }
-
-  function setOpen(open){
-    panel.classList.toggle('is-open', open);
-    input.setAttribute('aria-expanded', open ? 'true' : 'false');
-  }
-
-  function closePanel(){
-    activeIndex = -1;
-    setOpen(false);
-    panel.innerHTML = '';
-  }
-
-  function setActive(index){
-    const items = Array.from(panel.querySelectorAll('.search-suggestion-item'));
-    if (!items.length) {
-      activeIndex = -1;
-      return;
-    }
-
-    activeIndex = Math.max(0, Math.min(index, items.length - 1));
-    items.forEach(function(item, itemIndex){
-      item.classList.toggle('is-active', itemIndex === activeIndex);
-      item.setAttribute('aria-selected', itemIndex === activeIndex ? 'true' : 'false');
-    });
-    items[activeIndex]?.scrollIntoView({ block: 'nearest' });
-  }
-
-  function renderLoading(query){
-    panel.innerHTML = `
-      <div class="search-suggestions__loading">
-        Recherche de propositions pour <strong>${esc(query)}</strong>...
-      </div>
-    `;
-    setOpen(true);
-  }
-
-  function renderSuggestions(payload, query){
-    const items = Array.isArray(payload.items) ? payload.items : [];
-    const fullSearchUrl = payload.searchUrl || searchUrl(query);
-
-    if (!items.length) {
-      panel.innerHTML = `
-        <div class="search-suggestions__empty">
-          Aucune proposition directe. Essayez la recherche complète.
-        </div>
-        <div class="search-suggestions__footer">
-          <a class="search-suggestions__all" href="${esc(fullSearchUrl)}">Rechercher "${esc(query)}" dans le catalogue</a>
-        </div>
-      `;
-      setOpen(true);
-      return;
-    }
-
-    panel.innerHTML = `
-      <div class="search-suggestions__head">
-        <strong>Suggestions</strong>
-        <span>${items.length} résultat(s)</span>
-      </div>
-      ${items.map(function(item, index){
-        const stockLabel = Number(item.stock || 0) > 0 ? `${item.stock} en stock` : 'Stock non disponible';
-        return `
-          <a class="search-suggestion-item" href="${esc(item.url)}" role="option" data-index="${index}" aria-selected="false">
-            <span>
-              <span class="search-suggestion-item__title">${esc(item.title || item.code || 'Article')}</span>
-              <span class="search-suggestion-item__meta">${esc([item.meta, stockLabel].filter(Boolean).join(' · '))}</span>
-            </span>
-            <span class="search-suggestion-item__code">${esc(item.code || '')}</span>
-          </a>
-        `;
-      }).join('')}
-      <div class="search-suggestions__footer">
-        <a class="search-suggestions__all" href="${esc(fullSearchUrl)}">Voir tous les résultats</a>
-      </div>
-    `;
-    activeIndex = -1;
-    setOpen(true);
-  }
-
-  async function fetchSuggestions(query){
-    if (controller) controller.abort();
-    controller = new AbortController();
-
-    const url = new URL(suggestionsUrl, window.location.origin);
-    url.searchParams.set('q', query);
-    url.searchParams.set('limit', '8');
-
-    renderLoading(query);
-
-    try {
-      const response = await fetch(url.toString(), {
-        headers: { 'Accept': 'application/json' },
-        signal: controller.signal
-      });
-      const payload = await response.json().catch(function(){ return {}; });
-
-      if (!response.ok || !payload.ok) {
-        throw new Error(payload.message || 'Erreur suggestions');
-      }
-
-      renderSuggestions(payload, query);
-    } catch (error) {
-      if (error.name === 'AbortError') return;
-      panel.innerHTML = `
-        <div class="search-suggestions__empty">
-          Impossible de charger les suggestions.
-        </div>
-        <div class="search-suggestions__footer">
-          <a class="search-suggestions__all" href="${esc(searchUrl(query))}">Lancer la recherche</a>
-        </div>
-      `;
-      setOpen(true);
-    }
-  }
-
-  function scheduleSuggestions(){
-    const query = input.value.trim();
-    clearTimeout(timer);
-
-    if (query.length < minChars) {
-      closePanel();
-      return;
-    }
-
-    timer = setTimeout(function(){
-      fetchSuggestions(query);
-    }, 260);
-  }
-
-  input.addEventListener('input', scheduleSuggestions);
-  input.addEventListener('focus', function(){
-    if (input.value.trim().length >= minChars && !panel.classList.contains('is-open')) {
-      scheduleSuggestions();
-    }
-  });
-
-  input.addEventListener('keydown', function(event){
-    if (!panel.classList.contains('is-open')) return;
-
-    const items = Array.from(panel.querySelectorAll('.search-suggestion-item'));
-
-    if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      setActive(activeIndex + 1);
-    } else if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      setActive(activeIndex <= 0 ? items.length - 1 : activeIndex - 1);
-    } else if (event.key === 'Enter' && activeIndex >= 0 && items[activeIndex]) {
-      event.preventDefault();
-      window.location.href = items[activeIndex].href;
-    } else if (event.key === 'Escape') {
-      closePanel();
-    }
-  });
-
-  document.addEventListener('click', function(event){
-    if (!form.contains(event.target)) {
-      closePanel();
-    }
-  });
-
-  form.addEventListener('submit', closePanel);
-})();
-</script>
 <script>
 (function(){
   const voiceBtn = document.getElementById('voiceSearchBtn');

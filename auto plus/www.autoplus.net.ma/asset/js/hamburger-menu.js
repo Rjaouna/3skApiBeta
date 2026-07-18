@@ -34,7 +34,7 @@ function bindEvent(el, eventName, eventHandler) {
             //closebtn.addEventListener( 'click', toggleMenu );
         }
 
-        // close the menu element if the target itÂ´s not the menu element or one of its descendants..
+        // close the menu element if the target is not the menu element or one of its descendants..
 
     }
 
