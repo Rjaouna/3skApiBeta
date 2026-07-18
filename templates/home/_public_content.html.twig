@@ -823,29 +823,40 @@
   .public-main-v2 .section-eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: .65rem;
-    margin-bottom: 1.1rem;
+    gap: .55rem;
+    margin-bottom: 1.15rem;
     color: var(--public-orange);
-    font-family: 'Montserrat', sans-serif;
-    font-size: .78rem;
-    font-weight: 550;
+    font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
+    font-size: clamp(.68rem, .78vw, .82rem);
+    font-weight: 700;
+    letter-spacing: .48em;
     text-transform: uppercase;
   }
 
   .public-main-v2 .section-eyebrow::before {
-    content: "";
-    width: 34px;
-    height: 3px;
-    background: currentColor;
+    content: "//";
+    width: auto;
+    height: auto;
+    background: transparent;
+    letter-spacing: .12em;
   }
 
   .public-main-v2 .section-heading {
     max-width: 820px;
     margin: 0;
     color: var(--public-ink);
-    font-size: clamp(2rem, 3.2vw, 2.9rem);
-    font-weight: 600;
-    line-height: 1.08;
+    font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
+    font-size: clamp(2.35rem, 5vw, 4.6rem);
+    font-weight: 850;
+    line-height: .96;
+    letter-spacing: .055em;
+    text-transform: uppercase;
+  }
+
+  .public-main-v2 .section-heading .heading-accent,
+  .latest-arrivals-title .heading-accent {
+    color: var(--public-orange);
+    text-shadow: 0 10px 26px rgba(255, 145, 0, .30);
   }
 
   .public-main-v2 .section-copy {
@@ -1092,15 +1103,19 @@
   }
 
   .public-brands-v2 .brands-heading {
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: 2rem;
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
     margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .public-brands-v2 .brands-heading .section-heading {
+    max-width: 980px;
   }
 
   .public-brands-v2 .brands-heading p {
-    max-width: 460px;
+    max-width: 650px;
     margin: 0;
   }
 
@@ -1424,6 +1439,17 @@
 
     .public-main-v2 .section-space {
       padding: 3.75rem 0;
+    }
+
+    .public-main-v2 .section-eyebrow {
+      font-size: .62rem;
+      letter-spacing: .28em;
+    }
+
+    .public-main-v2 .section-heading {
+      font-size: clamp(2rem, 11vw, 3rem);
+      line-height: .98;
+      letter-spacing: .025em;
     }
 
     .public-intro-v2::after {
@@ -1833,7 +1859,7 @@
           <div class="col-12 col-lg-7">
             <div class="intro-copy">
               <span class="section-eyebrow">3SK Parts Auto - Casablanca</span>
-              <h1 class="section-heading">Pieces Carrosserie & accessoires pour les professionnels de l’automobile</h1>
+              <h1 class="section-heading">Pieces Carrosserie & accessoires <span class="heading-accent">automobile</span></h1>
               <p class="section-copy mt-4 mb-0">
                 Basée à Casablanca depuis 2014, 3SK Parts Auto accompagne les acteurs de la rechange automobile avec une offre orientée
                 pièces carrosserie et accessoires, ainsi qu'un espace client dédié pour consulter le catalogue et préparer les commandes.
@@ -1885,7 +1911,7 @@
           <div class="col-12 col-lg-6">
             <div class="about-copy">
               <span class="section-eyebrow">Qui sommes-nous</span>
-              <h2 class="section-heading">3SK Parts Auto</h2>
+              <h2 class="section-heading">3SK Parts <span class="heading-accent">Auto</span></h2>
               <p class="section-copy mt-4">
                 3SK Parts Auto est une SARL marocaine créée en 2014, spécialisée dans l'achat, la vente,
                 l'importation et l'exportation de pièces carrosserie et accessoires pour automobiles.
@@ -1919,7 +1945,7 @@
         <div class="row align-items-center g-5">
           <div class="col-12 col-lg-6">
             <span class="section-eyebrow">Services</span>
-            <h2 class="section-heading">Une offre construite pour les besoins du terrain.</h2>
+            <h2 class="section-heading">Une offre pour le <span class="heading-accent">terrain</span></h2>
             <p class="section-copy mt-4">
               3SK Parts Auto s'adresse aux professionnels qui recherchent un interlocuteur capable de centraliser
               l'accès aux références, de fluidifier la préparation des commandes et de simplifier la relation commerciale.
@@ -1991,7 +2017,7 @@
         <div class="brands-heading">
           <div>
             <span class="section-eyebrow">Nos marques phares</span>
-            <h2 class="section-heading">Des marques qui soutiennent une offre de rechange structurée</h2>
+            <h2 class="section-heading">Nos marques <span class="heading-accent">partenaires</span></h2>
           </div>
           <p class="section-copy">Une sélection de partenaires et de références reconnues pour accompagner les besoins des professionnels.</p>
         </div>
@@ -2055,7 +2081,7 @@
         <div class="contact-pane contact-pane-light">
           <div class="contact-pane-inner">
             <span class="section-eyebrow">Contact</span>
-            <h2 class="section-heading">Nous contacter</h2>
+            <h2 class="section-heading">Nous <span class="heading-accent">contacter</span></h2>
             <p class="section-copy mt-4 mb-0">Retrouvez 3SK Parts Auto à Casablanca pour vos demandes commerciales et vos besoins en pièces carrosserie & accessoires.</p>
 
             <form class="contact-form" method="post" action="{{ path('home_contact') }}" data-contact-form>

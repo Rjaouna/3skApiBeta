@@ -20,17 +20,46 @@
 
   [data-new-section] .latest-arrivals-title{
     margin: 0;
-    font-size: 2rem;
-    font-weight: 550;
-    letter-spacing: -0.02em;
+    font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
+    font-size: clamp(2.25rem, 4.8vw, 4.35rem);
+    font-weight: 850;
+    line-height: .96;
+    letter-spacing: .055em;
+    text-transform: uppercase;
     color: #1f2937;
+  }
+
+  [data-new-section] .latest-arrivals-eyebrow{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .55rem;
+    margin-bottom: 1rem;
+    color: var(--bs-warning, #ff9100);
+    font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
+    font-size: clamp(.68rem, .78vw, .82rem);
+    font-weight: 700;
+    letter-spacing: .42em;
+    text-transform: uppercase;
+  }
+
+  [data-new-section] .latest-arrivals-eyebrow::before{
+    content: "//";
+    letter-spacing: .12em;
+  }
+
+  [data-new-section] .latest-arrivals-title .heading-accent{
+    color: var(--bs-warning, #ff9100);
+    text-shadow: 0 10px 26px rgba(255, 145, 0, .30);
   }
 
   [data-new-section] .latest-arrivals-subtitle{
     margin-top: 8px;
-    font-size: .95rem;
+    font-size: .9rem;
     color: #6b7280;
     font-weight: 400;
+    letter-spacing: .08em;
+    text-transform: uppercase;
   }
 
   [data-new-section] .latest-arrivals-link{
@@ -397,7 +426,8 @@
 
 <section class="latest-arrivals-section mb-5" data-new-section>
   <div class="text-center mb-4">
-    <h2 class="latest-arrivals-title">Dernier arrivage</h2>
+    <div class="section-eyebrow latest-arrivals-eyebrow">Nouveautés catalogue</div>
+    <h2 class="latest-arrivals-title">Dernier <span class="heading-accent">arrivage</span></h2>
     <div class="latest-arrivals-subtitle">Découvrez les arrivages récemment ajoutés au catalogue</div>
   </div>
 
@@ -423,17 +453,46 @@
 
   .latest-arrivals-title{
     margin: 0;
-    font-size: 2rem;
-    font-weight: 550;
-    letter-spacing: -0.02em;
+    font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
+    font-size: clamp(2.25rem, 4.8vw, 4.35rem);
+    font-weight: 850;
+    line-height: .96;
+    letter-spacing: .055em;
+    text-transform: uppercase;
     color: #1f2937;
+  }
+
+  .latest-arrivals-eyebrow{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .55rem;
+    margin-bottom: 1rem;
+    color: var(--bs-warning, #ff9100);
+    font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
+    font-size: clamp(.68rem, .78vw, .82rem);
+    font-weight: 700;
+    letter-spacing: .42em;
+    text-transform: uppercase;
+  }
+
+  .latest-arrivals-eyebrow::before{
+    content: "//";
+    letter-spacing: .12em;
+  }
+
+  .latest-arrivals-title .heading-accent{
+    color: var(--bs-warning, #ff9100);
+    text-shadow: 0 10px 26px rgba(255, 145, 0, .30);
   }
 
   .latest-arrivals-subtitle{
     margin-top: 8px;
-    font-size: .95rem;
+    font-size: .9rem;
     color: #6b7280;
     font-weight: 400;
+    letter-spacing: .08em;
+    text-transform: uppercase;
   }
 
   .latest-arrivals-link{

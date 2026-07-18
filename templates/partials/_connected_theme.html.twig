@@ -599,18 +599,26 @@
   .app-connected .home-section-head h2,
   .app-connected .latest-arrivals-title {
     color: var(--app-ink) !important;
-    font-size: 1.65rem !important;
-    font-weight: 650 !important;
+    font-family: 'Montserrat', 'Arial Black', Arial, sans-serif !important;
+    font-size: clamp(2.15rem, 4vw, 3.75rem) !important;
+    font-weight: 850 !important;
+    line-height: .96 !important;
+    letter-spacing: .045em !important;
+    text-transform: uppercase !important;
   }
 
   .app-connected .home-section-head h2::after,
   .app-connected .latest-arrivals-title::after {
-    content: "";
-    display: block;
-    width: 54px;
-    height: 4px;
-    margin: 12px auto 0;
-    background: var(--app-orange);
+    display: none !important;
+  }
+
+  .app-connected .latest-arrivals-eyebrow {
+    color: var(--app-orange) !important;
+  }
+
+  .app-connected .latest-arrivals-title .heading-accent {
+    color: var(--app-orange) !important;
+    text-shadow: 0 10px 26px rgba(255, 145, 0, .30) !important;
   }
 
   .app-connected .chip {

@@ -1384,6 +1384,287 @@
     margin-right: 0 !important;
     border-radius: 0 !important;
   }
+
+  body.app-public .public-slider-shell,
+  body.app-connected .connected-slider-shell,
+  body.app-public .public-slider-shell .hero-carousel,
+  body.app-connected .connected-slider-shell .hero-carousel,
+  body.app-public .public-slider-shell .hero-slide,
+  body.app-connected .connected-slider-shell .hero-slide {
+    background: #020202 !important;
+  }
+
+  body.app-public .public-slider-shell .hero-slide,
+  body.app-connected .connected-slider-shell .hero-slide,
+  body.app-public .public-slider-shell .hero-carousel-full .hero-slide,
+  body.app-connected .connected-slider-shell .hero-carousel-full .hero-slide {
+    min-height: clamp(390px, 42vw, 560px) !important;
+    overflow: hidden !important;
+  }
+
+  body.app-public .public-slider-shell .hero-img,
+  body.app-public .public-slider-shell .hero-video,
+  body.app-connected .connected-slider-shell .hero-img,
+  body.app-connected .connected-slider-shell .hero-video,
+  body.app-public .public-slider-shell .hero-carousel-full .hero-img,
+  body.app-public .public-slider-shell .hero-carousel-full .hero-video,
+  body.app-connected .connected-slider-shell .hero-carousel-full .hero-img,
+  body.app-connected .connected-slider-shell .hero-carousel-full .hero-video {
+    height: clamp(390px, 42vw, 560px) !important;
+    object-fit: cover !important;
+    object-position: right center !important;
+    filter: saturate(.98) contrast(1.06) brightness(.92) !important;
+  }
+
+  body.app-public .public-slider-shell .hero-slide::after,
+  body.app-connected .connected-slider-shell .hero-slide::after,
+  body.app-public .public-slider-shell .hero-carousel-full .hero-slide::after,
+  body.app-connected .connected-slider-shell .hero-carousel-full .hero-slide::after {
+    background:
+      linear-gradient(90deg, rgba(0,0,0,.96) 0%, rgba(0,0,0,.84) 28%, rgba(0,0,0,.46) 52%, rgba(0,0,0,.10) 78%, rgba(0,0,0,.36) 100%),
+      linear-gradient(0deg, rgba(0,0,0,.58) 0%, transparent 42%),
+      radial-gradient(680px circle at 72% 58%, rgba(255,255,255,.12), transparent 50%) !important;
+  }
+
+  body.app-public .public-slider-shell .hero-overlay,
+  body.app-connected .connected-slider-shell .hero-overlay {
+    align-items: center !important;
+    padding-inline: clamp(28px, 4.4vw, 86px) !important;
+    padding-block: clamp(2rem, 4vw, 4.2rem) !important;
+  }
+
+  body.app-public .public-slider-shell .hero-card,
+  body.app-connected .connected-slider-shell .hero-card,
+  body.app-public .public-slider-shell .hero-carousel-full .hero-card,
+  body.app-connected .connected-slider-shell .hero-carousel-full .hero-card {
+    max-width: min(760px, 50vw) !important;
+    color: #fff !important;
+  }
+
+  body.app-public .public-slider-shell .hero-kicker,
+  body.app-connected .connected-slider-shell .hero-kicker,
+  body.app-public .public-slider-shell .hero-carousel-full .hero-kicker,
+  body.app-connected .connected-slider-shell .hero-carousel-full .hero-kicker {
+    width: fit-content !important;
+    padding: .42rem .92rem !important;
+    margin-bottom: 1.1rem !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    background: var(--brand-orange, #ff9100) !important;
+    color: #fff !important;
+    font-size: .72rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    box-shadow: 0 12px 26px rgba(255,145,0,.26) !important;
+  }
+
+  body.app-public .public-slider-shell .hero-title,
+  body.app-connected .connected-slider-shell .hero-title {
+    max-width: 12ch !important;
+    color: #fff !important;
+    font-size: clamp(2.35rem, 5.4vw, 5.1rem) !important;
+    line-height: .96 !important;
+    letter-spacing: .01em !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    text-shadow: 0 18px 38px rgba(0,0,0,.36) !important;
+  }
+
+  body.app-public .public-slider-shell .hero-text,
+  body.app-connected .connected-slider-shell .hero-text {
+    max-width: 54ch !important;
+    margin: 1.35rem 0 2rem !important;
+    color: rgba(255,255,255,.86) !important;
+    font-size: clamp(.95rem, 1.12vw, 1.08rem) !important;
+    line-height: 1.55 !important;
+    font-weight: 500 !important;
+    text-shadow: 0 10px 24px rgba(0,0,0,.34) !important;
+  }
+
+  body.app-public .public-slider-shell .hero-card .btn,
+  body.app-connected .connected-slider-shell .hero-card .btn {
+    min-height: 58px !important;
+    padding: .95rem 1.55rem !important;
+    border-radius: 999px !important;
+    border: 0 !important;
+    font-size: .96rem !important;
+    font-weight: 650 !important;
+    box-shadow: 0 16px 32px rgba(255,145,0,.28) !important;
+  }
+
+  body.app-public .public-slider-shell .hero-card .btn-primary,
+  body.app-connected .connected-slider-shell .hero-card .btn-primary {
+    background: var(--brand-orange, #ff9100) !important;
+    color: #fff !important;
+  }
+
+  body.app-public .public-slider-shell .hero-card .btn-primary:hover,
+  body.app-connected .connected-slider-shell .hero-card .btn-primary:hover {
+    background: #ff9f22 !important;
+    color: #fff !important;
+    transform: translateY(-2px) !important;
+  }
+
+  body.app-public .public-slider-shell .btn-glass,
+  body.app-connected .connected-slider-shell .btn-glass {
+    background: rgba(255,255,255,.10) !important;
+    border: 1px solid rgba(255,255,255,.22) !important;
+    color: #fff !important;
+    box-shadow: none !important;
+  }
+
+  body.app-public .public-slider-shell .btn-glass:hover,
+  body.app-connected .connected-slider-shell .btn-glass:hover {
+    background: rgba(255,255,255,.18) !important;
+    color: #fff !important;
+  }
+
+  body.app-public .public-slider-shell .hero-carousel .carousel-indicators,
+  body.app-connected .connected-slider-shell .hero-carousel .carousel-indicators {
+    left: clamp(28px, 4.4vw, 86px) !important;
+    right: auto !important;
+    bottom: clamp(22px, 3vw, 42px) !important;
+  }
+
+  body.app-public .public-slider-shell .hero-carousel .carousel-indicators [data-bs-target],
+  body.app-connected .connected-slider-shell .hero-carousel .carousel-indicators [data-bs-target] {
+    width: 36px !important;
+    height: 6px !important;
+    border-radius: 999px !important;
+    background: rgba(255,255,255,.38) !important;
+    opacity: 1 !important;
+  }
+
+  body.app-public .public-slider-shell .hero-carousel .carousel-indicators .active,
+  body.app-connected .connected-slider-shell .hero-carousel .carousel-indicators .active {
+    width: 46px !important;
+    background: var(--brand-orange, #ff9100) !important;
+  }
+
+  @media (max-width: 767.98px) {
+    body.app-public .public-slider-shell .hero-slide,
+    body.app-connected .connected-slider-shell .hero-slide,
+    body.app-public .public-slider-shell .hero-img,
+    body.app-public .public-slider-shell .hero-video,
+    body.app-connected .connected-slider-shell .hero-img,
+    body.app-connected .connected-slider-shell .hero-video {
+      height: 430px !important;
+      min-height: 430px !important;
+    }
+
+    body.app-public .public-slider-shell .hero-slide::after,
+    body.app-connected .connected-slider-shell .hero-slide::after {
+      background:
+        linear-gradient(0deg, rgba(0,0,0,.96) 0%, rgba(0,0,0,.74) 48%, rgba(0,0,0,.20) 100%),
+        linear-gradient(90deg, rgba(0,0,0,.72), rgba(0,0,0,.12)) !important;
+    }
+
+    body.app-public .public-slider-shell .hero-overlay,
+    body.app-connected .connected-slider-shell .hero-overlay {
+      align-items: flex-end !important;
+      padding: 1.35rem 1rem 4rem !important;
+    }
+
+    body.app-public .public-slider-shell .hero-card,
+    body.app-connected .connected-slider-shell .hero-card {
+      max-width: 100% !important;
+    }
+
+    body.app-public .public-slider-shell .hero-title,
+    body.app-connected .connected-slider-shell .hero-title {
+      max-width: 12ch !important;
+      font-size: clamp(2rem, 10vw, 3.1rem) !important;
+    }
+
+    body.app-public .public-slider-shell .hero-text,
+    body.app-connected .connected-slider-shell .hero-text {
+      margin: .85rem 0 1.2rem !important;
+      font-size: .92rem !important;
+    }
+
+    body.app-public .public-slider-shell .hero-card .btn,
+    body.app-connected .connected-slider-shell .hero-card .btn {
+      min-height: 48px !important;
+      width: auto !important;
+      padding: .78rem 1.2rem !important;
+    }
+
+    body.app-public .public-slider-shell .hero-carousel .carousel-indicators,
+    body.app-connected .connected-slider-shell .hero-carousel .carousel-indicators {
+      left: 1rem !important;
+      right: 1rem !important;
+      bottom: 1.35rem !important;
+      justify-content: flex-start !important;
+    }
+  }
+
+  body.app-public .public-main-v2 .section-eyebrow,
+  body.app-connected .latest-arrivals-eyebrow {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: .55rem !important;
+    margin-bottom: 1rem !important;
+    color: var(--brand-orange, #ff9100) !important;
+    font-family: "Montserrat", "Arial Black", Arial, sans-serif !important;
+    font-size: clamp(.68rem, .78vw, .82rem) !important;
+    font-weight: 750 !important;
+    letter-spacing: .42em !important;
+    text-transform: uppercase !important;
+  }
+
+  body.app-public .public-main-v2 .section-eyebrow::before,
+  body.app-connected .latest-arrivals-eyebrow::before {
+    content: "//" !important;
+    width: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    letter-spacing: .12em !important;
+  }
+
+  body.app-public .public-main-v2 .section-heading,
+  body.app-connected .home-section-head h2,
+  body.app-connected .latest-arrivals-title {
+    font-family: "Montserrat", "Arial Black", Arial, sans-serif !important;
+    font-size: clamp(2.25rem, 5vw, 4.65rem) !important;
+    font-weight: 850 !important;
+    line-height: .96 !important;
+    letter-spacing: .05em !important;
+    text-transform: uppercase !important;
+  }
+
+  body.app-public .public-main-v2 .section-heading,
+  body.app-connected .home-section-head h2,
+  body.app-connected .latest-arrivals-title {
+    color: var(--brand-black, #101828) !important;
+  }
+
+  body.app-public .public-main-v2 .section-heading .heading-accent,
+  body.app-connected .latest-arrivals-title .heading-accent {
+    color: var(--brand-orange, #ff9100) !important;
+    text-shadow: 0 10px 26px rgba(255, 145, 0, .30) !important;
+  }
+
+  body.app-connected .home-section-head h2::after,
+  body.app-connected .latest-arrivals-title::after {
+    display: none !important;
+  }
+
+  @media (max-width: 575.98px) {
+    body.app-public .public-main-v2 .section-eyebrow,
+    body.app-connected .latest-arrivals-eyebrow {
+      font-size: .62rem !important;
+      letter-spacing: .28em !important;
+    }
+
+    body.app-public .public-main-v2 .section-heading,
+    body.app-connected .home-section-head h2,
+    body.app-connected .latest-arrivals-title {
+      font-size: clamp(2rem, 11vw, 3rem) !important;
+      letter-spacing: .025em !important;
+    }
+  }
 </style>
 
 <script>
