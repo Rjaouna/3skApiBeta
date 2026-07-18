@@ -581,12 +581,14 @@
 
  function stockStyle(stock){
   if (!canSeeExactStock) {
-    return stock > 0 ? `color: rgba(25,135,84,.98);` : `color: rgba(220,53,69,.98);`;
+    return stock > 0
+      ? `color: rgba(25,135,84,.98); background: rgba(25,135,84,.12); border-color: rgba(25,135,84,.22);`
+      : `color: rgba(220,53,69,.98); background: rgba(220,53,69,.10); border-color: rgba(220,53,69,.20);`;
   }
 
-  if (stock === 0) return `color: rgba(220,53,69,.98);`;
-  if (stock < 5)  return `color: rgba(176,117,0,.98);`;
-  if (stock > 10) return `color: rgba(25,135,84,.98);`;
+  if (stock === 0) return `color: rgba(220,53,69,.98); background: rgba(220,53,69,.10); border-color: rgba(220,53,69,.20);`;
+  if (stock < 5)  return `color: rgba(176,117,0,.98); background: rgba(255,193,7,.14); border-color: rgba(255,193,7,.28);`;
+  if (stock > 10) return `color: rgba(25,135,84,.98); background: rgba(25,135,84,.12); border-color: rgba(25,135,84,.22);`;
   return ``;
 }
 
@@ -595,7 +597,7 @@ function stockLabel(stock){
     return stock > 20 ? '+20' : String(stock);
   }
 
-  return stock > 0 ? 'En stock' : 'Rupture';
+  return stock > 0 ? 'En stock' : 'Non dispo';
 }
 
   function skeletons(){
@@ -671,7 +673,7 @@ const reduction = String(a.reduction ?? '').trim();
 const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
 
 card.innerHTML = `
-  <div class="wishlist-button" title="${availableStock > 0 ? 'Stock disponible' : 'Rupture de stock'}" style="${stockStyle(availableStock)}">
+  <div class="wishlist-button" title="${availableStock > 0 ? 'Stock disponible' : 'Non disponible'}" style="${stockStyle(availableStock)}">
     <span data-stock-badge>${esc(stockDisplay)}</span>
   </div>
 
