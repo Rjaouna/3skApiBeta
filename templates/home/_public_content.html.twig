@@ -1606,6 +1606,147 @@
       min-height: 112px;
     }
   }
+
+  .home-scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 11000;
+    width: 100%;
+    height: 3px;
+    pointer-events: none;
+    transform: scaleX(var(--home-scroll-progress, 0));
+    transform-origin: left center;
+    background: linear-gradient(90deg, var(--public-blue), var(--public-orange));
+    box-shadow: 0 0 18px rgba(255,145,0,.22);
+  }
+
+  .public-slider-shell.is-home-parallax-ready {
+    --home-hero-y: 0px;
+    --home-hero-text-y: 0px;
+    --home-hero-fade: 1;
+    overflow: hidden;
+  }
+
+  .public-slider-shell.is-home-parallax-ready .hero-img,
+  .public-slider-shell.is-home-parallax-ready .hero-video {
+    object-position: right calc(50% + var(--home-hero-y)) !important;
+    transition: object-position .08s linear;
+  }
+
+  .public-slider-shell.is-home-parallax-ready .hero-card {
+    opacity: var(--home-hero-fade);
+    transform: translate3d(0, var(--home-hero-text-y), 0);
+    transition: opacity .12s linear;
+    will-change: transform, opacity;
+  }
+
+  .home-scroll-reveal {
+    --home-reveal-x: 0px;
+    --home-reveal-y: 46px;
+    --home-reveal-scale: 1;
+    opacity: 0;
+    filter: blur(12px);
+    transform: translate3d(var(--home-reveal-x), var(--home-reveal-y), 0) scale(var(--home-reveal-scale));
+    transition:
+      opacity .9s ease,
+      transform .9s cubic-bezier(.16, .84, .2, 1),
+      filter .9s ease;
+    transition-delay: var(--home-reveal-delay, 0ms);
+    will-change: transform, opacity;
+  }
+
+  .home-reveal-left {
+    --home-reveal-x: -96px;
+    --home-reveal-y: 22px;
+  }
+
+  .home-reveal-right {
+    --home-reveal-x: 96px;
+    --home-reveal-y: 22px;
+  }
+
+  .home-reveal-up {
+    --home-reveal-x: 0px;
+    --home-reveal-y: 54px;
+  }
+
+  .home-reveal-zoom {
+    --home-reveal-x: 0px;
+    --home-reveal-y: 24px;
+    --home-reveal-scale: .9;
+  }
+
+  .home-scroll-reveal.is-visible {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  .home-scroll-reveal .intro-fact,
+  .home-scroll-reveal .about-metric,
+  .home-scroll-reveal .service-line,
+  .home-scroll-reveal .brand-item {
+    transition:
+      transform .2s ease,
+      box-shadow .2s ease,
+      border-color .2s ease;
+  }
+
+  .home-scroll-reveal.is-visible .intro-fact:hover,
+  .home-scroll-reveal.is-visible .about-metric:hover,
+  .home-scroll-reveal.is-visible .service-line:hover,
+  .home-scroll-reveal.is-visible .brand-item:hover {
+    transform: translateY(-3px);
+  }
+
+  @media (max-width: 767.98px) {
+    .home-scroll-progress {
+      height: 2px;
+    }
+
+    .home-scroll-reveal {
+      --home-reveal-x: 0px;
+      --home-reveal-y: 18px;
+      transition-duration: .46s;
+      transition-delay: 0ms !important;
+    }
+
+    .home-reveal-left {
+      --home-reveal-x: -22px;
+      --home-reveal-y: 14px;
+    }
+
+    .home-reveal-right {
+      --home-reveal-x: 22px;
+      --home-reveal-y: 14px;
+    }
+
+    .home-reveal-zoom {
+      --home-reveal-scale: .98;
+    }
+
+    .public-slider-shell.is-home-parallax-ready .hero-card {
+      transform: translate3d(0, calc(var(--home-hero-text-y) * .35), 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-scroll-progress {
+      display: none;
+    }
+
+    .public-slider-shell.is-home-parallax-ready .hero-img,
+    .public-slider-shell.is-home-parallax-ready .hero-video,
+    .public-slider-shell.is-home-parallax-ready .hero-card,
+    .home-scroll-reveal,
+    .home-scroll-reveal.is-visible {
+      opacity: 1;
+      transform: none;
+      transition: none;
+      will-change: auto;
+    }
+  }
 </style>
 
 <div class="public-home public-shell">
@@ -2135,34 +2276,6 @@
   </main>
 
   <script>
-    (() => {
-      const introSection = document.querySelector('.public-intro-v2');
-      const parallaxEnabled = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)');
-
-      if (!introSection || !parallaxEnabled.matches) return;
-
-      let animationFrame = null;
-
-      const updateIntroParallax = () => {
-        const bounds = introSection.getBoundingClientRect();
-        const sectionCenter = bounds.top + (bounds.height / 2);
-        const viewportCenter = window.innerHeight / 2;
-        const offset = Math.max(-28, Math.min(28, (viewportCenter - sectionCenter) * .08));
-
-        introSection.style.setProperty('--intro-parallax-y', `${offset}px`);
-        animationFrame = null;
-      };
-
-      const requestIntroParallaxUpdate = () => {
-        if (animationFrame !== null) return;
-        animationFrame = window.requestAnimationFrame(updateIntroParallax);
-      };
-
-      window.addEventListener('scroll', requestIntroParallaxUpdate, { passive: true });
-      window.addEventListener('resize', requestIntroParallaxUpdate, { passive: true });
-      updateIntroParallax();
-    })();
-
     (() => {
       const form = document.querySelector('[data-contact-form]');
       if (!form) return;
