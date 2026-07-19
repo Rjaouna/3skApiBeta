@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -46,6 +47,7 @@ class AdminOrderController extends AbstractController
             'currentCity' => $city,
             'labels' => CustomerOrder::getStatusLabels(),
             'statuses' => CustomerOrder::getAvailableStatuses(),
+            'totalOrders' => $orderRepository->count([]),
         ]);
     }
 
@@ -127,6 +129,67 @@ class AdminOrderController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/delete', name: 'delete', methods: ['POST'], requirements: ['id' => '\d+'])]
+    public function delete(
+        CustomerOrder $order,
+        Request $request,
+        EntityManagerInterface $em,
+        UserPasswordHasherInterface $passwordHasher
+    ): RedirectResponse {
+        if (!$this->isCsrfTokenValid('delete_order_' . $order->getId(), (string) $request->request->get('_token'))) {
+            $this->addFlash('danger', 'Token invalide.');
+
+            return $this->redirectToRoute('admin_orders_index');
+        }
+
+        if (!$this->isAdminPasswordConfirmed($request, $passwordHasher)) {
+            $this->addFlash('danger', 'Mot de passe administrateur incorrect.');
+
+            return $this->redirectToRoute('admin_orders_index');
+        }
+
+        $orderNumber = $order->getOrderNumber();
+        $em->remove($order);
+        $em->flush();
+
+        $this->addFlash('success', sprintf('La commande %s a ete supprimee.', $orderNumber));
+
+        return $this->redirectToRoute('admin_orders_index');
+    }
+
+    #[Route('/delete-all', name: 'delete_all', methods: ['POST'])]
+    public function deleteAll(
+        Request $request,
+        CustomerOrderRepository $orderRepository,
+        EntityManagerInterface $em,
+        UserPasswordHasherInterface $passwordHasher
+    ): RedirectResponse {
+        if (!$this->isCsrfTokenValid('delete_all_orders', (string) $request->request->get('_token'))) {
+            $this->addFlash('danger', 'Token invalide.');
+
+            return $this->redirectToRoute('admin_orders_index');
+        }
+
+        if (!$this->isAdminPasswordConfirmed($request, $passwordHasher)) {
+            $this->addFlash('danger', 'Mot de passe administrateur incorrect.');
+
+            return $this->redirectToRoute('admin_orders_index');
+        }
+
+        $orders = $orderRepository->findAll();
+        $deletedCount = count($orders);
+
+        foreach ($orders as $order) {
+            $em->remove($order);
+        }
+
+        $em->flush();
+
+        $this->addFlash('success', sprintf('%d commande%s supprimee%s.', $deletedCount, $deletedCount > 1 ? 's' : '', $deletedCount > 1 ? 's' : ''));
+
+        return $this->redirectToRoute('admin_orders_index');
+    }
+
     #[Route('/{id}/advance', name: 'advance', methods: ['POST'], requirements: ['id' => '\d+'])]
     public function advance(
         CustomerOrder $order,
@@ -200,5 +263,17 @@ class AdminOrderController extends AbstractController
         $value = preg_replace('/[^A-Za-z0-9._-]+/', '-', $value) ?: 'commande';
 
         return trim($value, '-_.') ?: 'commande';
+    }
+
+    private function isAdminPasswordConfirmed(Request $request, UserPasswordHasherInterface $passwordHasher): bool
+    {
+        $user = $this->getUser();
+        $password = (string) $request->request->get('confirm_password', '');
+
+        if (!$user instanceof User || trim($password) === '') {
+            return false;
+        }
+
+        return $passwordHasher->isPasswordValid($user, $password);
     }
 }

@@ -204,6 +204,92 @@
     padding-inline: 14px;
   }
 
+  .order-actions-inline{
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .order-delete-btn{
+    color: var(--bs-danger) !important;
+    border-color: rgba(var(--bs-danger-rgb), .34) !important;
+    background: rgba(var(--bs-danger-rgb), .04) !important;
+  }
+
+  .order-delete-btn:hover{
+    color: #fff !important;
+    background: var(--bs-danger) !important;
+    border-color: var(--bs-danger) !important;
+  }
+
+  .orders-danger-btn{
+    min-height: 42px;
+    border-radius: 999px;
+    font-weight: 650;
+    padding-inline: 14px;
+  }
+
+  .orders-delete-modal .modal-content{
+    border: 0;
+    border-radius: 24px;
+    box-shadow: 0 24px 80px rgba(16,24,40,.24);
+    overflow: hidden;
+  }
+
+  .orders-delete-modal .modal-header{
+    border: 0;
+    padding: 20px 22px 10px;
+  }
+
+  .orders-delete-modal .modal-body{
+    padding: 10px 22px 22px;
+  }
+
+  .orders-delete-modal__icon{
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    color: var(--bs-danger);
+    background: rgba(var(--bs-danger-rgb), .10);
+    margin-bottom: 14px;
+  }
+
+  .orders-delete-modal__title{
+    margin: 0;
+    font-size: 1.16rem;
+    font-weight: 750;
+    color: var(--oc-text);
+  }
+
+  .orders-delete-modal__text{
+    margin: 8px 0 0;
+    color: var(--oc-muted);
+    font-size: .92rem;
+    line-height: 1.45;
+  }
+
+  .orders-delete-modal .form-label{
+    font-size: .78rem;
+    font-weight: 650;
+    color: var(--oc-muted);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+
+  .orders-delete-modal .form-control{
+    min-height: 48px;
+    border-radius: 14px;
+  }
+
+  .orders-delete-modal .modal-footer{
+    border-top: 1px solid rgba(0,0,0,.06);
+    padding: 14px 22px 20px;
+  }
+
   .status-pill{
     display: inline-flex;
     align-items: center;
@@ -342,6 +428,8 @@
   .mobile-order-actions{
     display: flex;
     justify-content: flex-end;
+    gap: 8px;
+    flex-wrap: wrap;
   }
 
   @media (max-width: 991.98px){
@@ -363,9 +451,17 @@
       <div class="subtitle">Suivi admin des commandes clients.</div>
     </div>
 
-    <div class="orders-count-badge">
-      <i class="fa-solid fa-box-open"></i>
-      <span>{{ orders|length }} commande{{ orders|length > 1 ? 's' : '' }}</span>
+    <div class="d-flex align-items-center gap-2 flex-wrap">
+      <div class="orders-count-badge">
+        <i class="fa-solid fa-box-open"></i>
+        <span>{{ orders|length }} commande{{ orders|length > 1 ? 's' : '' }}</span>
+      </div>
+
+      {% if totalOrders|default(0) > 0 %}
+        <button class="btn btn-outline-danger orders-danger-btn" type="button" data-bs-toggle="modal" data-bs-target="#deleteAllOrdersModal">
+          <i class="fa-solid fa-trash-can me-2"></i>Supprimer toutes
+        </button>
+      {% endif %}
     </div>
   </div>
 
@@ -505,10 +601,22 @@
                   </td>
 
                   <td class="text-end">
-                    <a class="btn btn-outline-primary btn-sm order-action-btn"
-                       href="{{ path('admin_orders_show', {id: order.id}) }}">
-                      <i class="fa-solid fa-eye me-1"></i>Voir
-                    </a>
+                    <div class="order-actions-inline">
+                      <a class="btn btn-outline-primary btn-sm order-action-btn"
+                         href="{{ path('admin_orders_show', {id: order.id}) }}">
+                        <i class="fa-solid fa-eye me-1"></i>Voir
+                      </a>
+
+                      <button class="btn btn-outline-danger btn-sm order-action-btn order-delete-btn"
+                              type="button"
+                              data-bs-toggle="modal"
+                              data-bs-target="#deleteOrderModal"
+                              data-delete-order-action="{{ path('admin_orders_delete', {id: order.id}) }}"
+                              data-delete-order-token="{{ csrf_token('delete_order_' ~ order.id) }}"
+                              data-delete-order-number="{{ order.orderNumber }}">
+                        <i class="fa-solid fa-trash-can me-1"></i>Supprimer
+                      </button>
+                    </div>
                   </td>
                 </tr>
               {% endfor %}
@@ -573,6 +681,16 @@
                    href="{{ path('admin_orders_show', {id: order.id}) }}">
                   <i class="fa-solid fa-eye me-1"></i>Voir
                 </a>
+
+                <button class="btn btn-outline-danger btn-sm order-action-btn order-delete-btn"
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#deleteOrderModal"
+                        data-delete-order-action="{{ path('admin_orders_delete', {id: order.id}) }}"
+                        data-delete-order-token="{{ csrf_token('delete_order_' ~ order.id) }}"
+                        data-delete-order-number="{{ order.orderNumber }}">
+                  <i class="fa-solid fa-trash-can me-1"></i>Supprimer
+                </button>
               </div>
             </div>
           {% endfor %}
@@ -581,4 +699,133 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade orders-delete-modal" id="deleteOrderModal" tabindex="-1" aria-labelledby="deleteOrderModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <form class="modal-content" method="post" id="deleteOrderForm">
+      <div class="modal-header">
+        <div>
+          <div class="orders-delete-modal__icon">
+            <i class="fa-solid fa-trash-can"></i>
+          </div>
+          <h5 class="orders-delete-modal__title" id="deleteOrderModalLabel">Supprimer la commande</h5>
+          <p class="orders-delete-modal__text">
+            Cette action supprimera définitivement la commande <strong data-delete-order-label>sélectionnée</strong> et ses lignes.
+          </p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+
+      <div class="modal-body">
+        <input type="hidden" name="_token" data-delete-order-token-input>
+
+        <label class="form-label" for="deleteOrderPassword">Mot de passe admin</label>
+        <input class="form-control"
+               id="deleteOrderPassword"
+               type="password"
+               name="confirm_password"
+               autocomplete="current-password"
+               placeholder="Saisissez votre mot de passe"
+               required>
+        <div class="form-text text-muted mt-2">
+          Le mot de passe du compte administrateur connecté est nécessaire pour confirmer.
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="submit" class="btn btn-danger">
+          <i class="fa-solid fa-trash-can me-2"></i>Supprimer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% if totalOrders|default(0) > 0 %}
+  <div class="modal fade orders-delete-modal" id="deleteAllOrdersModal" tabindex="-1" aria-labelledby="deleteAllOrdersModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <form class="modal-content" method="post" action="{{ path('admin_orders_delete_all') }}">
+        <div class="modal-header">
+          <div>
+            <div class="orders-delete-modal__icon">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h5 class="orders-delete-modal__title" id="deleteAllOrdersModalLabel">Supprimer toutes les commandes</h5>
+            <p class="orders-delete-modal__text">
+              Cette action supprimera définitivement toutes les commandes enregistrées, avec leurs lignes de commande.
+            </p>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+
+        <div class="modal-body">
+          <input type="hidden" name="_token" value="{{ csrf_token('delete_all_orders') }}">
+
+          <div class="alert alert-danger small mb-3">
+            Attention : cette suppression concerne toutes les commandes, pas seulement le filtre actuel.
+          </div>
+
+          <label class="form-label" for="deleteAllOrdersPassword">Mot de passe admin</label>
+          <input class="form-control"
+                 id="deleteAllOrdersPassword"
+                 type="password"
+                 name="confirm_password"
+                 autocomplete="current-password"
+                 placeholder="Saisissez votre mot de passe"
+                 required>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="submit" class="btn btn-danger">
+            <i class="fa-solid fa-trash-can me-2"></i>Tout supprimer
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endif %}
+
+<script>
+(function () {
+  const deleteOrderModal = document.getElementById('deleteOrderModal');
+  const deleteOrderForm = document.getElementById('deleteOrderForm');
+
+  if (!deleteOrderModal || !deleteOrderForm) {
+    return;
+  }
+
+  deleteOrderModal.addEventListener('show.bs.modal', function (event) {
+    const trigger = event.relatedTarget;
+    if (!trigger) {
+      return;
+    }
+
+    const action = trigger.getAttribute('data-delete-order-action') || '';
+    const token = trigger.getAttribute('data-delete-order-token') || '';
+    const number = trigger.getAttribute('data-delete-order-number') || 'sélectionnée';
+    const label = deleteOrderModal.querySelector('[data-delete-order-label]');
+    const tokenInput = deleteOrderModal.querySelector('[data-delete-order-token-input]');
+    const passwordInput = deleteOrderModal.querySelector('input[name="confirm_password"]');
+
+    deleteOrderForm.setAttribute('action', action);
+
+    if (tokenInput) {
+      tokenInput.value = token;
+    }
+
+    if (label) {
+      label.textContent = number;
+    }
+
+    if (passwordInput) {
+      passwordInput.value = '';
+      window.setTimeout(function () {
+        passwordInput.focus();
+      }, 180);
+    }
+  });
+})();
+</script>
 {% endblock %}
