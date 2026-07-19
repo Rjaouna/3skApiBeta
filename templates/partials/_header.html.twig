@@ -1139,6 +1139,285 @@
     color: rgba(220,53,69,.98);
   }
 
+  .admin-settings-modal{
+    --settings-bg: var(--bs-body-bg);
+    --settings-surface: var(--bs-white, #fff);
+    --settings-text: var(--bs-body-color);
+    --settings-muted: var(--bs-secondary-color);
+    --settings-border: var(--bs-border-color);
+    --settings-soft: rgba(var(--bs-primary-rgb), .08);
+  }
+
+  .admin-settings-modal .modal-dialog,
+  .admin-settings-modal .modal-content{
+    min-height: 100dvh;
+  }
+
+  .admin-settings-modal .modal-content{
+    border: 0;
+    border-radius: 0;
+    background:
+      radial-gradient(900px circle at 6% 0%, rgba(var(--bs-primary-rgb), .12), transparent 38%),
+      radial-gradient(760px circle at 96% 10%, rgba(var(--bs-secondary-rgb), .12), transparent 34%),
+      var(--settings-bg);
+    color: var(--settings-text);
+  }
+
+  .admin-settings-modal__shell{
+    width: min(1120px, calc(100% - 32px));
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding: clamp(18px, 3vw, 34px) 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 2vw, 24px);
+  }
+
+  .admin-settings-modal__top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .admin-settings-modal__eyebrow{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    color: var(--bs-primary);
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .admin-settings-modal__title{
+    margin: 0;
+    color: var(--settings-text);
+    font-size: clamp(1.65rem, 3vw, 2.45rem);
+    font-weight: 750;
+    letter-spacing: -.03em;
+    line-height: 1;
+  }
+
+  .admin-settings-modal__subtitle{
+    max-width: 620px;
+    margin: 10px 0 0;
+    color: var(--settings-muted);
+    font-size: .98rem;
+    line-height: 1.55;
+  }
+
+  .admin-settings-modal__close{
+    width: 46px;
+    height: 46px;
+    flex: 0 0 auto;
+    border-radius: 16px;
+    border: 1px solid var(--settings-border);
+    background: var(--settings-surface);
+    color: var(--settings-text);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 10px 24px rgba(16,24,40,.08);
+    transition: transform .14s ease, background .14s ease, color .14s ease;
+  }
+
+  .admin-settings-modal__close:hover{
+    transform: translateY(-1px);
+    color: var(--bs-primary);
+    background: var(--settings-soft);
+  }
+
+  .admin-settings-modal__grid{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .admin-settings-modal__card{
+    min-height: 126px;
+    border-radius: 22px;
+    border: 1px solid var(--settings-border);
+    background: var(--settings-surface);
+    color: var(--settings-text);
+    padding: 18px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+    box-shadow: 0 12px 30px rgba(16,24,40,.07);
+    transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease, background .16s ease;
+  }
+
+  .admin-settings-modal__card:hover{
+    color: var(--settings-text);
+    transform: translateY(-3px);
+    border-color: rgba(var(--bs-primary-rgb), .32);
+    background:
+      linear-gradient(135deg, rgba(var(--bs-primary-rgb), .08), transparent 58%),
+      var(--settings-surface);
+    box-shadow: 0 18px 42px rgba(16,24,40,.12);
+  }
+
+  .admin-settings-modal__card-head{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .admin-settings-modal__icon{
+    width: 46px;
+    height: 46px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    color: var(--bs-primary);
+    background: rgba(var(--bs-primary-rgb), .10);
+    flex: 0 0 auto;
+  }
+
+  .admin-settings-modal__arrow{
+    color: var(--settings-muted);
+    font-size: .92rem;
+    transform: translate(-2px, 2px);
+    transition: transform .16s ease, color .16s ease;
+  }
+
+  .admin-settings-modal__card:hover .admin-settings-modal__arrow{
+    color: var(--bs-primary);
+    transform: translate(2px, -2px);
+  }
+
+  .admin-settings-modal__label{
+    display: block;
+    color: var(--settings-text);
+    font-size: .98rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .admin-settings-modal__desc{
+    display: block;
+    margin-top: 6px;
+    color: var(--settings-muted);
+    font-size: .82rem;
+    font-weight: 400;
+    line-height: 1.35;
+  }
+
+  .admin-settings-modal__footer{
+    margin-top: auto;
+    padding-top: 4px;
+  }
+
+  .admin-settings-modal__logout{
+    width: 100%;
+    min-height: 74px;
+    border-radius: 22px;
+    border: 1px solid rgba(var(--bs-danger-rgb), .22);
+    background:
+      linear-gradient(135deg, rgba(var(--bs-danger-rgb), .11), rgba(var(--bs-danger-rgb), .04)),
+      var(--settings-surface);
+    color: var(--bs-danger);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    text-decoration: none;
+    box-shadow: 0 12px 30px rgba(16,24,40,.07);
+    transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+  }
+
+  .admin-settings-modal__logout:hover{
+    color: #fff;
+    background: var(--bs-danger);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 42px rgba(var(--bs-danger-rgb), .22);
+  }
+
+  .admin-settings-modal__logout-main{
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+
+  .admin-settings-modal__logout-icon{
+    width: 44px;
+    height: 44px;
+    border-radius: 15px;
+    display: grid;
+    place-items: center;
+    background: rgba(var(--bs-danger-rgb), .12);
+  }
+
+  .admin-settings-modal__logout:hover .admin-settings-modal__logout-icon{
+    background: rgba(255,255,255,.18);
+  }
+
+  .admin-settings-modal__logout-title{
+    display: block;
+    font-size: .98rem;
+    font-weight: 750;
+    line-height: 1.1;
+  }
+
+  .admin-settings-modal__logout-desc{
+    display: block;
+    margin-top: 4px;
+    color: rgba(var(--bs-danger-rgb), .78);
+    font-size: .8rem;
+    font-weight: 400;
+  }
+
+  .admin-settings-modal__logout:hover .admin-settings-modal__logout-desc{
+    color: rgba(255,255,255,.78);
+  }
+
+  @media (max-width: 991.98px){
+    .admin-settings-modal__grid{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 575.98px){
+    .admin-settings-modal__shell{
+      width: calc(100% - 20px);
+      padding: 14px 0 18px;
+      gap: 14px;
+    }
+
+    .admin-settings-modal__top{
+      align-items: flex-start;
+    }
+
+    .admin-settings-modal__subtitle{
+      font-size: .88rem;
+      margin-top: 8px;
+    }
+
+    .admin-settings-modal__grid{
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .admin-settings-modal__card{
+      min-height: 0;
+      border-radius: 18px;
+      padding: 14px;
+      gap: 12px;
+    }
+
+    .admin-settings-modal__icon{
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+    }
+  }
+
   .account-menu{
     min-width: 300px !important;
     border-radius: 18px !important;
@@ -1790,107 +2069,11 @@ body.theme-dark .voice-search-btn.is-listening{
           </div>
 
           {% if is_granted('ROLE_ADMIN') %}
-            <div class="dropdown hd-dropdown admin-settings-dropdown">
-              <button class="btn btn-sm admin-settings-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="admin-settings-dropdown">
+              <button class="btn btn-sm admin-settings-btn" type="button" data-bs-toggle="modal" data-bs-target="#adminSettingsModal" aria-controls="adminSettingsModal">
                 <i class="fa-solid fa-sliders me-2"></i>
                 <span>Paramètres</span>
               </button>
-
-              <ul class="dropdown-menu dropdown-menu-end admin-settings-menu">
-                <li class="admin-settings-head">
-                  <div class="admin-settings-head__icon">
-                    <i class="fa-solid fa-gear"></i>
-                  </div>
-                  <div>
-                    <div class="admin-settings-head__title">Administration</div>
-                    <div class="admin-settings-head__subtitle">Configuration et gestion</div>
-                  </div>
-                </li>
-
-                <li><hr class="dropdown-divider"></li>
-
-                <li>
-                  <a class="dropdown-item admin-settings-item" href="{{ path('admin_company_setting_index') }}">
-                    <span class="admin-settings-item__icon">
-                      <i class="fa-solid fa-building"></i>
-                    </span>
-                    <span>Configuration 3sk</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="dropdown-item admin-settings-item" href="{{ path('admin_category_reduction_index') }}">
-                    <span class="admin-settings-item__icon">
-                      <i class="fa-solid fa-percent"></i>
-                    </span>
-                    <span>Gestion des réductions</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="dropdown-item admin-settings-item" href="{{ path('admin_clients_index') }}">
-                    <span class="admin-settings-item__icon">
-                      <i class="fa-solid fa-users"></i>
-                    </span>
-                    <span>Gestion des clients</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="dropdown-item admin-settings-item" href="{{ path('admin_orders_index') }}">
-                    <span class="admin-settings-item__icon">
-                      <i class="fa-solid fa-box-open"></i>
-                    </span>
-                    <span>Gestion des commandes</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="dropdown-item admin-settings-item" href="{{ path('admin_hero_slide_index') }}">
-                    <span class="admin-settings-item__icon">
-                      <i class="fa-solid fa-images"></i>
-                    </span>
-                    <span>Gestion slides</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="dropdown-item admin-settings-item" href="{{ path('import_source_index') }}">
-                    <span class="admin-settings-item__icon">
-                      <i class="fa-solid fa-folder-tree"></i>
-                    </span>
-                    <span>Configuration import</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a class="dropdown-item admin-settings-item" href="{{ path('import_index') }}">
-                    <span class="admin-settings-item__icon">
-                      <i class="fa-solid fa-file-import"></i>
-                    </span>
-                    <span>Lancer l’import</span>
-                  </a>
-                </li>
-
-                <li><hr class="dropdown-divider"></li>
-                <li>
-  <a class="dropdown-item admin-settings-item" href="{{ path('admin_dashboard_index') }}">
-    <span class="admin-settings-item__icon">
-      <i class="fa-solid fa-chart-line"></i>
-    </span>
-    <span>Dashboard statistique</span>
-  </a>
-</li>
-
-                <li>
-                  <a class="dropdown-item admin-settings-item admin-settings-item--danger" href="{{ path('app_logout') }}">
-                    <span class="admin-settings-item__icon">
-                      <i class="fa-solid fa-right-from-bracket"></i>
-                    </span>
-                    <span>Déconnexion</span>
-                  </a>
-                </li>
-              </ul>
             </div>
           {% endif %}
         </div>
@@ -2006,6 +2189,170 @@ body.theme-dark .voice-search-btn.is-listening{
       </div>
     </div>
   </div>
+
+  {% if is_granted('ROLE_ADMIN') %}
+    <div class="modal fade admin-settings-modal" id="adminSettingsModal" tabindex="-1" aria-labelledby="adminSettingsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen m-0">
+        <div class="modal-content">
+          <div class="admin-settings-modal__shell">
+            <div class="admin-settings-modal__top">
+              <div>
+                <div class="admin-settings-modal__eyebrow">
+                  <i class="fa-solid fa-sliders"></i>
+                  <span>Paramètres</span>
+                </div>
+                <h2 class="admin-settings-modal__title" id="adminSettingsModalLabel">Centre de gestion</h2>
+                <p class="admin-settings-modal__subtitle">
+                  Retrouvez les actions importantes dans un espace clair : configuration, clients, commandes, slides, imports et statistiques.
+                </p>
+              </div>
+
+              <button type="button" class="admin-settings-modal__close" data-bs-dismiss="modal" aria-label="Fermer">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <div class="admin-settings-modal__grid">
+              <a class="admin-settings-modal__card" href="{{ path('admin_company_setting_index') }}">
+                <span class="admin-settings-modal__card-head">
+                  <span class="admin-settings-modal__icon">
+                    <i class="fa-solid fa-building"></i>
+                  </span>
+                  <span class="admin-settings-modal__arrow">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class="admin-settings-modal__label">Configuration 3SK</span>
+                  <span class="admin-settings-modal__desc">Coordonnées, identité société et réglages généraux.</span>
+                </span>
+              </a>
+
+              <a class="admin-settings-modal__card" href="{{ path('admin_category_reduction_index') }}">
+                <span class="admin-settings-modal__card-head">
+                  <span class="admin-settings-modal__icon">
+                    <i class="fa-solid fa-percent"></i>
+                  </span>
+                  <span class="admin-settings-modal__arrow">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class="admin-settings-modal__label">Gestion des réductions</span>
+                  <span class="admin-settings-modal__desc">Remises catalogue et avantages par catégorie.</span>
+                </span>
+              </a>
+
+              <a class="admin-settings-modal__card" href="{{ path('admin_clients_index') }}">
+                <span class="admin-settings-modal__card-head">
+                  <span class="admin-settings-modal__icon">
+                    <i class="fa-solid fa-users"></i>
+                  </span>
+                  <span class="admin-settings-modal__arrow">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class="admin-settings-modal__label">Gestion des clients</span>
+                  <span class="admin-settings-modal__desc">Comptes clients, statuts, coordonnées et accès.</span>
+                </span>
+              </a>
+
+              <a class="admin-settings-modal__card" href="{{ path('admin_orders_index') }}">
+                <span class="admin-settings-modal__card-head">
+                  <span class="admin-settings-modal__icon">
+                    <i class="fa-solid fa-box-open"></i>
+                  </span>
+                  <span class="admin-settings-modal__arrow">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class="admin-settings-modal__label">Gestion des commandes</span>
+                  <span class="admin-settings-modal__desc">Suivi des paniers, commandes et demandes clients.</span>
+                </span>
+              </a>
+
+              <a class="admin-settings-modal__card" href="{{ path('admin_hero_slide_index') }}">
+                <span class="admin-settings-modal__card-head">
+                  <span class="admin-settings-modal__icon">
+                    <i class="fa-solid fa-images"></i>
+                  </span>
+                  <span class="admin-settings-modal__arrow">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class="admin-settings-modal__label">Gestion slides</span>
+                  <span class="admin-settings-modal__desc">Visuels d’accueil, ordre d’affichage et mises en avant.</span>
+                </span>
+              </a>
+
+              <a class="admin-settings-modal__card" href="{{ path('import_source_index') }}">
+                <span class="admin-settings-modal__card-head">
+                  <span class="admin-settings-modal__icon">
+                    <i class="fa-solid fa-folder-tree"></i>
+                  </span>
+                  <span class="admin-settings-modal__arrow">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class="admin-settings-modal__label">Configuration import</span>
+                  <span class="admin-settings-modal__desc">Sources catalogue, mapping et paramètres d’intégration.</span>
+                </span>
+              </a>
+
+              <a class="admin-settings-modal__card" href="{{ path('import_index') }}">
+                <span class="admin-settings-modal__card-head">
+                  <span class="admin-settings-modal__icon">
+                    <i class="fa-solid fa-file-import"></i>
+                  </span>
+                  <span class="admin-settings-modal__arrow">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class="admin-settings-modal__label">Lancer l’import</span>
+                  <span class="admin-settings-modal__desc">Importer ou mettre à jour les données catalogue.</span>
+                </span>
+              </a>
+
+              <a class="admin-settings-modal__card" href="{{ path('admin_dashboard_index') }}">
+                <span class="admin-settings-modal__card-head">
+                  <span class="admin-settings-modal__icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                  </span>
+                  <span class="admin-settings-modal__arrow">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class="admin-settings-modal__label">Dashboard statistique</span>
+                  <span class="admin-settings-modal__desc">Vue globale sur les clients, commandes et activité.</span>
+                </span>
+              </a>
+            </div>
+
+            <div class="admin-settings-modal__footer">
+              <a class="admin-settings-modal__logout" href="{{ path('app_logout') }}">
+                <span class="admin-settings-modal__logout-main">
+                  <span class="admin-settings-modal__logout-icon">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                  </span>
+                  <span>
+                    <span class="admin-settings-modal__logout-title">Déconnexion</span>
+                    <span class="admin-settings-modal__logout-desc">Fermer la session administrateur en toute sécurité.</span>
+                  </span>
+                </span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
 
   <div class="offcanvas offcanvas-start mobile-menu-offcanvas" tabindex="-1" id="mainMenuOffcanvas" aria-labelledby="mainMenuOffcanvasLabel">
     <div class="offcanvas-header">
@@ -2136,6 +2483,22 @@ body.theme-dark .voice-search-btn.is-listening{
     </div>
   </div>
 </header>
+
+<script>
+(function () {
+  function mountAdminSettingsModal() {
+    const modal = document.getElementById('adminSettingsModal');
+    if (!modal || modal.parentElement === document.body) return;
+    document.body.appendChild(modal);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mountAdminSettingsModal, { once: true });
+  } else {
+    mountAdminSettingsModal();
+  }
+})();
+</script>
 
 <script>
 (function(){
