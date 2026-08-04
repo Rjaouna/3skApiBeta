@@ -270,7 +270,7 @@
 <div class="container py-4">
   <div class="import-page-hero mb-3 d-flex align-items-start justify-content-between flex-wrap gap-3">
     <div>
-      <h3>Import Articles (AJAX)</h3>
+      <h3>Import Articles</h3>
       <div class="subtitle">Insert / Update / Skip + progression fiable</div>
     </div>
 
@@ -348,6 +348,16 @@
           <div class="import-stat-label">Ignorées</div>
           <div class="import-stat-value" id="skp">0</div>
         </div>
+
+        <div class="import-stat-card">
+          <div class="import-stat-label">Articles CSV</div>
+          <div class="import-stat-value" id="csvArticles">0</div>
+        </div>
+
+        <div class="import-stat-card">
+          <div class="import-stat-label">Articles base</div>
+          <div class="import-stat-value" id="dbArticles">—</div>
+        </div>
       </div>
 
       <div class="mt-3">
@@ -421,6 +431,22 @@ function render(data){
   el('upd').textContent = data.updatedRows ?? 0;
   el('skp').textContent = data.skippedRows ?? 0;
   el('msg').textContent = data.message ?? '—';
+
+  const csvArticles = el('csvArticles');
+  const dbArticles = el('dbArticles');
+  if (csvArticles && data.expectedArticleCount !== null && data.expectedArticleCount !== undefined) {
+    csvArticles.textContent = data.expectedArticleCount;
+  }
+  if (dbArticles) {
+    dbArticles.classList.remove('text-success', 'text-danger');
+    if (data.databaseArticleCount === null || data.databaseArticleCount === undefined) {
+      dbArticles.textContent = '—';
+    } else {
+      dbArticles.textContent = data.databaseArticleCount;
+      dbArticles.classList.add(data.countsMatch === false ? 'text-danger' : 'text-success');
+    }
+  }
+
   setBadge(data.status ?? 'READY');
   setProgress(data.processedRows ?? 0, data.totalRows ?? 0);
 }
@@ -448,6 +474,7 @@ async function start(){
 
   jobId = data.jobId;
   render(data);
+  logLine(data.message || ("Vous allez mettre a jour " + (data.totalRows || 0) + " articles."));
   logLine("Job #" + jobId + " RUNNING");
 
   stepLoop();

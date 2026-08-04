@@ -95,6 +95,10 @@ class ImportController extends AbstractController
         fclose($h);
 
         $totalRows = $this->countCsvRows($path);
+        $csvArticleIds = $this->readCsvArticleIds($path);
+        $expectedArticleCount = count($csvArticleIds);
+        $duplicateCsvRows = max(0, $totalRows - $expectedArticleCount);
+        $databaseArticleCount = (int) $em->getRepository(Article::class)->count([]);
 
         $job = new ImportJob($path);
         $job->setStatus(ImportJob::STATUS_RUNNING);
@@ -104,7 +108,7 @@ class ImportController extends AbstractController
         $job->setInsertedRows(0);
         $job->setUpdatedRows(0);
         $job->setSkippedRows(0);
-        $job->setLastMessage('Démarrage import...');
+        $job->setLastMessage($this->buildStartMessage($expectedArticleCount, $duplicateCsvRows));
 
         $em->persist($job);
         $em->flush();
@@ -115,10 +119,10 @@ class ImportController extends AbstractController
             $job->setLastMessage('Aucune ligne à importer.');
             $em->flush();
 
-            return $this->json(['ok' => true, 'done' => true] + $this->payload($job));
+            return $this->json(['ok' => true, 'done' => true] + $this->payload($job, $databaseArticleCount, $expectedArticleCount, $duplicateCsvRows));
         }
 
-        return $this->json(['ok' => true, 'done' => false] + $this->payload($job));
+        return $this->json(['ok' => true, 'done' => false] + $this->payload($job, $databaseArticleCount, $expectedArticleCount, $duplicateCsvRows));
     }
 
     #[Route('/admin/import/step/{id}', name: 'import_step', methods: ['POST'])]
@@ -139,7 +143,12 @@ class ImportController extends AbstractController
         }
 
         if ($job->getStatus() === ImportJob::STATUS_DONE) {
-            return $this->json(['ok' => true, 'done' => true] + $this->payload($job));
+            $csvArticleIds = $this->readCsvArticleIds($job->getFilePath());
+            $expectedArticleCount = count($csvArticleIds);
+            $duplicateCsvRows = max(0, $job->getTotalRows() - $expectedArticleCount);
+            $databaseArticleCount = (int) $em->getRepository(Article::class)->count([]);
+
+            return $this->json(['ok' => true, 'done' => true] + $this->payload($job, $databaseArticleCount, $expectedArticleCount, $duplicateCsvRows));
         }
 
         if ($job->getStatus() === ImportJob::STATUS_ERROR) {
@@ -161,20 +170,43 @@ class ImportController extends AbstractController
             );
 
             if ($done) {
+                $csvArticleIds = $this->readCsvArticleIds($job->getFilePath());
+                $expectedArticleCount = count($csvArticleIds);
+                $duplicateCsvRows = max(0, $job->getTotalRows() - $expectedArticleCount);
+                $removedArticles = $this->synchronizeArticlesWithCsvIds($csvArticleIds, $em);
+                $databaseArticleCount = (int) $em->getRepository(Article::class)->count([]);
+
                 $job->setStatus(ImportJob::STATUS_DONE);
                 $job->setFinishedAt(new \DateTimeImmutable('now'));
+                $job->setLastMessage($this->buildFinalMessage(
+                    $expectedArticleCount,
+                    $job->getTotalRows(),
+                    $duplicateCsvRows,
+                    $databaseArticleCount,
+                    $removedArticles,
+                    $job->getInsertedRows(),
+                    $job->getUpdatedRows(),
+                    $job->getSkippedRows()
+                ));
             }
 
             $em->flush();
 
-            return $this->json(['ok' => true, 'done' => $job->getStatus() === ImportJob::STATUS_DONE] + $this->payload($job));
+            return $this->json(['ok' => true, 'done' => $job->getStatus() === ImportJob::STATUS_DONE] + $this->payload(
+                $job,
+                $databaseArticleCount ?? null,
+                $expectedArticleCount ?? null,
+                $duplicateCsvRows ?? null
+            ));
         } catch (\Throwable $e) {
             $job->setStatus(ImportJob::STATUS_ERROR);
             $job->setLastMessage('Erreur: ' . $e->getMessage());
             $job->setFinishedAt(new \DateTimeImmutable('now'));
             $em->flush();
 
-            return $this->json(['ok' => false, 'done' => true] + $this->payload($job), 500);
+            $databaseArticleCount = (int) $em->getRepository(Article::class)->count([]);
+
+            return $this->json(['ok' => false, 'done' => true] + $this->payload($job, $databaseArticleCount), 500);
         }
     }
 
@@ -253,6 +285,7 @@ class ImportController extends AbstractController
             $articlesByCode[$code] = $article;
 
             if (($job->getProcessedRows() % 400) === 0) {
+                $job->setByteOffset((int) ftell($h));
                 $em->flush();
                 $em->clear(Article::class);
                 $articlesByCode = [];
@@ -263,8 +296,6 @@ class ImportController extends AbstractController
             }
         }
 
-        $em->flush();
-
         $job->setByteOffset((int) ftell($h));
         $eof = feof($h);
         fclose($h);
@@ -272,6 +303,8 @@ class ImportController extends AbstractController
         if ($job->getProcessedRows() > $job->getTotalRows()) {
             $job->setProcessedRows($job->getTotalRows());
         }
+
+        $em->flush();
 
         return ['read' => $read, 'eof' => $eof];
     }
@@ -387,18 +420,153 @@ class ImportController extends AbstractController
         return $a->getTimestamp() === $b->getTimestamp();
     }
 
-    private function payload(ImportJob $job): array
+    private function payload(
+        ImportJob $job,
+        ?int $databaseArticleCount = null,
+        ?int $expectedArticleCount = null,
+        ?int $duplicateCsvRows = null
+    ): array
     {
         return [
             'jobId' => $job->getId(),
             'status' => $job->getStatus(),
             'totalRows' => $job->getTotalRows(),
+            'expectedArticleCount' => $expectedArticleCount,
+            'duplicateCsvRows' => $duplicateCsvRows,
+            'databaseArticleCount' => $databaseArticleCount,
+            'countsMatch' => $databaseArticleCount !== null && $expectedArticleCount !== null
+                ? $databaseArticleCount === $expectedArticleCount
+                : null,
             'processedRows' => $job->getProcessedRows(),
             'insertedRows' => $job->getInsertedRows(),
             'updatedRows' => $job->getUpdatedRows(),
             'skippedRows' => $job->getSkippedRows(),
             'message' => $job->getLastMessage(),
         ];
+    }
+
+    private function buildStartMessage(int $articleCount, int $duplicateCsvRows): string
+    {
+        $message = sprintf(
+            'Vous allez mettre a jour %d article%s unique%s.',
+            $articleCount,
+            $articleCount > 1 ? 's' : '',
+            $articleCount > 1 ? 's' : ''
+        );
+
+        if ($duplicateCsvRows > 0) {
+            $message .= sprintf(' %d ligne%s doublon%s detectee%s dans le CSV.', $duplicateCsvRows, $duplicateCsvRows > 1 ? 's' : '', $duplicateCsvRows > 1 ? 's' : '', $duplicateCsvRows > 1 ? 's' : '');
+        }
+
+        return $message;
+    }
+
+    private function buildFinalMessage(
+        int $expectedArticleCount,
+        int $csvRows,
+        int $duplicateCsvRows,
+        int $databaseArticleCount,
+        int $removedArticles,
+        int $insertedRows,
+        int $updatedRows,
+        int $skippedRows
+    ): string {
+        $summary = sprintf(
+            'Import termine. CSV: %d articles uniques (%d lignes, %d doublons). Base: %d articles. INS %d | UPD %d | SKIP %d | SUP %d.',
+            $expectedArticleCount,
+            $csvRows,
+            $duplicateCsvRows,
+            $databaseArticleCount,
+            $insertedRows,
+            $updatedRows,
+            $skippedRows,
+            $removedArticles
+        );
+
+        if ($databaseArticleCount === $expectedArticleCount) {
+            return $summary . ' Comptage conforme.';
+        }
+
+        return $summary . ' Attention: le nombre en base ne correspond pas au CSV.';
+    }
+
+    /**
+     * @param array<string, true> $csvIds
+     */
+    private function synchronizeArticlesWithCsvIds(array $csvIds, EntityManagerInterface $em): int
+    {
+        if ($csvIds === []) {
+            return 0;
+        }
+
+        $rows = $em->createQueryBuilder()
+            ->select('a.uniqueId AS uniqueId')
+            ->from(Article::class, 'a')
+            ->getQuery()
+            ->getArrayResult();
+
+        $removed = 0;
+        foreach ($rows as $row) {
+            $uniqueId = (string) ($row['uniqueId'] ?? '');
+            if ($uniqueId === '' || isset($csvIds[$uniqueId])) {
+                continue;
+            }
+
+            $em->remove($em->getReference(Article::class, $uniqueId));
+            $removed++;
+
+            if (($removed % 400) === 0) {
+                $em->flush();
+                $em->clear(Article::class);
+            }
+        }
+
+        if ($removed > 0) {
+            $em->flush();
+            $em->clear(Article::class);
+        }
+
+        return $removed;
+    }
+
+    /**
+     * @return array<string, true>
+     */
+    private function readCsvArticleIds(string $path): array
+    {
+        $h = fopen($path, 'r');
+        if (!$h) {
+            return [];
+        }
+
+        $header = fgetcsv($h, 0, ';', '"', '\\');
+        if (!$header) {
+            fclose($h);
+            return [];
+        }
+
+        $header[0] = preg_replace('/^\xEF\xBB\xBF/', '', (string) $header[0]);
+        $map = array_flip($header);
+        if (!array_key_exists('UniqueId', $map)) {
+            fclose($h);
+            return [];
+        }
+
+        $ids = [];
+        while (($row = fgetcsv($h, 0, ';', '"', '\\')) !== false) {
+            if (count($row) === 1 && trim((string) $row[0]) === '') {
+                continue;
+            }
+
+            $uniqueId = trim((string) ($row[$map['UniqueId']] ?? ''));
+            if ($uniqueId !== '') {
+                $ids[$uniqueId] = true;
+            }
+        }
+
+        fclose($h);
+
+        return $ids;
     }
 
     private function isUrl(string $value): bool

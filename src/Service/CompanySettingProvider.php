@@ -24,7 +24,7 @@ class CompanySettingProvider
 
         $setting = new CompanySetting();
         $setting->setCode('default');
-        $setting->setCompanyName('Hopic');
+        $setting->setCompanyName('"Hopic"');
         $setting->setEmailFrom('commandes@3skpartsauto.com');
         $setting->setEmailFromName('Hopic');
         $setting->setSendOrderEmailToAdmin(true);
