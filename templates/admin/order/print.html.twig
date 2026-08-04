@@ -16,6 +16,8 @@
 
     * {
       box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
 
     body {
@@ -264,6 +266,28 @@
         padding: 0;
         border-radius: 0;
         box-shadow: none;
+      }
+
+      .order-head {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) auto !important;
+        gap: 18px !important;
+        align-items: start !important;
+      }
+
+      .order-title {
+        text-align: right !important;
+      }
+
+      .meta-grid {
+        display: grid !important;
+        grid-template-columns: 1.1fr .9fr !important;
+        gap: 12px !important;
+      }
+
+      thead th {
+        background: var(--print-primary) !important;
+        color: #fff !important;
       }
     }
 
