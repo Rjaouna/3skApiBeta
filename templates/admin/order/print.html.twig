@@ -207,11 +207,6 @@
       width: 9%;
     }
 
-    th:nth-child(4),
-    td:nth-child(4) {
-      width: 18%;
-    }
-
     tbody tr:nth-child(even) td {
       background: #fbfcfe;
     }
@@ -236,33 +231,6 @@
 
     .designation {
       line-height: 1.25;
-    }
-
-    .totals {
-      width: min(100%, 330px);
-      margin: 14px 0 0 auto;
-      border: 1px solid var(--print-line);
-      border-radius: 11px;
-      overflow: hidden;
-    }
-
-    .total-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 8px 12px;
-      border-bottom: 1px solid #edf1f6;
-    }
-
-    .total-row:last-child {
-      border-bottom: 0;
-    }
-
-    .total-row.final {
-      background: var(--print-primary);
-      color: #fff;
-      font-size: 15px;
-      font-weight: 700;
     }
 
     .print-footer {
@@ -381,7 +349,6 @@
           <th>Reference</th>
           <th>Article</th>
           <th class="text-end">Qte</th>
-          <th class="text-end">Total TTC</th>
         </tr>
       </thead>
       <tbody>
@@ -390,32 +357,14 @@
             <td><span class="ref">{{ line.articleCode }}</span></td>
             <td class="designation">{{ line.designation ?: '-' }}</td>
             <td class="text-end">{{ line.quantity }}</td>
-            <td class="text-end">{{ line.lineTotalTtc }} DH</td>
           </tr>
         {% else %}
           <tr>
-            <td colspan="4" class="muted">Aucun article dans cette commande.</td>
+            <td colspan="3" class="muted">Aucun article dans cette commande.</td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
-
-    <section class="totals">
-      <div class="total-row">
-        <span>Sous-total TTC</span>
-        <strong>{{ order.subtotalTtc }} DH</strong>
-      </div>
-      {% if order.discountAmountTtc and order.discountAmountTtc != '0.00' and order.discountAmountTtc != '0' %}
-        <div class="total-row">
-          <span>Remise TTC</span>
-          <strong>-{{ order.discountAmountTtc }} DH</strong>
-        </div>
-      {% endif %}
-      <div class="total-row final">
-        <span>Total TTC</span>
-        <strong>{{ order.totalTtc }} DH</strong>
-      </div>
-    </section>
 
     <footer class="print-footer">
       <span>3SK Parts Auto</span>
