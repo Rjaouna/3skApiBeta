@@ -1292,9 +1292,8 @@ body.theme-dark .empty-results-box{
         }
 
         if (stock === 0) return `color: #fff !important; background: #dc3545 !important; border-color: #dc3545 !important;`;
-        if (stock < 5)  return `color: rgba(176,117,0,.98); background: rgba(255,193,7,.14); border-color: rgba(255,193,7,.28);`;
-        if (stock > 10) return `color: rgba(25,135,84,.98); background: rgba(25,135,84,.12); border-color: rgba(25,135,84,.22);`;
-        return ``;
+        if (stock < 5)  return `color: #fff !important; background: #ff8a00 !important; border-color: #ff8a00 !important;`;
+        return `color: #fff !important; background: #198754 !important; border-color: #198754 !important;`;
       }
 
       function stockLabel(stock){
