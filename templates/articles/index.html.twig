@@ -57,6 +57,21 @@
   background: rgba(255,255,255,.86) !important;
   text-indent: 0 !important;
   opacity: 1 !important;
+  text-decoration: none !important;
+  line-height: 1 !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+}
+
+.articles-reset-btn i,
+.articles-reset-btn span{
+  display: inline-flex !important;
+  align-items: center;
+  color: var(--app-blue, var(--bs-primary)) !important;
+  font-size: .9rem !important;
+  line-height: 1 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .articles-reset-btn:hover,
@@ -748,7 +763,7 @@ body.theme-dark .empty-results-box{
       </div>
 
       <div class="d-flex gap-2 flex-wrap">
-        <a class="btn btn-outline-secondary articles-reset-btn" href="{{ path('articles_page') }}">
+        <a class="articles-reset-btn" href="{{ path('articles_page') }}">
           <i class="fa-solid fa-rotate-left"></i>
           <span>Reset</span>
         </a>
