@@ -736,6 +736,26 @@ body.theme-dark .empty-results-box{
   border-color: rgba(37,211,102,.20);
 }
 
+.articles-infinite-loader{
+  grid-column: 1 / -1;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 12px;
+  color: var(--bs-primary);
+  font-weight: 600;
+  font-size: .9rem;
+}
+
+.articles-infinite-loader:not(.d-none){
+  display: flex;
+}
+
+.articles-scroll-sentinel{
+  height: 1px;
+}
+
 @media (max-width: 575.98px){
   .empty-results-actions{
     flex-direction: column;
@@ -881,6 +901,12 @@ body.theme-dark .empty-results-box{
         <div id="grid" class="product-grid"></div>
         <div class="alert alert-danger mt-3 d-none" id="apiError"></div>
 
+        <div class="articles-infinite-loader d-none" id="infiniteLoader" aria-live="polite">
+          <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+          <span>Chargement des articles...</span>
+        </div>
+        <div id="infiniteScrollSentinel" class="articles-scroll-sentinel" aria-hidden="true"></div>
+
         <div class="d-flex align-items-center justify-content-end flex-wrap gap-2 mt-3">
           <button class="btn btn-outline-secondary btn-sm" id="prevBtnBottom" disabled>←</button>
           <span class="small" id="pageLabelBottom">1</span>
@@ -916,6 +942,8 @@ body.theme-dark .empty-results-box{
       const applyBtn = document.getElementById('applyFilters');
       const clearBtn = document.getElementById('clearFilters');
       const grid = document.getElementById('grid');
+      const infiniteLoader = document.getElementById('infiniteLoader');
+      const infiniteScrollSentinel = document.getElementById('infiniteScrollSentinel');
 
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
@@ -946,6 +974,9 @@ body.theme-dark .empty-results-box{
       let articleLoadController = null;
       let articleLoadSerial = 0;
       let keywordTimer = null;
+      let totalPages = 1;
+      let isLoadingArticles = false;
+      let infiniteObserver = null;
 
       let state = {
         page: 1,
@@ -1170,6 +1201,54 @@ body.theme-dark .empty-results-box{
         }
       }
 
+      function setInfiniteLoader(visible){
+        infiniteLoader?.classList.toggle('d-none', !visible);
+      }
+
+      function countVisibleCards(){
+        return grid ? grid.querySelectorAll('.product-card').length : 0;
+      }
+
+      function canLoadMoreArticles(){
+        return !isLoadingArticles && state.page < totalPages;
+      }
+
+      function loadNextArticlesPage(){
+        if (!canLoadMoreArticles()) return;
+        state.page++;
+        load({ append: true });
+      }
+
+      function maybeLoadMoreIfNeeded(){
+        if (!infiniteScrollSentinel || !canLoadMoreArticles()) return;
+
+        const rect = infiniteScrollSentinel.getBoundingClientRect();
+        if (rect.top <= window.innerHeight + 520) {
+          loadNextArticlesPage();
+        }
+      }
+
+      function setupInfiniteScroll(){
+        if (!infiniteScrollSentinel) return;
+
+        if ('IntersectionObserver' in window) {
+          infiniteObserver?.disconnect();
+          infiniteObserver = new IntersectionObserver((entries) => {
+            if (entries.some(entry => entry.isIntersecting)) {
+              loadNextArticlesPage();
+            }
+          }, { root: null, rootMargin: '520px 0px', threshold: 0 });
+
+          infiniteObserver.observe(infiniteScrollSentinel);
+          return;
+        }
+
+        window.addEventListener('scroll', () => {
+          const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 520;
+          if (nearBottom) loadNextArticlesPage();
+        }, { passive: true });
+      }
+
       function clampYears(from, to){
         from = Math.max(dataYearMin, Math.min(dataYearMax, from));
         to   = Math.max(dataYearMin, Math.min(dataYearMax, to));
@@ -1333,13 +1412,15 @@ body.theme-dark .empty-results-box{
         return stock > 0 ? 'En stock' : 'Non dispo';
       }
 
-      function render(items, imagesBaseUrl){
+      function render(items, imagesBaseUrl, append = false){
         if (!grid) return;
 
         const cartObj = getCart();
-        grid.innerHTML = '';
+        if (!append) {
+          grid.innerHTML = '';
+        }
 
-        if (!items || !items.length){
+        if (!append && (!items || !items.length)){
           grid.innerHTML = `
            <div style="grid-column: 1 / -1;">
   <div class="empty-results-box">
@@ -1374,6 +1455,10 @@ body.theme-dark .empty-results-box{
   </div>
 </div>
           `;
+          return;
+        }
+
+        if (append && (!items || !items.length)){
           return;
         }
 
@@ -1665,16 +1750,26 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
         });
       }
 
-      async function load(){
+      async function load(options = {}){
+        const append = options.append === true;
+        if (isLoadingArticles && append) return;
+
         const currentLoadSerial = ++articleLoadSerial;
-        if (articleLoadController) {
+        if (!append && articleLoadController) {
           articleLoadController.abort();
         }
         articleLoadController = new AbortController();
+        isLoadingArticles = true;
+        let loadSucceeded = false;
 
         if (apiError) apiError.classList.add('d-none');
-        skeletons();
-        if (statusLine) statusLine.textContent = 'Chargement…';
+        if (append) {
+          setInfiniteLoader(true);
+        } else {
+          skeletons();
+          setInfiniteLoader(false);
+        }
+        if (!append && statusLine) statusLine.textContent = 'Chargement...';
 
         try{
           const res = await fetch(buildUrl(), {
@@ -1696,7 +1791,7 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
                 <div class="small">Début: <code>${esc(text.slice(0, 280))}</code></div>`;
             }
             if (statusLine) statusLine.textContent = 'Erreur API';
-            if (grid) grid.innerHTML = '';
+            if (!append && grid) grid.innerHTML = '';
             if (prevBtn) prevBtn.disabled = true;
             if (nextBtn) nextBtn.disabled = true;
             if (prevBtnBottom) prevBtnBottom.disabled = true;
@@ -1732,16 +1827,20 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
 
           const total = data.total || 0;
           const pages = data.pages || 1;
+          totalPages = Math.max(1, pages);
 
-          if (pageLabel) pageLabel.textContent = `${state.page} / ${pages}`;
+          if (pageLabel) pageLabel.textContent = `${state.page} / ${totalPages}`;
           if (prevBtn) prevBtn.disabled = state.page <= 1;
-          if (nextBtn) nextBtn.disabled = state.page >= pages;
+          if (nextBtn) nextBtn.disabled = state.page >= totalPages;
 
-          if (pageLabelBottom) pageLabelBottom.textContent = `${state.page} / ${pages}`;
+          if (pageLabelBottom) pageLabelBottom.textContent = `${state.page} / ${totalPages}`;
           if (prevBtnBottom) prevBtnBottom.disabled = state.page <= 1;
-          if (nextBtnBottom) nextBtnBottom.disabled = state.page >= pages;
+          if (nextBtnBottom) nextBtnBottom.disabled = state.page >= totalPages;
 
-          if (statusLine) statusLine.textContent = `${total} article(s)`;
+          if (statusLine) {
+            const shown = append ? countVisibleCards() + (data.items || []).length : (data.items || []).length;
+            statusLine.textContent = `${shown} / ${total} article(s)`;
+          }
 
           const from = parseInt(f_yearFrom?.value || String(dataYearMin), 10);
           const to   = parseInt(f_yearTo?.value   || String(dataYearMax), 10);
@@ -1753,8 +1852,9 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
               : `Année : ${from} → ${to}`;
           }
 
-          render(data.items || [], data.imagesBaseUrl || '');
+          render(data.items || [], data.imagesBaseUrl || '', append);
           initTooltips(grid);
+          loadSucceeded = true;
         } catch(e){
           if (e.name === 'AbortError') {
             return;
@@ -1765,13 +1865,21 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
             apiError.innerHTML = `<div class="fw-bold">Erreur JS</div><div class="small">${esc(e.message || e)}</div>`;
           }
           if (statusLine) statusLine.textContent = 'Erreur JS';
-          if (grid) grid.innerHTML = '';
+          if (!append && grid) grid.innerHTML = '';
+          if (append && state.page > 1) state.page--;
+        } finally {
+          isLoadingArticles = false;
+          setInfiniteLoader(false);
+          if (loadSucceeded) {
+            window.setTimeout(maybeLoadMoreIfNeeded, 120);
+          }
         }
       }
 
       ensureYearSlider();
       updateYearSliderOptions();
       initYearFromQuery();
+      setupInfiniteScroll();
 
       if (f_family) f_family.value = state.family;
       if (f_brand)  f_brand.value = state.brand;
