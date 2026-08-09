@@ -960,6 +960,7 @@ body.theme-dark .empty-results-box{
       const apiError = document.getElementById('apiError');
       const headerSearchInput = document.getElementById('InputRechercheProduit');
       const headerSearchForm = document.getElementById('searchFormHeader');
+      const canSeePrices = {{ app.user ? 'true' : 'false' }};
       const canSeeExactStock = {{ is_granted('ROLE_ADMIN') ? 'true' : 'false' }};
 
       const FALLBACK_IMG = "{{ asset('img/default-piece.png')|e('js') }}";
@@ -1524,10 +1525,12 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
             </div>
 
             <div class="product-card__footer">
-              <div class="product-card__prices">
-                <span class="price-ttc">${money(a.SalePriceVatIncluded)} DH</span>
-                <span class="price-label">[TTC]</span>
-              </div>
+              ${canSeePrices ? `
+                <div class="product-card__prices">
+                  <span class="price-ttc">${money(a.SalePriceVatIncluded)} DH</span>
+                  <span class="price-label">[TTC]</span>
+                </div>
+              ` : ''}
 
               ${showCartAlert ? `
                 <div

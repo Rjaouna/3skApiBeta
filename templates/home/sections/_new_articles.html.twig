@@ -527,6 +527,7 @@
 <script>
 (function(){
   const canSeeExactStock = {{ is_granted('ROLE_ADMIN') ? 'true' : 'false' }};
+  const canSeePrices = {{ app.user ? 'true' : 'false' }};
   const section = document.querySelector('[data-new-section]');
   if (!section) return;
 
@@ -759,10 +760,12 @@ card.innerHTML = `
   </div>
 
   <div class="product-card__footer">
-    <div class="product-card__prices">
-      <span class="price-ttc">${money(a.SalePriceVatIncluded)} DH</span>
-      <span class="price-label">[TTC]</span>
-    </div>
+    ${canSeePrices ? `
+      <div class="product-card__prices">
+        <span class="price-ttc">${money(a.SalePriceVatIncluded)} DH</span>
+        <span class="price-label">[TTC]</span>
+      </div>
+    ` : ''}
 
     <div class="bottomFooterWrapper">
       <div class="qty-stepper" data-qty-stepper>
