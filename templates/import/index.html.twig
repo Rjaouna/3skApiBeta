@@ -232,6 +232,21 @@
     word-break: break-word;
   }
 
+  .import-message-box.is-success{
+    border-color: rgba(var(--bs-success-rgb), .28);
+    background: rgba(var(--bs-success-rgb), .08);
+  }
+
+  .import-message-box.is-warning{
+    border-color: rgba(var(--bs-warning-rgb), .32);
+    background: rgba(var(--bs-warning-rgb), .10);
+  }
+
+  .import-message-box.is-error{
+    border-color: rgba(var(--bs-danger-rgb), .30);
+    background: rgba(var(--bs-danger-rgb), .08);
+  }
+
   .import-log{
     height: 160px;
     overflow: auto;
@@ -243,6 +258,93 @@
 
   .import-log > div + div{
     margin-top: 6px;
+  }
+
+  .import-created-panel{
+    display: none;
+    border-radius: 18px;
+    border: 1px solid rgba(var(--bs-success-rgb), .22);
+    background: rgba(var(--bs-success-rgb), .06);
+    padding: 14px;
+  }
+
+  .import-created-panel.is-visible{
+    display: block;
+  }
+
+  .import-created-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .import-created-title{
+    color: var(--oc-text);
+    font-weight: 650;
+    margin: 0;
+  }
+
+  .import-created-count{
+    border-radius: 999px;
+    background: rgba(var(--bs-success-rgb), .14);
+    color: rgb(var(--bs-success-rgb));
+    padding: 6px 10px;
+    font-size: .78rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .import-created-list{
+    display: grid;
+    gap: 8px;
+    max-height: 340px;
+    overflow: auto;
+    padding-right: 4px;
+  }
+
+  .import-created-item{
+    display: grid;
+    grid-template-columns: minmax(120px, .7fr) minmax(0, 1.5fr) auto;
+    gap: 10px;
+    align-items: center;
+    border-radius: 14px;
+    border: 1px solid var(--oc-border);
+    background: rgba(255,255,255,.58);
+    padding: 10px 12px;
+  }
+
+  body.theme-dark .import-created-item{
+    background: rgba(255,255,255,.05);
+  }
+
+  .import-created-code{
+    color: rgb(var(--bs-primary-rgb));
+    font-weight: 700;
+    word-break: break-word;
+  }
+
+  .import-created-name{
+    color: var(--oc-text);
+    font-weight: 550;
+    line-height: 1.35;
+  }
+
+  .import-created-meta{
+    color: var(--oc-muted);
+    font-size: .78rem;
+    margin-top: 3px;
+  }
+
+  .import-created-stock{
+    border-radius: 999px;
+    background: rgba(var(--bs-primary-rgb), .10);
+    color: rgb(var(--bs-primary-rgb));
+    padding: 5px 9px;
+    font-size: .78rem;
+    font-weight: 700;
+    white-space: nowrap;
   }
 
   @media (max-width: 991.98px){
@@ -373,149 +475,379 @@
           <div id="log" class="import-log"></div>
         </div>
       </div>
+
+      <div class="mt-3">
+        <div id="createdArticlesPanel" class="import-created-panel" aria-live="polite">
+          <div class="import-created-header">
+            <p class="import-created-title">Nouveaux articles crees</p>
+            <span id="createdArticlesCount" class="import-created-count">0</span>
+          </div>
+          <div id="createdArticlesList" class="import-created-list"></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
-var CSRF = "{{ csrf }}";
-var jobId = null;
-var stopped = false;
+(function(){
+  const csrf = "{{ csrf }}";
+  const hasSource = {{ source ? 'true' : 'false' }};
+  const startUrl = "{{ path('import_start') }}";
+  const stepUrlPattern = "{{ path('import_step', {id: 999999}) }}";
+  const stopUrlPattern = "{{ path('import_stop', {id: 999999}) }}";
+  const minChunkLimit = 50;
+  const maxChunkLimit = 300;
+  const requestTimeoutMs = 25000;
+  const maxRetries = 3;
 
-const el = (id) => document.getElementById(id);
+  let robustJobId = null;
+  let robustStopped = false;
+  let robustRetryCount = 0;
+  let robustLimit = 120;
 
-function setBadge(status){
-  const b = el('statusBadge');
-  if(!b) return;
+  const byId = (id) => document.getElementById(id);
+  const route = (pattern, id) => pattern.replace('999999', encodeURIComponent(String(id)));
 
-  let icon = 'fa-clock';
-  let cls = 'status-ready';
+  function setRunning(isRunning){
+    const startBtn = byId('btnStart');
+    const stopBtn = byId('btnStop');
 
-  if (status === 'RUNNING') {
-    icon = 'fa-rotate';
-    cls = 'status-running';
-  } else if (status === 'DONE') {
-    icon = 'fa-circle-check';
-    cls = 'status-done';
-  } else if (status === 'ERROR') {
-    icon = 'fa-triangle-exclamation';
-    cls = 'status-error';
-  }
-
-  b.className = 'status-pill ' + cls;
-  b.innerHTML = `<i class="fa-solid ${icon}"></i>${status}`;
-}
-
-function setProgress(processed, total){
-  const bar = el('bar');
-  let percent = total > 0 ? Math.floor((processed / total) * 100) : 0;
-  percent = Math.max(0, Math.min(100, percent));
-  bar.style.width = percent + "%";
-  bar.textContent = percent + "%";
-  bar.classList.toggle('progress-bar-striped', percent < 100);
-  bar.classList.toggle('progress-bar-animated', percent < 100);
-}
-
-function logLine(text){
-  const box = el('log');
-  const div = document.createElement('div');
-  div.textContent = text;
-  box.appendChild(div);
-  box.scrollTop = box.scrollHeight;
-}
-
-function render(data){
-  el('read').textContent = data.processedRows ?? 0;
-  el('total').textContent = data.totalRows ?? 0;
-  el('ins').textContent = data.insertedRows ?? 0;
-  el('upd').textContent = data.updatedRows ?? 0;
-  el('skp').textContent = data.skippedRows ?? 0;
-  el('msg').textContent = data.message ?? '—';
-
-  const csvArticles = el('csvArticles');
-  const dbArticles = el('dbArticles');
-  if (csvArticles && data.expectedArticleCount !== null && data.expectedArticleCount !== undefined) {
-    csvArticles.textContent = data.expectedArticleCount;
-  }
-  if (dbArticles) {
-    dbArticles.classList.remove('text-success', 'text-danger');
-    if (data.databaseArticleCount === null || data.databaseArticleCount === undefined) {
-      dbArticles.textContent = '—';
-    } else {
-      dbArticles.textContent = data.databaseArticleCount;
-      dbArticles.classList.add(data.countsMatch === false ? 'text-danger' : 'text-success');
+    if (startBtn) {
+      startBtn.disabled = isRunning || !hasSource;
+    }
+    if (stopBtn) {
+      stopBtn.disabled = !isRunning || !robustJobId;
     }
   }
 
-  setBadge(data.status ?? 'READY');
-  setProgress(data.processedRows ?? 0, data.totalRows ?? 0);
-}
+  function setBadge(status){
+    const badge = byId('statusBadge');
+    if (!badge) return;
 
-async function start(){
-  stopped = false;
-  el('btnStart').disabled = true;
-  el('btnStop').disabled = false;
+    let icon = 'fa-clock';
+    let cls = 'status-ready';
 
-  logLine("Start…");
+    if (status === 'RUNNING') {
+      icon = 'fa-rotate';
+      cls = 'status-running';
+    } else if (status === 'DONE') {
+      icon = 'fa-circle-check';
+      cls = 'status-done';
+    } else if (status === 'ERROR') {
+      icon = 'fa-triangle-exclamation';
+      cls = 'status-error';
+    }
 
-  const res = await fetch("{{ path('import_start') }}", {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify({_token: CSRF})
-  });
-
-  const data = await res.json().catch(()=> ({}));
-  if(!res.ok || !data.ok){
-    alert(data.message || "Erreur start");
-    el('btnStart').disabled = false;
-    el('btnStop').disabled = true;
-    return;
+    badge.className = 'status-pill ' + cls;
+    badge.innerHTML = '<i class="fa-solid ' + icon + '"></i>' + status;
   }
 
-  jobId = data.jobId;
-  render(data);
-  logLine(data.message || ("Vous allez mettre a jour " + (data.totalRows || 0) + " articles."));
-  logLine("Job #" + jobId + " RUNNING");
+  function setMessage(text, type){
+    const message = byId('msg');
+    if (!message) return;
 
-  stepLoop();
-}
+    const box = message.closest('.import-message-box');
+    message.textContent = text || '-';
 
-async function stepLoop(){
-  if(stopped) return;
-
-  const res = await fetch(`/admin/import/step/${jobId}`, {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify({_token: CSRF, limit: 350})
-  });
-
-  const data = await res.json().catch(()=> ({}));
-  if(!res.ok || !data.ok){
-    render(data);
-    logLine("ERROR: " + (data.message || "Erreur"));
-    el('btnStart').disabled = false;
-    el('btnStop').disabled = true;
-    return;
+    if (box) {
+      box.classList.remove('is-success', 'is-warning', 'is-error');
+      if (['success', 'warning', 'error'].includes(type)) {
+        box.classList.add('is-' + type);
+      }
+    }
   }
 
-  render(data);
+  function setProgress(processed, total){
+    const bar = byId('bar');
+    if (!bar) return;
 
-  if(data.done){
-    logLine("DONE: " + (data.message || ""));
-    el('btnStart').disabled = false;
-    el('btnStop').disabled = true;
-    return;
+    let percent = total > 0 ? Math.floor((processed / total) * 100) : 0;
+    percent = Math.max(0, Math.min(100, percent));
+    bar.style.width = percent + '%';
+    bar.textContent = percent + '%';
+    bar.classList.toggle('progress-bar-striped', percent < 100);
+    bar.classList.toggle('progress-bar-animated', percent < 100);
   }
 
-  setTimeout(stepLoop, 120);
-}
+  function logLine(text){
+    const log = byId('log');
+    if (!log) return;
 
-el('btnStart')?.addEventListener('click', start);
-el('btnStop')?.addEventListener('click', () => {
-  stopped = true;
-  el('btnStart').disabled = false;
-  el('btnStop').disabled = true;
-  logLine("STOP demandé par l’utilisateur");
-});
+    const row = document.createElement('div');
+    row.textContent = text;
+    log.appendChild(row);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function escapeHtml(value){
+    return String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function renderCreatedArticles(data){
+    const panel = byId('createdArticlesPanel');
+    const countNode = byId('createdArticlesCount');
+    const list = byId('createdArticlesList');
+
+    if (!panel || !countNode || !list) return;
+
+    const createdArticles = Array.isArray(data.createdArticles) ? data.createdArticles : [];
+    const insertedRows = Number(data.insertedRows || 0);
+
+    countNode.textContent = insertedRows + ' article' + (insertedRows > 1 ? 's' : '');
+
+    if (data.status !== 'DONE' || insertedRows <= 0) {
+      panel.classList.remove('is-visible');
+      list.innerHTML = '';
+      return;
+    }
+
+    panel.classList.add('is-visible');
+    if (createdArticles.length === 0) {
+      list.innerHTML = '<div class="import-created-item"><div class="import-created-code">Info</div><div><div class="import-created-name">Liste detaillee indisponible pour ce job.</div><div class="import-created-meta">Le compteur reste fiable.</div></div><div class="import-created-stock">' + escapeHtml(insertedRows) + '</div></div>';
+      return;
+    }
+
+    list.innerHTML = createdArticles.map((article) => {
+      const meta = [article.family, article.brand, article.uniqueId].filter(Boolean).join(' - ');
+      return `
+        <div class="import-created-item">
+          <div class="import-created-code">${escapeHtml(article.code || article.uniqueId || '-')}</div>
+          <div>
+            <div class="import-created-name">${escapeHtml(article.designation || 'Article sans designation')}</div>
+            <div class="import-created-meta">${escapeHtml(meta || 'Nouvel article')}</div>
+          </div>
+          <div class="import-created-stock">Stock ${escapeHtml(article.stock ?? 0)}</div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function render(data){
+    data = data || {};
+
+    const fields = {
+      read: data.processedRows ?? 0,
+      total: data.totalRows ?? 0,
+      ins: data.insertedRows ?? 0,
+      upd: data.updatedRows ?? 0,
+      skp: data.skippedRows ?? 0
+    };
+
+    Object.entries(fields).forEach(([id, value]) => {
+      const node = byId(id);
+      if (node) node.textContent = value;
+    });
+
+    setMessage(data.message ?? '-', data.status === 'DONE' ? 'success' : (data.status === 'ERROR' ? 'error' : null));
+
+    const csvArticles = byId('csvArticles');
+    const dbArticles = byId('dbArticles');
+
+    if (csvArticles && data.expectedArticleCount !== null && data.expectedArticleCount !== undefined) {
+      csvArticles.textContent = data.expectedArticleCount;
+    }
+
+    if (dbArticles) {
+      dbArticles.classList.remove('text-success', 'text-danger');
+      if (data.databaseArticleCount === null || data.databaseArticleCount === undefined) {
+        dbArticles.textContent = '-';
+      } else {
+        dbArticles.textContent = data.databaseArticleCount;
+        dbArticles.classList.add(data.countsMatch === false ? 'text-danger' : 'text-success');
+      }
+    }
+
+    setBadge(data.status ?? 'READY');
+    setProgress(data.processedRows ?? 0, data.totalRows ?? 0);
+    renderCreatedArticles(data);
+  }
+
+  async function fetchJson(url, options = {}){
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), requestTimeoutMs);
+
+    try {
+      const response = await fetch(url, Object.assign({}, options, {
+        credentials: 'same-origin',
+        signal: controller.signal,
+        headers: Object.assign({
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }, options.headers || {})
+      }));
+
+      const body = await response.text();
+      let data = {};
+
+      if (body.trim() !== '') {
+        try {
+          data = JSON.parse(body);
+        } catch (error) {
+          throw new Error('Reponse serveur invalide (' + response.status + ').');
+        }
+      }
+
+      if (!response.ok || data.ok === false) {
+        const error = new Error(data.message || 'Erreur serveur (' + response.status + ').');
+        error.data = data;
+        throw error;
+      }
+
+      return data;
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        throw new Error('Le serveur met trop de temps a repondre. Import mis en pause.');
+      }
+      throw error;
+    } finally {
+      window.clearTimeout(timeout);
+    }
+  }
+
+  function adjustChunkLimit(elapsedMs){
+    if (!elapsedMs) return;
+
+    if (elapsedMs > 8000) {
+      robustLimit = Math.max(minChunkLimit, Math.floor(robustLimit / 2));
+      logLine('Chunk reduit a ' + robustLimit + ' lignes pour eviter les timeouts.');
+    } else if (elapsedMs < 1800 && robustLimit < maxChunkLimit) {
+      robustLimit = Math.min(maxChunkLimit, robustLimit + 25);
+    }
+  }
+
+  function failImport(error){
+    if (error && error.data) {
+      render(error.data);
+    } else {
+      setBadge('ERROR');
+      setMessage('Import interrompu: ' + (error?.message || 'erreur inconnue'), 'error');
+    }
+
+    logLine('ERROR: ' + (error?.message || 'erreur inconnue'));
+    robustStopped = true;
+    setRunning(false);
+  }
+
+  async function robustStart(){
+    robustJobId = null;
+    robustStopped = false;
+    robustRetryCount = 0;
+    robustLimit = 120;
+    setBadge('RUNNING');
+    setMessage('Preparation de l import...', null);
+    setRunning(true);
+    logLine('Start...');
+
+    try {
+      const data = await fetchJson(startUrl, {
+        method: 'POST',
+        body: JSON.stringify({_token: csrf})
+      });
+
+      robustJobId = data.jobId;
+      render(data);
+      setRunning(true);
+
+      if (data.alreadyRunning) {
+        logLine(data.message || ('Reprise du job #' + robustJobId));
+      } else {
+        logLine(data.message || ('Vous allez mettre a jour ' + (data.expectedArticleCount || data.totalRows || 0) + ' articles.'));
+        logLine('Job #' + robustJobId + ' RUNNING');
+      }
+
+      if (data.done) {
+        robustStopped = true;
+        setRunning(false);
+        logLine('DONE: ' + (data.message || ''));
+        return;
+      }
+
+      window.setTimeout(robustStepLoop, 250);
+    } catch (error) {
+      failImport(error);
+    }
+  }
+
+  async function robustStepLoop(){
+    if (robustStopped || !robustJobId) return;
+
+    try {
+      const data = await fetchJson(route(stepUrlPattern, robustJobId), {
+        method: 'POST',
+        body: JSON.stringify({_token: csrf, limit: robustLimit})
+      });
+
+      robustRetryCount = 0;
+      adjustChunkLimit(data.elapsedMs);
+      render(data);
+
+      if (data.done) {
+        robustStopped = true;
+        setRunning(false);
+        logLine('DONE: ' + (data.message || ''));
+        return;
+      }
+
+      window.setTimeout(robustStepLoop, 300);
+    } catch (error) {
+      if (robustStopped) return;
+
+      robustRetryCount++;
+      if (robustRetryCount <= maxRetries) {
+        const delay = robustRetryCount * 1500;
+        setMessage('Import momentanement ralenti. Nouvelle tentative ' + robustRetryCount + '/' + maxRetries + '...', 'warning');
+        logLine('Retry ' + robustRetryCount + '/' + maxRetries + ': ' + (error?.message || 'erreur reseau'));
+        window.setTimeout(robustStepLoop, delay);
+        return;
+      }
+
+      failImport(error);
+    }
+  }
+
+  async function robustStop(){
+    robustStopped = true;
+    const currentJobId = robustJobId;
+    setRunning(false);
+
+    if (!currentJobId) {
+      logLine('STOP demande avant creation du job.');
+      return;
+    }
+
+    logLine('STOP demande par l utilisateur');
+
+    try {
+      const data = await fetchJson(route(stopUrlPattern, currentJobId), {
+        method: 'POST',
+        body: JSON.stringify({_token: csrf})
+      });
+      render(data);
+      logLine('STOP: ' + (data.message || 'Import arrete.'));
+    } catch (error) {
+      setBadge('ERROR');
+      setMessage('Stop local effectue. Le serveur n a pas confirme l arret: ' + (error?.message || 'erreur inconnue'), 'warning');
+      logLine('STOP warning: ' + (error?.message || 'erreur inconnue'));
+    }
+  }
+
+  byId('btnStart')?.addEventListener('click', function(event){
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    robustStart();
+  }, true);
+
+  byId('btnStop')?.addEventListener('click', function(event){
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    robustStop();
+  }, true);
+})();
 </script>
 {% endblock %}

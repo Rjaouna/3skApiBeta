@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Repository\CustomerOrderRepository;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,13 +27,16 @@ class ClientAdminController extends AbstractController
     }
 
     #[Route('/list', name: 'list', methods: ['GET'])]
-    public function list(Request $request, UserRepository $userRepository): JsonResponse
+    public function list(Request $request, UserRepository $userRepository, CustomerOrderRepository $orderRepository): JsonResponse
     {
         $q = mb_strtolower(trim((string)$request->query->get('q', '')));
         $active = trim((string)$request->query->get('active', ''));
         $city = mb_strtolower(trim((string)$request->query->get('city', '')));
         $page = max(1, (int) $request->query->get('page', 1));
         $limit = 20;
+
+        $monthStart = new \DateTimeImmutable('first day of this month 00:00:00');
+        $orderStats = $orderRepository->getClientOrderStats($monthStart, $monthStart->modify('first day of next month'));
 
         $users = $userRepository->findBy([], ['id' => 'DESC']);
 
@@ -48,6 +52,8 @@ class ClientAdminController extends AbstractController
             }
 
             $row = $this->normalizeUser($user);
+            $row['lastOrderAt'] = $orderStats[$user->getId()]['lastOrderAt'] ?? null;
+            $row['monthlyOrders'] = $orderStats[$user->getId()]['monthlyOrders'] ?? 0;
 
             if ($q !== '') {
                 $haystack = mb_strtolower(implode(' ', [
@@ -78,6 +84,10 @@ class ClientAdminController extends AbstractController
 
             $items[] = $row;
         }
+
+        usort($items, static fn (array $a, array $b): int =>
+            strcmp($b['lastOrderAt'] ?? '', $a['lastOrderAt'] ?? '') ?: ($b['id'] <=> $a['id'])
+        );
 
         $total = count($items);
         $pages = max(1, (int) ceil($total / $limit));

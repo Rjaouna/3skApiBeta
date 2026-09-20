@@ -518,13 +518,15 @@
               <th>Client</th>
               <th>Code client</th>
               <th>Ville</th>
+              <th>Dernière commande</th>
+              <th>Commandes ce mois</th>
               <th>Statut</th>
               <th class="text-end">Actions</th>
             </tr>
           </thead>
           <tbody id="clientsTbody">
             <tr>
-              <td colspan="5" class="text-muted">Chargement…</td>
+              <td colspan="7" class="text-muted">Chargement…</td>
             </tr>
           </tbody>
         </table>
@@ -778,7 +780,7 @@
     if (!currentItems.length) {
       tbody.innerHTML = `
         <tr>
-          <td colspan="5">
+          <td colspan="7">
             <div class="clients-empty my-2">
               <i class="fa-solid fa-user-slash"></i>
               <div class="fw-bold mb-1">Aucun client trouvé</div>
@@ -808,6 +810,8 @@
         <td>
           <div class="client-city">${esc(item.city || '—')}</div>
         </td>
+        <td>${item.lastOrderAt ? esc(new Date(item.lastOrderAt.replace(' ', 'T')).toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' })) : '—'}</td>
+        <td>${Number(item.monthlyOrders) || 0}</td>
         <td>
           ${
             item.isActive
@@ -883,7 +887,7 @@
     currentPage = Math.max(1, Number(page) || 1);
     setPageError('');
     if (tbody) {
-      tbody.innerHTML = `<tr><td colspan="5" class="text-muted">Chargement…</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="7" class="text-muted">Chargement…</td></tr>`;
     }
 
     try {
@@ -905,7 +909,7 @@
       if (!res.ok || !data.ok) {
         setPageError(data.message || 'Impossible de charger les clients');
         if (tbody) {
-          tbody.innerHTML = `<tr><td colspan="5" class="text-danger">Erreur chargement</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="7" class="text-danger">Erreur chargement</td></tr>`;
         }
         return;
       }

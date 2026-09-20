@@ -2486,17 +2486,30 @@ body.theme-dark .voice-search-btn.is-listening{
 
 <script>
 (function () {
-  function mountAdminSettingsModal() {
-    const modal = document.getElementById('adminSettingsModal');
-    if (!modal || modal.parentElement === document.body) return;
-    document.body.appendChild(modal);
+  function mountHeaderOverlayElements() {
+    ['adminSettingsModal', 'mainMenuOffcanvas', 'cartOffcanvas'].forEach(function (id) {
+      const element = document.getElementById(id);
+      if (!element || element.parentElement === document.body) return;
+      document.body.appendChild(element);
+    });
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', mountAdminSettingsModal, { once: true });
+    document.addEventListener('DOMContentLoaded', mountHeaderOverlayElements, { once: true });
   } else {
-    mountAdminSettingsModal();
+    mountHeaderOverlayElements();
   }
+
+  document.addEventListener('click', function (event) {
+    const offcanvas = document.getElementById('mainMenuOffcanvas');
+    if (!offcanvas || !event.target.closest('#mainMenuOffcanvas')) return;
+
+    const link = event.target.closest('a[href]');
+    if (link && link.getAttribute('href') && link.getAttribute('href') !== '#') {
+      const instance = window.bootstrap ? window.bootstrap.Offcanvas.getInstance(offcanvas) : null;
+      if (instance) instance.hide();
+    }
+  });
 })();
 </script>
 

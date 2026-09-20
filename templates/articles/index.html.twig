@@ -268,9 +268,30 @@
       background: rgba(255, 145, 0, .10);
       color: var(--app-orange, #ff8a00);
     }
+    .meta-chip--brand-logo{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 48px;
+      height: 22px;
+      padding: 2px 5px;
+      border-color: rgba(16,24,40,.14);
+      background: #fff;
+    }
+    .meta-chip--brand-logo img{
+      display: block;
+      max-width: 68px;
+      max-height: 16px;
+      object-fit: contain;
+    }
+    .meta-chip--brand-logo img[hidden]{ display: none; }
+    .meta-chip--brand-logo .brand-logo-fallback[hidden]{ display: none; }
     body.theme-dark .meta-chip{
       border-color: rgba(255,255,255,.14);
       background: rgba(18,18,22,.62);
+    }
+    body.theme-dark .meta-chip--brand-logo{
+      background: #fff;
     }
 
     .product-card__footer{
@@ -964,6 +985,56 @@ body.theme-dark .empty-results-box{
 
       const FALLBACK_IMG = "{{ asset('img/default-piece.png')|e('js') }}";
       const NEW_BADGE_IMG = "{{ asset('img/new.png')|e('js') }}";
+      {% set brandLogoFiles = {
+        'MISFAT': 'brand-logos/misfat.png',
+        'ASZ': 'brand-logos/asz.png',
+        'METELLI': 'brand-logos/metelli.png',
+        'DEPO': 'logo-depo-pieces-carrosserie-3sk-parts-auto.jpg',
+        'PHIRA': 'logo-phira-pieces-carrosserie-3sk-parts-auto.jpg',
+        'POLIPLAST': 'logo-poliplast-pieces-carrosserie-3sk-parts-auto.jpg',
+        'YIH SHENG': 'logo-yih-sheng-pieces-carrosserie-3sk-parts-auto.jpg',
+        'EURO BUMP': 'logo-euro-bump-pieces-carrosserie-3sk-parts-auto.jpg',
+        'EUROBUMP': 'logo-euro-bump-pieces-carrosserie-3sk-parts-auto.jpg',
+        'DE-GA': 'logo-de-ga-pieces-carrosserie-3sk-parts-auto.jpg',
+        'DEGA': 'logo-de-ga-pieces-carrosserie-3sk-parts-auto.jpg',
+        'ANTAI': 'logo-antai-pieces-carrosserie-3sk-parts-auto.jpg',
+        'SP': 'logo-sp-pieces-carrosserie-3sk-parts-auto.png',
+        'ISAM': 'logo-isam-pieces-carrosserie-3sk-parts-auto.jpg',
+        'ITSA': 'logo-itsa-passion-for-plastics-pieces-carrosserie-3sk-parts-auto.jpg',
+        'FAROLON': 'logo-farolon-pieces-carrosserie-3sk-parts-auto.jpg',
+        'TURSAN': 'logo-tursan-pieces-carrosserie-3sk-parts-auto.jpg',
+        'AP': 'logo-ap-pieces-carrosserie-3sk-parts-auto.jpg',
+        'EURO STAMP': 'logo-euro-stamp-pieces-carrosserie-3sk-parts-auto.jpg',
+        'MAXEM': 'logo-maxem-pieces-carrosserie-3sk-parts-auto.jpg',
+        'PLEKSAN': 'logo-pleksan-pieces-carrosserie-3sk-parts-auto.jpg',
+        'FOWYAD': 'logo-fowyad-pieces-carrosserie-3sk-parts-auto.jpg',
+        'ORAN': 'logo-oran-pieces-carrosserie-3sk-parts-auto.jpg',
+        'PRASCO': 'logo-prasco-pieces-carrosserie-3sk-parts-auto.jpg',
+        'PULO': 'logo-pulo-pieces-carrosserie-3sk-parts-auto.jpg',
+        'RESHING AUTOPARTS': 'logo-reshing-autoparts-pieces-carrosserie-3sk-parts-auto.jpg',
+        'ROOT': 'logo-root-pieces-carrosserie-3sk-parts-auto.jpg',
+        'ROOT AUTOMOTIVE': 'logo-root-automotive-pieces-carrosserie-3sk-parts-auto.jpg',
+        'TYG': 'logo-tyg-pieces-carrosserie-3sk-parts-auto.jpg',
+        'VIEW MAX': 'logo-view-max-pieces-carrosserie-3sk-parts-auto.jpg'
+      } %}
+      {% set brandLogoUrls = {} %}
+      {% for brandName, logoFile in brandLogoFiles %}
+        {% set logoPath = logoFile starts with 'brand-logos/' ? 'img/' ~ logoFile : 'img/logo-marques-home-hors-ligne/' ~ logoFile %}
+        {% set brandLogoUrls = brandLogoUrls|merge({ (brandName): optimized_asset(logoPath) }) %}
+      {% endfor %}
+      const BRAND_LOGOS = {{ brandLogoUrls|json_encode(constant('JSON_HEX_TAG') b-or constant('JSON_HEX_AMP') b-or constant('JSON_HEX_APOS') b-or constant('JSON_HEX_QUOT'))|raw }};
+
+      function brandBadge(name){
+        const label = String(name || '').trim();
+        if (!label) return '';
+        const key = label.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ').toUpperCase();
+        const logo = BRAND_LOGOS[key];
+        if (!logo) return `<span class="meta-chip">${esc(label)}</span>`;
+        return `<span class="meta-chip meta-chip--brand-logo" title="${esc(label)}">
+          <img src="${esc(logo)}" alt="${esc(label)}" loading="lazy" decoding="async" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+          <span class="brand-logo-fallback" hidden>${esc(label)}</span>
+        </span>`;
+      }
 
       const DEFAULT_YEAR_MIN = 1976;
       let dataYearMin = DEFAULT_YEAR_MIN;
@@ -1512,7 +1583,7 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
 
             <div class="product-card__info">
               <div class="meta-line">
-                ${a.xx_Marque ? `<span class="meta-chip">${esc(a.xx_Marque)}</span>` : ''}
+                ${brandBadge(a.xx_Marque)}
                 ${family ? `<span class="meta-chip meta-chip--family">${esc(truncate(family, 8))}</span>` : ''}
                 <span class="wishlist-button" title="${availableStock > 0 ? 'Stock disponible' : 'Non disponible'}" style="${stockStyle(availableStock)}">
                   <span data-stock-badge>${esc(stockDisplay)}</span>
@@ -1889,34 +1960,50 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
         headerSearchInput.value = state.q;
       }
 
-      function applyKeywordSearch(query){
-        const normalizedQuery = String(query || '').trim();
+      function cleanKeywordQuery(query){
+        return String(query || '').replace(/\s+/g, ' ').trim();
+      }
+
+      function syncKeywordInputs(rawQuery, sourceInput = null){
+        const value = String(rawQuery || '');
+
+        if (f_q && f_q !== sourceInput && f_q.value !== value) {
+          f_q.value = value;
+        }
+
+        if (headerSearchInput && headerSearchInput !== sourceInput && headerSearchInput.value !== value) {
+          headerSearchInput.value = value;
+        }
+      }
+
+      function applyKeywordSearch(query, sourceInput = null){
+        const rawQuery = String(query || '');
+        const normalizedQuery = cleanKeywordQuery(rawQuery);
+        const previousPage = state.page;
 
         state.page = 1;
+        syncKeywordInputs(rawQuery, sourceInput);
+
+        if (state.q === normalizedQuery && previousPage === 1) {
+          syncUrlToBrowser();
+          return;
+        }
+
         state.q = normalizedQuery;
-
-        if (f_q && f_q.value !== normalizedQuery) {
-          f_q.value = normalizedQuery;
-        }
-
-        if (headerSearchInput && headerSearchInput.value !== normalizedQuery) {
-          headerSearchInput.value = normalizedQuery;
-        }
-
         syncUrlToBrowser();
         load();
       }
 
-      function scheduleKeywordSearch(query){
+      function scheduleKeywordSearch(query, sourceInput = null){
         clearTimeout(keywordTimer);
         keywordTimer = setTimeout(() => {
-          applyKeywordSearch(query);
+          applyKeywordSearch(query, sourceInput);
         }, 300);
       }
 
       applyBtn?.addEventListener('click', () => {
         state.page = 1;
-        state.q = (f_q?.value || '').trim();
+        state.q = cleanKeywordQuery(f_q?.value || '');
         state.family = (f_family?.value || '').trim();
         state.brand = (f_brand?.value || '').trim();
         state.vehicle = (f_vehicle?.value || '').trim();
@@ -1954,17 +2041,17 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
       nextBtnBottom?.addEventListener('click', () => { state.page++; load(); });
 
       f_q?.addEventListener('input', () => {
-        scheduleKeywordSearch(f_q.value);
+        scheduleKeywordSearch(f_q.value, f_q);
       });
 
       headerSearchInput?.addEventListener('input', () => {
-        scheduleKeywordSearch(headerSearchInput.value);
+        scheduleKeywordSearch(headerSearchInput.value, headerSearchInput);
       });
 
       headerSearchForm?.addEventListener('submit', (event) => {
         event.preventDefault();
         clearTimeout(keywordTimer);
-        applyKeywordSearch(headerSearchInput?.value || '');
+        applyKeywordSearch(headerSearchInput?.value || '', headerSearchInput);
       });
 
       syncUrlToBrowser();

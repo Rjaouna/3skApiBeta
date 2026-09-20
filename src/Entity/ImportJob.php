@@ -30,7 +30,7 @@ class ImportJob
     private int $processedRows = 0;
 
     #[ORM\Column(type: 'bigint')]
-    private int $byteOffset = 0; // où reprendre dans le fichier
+    private int $byteOffset = 0;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $lastMessage = null;
@@ -45,28 +45,42 @@ class ImportJob
     {
         $this->filePath = $filePath;
         $this->startedAt = new \DateTimeImmutable('now');
-        
     }
-#[ORM\Column(type: 'integer')]
-private int $insertedRows = 0;
 
-#[ORM\Column(type: 'integer')]
-private int $updatedRows = 0;
+    #[ORM\Column(type: 'integer')]
+    private int $insertedRows = 0;
 
-#[ORM\Column(type: 'integer')]
-private int $skippedRows = 0;
+    #[ORM\Column(type: 'integer')]
+    private int $updatedRows = 0;
 
-public function getInsertedRows(): int { return $this->insertedRows; }
-public function setInsertedRows(int $v): self { $this->insertedRows = $v; return $this; }
-public function addInserted(int $v = 1): self { $this->insertedRows += $v; return $this; }
+    #[ORM\Column(type: 'integer')]
+    private int $skippedRows = 0;
 
-public function getUpdatedRows(): int { return $this->updatedRows; }
-public function setUpdatedRows(int $v): self { $this->updatedRows = $v; return $this; }
-public function addUpdated(int $v = 1): self { $this->updatedRows += $v; return $this; }
+    #[ORM\Column(type: 'json', nullable: true)]
+    private ?array $createdArticles = [];
 
-public function getSkippedRows(): int { return $this->skippedRows; }
-public function setSkippedRows(int $v): self { $this->skippedRows = $v; return $this; }
-public function addSkipped(int $v = 1): self { $this->skippedRows += $v; return $this; }
+    public function getInsertedRows(): int { return $this->insertedRows; }
+    public function setInsertedRows(int $v): self { $this->insertedRows = $v; return $this; }
+    public function addInserted(int $v = 1): self { $this->insertedRows += $v; return $this; }
+
+    public function getUpdatedRows(): int { return $this->updatedRows; }
+    public function setUpdatedRows(int $v): self { $this->updatedRows = $v; return $this; }
+    public function addUpdated(int $v = 1): self { $this->updatedRows += $v; return $this; }
+
+    public function getSkippedRows(): int { return $this->skippedRows; }
+    public function setSkippedRows(int $v): self { $this->skippedRows = $v; return $this; }
+    public function addSkipped(int $v = 1): self { $this->skippedRows += $v; return $this; }
+
+    public function getCreatedArticles(): array { return $this->createdArticles ?? []; }
+    public function setCreatedArticles(?array $createdArticles): self { $this->createdArticles = $createdArticles ?? []; return $this; }
+    public function addCreatedArticle(array $article): self
+    {
+        $items = $this->getCreatedArticles();
+        $items[] = $article;
+        $this->createdArticles = $items;
+
+        return $this;
+    }
 
 
     // GETTERS / SETTERS

@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}3sk parts auto- Pièces Auto {% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}?v=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer">
         <script>
             document.documentElement.classList.add('site-is-loading');
@@ -49,15 +49,11 @@
             }
 
             .site-page-loader__mark {
-                width: 48px;
-                height: 48px;
-                border-radius: 16px;
-                display: grid;
-                place-items: center;
-                background: var(--bs-primary, #315fbb);
-                color: #fff;
-                font-weight: 700;
-                box-shadow: 0 12px 28px rgba(var(--bs-primary-rgb, 49, 95, 187), .24);
+                display: block;
+                width: min(155px, 42%);
+                height: auto;
+                flex-shrink: 0;
+                object-fit: contain;
             }
 
             .site-page-loader__title {
@@ -111,7 +107,7 @@
     <div class="site-page-loader" data-site-loader aria-live="polite" aria-label="Chargement du site">
         <div class="site-page-loader__panel">
             <div class="site-page-loader__brand">
-                <div class="site-page-loader__mark">3SK</div>
+                <img class="site-page-loader__mark" src="{{ optimized_asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto" width="155" height="60" fetchpriority="high">
                 <div>
                     <p class="site-page-loader__title">Préparation du site</p>
                     <p class="site-page-loader__subtitle">Optimisation des visuels et du catalogue.</p>

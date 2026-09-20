@@ -278,6 +278,76 @@
   .home-order-switch .btn{
     border-radius:999px;
   }
+
+  .connected-brands .public-brands-v2{
+    padding: 4rem 0;
+    background: #fff;
+    border-top: 1px solid rgba(16,24,40,.08);
+  }
+  .connected-brands .section-shell{
+    width: 100%;
+    padding-inline: clamp(16px, 3vw, 42px);
+  }
+  .connected-brands .brands-heading{
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+  .connected-brands .section-eyebrow{
+    color: #f47b20;
+    font-size: .8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .connected-brands .section-eyebrow::before{
+    content: '// ';
+  }
+  .connected-brands .section-heading{
+    margin: 1rem 0 0;
+    color: #152238;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+  .connected-brands .heading-accent{
+    color: #f47b20;
+  }
+  .connected-brands .section-copy{
+    max-width: 650px;
+    margin: 0;
+    color: #596579;
+  }
+  .connected-brands .brand-row{
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    border-top: 1px solid rgba(16,24,40,.12);
+    border-left: 1px solid rgba(16,24,40,.12);
+  }
+  .connected-brands .brand-item{
+    min-height: 150px;
+    display: grid;
+    place-items: center;
+    padding: 1.25rem;
+    border-right: 1px solid rgba(16,24,40,.12);
+    border-bottom: 1px solid rgba(16,24,40,.12);
+    background: #fff;
+  }
+  .connected-brands .brand-item img{
+    width: 100%;
+    max-width: 150px;
+    max-height: 82px;
+    object-fit: contain;
+  }
+  @media (max-width: 991px){
+    .connected-brands .brand-row{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 575px){
+    .connected-brands .section-heading{ font-size: 2rem; }
+    .connected-brands .brand-row{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .connected-brands .brand-item{ min-height: 120px; }
+  }
 </style>
 
 <section class="connected-slider-shell">
@@ -323,6 +393,10 @@
   </section>
   {% include 'home/sections/_new_articles.html.twig' %}
 
+</div>
+
+<div class="connected-brands">
+  {% include 'home/sections/_partner_brands.html.twig' %}
 </div>
 
 <script>

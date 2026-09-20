@@ -1,0 +1,49 @@
+{% set brandLogos = [
+  { name: 'DEPO', file: 'logo-depo-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'PHIRA', file: 'logo-phira-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'POLIPLAST', file: 'logo-poliplast-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'YIH SHENG', file: 'logo-yih-sheng-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'EURO BUMP', file: 'logo-euro-bump-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'DE-GA', file: 'logo-de-ga-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'ANTAI', file: 'logo-antai-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'SP', file: 'logo-sp-pieces-carrosserie-3sk-parts-auto.png' },
+  { name: 'ISAM', file: 'logo-isam-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'ITSA', file: 'logo-itsa-passion-for-plastics-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'FAROLON', file: 'logo-farolon-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'TURSAN', file: 'logo-tursan-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'AP', file: 'logo-ap-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'EURO STAMP', file: 'logo-euro-stamp-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'MAXEM', file: 'logo-maxem-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'PLEKSAN', file: 'logo-pleksan-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'FOWYAD', file: 'logo-fowyad-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'ORAN', file: 'logo-oran-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'PRASCO', file: 'logo-prasco-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'PULO', file: 'logo-pulo-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'RESHING AUTOPARTS', file: 'logo-reshing-autoparts-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'ROOT', file: 'logo-root-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'TYG', file: 'logo-tyg-pieces-carrosserie-3sk-parts-auto.jpg' },
+  { name: 'VIEW MAX', file: 'logo-view-max-pieces-carrosserie-3sk-parts-auto.jpg' }
+] %}
+<section id="marques" class="public-brands-v2 section-space">
+  <div class="section-shell">
+    <div class="brands-heading">
+      <div>
+        <span class="section-eyebrow">Nos marques phares</span>
+        <h2 class="section-heading">Nos marques <span class="heading-accent">partenaires</span></h2>
+      </div>
+      <p class="section-copy">Une sélection de partenaires et de références reconnues pour accompagner les besoins des professionnels.</p>
+    </div>
+    <div class="brand-row">
+      {% for brand in brandLogos %}
+        <div class="brand-item">
+          <img
+            src="{{ optimized_asset('img/logo-marques-home-hors-ligne/' ~ brand.file) }}"
+            alt="Logo {{ brand.name }} pièces carrosserie 3SK Parts Auto"
+            loading="lazy"
+            decoding="async"
+          >
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

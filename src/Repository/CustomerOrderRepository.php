@@ -14,6 +14,31 @@ class CustomerOrderRepository extends ServiceEntityRepository
         parent::__construct($registry, CustomerOrder::class);
     }
 
+    public function getClientOrderStats(\DateTimeImmutable $monthStart, \DateTimeImmutable $nextMonthStart): array
+    {
+        $rows = $this->createQueryBuilder('o')
+            ->select('IDENTITY(o.customer) AS customerId')
+            ->addSelect('MAX(o.createdAt) AS lastOrderAt')
+            ->addSelect('SUM(CASE WHEN o.createdAt >= :monthStart AND o.createdAt < :nextMonthStart THEN 1 ELSE 0 END) AS monthlyOrders')
+            ->groupBy('o.customer')
+            ->setParameter('monthStart', $monthStart)
+            ->setParameter('nextMonthStart', $nextMonthStart)
+            ->getQuery()
+            ->getArrayResult();
+
+        $stats = [];
+        foreach ($rows as $row) {
+            $stats[(int) $row['customerId']] = [
+                'lastOrderAt' => $row['lastOrderAt'] instanceof \DateTimeInterface
+                    ? $row['lastOrderAt']->format('Y-m-d H:i:s')
+                    : (string) $row['lastOrderAt'],
+                'monthlyOrders' => (int) $row['monthlyOrders'],
+            ];
+        }
+
+        return $stats;
+    }
+
     public function findAdminList(
         ?string $status = null,
         ?string $query = null,

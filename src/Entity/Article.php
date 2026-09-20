@@ -16,7 +16,7 @@ class Article
     #[ORM\Column(name: 'UniqueId', type: Types::STRING, length: 36)]
     private ?string $uniqueId = null;
 
-    #[ORM\Column(name: 'Id', type: Types::STRING, length: 64, unique: true)]
+    #[ORM\Column(name: 'Id', type: Types::STRING, length: 64)]
     private ?string $id = null;
 
     #[ORM\Column(name: 'DesComClear', type: Types::STRING, length: 255, nullable: true)]
