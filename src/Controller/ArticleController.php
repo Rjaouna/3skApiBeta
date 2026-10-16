@@ -34,6 +34,7 @@ class ArticleController extends AbstractController
                 'inStock' => (string) $request->query->get('inStock', ''),
                 'new' => (string) $request->query->get('new', ''),
                 'newDays' => (int) $request->query->get('newDays', 5),
+                'sort' => $request->query->get('sort') === 'created_desc' ? 'created_desc' : '',
             ],
         ]);
     }

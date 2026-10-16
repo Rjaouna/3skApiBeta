@@ -17,7 +17,8 @@
     annee: app.request.query.get('annee', ''),
     inStock: app.request.query.get('inStock', ''),
     new: app.request.query.get('new', ''),
-    newDays: (app.request.query.get('newDays', 5))
+    newDays: (app.request.query.get('newDays', 5)),
+    sort: app.request.query.get('sort', '')
   }) %}
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.css">
@@ -994,6 +995,7 @@ body.theme-dark .empty-results-box{
         inStock: initial.inStock || '',
         onlyNew: (initial.new === '1'),
         newDays: initial.newDays || 5,
+        sort: initial.sort === 'created_desc' ? 'created_desc' : '',
       };
 
       function safeJsonParse(s, fallback){
@@ -1380,6 +1382,11 @@ body.theme-dark .empty-results-box{
           url.searchParams.set('newDays', String(state.newDays));
         }
 
+        if (state.sort) {
+          url.searchParams.set('sort', state.sort);
+          url.searchParams.set('newDays', String(state.newDays));
+        }
+
         if (!facetsLoaded) url.searchParams.set('facets', '1');
         return url.toString();
       }
@@ -1403,6 +1410,11 @@ body.theme-dark .empty-results-box{
 
         if (state.onlyNew) {
           url.searchParams.set('new', '1');
+          url.searchParams.set('newDays', String(state.newDays));
+        }
+
+        if (state.sort) {
+          url.searchParams.set('sort', state.sort);
           url.searchParams.set('newDays', String(state.newDays));
         }
 
@@ -1959,7 +1971,7 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
       function updateFilterMeta(){
         const hasYears = Number(f_yearFrom?.value) !== dataYearMin || Number(f_yearTo?.value) !== dataYearMax;
         const count = [state.q, state.family, state.brand, state.vehicle, state.inStock === '1', state.onlyNew, hasYears].filter(Boolean).length;
-        if (resultMeta) resultMeta.textContent = count ? `${count} filtre${count > 1 ? 's' : ''} actif${count > 1 ? 's' : ''}` : 'Tous les articles';
+        if (resultMeta) resultMeta.textContent = count ? `${count} filtre${count > 1 ? 's' : ''} actif${count > 1 ? 's' : ''}` : (state.sort ? 'Derniers articles ajoutés' : 'Tous les articles');
         newArrivalsLink?.classList.toggle('is-active', state.onlyNew);
       }
 
@@ -1989,6 +2001,7 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
         state.vehicle = '';
         state.inStock = '';
         state.onlyNew = false;
+        state.sort = '';
 
         if (f_q) f_q.value = '';
         if (headerSearchInput) headerSearchInput.value = '';

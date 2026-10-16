@@ -1,689 +1,103 @@
-{# ---- HERO CAROUSEL (TEXT INSIDE IMAGE, IMAGE ORIGINAL SIZE) ---- #}
-
-<style>
-  .hero-carousel{
-    --pad: clamp(16px, 2.4vw, 32px);
-    font-family: 'Roboto', sans-serif;
-    border-radius: 8px;
-    overflow: hidden;
-    background:
-      linear-gradient(135deg, rgba(var(--bs-primary-rgb), .16), rgba(var(--brand-orange-rgb), .14)),
-      #fff;
-    border: 1px solid rgba(var(--brand-anthracite-rgb), .10);
-    box-shadow: 0 22px 58px rgba(var(--brand-anthracite-rgb), .14);
-  }
-
-  .hero-carousel.hero-carousel-full {
-    border: 0;
-    border-radius: 0;
-    background: #071a3a;
-    box-shadow: none;
-  }
-
-  .hero-carousel .carousel-inner{
-    overflow: hidden;
-    border-radius: inherit;
-  }
-
-  .hero-slide{
-    position: relative;
-    min-height: clamp(360px, 52vw, 620px);
-    background: var(--brand-ink);
-    overflow: hidden;
-  }
-
-  .hero-carousel-full .hero-slide {
-    min-height: clamp(520px, 72vh, 760px);
-  }
-
-  .hero-img{
-    width: 100%;
-    height: clamp(360px, 52vw, 620px);
-    display: block;
-    object-fit: cover;
-  }
-
-  .hero-img--ken-burns {
-    --ken-burns-start-x: -1.25%;
-    --ken-burns-start-y: .5%;
-    --ken-burns-end-x: 1.25%;
-    --ken-burns-end-y: -.75%;
-    backface-visibility: hidden;
-    transform: translate3d(var(--ken-burns-start-x), var(--ken-burns-start-y), 0) scale(1.045);
-    transform-origin: center;
-    will-change: transform;
-  }
-
-  .hero-carousel .carousel-item:nth-child(even) .hero-img--ken-burns {
-    --ken-burns-start-x: 1.25%;
-    --ken-burns-start-y: -.5%;
-    --ken-burns-end-x: -1.25%;
-    --ken-burns-end-y: .75%;
-  }
-
-  .hero-carousel .carousel-item.active .hero-img--ken-burns,
-  .hero-carousel .carousel-item-next .hero-img--ken-burns,
-  .hero-carousel .carousel-item-prev .hero-img--ken-burns {
-    animation: hero-ken-burns 7s ease-out both;
-  }
-
-  @keyframes hero-ken-burns {
-    from {
-      transform: translate3d(var(--ken-burns-start-x), var(--ken-burns-start-y), 0) scale(1.045);
-    }
-    to {
-      transform: translate3d(var(--ken-burns-end-x), var(--ken-burns-end-y), 0) scale(1.13);
-    }
-  }
-
-  .hero-video{
-    height: clamp(360px, 52vw, 620px);
-  }
-
-  .hero-carousel-full .hero-img,
-  .hero-carousel-full .hero-video {
-    height: clamp(520px, 72vh, 760px);
-  }
-
-  .hero-slide::after{
-    content:"";
-    position:absolute;
-    inset: 0;
-    background:
-      linear-gradient(90deg, rgba(7,26,58,.76) 0%, rgba(var(--brand-blue-rgb), .40) 46%, rgba(var(--brand-orange-rgb), .08) 100%),
-      radial-gradient(760px circle at 78% 16%, rgba(var(--brand-orange-rgb), .18), transparent 42%),
-      radial-gradient(720px circle at 12% 92%, rgba(var(--brand-blue-rgb), .20), transparent 44%),
-      linear-gradient(0deg, rgba(7,26,58,.42) 0%, transparent 48%);
-    pointer-events:none;
-  }
-
-  .hero-carousel-full .hero-slide::after {
-    background:
-      linear-gradient(90deg, rgba(7,26,58,.80) 0%, rgba(var(--brand-blue-rgb), .48) 44%, rgba(var(--brand-orange-rgb), .10) 100%),
-      radial-gradient(900px circle at 82% 12%, rgba(var(--brand-orange-rgb), .22), transparent 42%),
-      radial-gradient(700px circle at 18% 92%, rgba(var(--brand-blue-rgb), .24), transparent 44%),
-      linear-gradient(0deg, rgba(7,26,58,.48) 0%, transparent 48%);
-  }
-
-  .hero-overlay{
-    position:absolute;
-    inset: 0;
-    display:flex;
-    align-items:center;
-    padding: var(--pad);
-    z-index: 2;
-    pointer-events:none;
-  }
-
-  .hero-card {
-    pointer-events: auto;
-    max-width: min(680px, 82vw);
-    color: #fff;
-    background: linear-gradient(135deg, rgba(7,26,58,.58), rgba(var(--brand-blue-rgb), .18));
-    border: 1px solid rgba(255,255,255,.20);
-    border-left: 4px solid rgba(var(--brand-orange-rgb), .92);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 8px;
-    padding: clamp(18px, 2.6vw, 34px);
-    box-shadow: 0 18px 46px rgba(0,0,0,.22);
-  }
-
-  .hero-carousel-full .hero-card {
-    max-width: min(720px, 86vw);
-    background: linear-gradient(135deg, rgba(7,26,58,.64), rgba(var(--brand-blue-rgb), .26));
-    border-color: rgba(255,255,255,.22);
-    border-left-color: rgba(var(--brand-orange-rgb), .95);
-    border-radius: 8px;
-    box-shadow: 0 24px 58px rgba(7,26,58,.36);
-  }
-
-  .hero-card:not(:has(.hero-kicker, .hero-title, .hero-text, .btn)){
-    display:none;
-  }
-
-  .hero-kicker{
-    display:inline-flex;
-    align-items:center;
-    gap:.55rem;
-    font-weight: 550;
-    font-family: 'Montserrat', sans-serif;
-    letter-spacing: .10em;
-    font-size: .78rem;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.92);
-    background: rgba(255,255,255,.14);
-    border: 1px solid rgba(255,255,255,.18);
-    padding: .35rem .7rem;
-    border-radius: 999px;
-    margin-bottom: .6rem;
-  }
-
-  .hero-carousel-full .hero-kicker {
-    color: #fff;
-    background: rgba(var(--brand-orange-rgb), .24);
-    border-color: rgba(var(--brand-orange-rgb), .48);
-  }
-
-  .hero-title{
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: clamp(2rem, 3.1vw, 2.875rem);
-    line-height: 1.08;
-    color: #ffb13b;
-    margin: 0;
-    text-shadow: 0 10px 30px rgba(7,26,58,.58);
-  }
-
-  .hero-text{
-    font-family: 'Roboto', sans-serif;
-    margin: .55rem 0 1rem;
-    color: rgba(244,248,255,.92);
-    font-size: clamp(.98rem, 1.4vw, 1.14rem);
-    max-width: 58ch;
-    text-shadow: 0 8px 24px rgba(7,26,58,.42);
-  }
-
-  .hero-card .btn{
-    font-family: 'Montserrat', sans-serif;
-    border-radius: 999px;
-    padding: .72rem 1.15rem;
-    font-weight: 550;
-    box-shadow: 0 10px 22px rgba(0,0,0,.14);
-  }
-
-  .btn-glass{
-    color:#fff;
-    background: rgba(255,255,255,.10);
-    border: 1px solid rgba(255,255,255,.22);
-  }
-  .btn-glass:hover{
-    color:#fff;
-    background: rgba(255,255,255,.16);
-  }
-
-  .hero-carousel .carousel-indicators{
-    right: var(--pad);
-    bottom: var(--pad);
-    left: auto;
-    margin: 0;
-    gap: .45rem;
-    z-index: 4;
-  }
-
-  .hero-carousel .carousel-indicators [data-bs-target]{
-    width: 30px;
-    height: 5px;
-    border-radius: 999px;
-    border: 0;
-    opacity: .55;
-    background: #fff;
-  }
-
-  .hero-carousel .carousel-indicators .active{
-    opacity: 1;
-    width: 48px;
-    background: var(--brand-orange);
-  }
-
-  .hero-carousel .carousel-control-prev,
-  .hero-carousel .carousel-control-next{
-    width: 52px;
-    height: 52px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-radius: 999px;
-    background: rgba(255,255,255,.12);
-    border: 1px solid rgba(255,255,255,.20);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    opacity: .92;
-    margin-inline: 18px;
-  }
-
-  .hero-carousel .carousel-control-prev:hover,
-  .hero-carousel .carousel-control-next:hover{
-    background: rgba(var(--brand-orange-rgb), .92);
-    opacity: 1;
-  }
-
-  @media (max-width: 576px){
-    .hero-slide,
-    .hero-img,
-    .hero-video{ height: 460px; min-height: 460px; }
-    .hero-overlay{ align-items:flex-end; padding-bottom: 56px; }
-    .hero-text{ font-size: .95rem; }
-    .hero-card{ max-width: 100%; padding: 16px; border-radius: 18px; }
-    .hero-title{ font-size: 1.55rem; line-height: 1.04; }
-    .hero-carousel .carousel-control-prev,
-    .hero-carousel .carousel-control-next{ display:none; }
-    .hero-carousel .carousel-indicators{ right: 16px; left: 16px; justify-content:center; }
-    .hero-carousel-full .hero-slide,
-    .hero-carousel-full .hero-img,
-    .hero-carousel-full .hero-video{ height: 500px; min-height: 500px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-img--ken-burns,
-    .hero-carousel .carousel-item.active .hero-img--ken-burns,
-    .hero-carousel .carousel-item-next .hero-img--ken-burns,
-    .hero-carousel .carousel-item-prev .hero-img--ken-burns {
-      animation: none;
-      transform: none;
-      will-change: auto;
-    }
-  }
-
-  .hero-admin-actions{
-    position:absolute;
-    top: calc(var(--pad) + 10px);
-    right: calc(var(--pad) + 10px);
-    z-index: 3;
-    display:flex;
-    gap:.5rem;
-    pointer-events:auto;
-  }
-  .hero-admin-actions .btn{
-    border-radius: 999px;
-    padding: .45rem .6rem;
-    line-height: 1;
-  }
-
-  /* Slider v3: compact, full-bleed and readable without heavy dark blocks. */
-  .hero-carousel{
-    --hero-pad: clamp(14px, 3vw, 42px);
-    --hero-primary: var(--bs-primary, var(--brand-blue));
-    --hero-accent: var(--bs-warning, var(--brand-orange));
-    --hero-height: clamp(320px, 38vw, 460px);
-    border-radius: 0;
-    border: 0;
-    box-shadow: none;
-    background: var(--bs-light, var(--brand-bg));
-  }
-
-  .hero-carousel:not(.hero-carousel-full){
-    border-radius: 28px;
-    overflow: hidden;
-    box-shadow: 0 22px 60px rgba(var(--brand-anthracite-rgb), .18);
-  }
-
-  .hero-carousel .carousel-inner{
-    border-radius: inherit;
-    box-shadow: none !important;
-  }
-
-  .hero-slide,
-  .hero-carousel-full .hero-slide{
-    min-height: var(--hero-height);
-    background: var(--bs-light, var(--brand-bg));
-    isolation: isolate;
-  }
-
-  .hero-img,
-  .hero-video,
-  .hero-carousel-full .hero-img,
-  .hero-carousel-full .hero-video{
-    height: var(--hero-height);
-    object-fit: cover;
-    object-position: center;
-    filter: saturate(.98) contrast(1.02);
-  }
-
-  .hero-slide::after,
-  .hero-carousel-full .hero-slide::after{
-    background:
-      linear-gradient(90deg, rgba(255,255,255,.90) 0%, rgba(255,255,255,.58) 38%, rgba(255,255,255,.08) 78%),
-      linear-gradient(0deg, rgba(var(--brand-anthracite-rgb), .22), transparent 45%),
-      radial-gradient(640px circle at 14% 55%, rgba(var(--bs-primary-rgb), .18), transparent 62%);
-  }
-
-  .hero-overlay{
-    padding-block: var(--hero-pad);
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    padding-inline: clamp(16px, 3vw, 42px);
-    align-items: center;
-  }
-
-  .hero-card,
-  .hero-carousel-full .hero-card{
-    max-width: min(640px, 92vw);
-    background: transparent;
-    border: 0;
-    border-radius: 0;
-    box-shadow: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    padding: 0;
-    color: var(--bs-body-color, var(--brand-ink));
-  }
-
-  .hero-card::before{
-    display:none;
-  }
-
-  .hero-kicker,
-  .hero-carousel-full .hero-kicker{
-    display:inline-flex;
-    align-items:center;
-    gap:.45rem;
-    padding: .34rem .62rem;
-    margin-bottom: .55rem;
-    border-radius: 999px;
-    border: 1px solid rgba(var(--bs-warning-rgb), .22);
-    background: rgba(var(--bs-warning-rgb), .13);
-    color: #8a4b00;
-    font-size: .66rem;
-    font-weight: 550;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-  }
-
-  .hero-title{
-    max-width: 22ch;
-    color: var(--hero-primary);
-    font-size: clamp(1.42rem, 2.8vw, 2.25rem);
-    font-weight: 700;
-    letter-spacing: -.03em;
-    line-height: 1.04;
-    text-shadow: 0 1px 0 rgba(255,255,255,.68);
-  }
-
-  .hero-text{
-    max-width: 56ch;
-    margin: .52rem 0 .85rem;
-    color: var(--bs-secondary-color, var(--brand-muted));
-    font-size: clamp(.9rem, 1.1vw, 1rem);
-    line-height: 1.5;
-    font-weight: 500;
-    text-shadow: 0 1px 0 rgba(255,255,255,.62);
-  }
-
-  .hero-card .btn{
-    min-height: 40px;
-    border-radius: 11px;
-    padding: .55rem .85rem;
-    font-size: .84rem;
-    font-weight: 550;
-    box-shadow: none;
-  }
-
-  .hero-card .btn-primary{
-    border-color: var(--hero-accent);
-    background: var(--hero-accent);
-    color: var(--brand-ink);
-  }
-
-  .hero-card .btn-primary:hover{
-    filter: brightness(.96);
-    transform: translateY(-1px);
-  }
-
-  .btn-glass{
-    color: var(--hero-primary);
-    background: #fff;
-    border: 1px solid rgba(var(--bs-primary-rgb), .24);
-  }
-
-  .btn-glass:hover{
-    color:#fff;
-    background: var(--hero-primary);
-    transform: translateY(-1px);
-  }
-
-  .hero-carousel .carousel-indicators{
-    left: var(--hero-pad);
-    right: auto;
-    bottom: calc(var(--hero-pad) * .72);
-    gap: .5rem;
-  }
-
-  .hero-carousel .carousel-indicators [data-bs-target]{
-    width: 10px;
-    height: 10px;
-    border-radius: 999px;
-    background: rgba(255,255,255,.72);
-    opacity: .62;
-    transition: width .18s ease, opacity .18s ease, background .18s ease;
-  }
-
-  .hero-carousel .carousel-indicators .active{
-    width: 34px;
-    opacity: 1;
-    background: var(--hero-accent);
-  }
-
-  .hero-carousel .carousel-control-prev,
-  .hero-carousel .carousel-control-next{
-    width: 46px;
-    height: 46px;
-    margin-inline: clamp(12px, 2vw, 28px);
-    background: rgba(255,255,255,.12);
-    border: 1px solid rgba(255,255,255,.24);
-    box-shadow: 0 12px 32px rgba(0,0,0,.22);
-  }
-
-  .hero-carousel .carousel-control-prev:hover,
-  .hero-carousel .carousel-control-next:hover{
-    background: var(--hero-accent);
-  }
-
-  .hero-admin-actions{
-    top: 18px;
-    right: 18px;
-  }
-
-  @media (max-width: 768px){
-    .hero-carousel{
-      --hero-height: 350px;
-    }
-
-    .hero-slide,
-    .hero-carousel-full .hero-slide,
-    .hero-img,
-    .hero-video,
-    .hero-carousel-full .hero-img,
-    .hero-carousel-full .hero-video{
-      height: var(--hero-height);
-      min-height: var(--hero-height);
-    }
-
-    .hero-slide::after,
-    .hero-carousel-full .hero-slide::after{
-      background:
-        linear-gradient(0deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.60) 56%, rgba(255,255,255,.16) 100%),
-        radial-gradient(520px circle at 20% 70%, rgba(var(--bs-primary-rgb), .18), transparent 62%);
-    }
-
-    .hero-overlay{
-      align-items: flex-end;
-      padding: 16px 24px 48px;
-    }
-
-    .hero-title{
-      max-width: 18ch;
-      font-size: clamp(1.35rem, 7vw, 1.95rem);
-      letter-spacing: -.025em;
-    }
-
-    .hero-text{
-      margin: .45rem 0 .75rem;
-      font-size: .88rem;
-      line-height: 1.42;
-    }
-
-    .hero-card .btn{
-      width: 100%;
-      justify-content: center;
-    }
-
-    .hero-card .d-flex{
-      width: 100%;
-    }
-
-    .hero-carousel .carousel-indicators{
-      left: 24px;
-      right: 18px;
-      bottom: 24px;
-      justify-content: flex-start;
-    }
-  }
-
-  @media (max-width: 575px){
-    .hero-overlay{
-      padding-left: 14px;
-      padding-right: 14px;
-    }
-
-    .hero-carousel .carousel-indicators{
-      left: 14px;
-      right: 14px;
-    }
-  }
-</style>
-
 <section class="container-fluid {{ hero_full_width|default(false) ? 'p-0 m-0 hero-section-full' : 'my-3' }}">
   {% if slides is defined and slides|length > 0 %}
-    <div id="heroCarousel" class="carousel slide hero-carousel {{ hero_full_width|default(false) ? 'hero-carousel-full' : '' }}" data-bs-ride="carousel" data-bs-interval="6500">
-
-      {# Indicators dynamiques #}
-      <div class="carousel-indicators">
+    <div id="heroCarousel" class="carousel slide showcase" data-bs-ride="carousel" data-bs-interval="6500">
+      <div class="carousel-inner">
         {% for s in slides %}
-          <button type="button"
-                  data-bs-target="#heroCarousel"
-                  data-bs-slide-to="{{ loop.index0 }}"
-                  class="{{ loop.first ? 'active' : '' }}"
-                  {{ loop.first ? 'aria-current="true"' : '' }}
-                  aria-label="Slide {{ loop.index }}"></button>
-        {% endfor %}
-      </div>
-
-      <div class="carousel-inner shadow">
-
-        {% for s in slides %}
-          <div class="carousel-item {{ loop.first ? 'active' : '' }}">
-            <div class="hero-slide">
-
-              {% set mediaPath = asset('img/slides/' ~ s.image) %}
-              {% set optimizedMediaPath = optimized_asset('img/slides/' ~ s.image) %}
-              {% set mediaExtension = s.image|split('.')|last|lower %}
-              {% set videoExtensions = ['mp4', 'webm'] %}
-              {% set heroPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAAAAACw=' %}
-
-              {% if mediaExtension in videoExtensions %}
-                <video class="hero-img hero-video"
-                       autoplay
-                       muted
-                       loop
-                       playsinline
-                       preload="none"
+          {% set mediaExtension = s.image|split('.')|last|lower %}
+          {% set heroPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAAAAACw=' %}
+          <section class="carousel-item {{ loop.first ? 'active' : '' }} showcase-hero" aria-label="{{ s.title|default('3SK Parts Auto', true) }}">
+            <div class="showcase-hero__media">
+              {% if mediaExtension in ['mp4', 'webm'] %}
+                <video class="showcase-hero__managed-media"
+                       autoplay muted loop playsinline preload="none"
                        data-hero-lazy-video
                        aria-label="{{ s.altText|default(s.title|default('Slide')) }}">
-                  <source data-src="{{ mediaPath }}" type="{{ mediaExtension == 'webm' ? 'video/webm' : 'video/mp4' }}">
+                  <source data-src="{{ asset('img/slides/' ~ s.image) }}" type="{{ mediaExtension == 'webm' ? 'video/webm' : 'video/mp4' }}">
                 </video>
               {% else %}
-                <img src="{{ loop.first ? optimizedMediaPath : heroPlaceholder }}"
-                     class="hero-img hero-img--ken-burns"
+                <img src="{{ loop.first ? optimized_asset('img/slides/' ~ s.image) : heroPlaceholder }}"
+                     class="showcase-hero__managed-media"
                      alt="{{ s.altText|default(s.title|default('Slide')) }}"
-                     width="1600"
-                     height="460"
-                     decoding="async"
+                     width="1600" height="600" decoding="async"
                      loading="{{ loop.first ? 'eager' : 'lazy' }}"
                      fetchpriority="{{ loop.first ? 'high' : 'auto' }}"
                      {% if not loop.first %}
-                       data-src="{{ optimizedMediaPath }}"
-                       data-hero-lazy
+                       data-src="{{ optimized_asset('img/slides/' ~ s.image) }}" data-hero-lazy
                      {% endif %}>
               {% endif %}
-
-              {# ✅ Actions admin (edit / delete / mise en avant) #}
-              {% if is_granted('ROLE_ADMIN') %}
-                <div class="hero-admin-actions">
-
-                  {# ✅ Mise en avant => bump #}
-                  <form method="post" action="{{ path('admin_hero_slide_bump', {id: s.id}) }}" class="d-inline">
-                    <input type="hidden" name="_token" value="{{ csrf_token('bump_slide_' ~ s.id) }}">
-                    <button class="btn btn-warning btn-sm" type="submit" title="Mettre en avant">
-                      <i class="fa-solid fa-thumbtack"></i>
-                    </button>
-                  </form>
-
-                  <a class="btn btn-light btn-sm"
-                     href="{{ path('admin_hero_slide_edit', {id: s.id}) }}"
-                     title="Modifier">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  </a>
-
-                  {# ✅ Delete #}
-                  <form method="post"
-                        action="{{ path('admin_hero_slide_delete', {id: s.id}) }}"
-                        class="d-inline"
-                        onsubmit="return confirm('Supprimer ce slide ?');">
-                    <input type="hidden" name="_token" value="{{ csrf_token('delete_slide_' ~ s.id) }}">
-                    <button class="btn btn-danger btn-sm" type="submit" title="Supprimer">
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
-                  </form>
-
-                </div>
-              {% endif %}
-
-              {# Overlay texte + boutons (tu peux remplir via champs DB) #}
-              <div class="hero-overlay">
-                <div class="hero-card">
-
-                  {% if s.kicker is defined and s.kicker %}
-                    <div class="hero-kicker">
-                      <i class="fa-solid fa-bolt"></i> {{ s.kicker }}
-                    </div>
-                  {% endif %}
-
-                  {% if s.title is defined and s.title %}
-                    <h2 class="hero-title">{{ s.title }}</h2>
-                  {% endif %}
-
-                  {% if s.subtitle is defined and s.subtitle %}
-                    <p class="hero-text">{{ s.subtitle }}</p>
-                  {% endif %}
-
-                  {# ✅ Boutons : PAS de fallback. On affiche seulement si label+url existent. #}
-                  {% set pLabel = (s.primaryLabel is defined) ? s.primaryLabel|trim : '' %}
-                  {% set pUrl   = (s.primaryUrl   is defined) ? s.primaryUrl|trim   : '' %}
-
-                  {% set sLabel = (s.secondaryLabel is defined) ? s.secondaryLabel|trim : '' %}
-                  {% set sUrl   = (s.secondaryUrl   is defined) ? s.secondaryUrl|trim   : '' %}
-
-                  {% if pLabel and pUrl or sLabel and sUrl %}
-                    <div class="d-flex gap-2 flex-wrap">
-                      {% if pLabel and pUrl %}
-                        <a href="{{ pUrl }}" class="btn btn-primary">
-                          {{ pLabel }}<i class="fa-solid fa-angles-right ms-2"></i>
-                        </a>
-                      {% endif %}
-
-                      {% if sLabel and sUrl %}
-                        <a href="{{ sUrl }}" class="btn btn-glass">
-                          <i class="fa-solid fa-star me-2"></i>{{ sLabel }}
-                        </a>
-                      {% endif %}
-                    </div>
-                  {% endif %}
-
-                </div>
-              </div>
-
             </div>
-          </div>
-        {% endfor %}
 
+            {% if is_granted('ROLE_ADMIN') %}
+              <div class="showcase-admin-actions">
+                <form method="post" action="{{ path('admin_hero_slide_bump', {id: s.id}) }}" class="d-inline">
+                  <input type="hidden" name="_token" value="{{ csrf_token('bump_slide_' ~ s.id) }}">
+                  <button class="btn btn-warning btn-sm" type="submit" title="Mettre en avant" aria-label="Mettre en avant">
+                    <i class="fa-solid fa-thumbtack" aria-hidden="true"></i>
+                  </button>
+                </form>
+                <a class="btn btn-light btn-sm" href="{{ path('admin_hero_slide_edit', {id: s.id}) }}" title="Modifier" aria-label="Modifier">
+                  <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+                </a>
+                <form method="post" action="{{ path('admin_hero_slide_delete', {id: s.id}) }}" class="d-inline" onsubmit="return confirm('Supprimer ce slide ?');">
+                  <input type="hidden" name="_token" value="{{ csrf_token('delete_slide_' ~ s.id) }}">
+                  <button class="btn btn-danger btn-sm" type="submit" title="Supprimer" aria-label="Supprimer">
+                    <i class="fa-solid fa-trash" aria-hidden="true"></i>
+                  </button>
+                </form>
+              </div>
+            {% endif %}
+
+            {% if loop.first %}
+              {% include 'home/sections/_showcase_intro.html.twig' %}
+            {% else %}
+              <div class="showcase-hero__content">
+                {% if s.kicker is defined and s.kicker %}
+                  <p class="showcase-eyebrow">{{ s.kicker }}</p>
+                {% endif %}
+
+                {% if s.title is defined and s.title %}
+                  <h2 class="showcase-managed-title">{{ s.title }}</h2>
+                {% endif %}
+
+                {% if s.subtitle is defined and s.subtitle %}
+                  <p class="showcase-description">{{ s.subtitle }}</p>
+                {% endif %}
+
+                {% set pLabel = (s.primaryLabel is defined) ? s.primaryLabel|trim : '' %}
+                {% set pUrl = (s.primaryUrl is defined) ? s.primaryUrl|trim : '' %}
+                {% set sLabel = (s.secondaryLabel is defined) ? s.secondaryLabel|trim : '' %}
+                {% set sUrl = (s.secondaryUrl is defined) ? s.secondaryUrl|trim : '' %}
+                {% if pLabel and pUrl or sLabel and sUrl %}
+                  <div class="showcase-actions">
+                    {% if pLabel and pUrl %}
+                      <a href="{{ pUrl }}" class="showcase-action showcase-action--primary">{{ pLabel }}<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    {% endif %}
+                    {% if sLabel and sUrl %}
+                      <a href="{{ sUrl }}" class="showcase-action showcase-action--secondary">{{ sLabel }}<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+          </section>
+        {% endfor %}
       </div>
 
-
+      {% if slides|length > 1 %}
+        <div class="carousel-indicators showcase-pagination">
+          {% for s in slides %}
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ loop.index0 }}"
+                    class="{{ loop.first ? 'active' : '' }}" {% if loop.first %}aria-current="true"{% endif %}
+                    aria-label="Slide {{ loop.index }}"></button>
+          {% endfor %}
+        </div>
+        <div class="showcase-controls" aria-label="Navigation des slides">
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Slide précédent"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Slide suivant"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      {% endif %}
     </div>
-
   {% else %}
-    {# Aucun slide #}
     <div class="alert alert-light border">
       <div class="fw-bold">Aucun slide</div>
       {% if is_granted('ROLE_ADMIN') %}
@@ -696,3 +110,4 @@
     </div>
   {% endif %}
 </section>
+<script src="{{ asset('scripts/public-showcase.js') }}?v=20261016-3" defer></script>

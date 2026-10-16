@@ -49,6 +49,7 @@ class ArticleApiController extends AbstractController
 
         $onlyNew = (string) $request->query->get('new', '') === '1';
         $newDays = max(1, min(365, (int) $request->query->get('newDays', 5)));
+        $sortByCreated = (string) $request->query->get('sort', '') === 'created_desc';
 
         $needFacets = (string) $request->query->get('facets', '') === '1';
 
@@ -95,14 +96,19 @@ class ArticleApiController extends AbstractController
         }
 
         $cutoff = null;
-        if ($onlyNew) {
+        if ($onlyNew || $sortByCreated) {
             $cutoff = (new \DateTimeImmutable('now'))->modify('-' . $newDays . ' days');
-            $qb->andWhere('a.sysCreatedDate IS NOT NULL')
-                ->andWhere('a.sysCreatedDate >= :cutoff')
+            $qb->andWhere('a.sysCreatedDate IS NOT NULL');
+        }
+        if ($onlyNew) {
+            $qb->andWhere('a.sysCreatedDate >= :cutoff')
                 ->setParameter('cutoff', $cutoff);
         }
 
         if ($catalogSearchTokens !== []) {
+            if ($sortByCreated) {
+                $qb->orderBy('a.sysCreatedDate', 'DESC')->addOrderBy('a.uniqueId', 'ASC');
+            }
             /** @var Article[] $candidates */
             $candidates = $qb->getQuery()->getResult();
             $items = [];
@@ -113,15 +119,20 @@ class ArticleApiController extends AbstractController
                 }
             }
 
-            $this->sortLikeLegacyCatalog($items);
+            if (!$sortByCreated) {
+                $this->sortLikeLegacyCatalog($items);
+            }
             $total = count($items);
             $items = array_slice($items, ($page - 1) * $limit, $limit);
         } else {
             $total = $this->countTotal($qb);
 
-            $qb->orderBy('a.sysModifiedDate', 'DESC')
+            $qb->orderBy($sortByCreated ? 'a.sysCreatedDate' : 'a.sysModifiedDate', 'DESC')
                 ->setFirstResult(($page - 1) * $limit)
                 ->setMaxResults($limit);
+            if ($sortByCreated) {
+                $qb->addOrderBy('a.uniqueId', 'ASC');
+            }
 
             /** @var Article[] $items */
             $items = $qb->getQuery()->getResult();
@@ -152,7 +163,7 @@ class ArticleApiController extends AbstractController
 
             $norm[] = $this->normalize(
                 $article,
-                $onlyNew ? $cutoff : null,
+                $cutoff,
                 $pressureMap[$article->getId()] ?? null,
                 $pricing
             );

@@ -429,15 +429,15 @@
     <div>
       <div class="section-eyebrow latest-arrivals-eyebrow">Nouveautés catalogue</div>
       <h2 class="latest-arrivals-title">Dernier <span class="heading-accent">arrivage</span></h2>
-      <div class="latest-arrivals-subtitle">Découvrez les arrivages récemment ajoutés au catalogue</div>
+      <div class="latest-arrivals-subtitle">Les derniers articles ajoutés au catalogue</div>
     </div>
-    <a href="{{ path('articles_page', { new: 1, newDays: 90 }) }}" class="latest-arrivals-link">
+    <a href="{{ path('articles_page', { sort: 'created_desc', newDays: 90 }) }}" class="latest-arrivals-link">
       Voir tout<i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
     </a>
   </div>
 
   <div class="product-grid" data-new-grid>
-    {% for i in 1..8 %}
+    {% for i in 1..5 %}
       <div class="skeleton"></div>
     {% endfor %}
   </div>
@@ -661,7 +661,7 @@ function stockLabel(stock){
   function skeletons(){
     if (!grid) return;
     grid.innerHTML = '';
-    for (let i=0; i<8; i++){
+    for (let i=0; i<5; i++){
       const d = document.createElement('div');
       d.className = 'skeleton';
       grid.appendChild(d);
@@ -676,7 +676,7 @@ function stockLabel(stock){
       const url = new URL('/api/articles', window.location.origin);
       url.searchParams.set('page', '1');
       url.searchParams.set('limit', '5');
-      url.searchParams.set('new', '1');
+      url.searchParams.set('sort', 'created_desc');
       url.searchParams.set('newDays', '90');
 
       const res = await fetch(url.toString(), { headers: { 'Accept':'application/json' } });
@@ -694,14 +694,14 @@ function stockLabel(stock){
         return;
       }
 
-      const items = (data.items || []).slice(0, 10);
+      const items = (data.items || []).slice(0, 5);
       const base = (data.imagesBaseUrl || '').replace(/\/$/, '');
 
       if (!grid) return;
       grid.innerHTML = '';
 
       if (!items.length){
-        grid.innerHTML = `<div class="text-muted small">Aucune nouveauté.</div>`;
+        grid.innerHTML = `<div class="text-muted small">Aucun article à afficher.</div>`;
         return;
       }
 
@@ -720,8 +720,7 @@ const inCartQty = getCartQtyFromObj(cartObj, code);
 const availableStock = Math.max(0, stock - inCartQty);
 const stockDisplay = stockLabel(availableStock);
 
-        // ✅ dans "Nouveautés" => badge toujours affiché
-        const isNew = (a.isNew !== undefined) ? !!a.isNew : true;
+        const isNew = a.isNew === true;
 
         const card = document.createElement('div');
 card.className = 'product-card';

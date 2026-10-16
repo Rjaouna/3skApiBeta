@@ -12,20 +12,7 @@
           <img src="{{ optimized_asset('img/slides/' ~ firstSlide.image) }}" alt="{{ firstSlide.title|default('3SK Parts Auto', true) }}" width="1600" height="600" fetchpriority="high" decoding="async">
         {% endif %}
       </div>
-      <div class="showcase-hero__content">
-        <p class="showcase-eyebrow">Pièces auto · Accessoires · Carrosserie</p>
-        <h1 class="showcase-title">3SK <span>PARTS</span> AUTO</h1>
-        <p class="showcase-description">Votre partenaire en pièces et accessoires automobiles<br class="showcase-desktop-break"> de qualité, au Maroc.</p>
-        <ul class="showcase-benefits">
-          <li><span class="showcase-benefits__icon"><i class="fa-solid fa-award" aria-hidden="true"></i></span><span>Pièces et accessoires<br>pour l’automobile</span></li>
-          <li><span class="showcase-benefits__icon"><i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i></span><span>Importateur<br>et distributeur</span></li>
-          <li><span class="showcase-benefits__icon"><i class="fa-solid fa-headset" aria-hidden="true"></i></span><span>Une équipe<br>à votre service</span></li>
-        </ul>
-        <div class="showcase-actions">
-          <a class="showcase-action showcase-action--primary" href="{{ path('articles_page') }}"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>Voir nos produits<i class="fa-solid fa-circle-chevron-right" aria-hidden="true"></i></a>
-          <a class="showcase-action showcase-action--secondary" href="#marques"><i class="fa-solid fa-tags" aria-hidden="true"></i>Nos marques<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-        </div>
-      </div>
+      {% include 'home/sections/_showcase_intro.html.twig' %}
     </section>
     {% for slide in slides|slice(1) %}
       {% set video = slide.image|split('.')|last|lower in ['mp4', 'webm'] %}
@@ -84,4 +71,4 @@
     </div>
   </section>
 {% endif %}
-<script src="{{ asset('scripts/public-showcase.js') }}?v=20261016-2" defer></script>
+<script src="{{ asset('scripts/public-showcase.js') }}?v=20261016-3" defer></script>

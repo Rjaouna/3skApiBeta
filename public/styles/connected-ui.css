@@ -96,12 +96,13 @@ body.app-connected .site__header .header-search .search-input { padding-right: 5
 body.app-connected .site__header .voice-search-btn { border-radius: 50%; }
 body.app-connected .site__header .indicator-btn { border-color: var(--workspace-line); border-radius: 12px; }
 body.app-connected .site__header .indicator-title { font-size: 14px; }
-body.app-connected .site__header .main-menu__list { gap: 4px 20px; }
-body.app-connected .site__header .main-menu__link { position: relative; padding: 10px 2px; border-radius: 0 !important; background: transparent !important; color: var(--brand-ink) !important; font-weight: 500; box-shadow: none !important; transform: none !important; }
+body.app-connected .site__header .main-menu__list { gap: 4px 16px; }
+body.app-connected .site__header .main-menu__link { position: relative; padding: 8px 2px; border-radius: 0 !important; background: transparent !important; color: var(--brand-ink) !important; font-weight: 500; box-shadow: none !important; transform: none !important; }
 body.app-connected .site__header .main-menu__link::after { content: ''; position: absolute; inset: auto 2px 0; height: 2px; background: transparent; }
 body.app-connected .site__header .main-menu__link:is(.is-active, [aria-current="page"], :hover) { background: transparent !important; color: var(--brand-blue) !important; box-shadow: none !important; }
 body.app-connected .site__header .main-menu__link:is(.is-active, [aria-current="page"])::after { background: var(--brand-orange); }
 body.app-connected .site__header .main-menu__link:hover::after { background: var(--brand-blue); }
+body.app-connected .mobile-menu-cats .list-group-item { min-height: 44px; }
 body.app-connected .site__header :is(.account-menu, .dropdown-menu) { border-color: var(--workspace-line); border-radius: 12px; box-shadow: 0 12px 32px rgba(var(--brand-blue-rgb), .1); }
 
 body.app-connected .home-section-head h2,

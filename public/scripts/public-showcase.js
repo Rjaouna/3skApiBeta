@@ -1,5 +1,5 @@
 (() => {
-  const header = document.querySelector('.showcase-header');
+  const header = document.querySelector('.showcase-header, .connected-showcase-header');
   const updateHeaderHeight = () => {
     if (!header || header.querySelector('.showcase-nav.show, .showcase-nav.collapsing')) return;
     document.documentElement.style.setProperty('--showcase-header-height', `${header.offsetHeight}px`);

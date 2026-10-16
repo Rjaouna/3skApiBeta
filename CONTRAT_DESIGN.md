@@ -1,6 +1,6 @@
 # Contrat de design - 3SK Parts Auto
 
-**Statut : actif. Version 2.1. Header commun ; avantages regroupés côté public et masqués après connexion.**
+**Statut : actif. Version 2.3. Header commun et premier slide identique entre accueil public et connecté.**
 
 Ce contrat est la référence visuelle pour les prochaines interventions sur le projet.
 Il concerne l'accueil public, la connexion, l'espace client, l'administration et leurs
@@ -383,3 +383,23 @@ La demande suivante du 16 octobre 2026 précise le fonctionnement et la présent
 Cette évolution n'autorise aucune modification des prix, stocks, paniers, imports,
 commandes, authentification ou droits. Aucun champ métier, image, statistique ou
 marque n'est inventé. L'impression conserve son échelle compacte et reste sans prix.
+
+## 16. Slide de l'accueil connecté
+
+La capture complémentaire du 16 octobre 2026 précise que le premier slide connecté
+doit reprendre le bloc public complet, pas seulement ses styles : mention Pièces auto,
+titre « 3SK PARTS AUTO », présentation, trois avantages avec leurs icônes et actions
+« Voir nos produits » / « Nos marques ». Le contenu provient du même partial Twig
+`home/sections/_showcase_intro.html.twig` ; les styles restent partagés dans
+`public/styles/public-showcase.css`.
+
+- Ne pas modifier le rendu de l'accueil public pour l'adapter au connecté.
+- Conserver les images, vidéos et ordre configurés dans l'administration. Le premier
+  slide affiche la composition de marque validée sans réécrire les données en base ;
+  les suivants conservent leurs titres, sous-titres et liens configurés.
+- Les deux actions mènent au catalogue réel et au bloc partenaires de la même page.
+  Garder ce dernier visible sous le header sticky après navigation par l'ancre.
+- Garder le chargement différé, le défilement existant et les commandes administrateur
+  avec leurs routes, méthodes, CSRF et droits d'accès.
+- Partager les paliers responsive et vérifier les débordements. Les commandes admin
+  peuvent disposer d'un espace supplémentaire sur mobile sans couvrir le contenu.

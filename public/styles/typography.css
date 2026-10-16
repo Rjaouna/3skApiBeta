@@ -82,15 +82,16 @@ body.app-public .showcase-header .showcase-join { font-size: var(--text-xs); }
 body.app-public .showcase-header .showcase-search input { font-size: var(--text-control); }
 body.app-public .showcase-header .showcase-search button { font-size: var(--text-sm); }
 body.app-public .showcase-header .showcase-nav__link { font-size: var(--text-control); }
-body.app-public .showcase .showcase-benefits li { font-size: var(--text-control); line-height: 1.5; }
-body.app-public .showcase .showcase-action { font-size: var(--text-control); }
-body.app-public .showcase .showcase-eyebrow { font-size: var(--text-xs); line-height: 1.5; }
+body:is(.app-public, .app-connected) .showcase .showcase-benefits li { font-size: var(--text-control); line-height: 1.5; }
+body:is(.app-public, .app-connected) .showcase .showcase-action { font-size: var(--text-control); }
+body:is(.app-public, .app-connected) .showcase .showcase-eyebrow { font-size: var(--text-xs); line-height: 1.5; }
 body.app-public .showcase-brands .showcase-brand span { font-size: var(--text-xs); }
 body.app-public .showcase-brands .showcase-brands__more { font-size: var(--text-xs); }
-body.app-connected .site__header :is(.main-menu__link, .notif-item, .account-menu-item) { font-size: var(--text-control) !important; }
+body.app-connected .site__header :is(.notif-item, .account-menu-item) { font-size: var(--text-control) !important; }
+body.app-connected .site__header .main-menu__link { font-size: var(--text-sm) !important; }
 body.app-connected .site__header :is(.topbar-welcome, .topbar-welcome-name, .header-user-greeting) { font-size: var(--text-sm) !important; }
-body.app-connected .mobile-menu-quick__item,
-body.app-connected .mobile-menu-cats .list-group-item { font-size: var(--text-control) !important; line-height: 1.5 !important; }
+body.app-connected .mobile-menu-quick__item { font-size: var(--text-control) !important; line-height: 1.5 !important; }
+body.app-connected .mobile-menu-cats .list-group-item { font-size: var(--text-sm) !important; line-height: 1.5 !important; }
 
 /* Shared reading scale; display headlines keep their approved hero hierarchy. */
 body:is(.app-public, .app-connected) :is(input, select, textarea, button, a, label, p, span) { letter-spacing: 0; }
@@ -98,7 +99,7 @@ body.app-public .public-main-v2 .home-reference-section.section-space:is(.home-a
 body.app-public .public-main-v2 .home-reference-section.section-space:is(.home-about-reference, .home-services-reference) .section-copy { font-size: 18px !important; line-height: 1.65 !important; }
 body.app-public .public-main-v2 .home-reference-section.home-services-reference .stock-frame-copy .btn { font-size: 16px !important; }
 body.app-public .showcase-header .showcase-join { font-size: 14px; }
-body.app-public .showcase .showcase-action { font-size: 14px; }
+body:is(.app-public, .app-connected) .showcase .showcase-action { font-size: 14px; }
 body.app-connected .site__header #InputRechercheProduit { font-size: 16px !important; font-weight: 400 !important; }
 body.app-connected .product-grid .designation { font-weight: 600 !important; }
 body.app-connected .product-grid .meta-line { min-height: 30px; align-items: center; }
@@ -109,8 +110,8 @@ body.app-connected .product-grid .meta-line { min-height: 30px; align-items: cen
   body.app-public .showcase-header .showcase-join { padding-inline: 10px; gap: 7px; }
   body.app-public .showcase-header .showcase-search input { font-size: var(--text-sm); }
   body.app-public .showcase-header .showcase-search button { font-size: var(--text-xs); padding-inline: 14px; }
-  body.app-public .showcase .showcase-benefits li { font-size: var(--text-xs); }
-  body.app-public .showcase .showcase-action { font-size: var(--text-xs); }
+  body:is(.app-public, .app-connected) .showcase .showcase-benefits li { font-size: var(--text-xs); }
+  body:is(.app-public, .app-connected) .showcase .showcase-action { font-size: var(--text-xs); }
   body.app-connected .site__header .brand-box { padding: 0 !important; margin: 0 !important; }
   body.app-connected .site__header .brand-logo { width: 100% !important; max-width: 190px !important; }
   body.app-connected .site__header .mobile-actions .hd-iconbtn[aria-controls="cartOffcanvas"] { display: flex; flex-direction: column; justify-content: center; gap: 3px; width: 96px !important; min-width: 96px !important; height: 56px !important; padding: 5px 4px !important; }
@@ -124,5 +125,5 @@ body.app-connected .product-grid .meta-line { min-height: 30px; align-items: cen
   body.app-public .public-main-v2 .home-reference-section.section-space:is(.home-about-reference, .home-services-reference) .section-heading { font-size: 32px !important; }
   body.app-public .public-main-v2 .home-reference-section.section-space:is(.home-about-reference, .home-services-reference) .section-copy { font-size: 16px !important; }
   body.app-public .showcase-header .showcase-join { font-size: 12px; }
-  body.app-public .showcase .showcase-action { font-size: 13px; }
+  body:is(.app-public, .app-connected) .showcase .showcase-action { font-size: 13px; }
 }
