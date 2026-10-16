@@ -1,0 +1,37 @@
+/* One content rail below the hero; framed components keep their inner padding. */
+body.app-public .public-home {
+  --home-content-gutter: 4.35vw;
+}
+
+body.app-public .public-home .public-main-v2 > .section-space,
+body.app-public .public-home .public-main-v2 > .home-reference-section.section-space,
+body.app-public .public-home .public-main-v2 > #marques.partner-brands,
+body.app-public .public-home > .site-stats-strip,
+body.app-public .public-home .site-footer--showcase .site-footer__main,
+body.app-public .public-home .site-footer--showcase .site-footer__bottom {
+  padding-inline: var(--home-content-gutter);
+}
+
+body.app-public .public-home .public-main-v2 > .section-space > .section-shell:not(.partner-brands__panel) {
+  padding-inline: 0;
+}
+
+body.app-public .public-home .public-main-v2 > #contact.contact-premium > .section-shell {
+  padding-inline: var(--home-content-gutter);
+}
+
+body.app-public .public-home .site-stats-strip__label {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1439px) {
+  body.app-public .public-home { --home-content-gutter: 40px; }
+}
+
+@media (max-width: 991px) {
+  body.app-public .public-home { --home-content-gutter: 24px; }
+}
+
+@media (max-width: 575px) {
+  body.app-public .public-home { --home-content-gutter: 18px; }
+}

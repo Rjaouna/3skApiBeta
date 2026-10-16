@@ -110,7 +110,9 @@ class CartApiController extends AbstractController
         if ($nextQty > $stock) {
             return $this->json([
                 'ok' => false,
-                'message' => sprintf('Stock insuffisant. Disponible : %d.', $stock),
+                'message' => $this->isGranted('ROLE_ADMIN')
+                    ? sprintf('Stock insuffisant. Disponible : %d.', $stock)
+                    : 'Quantité demandée indisponible.',
             ], 422);
         }
 
@@ -190,7 +192,9 @@ class CartApiController extends AbstractController
         if ($qty > $stock) {
             return $this->json([
                 'ok' => false,
-                'message' => sprintf('Stock insuffisant. Disponible : %d.', $stock),
+                'message' => $this->isGranted('ROLE_ADMIN')
+                    ? sprintf('Stock insuffisant. Disponible : %d.', $stock)
+                    : 'Quantité demandée indisponible.',
             ], 422);
         }
 

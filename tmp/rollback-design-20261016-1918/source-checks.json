@@ -1,0 +1,75 @@
+{
+  "checks": [
+    {
+      "file": "assets/app.js",
+      "unchanged": true
+    },
+    {
+      "file": "assets/styles/app.scss",
+      "unchanged": true
+    },
+    {
+      "file": "public/styles/home-about-services.css",
+      "unchanged": true
+    },
+    {
+      "file": "public/styles/partner-brands.css",
+      "unchanged": true
+    },
+    {
+      "file": "public/styles/public-showcase.css",
+      "unchanged": true
+    },
+    {
+      "file": "public/styles/site-footer.css",
+      "unchanged": true
+    },
+    {
+      "file": "public/styles/typography.css",
+      "unchanged": true
+    },
+    {
+      "file": "templates/base.html.twig",
+      "unchanged": true
+    },
+    {
+      "file": "templates/home/sections/_about.html.twig",
+      "unchanged": true
+    },
+    {
+      "file": "templates/home/sections/_partner_brands.html.twig",
+      "unchanged": true
+    },
+    {
+      "file": "templates/home/sections/_services.html.twig",
+      "unchanged": true
+    },
+    {
+      "file": "templates/partials/_design_system.html.twig",
+      "unchanged": true
+    },
+    {
+      "file": "templates/partials/_public_header.html.twig",
+      "unchanged": true
+    },
+    {
+      "file": "src/Controller/Api/CartApiController.php",
+      "unchanged": true,
+      "sha256": "687859F65C316AE24D1CD98710759AF8496EBB91CC0B50E21B9EDEA111A70B21"
+    },
+    {
+      "file": "src/Controller/HomeController.php",
+      "unchanged": true,
+      "sha256": "073FC348B021E4A5E126A3272459CC642C938429E2FFB13025C8739DCEC6F049"
+    },
+    {
+      "file": "public/img/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+      "unchanged": true,
+      "sha256": "8425948A7149AE0998FE7A4A2F07D46017EED2DEC2162B7459F802E755F03FA4"
+    }
+  ],
+  "formUnchanged": true,
+  "scriptsUnchanged": true,
+  "publicHomeOutsideContactUnchanged": true,
+  "cssContactScoped": true
+}

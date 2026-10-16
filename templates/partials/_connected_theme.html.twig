@@ -1,20 +1,20 @@
 {# Shared visual layer for authenticated pages. Business markup and behavior stay untouched. #}
 <style>
   .app-connected {
-    --app-orange: #ff9100;
-    --app-orange-dark: #df7600;
-    --app-blue: #315fbb;
-    --app-blue-dark: #23498f;
-    --app-black: #102e63;
-    --app-panel-blue: linear-gradient(135deg, rgba(16, 46, 99, .96) 0%, rgba(49, 95, 187, .86) 58%, rgba(255, 145, 0, .16) 100%);
-    --app-panel-blue-soft: linear-gradient(135deg, rgba(49, 95, 187, .12), rgba(255, 145, 0, .08));
-    --app-ink: #101828;
-    --app-muted: #667085;
-    --app-line: #dfe3e8;
-    --app-soft: #f3f5f7;
+    --app-orange: var(--brand-orange);
+    --app-orange-dark: var(--brand-orange-dark);
+    --app-blue: var(--brand-blue);
+    --app-blue-dark: var(--brand-blue-dark);
+    --app-black: var(--brand-anthracite);
+    --app-panel-blue: var(--brand-blue);
+    --app-panel-blue-soft: var(--brand-bg);
+    --app-ink: var(--brand-ink);
+    --app-muted: var(--brand-muted);
+    --app-line: var(--brand-border);
+    --app-soft: var(--brand-bg);
     --app-surface: #ffffff;
     --app-radius: 8px;
-    --app-shadow: 0 14px 36px rgba(16, 24, 40, .09);
+    --app-shadow: var(--brand-shadow-sm);
     min-height: 100vh;
     background: var(--app-soft);
     color: var(--app-ink);
@@ -59,7 +59,7 @@
   }
 
   .app-connected .site__header {
-    box-shadow: 0 10px 28px rgba(16, 24, 40, .08);
+    box-shadow: 0 2px 8px rgba(var(--brand-anthracite-rgb), .05);
   }
 
   .app-connected .site__header,
@@ -67,10 +67,10 @@
   .app-connected .site__header .header-topbar,
   .app-connected .site__header .header__navbar,
   .app-connected .site__header .header-nav {
-    --hd-border: rgba(49, 95, 187, .14);
-    --hd-shadow: 0 14px 34px rgba(16, 24, 40, .08);
+    --hd-border: rgba(var(--brand-blue-rgb), .14);
+    --hd-shadow: 0 14px 34px rgba(var(--brand-anthracite-rgb), .08);
     --hd-glass: #fff;
-    --hd-glass2: rgba(49, 95, 187, .07);
+    --hd-glass2: rgba(var(--brand-blue-rgb), .07);
     --hd-text: var(--app-ink);
     --hd-muted: var(--app-muted);
     background: #fff !important;
@@ -78,7 +78,7 @@
   }
 
   .app-connected .site__header .header-topbar {
-    border-bottom-color: rgba(49, 95, 187, .12) !important;
+    border-bottom-color: rgba(var(--brand-blue-rgb), .12) !important;
     background: #fff !important;
   }
 
@@ -103,9 +103,9 @@
   }
 
   .app-connected .site__header .topbar-phone {
-    border: 1px solid rgba(49, 95, 187, .18);
+    border: 1px solid rgba(var(--brand-blue-rgb), .18);
     border-radius: var(--app-radius);
-    background: rgba(49, 95, 187, .06);
+    background: rgba(var(--brand-blue-rgb), .06);
     color: var(--app-blue) !important;
   }
 
@@ -116,7 +116,7 @@
   .app-connected .site__header .hd-iconbtn,
   .app-connected .site__header .admin-settings-btn,
   .app-connected .site__header .mobile-menu-toggle {
-    border-color: rgba(49, 95, 187, .22) !important;
+    border-color: rgba(var(--brand-blue-rgb), .22) !important;
     border-radius: var(--app-radius) !important;
     background: #fff !important;
     color: var(--app-blue) !important;
@@ -131,12 +131,12 @@
   }
 
   .app-connected .site__header .theme-switch {
-    border-color: rgba(49, 95, 187, .22) !important;
-    background: rgba(49, 95, 187, .12) !important;
+    border-color: rgba(var(--brand-blue-rgb), .22) !important;
+    background: rgba(var(--brand-blue-rgb), .12) !important;
   }
 
   .app-connected .site__header .header-main-row {
-    min-height: 74px;
+    min-height: 68px;
     padding-block: .35rem .45rem;
     column-gap: 1rem !important;
     row-gap: .65rem;
@@ -148,27 +148,27 @@
   }
 
   .app-connected .site__header .brand-box {
-    --logo-panel-height: 72px;
+    --logo-panel-height: 56px;
     --logo-panel-angle: 24px;
     position: relative;
     isolation: isolate;
     display: inline-flex;
     align-items: center;
     min-height: var(--logo-panel-height);
-    padding: 0 .9rem;
-    margin-left: .65rem;
+    padding: 0;
+    margin-left: 0;
     margin-right: 1rem;
     overflow: visible;
     background: #fff;
     border: 0;
     border-radius: 0;
-    box-shadow: 0 8px 18px rgba(49, 95, 187, .10);
+    box-shadow: none;
     text-decoration: none;
   }
 
   .app-connected .site__header .brand-box::before,
   .app-connected .site__header .brand-box::after {
-    content: "";
+    content: none;
     position: absolute;
     top: 0;
     width: 0;
@@ -204,14 +204,14 @@
 
   .app-connected .site__header .header-search .search-input {
     height: 48px;
-    border: 1px solid rgba(49, 95, 187, .2) !important;
+    border: 1px solid rgba(var(--brand-blue-rgb), .2) !important;
     border-radius: var(--app-radius) !important;
-    background: #f8fafc !important;
+    background: var(--brand-bg) !important;
     color: var(--app-ink) !important;
   }
 
   .app-connected .site__header .header-search .search-input::placeholder {
-    color: #7b8492;
+    color: var(--brand-muted);
   }
 
   .app-connected .site__header .header-search .search-ico,
@@ -221,12 +221,12 @@
 
   .app-connected .site__header .voice-search-btn {
     border-radius: 6px;
-    background: rgba(255, 145, 0, .12);
+    background: rgba(var(--brand-orange-rgb), .12);
   }
 
   .app-connected .site__header .indicator-btn {
     min-height: 48px;
-    border: 1px solid rgba(49, 95, 187, .18);
+    border: 1px solid rgba(var(--brand-blue-rgb), .18);
     border-radius: var(--app-radius);
     background: #fff;
     color: var(--app-ink);
@@ -234,8 +234,8 @@
   }
 
   .app-connected .site__header .indicator-btn:hover {
-    border-color: rgba(255, 145, 0, .7);
-    background: rgba(255, 145, 0, .08);
+    border-color: rgba(var(--brand-orange-rgb), .7);
+    background: rgba(var(--brand-orange-rgb), .08);
   }
 
   .app-connected .site__header .indicator-title,
@@ -247,12 +247,12 @@
   .app-connected .site__header .indicator-icon {
     border-radius: 6px;
     background: var(--app-orange);
-    color: #fff;
+    color: var(--brand-anthracite);
   }
 
   .app-connected .site__header .header__navbar {
     padding: 0;
-    border-top-color: rgba(49, 95, 187, .12);
+    border-top-color: rgba(var(--brand-blue-rgb), .12);
     border-bottom: 3px solid var(--app-orange);
   }
 
@@ -317,7 +317,7 @@
 
   .app-connected .site__header .dropdown-item:hover,
   .app-connected .site__header .notif-item:hover {
-    background: rgba(49, 95, 187, .08);
+    background: rgba(var(--brand-blue-rgb), .08);
     color: var(--app-blue);
   }
 
@@ -332,7 +332,7 @@
     height: 54px;
     border: 3px solid #fff;
     border-radius: 50%;
-    box-shadow: 0 14px 32px rgba(16, 24, 40, .22);
+    box-shadow: 0 14px 32px rgba(var(--brand-anthracite-rgb), .22);
   }
 
   .app-connected > .alert,
@@ -361,14 +361,15 @@
   .app-connected .notification-page-hero,
   .app-connected .simple-page-hero,
   .app-connected .dash-hero {
-    min-height: 112px;
+    min-height: 96px;
     padding: 24px !important;
     border: 0 !important;
     border-left: 5px solid var(--app-orange) !important;
-    border-radius: var(--app-radius) !important;
-    background: var(--app-panel-blue) !important;
-    box-shadow: 0 18px 42px rgba(49, 95, 187, .20) !important;
-    color: #fff !important;
+    border-bottom: 1px solid var(--app-line) !important;
+    border-radius: 0 !important;
+    background: var(--app-surface) !important;
+    box-shadow: none !important;
+    color: var(--app-ink) !important;
     overflow: hidden;
   }
 
@@ -412,8 +413,8 @@
   .app-connected .dash-hero h2,
   .app-connected .dash-hero h3 {
     margin: 0;
-    color: #fff !important;
-    font-size: 1.8rem;
+    color: var(--app-ink) !important;
+    font-size: 1.65rem;
     font-weight: 650 !important;
     line-height: 1.2;
   }
@@ -431,7 +432,7 @@
   .app-connected .notification-page-hero .subtitle,
   .app-connected .simple-page-hero .subtitle,
   .app-connected .dash-hero .subtitle {
-    color: rgba(255, 255, 255, .7) !important;
+    color: var(--app-muted) !important;
   }
 
   .app-connected .page-hero .text-muted,
@@ -447,7 +448,7 @@
   .app-connected .notification-page-hero .text-muted,
   .app-connected .simple-page-hero .text-muted,
   .app-connected .dash-hero .text-muted {
-    color: rgba(255, 255, 255, .7) !important;
+    color: var(--app-muted) !important;
   }
 
   .app-connected .page-hero .btn-outline-secondary,
@@ -463,8 +464,9 @@
   .app-connected .notification-page-hero .btn-outline-secondary,
   .app-connected .simple-page-hero .btn-outline-secondary,
   .app-connected .dash-hero .btn-outline-secondary {
-    border-color: rgba(255, 255, 255, .55) !important;
-    color: #fff !important;
+    border-color: var(--app-blue) !important;
+    background: var(--app-surface) !important;
+    color: var(--app-blue) !important;
   }
 
   .app-connected .page-hero .btn-outline-primary,
@@ -480,8 +482,9 @@
   .app-connected .notification-page-hero .btn-outline-primary,
   .app-connected .simple-page-hero .btn-outline-primary,
   .app-connected .dash-hero .btn-outline-primary {
-    border-color: var(--app-orange) !important;
-    color: var(--app-orange) !important;
+    border-color: var(--app-blue) !important;
+    background: var(--app-surface) !important;
+    color: var(--app-blue) !important;
   }
 
   .app-connected .page-hero .btn-outline-primary:hover,
@@ -497,8 +500,8 @@
   .app-connected .notification-page-hero .btn-outline-primary:hover,
   .app-connected .simple-page-hero .btn-outline-primary:hover,
   .app-connected .dash-hero .btn-outline-primary:hover {
-    border-color: var(--app-orange) !important;
-    background: var(--app-orange) !important;
+    border-color: var(--app-blue) !important;
+    background: var(--app-blue) !important;
     color: #fff !important;
   }
 
@@ -507,7 +510,7 @@
     border-radius: var(--app-radius) !important;
     border-color: rgba(255, 255, 255, .22) !important;
     border-left-color: var(--app-orange) !important;
-    background: linear-gradient(135deg, rgba(16, 46, 99, .64), rgba(49, 95, 187, .28)) !important;
+    background: linear-gradient(135deg, rgba(16, 46, 99, .64), rgba(var(--brand-blue-rgb), .28)) !important;
     box-shadow: 0 24px 58px rgba(7, 26, 58, .34) !important;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -584,12 +587,12 @@
   .app-connected .product-card:hover,
   .app-connected .related-card:hover,
   .app-connected .notification-card:hover {
-    border-color: rgba(49, 95, 187, .42) !important;
-    box-shadow: 0 18px 38px rgba(16, 24, 40, .14) !important;
+    border-color: rgba(var(--brand-blue-rgb), .42) !important;
+    box-shadow: 0 18px 38px rgba(var(--brand-anthracite-rgb), .14) !important;
   }
 
   .app-connected .card-header {
-    border-bottom: 1px solid rgba(49, 95, 187, .16);
+    border-bottom: 1px solid rgba(var(--brand-blue-rgb), .16);
     border-left: 4px solid var(--app-orange);
     background: var(--app-panel-blue-soft);
     color: var(--app-blue-dark);
@@ -618,20 +621,20 @@
 
   .app-connected .latest-arrivals-title .heading-accent {
     color: var(--app-orange) !important;
-    text-shadow: 0 10px 26px rgba(255, 145, 0, .30) !important;
+    text-shadow: 0 10px 26px rgba(var(--brand-orange-rgb), .30) !important;
   }
 
   .app-connected .chip {
     border: 1px solid var(--app-line) !important;
     border-radius: var(--app-radius) !important;
     background: #fff !important;
-    box-shadow: 0 8px 22px rgba(16, 24, 40, .06);
+    box-shadow: 0 8px 22px rgba(var(--brand-anthracite-rgb), .06);
   }
 
   .app-connected .chip:hover,
   .app-connected .chip.active {
     border-color: var(--app-blue) !important;
-    box-shadow: 0 12px 28px rgba(49, 95, 187, .14) !important;
+    box-shadow: 0 12px 28px rgba(var(--brand-blue-rgb), .14) !important;
   }
 
   .app-connected .chip-logoWrap,
@@ -677,17 +680,17 @@
   .app-connected .table thead,
   .app-connected .table thead tr,
   .app-connected .table thead th {
-    background: var(--bs-gray-100, #f3f4f6) !important;
-    background-color: var(--bs-gray-100, #f3f4f6) !important;
+    background: var(--bs-gray-100, var(--brand-bg)) !important;
+    background-color: var(--bs-gray-100, var(--brand-bg)) !important;
     background-image: none !important;
   }
 
   .app-connected .table thead th {
-    --bs-table-bg: var(--bs-gray-100, #f3f4f6);
-    --bs-table-color: var(--bs-gray-600, #667085);
-    border-color: var(--bs-gray-200, #e5e7eb) !important;
-    border-bottom: 1px solid var(--bs-gray-200, #e5e7eb) !important;
-    color: var(--bs-gray-600, #667085) !important;
+    --bs-table-bg: var(--bs-gray-100, var(--brand-bg));
+    --bs-table-color: var(--bs-gray-600, var(--brand-muted));
+    border-color: var(--bs-gray-200, var(--brand-border)) !important;
+    border-bottom: 1px solid var(--bs-gray-200, var(--brand-border)) !important;
+    color: var(--bs-gray-600, var(--brand-muted)) !important;
     font-size: .72rem !important;
     font-weight: 600 !important;
     letter-spacing: .04em;
@@ -706,13 +709,13 @@
   }
 
   .app-connected .table tbody td {
-    border-color: #e8ebef !important;
+    border-color: var(--brand-border) !important;
     background: #fff;
     color: var(--app-ink) !important;
   }
 
   .app-connected .table tbody tr:hover td {
-    background: #f7f9fb !important;
+    background: var(--brand-bg) !important;
   }
 
   .app-connected .form-control,
@@ -722,7 +725,7 @@
   .app-connected .ufd-form-control,
   .app-connected .ufd-form-select {
     min-height: 44px;
-    border: 1px solid #cfd5dc !important;
+    border: 1px solid var(--brand-border-strong) !important;
     border-radius: 6px !important;
     background: #fff !important;
     color: var(--app-ink) !important;
@@ -741,7 +744,7 @@
   .app-connected .ufd-form-control:focus,
   .app-connected .ufd-form-select:focus {
     border-color: var(--app-blue) !important;
-    box-shadow: 0 0 0 3px rgba(49, 95, 187, .13) !important;
+    box-shadow: 0 0 0 3px rgba(var(--brand-blue-rgb), .13) !important;
   }
 
   .app-connected .form-check-input:checked {
@@ -772,7 +775,7 @@
   .app-connected .btn-secondary {
     border-color: var(--app-orange) !important;
     background: var(--app-orange) !important;
-    color: #fff !important;
+    color: var(--app-ink) !important;
   }
 
   .app-connected .btn-warning:hover,
@@ -792,8 +795,8 @@
   }
 
   .app-connected .btn-outline-secondary {
-    border-color: #98a2b3 !important;
-    color: #344054 !important;
+    border-color: var(--brand-muted) !important;
+    color: var(--brand-ink) !important;
   }
 
   .app-connected .btn-outline-secondary:hover {
@@ -810,7 +813,7 @@
   .app-connected .discount-badge {
     border-color: var(--app-orange) !important;
     background: var(--app-orange) !important;
-    color: #fff !important;
+    color: var(--app-ink) !important;
   }
 
   .app-connected .modal-content,
@@ -833,10 +836,10 @@
 
   .app-connected #cartOffcanvas {
     --bs-offcanvas-width: min(96vw, 430px);
-    --hd-text: #101828;
-    --hd-muted: #667085;
-    --hd-border: #dfe3e8;
-    --hd-glass2: #f7f8fa;
+    --hd-text: var(--brand-ink);
+    --hd-muted: var(--brand-muted);
+    --hd-border: var(--brand-border);
+    --hd-glass2: var(--brand-bg);
     position: fixed !important;
     top: 0 !important;
     right: 0 !important;
@@ -850,9 +853,9 @@
     overflow: hidden !important;
     z-index: 1085 !important;
     border-radius: 0 !important;
-    border-left: 1px solid #dfe3e8;
+    border-left: 1px solid var(--brand-border);
     background: #fff !important;
-    color: #101828 !important;
+    color: var(--brand-ink) !important;
   }
 
   .app-connected #cartOffcanvas .offcanvas-header {
@@ -876,8 +879,8 @@
     min-height: 0 !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
-    background: #f3f5f7;
-    color: #101828;
+    background: var(--brand-bg);
+    color: var(--brand-ink);
   }
 
   .app-connected .offcanvas-backdrop {
@@ -885,10 +888,10 @@
   }
 
   .app-connected #cartOffcanvas .cart-summary-card {
-    border: 1px solid #dfe3e8 !important;
+    border: 1px solid var(--brand-border) !important;
     border-top: 4px solid var(--app-orange) !important;
     background: #fff !important;
-    color: #101828 !important;
+    color: var(--brand-ink) !important;
   }
 
   .app-connected #cartOffcanvas .cart-summary-kicker {
@@ -903,44 +906,44 @@
   .app-connected #cartOffcanvas .cart-title,
   .app-connected #cartOffcanvas .cart-qty,
   .app-connected #cartOffcanvas .cart-subtotal {
-    color: #101828 !important;
+    color: var(--brand-ink) !important;
   }
 
   .app-connected #cartOffcanvas .cart-summary-label,
   .app-connected #cartOffcanvas .cart-summary-foot,
   .app-connected #cartOffcanvas .cart-ref,
   .app-connected #cartOffcanvas .text-muted {
-    color: #667085 !important;
+    color: var(--brand-muted) !important;
   }
 
   .app-connected #cartOffcanvas .cart-summary-box {
-    border: 1px solid #dfe3e8;
-    background: #f7f8fa !important;
+    border: 1px solid var(--brand-border);
+    background: var(--brand-bg) !important;
   }
 
   .app-connected #cartOffcanvas .cart-summary-line {
-    border-top-color: #dfe3e8;
+    border-top-color: var(--brand-border);
   }
 
   .app-connected #cartOffcanvas .cart-summary-total {
-    border: 1px solid rgba(49, 95, 187, .22);
-    background: rgba(49, 95, 187, .08);
+    border: 1px solid rgba(var(--brand-blue-rgb), .22);
+    background: rgba(var(--brand-blue-rgb), .08);
   }
 
   .app-connected #cartOffcanvas .cart-item {
-    border: 1px solid #dfe3e8;
+    border: 1px solid var(--brand-border);
     background: #fff !important;
-    color: #101828;
+    color: var(--brand-ink);
   }
 
   .app-connected #cartOffcanvas .cart-thumb {
-    border-color: #dfe3e8;
+    border-color: var(--brand-border);
     background: #fff !important;
   }
 
   .app-connected #cartOffcanvas .cart-qty {
-    border-color: #dfe3e8;
-    background: #f3f5f7 !important;
+    border-color: var(--brand-border);
+    background: var(--brand-bg) !important;
   }
 
   @media (max-width: 575.98px) {
@@ -967,7 +970,7 @@
   }
 
   .app-connected.theme-dark {
-    --app-ink: #f7f8fa;
+    --app-ink: var(--brand-bg);
     --app-muted: #aeb7c4;
     --app-line: rgba(255, 255, 255, .13);
     --app-soft: #0f1116;

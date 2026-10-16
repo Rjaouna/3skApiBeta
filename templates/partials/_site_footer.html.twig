@@ -1,370 +1,80 @@
 {% set footer_connected = footer_connected|default(app.user ? true : false) %}
 {% set footer_home_href = footer_home_href|default(path('home')) %}
 {% set footer_anchor_prefix = footer_anchor_prefix|default(footer_home_href == path('home') ? path('home') : '') %}
+{% set footer_photo = optimized_asset('img/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp') %}
 
-<style>
-  .site-footer {
-    position: relative !important;
-    overflow: hidden !important;
-    margin-top: 0 !important;
-    padding-top: 4.25rem !important;
-    padding-bottom: 2.35rem !important;
-    border-top: 1px solid rgba(16,24,40,.08) !important;
-    background: #fff !important;
-    color: var(--public-ink, #111827) !important;
-    font-weight: 400 !important;
-  }
-
-  .site-footer::before {
-    content: "" !important;
-    position: absolute !important;
-    inset: 0 0 auto !important;
-    height: 3px !important;
-    background: linear-gradient(90deg, var(--public-blue, #315fbb), var(--public-orange, #ff9100), var(--public-blue, #315fbb)) !important;
-    opacity: .95 !important;
-  }
-
-  .site-footer::after {
-    content: "" !important;
-    position: absolute !important;
-    top: 0 !important;
-    right: -5% !important;
-    bottom: 0 !important;
-    width: min(46vw, 680px) !important;
-    display: block !important;
-    background:
-      linear-gradient(90deg, #fff 0%, rgba(255,255,255,.78) 34%, rgba(255,255,255,.28) 100%),
-      url('{{ optimized_asset('img/bg-section/stock-entrepot-pieces-carrosserie-automobile-3sk-parts-auto.jpeg') }}') center right / cover no-repeat !important;
-    opacity: .16 !important;
-    pointer-events: none !important;
-  }
-
-  .site-footer__inner {
-    position: relative !important;
-    z-index: 1 !important;
-    padding-top: .35rem !important;
-    padding-bottom: .35rem !important;
-  }
-
-  .site-footer p,
-  .site-footer li,
-  .site-footer span,
-  .site-footer a,
-  .site-footer button,
-  .site-footer strong {
-    font-weight: 400 !important;
-  }
-
-  .site-footer h4 {
-    color: var(--public-ink, #111827) !important;
-    font-size: 1.02rem !important;
-    font-weight: 500 !important;
-    letter-spacing: -.01em !important;
-    text-transform: uppercase !important;
-    margin-bottom: 1rem !important;
-  }
-
-  .site-footer h4::after {
-    display: none !important;
-  }
-
-  .site-footer hr {
-    border-color: rgba(16,24,40,.10) !important;
-    opacity: 1 !important;
-  }
-
-  .site-footer a {
-    color: var(--public-muted, #667085) !important;
-    text-decoration: none !important;
-    transition: color .15s ease, background .15s ease, border-color .15s ease, transform .15s ease !important;
-  }
-
-  .site-footer a:hover {
-    color: var(--public-blue, #315fbb) !important;
-    text-decoration: none !important;
-  }
-
-  .site-footer__muted {
-    color: var(--public-muted, #667085) !important;
-    line-height: 1.65 !important;
-  }
-
-  .site-footer__lead {
-    color: var(--public-ink, #111827) !important;
-    font-weight: 400 !important;
-    line-height: 1.45 !important;
-  }
-
-  .site-footer__logo {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    width: min(100%, 235px) !important;
-    min-height: 70px !important;
-    padding: .65rem 0 !important;
-    margin-bottom: .9rem !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
-
-  .site-footer__logo:hover {
-    transform: none !important;
-  }
-
-  .site-footer__logo img {
-    display: block !important;
-    width: 100% !important;
-    max-width: 210px !important;
-    max-height: 64px !important;
-    object-fit: contain !important;
-  }
-
-  .site-footer__list {
-    display: grid !important;
-    gap: .45rem !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    list-style: none !important;
-  }
-
-  .site-footer__list a,
-  .site-footer__list span {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: .55rem !important;
-    color: var(--public-muted, #667085) !important;
-    font-size: .92rem !important;
-    line-height: 1.35 !important;
-  }
-
-  .site-footer__list i {
-    width: 17px !important;
-    color: rgba(49,95,187,.55) !important;
-    text-align: center !important;
-  }
-
-  .site-footer__list a:hover {
-    color: var(--public-blue, #315fbb) !important;
-    transform: translateX(2px) !important;
-  }
-
-  .site-footer__list a:hover i {
-    color: var(--public-orange, #ff9100) !important;
-  }
-
-  .site-footer__block {
-    height: 100% !important;
-    padding: .25rem 0 0 !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
-
-  .site-footer .public-payment-row {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: .65rem !important;
-    align-items: center !important;
-  }
-
-  .site-footer .public-payment-badge {
-    min-width: 62px !important;
-    height: 38px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    border-radius: 10px !important;
-    border: 1px solid rgba(16,24,40,.10) !important;
-    background: #fff !important;
-    color: var(--public-ink, #111827) !important;
-    font-size: .76rem !important;
-    font-weight: 500 !important;
-    letter-spacing: .02em !important;
-    box-shadow: 0 8px 20px rgba(16,24,40,.06) !important;
-  }
-
-  .site-footer .public-payment-badge img {
-    display: block !important;
-    max-width: 54px !important;
-    max-height: 28px !important;
-    object-fit: contain !important;
-  }
-
-  .site-footer .public-payment-badge.is-mastercard {
-    color: #1f2937 !important;
-    position: relative !important;
-  }
-
-  .site-footer .public-payment-badge.is-mastercard::before,
-  .site-footer .public-payment-badge.is-mastercard::after {
-    content: "" !important;
-    width: 20px !important;
-    height: 20px !important;
-    border-radius: 50% !important;
-    position: absolute !important;
-    top: 9px !important;
-  }
-
-  .site-footer .public-payment-badge.is-mastercard::before {
-    left: 15px !important;
-    background: #eb001b !important;
-  }
-
-  .site-footer .public-payment-badge.is-mastercard::after {
-    left: 28px !important;
-    background: rgba(247,158,27,.88) !important;
-  }
-
-  .site-footer .public-payment-badge.is-mastercard span {
-    position: relative !important;
-    z-index: 1 !important;
-    font-size: 0 !important;
-  }
-
-  .site-footer__social a {
-    width: 36px !important;
-    height: 36px !important;
-    display: grid !important;
-    place-items: center !important;
-    border: 1px solid rgba(16,24,40,.08) !important;
-    border-radius: 999px !important;
-    background: #fff !important;
-    color: var(--public-ink, #111827) !important;
-    box-shadow: none !important;
-  }
-
-  .site-footer__social a:hover {
-    transform: translateY(-1px) !important;
-    background: var(--public-blue, #315fbb) !important;
-    border-color: var(--public-blue, #315fbb) !important;
-    color: #fff !important;
-  }
-
-  .site-footer__map {
-    height: 100% !important;
-    min-height: 285px !important;
-    border-radius: 20px !important;
-    overflow: hidden !important;
-    border: 1px solid rgba(16,24,40,.08) !important;
-    background: #dbeafe !important;
-    box-shadow: 0 18px 42px rgba(16,24,40,.10) !important;
-  }
-
-  .site-footer__map iframe {
-    display: block !important;
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 285px !important;
-    border: 0 !important;
-  }
-
-  .site-footer__bottom {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 1rem !important;
-    flex-wrap: wrap !important;
-    color: var(--public-muted, #667085) !important;
-    font-size: .86rem !important;
-  }
-
-  @media (max-width: 575.98px) {
-    .site-footer {
-      padding-top: 3.15rem !important;
-      padding-bottom: 2rem !important;
-    }
-
-    .site-footer::after {
-      width: 100% !important;
-      right: -38% !important;
-      opacity: .08 !important;
-    }
-
-    .site-footer__block {
-      padding: 0 !important;
-    }
-
-    .site-footer__logo {
-      min-height: auto !important;
-    }
-
-    .site-footer__map,
-    .site-footer__map iframe {
-      min-height: 220px !important;
-    }
-  }
-</style>
-
-<footer class="site-footer public-footer connected-footer">
-  <div class="container-fluid px-4 px-xl-5 site-footer__inner public-footer-inner">
-    <div class="row g-4 align-items-stretch">
-      <div class="col-12 col-lg-3">
-        <a class="site-footer__logo public-footer-logo connected-footer-logo" href="{{ footer_home_href }}" aria-label="3SK Parts Auto">
-          <img src="{{ optimized_asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto" loading="lazy" decoding="async">
+<footer class="site-footer site-footer--showcase" style="--footer-photo: url('{{ footer_photo }}')">
+  <div class="site-footer__main">
+    <div class="site-footer__inner">
+      <div class="site-footer__identity">
+        <a class="site-footer__logo" href="{{ footer_home_href }}" aria-label="3SK Parts Auto, accueil">
+          <img src="{{ optimized_asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto" width="290" height="78" loading="lazy" decoding="async">
         </a>
-        <p class="site-footer__lead mb-2">IMPORTATEUR ET DISTRIBUTEUR DE PIECES AUTOMOBILES CARROSSERIES ET ACCESSOIRES</p>
-        <p class="site-footer__muted public-footer-muted connected-footer-muted mb-3">HAY ENNASR 2 Nr 6 lahraouyine Casablanca</p>
-        <p class="mb-2"><strong>Service client :</strong> <button class="phone-contact-trigger" type="button" data-bs-toggle="modal" data-bs-target="#phoneContactModal">Voir les numeros</button></p>
-        <p class="mb-3"><strong>Email :</strong> <a href="mailto:3sk.partsauto@gmail.com">3sk.partsauto@gmail.com</a></p>
-        <div class="d-flex gap-2 site-footer__social public-footer-social connected-footer-social">
-          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        <p class="site-footer__lead">IMPORTATEUR ET DISTRIBUTEUR DE PIECES AUTOMOBILES CARROSSERIES ET ACCESSOIRES</p>
+        <p class="site-footer__address"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>HAY ENNASR 2 Nr 6 lahraouyine Casablanca</span></p>
+        <div class="site-footer__contacts">
+          <p><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Service client : <button class="phone-contact-trigger" type="button" data-bs-toggle="modal" data-bs-target="#phoneContactModal">Voir les numéros</button></span></p>
+          <p><i class="fa-solid fa-envelope" aria-hidden="true"></i><span>Email : <a href="mailto:3sk.partsauto@gmail.com">3sk.partsauto@gmail.com</a></span></p>
+        </div>
+        <div class="site-footer__social" aria-label="Réseaux sociaux">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+          <a href="https://wa.me/212613577138" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
         </div>
       </div>
 
-      <div class="col-12 col-md-6 col-lg-2">
-        <div class="site-footer__block public-footer-card">
-          <h4 class="h6 mb-3">Transaction sécurisée</h4>
-          <div class="public-payment-row mb-4">
-            <span class="public-payment-badge">
-              <img src="{{ asset('img/payment/cmi.svg') }}" alt="CMI" loading="lazy" decoding="async">
-            </span>
-            <span class="public-payment-badge is-mastercard"><span>Mastercard</span></span>
-            <span class="public-payment-badge">
-              <img src="{{ asset('img/payment/visa.svg') }}" alt="VISA" loading="lazy" decoding="async">
-            </span>
+      <div class="site-footer__support">
+        <section class="site-footer__panel" aria-labelledby="footer-payment-title">
+          <div class="site-footer__heading-row">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            <h2 class="site-footer__heading" id="footer-payment-title">Paiement sécurisé</h2>
           </div>
-
-          <h4 class="h6 mb-3">Besoin d'aide ?</h4>
-          <ul class="site-footer__list public-footer-list connected-footer-list">
-            <li><a href="{{ footer_anchor_prefix }}#qui-sommes-nous"><i class="fa-solid fa-circle-info"></i>À propos</a></li>
-            <li><a href="{{ footer_anchor_prefix }}#services"><i class="fa-solid fa-file-lines"></i>Services</a></li>
-            <li><a href="{{ footer_anchor_prefix }}#contact"><i class="fa-solid fa-headset"></i>Contact</a></li>
+          <div class="site-footer__payments">
+            <span class="site-footer__payment"><img src="{{ asset('img/payment/cmi-logo.png') }}" alt="CMI" width="60" height="40" loading="lazy" decoding="async"></span>
+            <span class="site-footer__payment site-footer__payment--mastercard" role="img" aria-label="Mastercard"><span></span><span></span></span>
+            <span class="site-footer__payment"><img src="{{ asset('img/payment/visa-logo.png') }}" alt="VISA" width="60" height="19" loading="lazy" decoding="async"></span>
+          </div>
+        </section>
+        <section class="site-footer__panel" aria-labelledby="footer-help-title">
+          <div class="site-footer__heading-row">
+            <i class="fa-solid fa-headset" aria-hidden="true"></i>
+            <h2 class="site-footer__heading" id="footer-help-title">Besoin d'aide ?</h2>
+          </div>
+          <ul class="site-footer__list">
+            <li><a href="{{ footer_anchor_prefix }}#qui-sommes-nous"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>À propos</span><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></li>
+            <li><a href="{{ footer_anchor_prefix }}#services"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Services</span><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></li>
+            <li><a href="{{ footer_anchor_prefix }}#contact"><i class="fa-solid fa-headset" aria-hidden="true"></i><span>Contact</span><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></li>
           </ul>
-        </div>
+        </section>
       </div>
 
-      <div class="col-12 col-md-6 col-lg-2">
-        <div class="site-footer__block public-footer-card">
-          <h4 class="h6 mb-3">Navigation</h4>
-          <ul class="site-footer__list public-footer-list connected-footer-list">
-            <li><a href="{{ footer_anchor_prefix }}#accueil"><i class="fa-solid fa-house"></i>Accueil</a></li>
-            <li><a href="{{ footer_anchor_prefix }}#marques"><i class="fa-solid fa-tags"></i>Marques</a></li>
-            <li><a href="{{ footer_anchor_prefix }}#contact"><i class="fa-solid fa-paper-plane"></i>Demande de contact</a></li>
-            <li><a href="{{ app.user ? path('account_profile') : path('app_login') }}"><i class="fa-solid fa-right-to-bracket"></i>Espace client</a></li>
-          </ul>
+      <nav class="site-footer__navigation" aria-labelledby="footer-nav-title">
+        <div class="site-footer__heading-row">
+          <i class="fa-solid fa-compass" aria-hidden="true"></i>
+          <h2 class="site-footer__heading" id="footer-nav-title">Navigation</h2>
         </div>
-      </div>
+        <ul class="site-footer__list">
+          <li><a href="{{ footer_anchor_prefix }}#accueil"><i class="fa-solid fa-house" aria-hidden="true"></i><span>Accueil</span><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></li>
+          <li><a href="{{ footer_anchor_prefix }}#marques"><i class="fa-solid fa-car-side" aria-hidden="true"></i><span>Marques</span><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></li>
+          <li><a href="{{ footer_anchor_prefix }}#contact"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i><span>Demande de contact</span><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></li>
+          <li><a href="{{ app.user ? path('account_profile') : path('app_login') }}"><i class="fa-solid fa-user" aria-hidden="true"></i><span>Espace client</span><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></li>
+        </ul>
+      </nav>
 
-      <div class="col-12 col-lg-5">
-        <div class="public-footer-map site-footer__map">
-          <iframe
-            title="Localisation 3SK Parts Auto Casablanca"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=33.528667,-7.550028&z=12&output=embed">
-          </iframe>
+      <section class="site-footer__panel site-footer__location" aria-labelledby="footer-location-title">
+        <div class="site-footer__heading-row">
+          <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+          <h2 class="site-footer__heading" id="footer-location-title">Notre localisation</h2>
         </div>
-      </div>
+        <div class="site-footer__map">
+          <iframe title="Localisation 3SK Parts Auto Casablanca" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=33.528667,-7.550028&z=12&output=embed"></iframe>
+        </div>
+        <p class="site-footer__map-caption"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>HAY ENNASR 2 Nr 6 lahraouyine Casablanca</span></p>
+      </section>
     </div>
-
-    <hr class="my-4">
-
-    <div class="site-footer__bottom public-footer-bottom connected-footer-muted">
+  </div>
+  <div class="site-footer__bottom">
+    <div class="site-footer__bottom-inner">
       <span>3SK Parts Auto - Tous droits réservés {{ "now"|date("Y") }}</span>
       <span>Importateur et distributeur de pièces automobiles, carrosseries et accessoires</span>
     </div>

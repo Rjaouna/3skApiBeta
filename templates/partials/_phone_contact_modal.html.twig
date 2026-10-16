@@ -26,34 +26,32 @@
     width: 1px;
     height: 22px;
     margin: 0 22px 0 18px;
-    background: rgba(49,95,187,.2);
+    background: rgba(var(--brand-blue-rgb), .2);
     vertical-align: middle;
   }
 
   .site-footer .phone-contact-trigger {
     display: inline;
-    color: var(--public-muted, #667085);
+    color: var(--public-muted, var(--brand-muted));
     background: transparent;
     padding: 0;
     text-align: left;
   }
 
   .site-footer .phone-contact-trigger:hover {
-    color: var(--public-blue, #315fbb);
+    color: var(--public-blue, var(--brand-blue));
   }
 
   .phone-contact-modal .modal-content {
     border: 0;
     border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 28px 70px rgba(16,24,40,.24);
+    box-shadow: 0 28px 70px rgba(var(--brand-anthracite-rgb), .24);
   }
 
   .phone-contact-modal__head {
     padding: 1.1rem 1.25rem;
-    background:
-      radial-gradient(circle at 12% 15%, rgba(255,145,0,.18), transparent 34%),
-      linear-gradient(135deg, var(--public-blue, #315fbb), #163c7a);
+    background: var(--brand-blue);
     color: #fff;
   }
 
@@ -78,21 +76,21 @@
     justify-content: space-between;
     gap: .9rem;
     padding: .85rem;
-    border: 1px solid rgba(49,95,187,.12);
+    border: 1px solid rgba(var(--brand-blue-rgb), .12);
     border-radius: 16px;
-    background: rgba(49,95,187,.035);
+    background: rgba(var(--brand-blue-rgb), .035);
   }
 
   .phone-contact-item__label {
     display: block;
-    color: var(--public-muted, #667085);
+    color: var(--public-muted, var(--brand-muted));
     font-size: .76rem;
     font-weight: 500;
   }
 
   .phone-contact-item__number {
     display: block;
-    color: var(--public-ink, #111827);
+    color: var(--public-ink, var(--brand-ink));
     font-size: .98rem;
     font-weight: 600;
     letter-spacing: .01em;
@@ -106,13 +104,13 @@
     display: inline-grid;
     place-items: center;
     color: #fff !important;
-    background: var(--public-blue, #315fbb);
+    background: var(--public-blue, var(--brand-blue));
     text-decoration: none;
-    box-shadow: 0 12px 22px rgba(49,95,187,.18);
+    box-shadow: 0 12px 22px rgba(var(--brand-blue-rgb), .18);
   }
 
   .phone-contact-item__call:hover {
-    background: var(--public-orange, #ff9100);
+    background: var(--brand-blue-dark);
     color: #fff !important;
   }
 

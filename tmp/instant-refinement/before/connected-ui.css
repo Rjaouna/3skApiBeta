@@ -1,0 +1,157 @@
+/* Authenticated workspace only. Existing content, states and permissions stay intact. */
+body.app-connected {
+  --workspace-gutter: clamp(24px, 2.65vw, 52px);
+  --workspace-line: rgba(var(--brand-blue-rgb), .12);
+}
+
+body.app-connected > :is(.container, .container-fluid):is(.py-3, .py-4) {
+  width: 100%;
+  max-width: none;
+  padding: 32px var(--workspace-gutter) 48px !important;
+}
+
+body.app-connected :is(.page-hero, .cart-page-hero, .orders-page-hero, .order-show-hero, .profile-page-hero, .clients-page-hero, .settings-page-hero, .import-page-hero, .reduction-page-hero, .ufd-page-hero, .notification-page-hero, .simple-page-hero, .dash-hero, .slide-admin-hero) {
+  min-height: 0;
+  padding: 0 0 24px !important;
+  margin-bottom: 24px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--workspace-line) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--brand-ink) !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+
+body.app-connected :is(.page-hero, .cart-page-hero, .orders-page-hero, .order-show-hero, .profile-page-hero, .clients-page-hero, .settings-page-hero, .import-page-hero, .reduction-page-hero, .ufd-page-hero, .notification-page-hero, .simple-page-hero, .dash-hero, .slide-admin-hero) :is(h1, h2, h3) {
+  margin: 0;
+  color: var(--brand-anthracite) !important;
+  font: 700 28px/1.25 'Montserrat', Arial, sans-serif !important;
+  text-transform: none;
+  overflow-wrap: anywhere;
+}
+
+body.app-connected :is(.page-hero, .cart-page-hero, .orders-page-hero, .order-show-hero, .profile-page-hero, .clients-page-hero, .settings-page-hero, .import-page-hero, .reduction-page-hero, .ufd-page-hero, .notification-page-hero, .simple-page-hero, .dash-hero, .slide-admin-hero) :is(h1, h2, h3)::before {
+  content: '';
+  display: inline-block;
+  width: 30px;
+  height: 3px;
+  margin-right: 14px;
+  vertical-align: middle;
+  background: var(--brand-orange);
+}
+
+body.app-connected :is(.page-hero, .cart-page-hero, .orders-page-hero, .order-show-hero, .profile-page-hero, .clients-page-hero, .settings-page-hero, .import-page-hero, .reduction-page-hero, .ufd-page-hero, .notification-page-hero, .simple-page-hero, .dash-hero, .slide-admin-hero) :is(.subtitle, .text-muted, .small) {
+  margin-top: 8px;
+  color: var(--brand-muted) !important;
+  line-height: 1.6;
+}
+
+body.app-connected :is(.cart-main-card, .cart-summary-card, .orders-summary-card, .orders-filter-card, .orders-table-card, .order-show-card, .profile-card, .clients-main-card, .settings-card, .import-card, .import-config-card, .reduction-shell, .ufd-filter-card, .ufd-table-card, .ufd-page-card, .simple-form-card, .admin-card, .dash-card, .slide-admin-card, .product-detail-card) {
+  border: 1px solid var(--workspace-line) !important;
+  border-radius: 16px !important;
+  background: var(--app-surface) !important;
+  box-shadow: 0 4px 18px rgba(var(--brand-blue-rgb), .025) !important;
+}
+
+body.app-connected :is(.profile-card, .order-show-card, .settings-card, .clients-main-card, .cart-main-card, .orders-filter-card, .orders-table-card, .dash-card) > .card-body { padding: 24px; }
+body.app-connected :is(.orders-filter-card, .ufd-filter-card, .reduction-toolbar) { border-radius: 12px !important; }
+body.app-connected :is(.profile-stat-card, .order-stat-card, .dash-mini-card, .import-stat-card) { border-color: transparent !important; border-radius: 8px !important; background: var(--brand-bg) !important; box-shadow: none !important; }
+body.app-connected :is(.profile-status-box, .password-side-box, .settings-side-box, .settings-switch-card, .client-switch-card, .import-file-box, .import-meta-box, .summary-box, .address-box, .customer-box) { border-color: var(--workspace-line) !important; border-radius: 8px !important; background: var(--brand-bg) !important; box-shadow: none !important; }
+body.app-connected .ufd-page-card .ufd-form-card { border: 0 !important; background: transparent !important; box-shadow: none !important; }
+body.app-connected :is(.ufd-page-card, .reduction-shell) :is(.ufd-form-card, .bulk-panel) { border-radius: 0 !important; box-shadow: none !important; }
+
+body.app-connected :is(.section-title, .profile-section-title, .settings-section-title, .dash-section-title, .import-section-title, .bulk-title) { margin-bottom: 20px; color: var(--brand-ink) !important; font-weight: 600 !important; text-transform: none; }
+body.app-connected :is(.section-title, .profile-section-title, .settings-section-title, .dash-section-title, .import-section-title)::before { width: 24px; height: 2px; margin-right: 10px; vertical-align: middle; background: var(--brand-orange); }
+body.app-connected :is(.form-label, .profile-label, .settings-label, .ufd-form-label, .orders-filter-label, .ufd-filter-label, .filters-label) { color: var(--brand-muted) !important; font-size: 13px !important; line-height: 1.5; text-transform: none; letter-spacing: 0; }
+body.app-connected :is(.form-control, .form-select, textarea, .ufd-form-control, .ufd-form-select) { border-color: rgba(var(--brand-blue-rgb), .23) !important; border-radius: 8px !important; font-weight: 400 !important; }
+body.app-connected :is(.form-control, .form-select, textarea):focus { border-color: var(--brand-blue) !important; box-shadow: 0 0 0 3px rgba(var(--brand-blue-rgb), .12) !important; }
+body.app-connected .form-check-input:checked { border-color: var(--brand-blue); background-color: var(--brand-blue); }
+body.app-connected .btn { min-height: 42px; border-radius: 8px !important; font-weight: 550 !important; transform: none !important; }
+body.app-connected .btn-sm { min-height: 36px; }
+body.app-connected .btn-primary { border-color: var(--brand-orange) !important; background: var(--brand-orange) !important; color: var(--brand-ink) !important; }
+body.app-connected .btn-primary:is(:hover, :focus-visible) { border-color: var(--brand-orange-dark) !important; background: var(--brand-orange-dark) !important; color: var(--brand-ink) !important; }
+body.app-connected .btn-primary > i { color: inherit !important; }
+body.app-connected .btn:is(.btn-outline-primary, .btn-outline-secondary) { border-color: rgba(var(--brand-blue-rgb), .35) !important; background: var(--brand-surface) !important; color: var(--brand-blue) !important; }
+body.app-connected .btn:is(.btn-outline-primary, .btn-outline-secondary):is(:hover, :focus-visible) { border-color: var(--brand-blue) !important; background: var(--brand-blue) !important; color: var(--brand-surface) !important; }
+body.app-connected .btn:is(.btn-outline-primary, .btn-outline-secondary) > i { color: inherit !important; }
+body.app-connected :is(button, a, summary, input, select, textarea):focus-visible { outline: 2px solid var(--brand-blue) !important; outline-offset: 3px; }
+
+body.app-connected .table-responsive { border-radius: 10px; }
+body.app-connected .table thead th { color: var(--brand-muted) !important; border-color: var(--workspace-line) !important; font-size: 12px !important; letter-spacing: 0; }
+body.app-connected .table tbody td { border-color: rgba(var(--brand-blue-rgb), .08) !important; }
+body.app-connected :is(.clients-toolbar, .ufd-filter-card, .reduction-toolbar) { gap: 16px; }
+body.app-connected :is(.clients-search-input, .clients-filter-select, .ufd-search, .ufd-filter-select) { border-radius: 8px !important; }
+
+body.app-connected .site__header .header-topbar { border-color: transparent !important; background: var(--brand-blue) !important; color: var(--brand-surface); }
+body.app-connected .site__header .header-topbar .container-fluid { padding-inline: var(--workspace-gutter) !important; }
+body.app-connected .site__header .topbar-row { min-height: 54px; color: var(--brand-surface) !important; }
+body.app-connected .site__header .header-topbar :is(.topbar-welcome, .account-name) { color: var(--brand-surface) !important; }
+body.app-connected .site__header .topbar-phone { border-color: rgba(255, 255, 255, .28); background: rgba(255, 255, 255, .1); color: var(--brand-surface) !important; text-decoration: none !important; }
+body.app-connected .site__header .topbar-phone i { color: inherit; }
+body.app-connected .site__header .header-topbar :is(.hd-iconbtn, .admin-settings-btn) { border-color: rgba(255, 255, 255, .28) !important; background: rgba(255, 255, 255, .08) !important; color: var(--brand-surface) !important; }
+body.app-connected .site__header .header-topbar :is(.hd-iconbtn, .admin-settings-btn):hover { border-color: var(--brand-surface) !important; background: rgba(255, 255, 255, .16) !important; color: var(--brand-surface) !important; }
+body.app-connected .site__header .header-topbar :is(button, a):focus-visible { outline-color: var(--brand-surface) !important; }
+body.app-connected .site__header .header-search .search-input { padding-right: 52px; border-radius: 24px !important; background: var(--brand-surface) !important; font-weight: 400; }
+body.app-connected .site__header .voice-search-btn { border-radius: 50%; }
+body.app-connected .site__header .indicator-btn { border-color: var(--workspace-line); border-radius: 12px; }
+body.app-connected .site__header .indicator-title { font-size: 14px; }
+body.app-connected .site__header .main-menu__link:is(.is-active, [aria-current="page"], :hover) { background: rgba(var(--brand-blue-rgb), .05) !important; color: var(--brand-blue) !important; }
+body.app-connected .site__header .main-menu__link:is(.is-active, [aria-current="page"]) { box-shadow: inset 0 -3px var(--brand-orange) !important; }
+body.app-connected .site__header :is(.account-menu, .dropdown-menu) { border-color: var(--workspace-line); border-radius: 12px; box-shadow: 0 12px 32px rgba(var(--brand-blue-rgb), .1); }
+
+body.app-connected .home-section-head h2,
+body.app-connected .latest-arrivals-title { color: var(--brand-ink) !important; font-size: 28px !important; line-height: 1.3 !important; font-weight: 700 !important; text-transform: none !important; letter-spacing: 0 !important; }
+body.app-connected .latest-arrivals-title .heading-accent { color: var(--brand-blue) !important; text-shadow: none !important; }
+body.app-connected .latest-arrivals-eyebrow { color: var(--brand-blue) !important; }
+body.app-connected .home-grid .chip { border-color: var(--workspace-line) !important; border-radius: 8px !important; box-shadow: 0 2px 8px rgba(var(--brand-blue-rgb), .025) !important; }
+body.app-connected .home-grid .chip:is(:hover, .active) { border-color: var(--brand-blue) !important; background: rgba(var(--brand-blue-rgb), .025) !important; }
+body.app-connected .product-grid .product-card { border-color: var(--workspace-line) !important; border-radius: 8px !important; }
+body.app-connected .product-grid .product-card:hover { border-color: rgba(var(--brand-blue-rgb), .4) !important; box-shadow: 0 4px 16px rgba(var(--brand-blue-rgb), .07) !important; }
+body.app-connected .product-grid .meta-chip { border-radius: 4px !important; }
+body.app-connected .product-grid .qty-stepper { border-color: rgba(var(--brand-blue-rgb), .23); border-radius: 6px; }
+body.app-connected .product-grid .addcart:not(:disabled),
+body.app-connected #addToCartBtn:not(:disabled) { border-color: var(--brand-orange) !important; border-radius: 6px; background: var(--brand-orange) !important; color: var(--brand-ink) !important; }
+body.app-connected .product-grid .addcart:not(:disabled):hover,
+body.app-connected #addToCartBtn:not(:disabled):hover { background: var(--brand-orange-dark) !important; }
+body.app-connected .product-grid .addcart:not(:disabled) > i { color: inherit !important; }
+body.app-connected .detail-ref { color: var(--brand-blue); }
+body.app-connected .detail-title { color: var(--brand-ink); }
+body.app-connected :is(.detail-item, .related-card) { border-color: var(--workspace-line); border-radius: 8px !important; }
+body.app-connected .detail-image-wrap { border-color: var(--workspace-line); border-radius: 12px; background: var(--brand-surface); }
+
+body.app-connected .modal-content { border-color: var(--workspace-line); border-radius: 16px; box-shadow: 0 16px 48px rgba(var(--brand-blue-rgb), .12); }
+body.app-connected .modal-header { padding: 20px 24px; background: var(--brand-bg); }
+body.app-connected .modal-footer { padding: 18px 24px; }
+body.app-connected #adminSettingsModal .modal-content { border-radius: 0; }
+body.app-connected #adminSettingsModal :is(.admin-settings-modal__heading, .admin-settings-modal__title) { color: var(--brand-ink); }
+body.app-connected .account-menu-item--danger,
+body.app-connected .account-menu-item--danger .account-menu-item__icon { color: #B02A37 !important; }
+body.app-connected .whatsapp-float { top: auto; bottom: 24px; }
+
+@media (max-width: 991px) {
+  body.app-connected { --workspace-gutter: 24px; }
+  body.app-connected .site__header .topbar-row { min-height: 48px; }
+  body.app-connected .clients-table { min-width: 1060px; table-layout: auto; }
+  body.app-connected .clients-table :is(th, td):first-child { min-width: 240px; }
+  body.app-connected .clients-table .client-primary-name { word-break: normal; overflow-wrap: anywhere; }
+}
+
+@media (max-width: 575px) {
+  body.app-connected { --workspace-gutter: 18px; }
+  body.app-connected > :is(.container, .container-fluid):is(.py-3, .py-4) { padding: 24px var(--workspace-gutter) 36px !important; }
+  body.app-connected :is(.page-hero, .cart-page-hero, .orders-page-hero, .order-show-hero, .profile-page-hero, .clients-page-hero, .settings-page-hero, .import-page-hero, .reduction-page-hero, .ufd-page-hero, .notification-page-hero, .simple-page-hero, .dash-hero, .slide-admin-hero) { padding-bottom: 20px !important; margin-bottom: 20px !important; }
+  body.app-connected :is(.page-hero, .cart-page-hero, .orders-page-hero, .order-show-hero, .profile-page-hero, .clients-page-hero, .settings-page-hero, .import-page-hero, .reduction-page-hero, .ufd-page-hero, .notification-page-hero, .simple-page-hero, .dash-hero, .slide-admin-hero) :is(h1, h2, h3) { font-size: 24px !important; }
+  body.app-connected :is(.page-hero, .cart-page-hero, .orders-page-hero, .order-show-hero, .profile-page-hero, .clients-page-hero, .settings-page-hero, .import-page-hero, .reduction-page-hero, .ufd-page-hero, .notification-page-hero, .simple-page-hero, .dash-hero, .slide-admin-hero) :is(h1, h2, h3)::before { width: 22px; margin-right: 10px; }
+  body.app-connected .btn { min-height: 44px; }
+  body.app-connected .btn-sm { min-height: 36px; }
+  body.app-connected .home-section-head h2,
+  body.app-connected .latest-arrivals-title { font-size: 24px !important; }
+  body.app-connected :is(.cart-main-card, .cart-summary-card, .orders-summary-card, .orders-filter-card, .orders-table-card, .order-show-card, .profile-card, .clients-main-card, .settings-card, .import-card, .import-config-card, .ufd-filter-card, .ufd-table-card, .ufd-page-card, .simple-form-card, .admin-card, .dash-card, .slide-admin-card, .product-detail-card) { border-radius: 12px !important; }
+  body.app-connected .modal-header,
+  body.app-connected .modal-footer { padding-inline: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.app-connected :is(.btn, .product-card, .related-card, .chip) { transition: none; }
+}

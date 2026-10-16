@@ -150,8 +150,8 @@
   }
 
   .meta-chip{
-    border: 1px solid rgb(255 145 0);
-    background: rgb(255 145 0);
+    border: 1px solid var(--brand-orange);
+    background: var(--brand-orange);
     border-radius: 999px;
     padding: 2px 10px;
     font-weight: 700;
@@ -393,7 +393,7 @@
     gap: 8px;
     padding: 0 16px;
     font-weight: 600;
-    border: 1px solid #dee2e6;
+    border: 1px solid var(--brand-border);
     background: #ecf0f1;
   }
   .addcart:hover{ background: rgba(190,190,190,.64); }
@@ -474,7 +474,8 @@
 {% set fallbackImg = asset('img/default-piece.png') %}
 
 {% set stock = article.realStock %}
-{% set stockClass = stock == 0 ? 'out' : (stock < 5 ? 'low' : '') %}
+{% set canSeeExactStock = is_granted('ROLE_ADMIN') %}
+{% set stockClass = stock == 0 ? 'out' : (canSeeExactStock and stock < 5 ? 'low' : '') %}
 
 {% set reductionRate = article.reduction is not empty ? (article.reduction|replace({',': '.'}) + 0) : 0 %}
 {% set hasReduction = reductionRate > 0 %}
@@ -553,7 +554,13 @@
 
           <span class="stock-box {{ stockClass }}" id="stockBadgeBox">
             <i class="fa-solid fa-cubes-stacked"></i>
-            Stock : <span id="stockBadgeValue">{{ stock > 20 ? '+20' : stock }}</span>
+            <span id="stockBadgeValue">
+              {% if canSeeExactStock %}
+                Stock : {{ stock > 20 ? '+20' : stock }}
+              {% else %}
+                {{ stock > 0 ? 'En stock' : 'Non dispo' }}
+              {% endif %}
+            </span>
           </span>
 
           <div class="cart-actions">
@@ -706,7 +713,8 @@
 <script>
 (function(){
   const code = {{ article.id|json_encode|raw }};
-  const stock = {{ article.realStock|default(0) }};
+  const stock = {{ canSeeExactStock ? article.realStock|default(0) : (stock > 0 ? 999999 : 0) }};
+  const canSeeExactStock = {{ canSeeExactStock ? 'true' : 'false' }};
   const qtyField = document.querySelector('[data-qty-input]');
   const btnMinus = document.querySelector('[data-qty-minus]');
   const btnPlus = document.querySelector('[data-qty-plus]');
@@ -795,7 +803,9 @@
     const available = getAvailNow();
 
     if (stockBadgeValue){
-      stockBadgeValue.textContent = available > 20 ? '+20' : String(available);
+      stockBadgeValue.textContent = canSeeExactStock
+        ? `Stock : ${available > 20 ? '+20' : String(available)}`
+        : (available > 0 ? 'En stock' : 'Non dispo');
     }
 
     if (stockBadgeBox){
@@ -803,7 +813,7 @@
 
       if (available <= 0){
         stockBadgeBox.classList.add('out');
-      } else if (available < 5){
+      } else if (canSeeExactStock && available < 5){
         stockBadgeBox.classList.add('low');
       }
     }
@@ -854,7 +864,7 @@
 
     const qty = Math.max(1, sanitizeQty());
     if (qty > max){
-      showMsg('Stock disponible : ' + max, 'warning');
+      showMsg(canSeeExactStock ? 'Stock disponible : ' + max : 'Quantité demandée indisponible.', 'warning');
       qtyField.value = String(max);
       setUI();
       return;

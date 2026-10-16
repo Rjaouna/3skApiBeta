@@ -1,0 +1,1088 @@
+[
+  {
+    "width": 1920,
+    "sections": [
+      {
+        "selector": ".showcase-header",
+        "dimensions": {
+          "width": 1920,
+          "height": 156,
+          "background": "rgb(255, 255, 255)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".showcase-hero",
+        "dimensions": {
+          "width": 1920,
+          "height": 510,
+          "background": "rgb(35, 43, 56)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "3SK PARTS AUTO",
+              "size": "88px",
+              "font": "Montserrat, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": ".showcase-brands",
+        "dimensions": {
+          "width": 1920,
+          "height": 104.796875,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".public-intro-v2",
+        "dimensions": {
+          "width": 1920,
+          "height": 452.875,
+          "background": "rgb(255, 255, 255)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Pieces Carrosserie & accessoires automobile",
+              "size": "36px",
+              "font": "Montserrat, \"Arial Black\", Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#qui-sommes-nous",
+        "dimensions": {
+          "width": 1920,
+          "height": 781.71875,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "3SK Parts Auto",
+              "size": "64px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#services",
+        "dimensions": {
+          "width": 1920,
+          "height": 1001.59375,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Une offre pourle terrain",
+              "size": "60px",
+              "font": "Montserrat, Arial, sans-serif"
+            },
+            {
+              "text": "Distribution de pièces carrosserie et accessoires pour l'automobile",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Organisation claire des références pour faciliter la préparation des commandes",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Activité d'import-export pour approvisionner l'offre",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Espace client pour consulter le catalogue et préparer les achats",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Un stock organisé pour répondre rapidement aux besoins de vos commandes.",
+              "size": "28px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#marques",
+        "dimensions": {
+          "width": 1920,
+          "height": 717.921875,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Nos marques partenaires",
+              "size": "48px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": ".site-stats-strip",
+        "dimensions": {
+          "width": 1920,
+          "height": 245.4375,
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".site-footer",
+        "dimensions": {
+          "width": 1920,
+          "height": 743.1875,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Paiement sécurisé",
+              "size": "18px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Besoin d'aide ?",
+              "size": "18px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Navigation",
+              "size": "18px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Notre localisation",
+              "size": "18px",
+              "font": "Roboto, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "sections": [
+      {
+        "selector": ".showcase-header",
+        "dimensions": {
+          "width": 1440,
+          "height": 154,
+          "background": "rgb(255, 255, 255)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".showcase-hero",
+        "dimensions": {
+          "width": 1440,
+          "height": 490,
+          "background": "rgb(35, 43, 56)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "3SK PARTS AUTO",
+              "size": "64px",
+              "font": "Montserrat, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": ".showcase-brands",
+        "dimensions": {
+          "width": 1440,
+          "height": 121.59375,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".public-intro-v2",
+        "dimensions": {
+          "width": 1440,
+          "height": 452.875,
+          "background": "rgb(255, 255, 255)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Pieces Carrosserie & accessoires automobile",
+              "size": "36px",
+              "font": "Montserrat, \"Arial Black\", Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#qui-sommes-nous",
+        "dimensions": {
+          "width": 1440,
+          "height": 731.96875,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "3SK Parts Auto",
+              "size": "56px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#services",
+        "dimensions": {
+          "width": 1440,
+          "height": 920.328125,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Une offre pourle terrain",
+              "size": "60px",
+              "font": "Montserrat, Arial, sans-serif"
+            },
+            {
+              "text": "Distribution de pièces carrosserie et accessoires pour l'automobile",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Organisation claire des références pour faciliter la préparation des commandes",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Activité d'import-export pour approvisionner l'offre",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Espace client pour consulter le catalogue et préparer les achats",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Un stock organisé pour répondre rapidement aux besoins de vos commandes.",
+              "size": "28px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#marques",
+        "dimensions": {
+          "width": 1440,
+          "height": 703.765625,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Nos marques partenaires",
+              "size": "36px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": ".site-stats-strip",
+        "dimensions": {
+          "width": 1440,
+          "height": 243.984375,
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".site-footer",
+        "dimensions": {
+          "width": 1440,
+          "height": 702.78125,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Paiement sécurisé",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Besoin d'aide ?",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Navigation",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Notre localisation",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 1024,
+    "sections": [
+      {
+        "selector": ".showcase-header",
+        "dimensions": {
+          "width": 1024,
+          "height": 199.09375,
+          "background": "rgb(255, 255, 255)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".showcase-hero",
+        "dimensions": {
+          "width": 1024,
+          "height": 470,
+          "background": "rgb(35, 43, 56)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "3SK PARTS AUTO",
+              "size": "58px",
+              "font": "Montserrat, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": ".showcase-brands",
+        "dimensions": {
+          "width": 1024,
+          "height": 129.59375,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".public-intro-v2",
+        "dimensions": {
+          "width": 1024,
+          "height": 480.0625,
+          "background": "rgb(255, 255, 255)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Pieces Carrosserie & accessoires automobile",
+              "size": "36px",
+              "font": "Montserrat, \"Arial Black\", Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#qui-sommes-nous",
+        "dimensions": {
+          "width": 1024,
+          "height": 721.09375,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "3SK Parts Auto",
+              "size": "44px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#services",
+        "dimensions": {
+          "width": 1024,
+          "height": 861.078125,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Une offre pourle terrain",
+              "size": "44px",
+              "font": "Montserrat, Arial, sans-serif"
+            },
+            {
+              "text": "Distribution de pièces carrosserie et accessoires pour l'automobile",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Organisation claire des références pour faciliter la préparation des commandes",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Activité d'import-export pour approvisionner l'offre",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Espace client pour consulter le catalogue et préparer les achats",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Un stock organisé pour répondre rapidement aux besoins de vos commandes.",
+              "size": "24px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#marques",
+        "dimensions": {
+          "width": 1024,
+          "height": 1158.953125,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Nos marques partenaires",
+              "size": "36px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": ".site-stats-strip",
+        "dimensions": {
+          "width": 1024,
+          "height": 317.96875,
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".site-footer",
+        "dimensions": {
+          "width": 1024,
+          "height": 1157.171875,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Paiement sécurisé",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Besoin d'aide ?",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Navigation",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Notre localisation",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 768,
+    "sections": [
+      {
+        "selector": ".showcase-header",
+        "dimensions": {
+          "width": 768,
+          "height": 180.59375,
+          "background": "rgb(255, 255, 255)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".showcase-hero",
+        "dimensions": {
+          "width": 768,
+          "height": 590,
+          "background": "rgb(35, 43, 56)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "3SK PARTS AUTO",
+              "size": "36px",
+              "font": "Montserrat, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": ".showcase-brands",
+        "dimensions": {
+          "width": 768,
+          "height": 116.59375,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".public-intro-v2",
+        "dimensions": {
+          "width": 768,
+          "height": 730.921875,
+          "background": "rgb(255, 255, 255)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Pieces Carrosserie & accessoires automobile",
+              "size": "36px",
+              "font": "Montserrat, \"Arial Black\", Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#qui-sommes-nous",
+        "dimensions": {
+          "width": 768,
+          "height": 1192.4375,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "3SK Parts Auto",
+              "size": "44px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#services",
+        "dimensions": {
+          "width": 768,
+          "height": 1420.53125,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Une offre pourle terrain",
+              "size": "44px",
+              "font": "Montserrat, Arial, sans-serif"
+            },
+            {
+              "text": "Distribution de pièces carrosserie et accessoires pour l'automobile",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Organisation claire des références pour faciliter la préparation des commandes",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Activité d'import-export pour approvisionner l'offre",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Espace client pour consulter le catalogue et préparer les achats",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Un stock organisé pour répondre rapidement aux besoins de vos commandes.",
+              "size": "24px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#marques",
+        "dimensions": {
+          "width": 768,
+          "height": 1158.953125,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Nos marques partenaires",
+              "size": "36px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": ".site-stats-strip",
+        "dimensions": {
+          "width": 768,
+          "height": 352.75,
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".site-footer",
+        "dimensions": {
+          "width": 768,
+          "height": 1184.5625,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Paiement sécurisé",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Besoin d'aide ?",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Navigation",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Notre localisation",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 390,
+    "sections": [
+      {
+        "selector": ".showcase-header",
+        "dimensions": {
+          "width": 390,
+          "height": 180.59375,
+          "background": "rgb(255, 255, 255)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".showcase-hero",
+        "dimensions": {
+          "width": 390,
+          "height": 625.65625,
+          "background": "rgb(35, 43, 56)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "3SK PARTS AUTO",
+              "size": "36px",
+              "font": "Montserrat, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": ".showcase-brands",
+        "dimensions": {
+          "width": 390,
+          "height": 116.59375,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".public-intro-v2",
+        "dimensions": {
+          "width": 390,
+          "height": 908.234375,
+          "background": "rgb(255, 255, 255)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Pieces Carrosserie & accessoires automobile",
+              "size": "28px",
+              "font": "Montserrat, \"Arial Black\", Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#qui-sommes-nous",
+        "dimensions": {
+          "width": 390,
+          "height": 1257,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "3SK Parts Auto",
+              "size": "32px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#services",
+        "dimensions": {
+          "width": 390,
+          "height": 1551.40625,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Une offre pourle terrain",
+              "size": "32px",
+              "font": "Montserrat, Arial, sans-serif"
+            },
+            {
+              "text": "Distribution de pièces carrosserie et accessoires pour l'automobile",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Organisation claire des références pour faciliter la préparation des commandes",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Activité d'import-export pour approvisionner l'offre",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Espace client pour consulter le catalogue et préparer les achats",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Un stock organisé pour répondre rapidement aux besoins de vos commandes.",
+              "size": "22px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#marques",
+        "dimensions": {
+          "width": 390,
+          "height": 1398.78125,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Nos marques partenaires",
+              "size": "28px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": ".site-stats-strip",
+        "dimensions": {
+          "width": 390,
+          "height": 410.34375,
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".site-footer",
+        "dimensions": {
+          "width": 390,
+          "height": 1928.84375,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Paiement sécurisé",
+              "size": "18px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Besoin d'aide ?",
+              "size": "18px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Navigation",
+              "size": "18px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Notre localisation",
+              "size": "18px",
+              "font": "Roboto, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 320,
+    "sections": [
+      {
+        "selector": ".showcase-header",
+        "dimensions": {
+          "width": 320,
+          "height": 180.59375,
+          "background": "rgb(255, 255, 255)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".showcase-hero",
+        "dimensions": {
+          "width": 320,
+          "height": 677.5625,
+          "background": "rgb(35, 43, 56)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "3SK PARTS AUTO",
+              "size": "30px",
+              "font": "Montserrat, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": ".showcase-brands",
+        "dimensions": {
+          "width": 320,
+          "height": 116.59375,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".public-intro-v2",
+        "dimensions": {
+          "width": 320,
+          "height": 993.015625,
+          "background": "rgb(255, 255, 255)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Pieces Carrosserie & accessoires automobile",
+              "size": "28px",
+              "font": "Montserrat, \"Arial Black\", Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#qui-sommes-nous",
+        "dimensions": {
+          "width": 320,
+          "height": 1260.578125,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "3SK Parts Auto",
+              "size": "32px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#services",
+        "dimensions": {
+          "width": 320,
+          "height": 1660.8125,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Une offre pourle terrain",
+              "size": "32px",
+              "font": "Montserrat, Arial, sans-serif"
+            },
+            {
+              "text": "Distribution de pièces carrosserie et accessoires pour l'automobile",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Organisation claire des références pour faciliter la préparation des commandes",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Activité d'import-export pour approvisionner l'offre",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Espace client pour consulter le catalogue et préparer les achats",
+              "size": "16px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Un stock organisé pour répondre rapidement aux besoins de vos commandes.",
+              "size": "22px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": "#marques",
+        "dimensions": {
+          "width": 320,
+          "height": 1420.21875,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Nos marques partenaires",
+              "size": "28px",
+              "font": "Montserrat, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      },
+      {
+        "selector": ".site-stats-strip",
+        "dimensions": {
+          "width": 320,
+          "height": 410.34375,
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px",
+          "headings": []
+        },
+        "difference": null
+      },
+      {
+        "selector": ".site-footer",
+        "dimensions": {
+          "width": 320,
+          "height": 2001.828125,
+          "background": "rgb(245, 246, 248)",
+          "radius": "0px",
+          "headings": [
+            {
+              "text": "Paiement sécurisé",
+              "size": "18px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Besoin d'aide ?",
+              "size": "18px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Navigation",
+              "size": "18px",
+              "font": "Roboto, Arial, sans-serif"
+            },
+            {
+              "text": "Notre localisation",
+              "size": "18px",
+              "font": "Roboto, Arial, sans-serif"
+            }
+          ]
+        },
+        "difference": null
+      }
+    ],
+    "errors": []
+  }
+]

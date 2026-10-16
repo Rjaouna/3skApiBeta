@@ -1,0 +1,51 @@
+{
+  "pdf": "F:\\3sk\\3sk (1)\\output\\pdf\\3SK_recapitulatif_modifications_janvier_octobre_2026.pdf",
+  "as_of": "2026-10-09",
+  "interventions": 100,
+  "estimate_hours_min": 190.5,
+  "estimate_hours_max": 336.0,
+  "periods": {
+    "early": {
+      "count": 6,
+      "hours": [
+        14.0,
+        24.0
+      ]
+    },
+    "june": {
+      "count": 20,
+      "hours": [
+        36.0,
+        65.0
+      ]
+    },
+    "july": {
+      "count": 56,
+      "hours": [
+        101.0,
+        179.5
+      ]
+    },
+    "august": {
+      "count": 8,
+      "hours": [
+        13.25,
+        23.0
+      ]
+    },
+    "september": {
+      "count": 9,
+      "hours": [
+        24.25,
+        40.5
+      ]
+    },
+    "october": {
+      "count": 1,
+      "hours": [
+        2,
+        4
+      ]
+    }
+  }
+}

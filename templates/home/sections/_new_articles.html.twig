@@ -26,7 +26,7 @@
     line-height: .96;
     letter-spacing: .055em;
     text-transform: uppercase;
-    color: #1f2937;
+    color: var(--brand-ink);
   }
 
   [data-new-section] .latest-arrivals-eyebrow{
@@ -35,7 +35,7 @@
     justify-content: center;
     gap: .55rem;
     margin-bottom: 1rem;
-    color: var(--bs-warning, #ff9100);
+    color: var(--bs-warning, var(--brand-orange));
     font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
     font-size: clamp(.68rem, .78vw, .82rem);
     font-weight: 700;
@@ -49,14 +49,14 @@
   }
 
   [data-new-section] .latest-arrivals-title .heading-accent{
-    color: var(--bs-warning, #ff9100);
-    text-shadow: 0 10px 26px rgba(255, 145, 0, .30);
+    color: var(--bs-warning, var(--brand-orange));
+    text-shadow: 0 10px 26px rgba(var(--brand-orange-rgb), .30);
   }
 
   [data-new-section] .latest-arrivals-subtitle{
     margin-top: 8px;
     font-size: .9rem;
-    color: #6b7280;
+    color: var(--brand-muted);
     font-weight: 400;
     letter-spacing: .08em;
     text-transform: uppercase;
@@ -263,8 +263,8 @@
   }
 
   [data-new-section] .meta-chip{
-    border: 1px solid rgb(255 145 0);
-    background: rgb(255 145 0);
+    border: 1px solid var(--brand-orange);
+    background: var(--brand-orange);
     border-radius: 999px;
     padding: 0 6px;
     font-weight: 400;
@@ -375,7 +375,7 @@
     justify-content: center;
     gap: 4px;
     padding: 0 5px;
-    border: 1px solid #dee2e6;
+    border: 1px solid var(--brand-border);
     background: #ecf0f1;
     font-weight: 600;
   }
@@ -425,10 +425,15 @@
 </style>
 
 <section class="latest-arrivals-section mb-5" data-new-section>
-  <div class="text-center mb-4">
-    <div class="section-eyebrow latest-arrivals-eyebrow">Nouveautés catalogue</div>
-    <h2 class="latest-arrivals-title">Dernier <span class="heading-accent">arrivage</span></h2>
-    <div class="latest-arrivals-subtitle">Découvrez les arrivages récemment ajoutés au catalogue</div>
+  <div class="latest-arrivals-head">
+    <div>
+      <div class="section-eyebrow latest-arrivals-eyebrow">Nouveautés catalogue</div>
+      <h2 class="latest-arrivals-title">Dernier <span class="heading-accent">arrivage</span></h2>
+      <div class="latest-arrivals-subtitle">Découvrez les arrivages récemment ajoutés au catalogue</div>
+    </div>
+    <a href="{{ path('articles_page', { new: 1, newDays: 90 }) }}" class="latest-arrivals-link">
+      Voir tout<i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+    </a>
   </div>
 
   <div class="product-grid" data-new-grid>
@@ -439,11 +444,6 @@
 
   <div class="alert alert-danger mt-3 d-none" data-new-error></div>
 
-  <div class="mt-4 text-center">
-    <a href="{{ path('articles_page', { new: 1, newDays: 90 }) }}" class="latest-arrivals-link">
-      Voir tout →
-    </a>
-  </div>
 </section>
 
 <style>
@@ -459,7 +459,7 @@
     line-height: .96;
     letter-spacing: .055em;
     text-transform: uppercase;
-    color: #1f2937;
+    color: var(--brand-ink);
   }
 
   .latest-arrivals-eyebrow{
@@ -468,7 +468,7 @@
     justify-content: center;
     gap: .55rem;
     margin-bottom: 1rem;
-    color: var(--bs-warning, #ff9100);
+    color: var(--bs-warning, var(--brand-orange));
     font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
     font-size: clamp(.68rem, .78vw, .82rem);
     font-weight: 700;
@@ -482,14 +482,14 @@
   }
 
   .latest-arrivals-title .heading-accent{
-    color: var(--bs-warning, #ff9100);
-    text-shadow: 0 10px 26px rgba(255, 145, 0, .30);
+    color: var(--bs-warning, var(--brand-orange));
+    text-shadow: 0 10px 26px rgba(var(--brand-orange-rgb), .30);
   }
 
   .latest-arrivals-subtitle{
     margin-top: 8px;
     font-size: .9rem;
-    color: #6b7280;
+    color: var(--brand-muted);
     font-weight: 400;
     letter-spacing: .08em;
     text-transform: uppercase;
@@ -646,7 +646,7 @@
   }
 
   if (stock === 0) return `color: #fff !important; background: #dc3545 !important; border-color: #dc3545 !important;`;
-  if (stock < 5)  return `color: #fff !important; background: #ff8a00 !important; border-color: #ff8a00 !important;`;
+  if (stock < 5)  return `color: var(--brand-anthracite) !important; background: var(--brand-orange) !important; border-color: var(--brand-orange) !important;`;
   return `color: #fff !important; background: #198754 !important; border-color: #198754 !important;`;
 }
 
@@ -754,7 +754,7 @@ card.innerHTML = `
     <a href="javascript:void(0)" class="designation" title="${esc(desFull)}">${esc(des)}</a>
 
     <div class="meta-line">
-      ${a.xx_Marque ? `<span class="meta-chip">${esc(a.xx_Marque)}</span>` : ''}
+      ${window.ProductBrandLogos.badge(a.xx_Marque)}
     </div>
   </div>
 

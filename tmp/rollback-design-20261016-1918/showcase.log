@@ -1,0 +1,641 @@
+[
+  {
+    "width": 1920,
+    "status": 200,
+    "viewport": 1920,
+    "scrollWidth": 1920,
+    "header": {
+      "x": 0,
+      "right": 1920,
+      "height": 156,
+      "width": 1920
+    },
+    "title": {
+      "x": 50.875,
+      "right": 960,
+      "height": 95.03125,
+      "width": 909.125
+    },
+    "hero": {
+      "x": 0,
+      "right": 1920,
+      "height": 510,
+      "width": 1920
+    },
+    "brands": 34,
+    "badImages": [],
+    "links": [
+      {
+        "label": "Accueil",
+        "found": true
+      },
+      {
+        "label": "Qui sommes-nous",
+        "found": true
+      },
+      {
+        "label": "Services",
+        "found": true
+      },
+      {
+        "label": "Marques",
+        "found": true
+      },
+      {
+        "label": "Contact",
+        "found": true
+      }
+    ],
+    "titleWeight": "800",
+    "errors": [],
+    "checks": {
+      "introAtLoad": {
+        "scrollY": 0,
+        "blocks": [
+          {
+            "opacity": "1",
+            "filter": "none",
+            "transform": "none",
+            "scrollReveal": false
+          },
+          {
+            "opacity": "1",
+            "filter": "none",
+            "transform": "none",
+            "scrollReveal": false
+          }
+        ],
+        "laterSectionsAnimated": 2
+      },
+      "originalSlideImage": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+      "colors": {
+        "blue": "rgb(49, 95, 183)",
+        "orange": "rgb(255, 138, 0)",
+        "brandStrip": "rgb(245, 246, 248)",
+        "brandText": "rgb(35, 43, 56)",
+        "overlay": "linear-gradient(90deg, rgba(35, 43, 56, 0.92), rgba(35, 43, 56, 0.72) 32%, rgba(35, 43, 56, 0.24) 55%, rgba(0, 0, 0, 0) 78%)"
+      },
+      "stickyTop": 0
+    }
+  },
+  {
+    "width": 1440,
+    "status": 200,
+    "viewport": 1440,
+    "scrollWidth": 1440,
+    "header": {
+      "x": 0,
+      "right": 1440,
+      "height": 154,
+      "width": 1440
+    },
+    "title": {
+      "x": 38.15625,
+      "right": 792,
+      "height": 69.109375,
+      "width": 753.84375
+    },
+    "hero": {
+      "x": 0,
+      "right": 1440,
+      "height": 490,
+      "width": 1440
+    },
+    "brands": 34,
+    "badImages": [],
+    "links": [
+      {
+        "label": "Accueil",
+        "found": true
+      },
+      {
+        "label": "Qui sommes-nous",
+        "found": true
+      },
+      {
+        "label": "Services",
+        "found": true
+      },
+      {
+        "label": "Marques",
+        "found": true
+      },
+      {
+        "label": "Contact",
+        "found": true
+      }
+    ],
+    "titleWeight": "800",
+    "errors": [],
+    "checks": {
+      "introAtLoad": {
+        "scrollY": 0,
+        "blocks": [
+          {
+            "opacity": "1",
+            "filter": "none",
+            "transform": "none",
+            "scrollReveal": false
+          },
+          {
+            "opacity": "1",
+            "filter": "none",
+            "transform": "none",
+            "scrollReveal": false
+          }
+        ],
+        "laterSectionsAnimated": 2
+      },
+      "originalSlideImage": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+      "colors": {
+        "blue": "rgb(49, 95, 183)",
+        "orange": "rgb(255, 138, 0)",
+        "brandStrip": "rgb(245, 246, 248)",
+        "brandText": "rgb(35, 43, 56)",
+        "overlay": "linear-gradient(90deg, rgba(35, 43, 56, 0.92), rgba(35, 43, 56, 0.72) 32%, rgba(35, 43, 56, 0.24) 55%, rgba(0, 0, 0, 0) 78%)"
+      },
+      "stickyTop": 0,
+      "otherBrandsVisible": true,
+      "searchRespectsLogin": true,
+      "loginStickyTop": 0
+    }
+  },
+  {
+    "width": 1280,
+    "status": 200,
+    "viewport": 1280,
+    "scrollWidth": 1280,
+    "header": {
+      "x": 0,
+      "right": 1280,
+      "height": 175.1875,
+      "width": 1280
+    },
+    "title": {
+      "x": 33.90625,
+      "right": 704,
+      "height": 69.109375,
+      "width": 670.09375
+    },
+    "hero": {
+      "x": 0,
+      "right": 1280,
+      "height": 490,
+      "width": 1280
+    },
+    "brands": 34,
+    "badImages": [],
+    "links": [
+      {
+        "label": "Accueil",
+        "found": true
+      },
+      {
+        "label": "Qui sommes-nous",
+        "found": true
+      },
+      {
+        "label": "Services",
+        "found": true
+      },
+      {
+        "label": "Marques",
+        "found": true
+      },
+      {
+        "label": "Contact",
+        "found": true
+      }
+    ],
+    "titleWeight": "800",
+    "errors": [],
+    "checks": {
+      "introAtLoad": {
+        "scrollY": 0,
+        "blocks": [
+          {
+            "opacity": "1",
+            "filter": "none",
+            "transform": "none",
+            "scrollReveal": false
+          },
+          {
+            "opacity": "1",
+            "filter": "none",
+            "transform": "none",
+            "scrollReveal": false
+          }
+        ],
+        "laterSectionsAnimated": 2
+      },
+      "originalSlideImage": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+      "colors": {
+        "blue": "rgb(49, 95, 183)",
+        "orange": "rgb(255, 138, 0)",
+        "brandStrip": "rgb(245, 246, 248)",
+        "brandText": "rgb(35, 43, 56)",
+        "overlay": "linear-gradient(90deg, rgba(35, 43, 56, 0.92), rgba(35, 43, 56, 0.72) 32%, rgba(35, 43, 56, 0.24) 55%, rgba(0, 0, 0, 0) 78%)"
+      },
+      "stickyTop": 0
+    }
+  },
+  {
+    "width": 1024,
+    "status": 200,
+    "viewport": 1024,
+    "scrollWidth": 1024,
+    "header": {
+      "x": 0,
+      "right": 1024,
+      "height": 199.09375,
+      "width": 1024
+    },
+    "title": {
+      "x": 27.125,
+      "right": 624.625,
+      "height": 62.625,
+      "width": 597.5
+    },
+    "hero": {
+      "x": 0,
+      "right": 1024,
+      "height": 470,
+      "width": 1024
+    },
+    "brands": 34,
+    "badImages": [],
+    "links": [
+      {
+        "label": "Accueil",
+        "found": true
+      },
+      {
+        "label": "Qui sommes-nous",
+        "found": true
+      },
+      {
+        "label": "Services",
+        "found": true
+      },
+      {
+        "label": "Marques",
+        "found": true
+      },
+      {
+        "label": "Contact",
+        "found": true
+      }
+    ],
+    "titleWeight": "800",
+    "errors": [],
+    "checks": {
+      "introAtLoad": {
+        "scrollY": 0,
+        "blocks": [
+          {
+            "opacity": "1",
+            "filter": "none",
+            "transform": "none",
+            "scrollReveal": false
+          },
+          {
+            "opacity": "1",
+            "filter": "none",
+            "transform": "none",
+            "scrollReveal": false
+          }
+        ],
+        "laterSectionsAnimated": 2
+      },
+      "originalSlideImage": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+      "colors": {
+        "blue": "rgb(49, 95, 183)",
+        "orange": "rgb(255, 138, 0)",
+        "brandStrip": "rgb(245, 246, 248)",
+        "brandText": "rgb(35, 43, 56)",
+        "overlay": "linear-gradient(90deg, rgba(35, 43, 56, 0.92), rgba(35, 43, 56, 0.72) 32%, rgba(35, 43, 56, 0.24) 55%, rgba(0, 0, 0, 0) 78%)"
+      },
+      "stickyTop": 0
+    }
+  },
+  {
+    "width": 768,
+    "status": 200,
+    "viewport": 768,
+    "scrollWidth": 768,
+    "header": {
+      "x": 0,
+      "right": 768,
+      "height": 180.59375,
+      "width": 768
+    },
+    "title": {
+      "x": 20,
+      "right": 748,
+      "height": 38.875,
+      "width": 728
+    },
+    "hero": {
+      "x": 0,
+      "right": 768,
+      "height": 590,
+      "width": 768
+    },
+    "brands": 34,
+    "badImages": [],
+    "links": [
+      {
+        "label": "Accueil",
+        "found": true
+      },
+      {
+        "label": "Qui sommes-nous",
+        "found": true
+      },
+      {
+        "label": "Services",
+        "found": true
+      },
+      {
+        "label": "Marques",
+        "found": true
+      },
+      {
+        "label": "Contact",
+        "found": true
+      }
+    ],
+    "titleWeight": "800",
+    "errors": [],
+    "checks": {
+      "introAtLoad": {
+        "scrollY": 0,
+        "blocks": [
+          {
+            "opacity": "1",
+            "filter": "none",
+            "transform": "none",
+            "scrollReveal": false
+          },
+          {
+            "opacity": "1",
+            "filter": "none",
+            "transform": "none",
+            "scrollReveal": false
+          }
+        ],
+        "laterSectionsAnimated": 2
+      },
+      "originalSlideImage": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+      "colors": {
+        "blue": "rgb(49, 95, 183)",
+        "orange": "rgb(255, 138, 0)",
+        "brandStrip": "rgb(245, 246, 248)",
+        "brandText": "rgb(35, 43, 56)",
+        "overlay": "linear-gradient(rgba(35, 43, 56, 0.94), rgba(35, 43, 56, 0.82) 40%, rgba(35, 43, 56, 0.12) 75%, rgba(0, 0, 0, 0))"
+      },
+      "stickyTop": 0
+    }
+  },
+  {
+    "width": 390,
+    "status": 200,
+    "viewport": 390,
+    "scrollWidth": 390,
+    "header": {
+      "x": 0,
+      "right": 390,
+      "height": 180.59375,
+      "width": 390
+    },
+    "title": {
+      "x": 20,
+      "right": 370,
+      "height": 38.875,
+      "width": 350
+    },
+    "hero": {
+      "x": 0,
+      "right": 390,
+      "height": 625.65625,
+      "width": 390
+    },
+    "brands": 34,
+    "badImages": [],
+    "links": [
+      {
+        "label": "Accueil",
+        "found": true
+      },
+      {
+        "label": "Qui sommes-nous",
+        "found": true
+      },
+      {
+        "label": "Services",
+        "found": true
+      },
+      {
+        "label": "Marques",
+        "found": true
+      },
+      {
+        "label": "Contact",
+        "found": true
+      }
+    ],
+    "titleWeight": "800",
+    "errors": [],
+    "checks": {
+      "introAtLoad": {
+        "scrollY": 0,
+        "blocks": [
+          {
+            "opacity": "1",
+            "filter": "none",
+            "transform": "none",
+            "scrollReveal": false
+          },
+          {
+            "opacity": "1",
+            "filter": "none",
+            "transform": "none",
+            "scrollReveal": false
+          }
+        ],
+        "laterSectionsAnimated": 2
+      },
+      "originalSlideImage": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+      "colors": {
+        "blue": "rgb(49, 95, 183)",
+        "orange": "rgb(255, 138, 0)",
+        "brandStrip": "rgb(245, 246, 248)",
+        "brandText": "rgb(35, 43, 56)",
+        "overlay": "linear-gradient(rgba(35, 43, 56, 0.94), rgba(35, 43, 56, 0.82) 40%, rgba(35, 43, 56, 0.12) 75%, rgba(0, 0, 0, 0))"
+      },
+      "stickyTop": 0,
+      "menuVisible": true,
+      "menuClosed": true,
+      "anchorBelowHeader": true,
+      "phoneLinks": 4
+    }
+  },
+  {
+    "width": 360,
+    "status": 200,
+    "viewport": 360,
+    "scrollWidth": 360,
+    "header": {
+      "x": 0,
+      "right": 360,
+      "height": 180.59375,
+      "width": 360
+    },
+    "title": {
+      "x": 20,
+      "right": 340,
+      "height": 32.390625,
+      "width": 320
+    },
+    "hero": {
+      "x": 0,
+      "right": 360,
+      "height": 637.171875,
+      "width": 360
+    },
+    "brands": 34,
+    "badImages": [],
+    "links": [
+      {
+        "label": "Accueil",
+        "found": true
+      },
+      {
+        "label": "Qui sommes-nous",
+        "found": true
+      },
+      {
+        "label": "Services",
+        "found": true
+      },
+      {
+        "label": "Marques",
+        "found": true
+      },
+      {
+        "label": "Contact",
+        "found": true
+      }
+    ],
+    "titleWeight": "800",
+    "errors": [],
+    "checks": {
+      "introAtLoad": {
+        "scrollY": 0,
+        "blocks": [
+          {
+            "opacity": "1",
+            "filter": "none",
+            "transform": "none",
+            "scrollReveal": false
+          },
+          {
+            "opacity": "1",
+            "filter": "none",
+            "transform": "none",
+            "scrollReveal": false
+          }
+        ],
+        "laterSectionsAnimated": 2
+      },
+      "originalSlideImage": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+      "colors": {
+        "blue": "rgb(49, 95, 183)",
+        "orange": "rgb(255, 138, 0)",
+        "brandStrip": "rgb(245, 246, 248)",
+        "brandText": "rgb(35, 43, 56)",
+        "overlay": "linear-gradient(rgba(35, 43, 56, 0.94), rgba(35, 43, 56, 0.82) 40%, rgba(35, 43, 56, 0.12) 75%, rgba(0, 0, 0, 0))"
+      },
+      "stickyTop": 0
+    }
+  },
+  {
+    "width": 320,
+    "status": 200,
+    "viewport": 320,
+    "scrollWidth": 320,
+    "header": {
+      "x": 0,
+      "right": 320,
+      "height": 180.59375,
+      "width": 320
+    },
+    "title": {
+      "x": 20,
+      "right": 300,
+      "height": 32.390625,
+      "width": 280
+    },
+    "hero": {
+      "x": 0,
+      "right": 320,
+      "height": 677.5625,
+      "width": 320
+    },
+    "brands": 34,
+    "badImages": [],
+    "links": [
+      {
+        "label": "Accueil",
+        "found": true
+      },
+      {
+        "label": "Qui sommes-nous",
+        "found": true
+      },
+      {
+        "label": "Services",
+        "found": true
+      },
+      {
+        "label": "Marques",
+        "found": true
+      },
+      {
+        "label": "Contact",
+        "found": true
+      }
+    ],
+    "titleWeight": "800",
+    "errors": [],
+    "checks": {
+      "introAtLoad": {
+        "scrollY": 0,
+        "blocks": [
+          {
+            "opacity": "1",
+            "filter": "none",
+            "transform": "none",
+            "scrollReveal": false
+          },
+          {
+            "opacity": "1",
+            "filter": "none",
+            "transform": "none",
+            "scrollReveal": false
+          }
+        ],
+        "laterSectionsAnimated": 2
+      },
+      "originalSlideImage": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+      "colors": {
+        "blue": "rgb(49, 95, 183)",
+        "orange": "rgb(255, 138, 0)",
+        "brandStrip": "rgb(245, 246, 248)",
+        "brandText": "rgb(35, 43, 56)",
+        "overlay": "linear-gradient(rgba(35, 43, 56, 0.94), rgba(35, 43, 56, 0.82) 40%, rgba(35, 43, 56, 0.12) 75%, rgba(0, 0, 0, 0))"
+      },
+      "stickyTop": 0
+    }
+  }
+]

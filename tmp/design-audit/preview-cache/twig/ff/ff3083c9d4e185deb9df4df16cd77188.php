@@ -1,0 +1,6358 @@
+<?php
+
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Extension\CoreExtension;
+use Twig\Extension\SandboxExtension;
+use Twig\Markup;
+use Twig\Sandbox\SecurityError;
+use Twig\Sandbox\SecurityNotAllowedTagError;
+use Twig\Sandbox\SecurityNotAllowedFilterError;
+use Twig\Sandbox\SecurityNotAllowedFunctionError;
+use Twig\Source;
+use Twig\Template;
+use Twig\TemplateWrapper;
+
+/* partials/_header.html.twig */
+class __TwigTemplate_3429ad213b6e6ba8cbfa535062e3c168 extends Template
+{
+    private Source $source;
+    /**
+     * @var array<string, Template>
+     */
+    private array $macros = [];
+
+    public function __construct(Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->source = $this->getSourceContext();
+
+        $this->parent = false;
+
+        $this->blocks = [
+        ];
+    }
+
+    protected function doDisplay(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "partials/_header.html.twig"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "partials/_header.html.twig"));
+
+        // line 2
+        yield "<style>
+  :root{
+    --hd-radius: 18px;
+    --hd-border: rgba(0,0,0,.08);
+    --hd-shadow: 0 14px 34px rgba(0,0,0,.08);
+    --hd-glass: rgba(255,255,255,1);
+    --hd-glass2: rgba(255,255,255,.62);
+    --hd-text: rgba(0,0,0,.78);
+    --hd-muted: rgba(0,0,0,.56);
+  }
+
+  body.theme-dark{
+    --hd-border: rgba(255,255,255,.14);
+    --hd-shadow: 0 16px 44px rgba(0,0,0,.35);
+    --hd-glass: rgba(18,18,22,.72);
+    --hd-glass2: rgba(18,18,22,.55);
+    --hd-text: rgba(255,255,255,.86);
+    --hd-muted: rgba(255,255,255,.62);
+    background: #0f1115;
+    color: rgba(255,255,255,.86);
+  }
+
+  .site__header{
+    position: sticky;
+    top: 0;
+    z-index: 1060;
+  }
+
+  .header-wrap{
+    border-bottom: 1px solid var(--hd-border);
+    background: var(--hd-glass);
+  }
+
+  .header-topbar{
+    position: relative;
+    overflow: visible !important;
+    border-bottom: 1px solid var(--hd-border);
+    background:
+      radial-gradient(800px circle at 10% 20%, rgba(var(--bs-primary-rgb), .16), transparent 40%),
+      radial-gradient(900px circle at 90% 40%, rgba(var(--bs-secondary-rgb), .14), transparent 38%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+    z-index: 1030;
+  }
+
+  body.theme-dark .header-topbar{
+    background:
+      radial-gradient(800px circle at 10% 20%, rgba(13,110,253,.18), transparent 40%),
+      radial-gradient(900px circle at 90% 40%, rgba(25,135,84,.18), transparent 38%),
+      linear-gradient(180deg, rgba(255,255,255,.03), transparent);
+  }
+
+  .header-topbar .dropdown-menu{
+    z-index: 2000;
+  }
+
+  .topbar-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding: 10px 0;
+    color: var(--hd-text);
+  }
+
+  .topbar-welcome{
+    font-weight: 700;
+    color: var(--hd-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 520px;
+  }
+
+  .topbar-welcome .account-name{
+    font-weight: 600;
+    color: var(--hd-text);
+  }
+
+  .topbar-phone{
+    margin-left: 8px;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--hd-glass2);
+    color: var(--hd-text);
+    font-weight: 550;
+  }
+
+  .topbar-phone:hover{
+    filter: brightness(.98);
+  }
+
+  .topbar-spacer{
+    flex:1;
+  }
+
+  .hd-iconbtn{
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,.08);
+    background: rgba(255,255,255,.72);
+    display:grid;
+    place-items:center;
+    color: rgba(0,0,0,.72);
+    text-decoration:none;
+    transition: transform .08s ease, filter .12s ease;
+  }
+
+  body.theme-dark .hd-iconbtn{
+    border-color: rgba(255,255,255,.10);
+    background: rgba(255,255,255,.08);
+    color: rgba(255,255,255,.82);
+  }
+
+  .hd-iconbtn:hover{
+    transform: translateY(-1px);
+    filter: brightness(.98);
+  }
+
+  .hd-badge{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    border-radius:999px;
+    padding: 2px 5px;
+    font-size:.64rem;
+    border: 1px solid rgba(0,0,0,.08);
+    box-shadow: none;
+  }
+
+  body.theme-dark .hd-badge{
+    border-color: rgba(255,255,255,.12);
+  }
+
+  .hd-dropdown .dropdown-menu{
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(0,0,0,.08);
+    border: 1px solid rgba(0,0,0,.08);
+    overflow: hidden;
+    min-width: 260px;
+    max-width: 280px;
+    background: rgba(255,255,255,.96);
+    color: rgba(0,0,0,.78);
+    padding: 0;
+  }
+
+  body.theme-dark .hd-dropdown .dropdown-menu{
+    background: rgba(28,28,34,.96);
+    border-color: rgba(255,255,255,.10);
+    box-shadow: 0 12px 28px rgba(0,0,0,.28);
+    color: rgba(255,255,255,.86);
+  }
+
+  .notif-head{
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 8px;
+  }
+
+  body.theme-dark .notif-head{
+    border-bottom-color: rgba(255,255,255,.08);
+  }
+
+  .notif-head h6{
+    margin:0;
+    font-weight: 550;
+    font-size:.92rem;
+    color: rgba(0,0,0,.78);
+  }
+
+  body.theme-dark .notif-head h6{
+    color: rgba(255,255,255,.86);
+  }
+
+  .notif-head button{
+    border:none;
+    background: transparent;
+    font-weight:700;
+    font-size:.78rem;
+    color: rgba(13,110,253,.92);
+    padding: 0;
+  }
+
+  body.theme-dark .notif-head button{
+    color: rgba(127,176,255,.95);
+  }
+
+  .notif-item{
+    display:flex;
+    gap:8px;
+    padding: 10px 12px;
+    text-decoration:none;
+    color: rgba(0,0,0,.76);
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    transition: background .12s ease;
+  }
+
+  body.theme-dark .notif-item{
+    color: rgba(255,255,255,.84);
+    border-bottom-color: rgba(255,255,255,.06);
+  }
+
+  .notif-item:hover{
+    background: rgba(13,110,253,.05);
+  }
+
+  body.theme-dark .notif-item:hover{
+    background: rgba(255,255,255,.04);
+  }
+
+  .notif-dot{
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    margin-top: 5px;
+    background: rgba(220,53,69,.92);
+    box-shadow: 0 0 0 3px rgba(220,53,69,.10);
+    flex: 0 0 auto;
+  }
+
+  .notif-content p{
+    margin:0;
+    font-size:.82rem;
+    line-height:1.25;
+    color: inherit;
+  }
+
+  .notif-time{
+    margin-top:4px;
+    font-size:.72rem;
+    color: rgba(0,0,0,.48);
+    display:block;
+  }
+
+  body.theme-dark .notif-time{
+    color: rgba(255,255,255,.52);
+  }
+
+  #notifDropdownList .p-3{
+    padding: 10px 12px !important;
+    font-size: .78rem;
+  }
+
+  .hd-dropdown .border-top{
+    border-top: 1px solid rgba(0,0,0,.06) !important;
+  }
+
+  body.theme-dark .hd-dropdown .border-top{
+    border-top-color: rgba(255,255,255,.08) !important;
+  }
+
+  .hd-dropdown .border-top .btn{
+    font-size: .78rem;
+    padding: .38rem .55rem;
+    border-radius: 10px;
+  }
+
+  .settings-btn{
+    border-radius: 999px !important;
+    border: 1px solid var(--hd-border) !important;
+    background: var(--hd-glass2) !important;
+    color: var(--hd-text) !important;
+    font-weight: 550 !important;
+    padding: 8px 12px !important;
+  }
+
+  .header-main-row{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-box{
+    flex: 0 0 auto;
+  }
+
+  .brand-logo{
+    height: 56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex: 0 0 auto;
+  }
+
+  .brand-logo img{
+    display:block;
+    max-height: 50px;
+    width: auto;
+    object-fit: contain;
+    padding: 0;
+  }
+
+  .brand-name{
+    display:flex;
+    flex-direction:column;
+    line-height:1.05;
+  }
+
+  .brand-name strong{
+    font-weight: 650;
+    color: var(--hd-text);
+  }
+
+  .brand-name span{
+    font-size:.82rem;
+    color: var(--hd-muted);
+    font-weight: 700;
+  }
+
+  .header-search{
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .header-search .form-select{
+    max-width: 210px;
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
+  }
+
+  .header-search .form-control{
+    border-radius: 0;
+  }
+
+  .header-search .btn{
+    border-top-right-radius: 999px;
+    border-bottom-right-radius: 999px;
+    font-weight: 600;
+  }
+
+  .header-search form{
+    width: 100%;
+  }
+
+  .header-search .search-wrap{
+    width: 100%;
+  }
+
+  .d-none.d-lg-flex.align-items-center.gap-2{
+    flex: 0 0 auto;
+  }
+
+  .header-nav{
+    border-top: 1px solid var(--hd-border);
+    background: rgba(0,0,0,.015);
+  }
+
+  body.theme-dark .header-nav{
+    background: rgba(255,255,255,.03);
+  }
+
+  .nav-list{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    padding: 10px 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .nav-list a{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    text-decoration:none;
+    border: 1px solid transparent;
+    color: var(--hd-text);
+    font-weight: 600;
+    transition: background .12s ease, transform .08s ease, border-color .12s ease;
+  }
+
+  .nav-list a:hover{
+    background: rgba(13,110,253,.08);
+    border-color: rgba(13,110,253,.18);
+    transform: translateY(-1px);
+  }
+
+  .nav-list .dropdown-menu{
+    border-radius: 18px;
+    border: 1px solid var(--hd-border);
+    box-shadow: var(--hd-shadow);
+    background: var(--hd-glass);
+  }
+
+  .indicator-btn{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding: 8px 12px;
+    border-radius: 16px;
+    background: var(--hd-glass2);
+    text-decoration:none;
+    color: var(--hd-text);
+    min-height: 46px;
+  }
+
+  .indicator-btn.indicator-cart{
+    padding: 10px 16px;
+    min-width: 245px;
+    margin-bottom: 10px;
+  }
+
+  .indicator-btn.indicator-cart #cartTotalMini{
+    font-weight: 650 !important;
+    font-size: 1.2rem;
+    color: var(--hd-text);
+  }
+
+  .indicator-btn.indicator-deals{
+    padding: 10px 16px;
+    min-width: 220px;
+    margin-bottom: 10px;
+  }
+
+  .indicator-btn.indicator-deals .indicator-title{
+    white-space: nowrap;
+  }
+
+  .indicator-title{
+    font-size:1.2rem;
+    font-weight: 600;
+    line-height:1;
+  }
+
+  .indicator-value{
+    font-size:.78rem;
+    color: var(--hd-muted);
+    font-weight: 550;
+  }
+
+  .indicator-icon{
+    position: relative;
+    width: 45px;
+    height: 45px;
+    border-radius: 14px;
+    display:grid;
+    place-items:center;
+  }
+
+  body.theme-dark .indicator-icon{
+    background: rgba(13,110,253,.16);
+  }
+
+  .theme-toggle{
+    border:none;
+    background: var(--hd-glass2);
+    border: 1px solid var(--hd-border);
+    border-radius: 999px;
+    padding: 7px 10px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color: var(--hd-text);
+    font-weight: 600;
+  }
+
+  .theme-toggle .dot{
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: rgba(255,193,7,.95);
+    box-shadow: 0 0 0 4px rgba(255,193,7,.18);
+  }
+
+  body.theme-dark .theme-toggle .dot{
+    background: rgba(13,110,253,.95);
+    box-shadow: 0 0 0 4px rgba(13,110,253,.18);
+  }
+
+  .offcanvas{
+    border-left: 1px solid var(--hd-border);
+    background: var(--hd-glass);
+    color: var(--hd-text);
+  }
+
+  .offcanvas .offcanvas-title{
+    font-weight: 650;
+  }
+
+  .offcanvas a{
+    color: var(--hd-text);
+  }
+
+  .theme-switch-wrap{
+    display:flex;
+    align-items:center;
+  }
+
+  .theme-switch{
+    width: 58px !important;
+    height: 30px !important;
+    border-radius: 999px !important;
+    cursor: pointer;
+    border: 1px solid var(--hd-border) !important;
+    position: relative;
+    background: rgba(255,193,7,.30) !important;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.04);
+    transition: background .22s ease, border-color .22s ease, box-shadow .22s ease;
+  }
+
+  body.theme-dark .theme-switch{
+    background: rgba(233,236,239,.75) !important;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+  }
+
+  .theme-switch:focus{
+    box-shadow: 0 0 0 .2rem rgba(13,110,253,.20) !important;
+  }
+
+  .theme-switch::before{
+    content:\"\";
+    position:absolute;
+    top: 50%;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    transform: translateY(-50%);
+    border-radius: 999px;
+    background: rgba(255,255,255,.98);
+    border: 1px solid rgba(0,0,0,.10);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12);
+    transition: left .26s ease, background .22s ease, border-color .22s ease;
+    z-index: 1;
+  }
+
+  .theme-switch::after{
+    content:\"\\f185\";
+    font-family: \"Font Awesome 6 Free\";
+    font-weight: 600;
+    position:absolute;
+    top: 50%;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    transform: translateY(-50%);
+    display:grid;
+    place-items:center;
+    color: rgba(255,140,0,.95);
+    transition: left .26s ease, transform .26s ease, opacity .18s ease;
+    z-index: 2;
+  }
+
+  .theme-switch:checked::before{
+    left: calc(100% - 3px - 24px);
+    background: rgba(255,255,255,.98);
+  }
+
+  .theme-switch:checked::after{
+    left: calc(100% - 3px - 24px);
+    content:\"\\f186\";
+    color: rgba(55,65,81,.95);
+  }
+
+  .theme-switch:active::before{
+    width: 28px;
+  }
+
+  .theme-switch:active::after{
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  .theme-switch-label{
+    margin:0;
+    padding:0;
+  }
+
+  .cart-summary-card{
+    border-radius: 22px;
+    border: 1px solid var(--hd-border);
+    background:
+      radial-gradient(600px circle at 10% 10%, rgba(var(--bs-primary-rgb), .10), transparent 40%),
+      radial-gradient(600px circle at 90% 20%, rgba(var(--bs-secondary-rgb), .08), transparent 35%),
+      var(--hd-glass2);
+    box-shadow: var(--hd-shadow);
+    padding: 16px;
+    backdrop-filter: blur(8px);
+  }
+
+  .cart-summary-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .cart-summary-kicker{
+    font-size: .74rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--hd-muted);
+  }
+
+  .cart-summary-title{
+    font-size: 1rem;
+    font-weight: 650;
+    color: var(--hd-text);
+    line-height: 1.1;
+  }
+
+  .cart-summary-badge{
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(220,53,69,.12);
+    color: rgba(220,53,69,.95);
+    border: 1px solid rgba(220,53,69,.18);
+    font-size: .78rem;
+    font-weight: 650;
+    white-space: nowrap;
+  }
+
+  .cart-summary-badge.d-none{
+    display: none !important;
+  }
+
+  .cart-discount-chip{
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(220,53,69,.10);
+    color: rgba(220,53,69,.95);
+    border: 1px solid rgba(220,53,69,.16);
+    font-size: .72rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .cart-summary-grid{
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .cart-summary-box{
+    border-radius: 16px;
+    border: 1px solid var(--hd-border);
+    background: rgba(255,255,255,.55);
+    padding: 12px;
+  }
+
+  body.theme-dark .cart-summary-box{
+    background: rgba(18,18,22,.45);
+  }
+
+  .cart-summary-label{
+    display:block;
+    font-size: .78rem;
+    font-weight: 550;
+    color: var(--hd-muted);
+    margin-bottom: 4px;
+  }
+
+  .cart-summary-value{
+    display:block;
+    font-size: 1rem;
+    font-weight: 650;
+    color: var(--hd-text);
+  }
+
+  .cart-summary-line{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 10px;
+    padding: 10px 0 8px 0;
+    border-top: 1px dashed var(--hd-border);
+    color: var(--hd-text);
+    font-size: .92rem;
+  }
+
+  .cart-summary-total{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 10px;
+    margin-top: 4px;
+    padding: 12px 14px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(13,110,253,.12), rgba(13,110,253,.04));
+    border: 1px solid rgba(13,110,253,.18);
+  }
+
+  .cart-summary-total span{
+    font-size: .90rem;
+    font-weight: 600;
+    color: var(--hd-text);
+  }
+
+  .cart-summary-total strong{
+    font-size: 1.25rem;
+    font-weight: 650;
+    color: var(--hd-text);
+  }
+
+  .cart-summary-foot{
+    margin-top: 10px;
+    font-size: .78rem;
+    font-weight: 550;
+    color: var(--hd-muted);
+    text-align: center;
+  }
+
+  .cart-item{
+    display:flex;
+    gap: 12px;
+    align-items:center;
+    padding: 10px;
+    border-radius: 16px;
+    border: 1px solid var(--hd-border);
+    background: var(--hd-glass2);
+  }
+
+  .cart-thumb{
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    border: 1px solid var(--hd-border);
+    background: rgba(0,0,0,.03);
+    object-fit: contain;
+    padding: 6px;
+    flex: 0 0 auto;
+  }
+
+  body.theme-dark .cart-thumb{
+    background: rgba(255,255,255,.05);
+  }
+
+  .cart-info{
+    min-width: 0;
+    flex: 1;
+  }
+
+  .cart-title{
+    font-weight: 650;
+    font-size: .92rem;
+    line-height: 1.12;
+    color: var(--hd-text);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .cart-ref{
+    margin-top: 4px;
+    font-size: .80rem;
+    font-weight: 600;
+    color: var(--hd-muted);
+  }
+
+  .cart-right{
+    display:flex;
+    flex-direction: column;
+    align-items:flex-end;
+    gap: 6px;
+    flex: 0 0 auto;
+  }
+
+  .cart-qty{
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: .78rem;
+    font-weight: 650;
+    border: 1px solid var(--hd-border);
+    background: rgba(255,255,255,.70);
+    color: var(--hd-text);
+    white-space: nowrap;
+  }
+
+  body.theme-dark .cart-qty{
+    background: rgba(18,18,22,.55);
+  }
+
+  .cart-subtotal{
+    font-size: .82rem;
+    font-weight: 650;
+    color: var(--hd-text);
+    white-space: nowrap;
+  }
+
+  .cart-remove-btn{
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    border: 1px solid rgba(220,53,69,.18);
+    background: rgba(220,53,69,.08);
+    color: rgba(220,53,69,.95);
+    display: inline-grid;
+    place-items: center;
+    padding: 0;
+    transition: transform .08s ease, background .12s ease, filter .12s ease;
+  }
+
+  .cart-remove-btn:hover{
+    background: rgba(220,53,69,.14);
+    transform: translateY(-1px);
+  }
+
+  body.theme-dark .cart-remove-btn{
+    border-color: rgba(220,53,69,.24);
+    background: rgba(220,53,69,.12);
+    color: rgba(255,120,120,.95);
+  }
+
+  .header-search .search-wrap{
+    position: relative;
+    width: 100%;
+  }
+
+  .header-search .search-ico{
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(0,0,0,.45);
+    pointer-events: none;
+    font-size: 1rem;
+  }
+
+  body.theme-dark .header-search .search-ico{
+    color: rgba(255,255,255,.55);
+  }
+
+  .header-search .search-input{
+    width: 100%;
+    height: 46px;
+    padding-left: 44px !important;
+    padding-right: 14px !important;
+    border: 1px solid var(--hd-border) !important;
+    color: var(--hd-text) !important;
+    font-weight: 550;
+    border-radius: 999px !important;
+    background: rgba(0,0,0,.03) !important;
+  }
+
+  body.theme-dark .header-search .search-input{
+    background: rgba(255,255,255,.08) !important;
+  }
+
+  .header-search .search-input::placeholder{
+    color: rgba(0,0,0,.45);
+    font-weight: 700;
+  }
+
+  body.theme-dark .header-search .search-input::placeholder{
+    color: rgba(255,255,255,.55);
+  }
+
+  .header-search .search-input:focus{
+    outline: none !important;
+    box-shadow: 0 0 0 .2rem rgba(13,110,253,.18) !important;
+    background: rgba(0,0,0,.05) !important;
+  }
+
+  body.theme-dark .header-search .search-input:focus{
+    background: rgba(255,255,255,.10) !important;
+  }
+
+  .main-menu__item.cat-item .main-menu__link{
+    background: transparent;
+  }
+
+  .main-menu__item.cat-item .main-menu__link:hover{
+    background: var(--bs-primary);
+    color:white;
+  }
+
+  .main-menu__item.cat-item .main-menu__link span{
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display:inline-block;
+  }
+
+  .header__navbar{
+    border-top: 1px solid var(--hd-border);
+    background: rgba(0,0,0,.015);
+    padding: 10px 0;
+  }
+
+  body.theme-dark .header__navbar{
+    background: rgba(255,255,255,.03);
+  }
+
+  .main-menu__list{
+    list-style: none;
+    display:flex;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    align-items:center;
+  }
+
+  .main-menu__item{
+    position: relative;
+  }
+
+  .main-menu__link{
+    display:flex;
+    align-items:center;
+    padding: 5px 5px;
+    text-decoration:none;
+    color: var(--hd-text);
+    font-weight: 550;
+    transition: background .12s ease, border-color .12s ease, transform .08s ease;
+    white-space: nowrap;
+    font-size: 0.85em;
+  }
+
+  .main-menu__link:hover{
+    background: rgba(13,110,253,.08);
+    border-color: rgba(13,110,253,.18);
+    transform: translateY(-1px);
+  }
+
+  .main-menu__link--primary{
+    background: rgba(220,53,69,.12);
+    border-color: rgba(220,53,69,.22);
+    color: rgba(220,53,69,.95);
+  }
+
+  .main-menu__link--primary:hover{
+    background: rgba(220,53,69,.18);
+    border-color: rgba(220,53,69,.30);
+  }
+
+  .main-menu__submenu{
+    position:absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    min-width: 320px;
+    background: var(--hd-glass);
+    border: 1px solid var(--hd-border);
+    border-radius: 18px;
+    box-shadow: var(--hd-shadow);
+    padding: 8px;
+    display:none;
+    z-index: 2000;
+  }
+
+  .main-menu__item--has-submenu:hover .main-menu__submenu{
+    display:block;
+  }
+
+  .menu{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:grid;
+    gap: 6px;
+  }
+
+  .menu__link{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    text-decoration:none;
+    color: var(--hd-text);
+    font-weight: 600;
+    background: var(--hd-glass2);
+    border: 1px solid rgba(0,0,0,.06);
+  }
+
+  body.theme-dark .menu__link{
+    border-color: rgba(255,255,255,.10);
+  }
+
+  .menu__link:hover{
+    background: rgba(13,110,253,.08);
+    border-color: rgba(13,110,253,.16);
+  }
+
+  .menu-arrow-down{
+    opacity:.7;
+  }
+
+  .menu-svg{
+    height: 27px;
+    flex: 0 0 auto;
+    display:inline-block;
+    color: rgba(0, 0, 0, 0.95);
+  }
+
+  body.theme-dark .menu-svg{
+    color: rgba(255,193,7,.95);
+  }
+
+  .menu-svg svg{
+    width:100%;
+    height:100%;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .main-menu__link.is-active,
+  .main-menu__link[aria-current=\"page\"]{
+    background-color: var(--bs-primary) !important;
+    color: #fff !important;
+    border-color: rgb(255, 0, 0);
+  }
+
+  .main-menu__link.is-active i,
+  .main-menu__link[aria-current=\"page\"] i{
+    color: #fff !important;
+  }
+
+  .admin-settings-btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 42px;
+    border-radius: 999px !important;
+    border: 1px solid var(--hd-border) !important;
+    background: var(--hd-glass2) !important;
+    color: var(--hd-text) !important;
+    font-weight: 550 !important;
+    padding: 8px 14px !important;
+    box-shadow: none !important;
+    transition: transform .08s ease, filter .12s ease, background .12s ease;
+  }
+
+  .admin-settings-btn:hover{
+    transform: translateY(-1px);
+    filter: brightness(.98);
+  }
+
+  .admin-settings-btn:focus{
+    box-shadow: 0 0 0 .2rem rgba(13,110,253,.14) !important;
+  }
+
+  .admin-settings-menu{
+    min-width: 320px !important;
+    border-radius: 18px !important;
+    border: 1px solid var(--hd-border) !important;
+    box-shadow: var(--hd-shadow) !important;
+    background: var(--hd-glass) !important;
+    padding: 10px !important;
+    overflow: hidden;
+  }
+
+  .admin-settings-head{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 4px 2px 4px;
+  }
+
+  .admin-settings-head__icon{
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: rgba(var(--bs-primary-rgb), .12);
+    color: rgba(var(--bs-primary-rgb), 1);
+    flex: 0 0 auto;
+  }
+
+  .admin-settings-head__title{
+    font-size: .95rem;
+    font-weight: 650;
+    color: var(--hd-text);
+    line-height: 1.1;
+  }
+
+  .admin-settings-head__subtitle{
+    margin-top: 3px;
+    font-size: .76rem;
+    font-weight: 700;
+    color: var(--hd-muted);
+    line-height: 1.1;
+  }
+
+  .admin-settings-item{
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    border-radius: 14px !important;
+    padding: 10px 12px !important;
+    font-weight: 500 !important;
+    color: var(--hd-text) !important;
+    transition: background .12s ease, transform .08s ease;
+  }
+
+  .admin-settings-item:hover{
+    background: rgba(13,110,253,.08) !important;
+    transform: translateX(2px);
+  }
+
+  .admin-settings-item__icon{
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: rgba(0,0,0,.05);
+    color: var(--hd-text);
+    flex: 0 0 auto;
+  }
+
+  body.theme-dark .admin-settings-item__icon{
+    background: rgba(255,255,255,.06);
+  }
+
+  .admin-settings-item--danger{
+    color: rgba(220,53,69,.98) !important;
+  }
+
+  .admin-settings-item--danger:hover{
+    background: rgba(220,53,69,.10) !important;
+  }
+
+  .admin-settings-item--danger .admin-settings-item__icon{
+    background: rgba(220,53,69,.10);
+    color: rgba(220,53,69,.98);
+  }
+
+  .admin-settings-modal{
+    --settings-bg: var(--bs-body-bg);
+    --settings-surface: var(--bs-white, #fff);
+    --settings-text: var(--bs-body-color);
+    --settings-muted: var(--bs-secondary-color);
+    --settings-border: var(--bs-border-color);
+    --settings-soft: rgba(var(--bs-primary-rgb), .08);
+  }
+
+  .admin-settings-modal .modal-dialog,
+  .admin-settings-modal .modal-content{
+    min-height: 100dvh;
+  }
+
+  .admin-settings-modal .modal-content{
+    border: 0;
+    border-radius: 0;
+    background: var(--settings-bg);
+    color: var(--settings-text);
+  }
+
+  .admin-settings-modal__shell{
+    width: min(1120px, calc(100% - 32px));
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding: clamp(18px, 3vw, 34px) 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 2vw, 24px);
+  }
+
+  .admin-settings-modal__top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .admin-settings-modal__eyebrow{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    color: var(--bs-primary);
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .admin-settings-modal__title{
+    margin: 0;
+    color: var(--settings-text);
+    font-size: clamp(1.65rem, 3vw, 2.45rem);
+    font-weight: 750;
+    letter-spacing: -.03em;
+    line-height: 1;
+  }
+
+  .admin-settings-modal__subtitle{
+    max-width: 620px;
+    margin: 10px 0 0;
+    color: var(--settings-muted);
+    font-size: .98rem;
+    line-height: 1.55;
+  }
+
+  .admin-settings-modal__close{
+    width: 46px;
+    height: 46px;
+    flex: 0 0 auto;
+    border-radius: 16px;
+    border: 1px solid var(--settings-border);
+    background: var(--settings-surface);
+    color: var(--settings-text);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 10px 24px rgba(var(--brand-anthracite-rgb), .08);
+    transition: transform .14s ease, background .14s ease, color .14s ease;
+  }
+
+  .admin-settings-modal__close:hover{
+    transform: translateY(-1px);
+    color: var(--bs-primary);
+    background: var(--settings-soft);
+  }
+
+  .admin-settings-modal__grid{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .admin-settings-modal__card{
+    min-height: 126px;
+    border-radius: 8px;
+    border: 1px solid var(--settings-border);
+    background: var(--settings-surface);
+    color: var(--settings-text);
+    padding: 18px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+    box-shadow: 0 12px 30px rgba(var(--brand-anthracite-rgb), .07);
+    transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease, background .16s ease;
+  }
+
+  .admin-settings-modal__card:hover{
+    color: var(--settings-text);
+    transform: translateY(-3px);
+    border-color: rgba(var(--bs-primary-rgb), .32);
+    background: var(--brand-bg);
+    box-shadow: 0 18px 42px rgba(var(--brand-anthracite-rgb), .12);
+  }
+
+  .admin-settings-modal__card-head{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .admin-settings-modal__icon{
+    width: 46px;
+    height: 46px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    color: var(--bs-primary);
+    background: rgba(var(--bs-primary-rgb), .10);
+    flex: 0 0 auto;
+  }
+
+  .admin-settings-modal__arrow{
+    color: var(--settings-muted);
+    font-size: .92rem;
+    transform: translate(-2px, 2px);
+    transition: transform .16s ease, color .16s ease;
+  }
+
+  .admin-settings-modal__card:hover .admin-settings-modal__arrow{
+    color: var(--bs-primary);
+    transform: translate(2px, -2px);
+  }
+
+  .admin-settings-modal__label{
+    display: block;
+    color: var(--settings-text);
+    font-size: .98rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .admin-settings-modal__desc{
+    display: block;
+    margin-top: 6px;
+    color: var(--settings-muted);
+    font-size: .82rem;
+    font-weight: 400;
+    line-height: 1.35;
+  }
+
+  .admin-settings-modal__footer{
+    margin-top: auto;
+    padding-top: 4px;
+  }
+
+  .admin-settings-modal__logout{
+    width: 100%;
+    min-height: 74px;
+    border-radius: 8px;
+    border: 1px solid #b42318;
+    background: #b42318;
+    color: #fff;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    text-decoration: none;
+    box-shadow: 0 12px 30px rgba(var(--brand-anthracite-rgb), .07);
+    transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+  }
+
+  .admin-settings-modal__logout:hover{
+    color: #fff;
+    background: color-mix(in srgb, #b42318 85%, var(--brand-anthracite));
+    transform: translateY(-2px);
+    box-shadow: 0 18px 42px rgba(var(--bs-danger-rgb), .22);
+  }
+
+  .admin-settings-modal__logout-main{
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+
+  .admin-settings-modal__logout-icon{
+    width: 44px;
+    height: 44px;
+    border-radius: 15px;
+    display: grid;
+    place-items: center;
+    background: rgba(var(--bs-danger-rgb), .12);
+  }
+
+  .admin-settings-modal__logout:hover .admin-settings-modal__logout-icon{
+    background: rgba(255,255,255,.18);
+  }
+
+  .admin-settings-modal__logout-title{
+    display: block;
+    font-size: .98rem;
+    font-weight: 750;
+    line-height: 1.1;
+  }
+
+  .admin-settings-modal__logout-desc{
+    display: block;
+    margin-top: 4px;
+    color: rgba(255,255,255,.9);
+    font-size: .8rem;
+    font-weight: 400;
+  }
+
+  .admin-settings-modal__logout:hover .admin-settings-modal__logout-desc{
+    color: rgba(255,255,255,.78);
+  }
+
+  @media (max-width: 991.98px){
+    .admin-settings-modal__grid{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 575.98px){
+    .admin-settings-modal__shell{
+      width: calc(100% - 20px);
+      padding: 14px 0 18px;
+      gap: 14px;
+    }
+
+    .admin-settings-modal__top{
+      align-items: flex-start;
+    }
+
+    .admin-settings-modal__subtitle{
+      font-size: .88rem;
+      margin-top: 8px;
+    }
+
+    .admin-settings-modal__grid{
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .admin-settings-modal__card{
+      min-height: 0;
+      border-radius: 18px;
+      padding: 14px;
+      gap: 12px;
+    }
+
+    .admin-settings-modal__icon{
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+    }
+  }
+
+  .account-menu{
+    min-width: 300px !important;
+    border-radius: 18px !important;
+    border: 1px solid var(--hd-border) !important;
+    box-shadow: var(--hd-shadow) !important;
+    background: var(--hd-glass) !important;
+    padding: 10px !important;
+    overflow: hidden;
+  }
+
+  .account-menu-head{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 4px 2px 4px;
+  }
+
+  .account-menu-head__icon{
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: rgba(var(--bs-primary-rgb), .12);
+    color: rgba(var(--bs-primary-rgb), 1);
+    flex: 0 0 auto;
+  }
+
+  .account-menu-head__title{
+    font-size: .95rem;
+    font-weight: 650;
+    color: var(--hd-text);
+    line-height: 1.1;
+  }
+
+  .account-menu-head__subtitle{
+    margin-top: 3px;
+    font-size: .76rem;
+    font-weight: 700;
+    color: var(--hd-muted);
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  .account-menu-item{
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    border-radius: 14px !important;
+    padding: 10px 12px !important;
+    font-weight: 500 !important;
+    color: var(--hd-text) !important;
+    transition: background .12s ease, transform .08s ease;
+  }
+
+  .account-menu-item:hover{
+    background: rgba(13,110,253,.08) !important;
+    transform: translateX(2px);
+  }
+
+  .account-menu-item__icon{
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: rgba(0,0,0,.05);
+    color: var(--hd-text);
+    flex: 0 0 auto;
+  }
+
+  body.theme-dark .account-menu-item__icon{
+    background: rgba(255,255,255,.06);
+  }
+
+  .account-menu-item--danger{
+    color: #b42318 !important;
+  }
+
+  .account-menu-item--danger:hover{
+    background: rgba(220,53,69,.10) !important;
+  }
+
+  .account-menu-item--danger .account-menu-item__icon{
+    background: rgba(220,53,69,.10);
+    color: #b42318;
+  }
+
+  /* ===== MOBILE MENU MODERN ===== */
+  .mobile-menu-toggle{
+    width: 46px;
+    height: 46px;
+    border-radius: 16px !important;
+    border: 1px solid var(--hd-border) !important;
+    background:
+      radial-gradient(120px circle at 20% 20%, rgba(var(--bs-primary-rgb), .14), transparent 45%),
+      var(--hd-glass2) !important;
+    box-shadow: 0 10px 24px rgba(0,0,0,.08);
+    display: inline-grid;
+    place-items: center;
+    padding: 0 !important;
+  }
+
+  body.theme-dark .mobile-menu-toggle{
+    background:
+      radial-gradient(120px circle at 20% 20%, rgba(13,110,253,.20), transparent 45%),
+      rgba(255,255,255,.08) !important;
+    box-shadow: 0 14px 28px rgba(0,0,0,.28);
+  }
+
+  .mobile-menu-toggle:hover{
+    transform: translateY(-1px);
+    filter: brightness(.98);
+  }
+
+  .mobile-menu-toggle__bars{
+    width: 19px;
+    height: 14px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+
+  .mobile-menu-toggle__bars span{
+    display:block;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+  }
+
+  .mobile-menu-toggle__bars span:nth-child(2){
+    width: 75%;
+    margin-left: auto;
+  }
+
+  .mobile-menu-offcanvas{
+    --bs-offcanvas-width: min(92vw, 380px);
+    --hd-border: var(--brand-border);
+    --hd-shadow: 0 18px 40px rgba(var(--brand-anthracite-rgb), .14);
+    --hd-glass: #fff;
+    --hd-glass2: var(--brand-bg);
+    --hd-text: var(--brand-ink);
+    --hd-muted: var(--brand-muted);
+    width: var(--bs-offcanvas-width) !important;
+    max-width: 92vw;
+    min-height: 100dvh;
+    z-index: 1085 !important;
+    border-left: 0 !important;
+    border-right: 1px solid var(--hd-border);
+    background:
+      radial-gradient(700px circle at 10% 10%, rgba(var(--bs-primary-rgb), .12), transparent 40%),
+      radial-gradient(700px circle at 90% 20%, rgba(var(--bs-secondary-rgb), .10), transparent 36%),
+      var(--hd-glass) !important;
+    color: var(--hd-text) !important;
+  }
+
+  .mobile-menu-offcanvas.show,
+  .mobile-menu-offcanvas.showing{
+    visibility: visible !important;
+  }
+
+  .mobile-menu-offcanvas .offcanvas-header{
+    padding: 14px 16px 8px 16px;
+    border-bottom: 0;
+  }
+
+  .mobile-menu-offcanvas .btn-close{
+    border-radius: 12px;
+    background-color: rgba(0,0,0,.04);
+    opacity: 1;
+    padding: .6rem;
+  }
+
+  body.theme-dark .mobile-menu-offcanvas .btn-close{
+    background-color: rgba(255,255,255,.06);
+    filter: invert(1) grayscale(1);
+  }
+
+  .mobile-menu-body{
+    padding: 0 16px 18px 16px !important;
+    overflow-y: auto;
+    background: transparent !important;
+  }
+
+  .mobile-menu-hero{
+    border-radius: 22px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid var(--hd-border);
+    box-shadow: var(--hd-shadow);
+    background:
+      radial-gradient(600px circle at 10% 10%, rgba(var(--bs-primary-rgb), .14), transparent 40%),
+      radial-gradient(600px circle at 90% 20%, rgba(var(--bs-secondary-rgb), .10), transparent 36%),
+      var(--hd-glass2);
+  }
+
+  .mobile-menu-brand{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+  }
+
+  .mobile-menu-brand__logo{
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    border: 1px solid var(--hd-border);
+    background: rgba(255,255,255,.86);
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+    flex: 0 0 auto;
+  }
+
+  body.theme-dark .mobile-menu-brand__logo{
+    background: rgba(255,255,255,.08);
+  }
+
+  .mobile-menu-brand__logo img{
+    max-width: 82%;
+    max-height: 82%;
+    object-fit: contain;
+  }
+
+  .mobile-menu-brand__title{
+    font-size: 1rem;
+    font-weight: 650;
+    color: var(--hd-text);
+    line-height: 1.05;
+  }
+
+  .mobile-menu-brand__subtitle{
+    margin-top: 4px;
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--hd-muted);
+    line-height: 1.2;
+  }
+
+  .mobile-menu-quick{
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .mobile-menu-quick__item{
+    min-height: 54px;
+    border-radius: 16px;
+    border: 1px solid var(--hd-border);
+    background: rgba(255,255,255,.62);
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    padding: 12px;
+    text-decoration:none;
+    color: var(--hd-text);
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(0,0,0,.05);
+  }
+
+  body.theme-dark .mobile-menu-quick__item{
+    background: rgba(255,255,255,.06);
+  }
+
+  .mobile-menu-quick__item i{
+    width: 18px;
+    text-align:center;
+  }
+
+  .mobile-menu-section{
+    margin-top: 14px;
+  }
+
+  .mobile-menu-section__title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .mobile-menu-section__title strong{
+    font-size: .92rem;
+    font-weight: 650;
+    color: var(--hd-text);
+  }
+
+  .mobile-menu-section__title span{
+    font-size: .74rem;
+    font-weight: 550;
+    color: var(--hd-muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+
+  .mobile-menu-cats{
+    border-radius: 18px;
+    border: 1px solid var(--hd-border);
+    box-shadow: var(--hd-shadow);
+    overflow: hidden;
+    background: rgba(255,255,255,.58);
+  }
+
+  body.theme-dark .mobile-menu-cats{
+    background: rgba(255,255,255,.04);
+  }
+
+  .mobile-menu-cats .list-group-item{
+    border: 0 !important;
+    border-bottom: 1px solid rgba(0,0,0,.06) !important;
+    background: transparent !important;
+    color: var(--hd-text) !important;
+    padding: 12px 14px !important;
+    font-weight: 550;
+  }
+
+  body.theme-dark .mobile-menu-cats .list-group-item{
+    border-bottom-color: rgba(255,255,255,.06) !important;
+  }
+
+  .mobile-menu-cats .list-group-item:last-child{
+    border-bottom: 0 !important;
+  }
+
+  .mobile-menu-help{
+    margin-top: 16px;
+    border-radius: 18px;
+    border: 1px solid var(--hd-border);
+    background: rgba(255,255,255,.60);
+    padding: 14px;
+  }
+
+  body.theme-dark .mobile-menu-help{
+    background: rgba(255,255,255,.05);
+  }
+
+  .mobile-menu-help__title{
+    font-size: .92rem;
+    font-weight: 650;
+    color: var(--hd-text);
+    margin-bottom: 6px;
+  }
+
+  .mobile-menu-help__text{
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--hd-muted);
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+
+  .mobile-menu-help__actions{
+    display:grid;
+    gap: 8px;
+  }
+
+  .mobile-menu-help__actions a{
+    min-height: 44px;
+    border-radius: 14px;
+    font-weight: 600;
+  }
+
+  #mainMenuOffcanvas.mobile-menu-offcanvas,
+  body.theme-dark #mainMenuOffcanvas.mobile-menu-offcanvas{
+    background:
+      radial-gradient(700px circle at 10% 10%, rgba(var(--bs-primary-rgb), .10), transparent 40%),
+      #fff !important;
+    color: var(--brand-ink) !important;
+  }
+
+  #mainMenuOffcanvas .mobile-menu-hero,
+  #mainMenuOffcanvas .mobile-menu-quick__item,
+  #mainMenuOffcanvas .mobile-menu-cats,
+  #mainMenuOffcanvas .mobile-menu-help,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-hero,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-quick__item,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-cats,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-help{
+    background: #fff !important;
+    color: var(--brand-ink) !important;
+    border-color: var(--brand-border) !important;
+  }
+
+  #mainMenuOffcanvas .mobile-menu-brand__title,
+  #mainMenuOffcanvas .mobile-menu-section__title strong,
+  #mainMenuOffcanvas .mobile-menu-help__title,
+  #mainMenuOffcanvas .mobile-menu-cats .list-group-item,
+  #mainMenuOffcanvas .mobile-menu-quick__item,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-brand__title,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-section__title strong,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-help__title,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-cats .list-group-item,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-quick__item{
+    color: var(--brand-ink) !important;
+  }
+
+  #mainMenuOffcanvas .mobile-menu-brand__subtitle,
+  #mainMenuOffcanvas .mobile-menu-section__title span,
+  #mainMenuOffcanvas .mobile-menu-help__text,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-brand__subtitle,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-section__title span,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-help__text{
+    color: var(--brand-muted) !important;
+  }
+
+  #mainMenuOffcanvas .mobile-menu-brand__logo,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-brand__logo{
+    background: #fff !important;
+  }
+
+  @media (max-width: 991.98px){
+    .header-main-row{
+      flex-wrap: wrap !important;
+      gap: 10px !important;
+      align-items: center !important;
+      min-height: auto;
+      padding: 10px 0;
+    }
+
+    .brand-box{
+      order: 1;
+      flex: 0 0 auto;
+      align-items: center;
+    }
+
+    .brand-logo{
+      height: 42px;
+      width: auto;
+    }
+
+    .brand-logo img{
+      max-height: 42px;
+      width: auto;
+    }
+
+    .mobile-actions{
+      order: 2;
+      margin-left: auto;
+      flex: 0 0 auto;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+
+    .header-search{
+      order: 3;
+      flex: 0 0 100% !important;
+      width: 100% !important;
+      flex-grow: 0 !important;
+      margin-top: 2px;
+      display:flex;
+      align-items:center;
+    }
+
+    .header-search .form-control{
+      border-radius: 999px 0 0 999px;
+    }
+
+    .header-search .btn{
+      border-radius: 0 999px 999px 0;
+    }
+  }
+  .voice-search-btn{
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--hd-border);
+  border-radius: 999px;
+  background: rgba(255,255,255,.88);
+  color: var(--hd-text);
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+  z-index: 3;
+  transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+}
+
+.voice-search-btn:hover{
+  transform: translateY(-50%) scale(1.03);
+  background: rgba(13,110,253,.08);
+}
+
+.voice-search-btn:focus{
+  outline: none;
+  box-shadow: 0 0 0 .2rem rgba(13,110,253,.18);
+}
+
+.voice-search-btn.is-listening{
+  background: rgba(220,53,69,.12);
+  color: rgba(220,53,69,.95);
+  border-color: rgba(220,53,69,.25);
+  animation: voicePulse 1s infinite;
+}
+
+.voice-search-btn:disabled{
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+body.theme-dark .voice-search-btn{
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.85);
+}
+
+body.theme-dark .voice-search-btn.is-listening{
+  background: rgba(220,53,69,.16);
+  color: rgba(255,120,120,.95);
+}
+
+.header-search .search-input{
+  padding-right: 54px !important;
+}
+
+@keyframes voicePulse{
+  0%{ box-shadow: 0 0 0 0 rgba(220,53,69,.25); }
+  70%{ box-shadow: 0 0 0 10px rgba(220,53,69,0); }
+  100%{ box-shadow: 0 0 0 0 rgba(220,53,69,0); }
+}
+</style>
+
+<link rel=\"stylesheet\" href=\"";
+        // line 1938
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("styles/public-showcase.css"), "html", null, true);
+        yield "?v=20261016-9\">
+<header class=\"site__header public-shell connected-showcase-header\">
+  <div class=\"header-wrap\">
+    <div class=\"header-topbar showcase-topbar\">
+      <div class=\"container-fluid\">
+        <div class=\"topbar-row showcase-topbar__inner\">
+          ";
+        // line 1944
+        yield from $this->load("partials/_header_contacts.html.twig", 1944)->unwrap()->yield($context);
+        // line 1945
+        yield "          ";
+        yield from $this->load("partials/_header_facts.html.twig", 1945)->unwrap()->yield($context);
+        // line 1946
+        yield "
+          <div class=\"dropdown hd-dropdown\">
+            <button class=\"hd-iconbtn position-relative\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" title=\"Notifications\">
+              <i class=\"fa-solid fa-bell\"></i>
+              <span class=\"badge text-bg-danger hd-badge\" id=\"notifCount\">0</span>
+            </button>
+
+            <div class=\"dropdown-menu dropdown-menu-end p-0\">
+              <div class=\"notif-head\">
+                <h6>Notifications</h6>
+                <button type=\"button\" id=\"markNotifRead\">Tout lire</button>
+              </div>
+
+              <div id=\"notifDropdownList\">
+                <div class=\"p-3 text-muted small\">Chargement…</div>
+              </div>
+
+              <div class=\"p-2 border-top\">
+                <a class=\"btn btn-sm btn-outline-primary w-100\" href=\"";
+        // line 1964
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("notification_index");
+        yield "\">
+                  Voir toutes les notifications
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class=\"dropdown hd-dropdown\">
+            <button class=\"showcase-join header-account-btn\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" title=\"Compte\" aria-label=\"Espace client\">
+              <i class=\"fa-solid fa-user\" aria-hidden=\"true\"></i><span>Espace client</span>
+            </button>
+
+            <ul class=\"dropdown-menu dropdown-menu-end account-menu\">
+              ";
+        // line 1977
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 1977, $this->source); })()), "user", [], "any", false, false, false, 1977)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 1978
+            yield "                <li class=\"account-menu-head\">
+                  <div class=\"account-menu-head__icon\">
+                    <i class=\"fa-solid fa-user\"></i>
+                  </div>
+                  <div>
+                    <div class=\"account-menu-head__title\">Mon compte</div>
+                    <div class=\"account-menu-head__subtitle\">
+                      Connecté : <strong>";
+            // line 1985
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 1985, $this->source); })()), "user", [], "any", false, false, false, 1985), "userIdentifier", [], "any", false, false, false, 1985), "html", null, true);
+            yield "</strong>
+                    </div>
+                  </div>
+                </li>
+
+                <li><hr class=\"dropdown-divider\"></li>
+
+                <li>
+                  <a class=\"dropdown-item account-menu-item\" href=\"";
+            // line 1993
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("account_profile");
+            yield "\">
+                    <span class=\"account-menu-item__icon\">
+                      <i class=\"fa-solid fa-id-card\"></i>
+                    </span>
+                    <span>Mon profil</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a class=\"dropdown-item account-menu-item\" href=\"";
+            // line 2002
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("order_index");
+            yield "\">
+                    <span class=\"account-menu-item__icon\">
+                      <i class=\"fa-solid fa-box-open\"></i>
+                    </span>
+                    <span>Mes commandes</span>
+                  </a>
+                </li>
+
+                <li><hr class=\"dropdown-divider\"></li>
+
+                <li>
+                  <a class=\"dropdown-item account-menu-item account-menu-item--danger\" href=\"";
+            // line 2013
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
+            yield "\">
+                    <span class=\"account-menu-item__icon\">
+                      <i class=\"fa-solid fa-right-from-bracket\"></i>
+                    </span>
+                    <span>Déconnexion</span>
+                  </a>
+                </li>
+              ";
+        } else {
+            // line 2021
+            yield "                <li class=\"account-menu-head\">
+                  <div class=\"account-menu-head__icon\">
+                    <i class=\"fa-solid fa-user-lock\"></i>
+                  </div>
+                  <div>
+                    <div class=\"account-menu-head__title\">Espace client</div>
+                    <div class=\"account-menu-head__subtitle\">Accédez à votre compte</div>
+                  </div>
+                </li>
+
+                <li><hr class=\"dropdown-divider\"></li>
+
+                <li>
+                  <a class=\"dropdown-item account-menu-item\" href=\"";
+            // line 2034
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
+            yield "\">
+                    <span class=\"account-menu-item__icon\">
+                      <i class=\"fa-solid fa-right-to-bracket\"></i>
+                    </span>
+                    <span>Connexion</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a class=\"dropdown-item account-menu-item\" href=\"#\">
+                    <span class=\"account-menu-item__icon\">
+                      <i class=\"fa-solid fa-user-plus\"></i>
+                    </span>
+                    <span>Créer un compte</span>
+                  </a>
+                </li>
+              ";
+        }
+        // line 2051
+        yield "            </ul>
+          </div>
+
+          ";
+        // line 2054
+        if ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 2055
+            yield "            <div class=\"admin-settings-dropdown\">
+              <button class=\"btn btn-sm admin-settings-btn\" type=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#adminSettingsModal\" aria-controls=\"adminSettingsModal\" aria-label=\"Paramètres\" title=\"Paramètres\">
+                <i class=\"fa-solid fa-sliders me-2\"></i>
+                <span>Paramètres</span>
+              </button>
+            </div>
+          ";
+        }
+        // line 2062
+        yield "        </div>
+      </div>
+    </div>
+
+    <div class=\"header-main-shell\">
+      <div class=\"container-fluid\">
+        <div class=\"d-flex align-items-center gap-3 header-main-row showcase-navbar\">
+          <a class=\"brand-box showcase-logo\" href=\"";
+        // line 2069
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("home");
+        yield "\">
+            <span class=\"brand-logo\">
+              <img src=\"";
+        // line 2071
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['App\Twig\OptimizedAssetExtension']->optimizedAsset("img/logo-3sk-partsauto-transparent.png"), "html", null, true);
+        yield "\" alt=\"3SK Parts Auto\" onerror=\"this.style.display='none'\">
+            </span>
+            <span class=\"brand-name d-none d-md-flex\"></span>
+          </a>
+
+          <div class=\"mobile-actions d-lg-none\">
+            <button class=\"btn mobile-menu-toggle\" type=\"button\"
+                    data-bs-toggle=\"offcanvas\" data-bs-target=\"#mainMenuOffcanvas\" aria-controls=\"mainMenuOffcanvas\" aria-label=\"Ouvrir le menu\">
+              <span class=\"mobile-menu-toggle__bars\" aria-hidden=\"true\">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </button>
+
+            <a class=\"hd-iconbtn position-relative\" href=\"javascript:void(0)\"
+               data-bs-toggle=\"offcanvas\" data-bs-target=\"#cartOffcanvas\" aria-controls=\"cartOffcanvas\"
+               title=\"Panier\">
+              <i class=\"fa-solid fa-cart-shopping\"></i>
+              <span class=\"badge text-bg-light border\" id=\"cartTotalMobile\"
+                    style=\"position:absolute; bottom:-10px; right:-8px; font-size:.68rem; padding:3px 6px;\">
+                0.00 DH
+              </span>
+            </a>
+          </div>
+
+        <div class=\"header-search\">
+  <form class=\"m-0 showcase-search\" method=\"get\" action=\"";
+        // line 2098
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("articles_page");
+        yield "\" id=\"searchFormHeader\" role=\"search\">
+    <div class=\"search-wrap\">
+      <i class=\"fa-solid fa-magnifying-glass search-ico\"></i>
+
+      <input class=\"form-control search-input\"
+             name=\"q\"
+             id=\"InputRechercheProduit\"
+             type=\"search\"
+             placeholder=\"Rechercher une pièce ou une référence…\"
+             aria-label=\"Rechercher une pièce ou une référence\"
+             autocomplete=\"off\"
+             value=\"";
+        // line 2109
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 2109, $this->source); })()), "request", [], "any", false, false, false, 2109), "query", [], "any", false, false, false, 2109), "get", ["q", ""], "method", false, false, false, 2109), "html_attr");
+        yield "\">
+
+      <button type=\"button\"
+              class=\"voice-search-btn\"
+              id=\"voiceSearchBtn\"
+              aria-label=\"Recherche vocale\"
+              title=\"Recherche vocale\">
+        <i class=\"fa-solid fa-microphone\"></i>
+      </button>
+      <button class=\"header-search-submit\" type=\"submit\">Rechercher</button>
+    </div>
+  </form>
+</div>
+
+          <div class=\"d-none d-lg-flex align-items-center gap-2\">
+            <a class=\"indicator-btn indicator-deals\" href=\"";
+        // line 2124
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("articles_page", ["new" => 1, "newDays" => 90]), "html", null, true);
+        yield "\">
+              <span class=\"indicator-icon\"><i class=\"fa-solid fa-truck-fast fa-xl\"></i></span>
+              <span class=\"d-flex flex-column\">
+                <span class=\"indicator-title\">Nouveaux Deals</span>
+                <span class=\"indicator-value\">Arrivages récents</span>
+              </span>
+            </a>
+
+            <a class=\"indicator-btn indicator-cart\" href=\"javascript:void(0)\" data-bs-toggle=\"offcanvas\" data-bs-target=\"#cartOffcanvas\">
+              <span class=\"indicator-icon position-relative\">
+                <i class=\"fa-solid fa-cart-shopping fa-xl\"></i>
+                <span class=\"badge text-bg-primary hd-badge\" id=\"cartCount\">0</span>
+              </span>
+
+              <span class=\"d-flex flex-column\">
+                <span class=\"indicator-value d-flex flex-column\">
+                  <span>Panier d'achat</span>
+                  <span id=\"cartTotalMini\">0.00 DH</span>
+                </span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class=\"header__navbar d-none d-lg-flex\">
+      <div class=\"container-fluid d-flex align-items-center justify-content-between gap-3\">
+        <div class=\"header__navbar-menu\">
+          <div class=\"main-menu\">
+            <ul class=\"main-menu__list\" id=\"mainMenuDesktop\">
+              <li class=\"main-menu__item\">
+                <a
+                  class=\"main-menu__link ";
+        // line 2157
+        yield ((((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 2157, $this->source); })()), "request", [], "any", false, false, false, 2157), "attributes", [], "any", false, false, false, 2157), "get", ["_route"], "method", false, false, false, 2157) == "articles_page") &&  !CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 2157, $this->source); })()), "request", [], "any", false, false, false, 2157), "query", [], "any", false, false, false, 2157), "get", ["family"], "method", false, false, false, 2157))) ? ("is-active") : (""));
+        yield "\"
+                  href=\"";
+        // line 2158
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("articles_page");
+        yield "\"
+                  style=\"text-transform: uppercase;\"
+                  ";
+        // line 2160
+        if (((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 2160, $this->source); })()), "request", [], "any", false, false, false, 2160), "attributes", [], "any", false, false, false, 2160), "get", ["_route"], "method", false, false, false, 2160) == "articles_page") &&  !CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 2160, $this->source); })()), "request", [], "any", false, false, false, 2160), "query", [], "any", false, false, false, 2160), "get", ["family"], "method", false, false, false, 2160))) {
+            yield "aria-current=\"page\"";
+        }
+        // line 2161
+        yield "                >
+                  <span>Catalogue</span>
+                </a>
+              </li>
+
+              <li class=\"main-menu__item\" id=\"navCatsLoading\">
+                <span class=\"main-menu__link\" style=\"opacity:.65\">
+                  Chargement…
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  ";
+        // line 2178
+        if ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 2179
+            yield "    <div class=\"modal fade admin-settings-modal\" id=\"adminSettingsModal\" tabindex=\"-1\" aria-labelledby=\"adminSettingsModalLabel\" aria-hidden=\"true\">
+      <div class=\"modal-dialog modal-fullscreen m-0\">
+        <div class=\"modal-content\">
+          <div class=\"admin-settings-modal__shell\">
+            <div class=\"admin-settings-modal__top\">
+              <div>
+                <div class=\"admin-settings-modal__eyebrow\">
+                  <i class=\"fa-solid fa-sliders\"></i>
+                  <span>Paramètres</span>
+                </div>
+                <h2 class=\"admin-settings-modal__title\" id=\"adminSettingsModalLabel\">Centre de gestion</h2>
+                <p class=\"admin-settings-modal__subtitle\">
+                  Retrouvez les actions importantes dans un espace clair : configuration, clients, commandes, slides, imports et statistiques.
+                </p>
+              </div>
+
+              <button type=\"button\" class=\"admin-settings-modal__close\" data-bs-dismiss=\"modal\" aria-label=\"Fermer\">
+                <i class=\"fa-solid fa-xmark\"></i>
+              </button>
+            </div>
+
+            <div class=\"admin-settings-modal__grid\">
+              <a class=\"admin-settings-modal__card\" href=\"";
+            // line 2201
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_company_setting_index");
+            yield "\">
+                <span class=\"admin-settings-modal__card-head\">
+                  <span class=\"admin-settings-modal__icon\">
+                    <i class=\"fa-solid fa-building\"></i>
+                  </span>
+                  <span class=\"admin-settings-modal__arrow\">
+                    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class=\"admin-settings-modal__label\">Configuration 3SK</span>
+                  <span class=\"admin-settings-modal__desc\">Coordonnées, identité société et réglages généraux.</span>
+                </span>
+              </a>
+
+              <a class=\"admin-settings-modal__card\" href=\"";
+            // line 2216
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_category_reduction_index");
+            yield "\">
+                <span class=\"admin-settings-modal__card-head\">
+                  <span class=\"admin-settings-modal__icon\">
+                    <i class=\"fa-solid fa-percent\"></i>
+                  </span>
+                  <span class=\"admin-settings-modal__arrow\">
+                    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class=\"admin-settings-modal__label\">Gestion des réductions</span>
+                  <span class=\"admin-settings-modal__desc\">Remises catalogue et avantages par catégorie.</span>
+                </span>
+              </a>
+
+              <a class=\"admin-settings-modal__card\" href=\"";
+            // line 2231
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_clients_index");
+            yield "\">
+                <span class=\"admin-settings-modal__card-head\">
+                  <span class=\"admin-settings-modal__icon\">
+                    <i class=\"fa-solid fa-users\"></i>
+                  </span>
+                  <span class=\"admin-settings-modal__arrow\">
+                    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class=\"admin-settings-modal__label\">Gestion des clients</span>
+                  <span class=\"admin-settings-modal__desc\">Comptes clients, statuts, coordonnées et accès.</span>
+                </span>
+              </a>
+
+              <a class=\"admin-settings-modal__card\" href=\"";
+            // line 2246
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_orders_index");
+            yield "\">
+                <span class=\"admin-settings-modal__card-head\">
+                  <span class=\"admin-settings-modal__icon\">
+                    <i class=\"fa-solid fa-box-open\"></i>
+                  </span>
+                  <span class=\"admin-settings-modal__arrow\">
+                    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class=\"admin-settings-modal__label\">Gestion des commandes</span>
+                  <span class=\"admin-settings-modal__desc\">Suivi des paniers, commandes et demandes clients.</span>
+                </span>
+              </a>
+
+              <a class=\"admin-settings-modal__card\" href=\"";
+            // line 2261
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_hero_slide_index");
+            yield "\">
+                <span class=\"admin-settings-modal__card-head\">
+                  <span class=\"admin-settings-modal__icon\">
+                    <i class=\"fa-solid fa-images\"></i>
+                  </span>
+                  <span class=\"admin-settings-modal__arrow\">
+                    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class=\"admin-settings-modal__label\">Gestion slides</span>
+                  <span class=\"admin-settings-modal__desc\">Visuels d’accueil, ordre d’affichage et mises en avant.</span>
+                </span>
+              </a>
+
+              <a class=\"admin-settings-modal__card\" href=\"";
+            // line 2276
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("import_source_index");
+            yield "\">
+                <span class=\"admin-settings-modal__card-head\">
+                  <span class=\"admin-settings-modal__icon\">
+                    <i class=\"fa-solid fa-folder-tree\"></i>
+                  </span>
+                  <span class=\"admin-settings-modal__arrow\">
+                    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class=\"admin-settings-modal__label\">Configuration import</span>
+                  <span class=\"admin-settings-modal__desc\">Sources catalogue, mapping et paramètres d’intégration.</span>
+                </span>
+              </a>
+
+              <a class=\"admin-settings-modal__card\" href=\"";
+            // line 2291
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("import_index");
+            yield "\">
+                <span class=\"admin-settings-modal__card-head\">
+                  <span class=\"admin-settings-modal__icon\">
+                    <i class=\"fa-solid fa-file-import\"></i>
+                  </span>
+                  <span class=\"admin-settings-modal__arrow\">
+                    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class=\"admin-settings-modal__label\">Lancer l’import</span>
+                  <span class=\"admin-settings-modal__desc\">Importer ou mettre à jour les données catalogue.</span>
+                </span>
+              </a>
+
+              <a class=\"admin-settings-modal__card\" href=\"";
+            // line 2306
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_dashboard_index");
+            yield "\">
+                <span class=\"admin-settings-modal__card-head\">
+                  <span class=\"admin-settings-modal__icon\">
+                    <i class=\"fa-solid fa-chart-line\"></i>
+                  </span>
+                  <span class=\"admin-settings-modal__arrow\">
+                    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class=\"admin-settings-modal__label\">Dashboard statistique</span>
+                  <span class=\"admin-settings-modal__desc\">Vue globale sur les clients, commandes et activité.</span>
+                </span>
+              </a>
+            </div>
+
+            <div class=\"admin-settings-modal__footer\">
+              <a class=\"admin-settings-modal__logout\" href=\"";
+            // line 2323
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
+            yield "\">
+                <span class=\"admin-settings-modal__logout-main\">
+                  <span class=\"admin-settings-modal__logout-icon\">
+                    <i class=\"fa-solid fa-right-from-bracket\"></i>
+                  </span>
+                  <span>
+                    <span class=\"admin-settings-modal__logout-title\">Déconnexion</span>
+                    <span class=\"admin-settings-modal__logout-desc\">Fermer la session administrateur en toute sécurité.</span>
+                  </span>
+                </span>
+                <i class=\"fa-solid fa-arrow-right\"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  ";
+        }
+        // line 2341
+        yield "
+  <div class=\"offcanvas offcanvas-start mobile-menu-offcanvas\" tabindex=\"-1\" id=\"mainMenuOffcanvas\" aria-labelledby=\"mainMenuOffcanvasLabel\">
+    <div class=\"offcanvas-header\">
+      <h5 class=\"offcanvas-title visually-hidden\" id=\"mainMenuOffcanvasLabel\">Menu</h5>
+      <button type=\"button\" class=\"btn-close ms-auto\" data-bs-dismiss=\"offcanvas\" aria-label=\"Close\"></button>
+    </div>
+
+    <div class=\"offcanvas-body mobile-menu-body\">
+      <div class=\"mobile-menu-hero\">
+        <div class=\"mobile-menu-brand\">
+          <div class=\"mobile-menu-brand__logo\">
+            <img src=\"";
+        // line 2352
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['App\Twig\OptimizedAssetExtension']->optimizedAsset("img/logo-3sk-partsauto-transparent.png"), "html", null, true);
+        yield "\" alt=\"3SK Parts Auto\" onerror=\"this.style.display='none'\">
+          </div>
+          <div>
+            <div class=\"mobile-menu-brand__title\">3SK Parts Auto</div>
+            <div class=\"mobile-menu-brand__subtitle\">
+              Catalogue, catégories et accès rapide à vos produits
+            </div>
+          </div>
+        </div>
+
+       <div class=\"mobile-menu-quick\">
+  <a class=\"mobile-menu-quick__item\" href=\"";
+        // line 2363
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("home");
+        yield "\">
+    <i class=\"fa-solid fa-house\"></i>
+    <span>Accueil</span>
+  </a>
+
+  <a class=\"mobile-menu-quick__item\" href=\"";
+        // line 2368
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("articles_page");
+        yield "\">
+    <i class=\"fa-solid fa-boxes-stacked\"></i>
+    <span>Catalogue</span>
+  </a>
+
+  <a class=\"mobile-menu-quick__item\" href=\"";
+        // line 2373
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("articles_page", ["new" => 1, "newDays" => 90]), "html", null, true);
+        yield "\">
+    <i class=\"fa-solid fa-bolt\"></i>
+    <span>Nouveautés</span>
+  </a>
+
+  <button class=\"mobile-menu-quick__item phone-contact-trigger\" type=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#phoneContactModal\">
+    <i class=\"fa-solid fa-phone-volume\"></i>
+    <span>Contact</span>
+  </button>
+
+  ";
+        // line 2383
+        if ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 2384
+            yield "    <a class=\"mobile-menu-quick__item\" href=\"";
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_dashboard_index");
+            yield "\">
+      <i class=\"fa-solid fa-chart-line\"></i>
+      <span>Statistiques</span>
+    </a>
+  ";
+        }
+        // line 2389
+        yield "</div>
+      </div>
+
+      <div class=\"mobile-menu-section\">
+        <div class=\"mobile-menu-section__title\">
+          <strong>Catégories</strong>
+          <span>Navigation</span>
+        </div>
+
+        <div class=\"list-group mobile-menu-cats\" id=\"categoriesMenuMobile\">
+          <div class=\"list-group-item\">Chargement…</div>
+        </div>
+      </div>
+
+      <div class=\"mobile-menu-help\">
+        <div class=\"mobile-menu-help__title\">Besoin d’aide ?</div>
+        <div class=\"mobile-menu-help__text\">
+          Contactez-nous rapidement pour trouver la bonne pièce ou obtenir une assistance.
+        </div>
+
+        <div class=\"mobile-menu-help__actions\">
+          <button class=\"btn btn-primary text-light phone-contact-trigger\" type=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#phoneContactModal\">
+            <i class=\"fa-solid fa-phone me-2\"></i>Appeler
+          </button>
+          <a class=\"btn btn-outline-secondary\" href=\"";
+        // line 2413
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("articles_page");
+        yield "\">
+            <i class=\"fa-solid fa-magnifying-glass me-2\"></i>Voir le catalogue
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class=\"offcanvas offcanvas-end\" tabindex=\"-1\" id=\"cartOffcanvas\" aria-labelledby=\"cartOffcanvasLabel\">
+    <div class=\"offcanvas-header\">
+      <h5 class=\"offcanvas-title\" id=\"cartOffcanvasLabel\">Panier</h5>
+      <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"offcanvas\" aria-label=\"Close\"></button>
+    </div>
+    <div class=\"offcanvas-body\">
+      <div class=\"cart-summary-card mb-2\">
+        <div class=\"cart-summary-head\">
+          <div>
+            <div class=\"cart-summary-kicker\">Panier</div>
+            <div class=\"cart-summary-title\">Résumé de commande</div>
+          </div>
+          <div class=\"cart-summary-badge d-none\" id=\"cartSummaryBadge\"></div>
+        </div>
+
+        <div class=\"cart-summary-grid\">
+          <div class=\"cart-summary-box\">
+            <span class=\"cart-summary-label\">Articles</span>
+            <strong class=\"cart-summary-value\" id=\"cartSummaryCount\">0</strong>
+          </div>
+
+          <div class=\"cart-summary-box\">
+            <span class=\"cart-summary-label\">Sous-total</span>
+            <strong class=\"cart-summary-value\" id=\"cartSubtotal\">0.00 DH</strong>
+          </div>
+        </div>
+
+        <div class=\"cart-summary-line\">
+          <span>Remise</span>
+          <strong class=\"text-danger\" id=\"cartDiscount\">-0.00 DH</strong>
+        </div>
+
+        <div class=\"cart-summary-total\">
+          <span>Total final</span>
+          <strong id=\"cartTotal\">0.00 DH</strong>
+        </div>
+
+        <div class=\"cart-summary-foot\" id=\"cartSummary\">
+          0 article
+        </div>
+      </div>
+
+      <div id=\"cartItems\" class=\"d-grid gap-2\"></div>
+
+      <div class=\"mt-3 d-grid gap-2\">
+        <a class=\"btn btn-primary btn-lg text-light\" href=\"";
+        // line 2466
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("cart_index");
+        yield "\">Voir le panier</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+(function () {
+  function mountHeaderOverlayElements() {
+    ['adminSettingsModal', 'mainMenuOffcanvas', 'cartOffcanvas'].forEach(function (id) {
+      const element = document.getElementById(id);
+      if (!element || element.parentElement === document.body) return;
+      document.body.appendChild(element);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mountHeaderOverlayElements, { once: true });
+  } else {
+    mountHeaderOverlayElements();
+  }
+
+  document.addEventListener('click', function (event) {
+    const offcanvas = document.getElementById('mainMenuOffcanvas');
+    if (!offcanvas || !event.target.closest('#mainMenuOffcanvas')) return;
+
+    const link = event.target.closest('a[href]');
+    if (link && link.getAttribute('href') && link.getAttribute('href') !== '#') {
+      const instance = window.bootstrap ? window.bootstrap.Offcanvas.getInstance(offcanvas) : null;
+      if (instance) instance.hide();
+    }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  const body = document.body;
+  const themeSwitch = document.getElementById('themeSwitch');
+
+  function applyTheme(mode){
+    if (mode === 'dark') {
+      body.classList.add('theme-dark');
+      if (themeSwitch) themeSwitch.checked = true;
+    } else {
+      body.classList.remove('theme-dark');
+      if (themeSwitch) themeSwitch.checked = false;
+    }
+  }
+
+  applyTheme(localStorage.getItem('theme_mode') || 'light');
+
+  if (themeSwitch){
+    themeSwitch.addEventListener('change', () => {
+      const next = themeSwitch.checked ? 'dark' : 'light';
+      localStorage.setItem('theme_mode', next);
+
+      const wrap = themeSwitch.closest('.theme-switch-wrap');
+      if (wrap){
+        wrap.classList.remove('ts-animate');
+        void wrap.offsetWidth;
+        wrap.classList.add('ts-animate');
+        setTimeout(()=> wrap.classList.remove('ts-animate'), 650);
+      }
+
+      applyTheme(next);
+    });
+  }
+
+  const notifCount = document.getElementById('notifCount');
+  const markBtn = document.getElementById('markNotifRead');
+  if (markBtn){
+    markBtn.addEventListener('click', () => {
+      document.querySelectorAll('[data-notif-dot]').forEach(d => d.style.display = 'none');
+      if (notifCount) notifCount.textContent = '0';
+    });
+  }
+
+  function getWishlist(){ try { return JSON.parse(localStorage.getItem('wishlist') || '[]'); } catch { return []; } }
+  function getCart(){ try { return JSON.parse(localStorage.getItem('cart') || '{}'); } catch { return {}; } }
+
+  function esc(s){
+    return String(s ?? '').replace(/[&<>\"']/g, m => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'
+    }[m]));
+  }
+
+  async function removeCartItem(code){
+    try{
+      const res = await fetch('/api/cart/remove', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ code })
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        return;
+      }
+
+      await refreshCounts();
+    } catch(e){
+      console.error(e);
+    }
+  }
+
+  async function refreshCounts(){
+    const cartTotalMiniEl = document.getElementById('cartTotalMini');
+    const cartTotalMobileEl = document.getElementById('cartTotalMobile');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const cartCountEl = document.getElementById('cartCount');
+    const cartCountMobileEl = document.getElementById('cartCountMobile');
+    const cartSummary = document.getElementById('cartSummary');
+    const cartSummaryCount = document.getElementById('cartSummaryCount');
+    const cartSubtotalEl = document.getElementById('cartSubtotal');
+    const cartDiscountEl = document.getElementById('cartDiscount');
+    const cartItems = document.getElementById('cartItems');
+    const cartSummaryBadgeEl = document.getElementById('cartSummaryBadge');
+
+    try{
+      const res = await fetch('/api/cart', { headers: { 'Accept':'application/json' } });
+
+      if (res.status === 401){
+        if (cartTotalEl) cartTotalEl.textContent = '0.00 DH';
+        if (cartTotalMiniEl) cartTotalMiniEl.textContent = '0.00 DH';
+        if (cartTotalMobileEl) cartTotalMobileEl.textContent = '0.00 DH';
+        if (cartCountEl) cartCountEl.textContent = '0';
+        if (cartCountMobileEl) cartCountMobileEl.textContent = '0';
+        if (cartSummaryCount) cartSummaryCount.textContent = '0';
+        if (cartSubtotalEl) cartSubtotalEl.textContent = '0.00 DH';
+        if (cartDiscountEl) cartDiscountEl.textContent = '-0.00 DH';
+        if (cartSummary) cartSummary.textContent = '0 article';
+        if (cartItems) cartItems.innerHTML = `<div class=\"text-muted small\">Connectez-vous pour voir le panier.</div>`;
+        if (cartSummaryBadgeEl) {
+          cartSummaryBadgeEl.textContent = '';
+          cartSummaryBadgeEl.classList.add('d-none');
+        }
+        return;
+      }
+
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error('API cart error');
+
+      const totalQty = Number(data.totalQty || 0);
+      const subtotal = Number(data.totalBeforeDiscount ?? data.subtotalTtc ?? 0);
+      const discount = Number(data.totalDiscount ?? 0);
+      const finalTotal = Number(data.totalFinal ?? data.total ?? data.totalAmount ?? data.totalTtc ?? 0);
+
+      const subtotalText = subtotal.toFixed(2) + ' DH';
+      const discountText = '-' + discount.toFixed(2) + ' DH';
+      const totalText = finalTotal.toFixed(2) + ' DH';
+
+      if (cartTotalEl) cartTotalEl.textContent = totalText;
+      if (cartTotalMiniEl) cartTotalMiniEl.textContent = totalText;
+      if (cartTotalMobileEl) cartTotalMobileEl.textContent = totalText;
+
+      if (cartSubtotalEl) cartSubtotalEl.textContent = subtotalText;
+      if (cartDiscountEl) cartDiscountEl.textContent = discountText;
+      if (cartSummaryCount) cartSummaryCount.textContent = String(totalQty);
+      if (cartCountEl) cartCountEl.textContent = String(totalQty);
+      if (cartCountMobileEl) cartCountMobileEl.textContent = String(totalQty);
+
+      if (cartSummary) {
+        cartSummary.textContent = totalQty + (totalQty > 1 ? ' articles dans votre panier' : ' article dans votre panier');
+      }
+
+      const summaryReductionText = String(data.summaryReductionText || '').trim();
+      if (cartSummaryBadgeEl) {
+        if (summaryReductionText !== '') {
+          cartSummaryBadgeEl.textContent = summaryReductionText;
+          cartSummaryBadgeEl.classList.remove('d-none');
+        } else {
+          cartSummaryBadgeEl.textContent = '';
+          cartSummaryBadgeEl.classList.add('d-none');
+        }
+      }
+
+      if (cartItems){
+        cartItems.innerHTML = '';
+        const items = data.items || [];
+
+        if (!items.length){
+          cartItems.innerHTML = `<div class=\"text-muted small\">Panier vide.</div>`;
+        } else {
+          const DEFAULT_IMG = \"";
+        // line 2653
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/default-piece.png"), "js"), "html", null, true);
+        yield "\";
+
+          items.slice(0, 20).forEach(it => {
+            const code = it.code ?? it.id ?? it.Id ?? '';
+            const qty = Number(it.qty ?? it.quantity ?? 0) || 0;
+
+            const title =
+              it.title ??
+              it.designation ??
+              it.name ??
+              it.label ??
+              it.DesComClear ??
+              it.des ??
+              '';
+
+            const img =
+              it.imageUrl ??
+              it.imgUrl ??
+              it.image ??
+              DEFAULT_IMG;
+
+            const reductionLabel = String(it.reductionLabel || '').trim();
+            const lineTotal = Number(it.lineTotal ?? 0);
+            const lineDiscount = Number(it.lineDiscount ?? 0);
+
+            const row = document.createElement('div');
+            row.className = 'cart-item';
+
+            row.innerHTML = `
+              <img class=\"cart-thumb\" src=\"\${img}\" alt=\"\"
+                   onerror=\"this.onerror=null;this.src='\${DEFAULT_IMG}'\">
+
+              <div class=\"cart-info\">
+                <div class=\"cart-title\">\${title ? title : code}</div>
+                <div class=\"cart-ref\">\${code}</div>
+                \${reductionLabel ? `<div class=\"cart-discount-chip\">\${reductionLabel}</div>` : ``}
+              </div>
+
+              <div class=\"cart-right\">
+                <button class=\"cart-remove-btn\" type=\"button\" data-remove-cart-item=\"\${esc(code)}\" title=\"Supprimer\">
+                  <i class=\"fa-solid fa-trash\"></i>
+                </button>
+                <span class=\"cart-qty\">Qté: \${qty}</span>
+                \${lineDiscount > 0 ? `<span class=\"small text-danger\">-\${lineDiscount.toFixed(2)} DH</span>` : ``}
+                <span class=\"cart-subtotal\">\${lineTotal.toFixed(2)} DH</span>
+              </div>
+            `;
+
+            cartItems.appendChild(row);
+          });
+
+          cartItems.querySelectorAll('[data-remove-cart-item]').forEach(btn => {
+            btn.addEventListener('click', async () => {
+              const code = btn.getAttribute('data-remove-cart-item');
+              btn.disabled = true;
+              await removeCartItem(code);
+            });
+          });
+        }
+      }
+    } catch(e){
+      if (cartItems) cartItems.innerHTML = `<div class=\"text-danger small\">Erreur panier.</div>`;
+      console.error(e);
+    }
+  }
+
+  refreshCounts();
+  window.addEventListener('storage', refreshCounts);
+  window.refreshHeaderCounts = refreshCounts;
+
+  function normKey(s){
+    s = String(s || '').trim();
+    try { s = s.normalize('NFD').replace(/[\\u0300-\\u036f]/g, ''); } catch(e){}
+    s = s.toLowerCase();
+    s = s.replace(/&/g, 'and');
+    s = s.replace(/[^a-z0-9]+/g, '_');
+    s = s.replace(/^_+|_+\$/g, '');
+    return s;
+  }
+
+  const CATEGORY_ICONS = {
+    catalogue: 'fa-boxes-stacked',
+    pare_choc: 'fa-car-burst',
+    pare_chocs: 'fa-car-burst',
+    optique: 'fa-lightbulb',
+    aile: 'fa-car-side',
+    feu_arr: 'fa-lightbulb',
+    feu_arriere: 'fa-lightbulb',
+    feux_arr: 'fa-lightbulb',
+    cache_roue: 'fa-circle',
+    cache_roues: 'fa-circle',
+    capot: 'fa-car-side',
+    fixation: 'fa-screwdriver-wrench',
+    fixations: 'fa-screwdriver-wrench',
+    grille_phare_secour: 'fa-border-all',
+    grille_phare_secours: 'fa-border-all',
+    calandre: 'fa-border-all',
+    grille: 'fa-table-cells-large',
+    renfort: 'fa-bars',
+    masque: 'fa-shield-halved',
+    retroviseur: 'fa-mirror',
+    retroviseurs: 'fa-mirror',
+    cataphote: 'fa-gem',
+    cataphotes: 'fa-gem',
+    phare_secour: 'fa-lightbulb',
+    phare_secours: 'fa-lightbulb',
+    'glasse retreviseur': 'fa-mirror',
+    'glasse retroviseur': 'fa-mirror',
+    'glace retroviseur': 'fa-mirror',
+    'glace retreviseur': 'fa-mirror',
+    porte: 'fa-car-side',
+    portes: 'fa-car-side',
+    baguette: 'fa-grip-lines',
+    baguettes: 'fa-grip-lines',
+  };
+
+  function iconForCategoryFA(name){
+    const k = normKey(name);
+
+    if (CATEGORY_ICONS[k]) return CATEGORY_ICONS[k];
+
+    const base = k.split('_')[0];
+    if (CATEGORY_ICONS[base]) return CATEGORY_ICONS[base];
+
+    if (k.includes('carross')) return 'fa-car-side';
+    if (k.includes('filtr') || k.includes('filter')) return 'fa-filter';
+    if (k.includes('moteur') || k.includes('engine')) return 'fa-gears';
+    if (k.includes('frein')) return 'fa-circle-stop';
+    if (k.includes('susp')) return 'fa-arrows-down-to-line';
+    if (k.includes('amort')) return 'fa-wand-magic-sparkles';
+
+    return 'fa-box';
+  }
+
+  async function loadCategories(){
+    const menuDesktop = document.getElementById('mainMenuDesktop');
+    const loadingLi = document.getElementById('navCatsLoading');
+    const mobile  = document.getElementById('categoriesMenuMobile');
+    const articlesUrl = \"";
+        // line 2791
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("articles_page"), "js"), "html", null, true);
+        yield "\";
+
+    const esc = (s)=>String(s??'').replace(/[&<>\"']/g, m => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'
+    }[m]));
+    const currentPath = window.location.pathname;
+    const currentFamily = new URLSearchParams(window.location.search).get('family') || '';
+
+    try{
+      const res = await fetch('/api/catalog/families', { headers: { 'Accept':'application/json' } });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.message || 'Erreur API');
+
+      const items = (data.items || [])
+        .filter(x => {
+          const name = String(x.value || '').trim();
+          const key = normKey(name);
+
+          return name !== ''
+            && (x.count ?? 0) > 0
+            && key !== 'hors_catalogue'
+            && key !== 'hors_catalague';
+        })
+        .sort((a,b)=> (b.count||0) - (a.count||0))
+        .slice(0, 18);
+
+      if (menuDesktop){
+        if (loadingLi) loadingLi.remove();
+
+        if (!items.length){
+          const li = document.createElement('li');
+          li.className = 'main-menu__item';
+          li.innerHTML = `<span class=\"main-menu__link\" style=\"opacity:.65\">Aucune catégorie</span>`;
+          menuDesktop.appendChild(li);
+        } else {
+          items.forEach(it=>{
+            const href = `\${articlesUrl}?family=\${encodeURIComponent(it.value)}`;
+            const li = document.createElement('li');
+            li.className = 'main-menu__item cat-item';
+
+            const isActiveCategory =
+              currentPath === articlesUrl &&
+              currentFamily.toLowerCase() === String(it.value).toLowerCase();
+
+            li.innerHTML = `
+              <a
+                class=\"main-menu__link \${isActiveCategory ? 'is-active' : ''}\"
+                href=\"\${href}\"
+                title=\"\${esc(it.value)}\"
+                \${isActiveCategory ? 'aria-current=\"page\"' : ''}
+              >
+                <span>\${esc(it.value)}</span>
+              </a>
+            `;
+            menuDesktop.appendChild(li);
+          });
+        }
+      }
+
+      if (mobile){
+        mobile.innerHTML = '';
+        if (!items.length){
+          mobile.innerHTML = `<div class=\"list-group-item\">Aucune catégorie.</div>`;
+        } else {
+          items.forEach(it=>{
+            const href = `\${articlesUrl}?family=\${encodeURIComponent(it.value)}`;
+            mobile.insertAdjacentHTML('beforeend',
+              `<a class=\"list-group-item list-group-item-action d-flex justify-content-between align-items-center\" href=\"\${href}\">
+                <span>\${esc(it.value)}</span>
+                <span class=\"badge text-bg-light border\">\${it.count}</span>
+              </a>`
+            );
+          });
+
+          mobile.insertAdjacentHTML('beforeend',
+            `<a class=\"list-group-item list-group-item-action fw-bold\" href=\"\${articlesUrl}\">
+              Voir tous les articles
+            </a>`
+          );
+        }
+      }
+
+    }catch(e){
+      console.error(e);
+
+      if (loadingLi){
+        loadingLi.innerHTML = `<span class=\"main-menu__link\" style=\"opacity:.65;color:#dc3545\">
+          Impossible de charger
+        </span>`;
+      }
+
+      if (mobile){
+        mobile.innerHTML = `<div class=\"list-group-item text-danger\">Impossible de charger.</div>`;
+      }
+    }
+  }
+
+  loadCategories();
+})();
+</script>
+
+<script>
+(function(){
+  const notifCount = document.getElementById('notifCount');
+  const markBtn = document.getElementById('markNotifRead');
+  const notifList = document.getElementById('notifDropdownList');
+
+  function esc(s){
+    return String(s ?? '').replace(/[&<>\"']/g, m => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'
+    }[m]));
+  }
+
+  async function loadNotifications(){
+    if (!notifList) return;
+
+    try {
+      const res = await fetch('";
+        // line 2908
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("notification_dropdown");
+        yield "', {
+        headers: { 'Accept': 'application/json' }
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        notifList.innerHTML = `<div class=\"p-3 text-danger small\">Erreur chargement.</div>`;
+        return;
+      }
+
+      if (notifCount) {
+        notifCount.textContent = String(data.count || 0);
+        notifCount.style.display = (data.count || 0) > 0 ? '' : 'none';
+      }
+
+      const items = data.items || [];
+
+      if (!items.length) {
+        notifList.innerHTML = `<div class=\"p-3 text-muted small\">Aucune notification.</div>`;
+        return;
+      }
+
+      notifList.innerHTML = items.map(item => `
+        <a href=\"#\"
+           class=\"notif-item\"
+           data-read-id=\"\${item.id}\"
+           data-route=\"\${esc(item.route || '')}\"
+           data-route-params='\${esc(JSON.stringify(item.routeParams || {}))}'>
+          <span class=\"notif-dot\"></span>
+          <div class=\"notif-content\">
+            <p><strong>\${esc(item.title)}</strong><br>\${esc(item.message)}</p>
+            <span class=\"notif-time\">\${esc(item.createdAt || '')}</span>
+          </div>
+        </a>
+      `).join('');
+
+      notifList.querySelectorAll('[data-read-id]').forEach(link => {
+        link.addEventListener('click', async (e) => {
+          e.preventDefault();
+
+          const id = link.getAttribute('data-read-id');
+          const route = link.getAttribute('data-route') || '';
+
+          try {
+            await fetch(`/mes-notifications/\${id}/lire`, {
+              method: 'POST',
+              headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            });
+          } catch(e) {}
+
+          await loadNotifications();
+
+          if (route) {
+            window.location.href = route;
+          }
+        });
+      });
+
+    } catch(e) {
+      notifList.innerHTML = `<div class=\"p-3 text-danger small\">Erreur réseau.</div>`;
+    }
+  }
+
+  markBtn?.addEventListener('click', async () => {
+    try {
+      await fetch('";
+        // line 2974
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("notification_read_all");
+        yield "', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' }
+      });
+      await loadNotifications();
+    } catch(e){}
+  });
+
+  loadNotifications();
+})();
+</script>
+
+<script>
+(function(){
+  const voiceBtn = document.getElementById('voiceSearchBtn');
+  const searchInput = document.getElementById('InputRechercheProduit');
+  const searchForm = document.getElementById('searchFormHeader');
+
+  if (!voiceBtn || !searchInput || !searchForm) return;
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    voiceBtn.disabled = true;
+    voiceBtn.title = \"Recherche vocale non prise en charge par ce navigateur\";
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'fr-FR';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+  recognition.continuous = false;
+
+  let isListening = false;
+  let originalPlaceholder = searchInput.getAttribute('placeholder') || '';
+
+  function setListening(state){
+    isListening = state;
+
+    if (state) {
+      voiceBtn.classList.add('is-listening');
+      voiceBtn.innerHTML = '<i class=\"fa-solid fa-microphone-lines\"></i>';
+      voiceBtn.title = 'Parlez maintenant...';
+      searchInput.setAttribute('placeholder', 'Parlez maintenant...');
+    } else {
+      voiceBtn.classList.remove('is-listening');
+      voiceBtn.innerHTML = '<i class=\"fa-solid fa-microphone\"></i>';
+      voiceBtn.title = 'Recherche vocale';
+      searchInput.setAttribute('placeholder', originalPlaceholder);
+    }
+  }
+
+  voiceBtn.addEventListener('click', function(e){
+    e.preventDefault();
+
+    try {
+      if (isListening) {
+        recognition.stop();
+        setListening(false);
+      } else {
+        recognition.start();
+      }
+    } catch (error) {
+      console.error('Erreur démarrage reconnaissance vocale :', error);
+      setListening(false);
+    }
+  });
+
+  recognition.onstart = function(){
+    setListening(true);
+  };
+
+  recognition.onend = function(){
+    setListening(false);
+  };
+
+  recognition.onresult = function(event){
+    const transcript = event.results[0][0].transcript.trim();
+
+    if (transcript !== '') {
+      searchInput.value = transcript;
+      searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+      searchForm.submit();
+    }
+  };
+
+  recognition.onerror = function(event){
+    console.error('Erreur reconnaissance vocale :', event.error);
+    setListening(false);
+
+    if (event.error === 'not-allowed') {
+      alert('Vous devez autoriser l’accès au microphone.');
+    }
+  };
+})();
+</script>
+";
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        yield from [];
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getTemplateName(): string
+    {
+        return "partials/_header.html.twig";
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function isTraitable(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getDebugInfo(): array
+    {
+        return array (  3152 => 2974,  3083 => 2908,  2963 => 2791,  2822 => 2653,  2632 => 2466,  2576 => 2413,  2550 => 2389,  2541 => 2384,  2539 => 2383,  2526 => 2373,  2518 => 2368,  2510 => 2363,  2496 => 2352,  2483 => 2341,  2462 => 2323,  2442 => 2306,  2424 => 2291,  2406 => 2276,  2388 => 2261,  2370 => 2246,  2352 => 2231,  2334 => 2216,  2316 => 2201,  2292 => 2179,  2290 => 2178,  2271 => 2161,  2267 => 2160,  2262 => 2158,  2258 => 2157,  2222 => 2124,  2204 => 2109,  2190 => 2098,  2160 => 2071,  2155 => 2069,  2146 => 2062,  2137 => 2055,  2135 => 2054,  2130 => 2051,  2110 => 2034,  2095 => 2021,  2084 => 2013,  2070 => 2002,  2058 => 1993,  2047 => 1985,  2038 => 1978,  2036 => 1977,  2020 => 1964,  2000 => 1946,  1997 => 1945,  1995 => 1944,  1986 => 1938,  48 => 2,);
+    }
+
+    public function getSourceContext(): Source
+    {
+        return new Source("{# templates/partials/_header.html.twig #}
+<style>
+  :root{
+    --hd-radius: 18px;
+    --hd-border: rgba(0,0,0,.08);
+    --hd-shadow: 0 14px 34px rgba(0,0,0,.08);
+    --hd-glass: rgba(255,255,255,1);
+    --hd-glass2: rgba(255,255,255,.62);
+    --hd-text: rgba(0,0,0,.78);
+    --hd-muted: rgba(0,0,0,.56);
+  }
+
+  body.theme-dark{
+    --hd-border: rgba(255,255,255,.14);
+    --hd-shadow: 0 16px 44px rgba(0,0,0,.35);
+    --hd-glass: rgba(18,18,22,.72);
+    --hd-glass2: rgba(18,18,22,.55);
+    --hd-text: rgba(255,255,255,.86);
+    --hd-muted: rgba(255,255,255,.62);
+    background: #0f1115;
+    color: rgba(255,255,255,.86);
+  }
+
+  .site__header{
+    position: sticky;
+    top: 0;
+    z-index: 1060;
+  }
+
+  .header-wrap{
+    border-bottom: 1px solid var(--hd-border);
+    background: var(--hd-glass);
+  }
+
+  .header-topbar{
+    position: relative;
+    overflow: visible !important;
+    border-bottom: 1px solid var(--hd-border);
+    background:
+      radial-gradient(800px circle at 10% 20%, rgba(var(--bs-primary-rgb), .16), transparent 40%),
+      radial-gradient(900px circle at 90% 40%, rgba(var(--bs-secondary-rgb), .14), transparent 38%),
+      linear-gradient(180deg, rgba(0,0,0,.02), transparent);
+    z-index: 1030;
+  }
+
+  body.theme-dark .header-topbar{
+    background:
+      radial-gradient(800px circle at 10% 20%, rgba(13,110,253,.18), transparent 40%),
+      radial-gradient(900px circle at 90% 40%, rgba(25,135,84,.18), transparent 38%),
+      linear-gradient(180deg, rgba(255,255,255,.03), transparent);
+  }
+
+  .header-topbar .dropdown-menu{
+    z-index: 2000;
+  }
+
+  .topbar-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding: 10px 0;
+    color: var(--hd-text);
+  }
+
+  .topbar-welcome{
+    font-weight: 700;
+    color: var(--hd-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 520px;
+  }
+
+  .topbar-welcome .account-name{
+    font-weight: 600;
+    color: var(--hd-text);
+  }
+
+  .topbar-phone{
+    margin-left: 8px;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--hd-glass2);
+    color: var(--hd-text);
+    font-weight: 550;
+  }
+
+  .topbar-phone:hover{
+    filter: brightness(.98);
+  }
+
+  .topbar-spacer{
+    flex:1;
+  }
+
+  .hd-iconbtn{
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,.08);
+    background: rgba(255,255,255,.72);
+    display:grid;
+    place-items:center;
+    color: rgba(0,0,0,.72);
+    text-decoration:none;
+    transition: transform .08s ease, filter .12s ease;
+  }
+
+  body.theme-dark .hd-iconbtn{
+    border-color: rgba(255,255,255,.10);
+    background: rgba(255,255,255,.08);
+    color: rgba(255,255,255,.82);
+  }
+
+  .hd-iconbtn:hover{
+    transform: translateY(-1px);
+    filter: brightness(.98);
+  }
+
+  .hd-badge{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    border-radius:999px;
+    padding: 2px 5px;
+    font-size:.64rem;
+    border: 1px solid rgba(0,0,0,.08);
+    box-shadow: none;
+  }
+
+  body.theme-dark .hd-badge{
+    border-color: rgba(255,255,255,.12);
+  }
+
+  .hd-dropdown .dropdown-menu{
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(0,0,0,.08);
+    border: 1px solid rgba(0,0,0,.08);
+    overflow: hidden;
+    min-width: 260px;
+    max-width: 280px;
+    background: rgba(255,255,255,.96);
+    color: rgba(0,0,0,.78);
+    padding: 0;
+  }
+
+  body.theme-dark .hd-dropdown .dropdown-menu{
+    background: rgba(28,28,34,.96);
+    border-color: rgba(255,255,255,.10);
+    box-shadow: 0 12px 28px rgba(0,0,0,.28);
+    color: rgba(255,255,255,.86);
+  }
+
+  .notif-head{
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 8px;
+  }
+
+  body.theme-dark .notif-head{
+    border-bottom-color: rgba(255,255,255,.08);
+  }
+
+  .notif-head h6{
+    margin:0;
+    font-weight: 550;
+    font-size:.92rem;
+    color: rgba(0,0,0,.78);
+  }
+
+  body.theme-dark .notif-head h6{
+    color: rgba(255,255,255,.86);
+  }
+
+  .notif-head button{
+    border:none;
+    background: transparent;
+    font-weight:700;
+    font-size:.78rem;
+    color: rgba(13,110,253,.92);
+    padding: 0;
+  }
+
+  body.theme-dark .notif-head button{
+    color: rgba(127,176,255,.95);
+  }
+
+  .notif-item{
+    display:flex;
+    gap:8px;
+    padding: 10px 12px;
+    text-decoration:none;
+    color: rgba(0,0,0,.76);
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    transition: background .12s ease;
+  }
+
+  body.theme-dark .notif-item{
+    color: rgba(255,255,255,.84);
+    border-bottom-color: rgba(255,255,255,.06);
+  }
+
+  .notif-item:hover{
+    background: rgba(13,110,253,.05);
+  }
+
+  body.theme-dark .notif-item:hover{
+    background: rgba(255,255,255,.04);
+  }
+
+  .notif-dot{
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    margin-top: 5px;
+    background: rgba(220,53,69,.92);
+    box-shadow: 0 0 0 3px rgba(220,53,69,.10);
+    flex: 0 0 auto;
+  }
+
+  .notif-content p{
+    margin:0;
+    font-size:.82rem;
+    line-height:1.25;
+    color: inherit;
+  }
+
+  .notif-time{
+    margin-top:4px;
+    font-size:.72rem;
+    color: rgba(0,0,0,.48);
+    display:block;
+  }
+
+  body.theme-dark .notif-time{
+    color: rgba(255,255,255,.52);
+  }
+
+  #notifDropdownList .p-3{
+    padding: 10px 12px !important;
+    font-size: .78rem;
+  }
+
+  .hd-dropdown .border-top{
+    border-top: 1px solid rgba(0,0,0,.06) !important;
+  }
+
+  body.theme-dark .hd-dropdown .border-top{
+    border-top-color: rgba(255,255,255,.08) !important;
+  }
+
+  .hd-dropdown .border-top .btn{
+    font-size: .78rem;
+    padding: .38rem .55rem;
+    border-radius: 10px;
+  }
+
+  .settings-btn{
+    border-radius: 999px !important;
+    border: 1px solid var(--hd-border) !important;
+    background: var(--hd-glass2) !important;
+    color: var(--hd-text) !important;
+    font-weight: 550 !important;
+    padding: 8px 12px !important;
+  }
+
+  .header-main-row{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-box{
+    flex: 0 0 auto;
+  }
+
+  .brand-logo{
+    height: 56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex: 0 0 auto;
+  }
+
+  .brand-logo img{
+    display:block;
+    max-height: 50px;
+    width: auto;
+    object-fit: contain;
+    padding: 0;
+  }
+
+  .brand-name{
+    display:flex;
+    flex-direction:column;
+    line-height:1.05;
+  }
+
+  .brand-name strong{
+    font-weight: 650;
+    color: var(--hd-text);
+  }
+
+  .brand-name span{
+    font-size:.82rem;
+    color: var(--hd-muted);
+    font-weight: 700;
+  }
+
+  .header-search{
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .header-search .form-select{
+    max-width: 210px;
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
+  }
+
+  .header-search .form-control{
+    border-radius: 0;
+  }
+
+  .header-search .btn{
+    border-top-right-radius: 999px;
+    border-bottom-right-radius: 999px;
+    font-weight: 600;
+  }
+
+  .header-search form{
+    width: 100%;
+  }
+
+  .header-search .search-wrap{
+    width: 100%;
+  }
+
+  .d-none.d-lg-flex.align-items-center.gap-2{
+    flex: 0 0 auto;
+  }
+
+  .header-nav{
+    border-top: 1px solid var(--hd-border);
+    background: rgba(0,0,0,.015);
+  }
+
+  body.theme-dark .header-nav{
+    background: rgba(255,255,255,.03);
+  }
+
+  .nav-list{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    padding: 10px 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .nav-list a{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    text-decoration:none;
+    border: 1px solid transparent;
+    color: var(--hd-text);
+    font-weight: 600;
+    transition: background .12s ease, transform .08s ease, border-color .12s ease;
+  }
+
+  .nav-list a:hover{
+    background: rgba(13,110,253,.08);
+    border-color: rgba(13,110,253,.18);
+    transform: translateY(-1px);
+  }
+
+  .nav-list .dropdown-menu{
+    border-radius: 18px;
+    border: 1px solid var(--hd-border);
+    box-shadow: var(--hd-shadow);
+    background: var(--hd-glass);
+  }
+
+  .indicator-btn{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding: 8px 12px;
+    border-radius: 16px;
+    background: var(--hd-glass2);
+    text-decoration:none;
+    color: var(--hd-text);
+    min-height: 46px;
+  }
+
+  .indicator-btn.indicator-cart{
+    padding: 10px 16px;
+    min-width: 245px;
+    margin-bottom: 10px;
+  }
+
+  .indicator-btn.indicator-cart #cartTotalMini{
+    font-weight: 650 !important;
+    font-size: 1.2rem;
+    color: var(--hd-text);
+  }
+
+  .indicator-btn.indicator-deals{
+    padding: 10px 16px;
+    min-width: 220px;
+    margin-bottom: 10px;
+  }
+
+  .indicator-btn.indicator-deals .indicator-title{
+    white-space: nowrap;
+  }
+
+  .indicator-title{
+    font-size:1.2rem;
+    font-weight: 600;
+    line-height:1;
+  }
+
+  .indicator-value{
+    font-size:.78rem;
+    color: var(--hd-muted);
+    font-weight: 550;
+  }
+
+  .indicator-icon{
+    position: relative;
+    width: 45px;
+    height: 45px;
+    border-radius: 14px;
+    display:grid;
+    place-items:center;
+  }
+
+  body.theme-dark .indicator-icon{
+    background: rgba(13,110,253,.16);
+  }
+
+  .theme-toggle{
+    border:none;
+    background: var(--hd-glass2);
+    border: 1px solid var(--hd-border);
+    border-radius: 999px;
+    padding: 7px 10px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color: var(--hd-text);
+    font-weight: 600;
+  }
+
+  .theme-toggle .dot{
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: rgba(255,193,7,.95);
+    box-shadow: 0 0 0 4px rgba(255,193,7,.18);
+  }
+
+  body.theme-dark .theme-toggle .dot{
+    background: rgba(13,110,253,.95);
+    box-shadow: 0 0 0 4px rgba(13,110,253,.18);
+  }
+
+  .offcanvas{
+    border-left: 1px solid var(--hd-border);
+    background: var(--hd-glass);
+    color: var(--hd-text);
+  }
+
+  .offcanvas .offcanvas-title{
+    font-weight: 650;
+  }
+
+  .offcanvas a{
+    color: var(--hd-text);
+  }
+
+  .theme-switch-wrap{
+    display:flex;
+    align-items:center;
+  }
+
+  .theme-switch{
+    width: 58px !important;
+    height: 30px !important;
+    border-radius: 999px !important;
+    cursor: pointer;
+    border: 1px solid var(--hd-border) !important;
+    position: relative;
+    background: rgba(255,193,7,.30) !important;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.04);
+    transition: background .22s ease, border-color .22s ease, box-shadow .22s ease;
+  }
+
+  body.theme-dark .theme-switch{
+    background: rgba(233,236,239,.75) !important;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+  }
+
+  .theme-switch:focus{
+    box-shadow: 0 0 0 .2rem rgba(13,110,253,.20) !important;
+  }
+
+  .theme-switch::before{
+    content:\"\";
+    position:absolute;
+    top: 50%;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    transform: translateY(-50%);
+    border-radius: 999px;
+    background: rgba(255,255,255,.98);
+    border: 1px solid rgba(0,0,0,.10);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12);
+    transition: left .26s ease, background .22s ease, border-color .22s ease;
+    z-index: 1;
+  }
+
+  .theme-switch::after{
+    content:\"\\f185\";
+    font-family: \"Font Awesome 6 Free\";
+    font-weight: 600;
+    position:absolute;
+    top: 50%;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    transform: translateY(-50%);
+    display:grid;
+    place-items:center;
+    color: rgba(255,140,0,.95);
+    transition: left .26s ease, transform .26s ease, opacity .18s ease;
+    z-index: 2;
+  }
+
+  .theme-switch:checked::before{
+    left: calc(100% - 3px - 24px);
+    background: rgba(255,255,255,.98);
+  }
+
+  .theme-switch:checked::after{
+    left: calc(100% - 3px - 24px);
+    content:\"\\f186\";
+    color: rgba(55,65,81,.95);
+  }
+
+  .theme-switch:active::before{
+    width: 28px;
+  }
+
+  .theme-switch:active::after{
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  .theme-switch-label{
+    margin:0;
+    padding:0;
+  }
+
+  .cart-summary-card{
+    border-radius: 22px;
+    border: 1px solid var(--hd-border);
+    background:
+      radial-gradient(600px circle at 10% 10%, rgba(var(--bs-primary-rgb), .10), transparent 40%),
+      radial-gradient(600px circle at 90% 20%, rgba(var(--bs-secondary-rgb), .08), transparent 35%),
+      var(--hd-glass2);
+    box-shadow: var(--hd-shadow);
+    padding: 16px;
+    backdrop-filter: blur(8px);
+  }
+
+  .cart-summary-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .cart-summary-kicker{
+    font-size: .74rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--hd-muted);
+  }
+
+  .cart-summary-title{
+    font-size: 1rem;
+    font-weight: 650;
+    color: var(--hd-text);
+    line-height: 1.1;
+  }
+
+  .cart-summary-badge{
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(220,53,69,.12);
+    color: rgba(220,53,69,.95);
+    border: 1px solid rgba(220,53,69,.18);
+    font-size: .78rem;
+    font-weight: 650;
+    white-space: nowrap;
+  }
+
+  .cart-summary-badge.d-none{
+    display: none !important;
+  }
+
+  .cart-discount-chip{
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(220,53,69,.10);
+    color: rgba(220,53,69,.95);
+    border: 1px solid rgba(220,53,69,.16);
+    font-size: .72rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .cart-summary-grid{
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .cart-summary-box{
+    border-radius: 16px;
+    border: 1px solid var(--hd-border);
+    background: rgba(255,255,255,.55);
+    padding: 12px;
+  }
+
+  body.theme-dark .cart-summary-box{
+    background: rgba(18,18,22,.45);
+  }
+
+  .cart-summary-label{
+    display:block;
+    font-size: .78rem;
+    font-weight: 550;
+    color: var(--hd-muted);
+    margin-bottom: 4px;
+  }
+
+  .cart-summary-value{
+    display:block;
+    font-size: 1rem;
+    font-weight: 650;
+    color: var(--hd-text);
+  }
+
+  .cart-summary-line{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 10px;
+    padding: 10px 0 8px 0;
+    border-top: 1px dashed var(--hd-border);
+    color: var(--hd-text);
+    font-size: .92rem;
+  }
+
+  .cart-summary-total{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 10px;
+    margin-top: 4px;
+    padding: 12px 14px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(13,110,253,.12), rgba(13,110,253,.04));
+    border: 1px solid rgba(13,110,253,.18);
+  }
+
+  .cart-summary-total span{
+    font-size: .90rem;
+    font-weight: 600;
+    color: var(--hd-text);
+  }
+
+  .cart-summary-total strong{
+    font-size: 1.25rem;
+    font-weight: 650;
+    color: var(--hd-text);
+  }
+
+  .cart-summary-foot{
+    margin-top: 10px;
+    font-size: .78rem;
+    font-weight: 550;
+    color: var(--hd-muted);
+    text-align: center;
+  }
+
+  .cart-item{
+    display:flex;
+    gap: 12px;
+    align-items:center;
+    padding: 10px;
+    border-radius: 16px;
+    border: 1px solid var(--hd-border);
+    background: var(--hd-glass2);
+  }
+
+  .cart-thumb{
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    border: 1px solid var(--hd-border);
+    background: rgba(0,0,0,.03);
+    object-fit: contain;
+    padding: 6px;
+    flex: 0 0 auto;
+  }
+
+  body.theme-dark .cart-thumb{
+    background: rgba(255,255,255,.05);
+  }
+
+  .cart-info{
+    min-width: 0;
+    flex: 1;
+  }
+
+  .cart-title{
+    font-weight: 650;
+    font-size: .92rem;
+    line-height: 1.12;
+    color: var(--hd-text);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .cart-ref{
+    margin-top: 4px;
+    font-size: .80rem;
+    font-weight: 600;
+    color: var(--hd-muted);
+  }
+
+  .cart-right{
+    display:flex;
+    flex-direction: column;
+    align-items:flex-end;
+    gap: 6px;
+    flex: 0 0 auto;
+  }
+
+  .cart-qty{
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: .78rem;
+    font-weight: 650;
+    border: 1px solid var(--hd-border);
+    background: rgba(255,255,255,.70);
+    color: var(--hd-text);
+    white-space: nowrap;
+  }
+
+  body.theme-dark .cart-qty{
+    background: rgba(18,18,22,.55);
+  }
+
+  .cart-subtotal{
+    font-size: .82rem;
+    font-weight: 650;
+    color: var(--hd-text);
+    white-space: nowrap;
+  }
+
+  .cart-remove-btn{
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    border: 1px solid rgba(220,53,69,.18);
+    background: rgba(220,53,69,.08);
+    color: rgba(220,53,69,.95);
+    display: inline-grid;
+    place-items: center;
+    padding: 0;
+    transition: transform .08s ease, background .12s ease, filter .12s ease;
+  }
+
+  .cart-remove-btn:hover{
+    background: rgba(220,53,69,.14);
+    transform: translateY(-1px);
+  }
+
+  body.theme-dark .cart-remove-btn{
+    border-color: rgba(220,53,69,.24);
+    background: rgba(220,53,69,.12);
+    color: rgba(255,120,120,.95);
+  }
+
+  .header-search .search-wrap{
+    position: relative;
+    width: 100%;
+  }
+
+  .header-search .search-ico{
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(0,0,0,.45);
+    pointer-events: none;
+    font-size: 1rem;
+  }
+
+  body.theme-dark .header-search .search-ico{
+    color: rgba(255,255,255,.55);
+  }
+
+  .header-search .search-input{
+    width: 100%;
+    height: 46px;
+    padding-left: 44px !important;
+    padding-right: 14px !important;
+    border: 1px solid var(--hd-border) !important;
+    color: var(--hd-text) !important;
+    font-weight: 550;
+    border-radius: 999px !important;
+    background: rgba(0,0,0,.03) !important;
+  }
+
+  body.theme-dark .header-search .search-input{
+    background: rgba(255,255,255,.08) !important;
+  }
+
+  .header-search .search-input::placeholder{
+    color: rgba(0,0,0,.45);
+    font-weight: 700;
+  }
+
+  body.theme-dark .header-search .search-input::placeholder{
+    color: rgba(255,255,255,.55);
+  }
+
+  .header-search .search-input:focus{
+    outline: none !important;
+    box-shadow: 0 0 0 .2rem rgba(13,110,253,.18) !important;
+    background: rgba(0,0,0,.05) !important;
+  }
+
+  body.theme-dark .header-search .search-input:focus{
+    background: rgba(255,255,255,.10) !important;
+  }
+
+  .main-menu__item.cat-item .main-menu__link{
+    background: transparent;
+  }
+
+  .main-menu__item.cat-item .main-menu__link:hover{
+    background: var(--bs-primary);
+    color:white;
+  }
+
+  .main-menu__item.cat-item .main-menu__link span{
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display:inline-block;
+  }
+
+  .header__navbar{
+    border-top: 1px solid var(--hd-border);
+    background: rgba(0,0,0,.015);
+    padding: 10px 0;
+  }
+
+  body.theme-dark .header__navbar{
+    background: rgba(255,255,255,.03);
+  }
+
+  .main-menu__list{
+    list-style: none;
+    display:flex;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    align-items:center;
+  }
+
+  .main-menu__item{
+    position: relative;
+  }
+
+  .main-menu__link{
+    display:flex;
+    align-items:center;
+    padding: 5px 5px;
+    text-decoration:none;
+    color: var(--hd-text);
+    font-weight: 550;
+    transition: background .12s ease, border-color .12s ease, transform .08s ease;
+    white-space: nowrap;
+    font-size: 0.85em;
+  }
+
+  .main-menu__link:hover{
+    background: rgba(13,110,253,.08);
+    border-color: rgba(13,110,253,.18);
+    transform: translateY(-1px);
+  }
+
+  .main-menu__link--primary{
+    background: rgba(220,53,69,.12);
+    border-color: rgba(220,53,69,.22);
+    color: rgba(220,53,69,.95);
+  }
+
+  .main-menu__link--primary:hover{
+    background: rgba(220,53,69,.18);
+    border-color: rgba(220,53,69,.30);
+  }
+
+  .main-menu__submenu{
+    position:absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    min-width: 320px;
+    background: var(--hd-glass);
+    border: 1px solid var(--hd-border);
+    border-radius: 18px;
+    box-shadow: var(--hd-shadow);
+    padding: 8px;
+    display:none;
+    z-index: 2000;
+  }
+
+  .main-menu__item--has-submenu:hover .main-menu__submenu{
+    display:block;
+  }
+
+  .menu{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:grid;
+    gap: 6px;
+  }
+
+  .menu__link{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    text-decoration:none;
+    color: var(--hd-text);
+    font-weight: 600;
+    background: var(--hd-glass2);
+    border: 1px solid rgba(0,0,0,.06);
+  }
+
+  body.theme-dark .menu__link{
+    border-color: rgba(255,255,255,.10);
+  }
+
+  .menu__link:hover{
+    background: rgba(13,110,253,.08);
+    border-color: rgba(13,110,253,.16);
+  }
+
+  .menu-arrow-down{
+    opacity:.7;
+  }
+
+  .menu-svg{
+    height: 27px;
+    flex: 0 0 auto;
+    display:inline-block;
+    color: rgba(0, 0, 0, 0.95);
+  }
+
+  body.theme-dark .menu-svg{
+    color: rgba(255,193,7,.95);
+  }
+
+  .menu-svg svg{
+    width:100%;
+    height:100%;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .main-menu__link.is-active,
+  .main-menu__link[aria-current=\"page\"]{
+    background-color: var(--bs-primary) !important;
+    color: #fff !important;
+    border-color: rgb(255, 0, 0);
+  }
+
+  .main-menu__link.is-active i,
+  .main-menu__link[aria-current=\"page\"] i{
+    color: #fff !important;
+  }
+
+  .admin-settings-btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 42px;
+    border-radius: 999px !important;
+    border: 1px solid var(--hd-border) !important;
+    background: var(--hd-glass2) !important;
+    color: var(--hd-text) !important;
+    font-weight: 550 !important;
+    padding: 8px 14px !important;
+    box-shadow: none !important;
+    transition: transform .08s ease, filter .12s ease, background .12s ease;
+  }
+
+  .admin-settings-btn:hover{
+    transform: translateY(-1px);
+    filter: brightness(.98);
+  }
+
+  .admin-settings-btn:focus{
+    box-shadow: 0 0 0 .2rem rgba(13,110,253,.14) !important;
+  }
+
+  .admin-settings-menu{
+    min-width: 320px !important;
+    border-radius: 18px !important;
+    border: 1px solid var(--hd-border) !important;
+    box-shadow: var(--hd-shadow) !important;
+    background: var(--hd-glass) !important;
+    padding: 10px !important;
+    overflow: hidden;
+  }
+
+  .admin-settings-head{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 4px 2px 4px;
+  }
+
+  .admin-settings-head__icon{
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: rgba(var(--bs-primary-rgb), .12);
+    color: rgba(var(--bs-primary-rgb), 1);
+    flex: 0 0 auto;
+  }
+
+  .admin-settings-head__title{
+    font-size: .95rem;
+    font-weight: 650;
+    color: var(--hd-text);
+    line-height: 1.1;
+  }
+
+  .admin-settings-head__subtitle{
+    margin-top: 3px;
+    font-size: .76rem;
+    font-weight: 700;
+    color: var(--hd-muted);
+    line-height: 1.1;
+  }
+
+  .admin-settings-item{
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    border-radius: 14px !important;
+    padding: 10px 12px !important;
+    font-weight: 500 !important;
+    color: var(--hd-text) !important;
+    transition: background .12s ease, transform .08s ease;
+  }
+
+  .admin-settings-item:hover{
+    background: rgba(13,110,253,.08) !important;
+    transform: translateX(2px);
+  }
+
+  .admin-settings-item__icon{
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: rgba(0,0,0,.05);
+    color: var(--hd-text);
+    flex: 0 0 auto;
+  }
+
+  body.theme-dark .admin-settings-item__icon{
+    background: rgba(255,255,255,.06);
+  }
+
+  .admin-settings-item--danger{
+    color: rgba(220,53,69,.98) !important;
+  }
+
+  .admin-settings-item--danger:hover{
+    background: rgba(220,53,69,.10) !important;
+  }
+
+  .admin-settings-item--danger .admin-settings-item__icon{
+    background: rgba(220,53,69,.10);
+    color: rgba(220,53,69,.98);
+  }
+
+  .admin-settings-modal{
+    --settings-bg: var(--bs-body-bg);
+    --settings-surface: var(--bs-white, #fff);
+    --settings-text: var(--bs-body-color);
+    --settings-muted: var(--bs-secondary-color);
+    --settings-border: var(--bs-border-color);
+    --settings-soft: rgba(var(--bs-primary-rgb), .08);
+  }
+
+  .admin-settings-modal .modal-dialog,
+  .admin-settings-modal .modal-content{
+    min-height: 100dvh;
+  }
+
+  .admin-settings-modal .modal-content{
+    border: 0;
+    border-radius: 0;
+    background: var(--settings-bg);
+    color: var(--settings-text);
+  }
+
+  .admin-settings-modal__shell{
+    width: min(1120px, calc(100% - 32px));
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding: clamp(18px, 3vw, 34px) 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 2vw, 24px);
+  }
+
+  .admin-settings-modal__top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .admin-settings-modal__eyebrow{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    color: var(--bs-primary);
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .admin-settings-modal__title{
+    margin: 0;
+    color: var(--settings-text);
+    font-size: clamp(1.65rem, 3vw, 2.45rem);
+    font-weight: 750;
+    letter-spacing: -.03em;
+    line-height: 1;
+  }
+
+  .admin-settings-modal__subtitle{
+    max-width: 620px;
+    margin: 10px 0 0;
+    color: var(--settings-muted);
+    font-size: .98rem;
+    line-height: 1.55;
+  }
+
+  .admin-settings-modal__close{
+    width: 46px;
+    height: 46px;
+    flex: 0 0 auto;
+    border-radius: 16px;
+    border: 1px solid var(--settings-border);
+    background: var(--settings-surface);
+    color: var(--settings-text);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 10px 24px rgba(var(--brand-anthracite-rgb), .08);
+    transition: transform .14s ease, background .14s ease, color .14s ease;
+  }
+
+  .admin-settings-modal__close:hover{
+    transform: translateY(-1px);
+    color: var(--bs-primary);
+    background: var(--settings-soft);
+  }
+
+  .admin-settings-modal__grid{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .admin-settings-modal__card{
+    min-height: 126px;
+    border-radius: 8px;
+    border: 1px solid var(--settings-border);
+    background: var(--settings-surface);
+    color: var(--settings-text);
+    padding: 18px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+    box-shadow: 0 12px 30px rgba(var(--brand-anthracite-rgb), .07);
+    transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease, background .16s ease;
+  }
+
+  .admin-settings-modal__card:hover{
+    color: var(--settings-text);
+    transform: translateY(-3px);
+    border-color: rgba(var(--bs-primary-rgb), .32);
+    background: var(--brand-bg);
+    box-shadow: 0 18px 42px rgba(var(--brand-anthracite-rgb), .12);
+  }
+
+  .admin-settings-modal__card-head{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .admin-settings-modal__icon{
+    width: 46px;
+    height: 46px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    color: var(--bs-primary);
+    background: rgba(var(--bs-primary-rgb), .10);
+    flex: 0 0 auto;
+  }
+
+  .admin-settings-modal__arrow{
+    color: var(--settings-muted);
+    font-size: .92rem;
+    transform: translate(-2px, 2px);
+    transition: transform .16s ease, color .16s ease;
+  }
+
+  .admin-settings-modal__card:hover .admin-settings-modal__arrow{
+    color: var(--bs-primary);
+    transform: translate(2px, -2px);
+  }
+
+  .admin-settings-modal__label{
+    display: block;
+    color: var(--settings-text);
+    font-size: .98rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .admin-settings-modal__desc{
+    display: block;
+    margin-top: 6px;
+    color: var(--settings-muted);
+    font-size: .82rem;
+    font-weight: 400;
+    line-height: 1.35;
+  }
+
+  .admin-settings-modal__footer{
+    margin-top: auto;
+    padding-top: 4px;
+  }
+
+  .admin-settings-modal__logout{
+    width: 100%;
+    min-height: 74px;
+    border-radius: 8px;
+    border: 1px solid #b42318;
+    background: #b42318;
+    color: #fff;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    text-decoration: none;
+    box-shadow: 0 12px 30px rgba(var(--brand-anthracite-rgb), .07);
+    transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+  }
+
+  .admin-settings-modal__logout:hover{
+    color: #fff;
+    background: color-mix(in srgb, #b42318 85%, var(--brand-anthracite));
+    transform: translateY(-2px);
+    box-shadow: 0 18px 42px rgba(var(--bs-danger-rgb), .22);
+  }
+
+  .admin-settings-modal__logout-main{
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+
+  .admin-settings-modal__logout-icon{
+    width: 44px;
+    height: 44px;
+    border-radius: 15px;
+    display: grid;
+    place-items: center;
+    background: rgba(var(--bs-danger-rgb), .12);
+  }
+
+  .admin-settings-modal__logout:hover .admin-settings-modal__logout-icon{
+    background: rgba(255,255,255,.18);
+  }
+
+  .admin-settings-modal__logout-title{
+    display: block;
+    font-size: .98rem;
+    font-weight: 750;
+    line-height: 1.1;
+  }
+
+  .admin-settings-modal__logout-desc{
+    display: block;
+    margin-top: 4px;
+    color: rgba(255,255,255,.9);
+    font-size: .8rem;
+    font-weight: 400;
+  }
+
+  .admin-settings-modal__logout:hover .admin-settings-modal__logout-desc{
+    color: rgba(255,255,255,.78);
+  }
+
+  @media (max-width: 991.98px){
+    .admin-settings-modal__grid{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 575.98px){
+    .admin-settings-modal__shell{
+      width: calc(100% - 20px);
+      padding: 14px 0 18px;
+      gap: 14px;
+    }
+
+    .admin-settings-modal__top{
+      align-items: flex-start;
+    }
+
+    .admin-settings-modal__subtitle{
+      font-size: .88rem;
+      margin-top: 8px;
+    }
+
+    .admin-settings-modal__grid{
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .admin-settings-modal__card{
+      min-height: 0;
+      border-radius: 18px;
+      padding: 14px;
+      gap: 12px;
+    }
+
+    .admin-settings-modal__icon{
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+    }
+  }
+
+  .account-menu{
+    min-width: 300px !important;
+    border-radius: 18px !important;
+    border: 1px solid var(--hd-border) !important;
+    box-shadow: var(--hd-shadow) !important;
+    background: var(--hd-glass) !important;
+    padding: 10px !important;
+    overflow: hidden;
+  }
+
+  .account-menu-head{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 4px 2px 4px;
+  }
+
+  .account-menu-head__icon{
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: rgba(var(--bs-primary-rgb), .12);
+    color: rgba(var(--bs-primary-rgb), 1);
+    flex: 0 0 auto;
+  }
+
+  .account-menu-head__title{
+    font-size: .95rem;
+    font-weight: 650;
+    color: var(--hd-text);
+    line-height: 1.1;
+  }
+
+  .account-menu-head__subtitle{
+    margin-top: 3px;
+    font-size: .76rem;
+    font-weight: 700;
+    color: var(--hd-muted);
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  .account-menu-item{
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    border-radius: 14px !important;
+    padding: 10px 12px !important;
+    font-weight: 500 !important;
+    color: var(--hd-text) !important;
+    transition: background .12s ease, transform .08s ease;
+  }
+
+  .account-menu-item:hover{
+    background: rgba(13,110,253,.08) !important;
+    transform: translateX(2px);
+  }
+
+  .account-menu-item__icon{
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: rgba(0,0,0,.05);
+    color: var(--hd-text);
+    flex: 0 0 auto;
+  }
+
+  body.theme-dark .account-menu-item__icon{
+    background: rgba(255,255,255,.06);
+  }
+
+  .account-menu-item--danger{
+    color: #b42318 !important;
+  }
+
+  .account-menu-item--danger:hover{
+    background: rgba(220,53,69,.10) !important;
+  }
+
+  .account-menu-item--danger .account-menu-item__icon{
+    background: rgba(220,53,69,.10);
+    color: #b42318;
+  }
+
+  /* ===== MOBILE MENU MODERN ===== */
+  .mobile-menu-toggle{
+    width: 46px;
+    height: 46px;
+    border-radius: 16px !important;
+    border: 1px solid var(--hd-border) !important;
+    background:
+      radial-gradient(120px circle at 20% 20%, rgba(var(--bs-primary-rgb), .14), transparent 45%),
+      var(--hd-glass2) !important;
+    box-shadow: 0 10px 24px rgba(0,0,0,.08);
+    display: inline-grid;
+    place-items: center;
+    padding: 0 !important;
+  }
+
+  body.theme-dark .mobile-menu-toggle{
+    background:
+      radial-gradient(120px circle at 20% 20%, rgba(13,110,253,.20), transparent 45%),
+      rgba(255,255,255,.08) !important;
+    box-shadow: 0 14px 28px rgba(0,0,0,.28);
+  }
+
+  .mobile-menu-toggle:hover{
+    transform: translateY(-1px);
+    filter: brightness(.98);
+  }
+
+  .mobile-menu-toggle__bars{
+    width: 19px;
+    height: 14px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+
+  .mobile-menu-toggle__bars span{
+    display:block;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+  }
+
+  .mobile-menu-toggle__bars span:nth-child(2){
+    width: 75%;
+    margin-left: auto;
+  }
+
+  .mobile-menu-offcanvas{
+    --bs-offcanvas-width: min(92vw, 380px);
+    --hd-border: var(--brand-border);
+    --hd-shadow: 0 18px 40px rgba(var(--brand-anthracite-rgb), .14);
+    --hd-glass: #fff;
+    --hd-glass2: var(--brand-bg);
+    --hd-text: var(--brand-ink);
+    --hd-muted: var(--brand-muted);
+    width: var(--bs-offcanvas-width) !important;
+    max-width: 92vw;
+    min-height: 100dvh;
+    z-index: 1085 !important;
+    border-left: 0 !important;
+    border-right: 1px solid var(--hd-border);
+    background:
+      radial-gradient(700px circle at 10% 10%, rgba(var(--bs-primary-rgb), .12), transparent 40%),
+      radial-gradient(700px circle at 90% 20%, rgba(var(--bs-secondary-rgb), .10), transparent 36%),
+      var(--hd-glass) !important;
+    color: var(--hd-text) !important;
+  }
+
+  .mobile-menu-offcanvas.show,
+  .mobile-menu-offcanvas.showing{
+    visibility: visible !important;
+  }
+
+  .mobile-menu-offcanvas .offcanvas-header{
+    padding: 14px 16px 8px 16px;
+    border-bottom: 0;
+  }
+
+  .mobile-menu-offcanvas .btn-close{
+    border-radius: 12px;
+    background-color: rgba(0,0,0,.04);
+    opacity: 1;
+    padding: .6rem;
+  }
+
+  body.theme-dark .mobile-menu-offcanvas .btn-close{
+    background-color: rgba(255,255,255,.06);
+    filter: invert(1) grayscale(1);
+  }
+
+  .mobile-menu-body{
+    padding: 0 16px 18px 16px !important;
+    overflow-y: auto;
+    background: transparent !important;
+  }
+
+  .mobile-menu-hero{
+    border-radius: 22px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid var(--hd-border);
+    box-shadow: var(--hd-shadow);
+    background:
+      radial-gradient(600px circle at 10% 10%, rgba(var(--bs-primary-rgb), .14), transparent 40%),
+      radial-gradient(600px circle at 90% 20%, rgba(var(--bs-secondary-rgb), .10), transparent 36%),
+      var(--hd-glass2);
+  }
+
+  .mobile-menu-brand{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+  }
+
+  .mobile-menu-brand__logo{
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    border: 1px solid var(--hd-border);
+    background: rgba(255,255,255,.86);
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+    flex: 0 0 auto;
+  }
+
+  body.theme-dark .mobile-menu-brand__logo{
+    background: rgba(255,255,255,.08);
+  }
+
+  .mobile-menu-brand__logo img{
+    max-width: 82%;
+    max-height: 82%;
+    object-fit: contain;
+  }
+
+  .mobile-menu-brand__title{
+    font-size: 1rem;
+    font-weight: 650;
+    color: var(--hd-text);
+    line-height: 1.05;
+  }
+
+  .mobile-menu-brand__subtitle{
+    margin-top: 4px;
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--hd-muted);
+    line-height: 1.2;
+  }
+
+  .mobile-menu-quick{
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .mobile-menu-quick__item{
+    min-height: 54px;
+    border-radius: 16px;
+    border: 1px solid var(--hd-border);
+    background: rgba(255,255,255,.62);
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    padding: 12px;
+    text-decoration:none;
+    color: var(--hd-text);
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(0,0,0,.05);
+  }
+
+  body.theme-dark .mobile-menu-quick__item{
+    background: rgba(255,255,255,.06);
+  }
+
+  .mobile-menu-quick__item i{
+    width: 18px;
+    text-align:center;
+  }
+
+  .mobile-menu-section{
+    margin-top: 14px;
+  }
+
+  .mobile-menu-section__title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .mobile-menu-section__title strong{
+    font-size: .92rem;
+    font-weight: 650;
+    color: var(--hd-text);
+  }
+
+  .mobile-menu-section__title span{
+    font-size: .74rem;
+    font-weight: 550;
+    color: var(--hd-muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+
+  .mobile-menu-cats{
+    border-radius: 18px;
+    border: 1px solid var(--hd-border);
+    box-shadow: var(--hd-shadow);
+    overflow: hidden;
+    background: rgba(255,255,255,.58);
+  }
+
+  body.theme-dark .mobile-menu-cats{
+    background: rgba(255,255,255,.04);
+  }
+
+  .mobile-menu-cats .list-group-item{
+    border: 0 !important;
+    border-bottom: 1px solid rgba(0,0,0,.06) !important;
+    background: transparent !important;
+    color: var(--hd-text) !important;
+    padding: 12px 14px !important;
+    font-weight: 550;
+  }
+
+  body.theme-dark .mobile-menu-cats .list-group-item{
+    border-bottom-color: rgba(255,255,255,.06) !important;
+  }
+
+  .mobile-menu-cats .list-group-item:last-child{
+    border-bottom: 0 !important;
+  }
+
+  .mobile-menu-help{
+    margin-top: 16px;
+    border-radius: 18px;
+    border: 1px solid var(--hd-border);
+    background: rgba(255,255,255,.60);
+    padding: 14px;
+  }
+
+  body.theme-dark .mobile-menu-help{
+    background: rgba(255,255,255,.05);
+  }
+
+  .mobile-menu-help__title{
+    font-size: .92rem;
+    font-weight: 650;
+    color: var(--hd-text);
+    margin-bottom: 6px;
+  }
+
+  .mobile-menu-help__text{
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--hd-muted);
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+
+  .mobile-menu-help__actions{
+    display:grid;
+    gap: 8px;
+  }
+
+  .mobile-menu-help__actions a{
+    min-height: 44px;
+    border-radius: 14px;
+    font-weight: 600;
+  }
+
+  #mainMenuOffcanvas.mobile-menu-offcanvas,
+  body.theme-dark #mainMenuOffcanvas.mobile-menu-offcanvas{
+    background:
+      radial-gradient(700px circle at 10% 10%, rgba(var(--bs-primary-rgb), .10), transparent 40%),
+      #fff !important;
+    color: var(--brand-ink) !important;
+  }
+
+  #mainMenuOffcanvas .mobile-menu-hero,
+  #mainMenuOffcanvas .mobile-menu-quick__item,
+  #mainMenuOffcanvas .mobile-menu-cats,
+  #mainMenuOffcanvas .mobile-menu-help,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-hero,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-quick__item,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-cats,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-help{
+    background: #fff !important;
+    color: var(--brand-ink) !important;
+    border-color: var(--brand-border) !important;
+  }
+
+  #mainMenuOffcanvas .mobile-menu-brand__title,
+  #mainMenuOffcanvas .mobile-menu-section__title strong,
+  #mainMenuOffcanvas .mobile-menu-help__title,
+  #mainMenuOffcanvas .mobile-menu-cats .list-group-item,
+  #mainMenuOffcanvas .mobile-menu-quick__item,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-brand__title,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-section__title strong,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-help__title,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-cats .list-group-item,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-quick__item{
+    color: var(--brand-ink) !important;
+  }
+
+  #mainMenuOffcanvas .mobile-menu-brand__subtitle,
+  #mainMenuOffcanvas .mobile-menu-section__title span,
+  #mainMenuOffcanvas .mobile-menu-help__text,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-brand__subtitle,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-section__title span,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-help__text{
+    color: var(--brand-muted) !important;
+  }
+
+  #mainMenuOffcanvas .mobile-menu-brand__logo,
+  body.theme-dark #mainMenuOffcanvas .mobile-menu-brand__logo{
+    background: #fff !important;
+  }
+
+  @media (max-width: 991.98px){
+    .header-main-row{
+      flex-wrap: wrap !important;
+      gap: 10px !important;
+      align-items: center !important;
+      min-height: auto;
+      padding: 10px 0;
+    }
+
+    .brand-box{
+      order: 1;
+      flex: 0 0 auto;
+      align-items: center;
+    }
+
+    .brand-logo{
+      height: 42px;
+      width: auto;
+    }
+
+    .brand-logo img{
+      max-height: 42px;
+      width: auto;
+    }
+
+    .mobile-actions{
+      order: 2;
+      margin-left: auto;
+      flex: 0 0 auto;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+
+    .header-search{
+      order: 3;
+      flex: 0 0 100% !important;
+      width: 100% !important;
+      flex-grow: 0 !important;
+      margin-top: 2px;
+      display:flex;
+      align-items:center;
+    }
+
+    .header-search .form-control{
+      border-radius: 999px 0 0 999px;
+    }
+
+    .header-search .btn{
+      border-radius: 0 999px 999px 0;
+    }
+  }
+  .voice-search-btn{
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--hd-border);
+  border-radius: 999px;
+  background: rgba(255,255,255,.88);
+  color: var(--hd-text);
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+  z-index: 3;
+  transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+}
+
+.voice-search-btn:hover{
+  transform: translateY(-50%) scale(1.03);
+  background: rgba(13,110,253,.08);
+}
+
+.voice-search-btn:focus{
+  outline: none;
+  box-shadow: 0 0 0 .2rem rgba(13,110,253,.18);
+}
+
+.voice-search-btn.is-listening{
+  background: rgba(220,53,69,.12);
+  color: rgba(220,53,69,.95);
+  border-color: rgba(220,53,69,.25);
+  animation: voicePulse 1s infinite;
+}
+
+.voice-search-btn:disabled{
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+body.theme-dark .voice-search-btn{
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.85);
+}
+
+body.theme-dark .voice-search-btn.is-listening{
+  background: rgba(220,53,69,.16);
+  color: rgba(255,120,120,.95);
+}
+
+.header-search .search-input{
+  padding-right: 54px !important;
+}
+
+@keyframes voicePulse{
+  0%{ box-shadow: 0 0 0 0 rgba(220,53,69,.25); }
+  70%{ box-shadow: 0 0 0 10px rgba(220,53,69,0); }
+  100%{ box-shadow: 0 0 0 0 rgba(220,53,69,0); }
+}
+</style>
+
+<link rel=\"stylesheet\" href=\"{{ asset('styles/public-showcase.css') }}?v=20261016-9\">
+<header class=\"site__header public-shell connected-showcase-header\">
+  <div class=\"header-wrap\">
+    <div class=\"header-topbar showcase-topbar\">
+      <div class=\"container-fluid\">
+        <div class=\"topbar-row showcase-topbar__inner\">
+          {% include 'partials/_header_contacts.html.twig' %}
+          {% include 'partials/_header_facts.html.twig' %}
+
+          <div class=\"dropdown hd-dropdown\">
+            <button class=\"hd-iconbtn position-relative\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" title=\"Notifications\">
+              <i class=\"fa-solid fa-bell\"></i>
+              <span class=\"badge text-bg-danger hd-badge\" id=\"notifCount\">0</span>
+            </button>
+
+            <div class=\"dropdown-menu dropdown-menu-end p-0\">
+              <div class=\"notif-head\">
+                <h6>Notifications</h6>
+                <button type=\"button\" id=\"markNotifRead\">Tout lire</button>
+              </div>
+
+              <div id=\"notifDropdownList\">
+                <div class=\"p-3 text-muted small\">Chargement…</div>
+              </div>
+
+              <div class=\"p-2 border-top\">
+                <a class=\"btn btn-sm btn-outline-primary w-100\" href=\"{{ path('notification_index') }}\">
+                  Voir toutes les notifications
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class=\"dropdown hd-dropdown\">
+            <button class=\"showcase-join header-account-btn\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" title=\"Compte\" aria-label=\"Espace client\">
+              <i class=\"fa-solid fa-user\" aria-hidden=\"true\"></i><span>Espace client</span>
+            </button>
+
+            <ul class=\"dropdown-menu dropdown-menu-end account-menu\">
+              {% if app.user %}
+                <li class=\"account-menu-head\">
+                  <div class=\"account-menu-head__icon\">
+                    <i class=\"fa-solid fa-user\"></i>
+                  </div>
+                  <div>
+                    <div class=\"account-menu-head__title\">Mon compte</div>
+                    <div class=\"account-menu-head__subtitle\">
+                      Connecté : <strong>{{ app.user.userIdentifier }}</strong>
+                    </div>
+                  </div>
+                </li>
+
+                <li><hr class=\"dropdown-divider\"></li>
+
+                <li>
+                  <a class=\"dropdown-item account-menu-item\" href=\"{{ path('account_profile') }}\">
+                    <span class=\"account-menu-item__icon\">
+                      <i class=\"fa-solid fa-id-card\"></i>
+                    </span>
+                    <span>Mon profil</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a class=\"dropdown-item account-menu-item\" href=\"{{ path('order_index') }}\">
+                    <span class=\"account-menu-item__icon\">
+                      <i class=\"fa-solid fa-box-open\"></i>
+                    </span>
+                    <span>Mes commandes</span>
+                  </a>
+                </li>
+
+                <li><hr class=\"dropdown-divider\"></li>
+
+                <li>
+                  <a class=\"dropdown-item account-menu-item account-menu-item--danger\" href=\"{{ path('app_logout') }}\">
+                    <span class=\"account-menu-item__icon\">
+                      <i class=\"fa-solid fa-right-from-bracket\"></i>
+                    </span>
+                    <span>Déconnexion</span>
+                  </a>
+                </li>
+              {% else %}
+                <li class=\"account-menu-head\">
+                  <div class=\"account-menu-head__icon\">
+                    <i class=\"fa-solid fa-user-lock\"></i>
+                  </div>
+                  <div>
+                    <div class=\"account-menu-head__title\">Espace client</div>
+                    <div class=\"account-menu-head__subtitle\">Accédez à votre compte</div>
+                  </div>
+                </li>
+
+                <li><hr class=\"dropdown-divider\"></li>
+
+                <li>
+                  <a class=\"dropdown-item account-menu-item\" href=\"{{ path('app_login') }}\">
+                    <span class=\"account-menu-item__icon\">
+                      <i class=\"fa-solid fa-right-to-bracket\"></i>
+                    </span>
+                    <span>Connexion</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a class=\"dropdown-item account-menu-item\" href=\"#\">
+                    <span class=\"account-menu-item__icon\">
+                      <i class=\"fa-solid fa-user-plus\"></i>
+                    </span>
+                    <span>Créer un compte</span>
+                  </a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+
+          {% if is_granted('ROLE_ADMIN') %}
+            <div class=\"admin-settings-dropdown\">
+              <button class=\"btn btn-sm admin-settings-btn\" type=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#adminSettingsModal\" aria-controls=\"adminSettingsModal\" aria-label=\"Paramètres\" title=\"Paramètres\">
+                <i class=\"fa-solid fa-sliders me-2\"></i>
+                <span>Paramètres</span>
+              </button>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class=\"header-main-shell\">
+      <div class=\"container-fluid\">
+        <div class=\"d-flex align-items-center gap-3 header-main-row showcase-navbar\">
+          <a class=\"brand-box showcase-logo\" href=\"{{ path('home') }}\">
+            <span class=\"brand-logo\">
+              <img src=\"{{ optimized_asset('img/logo-3sk-partsauto-transparent.png') }}\" alt=\"3SK Parts Auto\" onerror=\"this.style.display='none'\">
+            </span>
+            <span class=\"brand-name d-none d-md-flex\"></span>
+          </a>
+
+          <div class=\"mobile-actions d-lg-none\">
+            <button class=\"btn mobile-menu-toggle\" type=\"button\"
+                    data-bs-toggle=\"offcanvas\" data-bs-target=\"#mainMenuOffcanvas\" aria-controls=\"mainMenuOffcanvas\" aria-label=\"Ouvrir le menu\">
+              <span class=\"mobile-menu-toggle__bars\" aria-hidden=\"true\">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </button>
+
+            <a class=\"hd-iconbtn position-relative\" href=\"javascript:void(0)\"
+               data-bs-toggle=\"offcanvas\" data-bs-target=\"#cartOffcanvas\" aria-controls=\"cartOffcanvas\"
+               title=\"Panier\">
+              <i class=\"fa-solid fa-cart-shopping\"></i>
+              <span class=\"badge text-bg-light border\" id=\"cartTotalMobile\"
+                    style=\"position:absolute; bottom:-10px; right:-8px; font-size:.68rem; padding:3px 6px;\">
+                0.00 DH
+              </span>
+            </a>
+          </div>
+
+        <div class=\"header-search\">
+  <form class=\"m-0 showcase-search\" method=\"get\" action=\"{{ path('articles_page') }}\" id=\"searchFormHeader\" role=\"search\">
+    <div class=\"search-wrap\">
+      <i class=\"fa-solid fa-magnifying-glass search-ico\"></i>
+
+      <input class=\"form-control search-input\"
+             name=\"q\"
+             id=\"InputRechercheProduit\"
+             type=\"search\"
+             placeholder=\"Rechercher une pièce ou une référence…\"
+             aria-label=\"Rechercher une pièce ou une référence\"
+             autocomplete=\"off\"
+             value=\"{{ app.request.query.get('q', '')|e('html_attr') }}\">
+
+      <button type=\"button\"
+              class=\"voice-search-btn\"
+              id=\"voiceSearchBtn\"
+              aria-label=\"Recherche vocale\"
+              title=\"Recherche vocale\">
+        <i class=\"fa-solid fa-microphone\"></i>
+      </button>
+      <button class=\"header-search-submit\" type=\"submit\">Rechercher</button>
+    </div>
+  </form>
+</div>
+
+          <div class=\"d-none d-lg-flex align-items-center gap-2\">
+            <a class=\"indicator-btn indicator-deals\" href=\"{{ path('articles_page', {'new': 1, 'newDays': 90}) }}\">
+              <span class=\"indicator-icon\"><i class=\"fa-solid fa-truck-fast fa-xl\"></i></span>
+              <span class=\"d-flex flex-column\">
+                <span class=\"indicator-title\">Nouveaux Deals</span>
+                <span class=\"indicator-value\">Arrivages récents</span>
+              </span>
+            </a>
+
+            <a class=\"indicator-btn indicator-cart\" href=\"javascript:void(0)\" data-bs-toggle=\"offcanvas\" data-bs-target=\"#cartOffcanvas\">
+              <span class=\"indicator-icon position-relative\">
+                <i class=\"fa-solid fa-cart-shopping fa-xl\"></i>
+                <span class=\"badge text-bg-primary hd-badge\" id=\"cartCount\">0</span>
+              </span>
+
+              <span class=\"d-flex flex-column\">
+                <span class=\"indicator-value d-flex flex-column\">
+                  <span>Panier d'achat</span>
+                  <span id=\"cartTotalMini\">0.00 DH</span>
+                </span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class=\"header__navbar d-none d-lg-flex\">
+      <div class=\"container-fluid d-flex align-items-center justify-content-between gap-3\">
+        <div class=\"header__navbar-menu\">
+          <div class=\"main-menu\">
+            <ul class=\"main-menu__list\" id=\"mainMenuDesktop\">
+              <li class=\"main-menu__item\">
+                <a
+                  class=\"main-menu__link {{ app.request.attributes.get('_route') == 'articles_page' and not app.request.query.get('family') ? 'is-active' : '' }}\"
+                  href=\"{{ path('articles_page') }}\"
+                  style=\"text-transform: uppercase;\"
+                  {% if app.request.attributes.get('_route') == 'articles_page' and not app.request.query.get('family') %}aria-current=\"page\"{% endif %}
+                >
+                  <span>Catalogue</span>
+                </a>
+              </li>
+
+              <li class=\"main-menu__item\" id=\"navCatsLoading\">
+                <span class=\"main-menu__link\" style=\"opacity:.65\">
+                  Chargement…
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if is_granted('ROLE_ADMIN') %}
+    <div class=\"modal fade admin-settings-modal\" id=\"adminSettingsModal\" tabindex=\"-1\" aria-labelledby=\"adminSettingsModalLabel\" aria-hidden=\"true\">
+      <div class=\"modal-dialog modal-fullscreen m-0\">
+        <div class=\"modal-content\">
+          <div class=\"admin-settings-modal__shell\">
+            <div class=\"admin-settings-modal__top\">
+              <div>
+                <div class=\"admin-settings-modal__eyebrow\">
+                  <i class=\"fa-solid fa-sliders\"></i>
+                  <span>Paramètres</span>
+                </div>
+                <h2 class=\"admin-settings-modal__title\" id=\"adminSettingsModalLabel\">Centre de gestion</h2>
+                <p class=\"admin-settings-modal__subtitle\">
+                  Retrouvez les actions importantes dans un espace clair : configuration, clients, commandes, slides, imports et statistiques.
+                </p>
+              </div>
+
+              <button type=\"button\" class=\"admin-settings-modal__close\" data-bs-dismiss=\"modal\" aria-label=\"Fermer\">
+                <i class=\"fa-solid fa-xmark\"></i>
+              </button>
+            </div>
+
+            <div class=\"admin-settings-modal__grid\">
+              <a class=\"admin-settings-modal__card\" href=\"{{ path('admin_company_setting_index') }}\">
+                <span class=\"admin-settings-modal__card-head\">
+                  <span class=\"admin-settings-modal__icon\">
+                    <i class=\"fa-solid fa-building\"></i>
+                  </span>
+                  <span class=\"admin-settings-modal__arrow\">
+                    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class=\"admin-settings-modal__label\">Configuration 3SK</span>
+                  <span class=\"admin-settings-modal__desc\">Coordonnées, identité société et réglages généraux.</span>
+                </span>
+              </a>
+
+              <a class=\"admin-settings-modal__card\" href=\"{{ path('admin_category_reduction_index') }}\">
+                <span class=\"admin-settings-modal__card-head\">
+                  <span class=\"admin-settings-modal__icon\">
+                    <i class=\"fa-solid fa-percent\"></i>
+                  </span>
+                  <span class=\"admin-settings-modal__arrow\">
+                    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class=\"admin-settings-modal__label\">Gestion des réductions</span>
+                  <span class=\"admin-settings-modal__desc\">Remises catalogue et avantages par catégorie.</span>
+                </span>
+              </a>
+
+              <a class=\"admin-settings-modal__card\" href=\"{{ path('admin_clients_index') }}\">
+                <span class=\"admin-settings-modal__card-head\">
+                  <span class=\"admin-settings-modal__icon\">
+                    <i class=\"fa-solid fa-users\"></i>
+                  </span>
+                  <span class=\"admin-settings-modal__arrow\">
+                    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class=\"admin-settings-modal__label\">Gestion des clients</span>
+                  <span class=\"admin-settings-modal__desc\">Comptes clients, statuts, coordonnées et accès.</span>
+                </span>
+              </a>
+
+              <a class=\"admin-settings-modal__card\" href=\"{{ path('admin_orders_index') }}\">
+                <span class=\"admin-settings-modal__card-head\">
+                  <span class=\"admin-settings-modal__icon\">
+                    <i class=\"fa-solid fa-box-open\"></i>
+                  </span>
+                  <span class=\"admin-settings-modal__arrow\">
+                    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class=\"admin-settings-modal__label\">Gestion des commandes</span>
+                  <span class=\"admin-settings-modal__desc\">Suivi des paniers, commandes et demandes clients.</span>
+                </span>
+              </a>
+
+              <a class=\"admin-settings-modal__card\" href=\"{{ path('admin_hero_slide_index') }}\">
+                <span class=\"admin-settings-modal__card-head\">
+                  <span class=\"admin-settings-modal__icon\">
+                    <i class=\"fa-solid fa-images\"></i>
+                  </span>
+                  <span class=\"admin-settings-modal__arrow\">
+                    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class=\"admin-settings-modal__label\">Gestion slides</span>
+                  <span class=\"admin-settings-modal__desc\">Visuels d’accueil, ordre d’affichage et mises en avant.</span>
+                </span>
+              </a>
+
+              <a class=\"admin-settings-modal__card\" href=\"{{ path('import_source_index') }}\">
+                <span class=\"admin-settings-modal__card-head\">
+                  <span class=\"admin-settings-modal__icon\">
+                    <i class=\"fa-solid fa-folder-tree\"></i>
+                  </span>
+                  <span class=\"admin-settings-modal__arrow\">
+                    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class=\"admin-settings-modal__label\">Configuration import</span>
+                  <span class=\"admin-settings-modal__desc\">Sources catalogue, mapping et paramètres d’intégration.</span>
+                </span>
+              </a>
+
+              <a class=\"admin-settings-modal__card\" href=\"{{ path('import_index') }}\">
+                <span class=\"admin-settings-modal__card-head\">
+                  <span class=\"admin-settings-modal__icon\">
+                    <i class=\"fa-solid fa-file-import\"></i>
+                  </span>
+                  <span class=\"admin-settings-modal__arrow\">
+                    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class=\"admin-settings-modal__label\">Lancer l’import</span>
+                  <span class=\"admin-settings-modal__desc\">Importer ou mettre à jour les données catalogue.</span>
+                </span>
+              </a>
+
+              <a class=\"admin-settings-modal__card\" href=\"{{ path('admin_dashboard_index') }}\">
+                <span class=\"admin-settings-modal__card-head\">
+                  <span class=\"admin-settings-modal__icon\">
+                    <i class=\"fa-solid fa-chart-line\"></i>
+                  </span>
+                  <span class=\"admin-settings-modal__arrow\">
+                    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>
+                  </span>
+                </span>
+                <span>
+                  <span class=\"admin-settings-modal__label\">Dashboard statistique</span>
+                  <span class=\"admin-settings-modal__desc\">Vue globale sur les clients, commandes et activité.</span>
+                </span>
+              </a>
+            </div>
+
+            <div class=\"admin-settings-modal__footer\">
+              <a class=\"admin-settings-modal__logout\" href=\"{{ path('app_logout') }}\">
+                <span class=\"admin-settings-modal__logout-main\">
+                  <span class=\"admin-settings-modal__logout-icon\">
+                    <i class=\"fa-solid fa-right-from-bracket\"></i>
+                  </span>
+                  <span>
+                    <span class=\"admin-settings-modal__logout-title\">Déconnexion</span>
+                    <span class=\"admin-settings-modal__logout-desc\">Fermer la session administrateur en toute sécurité.</span>
+                  </span>
+                </span>
+                <i class=\"fa-solid fa-arrow-right\"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class=\"offcanvas offcanvas-start mobile-menu-offcanvas\" tabindex=\"-1\" id=\"mainMenuOffcanvas\" aria-labelledby=\"mainMenuOffcanvasLabel\">
+    <div class=\"offcanvas-header\">
+      <h5 class=\"offcanvas-title visually-hidden\" id=\"mainMenuOffcanvasLabel\">Menu</h5>
+      <button type=\"button\" class=\"btn-close ms-auto\" data-bs-dismiss=\"offcanvas\" aria-label=\"Close\"></button>
+    </div>
+
+    <div class=\"offcanvas-body mobile-menu-body\">
+      <div class=\"mobile-menu-hero\">
+        <div class=\"mobile-menu-brand\">
+          <div class=\"mobile-menu-brand__logo\">
+            <img src=\"{{ optimized_asset('img/logo-3sk-partsauto-transparent.png') }}\" alt=\"3SK Parts Auto\" onerror=\"this.style.display='none'\">
+          </div>
+          <div>
+            <div class=\"mobile-menu-brand__title\">3SK Parts Auto</div>
+            <div class=\"mobile-menu-brand__subtitle\">
+              Catalogue, catégories et accès rapide à vos produits
+            </div>
+          </div>
+        </div>
+
+       <div class=\"mobile-menu-quick\">
+  <a class=\"mobile-menu-quick__item\" href=\"{{ path('home') }}\">
+    <i class=\"fa-solid fa-house\"></i>
+    <span>Accueil</span>
+  </a>
+
+  <a class=\"mobile-menu-quick__item\" href=\"{{ path('articles_page') }}\">
+    <i class=\"fa-solid fa-boxes-stacked\"></i>
+    <span>Catalogue</span>
+  </a>
+
+  <a class=\"mobile-menu-quick__item\" href=\"{{ path('articles_page', {'new': 1, 'newDays': 90}) }}\">
+    <i class=\"fa-solid fa-bolt\"></i>
+    <span>Nouveautés</span>
+  </a>
+
+  <button class=\"mobile-menu-quick__item phone-contact-trigger\" type=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#phoneContactModal\">
+    <i class=\"fa-solid fa-phone-volume\"></i>
+    <span>Contact</span>
+  </button>
+
+  {% if is_granted('ROLE_ADMIN') %}
+    <a class=\"mobile-menu-quick__item\" href=\"{{ path('admin_dashboard_index') }}\">
+      <i class=\"fa-solid fa-chart-line\"></i>
+      <span>Statistiques</span>
+    </a>
+  {% endif %}
+</div>
+      </div>
+
+      <div class=\"mobile-menu-section\">
+        <div class=\"mobile-menu-section__title\">
+          <strong>Catégories</strong>
+          <span>Navigation</span>
+        </div>
+
+        <div class=\"list-group mobile-menu-cats\" id=\"categoriesMenuMobile\">
+          <div class=\"list-group-item\">Chargement…</div>
+        </div>
+      </div>
+
+      <div class=\"mobile-menu-help\">
+        <div class=\"mobile-menu-help__title\">Besoin d’aide ?</div>
+        <div class=\"mobile-menu-help__text\">
+          Contactez-nous rapidement pour trouver la bonne pièce ou obtenir une assistance.
+        </div>
+
+        <div class=\"mobile-menu-help__actions\">
+          <button class=\"btn btn-primary text-light phone-contact-trigger\" type=\"button\" data-bs-toggle=\"modal\" data-bs-target=\"#phoneContactModal\">
+            <i class=\"fa-solid fa-phone me-2\"></i>Appeler
+          </button>
+          <a class=\"btn btn-outline-secondary\" href=\"{{ path('articles_page') }}\">
+            <i class=\"fa-solid fa-magnifying-glass me-2\"></i>Voir le catalogue
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class=\"offcanvas offcanvas-end\" tabindex=\"-1\" id=\"cartOffcanvas\" aria-labelledby=\"cartOffcanvasLabel\">
+    <div class=\"offcanvas-header\">
+      <h5 class=\"offcanvas-title\" id=\"cartOffcanvasLabel\">Panier</h5>
+      <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"offcanvas\" aria-label=\"Close\"></button>
+    </div>
+    <div class=\"offcanvas-body\">
+      <div class=\"cart-summary-card mb-2\">
+        <div class=\"cart-summary-head\">
+          <div>
+            <div class=\"cart-summary-kicker\">Panier</div>
+            <div class=\"cart-summary-title\">Résumé de commande</div>
+          </div>
+          <div class=\"cart-summary-badge d-none\" id=\"cartSummaryBadge\"></div>
+        </div>
+
+        <div class=\"cart-summary-grid\">
+          <div class=\"cart-summary-box\">
+            <span class=\"cart-summary-label\">Articles</span>
+            <strong class=\"cart-summary-value\" id=\"cartSummaryCount\">0</strong>
+          </div>
+
+          <div class=\"cart-summary-box\">
+            <span class=\"cart-summary-label\">Sous-total</span>
+            <strong class=\"cart-summary-value\" id=\"cartSubtotal\">0.00 DH</strong>
+          </div>
+        </div>
+
+        <div class=\"cart-summary-line\">
+          <span>Remise</span>
+          <strong class=\"text-danger\" id=\"cartDiscount\">-0.00 DH</strong>
+        </div>
+
+        <div class=\"cart-summary-total\">
+          <span>Total final</span>
+          <strong id=\"cartTotal\">0.00 DH</strong>
+        </div>
+
+        <div class=\"cart-summary-foot\" id=\"cartSummary\">
+          0 article
+        </div>
+      </div>
+
+      <div id=\"cartItems\" class=\"d-grid gap-2\"></div>
+
+      <div class=\"mt-3 d-grid gap-2\">
+        <a class=\"btn btn-primary btn-lg text-light\" href=\"{{ path('cart_index') }}\">Voir le panier</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+(function () {
+  function mountHeaderOverlayElements() {
+    ['adminSettingsModal', 'mainMenuOffcanvas', 'cartOffcanvas'].forEach(function (id) {
+      const element = document.getElementById(id);
+      if (!element || element.parentElement === document.body) return;
+      document.body.appendChild(element);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mountHeaderOverlayElements, { once: true });
+  } else {
+    mountHeaderOverlayElements();
+  }
+
+  document.addEventListener('click', function (event) {
+    const offcanvas = document.getElementById('mainMenuOffcanvas');
+    if (!offcanvas || !event.target.closest('#mainMenuOffcanvas')) return;
+
+    const link = event.target.closest('a[href]');
+    if (link && link.getAttribute('href') && link.getAttribute('href') !== '#') {
+      const instance = window.bootstrap ? window.bootstrap.Offcanvas.getInstance(offcanvas) : null;
+      if (instance) instance.hide();
+    }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  const body = document.body;
+  const themeSwitch = document.getElementById('themeSwitch');
+
+  function applyTheme(mode){
+    if (mode === 'dark') {
+      body.classList.add('theme-dark');
+      if (themeSwitch) themeSwitch.checked = true;
+    } else {
+      body.classList.remove('theme-dark');
+      if (themeSwitch) themeSwitch.checked = false;
+    }
+  }
+
+  applyTheme(localStorage.getItem('theme_mode') || 'light');
+
+  if (themeSwitch){
+    themeSwitch.addEventListener('change', () => {
+      const next = themeSwitch.checked ? 'dark' : 'light';
+      localStorage.setItem('theme_mode', next);
+
+      const wrap = themeSwitch.closest('.theme-switch-wrap');
+      if (wrap){
+        wrap.classList.remove('ts-animate');
+        void wrap.offsetWidth;
+        wrap.classList.add('ts-animate');
+        setTimeout(()=> wrap.classList.remove('ts-animate'), 650);
+      }
+
+      applyTheme(next);
+    });
+  }
+
+  const notifCount = document.getElementById('notifCount');
+  const markBtn = document.getElementById('markNotifRead');
+  if (markBtn){
+    markBtn.addEventListener('click', () => {
+      document.querySelectorAll('[data-notif-dot]').forEach(d => d.style.display = 'none');
+      if (notifCount) notifCount.textContent = '0';
+    });
+  }
+
+  function getWishlist(){ try { return JSON.parse(localStorage.getItem('wishlist') || '[]'); } catch { return []; } }
+  function getCart(){ try { return JSON.parse(localStorage.getItem('cart') || '{}'); } catch { return {}; } }
+
+  function esc(s){
+    return String(s ?? '').replace(/[&<>\"']/g, m => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'
+    }[m]));
+  }
+
+  async function removeCartItem(code){
+    try{
+      const res = await fetch('/api/cart/remove', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ code })
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        return;
+      }
+
+      await refreshCounts();
+    } catch(e){
+      console.error(e);
+    }
+  }
+
+  async function refreshCounts(){
+    const cartTotalMiniEl = document.getElementById('cartTotalMini');
+    const cartTotalMobileEl = document.getElementById('cartTotalMobile');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const cartCountEl = document.getElementById('cartCount');
+    const cartCountMobileEl = document.getElementById('cartCountMobile');
+    const cartSummary = document.getElementById('cartSummary');
+    const cartSummaryCount = document.getElementById('cartSummaryCount');
+    const cartSubtotalEl = document.getElementById('cartSubtotal');
+    const cartDiscountEl = document.getElementById('cartDiscount');
+    const cartItems = document.getElementById('cartItems');
+    const cartSummaryBadgeEl = document.getElementById('cartSummaryBadge');
+
+    try{
+      const res = await fetch('/api/cart', { headers: { 'Accept':'application/json' } });
+
+      if (res.status === 401){
+        if (cartTotalEl) cartTotalEl.textContent = '0.00 DH';
+        if (cartTotalMiniEl) cartTotalMiniEl.textContent = '0.00 DH';
+        if (cartTotalMobileEl) cartTotalMobileEl.textContent = '0.00 DH';
+        if (cartCountEl) cartCountEl.textContent = '0';
+        if (cartCountMobileEl) cartCountMobileEl.textContent = '0';
+        if (cartSummaryCount) cartSummaryCount.textContent = '0';
+        if (cartSubtotalEl) cartSubtotalEl.textContent = '0.00 DH';
+        if (cartDiscountEl) cartDiscountEl.textContent = '-0.00 DH';
+        if (cartSummary) cartSummary.textContent = '0 article';
+        if (cartItems) cartItems.innerHTML = `<div class=\"text-muted small\">Connectez-vous pour voir le panier.</div>`;
+        if (cartSummaryBadgeEl) {
+          cartSummaryBadgeEl.textContent = '';
+          cartSummaryBadgeEl.classList.add('d-none');
+        }
+        return;
+      }
+
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error('API cart error');
+
+      const totalQty = Number(data.totalQty || 0);
+      const subtotal = Number(data.totalBeforeDiscount ?? data.subtotalTtc ?? 0);
+      const discount = Number(data.totalDiscount ?? 0);
+      const finalTotal = Number(data.totalFinal ?? data.total ?? data.totalAmount ?? data.totalTtc ?? 0);
+
+      const subtotalText = subtotal.toFixed(2) + ' DH';
+      const discountText = '-' + discount.toFixed(2) + ' DH';
+      const totalText = finalTotal.toFixed(2) + ' DH';
+
+      if (cartTotalEl) cartTotalEl.textContent = totalText;
+      if (cartTotalMiniEl) cartTotalMiniEl.textContent = totalText;
+      if (cartTotalMobileEl) cartTotalMobileEl.textContent = totalText;
+
+      if (cartSubtotalEl) cartSubtotalEl.textContent = subtotalText;
+      if (cartDiscountEl) cartDiscountEl.textContent = discountText;
+      if (cartSummaryCount) cartSummaryCount.textContent = String(totalQty);
+      if (cartCountEl) cartCountEl.textContent = String(totalQty);
+      if (cartCountMobileEl) cartCountMobileEl.textContent = String(totalQty);
+
+      if (cartSummary) {
+        cartSummary.textContent = totalQty + (totalQty > 1 ? ' articles dans votre panier' : ' article dans votre panier');
+      }
+
+      const summaryReductionText = String(data.summaryReductionText || '').trim();
+      if (cartSummaryBadgeEl) {
+        if (summaryReductionText !== '') {
+          cartSummaryBadgeEl.textContent = summaryReductionText;
+          cartSummaryBadgeEl.classList.remove('d-none');
+        } else {
+          cartSummaryBadgeEl.textContent = '';
+          cartSummaryBadgeEl.classList.add('d-none');
+        }
+      }
+
+      if (cartItems){
+        cartItems.innerHTML = '';
+        const items = data.items || [];
+
+        if (!items.length){
+          cartItems.innerHTML = `<div class=\"text-muted small\">Panier vide.</div>`;
+        } else {
+          const DEFAULT_IMG = \"{{ asset('img/default-piece.png')|e('js') }}\";
+
+          items.slice(0, 20).forEach(it => {
+            const code = it.code ?? it.id ?? it.Id ?? '';
+            const qty = Number(it.qty ?? it.quantity ?? 0) || 0;
+
+            const title =
+              it.title ??
+              it.designation ??
+              it.name ??
+              it.label ??
+              it.DesComClear ??
+              it.des ??
+              '';
+
+            const img =
+              it.imageUrl ??
+              it.imgUrl ??
+              it.image ??
+              DEFAULT_IMG;
+
+            const reductionLabel = String(it.reductionLabel || '').trim();
+            const lineTotal = Number(it.lineTotal ?? 0);
+            const lineDiscount = Number(it.lineDiscount ?? 0);
+
+            const row = document.createElement('div');
+            row.className = 'cart-item';
+
+            row.innerHTML = `
+              <img class=\"cart-thumb\" src=\"\${img}\" alt=\"\"
+                   onerror=\"this.onerror=null;this.src='\${DEFAULT_IMG}'\">
+
+              <div class=\"cart-info\">
+                <div class=\"cart-title\">\${title ? title : code}</div>
+                <div class=\"cart-ref\">\${code}</div>
+                \${reductionLabel ? `<div class=\"cart-discount-chip\">\${reductionLabel}</div>` : ``}
+              </div>
+
+              <div class=\"cart-right\">
+                <button class=\"cart-remove-btn\" type=\"button\" data-remove-cart-item=\"\${esc(code)}\" title=\"Supprimer\">
+                  <i class=\"fa-solid fa-trash\"></i>
+                </button>
+                <span class=\"cart-qty\">Qté: \${qty}</span>
+                \${lineDiscount > 0 ? `<span class=\"small text-danger\">-\${lineDiscount.toFixed(2)} DH</span>` : ``}
+                <span class=\"cart-subtotal\">\${lineTotal.toFixed(2)} DH</span>
+              </div>
+            `;
+
+            cartItems.appendChild(row);
+          });
+
+          cartItems.querySelectorAll('[data-remove-cart-item]').forEach(btn => {
+            btn.addEventListener('click', async () => {
+              const code = btn.getAttribute('data-remove-cart-item');
+              btn.disabled = true;
+              await removeCartItem(code);
+            });
+          });
+        }
+      }
+    } catch(e){
+      if (cartItems) cartItems.innerHTML = `<div class=\"text-danger small\">Erreur panier.</div>`;
+      console.error(e);
+    }
+  }
+
+  refreshCounts();
+  window.addEventListener('storage', refreshCounts);
+  window.refreshHeaderCounts = refreshCounts;
+
+  function normKey(s){
+    s = String(s || '').trim();
+    try { s = s.normalize('NFD').replace(/[\\u0300-\\u036f]/g, ''); } catch(e){}
+    s = s.toLowerCase();
+    s = s.replace(/&/g, 'and');
+    s = s.replace(/[^a-z0-9]+/g, '_');
+    s = s.replace(/^_+|_+\$/g, '');
+    return s;
+  }
+
+  const CATEGORY_ICONS = {
+    catalogue: 'fa-boxes-stacked',
+    pare_choc: 'fa-car-burst',
+    pare_chocs: 'fa-car-burst',
+    optique: 'fa-lightbulb',
+    aile: 'fa-car-side',
+    feu_arr: 'fa-lightbulb',
+    feu_arriere: 'fa-lightbulb',
+    feux_arr: 'fa-lightbulb',
+    cache_roue: 'fa-circle',
+    cache_roues: 'fa-circle',
+    capot: 'fa-car-side',
+    fixation: 'fa-screwdriver-wrench',
+    fixations: 'fa-screwdriver-wrench',
+    grille_phare_secour: 'fa-border-all',
+    grille_phare_secours: 'fa-border-all',
+    calandre: 'fa-border-all',
+    grille: 'fa-table-cells-large',
+    renfort: 'fa-bars',
+    masque: 'fa-shield-halved',
+    retroviseur: 'fa-mirror',
+    retroviseurs: 'fa-mirror',
+    cataphote: 'fa-gem',
+    cataphotes: 'fa-gem',
+    phare_secour: 'fa-lightbulb',
+    phare_secours: 'fa-lightbulb',
+    'glasse retreviseur': 'fa-mirror',
+    'glasse retroviseur': 'fa-mirror',
+    'glace retroviseur': 'fa-mirror',
+    'glace retreviseur': 'fa-mirror',
+    porte: 'fa-car-side',
+    portes: 'fa-car-side',
+    baguette: 'fa-grip-lines',
+    baguettes: 'fa-grip-lines',
+  };
+
+  function iconForCategoryFA(name){
+    const k = normKey(name);
+
+    if (CATEGORY_ICONS[k]) return CATEGORY_ICONS[k];
+
+    const base = k.split('_')[0];
+    if (CATEGORY_ICONS[base]) return CATEGORY_ICONS[base];
+
+    if (k.includes('carross')) return 'fa-car-side';
+    if (k.includes('filtr') || k.includes('filter')) return 'fa-filter';
+    if (k.includes('moteur') || k.includes('engine')) return 'fa-gears';
+    if (k.includes('frein')) return 'fa-circle-stop';
+    if (k.includes('susp')) return 'fa-arrows-down-to-line';
+    if (k.includes('amort')) return 'fa-wand-magic-sparkles';
+
+    return 'fa-box';
+  }
+
+  async function loadCategories(){
+    const menuDesktop = document.getElementById('mainMenuDesktop');
+    const loadingLi = document.getElementById('navCatsLoading');
+    const mobile  = document.getElementById('categoriesMenuMobile');
+    const articlesUrl = \"{{ path('articles_page')|e('js') }}\";
+
+    const esc = (s)=>String(s??'').replace(/[&<>\"']/g, m => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'
+    }[m]));
+    const currentPath = window.location.pathname;
+    const currentFamily = new URLSearchParams(window.location.search).get('family') || '';
+
+    try{
+      const res = await fetch('/api/catalog/families', { headers: { 'Accept':'application/json' } });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.message || 'Erreur API');
+
+      const items = (data.items || [])
+        .filter(x => {
+          const name = String(x.value || '').trim();
+          const key = normKey(name);
+
+          return name !== ''
+            && (x.count ?? 0) > 0
+            && key !== 'hors_catalogue'
+            && key !== 'hors_catalague';
+        })
+        .sort((a,b)=> (b.count||0) - (a.count||0))
+        .slice(0, 18);
+
+      if (menuDesktop){
+        if (loadingLi) loadingLi.remove();
+
+        if (!items.length){
+          const li = document.createElement('li');
+          li.className = 'main-menu__item';
+          li.innerHTML = `<span class=\"main-menu__link\" style=\"opacity:.65\">Aucune catégorie</span>`;
+          menuDesktop.appendChild(li);
+        } else {
+          items.forEach(it=>{
+            const href = `\${articlesUrl}?family=\${encodeURIComponent(it.value)}`;
+            const li = document.createElement('li');
+            li.className = 'main-menu__item cat-item';
+
+            const isActiveCategory =
+              currentPath === articlesUrl &&
+              currentFamily.toLowerCase() === String(it.value).toLowerCase();
+
+            li.innerHTML = `
+              <a
+                class=\"main-menu__link \${isActiveCategory ? 'is-active' : ''}\"
+                href=\"\${href}\"
+                title=\"\${esc(it.value)}\"
+                \${isActiveCategory ? 'aria-current=\"page\"' : ''}
+              >
+                <span>\${esc(it.value)}</span>
+              </a>
+            `;
+            menuDesktop.appendChild(li);
+          });
+        }
+      }
+
+      if (mobile){
+        mobile.innerHTML = '';
+        if (!items.length){
+          mobile.innerHTML = `<div class=\"list-group-item\">Aucune catégorie.</div>`;
+        } else {
+          items.forEach(it=>{
+            const href = `\${articlesUrl}?family=\${encodeURIComponent(it.value)}`;
+            mobile.insertAdjacentHTML('beforeend',
+              `<a class=\"list-group-item list-group-item-action d-flex justify-content-between align-items-center\" href=\"\${href}\">
+                <span>\${esc(it.value)}</span>
+                <span class=\"badge text-bg-light border\">\${it.count}</span>
+              </a>`
+            );
+          });
+
+          mobile.insertAdjacentHTML('beforeend',
+            `<a class=\"list-group-item list-group-item-action fw-bold\" href=\"\${articlesUrl}\">
+              Voir tous les articles
+            </a>`
+          );
+        }
+      }
+
+    }catch(e){
+      console.error(e);
+
+      if (loadingLi){
+        loadingLi.innerHTML = `<span class=\"main-menu__link\" style=\"opacity:.65;color:#dc3545\">
+          Impossible de charger
+        </span>`;
+      }
+
+      if (mobile){
+        mobile.innerHTML = `<div class=\"list-group-item text-danger\">Impossible de charger.</div>`;
+      }
+    }
+  }
+
+  loadCategories();
+})();
+</script>
+
+<script>
+(function(){
+  const notifCount = document.getElementById('notifCount');
+  const markBtn = document.getElementById('markNotifRead');
+  const notifList = document.getElementById('notifDropdownList');
+
+  function esc(s){
+    return String(s ?? '').replace(/[&<>\"']/g, m => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'
+    }[m]));
+  }
+
+  async function loadNotifications(){
+    if (!notifList) return;
+
+    try {
+      const res = await fetch('{{ path('notification_dropdown') }}', {
+        headers: { 'Accept': 'application/json' }
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        notifList.innerHTML = `<div class=\"p-3 text-danger small\">Erreur chargement.</div>`;
+        return;
+      }
+
+      if (notifCount) {
+        notifCount.textContent = String(data.count || 0);
+        notifCount.style.display = (data.count || 0) > 0 ? '' : 'none';
+      }
+
+      const items = data.items || [];
+
+      if (!items.length) {
+        notifList.innerHTML = `<div class=\"p-3 text-muted small\">Aucune notification.</div>`;
+        return;
+      }
+
+      notifList.innerHTML = items.map(item => `
+        <a href=\"#\"
+           class=\"notif-item\"
+           data-read-id=\"\${item.id}\"
+           data-route=\"\${esc(item.route || '')}\"
+           data-route-params='\${esc(JSON.stringify(item.routeParams || {}))}'>
+          <span class=\"notif-dot\"></span>
+          <div class=\"notif-content\">
+            <p><strong>\${esc(item.title)}</strong><br>\${esc(item.message)}</p>
+            <span class=\"notif-time\">\${esc(item.createdAt || '')}</span>
+          </div>
+        </a>
+      `).join('');
+
+      notifList.querySelectorAll('[data-read-id]').forEach(link => {
+        link.addEventListener('click', async (e) => {
+          e.preventDefault();
+
+          const id = link.getAttribute('data-read-id');
+          const route = link.getAttribute('data-route') || '';
+
+          try {
+            await fetch(`/mes-notifications/\${id}/lire`, {
+              method: 'POST',
+              headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            });
+          } catch(e) {}
+
+          await loadNotifications();
+
+          if (route) {
+            window.location.href = route;
+          }
+        });
+      });
+
+    } catch(e) {
+      notifList.innerHTML = `<div class=\"p-3 text-danger small\">Erreur réseau.</div>`;
+    }
+  }
+
+  markBtn?.addEventListener('click', async () => {
+    try {
+      await fetch('{{ path('notification_read_all') }}', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' }
+      });
+      await loadNotifications();
+    } catch(e){}
+  });
+
+  loadNotifications();
+})();
+</script>
+
+<script>
+(function(){
+  const voiceBtn = document.getElementById('voiceSearchBtn');
+  const searchInput = document.getElementById('InputRechercheProduit');
+  const searchForm = document.getElementById('searchFormHeader');
+
+  if (!voiceBtn || !searchInput || !searchForm) return;
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    voiceBtn.disabled = true;
+    voiceBtn.title = \"Recherche vocale non prise en charge par ce navigateur\";
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'fr-FR';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+  recognition.continuous = false;
+
+  let isListening = false;
+  let originalPlaceholder = searchInput.getAttribute('placeholder') || '';
+
+  function setListening(state){
+    isListening = state;
+
+    if (state) {
+      voiceBtn.classList.add('is-listening');
+      voiceBtn.innerHTML = '<i class=\"fa-solid fa-microphone-lines\"></i>';
+      voiceBtn.title = 'Parlez maintenant...';
+      searchInput.setAttribute('placeholder', 'Parlez maintenant...');
+    } else {
+      voiceBtn.classList.remove('is-listening');
+      voiceBtn.innerHTML = '<i class=\"fa-solid fa-microphone\"></i>';
+      voiceBtn.title = 'Recherche vocale';
+      searchInput.setAttribute('placeholder', originalPlaceholder);
+    }
+  }
+
+  voiceBtn.addEventListener('click', function(e){
+    e.preventDefault();
+
+    try {
+      if (isListening) {
+        recognition.stop();
+        setListening(false);
+      } else {
+        recognition.start();
+      }
+    } catch (error) {
+      console.error('Erreur démarrage reconnaissance vocale :', error);
+      setListening(false);
+    }
+  });
+
+  recognition.onstart = function(){
+    setListening(true);
+  };
+
+  recognition.onend = function(){
+    setListening(false);
+  };
+
+  recognition.onresult = function(event){
+    const transcript = event.results[0][0].transcript.trim();
+
+    if (transcript !== '') {
+      searchInput.value = transcript;
+      searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+      searchForm.submit();
+    }
+  };
+
+  recognition.onerror = function(event){
+    console.error('Erreur reconnaissance vocale :', event.error);
+    setListening(false);
+
+    if (event.error === 'not-allowed') {
+      alert('Vous devez autoriser l’accès au microphone.');
+    }
+  };
+})();
+</script>
+", "partials/_header.html.twig", "F:\\3sk\\3sk (1)\\templates\\partials\\_header.html.twig");
+    }
+}

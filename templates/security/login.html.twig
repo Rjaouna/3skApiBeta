@@ -1,726 +1,118 @@
-{# templates/security/login.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Connexion{% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('styles/login.css') }}?v=20261016-2">
+{% endblock %}
+
 {% block body %}
-<style>
-  :root{
-    --brand-primary: var(--bs-primary);
-    --brand-black: #1b1b1b;
-    --brand-soft: rgba(255,255,255,.84);
-    --brand-border: rgba(0,0,0,.10);
-    --brand-shadow: 0 18px 50px rgba(0,0,0,.12);
-    --brand-muted: rgba(0,0,0,.58);
-    --login-blue-night: rgba(7,26,58,.86);
-    --login-blue-deep: rgba(9,31,73,.72);
-  }
-
-  body.theme-dark{
-    --brand-soft: rgba(18,18,22,.76);
-    --brand-border: rgba(255,255,255,.12);
-    --brand-shadow: 0 24px 70px rgba(0,0,0,.50);
-    --brand-muted: rgba(255,255,255,.66);
-  }
-
-  .login-public-shell{
-    position:relative;
-    z-index:3;
-    font-family:'Roboto', sans-serif;
-  }
-
-  .login-public-shell a{
-    transition: color .15s ease, background .15s ease, border-color .15s ease, transform .15s ease;
-  }
-
-  .login-public-shell .public-footer{
-    border-top:4px solid var(--bs-secondary);
-    padding-top:5.75rem !important;
-    padding-bottom:5.25rem !important;
-    background:var(--bs-primary);
-    color:#fff;
-    box-shadow:
-      inset 0 1px 0 rgba(var(--bs-secondary-rgb), .34),
-      inset 0 1px 0 rgba(255,255,255,.18);
-  }
-
-  .login-public-shell .public-footer h3{
-    color:#fff;
-    text-shadow:none;
-  }
-
-  .login-public-shell .public-footer h4{
-    color:var(--bs-secondary);
-    text-shadow:none;
-  }
-
-  .login-public-shell .public-footer h4{
-    position:relative;
-    padding-bottom:.7rem;
-  }
-
-  .login-public-shell .public-footer h4::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:0;
-    width:42px;
-    height:3px;
-    background:#fff;
-    border-radius:999px;
-  }
-
-  .login-public-shell .public-footer hr{
-    border-color:rgba(255,255,255,.28);
-    opacity:1;
-  }
-
-  .login-public-shell .public-footer a{
-    color:rgba(255,255,255,.9);
-    text-decoration:none;
-  }
-
-  .login-public-shell .public-footer a:hover{
-    color:var(--bs-secondary);
-  }
-
-  .login-public-shell .public-footer-muted{
-    color:rgba(255,255,255,.76);
-  }
-
-  .login-public-shell .public-footer-logo{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width:min(100%, 285px);
-    min-height:112px;
-    padding:.85rem 1.35rem;
-    margin-bottom:1.25rem;
-    border-radius:8px;
-    background:#fff;
-    border:1px solid rgba(16,24,40,.09);
-    box-shadow:0 18px 38px rgba(16,24,40,.12);
-  }
-
-  .login-public-shell .public-footer-logo:hover{
-    transform:translateY(-1px);
-  }
-
-  .login-public-shell .public-footer-logo img{
-    display:block;
-    width:100%;
-    max-width:240px;
-    max-height:88px;
-    object-fit:contain;
-  }
-
-  .login-public-shell .public-footer-pill{
-    display:inline-flex;
-    align-items:center;
-    gap:.5rem;
-    padding:.55rem .9rem;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,.34);
-    background:rgba(255,255,255,.1);
-    color:#fff !important;
-    font-weight:600;
-    text-decoration:none;
-    box-shadow:0 10px 24px rgba(16,24,40,.14);
-  }
-
-  .login-public-shell .public-footer-pill:hover{
-    background:var(--bs-secondary);
-    border-color:var(--bs-secondary);
-    color:#fff !important;
-  }
-
-  .login-public-shell .public-footer-account{
-    height:100%;
-    padding:1.35rem;
-    border-radius:8px;
-    border:1px solid rgba(255,255,255,.22);
-    border-left:4px solid var(--bs-secondary);
-    background:
-      linear-gradient(135deg, rgba(16,46,99,.92), rgba(49,95,187,.70)),
-      rgba(255,255,255,.08);
-    box-shadow:0 18px 38px rgba(16,24,40,.14);
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-  }
-
-  .login-public-shell .public-footer-account p{
-    color:rgba(255,255,255,.72);
-  }
-
-  .login-public-shell .public-footer-account a:not(.public-footer-login-btn){
-    color:#fff;
-  }
-
-  .login-public-shell .public-footer-account a:not(.public-footer-login-btn):hover{
-    color:var(--bs-secondary);
-  }
-
-  .login-public-shell .public-footer-login-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:.55rem;
-    border-radius:8px !important;
-    background:var(--bs-secondary) !important;
-    border-color:var(--bs-secondary) !important;
-    color:#fff !important;
-    box-shadow:0 12px 26px rgba(0,0,0,.22);
-  }
-
-  .login-public-shell .public-footer-login-btn:hover{
-    background:#fff !important;
-    border-color:#fff !important;
-    color:var(--bs-primary) !important;
-    transform:translateY(-1px);
-  }
-
-  .login-public-shell .public-footer-social a{
-    width:40px;
-    height:40px;
-    border-radius:8px;
-    border:1px solid rgba(255,255,255,.34);
-    display:grid;
-    place-items:center;
-    color:#fff;
-    background:rgba(255,255,255,.1);
-    box-shadow:0 10px 24px rgba(16,24,40,.14);
-  }
-
-  .login-public-shell .public-footer-social a:hover{
-    transform:translateY(-1px);
-    background:var(--bs-secondary);
-    border-color:var(--bs-secondary);
-    color:#fff;
-  }
-
-  .login-bg-video{
-    position:fixed;
-    inset:0;
-    z-index:0;
-    width:100vw;
-    height:100vh;
-    object-fit:cover;
-    pointer-events:none;
-  }
-
-  .login-video-overlay{
-    position:fixed;
-    inset:0;
-    z-index:1;
-    pointer-events:none;
-    background:
-      linear-gradient(90deg, var(--login-blue-night) 0%, rgba(49,95,187,.60) 46%, rgba(49,95,187,.30) 100%),
-      linear-gradient(0deg, var(--login-blue-deep) 0%, transparent 52%),
-      radial-gradient(920px circle at 18% 12%, rgba(var(--bs-primary-rgb), .34), transparent 42%),
-      radial-gradient(780px circle at 88% 18%, rgba(var(--bs-secondary-rgb), .24), transparent 38%);
-  }
-
-  .login-video-overlay::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:rgba(7,26,58,.12);
-  }
-
-  .login-page{
-    width:100%;
-    max-width:none;
-    margin:0;
-    min-height: auto;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:42px clamp(16px, 3vw, 42px) 46px;
-    position:relative;
-    z-index:2;
-  }
-
-  .login-page::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background:
-      radial-gradient(900px circle at 15% 10%, rgba(var(--bs-primary-rgb), .18), transparent 38%),
-      radial-gradient(1000px circle at 90% 15%, rgba(var(--bs-secondary-rgb), .12), transparent 35%),
-      radial-gradient(800px circle at 50% 100%, rgba(var(--bs-primary-rgb), .14), transparent 36%);
-    z-index:0;
-  }
-
-  .login-stack{
-    position:relative;
-    z-index:1;
-    width:min(620px, 94vw);
-  }
-
-  .login-card{
-    border-radius:8px;
-    border:1px solid rgba(255,255,255,.22);
-    border-top:4px solid var(--bs-secondary);
-    background:
-      radial-gradient(760px circle at 100% 0%, rgba(var(--bs-secondary-rgb), .22), transparent 42%),
-      radial-gradient(620px circle at 0% 100%, rgba(255,255,255,.12), transparent 42%),
-      linear-gradient(135deg, rgba(16,46,99,.86), rgba(49,95,187,.56));
-    box-shadow:0 28px 72px rgba(16,46,99,.34);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    overflow:hidden;
-  }
-
-  .login-head{
-    padding:18px 24px 14px;
-    border-bottom:1px solid rgba(255,255,255,.20);
-    background:
-      linear-gradient(135deg, rgba(var(--bs-secondary-rgb), .20), transparent 45%),
-      linear-gradient(225deg, rgba(255,255,255,.10), transparent 42%);
-  }
-
-  body.theme-dark .login-head{
-    border-bottom-color:rgba(255,255,255,.08);
-  }
-
-  .login-title-row{
-    display:flex;
-    align-items:center;
-    gap:14px;
-  }
-
-  .login-icon{
-    width:52px;
-    height:52px;
-    border-radius:8px;
-    display:grid;
-    place-items:center;
-    background:rgba(var(--bs-secondary-rgb), .16);
-    border:1px solid rgba(var(--bs-secondary-rgb), .42);
-    color:var(--bs-secondary);
-    font-size:1.05rem;
-    flex:0 0 52px;
-  }
-
-  .login-title{
-    margin:0;
-    font-size:1.45rem;
-    font-weight:650;
-    color:#fff;
-  }
-
-  body.theme-dark .login-title{
-    color:rgba(255,255,255,.92);
-  }
-
-  .login-subtitle{
-    margin-top:2px;
-    color:rgba(255,255,255,.82);
-    font-weight:400;
-    font-size:.92rem;
-  }
-
-  .login-body{
-    padding:20px 24px 22px;
-  }
-
-  .form-label{
-    font-weight:500;
-    margin-bottom:8px;
-    color:rgba(255,255,255,.88);
-  }
-
-  .input-shell{
-    position:relative;
-  }
-
-  .input-icon{
-    position:absolute;
-    left:14px;
-    top:50%;
-    transform:translateY(-50%);
-    color:rgba(var(--bs-secondary-rgb), .88);
-    z-index:2;
-  }
-
-  body.theme-dark .input-icon{
-    color:rgba(255,255,255,.46);
-  }
-
-  .login-control{
-    height:54px;
-    border-radius:8px;
-    border:1px solid rgba(255,255,255,.26);
-    background:rgba(255,255,255,.13);
-    color:#fff;
-    padding-left:42px;
-    font-weight:400;
-    box-shadow:none !important;
-  }
-
-  .login-control::placeholder{
-    color:rgba(255,255,255,.58);
-  }
-
-  .login-control:focus{
-    border-color:rgba(var(--bs-secondary-rgb), .68);
-    box-shadow:0 0 0 .22rem rgba(var(--bs-secondary-rgb), .14) !important;
-    background:rgba(255,255,255,.18);
-    color:#fff;
-  }
-
-  body.theme-dark .login-control{
-    background:rgba(255,255,255,.13);
-    border-color:rgba(255,255,255,.26);
-    color:rgba(255,255,255,.92);
-  }
-
-  body.theme-dark .login-control::placeholder{
-    color:rgba(255,255,255,.58);
-  }
-
-  .password-toggle{
-    position:absolute;
-    right:12px;
-    top:50%;
-    transform:translateY(-50%);
-    border:0;
-    background:transparent;
-    width:34px;
-    height:34px;
-    border-radius:8px;
-    color:rgba(255,255,255,.66);
-  }
-
-  body.theme-dark .password-toggle{
-    color:rgba(255,255,255,.55);
-  }
-
-  .password-toggle:hover{
-    background:rgba(255,145,0,.18);
-    color:#fff;
-  }
-
-  body.theme-dark .password-toggle:hover{
-    background:rgba(255,145,0,.18);
-  }
-
-  .login-btn{
-    height:54px;
-    border:0;
-    border-radius:8px;
-    font-weight:600;
-    letter-spacing:.01em;
-    background:linear-gradient(135deg, #d96d00, var(--bs-secondary));
-    box-shadow:0 14px 30px rgba(var(--bs-secondary-rgb), .28);
-  }
-
-  .login-btn:hover{
-    background:linear-gradient(135deg, var(--bs-secondary), #ffad3d);
-    filter:brightness(1.05);
-    transform:translateY(-1px);
-  }
-
-  .login-btn:active{
-    transform:translateY(0);
-  }
-
-  .login-footer{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:12px;
-    margin-top:16px;
-    flex-wrap:wrap;
-  }
-
-  .login-muted{
-    color:rgba(255,255,255,.78);
-    font-weight:400;
-    font-size:.92rem;
-  }
-
-  .login-link{
-    color:var(--bs-secondary);
-    font-weight:550;
-    text-decoration:none;
-  }
-
-  .login-link:hover{
-    text-decoration:underline;
-  }
-
-  @media (max-width: 575px){
-    .login-page{
-      padding:28px 0 32px;
-    }
-
-    .login-card{
-      border-radius:8px;
-    }
-
-    .login-head,
-    .login-body{
-      padding:18px;
-    }
-
-    .login-title{
-      font-size:1.2rem;
-    }
-  }
-
-  @media (max-width: 575px){
-    .login-public-shell .public-footer{
-      padding-top:4.25rem !important;
-      padding-bottom:4rem !important;
-    }
-  }
-
-  /* Login refresh: same light blue/orange identity as the public home. */
-  .login-bg-video{
-    opacity: .10;
-    filter: grayscale(.12) saturate(.92) contrast(1.04);
-  }
-
-  .login-video-overlay{
-    background:
-      radial-gradient(920px circle at 12% 6%, rgba(var(--bs-primary-rgb), .14), transparent 42%),
-      radial-gradient(760px circle at 90% 14%, rgba(var(--bs-secondary-rgb), .14), transparent 40%),
-      linear-gradient(135deg, rgba(255,255,255,.94), rgba(248,250,252,.90) 58%, rgba(255,247,237,.86));
-  }
-
-  .login-video-overlay::after{
-    background: rgba(255,255,255,.24);
-  }
-
-  .login-page{
-    padding:
-      clamp(68px, 7vw, 96px)
-      clamp(16px, 3vw, 42px)
-      clamp(72px, 7vw, 104px);
-  }
-
-  .login-page::before{
-    background:
-      radial-gradient(780px circle at 14% 10%, rgba(var(--bs-primary-rgb), .10), transparent 44%),
-      radial-gradient(680px circle at 86% 20%, rgba(var(--bs-secondary-rgb), .12), transparent 42%);
-  }
-
-  .login-stack{
-    width: min(560px, 94vw);
-  }
-
-  .login-card{
-    border-radius: 22px;
-    border: 1px solid rgba(16,24,40,.10);
-    border-top: 4px solid var(--bs-secondary);
-    background: rgba(255,255,255,.94);
-    box-shadow: 0 24px 64px rgba(16,24,40,.14);
-    color: #111827;
-  }
-
-  .login-head{
-    padding: 24px 28px 18px;
-    border-bottom: 1px solid rgba(16,24,40,.08);
-    background:
-      linear-gradient(135deg, rgba(var(--bs-primary-rgb), .08), transparent 46%),
-      linear-gradient(225deg, rgba(var(--bs-secondary-rgb), .10), transparent 42%),
-      #fff;
-  }
-
-  .login-icon{
-    border-radius: 16px;
-    background: rgba(var(--bs-primary-rgb), .09);
-    border-color: rgba(var(--bs-primary-rgb), .16);
-    color: var(--bs-primary);
-  }
-
-  .login-title{
-    color: var(--bs-primary);
-  }
-
-  .login-subtitle,
-  .login-muted{
-    color: #667085;
-  }
-
-  .login-body{
-    padding: 28px 28px 32px;
-  }
-
-  .form-label{
-    color: #111827;
-  }
-
-  .input-icon{
-    color: rgba(var(--bs-primary-rgb), .70);
-  }
-
-  .login-control{
-    border: 1px solid rgba(16,24,40,.12);
-    background: #fff;
-    color: #111827;
-  }
-
-  .login-control::placeholder{
-    color: #98a2b3;
-  }
-
-  .login-control:focus{
-    border-color: rgba(var(--bs-primary-rgb), .55);
-    background: #fff;
-    color: #111827;
-    box-shadow: 0 0 0 .22rem rgba(var(--bs-primary-rgb), .12) !important;
-  }
-
-  .password-toggle{
-    color: #667085;
-  }
-
-  .password-toggle:hover{
-    background: rgba(var(--bs-primary-rgb), .08);
-    color: var(--bs-primary);
-  }
-
-  .login-btn{
-    border-radius: 14px;
-    background: linear-gradient(135deg, var(--bs-primary), #214f9f);
-    box-shadow: 0 16px 32px rgba(var(--bs-primary-rgb), .22);
-  }
-
-  .login-btn:hover{
-    background: linear-gradient(135deg, #214f9f, var(--bs-primary));
-  }
-
-  .login-link{
-    color: var(--bs-primary);
-  }
-
-  .login-public-shell .public-footer{
-    background: #fff !important;
-    border-top: 1px solid rgba(16,24,40,.08) !important;
-    color: #111827 !important;
-    box-shadow: none !important;
-  }
-
-  .login-public-shell .public-footer h4::after{
-    display: none !important;
-  }
-
-  @media (max-width: 575px){
-    .login-card{
-      border-radius: 18px;
-    }
-
-    .login-page{
-      padding: 42px 14px 48px;
-    }
-
-    .login-head{
-      padding: 20px 18px 15px;
-    }
-
-    .login-body{
-      padding: 24px 18px 28px;
-    }
-  }
-</style>
-
-<video class="login-bg-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-  <source src="{{ asset('videos/7186026_Paint_Ink_1280x720.mp4') }}" type="video/mp4">
-</video>
-<div class="login-video-overlay" aria-hidden="true"></div>
-
 <div class="login-public-shell public-shell">
   {% include 'partials/_public_header.html.twig' with {
     public_header_nav_id: 'publicLoginNav'
   } %}
 </div>
 
-<div class="login-page">
-  <div class="login-stack">
-    <div class="login-card">
-      <div class="login-head">
-        <div class="login-title-row">
-          <div class="login-icon">
-            <i class="fa-solid fa-shield-halved"></i>
+<main class="login-page login-experience" aria-labelledby="login-title">
+  <div class="login-layout">
+    <div class="login-stack">
+      <section class="login-card" aria-labelledby="login-title">
+        <div class="login-head">
+          <div class="login-title-row">
+            <span class="login-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></span>
+            <div>
+              <span class="login-eyebrow">Espace client</span>
+              <h1 class="login-title" id="login-title">Connexion</h1>
+            </div>
           </div>
-          <div>
-            <h1 class="login-title">Connexion</h1>
-            <div class="login-subtitle">Accédez à votre compte 3SK Parts Auto</div>
+          <p class="login-subtitle">Accédez à votre compte 3SK Parts Auto</p>
+        </div>
+
+        <div class="login-body">
+          <form method="post" novalidate>
+            {% if error %}
+              <div class="alert alert-danger mb-3" role="alert">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+              </div>
+            {% endif %}
+
+            {% if app.user %}
+              <div class="alert alert-info mb-3" role="status">
+                Vous êtes déjà connecté en tant que <strong>{{ app.user.userIdentifier }}</strong>.
+                <a href="{{ logout_path() }}" class="ms-1">Déconnexion</a>
+              </div>
+            {% endif %}
+
+            <div class="login-field">
+              <label for="inputEmail" class="form-label">Email</label>
+              <div class="input-shell">
+                <i class="fa-solid fa-envelope input-icon" aria-hidden="true"></i>
+                <input
+                  type="email"
+                  value="{{ last_username }}"
+                  name="email"
+                  id="inputEmail"
+                  class="form-control login-control"
+                  placeholder="ex : client@gmail.com"
+                  autocomplete="email"
+                  required
+                  autofocus
+                >
+              </div>
+            </div>
+
+            <div class="login-field">
+              <label for="inputPassword" class="form-label">Mot de passe</label>
+              <div class="input-shell">
+                <i class="fa-solid fa-lock input-icon" aria-hidden="true"></i>
+                <input
+                  type="password"
+                  name="password"
+                  id="inputPassword"
+                  class="form-control login-control"
+                  placeholder="Votre mot de passe"
+                  autocomplete="current-password"
+                  required
+                >
+                <button type="button" class="password-toggle" id="togglePassword" aria-label="Afficher le mot de passe" aria-controls="inputPassword" aria-pressed="false" title="Afficher le mot de passe">
+                  <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <button class="btn login-btn" type="submit">
+              <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+              Se connecter
+              <i class="fa-solid fa-arrow-right login-btn-arrow" aria-hidden="true"></i>
+            </button>
+          </form>
+
+          <div class="login-help">
+            <span>Besoin d'aide ?</span>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#phoneContactModal"><i class="fa-solid fa-phone" aria-hidden="true"></i>Nous appeler</button>
           </div>
         </div>
-      </div>
-
-      <div class="login-body">
-        <form method="post" novalidate>
-          {% if error %}
-            <div class="alert alert-danger mb-3">
-              {{ error.messageKey|trans(error.messageData, 'security') }}
-            </div>
-          {% endif %}
-
-          {% if app.user %}
-            <div class="alert alert-info mb-3">
-              Vous êtes déjà connecté en tant que <strong>{{ app.user.userIdentifier }}</strong>.
-              <a href="{{ logout_path() }}" class="ms-1">Déconnexion</a>
-            </div>
-          {% endif %}
-
-          <div class="mb-3">
-            <label for="inputEmail" class="form-label">Email</label>
-            <div class="input-shell">
-              <i class="fa-solid fa-envelope input-icon"></i>
-              <input
-                type="email"
-                value="{{ last_username }}"
-                name="email"
-                id="inputEmail"
-                class="form-control login-control"
-                placeholder="ex : client@gmail.com"
-                autocomplete="email"
-                required
-                autofocus
-              >
-            </div>
-          </div>
-
-          <div class="mb-2">
-            <label for="inputPassword" class="form-label">Mot de passe</label>
-            <div class="input-shell">
-              <i class="fa-solid fa-lock input-icon"></i>
-              <input
-                type="password"
-                name="password"
-                id="inputPassword"
-                class="form-control login-control"
-                placeholder="Votre mot de passe"
-                autocomplete="current-password"
-                required
-              >
-              <button type="button" class="password-toggle" id="togglePassword" aria-label="Afficher le mot de passe">
-                <i class="fa-solid fa-eye"></i>
-              </button>
-            </div>
-          </div>
-
-          <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-          <div class="d-grid mt-3">
-            <button class="btn login-btn text-white" type="submit">
-              <i class="fa-solid fa-right-to-bracket me-2"></i>
-              Se connecter
-            </button>
-          </div>
-          
-
-        </form>
-      </div>
+      </section>
+      <a class="login-back" href="{{ path('home') }}"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i>Retour à l'accueil</a>
     </div>
 
+    <aside class="login-story" aria-labelledby="login-story-title">
+      <span class="login-eyebrow login-story__eyebrow">Au service des professionnels</span>
+      <h2 id="login-story-title">3SK Parts <span>Auto</span></h2>
+      <p class="login-story__intro">Importateur et distributeur de pièces automobiles, carrosseries et accessoires.</p>
+      <figure class="login-story__visual">
+        <img src="{{ optimized_asset('img/bg-section/stock-entrepot-pieces-carrosserie-automobile-3sk-parts-auto.jpeg') }}" alt="Stock de pièces carrosserie dans l'entrepôt 3SK Parts Auto" width="1086" height="1448" decoding="async">
+      </figure>
+      <div class="login-story__signature">
+        <span class="login-story__icon" aria-hidden="true"><i class="fa-solid fa-boxes-stacked"></i></span>
+        <div><strong>Pièces carrosserie & accessoires</strong><span>Casablanca · Depuis 2014</span></div>
+      </div>
+    </aside>
   </div>
-</div>
+</main>
 
 <div class="login-public-shell">
   {% include 'partials/_site_footer.html.twig' with {
@@ -734,15 +126,18 @@
 (function () {
   const btn = document.getElementById('togglePassword');
   const input = document.getElementById('inputPassword');
-
   if (!btn || !input) return;
 
   btn.addEventListener('click', function () {
     const isPassword = input.getAttribute('type') === 'password';
+    const label = isPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe';
     input.setAttribute('type', isPassword ? 'text' : 'password');
+    btn.setAttribute('aria-pressed', String(isPassword));
+    btn.setAttribute('aria-label', label);
+    btn.setAttribute('title', label);
     btn.innerHTML = isPassword
-      ? '<i class="fa-solid fa-eye-slash"></i>'
-      : '<i class="fa-solid fa-eye"></i>';
+      ? '<i class="fa-solid fa-eye-slash" aria-hidden="true"></i>'
+      : '<i class="fa-solid fa-eye" aria-hidden="true"></i>';
   });
 })();
 </script>

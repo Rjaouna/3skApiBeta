@@ -1,0 +1,2383 @@
+<?php
+
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Extension\CoreExtension;
+use Twig\Extension\SandboxExtension;
+use Twig\Markup;
+use Twig\Sandbox\SecurityError;
+use Twig\Sandbox\SecurityNotAllowedTagError;
+use Twig\Sandbox\SecurityNotAllowedFilterError;
+use Twig\Sandbox\SecurityNotAllowedFunctionError;
+use Twig\Source;
+use Twig\Template;
+use Twig\TemplateWrapper;
+
+/* partials/_connected_theme.html.twig */
+class __TwigTemplate_83fe66ec9e907c8f0cb9f3d0716f98e4 extends Template
+{
+    private Source $source;
+    /**
+     * @var array<string, Template>
+     */
+    private array $macros = [];
+
+    public function __construct(Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->source = $this->getSourceContext();
+
+        $this->parent = false;
+
+        $this->blocks = [
+        ];
+    }
+
+    protected function doDisplay(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "partials/_connected_theme.html.twig"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "partials/_connected_theme.html.twig"));
+
+        // line 2
+        yield "<style>
+  .app-connected {
+    --app-orange: var(--brand-orange);
+    --app-orange-dark: var(--brand-orange-dark);
+    --app-blue: var(--brand-blue);
+    --app-blue-dark: var(--brand-blue-dark);
+    --app-black: var(--brand-anthracite);
+    --app-panel-blue: var(--brand-blue);
+    --app-panel-blue-soft: var(--brand-bg);
+    --app-ink: var(--brand-ink);
+    --app-muted: var(--brand-muted);
+    --app-line: var(--brand-border);
+    --app-soft: var(--brand-bg);
+    --app-surface: #ffffff;
+    --app-radius: 8px;
+    --app-shadow: var(--brand-shadow-sm);
+    min-height: 100vh;
+    background: var(--app-soft);
+    color: var(--app-ink);
+  }
+
+  .app-connected,
+  .app-connected input,
+  .app-connected select,
+  .app-connected textarea {
+    font-family: \"Roboto\", sans-serif;
+  }
+
+  .app-connected h1,
+  .app-connected h2,
+  .app-connected h3,
+  .app-connected h4,
+  .app-connected h5,
+  .app-connected h6,
+  .app-connected .h1,
+  .app-connected .h2,
+  .app-connected .h3,
+  .app-connected .h4,
+  .app-connected .h5,
+  .app-connected .h6,
+  .app-connected .btn,
+  .app-connected .badge,
+  .app-connected .nav-link,
+  .app-connected .dropdown-menu,
+  .app-connected .form-label,
+  .app-connected th {
+    font-family: \"Montserrat\", sans-serif;
+    letter-spacing: 0;
+  }
+
+  .app-connected h1,
+  .app-connected h2,
+  .app-connected h3,
+  .app-connected h4,
+  .app-connected h5,
+  .app-connected h6 {
+    color: var(--app-ink);
+  }
+
+  .app-connected .site__header {
+    box-shadow: 0 2px 8px rgba(var(--brand-anthracite-rgb), .05);
+  }
+
+  .app-connected .site__header,
+  .app-connected .site__header .header-wrap,
+  .app-connected .site__header .header-topbar,
+  .app-connected .site__header .header__navbar,
+  .app-connected .site__header .header-nav {
+    --hd-border: rgba(var(--brand-blue-rgb), .14);
+    --hd-shadow: 0 14px 34px rgba(var(--brand-anthracite-rgb), .08);
+    --hd-glass: #fff;
+    --hd-glass2: rgba(var(--brand-blue-rgb), .07);
+    --hd-text: var(--app-ink);
+    --hd-muted: var(--app-muted);
+    background: #fff !important;
+    color: var(--app-ink);
+  }
+
+  .app-connected .site__header .header-topbar {
+    border-bottom-color: rgba(var(--brand-blue-rgb), .12) !important;
+    background: #fff !important;
+  }
+
+  .app-connected .site__header .topbar-row {
+    color: var(--app-ink);
+    gap: 14px;
+  }
+
+  .app-connected .site__header .topbar-row .hd-dropdown + .hd-dropdown,
+  .app-connected .site__header .topbar-row .hd-dropdown + .admin-settings-dropdown {
+    margin-left: .25rem;
+  }
+
+  .app-connected .site__header .account-name,
+  .app-connected .site__header .topbar-welcome,
+  .app-connected .site__header .topbar-phone {
+    color: var(--app-ink) !important;
+  }
+
+  .app-connected .site__header .account-name {
+    color: var(--app-orange) !important;
+  }
+
+  .app-connected .site__header .topbar-phone {
+    border: 1px solid rgba(var(--brand-blue-rgb), .18);
+    border-radius: var(--app-radius);
+    background: rgba(var(--brand-blue-rgb), .06);
+    color: var(--app-blue) !important;
+  }
+
+  .app-connected .site__header .topbar-phone i {
+    color: var(--app-orange);
+  }
+
+  .app-connected .site__header .hd-iconbtn,
+  .app-connected .site__header .admin-settings-btn,
+  .app-connected .site__header .mobile-menu-toggle {
+    border-color: rgba(var(--brand-blue-rgb), .22) !important;
+    border-radius: var(--app-radius) !important;
+    background: #fff !important;
+    color: var(--app-blue) !important;
+  }
+
+  .app-connected .site__header .hd-iconbtn:hover,
+  .app-connected .site__header .admin-settings-btn:hover,
+  .app-connected .site__header .mobile-menu-toggle:hover {
+    border-color: var(--app-orange) !important;
+    background: var(--app-orange) !important;
+    color: #fff !important;
+  }
+
+  .app-connected .site__header .theme-switch {
+    border-color: rgba(var(--brand-blue-rgb), .22) !important;
+    background: rgba(var(--brand-blue-rgb), .12) !important;
+  }
+
+  .app-connected .site__header .header-main-row {
+    min-height: 68px;
+    padding-block: .35rem .45rem;
+    column-gap: 1rem !important;
+    row-gap: .65rem;
+  }
+
+  .app-connected .site__header .header-main-row > .d-none.d-lg-flex {
+    gap: .8rem !important;
+    margin-left: .25rem;
+  }
+
+  .app-connected .site__header .brand-box {
+    --logo-panel-height: 56px;
+    --logo-panel-angle: 24px;
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--logo-panel-height);
+    padding: 0;
+    margin-left: 0;
+    margin-right: 1rem;
+    overflow: visible;
+    background: #fff;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    text-decoration: none;
+  }
+
+  .app-connected .site__header .brand-box::before,
+  .app-connected .site__header .brand-box::after {
+    content: none;
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+
+  .app-connected .site__header .brand-box::before {
+    right: 100%;
+    border-width: 0 var(--logo-panel-angle) var(--logo-panel-height) 0;
+    border-color: transparent #fff transparent transparent;
+  }
+
+  .app-connected .site__header .brand-box::after {
+    left: 100%;
+    border-width: var(--logo-panel-height) 0 0 var(--logo-panel-angle);
+    border-color: transparent transparent transparent #fff;
+  }
+
+  .app-connected .site__header .brand-logo {
+    position: relative;
+    z-index: 1;
+    height: var(--logo-panel-height);
+  }
+
+  .app-connected .site__header .brand-logo img {
+    display: block;
+    width: auto;
+    height: var(--logo-panel-height);
+    max-height: none;
+    object-fit: contain;
+  }
+
+  .app-connected .site__header .header-search .search-input {
+    height: 48px;
+    border: 1px solid rgba(var(--brand-blue-rgb), .2) !important;
+    border-radius: var(--app-radius) !important;
+    background: var(--brand-bg) !important;
+    color: var(--app-ink) !important;
+  }
+
+  .app-connected .site__header .header-search .search-input::placeholder {
+    color: var(--brand-muted);
+  }
+
+  .app-connected .site__header .header-search .search-ico,
+  .app-connected .site__header .voice-search-btn {
+    color: var(--app-blue) !important;
+  }
+
+  .app-connected .site__header .voice-search-btn {
+    border-radius: 6px;
+    background: rgba(var(--brand-orange-rgb), .12);
+  }
+
+  .app-connected .site__header .indicator-btn {
+    min-height: 48px;
+    border: 1px solid rgba(var(--brand-blue-rgb), .18);
+    border-radius: var(--app-radius);
+    background: #fff;
+    color: var(--app-ink);
+    margin-block: .15rem;
+  }
+
+  .app-connected .site__header .indicator-btn:hover {
+    border-color: rgba(var(--brand-orange-rgb), .7);
+    background: rgba(var(--brand-orange-rgb), .08);
+  }
+
+  .app-connected .site__header .indicator-title,
+  .app-connected .site__header .indicator-value,
+  .app-connected .site__header .indicator-cart #cartTotalMini {
+    color: var(--app-ink) !important;
+  }
+
+  .app-connected .site__header .indicator-icon {
+    border-radius: 6px;
+    background: var(--app-orange);
+    color: var(--brand-anthracite);
+  }
+
+  .app-connected .site__header .header__navbar {
+    padding: 0;
+    border-top-color: rgba(var(--brand-blue-rgb), .12);
+    border-bottom: 3px solid var(--app-orange);
+  }
+
+  .app-connected .site__header .header__navbar > .container-fluid {
+    justify-content: center !important;
+  }
+
+  .app-connected .site__header .header__navbar-menu,
+  .app-connected .site__header .main-menu {
+    width: 100%;
+  }
+
+  .app-connected .site__header .main-menu__list {
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .app-connected .site__header .main-menu__link {
+    min-height: 44px;
+    justify-content: center;
+    padding: 7px 14px;
+    border: 0 !important;
+    border-radius: var(--app-radius);
+    color: var(--app-blue);
+    font-size: .76rem;
+    text-transform: uppercase;
+    box-shadow: none !important;
+  }
+
+  .app-connected .site__header .main-menu__link > i {
+    display: none !important;
+  }
+
+  .app-connected .site__header .main-menu__link:hover {
+    background: transparent !important;
+    color: var(--app-orange) !important;
+    transform: none;
+  }
+
+  .app-connected .site__header .main-menu__link.is-active,
+  .app-connected .site__header .main-menu__link[aria-current=\"page\"] {
+    background: transparent !important;
+    color: var(--app-orange) !important;
+    transform: none;
+  }
+
+  .app-connected .site__header .hd-dropdown .dropdown-menu,
+  .app-connected .site__header .account-menu,
+  .app-connected .site__header .admin-settings-menu {
+    border: 1px solid var(--app-line);
+    border-radius: var(--app-radius);
+    background: #fff;
+    color: var(--app-ink);
+    box-shadow: var(--app-shadow);
+  }
+
+  .app-connected .site__header .dropdown-item,
+  .app-connected .site__header .notif-item,
+  .app-connected .site__header .notif-head h6 {
+    color: var(--app-ink);
+  }
+
+  .app-connected .site__header .dropdown-item:hover,
+  .app-connected .site__header .notif-item:hover {
+    background: rgba(var(--brand-blue-rgb), .08);
+    color: var(--app-blue);
+  }
+
+  .app-connected .site__header .account-menu-item__icon,
+  .app-connected .site__header .admin-settings-item__icon {
+    border-radius: 6px;
+    color: var(--app-orange);
+  }
+
+  .app-connected .whatsapp-float {
+    width: 54px;
+    height: 54px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 14px 32px rgba(var(--brand-anthracite-rgb), .22);
+  }
+
+  .app-connected > .alert,
+  .app-connected > .container > .alert {
+    border-radius: var(--app-radius);
+  }
+
+  .app-connected .container.py-4,
+  .app-connected .container-fluid.py-4,
+  .app-connected .container.py-3,
+  .app-connected .container-fluid.py-3 {
+    padding-top: 2rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+
+  .app-connected .page-hero,
+  .app-connected .cart-page-hero,
+  .app-connected .orders-page-hero,
+  .app-connected .order-show-hero,
+  .app-connected .profile-page-hero,
+  .app-connected .clients-page-hero,
+  .app-connected .settings-page-hero,
+  .app-connected .import-page-hero,
+  .app-connected .reduction-page-hero,
+  .app-connected .ufd-page-hero,
+  .app-connected .notification-page-hero,
+  .app-connected .simple-page-hero,
+  .app-connected .dash-hero {
+    min-height: 96px;
+    padding: 24px !important;
+    border: 0 !important;
+    border-left: 5px solid var(--app-orange) !important;
+    border-bottom: 1px solid var(--app-line) !important;
+    border-radius: 0 !important;
+    background: var(--app-surface) !important;
+    box-shadow: none !important;
+    color: var(--app-ink) !important;
+    overflow: hidden;
+  }
+
+  .app-connected .page-hero h1,
+  .app-connected .page-hero h2,
+  .app-connected .page-hero h3,
+  .app-connected .cart-page-hero h1,
+  .app-connected .cart-page-hero h2,
+  .app-connected .cart-page-hero h3,
+  .app-connected .orders-page-hero h1,
+  .app-connected .orders-page-hero h2,
+  .app-connected .orders-page-hero h3,
+  .app-connected .order-show-hero h1,
+  .app-connected .order-show-hero h2,
+  .app-connected .order-show-hero h3,
+  .app-connected .profile-page-hero h1,
+  .app-connected .profile-page-hero h2,
+  .app-connected .profile-page-hero h3,
+  .app-connected .clients-page-hero h1,
+  .app-connected .clients-page-hero h2,
+  .app-connected .clients-page-hero h3,
+  .app-connected .settings-page-hero h1,
+  .app-connected .settings-page-hero h2,
+  .app-connected .settings-page-hero h3,
+  .app-connected .import-page-hero h1,
+  .app-connected .import-page-hero h2,
+  .app-connected .import-page-hero h3,
+  .app-connected .reduction-page-hero h1,
+  .app-connected .reduction-page-hero h2,
+  .app-connected .reduction-page-hero h3,
+  .app-connected .ufd-page-hero h1,
+  .app-connected .ufd-page-hero h2,
+  .app-connected .ufd-page-hero h3,
+  .app-connected .notification-page-hero h1,
+  .app-connected .notification-page-hero h2,
+  .app-connected .notification-page-hero h3,
+  .app-connected .simple-page-hero h1,
+  .app-connected .simple-page-hero h2,
+  .app-connected .simple-page-hero h3,
+  .app-connected .dash-hero h1,
+  .app-connected .dash-hero h2,
+  .app-connected .dash-hero h3 {
+    margin: 0;
+    color: var(--app-ink) !important;
+    font-size: 1.65rem;
+    font-weight: 650 !important;
+    line-height: 1.2;
+  }
+
+  .app-connected .page-hero .subtitle,
+  .app-connected .cart-page-hero .subtitle,
+  .app-connected .orders-page-hero .subtitle,
+  .app-connected .order-show-hero .subtitle,
+  .app-connected .profile-page-hero .subtitle,
+  .app-connected .clients-page-hero .subtitle,
+  .app-connected .settings-page-hero .subtitle,
+  .app-connected .import-page-hero .subtitle,
+  .app-connected .reduction-page-hero .subtitle,
+  .app-connected .ufd-page-hero .subtitle,
+  .app-connected .notification-page-hero .subtitle,
+  .app-connected .simple-page-hero .subtitle,
+  .app-connected .dash-hero .subtitle {
+    color: var(--app-muted) !important;
+  }
+
+  .app-connected .page-hero .text-muted,
+  .app-connected .cart-page-hero .text-muted,
+  .app-connected .orders-page-hero .text-muted,
+  .app-connected .order-show-hero .text-muted,
+  .app-connected .profile-page-hero .text-muted,
+  .app-connected .clients-page-hero .text-muted,
+  .app-connected .settings-page-hero .text-muted,
+  .app-connected .import-page-hero .text-muted,
+  .app-connected .reduction-page-hero .text-muted,
+  .app-connected .ufd-page-hero .text-muted,
+  .app-connected .notification-page-hero .text-muted,
+  .app-connected .simple-page-hero .text-muted,
+  .app-connected .dash-hero .text-muted {
+    color: var(--app-muted) !important;
+  }
+
+  .app-connected .page-hero .btn-outline-secondary,
+  .app-connected .cart-page-hero .btn-outline-secondary,
+  .app-connected .orders-page-hero .btn-outline-secondary,
+  .app-connected .order-show-hero .btn-outline-secondary,
+  .app-connected .profile-page-hero .btn-outline-secondary,
+  .app-connected .clients-page-hero .btn-outline-secondary,
+  .app-connected .settings-page-hero .btn-outline-secondary,
+  .app-connected .import-page-hero .btn-outline-secondary,
+  .app-connected .reduction-page-hero .btn-outline-secondary,
+  .app-connected .ufd-page-hero .btn-outline-secondary,
+  .app-connected .notification-page-hero .btn-outline-secondary,
+  .app-connected .simple-page-hero .btn-outline-secondary,
+  .app-connected .dash-hero .btn-outline-secondary {
+    border-color: var(--app-blue) !important;
+    background: var(--app-surface) !important;
+    color: var(--app-blue) !important;
+  }
+
+  .app-connected .page-hero .btn-outline-primary,
+  .app-connected .cart-page-hero .btn-outline-primary,
+  .app-connected .orders-page-hero .btn-outline-primary,
+  .app-connected .order-show-hero .btn-outline-primary,
+  .app-connected .profile-page-hero .btn-outline-primary,
+  .app-connected .clients-page-hero .btn-outline-primary,
+  .app-connected .settings-page-hero .btn-outline-primary,
+  .app-connected .import-page-hero .btn-outline-primary,
+  .app-connected .reduction-page-hero .btn-outline-primary,
+  .app-connected .ufd-page-hero .btn-outline-primary,
+  .app-connected .notification-page-hero .btn-outline-primary,
+  .app-connected .simple-page-hero .btn-outline-primary,
+  .app-connected .dash-hero .btn-outline-primary {
+    border-color: var(--app-blue) !important;
+    background: var(--app-surface) !important;
+    color: var(--app-blue) !important;
+  }
+
+  .app-connected .page-hero .btn-outline-primary:hover,
+  .app-connected .cart-page-hero .btn-outline-primary:hover,
+  .app-connected .orders-page-hero .btn-outline-primary:hover,
+  .app-connected .order-show-hero .btn-outline-primary:hover,
+  .app-connected .profile-page-hero .btn-outline-primary:hover,
+  .app-connected .clients-page-hero .btn-outline-primary:hover,
+  .app-connected .settings-page-hero .btn-outline-primary:hover,
+  .app-connected .import-page-hero .btn-outline-primary:hover,
+  .app-connected .reduction-page-hero .btn-outline-primary:hover,
+  .app-connected .ufd-page-hero .btn-outline-primary:hover,
+  .app-connected .notification-page-hero .btn-outline-primary:hover,
+  .app-connected .simple-page-hero .btn-outline-primary:hover,
+  .app-connected .dash-hero .btn-outline-primary:hover {
+    border-color: var(--app-blue) !important;
+    background: var(--app-blue) !important;
+    color: #fff !important;
+  }
+
+  .app-connected .hero-card {
+    border-left: 4px solid var(--app-orange) !important;
+    border-radius: var(--app-radius) !important;
+    border-color: rgba(255, 255, 255, .22) !important;
+    border-left-color: var(--app-orange) !important;
+    background: linear-gradient(135deg, rgba(16, 46, 99, .64), rgba(var(--brand-blue-rgb), .28)) !important;
+    box-shadow: 0 24px 58px rgba(7, 26, 58, .34) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .app-connected .hero-title {
+    color: var(--app-orange) !important;
+  }
+
+  .app-connected .hero-text {
+    color: rgba(255, 255, 255, .88) !important;
+  }
+
+  .app-connected .card,
+  .app-connected .filters-card,
+  .app-connected .filters-panel,
+  .app-connected .product-card,
+  .app-connected .product-detail-card,
+  .app-connected .related-card,
+  .app-connected .cart-main-card,
+  .app-connected .cart-summary-card,
+  .app-connected .orders-summary-card,
+  .app-connected .orders-table-card,
+  .app-connected .order-stat-card,
+  .app-connected .mobile-order-card,
+  .app-connected .mobile-order-box,
+  .app-connected .order-show-card,
+  .app-connected .summary-box,
+  .app-connected .address-box,
+  .app-connected .customer-box,
+  .app-connected .profile-card,
+  .app-connected .profile-stat-card,
+  .app-connected .profile-status-box,
+  .app-connected .password-side-box,
+  .app-connected .dash-card,
+  .app-connected .dash-kpi,
+  .app-connected .dash-mini-card,
+  .app-connected .clients-main-card,
+  .app-connected .client-switch-card,
+  .app-connected .settings-card,
+  .app-connected .settings-switch-card,
+  .app-connected .settings-side-box,
+  .app-connected .import-card,
+  .app-connected .import-file-box,
+  .app-connected .import-stat-card,
+  .app-connected .import-config-card,
+  .app-connected .import-meta-box,
+  .app-connected .reduction-shell,
+  .app-connected .reduction-toolbar,
+  .app-connected .bulk-panel,
+  .app-connected .reduction-stat,
+  .app-connected .ufd-table-card,
+  .app-connected .ufd-mobile-card,
+  .app-connected .ufd-mobile-box,
+  .app-connected .ufd-page-card,
+  .app-connected .ufd-form-card,
+  .app-connected .notification-card,
+  .app-connected .admin-card {
+    border: 1px solid var(--app-line) !important;
+    border-radius: var(--app-radius) !important;
+    background: var(--app-surface) !important;
+    box-shadow: var(--app-shadow) !important;
+    backdrop-filter: none !important;
+  }
+
+  .app-connected .simple-form-card {
+    padding: 24px;
+    border: 1px solid var(--app-line);
+    border-radius: var(--app-radius);
+    background: var(--app-surface);
+    box-shadow: var(--app-shadow);
+  }
+
+  .app-connected .product-card:hover,
+  .app-connected .related-card:hover,
+  .app-connected .notification-card:hover {
+    border-color: rgba(var(--brand-blue-rgb), .42) !important;
+    box-shadow: 0 18px 38px rgba(var(--brand-anthracite-rgb), .14) !important;
+  }
+
+  .app-connected .card-header {
+    border-bottom: 1px solid rgba(var(--brand-blue-rgb), .16);
+    border-left: 4px solid var(--app-orange);
+    background: var(--app-panel-blue-soft);
+    color: var(--app-blue-dark);
+    font-weight: 550;
+  }
+
+  .app-connected .home-section-head h2,
+  .app-connected .latest-arrivals-title {
+    color: var(--app-ink) !important;
+    font-family: 'Montserrat', 'Arial Black', Arial, sans-serif !important;
+    font-size: clamp(2.15rem, 4vw, 3.75rem) !important;
+    font-weight: 850 !important;
+    line-height: .96 !important;
+    letter-spacing: .045em !important;
+    text-transform: uppercase !important;
+  }
+
+  .app-connected .home-section-head h2::after,
+  .app-connected .latest-arrivals-title::after {
+    display: none !important;
+  }
+
+  .app-connected .latest-arrivals-eyebrow {
+    color: var(--app-orange) !important;
+  }
+
+  .app-connected .latest-arrivals-title .heading-accent {
+    color: var(--app-orange) !important;
+    text-shadow: 0 10px 26px rgba(var(--brand-orange-rgb), .30) !important;
+  }
+
+  .app-connected .chip {
+    border: 1px solid var(--app-line) !important;
+    border-radius: var(--app-radius) !important;
+    background: #fff !important;
+    box-shadow: 0 8px 22px rgba(var(--brand-anthracite-rgb), .06);
+  }
+
+  .app-connected .chip:hover,
+  .app-connected .chip.active {
+    border-color: var(--app-blue) !important;
+    box-shadow: 0 12px 28px rgba(var(--brand-blue-rgb), .14) !important;
+  }
+
+  .app-connected .chip-logoWrap,
+  .app-connected .product-img,
+  .app-connected .related-card__imgwrap,
+  .app-connected .wishlist-button {
+    border-radius: 6px !important;
+  }
+
+  .app-connected .product-card__image,
+  .app-connected .product-img {
+    background: #fff !important;
+  }
+
+  .app-connected .section-title,
+  .app-connected [class\$=\"-section-title\"],
+  .app-connected .filters-panel__title {
+    color: var(--app-ink) !important;
+    font-weight: 600 !important;
+  }
+
+  .app-connected .section-title::before,
+  .app-connected [class\$=\"-section-title\"]::before {
+    content: \"\";
+    display: inline-block;
+    width: 4px;
+    height: 1em;
+    margin-right: 9px;
+    vertical-align: -.08em;
+    background: var(--app-orange);
+  }
+
+  .app-connected .table-responsive {
+    border-radius: 6px;
+  }
+
+  .app-connected .table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--app-ink);
+    margin-bottom: 0;
+  }
+
+  .app-connected .table thead,
+  .app-connected .table thead tr,
+  .app-connected .table thead th {
+    background: var(--bs-gray-100, var(--brand-bg)) !important;
+    background-color: var(--bs-gray-100, var(--brand-bg)) !important;
+    background-image: none !important;
+  }
+
+  .app-connected .table thead th {
+    --bs-table-bg: var(--bs-gray-100, var(--brand-bg));
+    --bs-table-color: var(--bs-gray-600, var(--brand-muted));
+    border-color: var(--bs-gray-200, var(--brand-border)) !important;
+    border-bottom: 1px solid var(--bs-gray-200, var(--brand-border)) !important;
+    color: var(--bs-gray-600, var(--brand-muted)) !important;
+    font-size: .72rem !important;
+    font-weight: 600 !important;
+    letter-spacing: .04em;
+    padding: 12px !important;
+    white-space: nowrap;
+    text-transform: uppercase;
+    box-shadow: none !important;
+  }
+
+  .app-connected .table thead th:first-child {
+    border-top-left-radius: 14px;
+  }
+
+  .app-connected .table thead th:last-child {
+    border-top-right-radius: 14px;
+  }
+
+  .app-connected .table tbody td {
+    border-color: var(--brand-border) !important;
+    background: #fff;
+    color: var(--app-ink) !important;
+  }
+
+  .app-connected .table tbody tr:hover td {
+    background: var(--brand-bg) !important;
+  }
+
+  .app-connected .form-control,
+  .app-connected .form-select,
+  .app-connected textarea,
+  .app-connected .filters-control,
+  .app-connected .ufd-form-control,
+  .app-connected .ufd-form-select {
+    min-height: 44px;
+    border: 1px solid var(--brand-border-strong) !important;
+    border-radius: 6px !important;
+    background: #fff !important;
+    color: var(--app-ink) !important;
+    box-shadow: none !important;
+  }
+
+  .app-connected textarea.form-control,
+  .app-connected textarea {
+    min-height: 96px;
+  }
+
+  .app-connected .form-control:focus,
+  .app-connected .form-select:focus,
+  .app-connected textarea:focus,
+  .app-connected .filters-control:focus,
+  .app-connected .ufd-form-control:focus,
+  .app-connected .ufd-form-select:focus {
+    border-color: var(--app-blue) !important;
+    box-shadow: 0 0 0 3px rgba(var(--brand-blue-rgb), .13) !important;
+  }
+
+  .app-connected .form-check-input:checked {
+    border-color: var(--app-orange);
+    background-color: var(--app-orange);
+  }
+
+  .app-connected .btn {
+    min-height: 40px;
+    border-radius: 6px !important;
+    font-weight: 700 !important;
+    box-shadow: none !important;
+  }
+
+  .app-connected .btn-primary {
+    border-color: var(--app-blue) !important;
+    background: var(--app-blue) !important;
+    color: #fff !important;
+  }
+
+  .app-connected .btn-primary:hover,
+  .app-connected .btn-primary:focus {
+    border-color: var(--app-blue-dark) !important;
+    background: var(--app-blue-dark) !important;
+  }
+
+  .app-connected .btn-warning,
+  .app-connected .btn-secondary {
+    border-color: var(--app-orange) !important;
+    background: var(--app-orange) !important;
+    color: var(--app-ink) !important;
+  }
+
+  .app-connected .btn-warning:hover,
+  .app-connected .btn-secondary:hover {
+    border-color: var(--app-orange-dark) !important;
+    background: var(--app-orange-dark) !important;
+  }
+
+  .app-connected .btn-outline-primary {
+    border-color: var(--app-blue) !important;
+    color: var(--app-blue) !important;
+  }
+
+  .app-connected .btn-outline-primary:hover {
+    background: var(--app-blue) !important;
+    color: #fff !important;
+  }
+
+  .app-connected .btn-outline-secondary {
+    border-color: var(--brand-muted) !important;
+    color: var(--brand-ink) !important;
+  }
+
+  .app-connected .btn-outline-secondary:hover {
+    border-color: var(--app-blue-dark) !important;
+    background: var(--app-blue-dark) !important;
+    color: #fff !important;
+  }
+
+  .app-connected .badge:not(.text-bg-danger):not(.bg-danger) {
+    border-radius: 999px;
+  }
+
+  .app-connected .meta-chip,
+  .app-connected .discount-badge {
+    border-color: var(--app-orange) !important;
+    background: var(--app-orange) !important;
+    color: var(--app-ink) !important;
+  }
+
+  .app-connected .modal-content,
+  .app-connected .offcanvas {
+    border: 1px solid var(--app-line);
+    border-radius: var(--app-radius);
+    background: #fff;
+    color: var(--app-ink);
+    box-shadow: var(--app-shadow);
+  }
+
+  .app-connected .modal-header,
+  .app-connected .offcanvas-header {
+    border-bottom-color: var(--app-line);
+  }
+
+  .app-connected .modal-footer {
+    border-top-color: var(--app-line);
+  }
+
+  .app-connected #cartOffcanvas {
+    --bs-offcanvas-width: min(96vw, 430px);
+    --hd-text: var(--brand-ink);
+    --hd-muted: var(--brand-muted);
+    --hd-border: var(--brand-border);
+    --hd-glass2: var(--brand-bg);
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: auto !important;
+    width: var(--bs-offcanvas-width) !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    z-index: 1085 !important;
+    border-radius: 0 !important;
+    border-left: 1px solid var(--brand-border);
+    background: #fff !important;
+    color: var(--brand-ink) !important;
+  }
+
+  .app-connected #cartOffcanvas .offcanvas-header {
+    flex: 0 0 auto !important;
+    border-bottom: 3px solid var(--app-orange);
+    background: var(--app-panel-blue);
+    color: #fff;
+  }
+
+  .app-connected #cartOffcanvas .offcanvas-title {
+    color: #fff !important;
+  }
+
+  .app-connected #cartOffcanvas .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+    opacity: .9;
+  }
+
+  .app-connected #cartOffcanvas .offcanvas-body {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    background: var(--brand-bg);
+    color: var(--brand-ink);
+  }
+
+  .app-connected .offcanvas-backdrop {
+    z-index: 1075 !important;
+  }
+
+  .app-connected #cartOffcanvas .cart-summary-card {
+    border: 1px solid var(--brand-border) !important;
+    border-top: 4px solid var(--app-orange) !important;
+    background: #fff !important;
+    color: var(--brand-ink) !important;
+  }
+
+  .app-connected #cartOffcanvas .cart-summary-kicker {
+    color: var(--app-orange) !important;
+  }
+
+  .app-connected #cartOffcanvas .cart-summary-title,
+  .app-connected #cartOffcanvas .cart-summary-value,
+  .app-connected #cartOffcanvas .cart-summary-line,
+  .app-connected #cartOffcanvas .cart-summary-total span,
+  .app-connected #cartOffcanvas .cart-summary-total strong,
+  .app-connected #cartOffcanvas .cart-title,
+  .app-connected #cartOffcanvas .cart-qty,
+  .app-connected #cartOffcanvas .cart-subtotal {
+    color: var(--brand-ink) !important;
+  }
+
+  .app-connected #cartOffcanvas .cart-summary-label,
+  .app-connected #cartOffcanvas .cart-summary-foot,
+  .app-connected #cartOffcanvas .cart-ref,
+  .app-connected #cartOffcanvas .text-muted {
+    color: var(--brand-muted) !important;
+  }
+
+  .app-connected #cartOffcanvas .cart-summary-box {
+    border: 1px solid var(--brand-border);
+    background: var(--brand-bg) !important;
+  }
+
+  .app-connected #cartOffcanvas .cart-summary-line {
+    border-top-color: var(--brand-border);
+  }
+
+  .app-connected #cartOffcanvas .cart-summary-total {
+    border: 1px solid rgba(var(--brand-blue-rgb), .22);
+    background: rgba(var(--brand-blue-rgb), .08);
+  }
+
+  .app-connected #cartOffcanvas .cart-item {
+    border: 1px solid var(--brand-border);
+    background: #fff !important;
+    color: var(--brand-ink);
+  }
+
+  .app-connected #cartOffcanvas .cart-thumb {
+    border-color: var(--brand-border);
+    background: #fff !important;
+  }
+
+  .app-connected #cartOffcanvas .cart-qty {
+    border-color: var(--brand-border);
+    background: var(--brand-bg) !important;
+  }
+
+  @media (max-width: 575.98px) {
+    .app-connected #cartOffcanvas {
+      --bs-offcanvas-width: 100vw;
+      width: 100vw !important;
+      max-width: 100vw !important;
+    }
+
+    .app-connected #cartOffcanvas .offcanvas-body {
+      padding: 14px !important;
+    }
+  }
+
+  .app-connected .pagination .page-link {
+    border-color: var(--app-line);
+    color: var(--app-blue);
+  }
+
+  .app-connected .pagination .active .page-link {
+    border-color: var(--app-blue);
+    background: var(--app-blue);
+    color: #fff;
+  }
+
+  .app-connected.theme-dark {
+    --app-ink: var(--brand-bg);
+    --app-muted: #aeb7c4;
+    --app-line: rgba(255, 255, 255, .13);
+    --app-soft: #0f1116;
+    --app-surface: #171a21;
+    --app-shadow: 0 18px 42px rgba(0, 0, 0, .3);
+    background: var(--app-soft);
+    color: var(--app-ink);
+  }
+
+  .app-connected.theme-dark .card,
+  .app-connected.theme-dark .filters-card,
+  .app-connected.theme-dark .filters-panel,
+  .app-connected.theme-dark .product-card,
+  .app-connected.theme-dark .product-detail-card,
+  .app-connected.theme-dark .related-card,
+  .app-connected.theme-dark .cart-main-card,
+  .app-connected.theme-dark .cart-summary-card,
+  .app-connected.theme-dark .orders-summary-card,
+  .app-connected.theme-dark .orders-table-card,
+  .app-connected.theme-dark .order-stat-card,
+  .app-connected.theme-dark .mobile-order-card,
+  .app-connected.theme-dark .mobile-order-box,
+  .app-connected.theme-dark .order-show-card,
+  .app-connected.theme-dark .summary-box,
+  .app-connected.theme-dark .address-box,
+  .app-connected.theme-dark .customer-box,
+  .app-connected.theme-dark .profile-card,
+  .app-connected.theme-dark .profile-stat-card,
+  .app-connected.theme-dark .profile-status-box,
+  .app-connected.theme-dark .password-side-box,
+  .app-connected.theme-dark .dash-card,
+  .app-connected.theme-dark .dash-kpi,
+  .app-connected.theme-dark .dash-mini-card,
+  .app-connected.theme-dark .clients-main-card,
+  .app-connected.theme-dark .client-switch-card,
+  .app-connected.theme-dark .settings-card,
+  .app-connected.theme-dark .settings-switch-card,
+  .app-connected.theme-dark .settings-side-box,
+  .app-connected.theme-dark .import-card,
+  .app-connected.theme-dark .import-file-box,
+  .app-connected.theme-dark .import-stat-card,
+  .app-connected.theme-dark .import-config-card,
+  .app-connected.theme-dark .import-meta-box,
+  .app-connected.theme-dark .reduction-shell,
+  .app-connected.theme-dark .reduction-toolbar,
+  .app-connected.theme-dark .bulk-panel,
+  .app-connected.theme-dark .reduction-stat,
+  .app-connected.theme-dark .ufd-table-card,
+  .app-connected.theme-dark .ufd-mobile-card,
+  .app-connected.theme-dark .ufd-mobile-box,
+  .app-connected.theme-dark .ufd-page-card,
+  .app-connected.theme-dark .ufd-form-card,
+  .app-connected.theme-dark .notification-card,
+  .app-connected.theme-dark .admin-card,
+  .app-connected.theme-dark .chip {
+    background: var(--app-surface) !important;
+  }
+
+  .app-connected.theme-dark .table tbody td {
+    border-color: rgba(255, 255, 255, .08) !important;
+    background: var(--app-surface);
+    color: var(--app-ink) !important;
+  }
+
+  .app-connected.theme-dark .table tbody tr:hover td {
+    background: #1d222b !important;
+  }
+
+  .app-connected.theme-dark .form-control,
+  .app-connected.theme-dark .form-select,
+  .app-connected.theme-dark textarea,
+  .app-connected.theme-dark .filters-control,
+  .app-connected.theme-dark .ufd-form-control,
+  .app-connected.theme-dark .ufd-form-select {
+    border-color: rgba(255, 255, 255, .18) !important;
+    background: #101319 !important;
+    color: #fff !important;
+  }
+
+  @media (max-width: 991.98px) {
+    .app-connected .site__header .header-main-row {
+      min-height: 54px;
+    }
+
+    .app-connected .site__header .brand-box {
+      --logo-panel-height: 52px;
+      --logo-panel-angle: 16px;
+      min-height: var(--logo-panel-height);
+      margin-left: .5rem;
+      margin-right: .75rem;
+      padding: .2rem .55rem;
+    }
+
+    .app-connected .site__header .brand-logo {
+      height: var(--logo-panel-height);
+    }
+
+    .app-connected .site__header .brand-logo img {
+      height: 46px;
+      max-height: 46px;
+    }
+
+    .app-connected .mobile-menu-offcanvas {
+      border-radius: 0;
+    }
+
+    .app-connected .page-hero,
+    .app-connected .cart-page-hero,
+    .app-connected .orders-page-hero,
+    .app-connected .order-show-hero,
+    .app-connected .profile-page-hero,
+    .app-connected .clients-page-hero,
+    .app-connected .settings-page-hero,
+    .app-connected .import-page-hero,
+    .app-connected .reduction-page-hero,
+    .app-connected .ufd-page-hero,
+    .app-connected .notification-page-hero,
+    .app-connected .simple-page-hero,
+    .app-connected .dash-hero {
+      min-height: 0;
+      padding: 20px !important;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .app-connected .container.py-4,
+    .app-connected .container-fluid.py-4,
+    .app-connected .container.py-3,
+    .app-connected .container-fluid.py-3 {
+      padding-right: 14px !important;
+      padding-left: 14px !important;
+    }
+
+    .app-connected .page-hero h1,
+    .app-connected .page-hero h2,
+    .app-connected .page-hero h3,
+    .app-connected .cart-page-hero h1,
+    .app-connected .cart-page-hero h2,
+    .app-connected .cart-page-hero h3,
+    .app-connected .orders-page-hero h1,
+    .app-connected .orders-page-hero h2,
+    .app-connected .orders-page-hero h3,
+    .app-connected .order-show-hero h1,
+    .app-connected .order-show-hero h2,
+    .app-connected .order-show-hero h3,
+    .app-connected .profile-page-hero h1,
+    .app-connected .profile-page-hero h2,
+    .app-connected .profile-page-hero h3,
+    .app-connected .clients-page-hero h1,
+    .app-connected .clients-page-hero h2,
+    .app-connected .clients-page-hero h3,
+    .app-connected .settings-page-hero h1,
+    .app-connected .settings-page-hero h2,
+    .app-connected .settings-page-hero h3,
+    .app-connected .import-page-hero h1,
+    .app-connected .import-page-hero h2,
+    .app-connected .import-page-hero h3,
+    .app-connected .reduction-page-hero h1,
+    .app-connected .reduction-page-hero h2,
+    .app-connected .reduction-page-hero h3,
+    .app-connected .ufd-page-hero h1,
+    .app-connected .ufd-page-hero h2,
+    .app-connected .ufd-page-hero h3,
+    .app-connected .notification-page-hero h1,
+    .app-connected .notification-page-hero h2,
+    .app-connected .notification-page-hero h3,
+    .app-connected .simple-page-hero h1,
+    .app-connected .simple-page-hero h2,
+    .app-connected .simple-page-hero h3,
+    .app-connected .dash-hero h1,
+    .app-connected .dash-hero h2,
+    .app-connected .dash-hero h3 {
+      font-size: 1.45rem;
+    }
+
+    .app-connected .btn {
+      white-space: normal;
+    }
+  }
+</style>
+";
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        yield from [];
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getTemplateName(): string
+    {
+        return "partials/_connected_theme.html.twig";
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getDebugInfo(): array
+    {
+        return array (  48 => 2,);
+    }
+
+    public function getSourceContext(): Source
+    {
+        return new Source("{# Shared visual layer for authenticated pages. Business markup and behavior stay untouched. #}
+<style>
+  .app-connected {
+    --app-orange: var(--brand-orange);
+    --app-orange-dark: var(--brand-orange-dark);
+    --app-blue: var(--brand-blue);
+    --app-blue-dark: var(--brand-blue-dark);
+    --app-black: var(--brand-anthracite);
+    --app-panel-blue: var(--brand-blue);
+    --app-panel-blue-soft: var(--brand-bg);
+    --app-ink: var(--brand-ink);
+    --app-muted: var(--brand-muted);
+    --app-line: var(--brand-border);
+    --app-soft: var(--brand-bg);
+    --app-surface: #ffffff;
+    --app-radius: 8px;
+    --app-shadow: var(--brand-shadow-sm);
+    min-height: 100vh;
+    background: var(--app-soft);
+    color: var(--app-ink);
+  }
+
+  .app-connected,
+  .app-connected input,
+  .app-connected select,
+  .app-connected textarea {
+    font-family: \"Roboto\", sans-serif;
+  }
+
+  .app-connected h1,
+  .app-connected h2,
+  .app-connected h3,
+  .app-connected h4,
+  .app-connected h5,
+  .app-connected h6,
+  .app-connected .h1,
+  .app-connected .h2,
+  .app-connected .h3,
+  .app-connected .h4,
+  .app-connected .h5,
+  .app-connected .h6,
+  .app-connected .btn,
+  .app-connected .badge,
+  .app-connected .nav-link,
+  .app-connected .dropdown-menu,
+  .app-connected .form-label,
+  .app-connected th {
+    font-family: \"Montserrat\", sans-serif;
+    letter-spacing: 0;
+  }
+
+  .app-connected h1,
+  .app-connected h2,
+  .app-connected h3,
+  .app-connected h4,
+  .app-connected h5,
+  .app-connected h6 {
+    color: var(--app-ink);
+  }
+
+  .app-connected .site__header {
+    box-shadow: 0 2px 8px rgba(var(--brand-anthracite-rgb), .05);
+  }
+
+  .app-connected .site__header,
+  .app-connected .site__header .header-wrap,
+  .app-connected .site__header .header-topbar,
+  .app-connected .site__header .header__navbar,
+  .app-connected .site__header .header-nav {
+    --hd-border: rgba(var(--brand-blue-rgb), .14);
+    --hd-shadow: 0 14px 34px rgba(var(--brand-anthracite-rgb), .08);
+    --hd-glass: #fff;
+    --hd-glass2: rgba(var(--brand-blue-rgb), .07);
+    --hd-text: var(--app-ink);
+    --hd-muted: var(--app-muted);
+    background: #fff !important;
+    color: var(--app-ink);
+  }
+
+  .app-connected .site__header .header-topbar {
+    border-bottom-color: rgba(var(--brand-blue-rgb), .12) !important;
+    background: #fff !important;
+  }
+
+  .app-connected .site__header .topbar-row {
+    color: var(--app-ink);
+    gap: 14px;
+  }
+
+  .app-connected .site__header .topbar-row .hd-dropdown + .hd-dropdown,
+  .app-connected .site__header .topbar-row .hd-dropdown + .admin-settings-dropdown {
+    margin-left: .25rem;
+  }
+
+  .app-connected .site__header .account-name,
+  .app-connected .site__header .topbar-welcome,
+  .app-connected .site__header .topbar-phone {
+    color: var(--app-ink) !important;
+  }
+
+  .app-connected .site__header .account-name {
+    color: var(--app-orange) !important;
+  }
+
+  .app-connected .site__header .topbar-phone {
+    border: 1px solid rgba(var(--brand-blue-rgb), .18);
+    border-radius: var(--app-radius);
+    background: rgba(var(--brand-blue-rgb), .06);
+    color: var(--app-blue) !important;
+  }
+
+  .app-connected .site__header .topbar-phone i {
+    color: var(--app-orange);
+  }
+
+  .app-connected .site__header .hd-iconbtn,
+  .app-connected .site__header .admin-settings-btn,
+  .app-connected .site__header .mobile-menu-toggle {
+    border-color: rgba(var(--brand-blue-rgb), .22) !important;
+    border-radius: var(--app-radius) !important;
+    background: #fff !important;
+    color: var(--app-blue) !important;
+  }
+
+  .app-connected .site__header .hd-iconbtn:hover,
+  .app-connected .site__header .admin-settings-btn:hover,
+  .app-connected .site__header .mobile-menu-toggle:hover {
+    border-color: var(--app-orange) !important;
+    background: var(--app-orange) !important;
+    color: #fff !important;
+  }
+
+  .app-connected .site__header .theme-switch {
+    border-color: rgba(var(--brand-blue-rgb), .22) !important;
+    background: rgba(var(--brand-blue-rgb), .12) !important;
+  }
+
+  .app-connected .site__header .header-main-row {
+    min-height: 68px;
+    padding-block: .35rem .45rem;
+    column-gap: 1rem !important;
+    row-gap: .65rem;
+  }
+
+  .app-connected .site__header .header-main-row > .d-none.d-lg-flex {
+    gap: .8rem !important;
+    margin-left: .25rem;
+  }
+
+  .app-connected .site__header .brand-box {
+    --logo-panel-height: 56px;
+    --logo-panel-angle: 24px;
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--logo-panel-height);
+    padding: 0;
+    margin-left: 0;
+    margin-right: 1rem;
+    overflow: visible;
+    background: #fff;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    text-decoration: none;
+  }
+
+  .app-connected .site__header .brand-box::before,
+  .app-connected .site__header .brand-box::after {
+    content: none;
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+
+  .app-connected .site__header .brand-box::before {
+    right: 100%;
+    border-width: 0 var(--logo-panel-angle) var(--logo-panel-height) 0;
+    border-color: transparent #fff transparent transparent;
+  }
+
+  .app-connected .site__header .brand-box::after {
+    left: 100%;
+    border-width: var(--logo-panel-height) 0 0 var(--logo-panel-angle);
+    border-color: transparent transparent transparent #fff;
+  }
+
+  .app-connected .site__header .brand-logo {
+    position: relative;
+    z-index: 1;
+    height: var(--logo-panel-height);
+  }
+
+  .app-connected .site__header .brand-logo img {
+    display: block;
+    width: auto;
+    height: var(--logo-panel-height);
+    max-height: none;
+    object-fit: contain;
+  }
+
+  .app-connected .site__header .header-search .search-input {
+    height: 48px;
+    border: 1px solid rgba(var(--brand-blue-rgb), .2) !important;
+    border-radius: var(--app-radius) !important;
+    background: var(--brand-bg) !important;
+    color: var(--app-ink) !important;
+  }
+
+  .app-connected .site__header .header-search .search-input::placeholder {
+    color: var(--brand-muted);
+  }
+
+  .app-connected .site__header .header-search .search-ico,
+  .app-connected .site__header .voice-search-btn {
+    color: var(--app-blue) !important;
+  }
+
+  .app-connected .site__header .voice-search-btn {
+    border-radius: 6px;
+    background: rgba(var(--brand-orange-rgb), .12);
+  }
+
+  .app-connected .site__header .indicator-btn {
+    min-height: 48px;
+    border: 1px solid rgba(var(--brand-blue-rgb), .18);
+    border-radius: var(--app-radius);
+    background: #fff;
+    color: var(--app-ink);
+    margin-block: .15rem;
+  }
+
+  .app-connected .site__header .indicator-btn:hover {
+    border-color: rgba(var(--brand-orange-rgb), .7);
+    background: rgba(var(--brand-orange-rgb), .08);
+  }
+
+  .app-connected .site__header .indicator-title,
+  .app-connected .site__header .indicator-value,
+  .app-connected .site__header .indicator-cart #cartTotalMini {
+    color: var(--app-ink) !important;
+  }
+
+  .app-connected .site__header .indicator-icon {
+    border-radius: 6px;
+    background: var(--app-orange);
+    color: var(--brand-anthracite);
+  }
+
+  .app-connected .site__header .header__navbar {
+    padding: 0;
+    border-top-color: rgba(var(--brand-blue-rgb), .12);
+    border-bottom: 3px solid var(--app-orange);
+  }
+
+  .app-connected .site__header .header__navbar > .container-fluid {
+    justify-content: center !important;
+  }
+
+  .app-connected .site__header .header__navbar-menu,
+  .app-connected .site__header .main-menu {
+    width: 100%;
+  }
+
+  .app-connected .site__header .main-menu__list {
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .app-connected .site__header .main-menu__link {
+    min-height: 44px;
+    justify-content: center;
+    padding: 7px 14px;
+    border: 0 !important;
+    border-radius: var(--app-radius);
+    color: var(--app-blue);
+    font-size: .76rem;
+    text-transform: uppercase;
+    box-shadow: none !important;
+  }
+
+  .app-connected .site__header .main-menu__link > i {
+    display: none !important;
+  }
+
+  .app-connected .site__header .main-menu__link:hover {
+    background: transparent !important;
+    color: var(--app-orange) !important;
+    transform: none;
+  }
+
+  .app-connected .site__header .main-menu__link.is-active,
+  .app-connected .site__header .main-menu__link[aria-current=\"page\"] {
+    background: transparent !important;
+    color: var(--app-orange) !important;
+    transform: none;
+  }
+
+  .app-connected .site__header .hd-dropdown .dropdown-menu,
+  .app-connected .site__header .account-menu,
+  .app-connected .site__header .admin-settings-menu {
+    border: 1px solid var(--app-line);
+    border-radius: var(--app-radius);
+    background: #fff;
+    color: var(--app-ink);
+    box-shadow: var(--app-shadow);
+  }
+
+  .app-connected .site__header .dropdown-item,
+  .app-connected .site__header .notif-item,
+  .app-connected .site__header .notif-head h6 {
+    color: var(--app-ink);
+  }
+
+  .app-connected .site__header .dropdown-item:hover,
+  .app-connected .site__header .notif-item:hover {
+    background: rgba(var(--brand-blue-rgb), .08);
+    color: var(--app-blue);
+  }
+
+  .app-connected .site__header .account-menu-item__icon,
+  .app-connected .site__header .admin-settings-item__icon {
+    border-radius: 6px;
+    color: var(--app-orange);
+  }
+
+  .app-connected .whatsapp-float {
+    width: 54px;
+    height: 54px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 14px 32px rgba(var(--brand-anthracite-rgb), .22);
+  }
+
+  .app-connected > .alert,
+  .app-connected > .container > .alert {
+    border-radius: var(--app-radius);
+  }
+
+  .app-connected .container.py-4,
+  .app-connected .container-fluid.py-4,
+  .app-connected .container.py-3,
+  .app-connected .container-fluid.py-3 {
+    padding-top: 2rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+
+  .app-connected .page-hero,
+  .app-connected .cart-page-hero,
+  .app-connected .orders-page-hero,
+  .app-connected .order-show-hero,
+  .app-connected .profile-page-hero,
+  .app-connected .clients-page-hero,
+  .app-connected .settings-page-hero,
+  .app-connected .import-page-hero,
+  .app-connected .reduction-page-hero,
+  .app-connected .ufd-page-hero,
+  .app-connected .notification-page-hero,
+  .app-connected .simple-page-hero,
+  .app-connected .dash-hero {
+    min-height: 96px;
+    padding: 24px !important;
+    border: 0 !important;
+    border-left: 5px solid var(--app-orange) !important;
+    border-bottom: 1px solid var(--app-line) !important;
+    border-radius: 0 !important;
+    background: var(--app-surface) !important;
+    box-shadow: none !important;
+    color: var(--app-ink) !important;
+    overflow: hidden;
+  }
+
+  .app-connected .page-hero h1,
+  .app-connected .page-hero h2,
+  .app-connected .page-hero h3,
+  .app-connected .cart-page-hero h1,
+  .app-connected .cart-page-hero h2,
+  .app-connected .cart-page-hero h3,
+  .app-connected .orders-page-hero h1,
+  .app-connected .orders-page-hero h2,
+  .app-connected .orders-page-hero h3,
+  .app-connected .order-show-hero h1,
+  .app-connected .order-show-hero h2,
+  .app-connected .order-show-hero h3,
+  .app-connected .profile-page-hero h1,
+  .app-connected .profile-page-hero h2,
+  .app-connected .profile-page-hero h3,
+  .app-connected .clients-page-hero h1,
+  .app-connected .clients-page-hero h2,
+  .app-connected .clients-page-hero h3,
+  .app-connected .settings-page-hero h1,
+  .app-connected .settings-page-hero h2,
+  .app-connected .settings-page-hero h3,
+  .app-connected .import-page-hero h1,
+  .app-connected .import-page-hero h2,
+  .app-connected .import-page-hero h3,
+  .app-connected .reduction-page-hero h1,
+  .app-connected .reduction-page-hero h2,
+  .app-connected .reduction-page-hero h3,
+  .app-connected .ufd-page-hero h1,
+  .app-connected .ufd-page-hero h2,
+  .app-connected .ufd-page-hero h3,
+  .app-connected .notification-page-hero h1,
+  .app-connected .notification-page-hero h2,
+  .app-connected .notification-page-hero h3,
+  .app-connected .simple-page-hero h1,
+  .app-connected .simple-page-hero h2,
+  .app-connected .simple-page-hero h3,
+  .app-connected .dash-hero h1,
+  .app-connected .dash-hero h2,
+  .app-connected .dash-hero h3 {
+    margin: 0;
+    color: var(--app-ink) !important;
+    font-size: 1.65rem;
+    font-weight: 650 !important;
+    line-height: 1.2;
+  }
+
+  .app-connected .page-hero .subtitle,
+  .app-connected .cart-page-hero .subtitle,
+  .app-connected .orders-page-hero .subtitle,
+  .app-connected .order-show-hero .subtitle,
+  .app-connected .profile-page-hero .subtitle,
+  .app-connected .clients-page-hero .subtitle,
+  .app-connected .settings-page-hero .subtitle,
+  .app-connected .import-page-hero .subtitle,
+  .app-connected .reduction-page-hero .subtitle,
+  .app-connected .ufd-page-hero .subtitle,
+  .app-connected .notification-page-hero .subtitle,
+  .app-connected .simple-page-hero .subtitle,
+  .app-connected .dash-hero .subtitle {
+    color: var(--app-muted) !important;
+  }
+
+  .app-connected .page-hero .text-muted,
+  .app-connected .cart-page-hero .text-muted,
+  .app-connected .orders-page-hero .text-muted,
+  .app-connected .order-show-hero .text-muted,
+  .app-connected .profile-page-hero .text-muted,
+  .app-connected .clients-page-hero .text-muted,
+  .app-connected .settings-page-hero .text-muted,
+  .app-connected .import-page-hero .text-muted,
+  .app-connected .reduction-page-hero .text-muted,
+  .app-connected .ufd-page-hero .text-muted,
+  .app-connected .notification-page-hero .text-muted,
+  .app-connected .simple-page-hero .text-muted,
+  .app-connected .dash-hero .text-muted {
+    color: var(--app-muted) !important;
+  }
+
+  .app-connected .page-hero .btn-outline-secondary,
+  .app-connected .cart-page-hero .btn-outline-secondary,
+  .app-connected .orders-page-hero .btn-outline-secondary,
+  .app-connected .order-show-hero .btn-outline-secondary,
+  .app-connected .profile-page-hero .btn-outline-secondary,
+  .app-connected .clients-page-hero .btn-outline-secondary,
+  .app-connected .settings-page-hero .btn-outline-secondary,
+  .app-connected .import-page-hero .btn-outline-secondary,
+  .app-connected .reduction-page-hero .btn-outline-secondary,
+  .app-connected .ufd-page-hero .btn-outline-secondary,
+  .app-connected .notification-page-hero .btn-outline-secondary,
+  .app-connected .simple-page-hero .btn-outline-secondary,
+  .app-connected .dash-hero .btn-outline-secondary {
+    border-color: var(--app-blue) !important;
+    background: var(--app-surface) !important;
+    color: var(--app-blue) !important;
+  }
+
+  .app-connected .page-hero .btn-outline-primary,
+  .app-connected .cart-page-hero .btn-outline-primary,
+  .app-connected .orders-page-hero .btn-outline-primary,
+  .app-connected .order-show-hero .btn-outline-primary,
+  .app-connected .profile-page-hero .btn-outline-primary,
+  .app-connected .clients-page-hero .btn-outline-primary,
+  .app-connected .settings-page-hero .btn-outline-primary,
+  .app-connected .import-page-hero .btn-outline-primary,
+  .app-connected .reduction-page-hero .btn-outline-primary,
+  .app-connected .ufd-page-hero .btn-outline-primary,
+  .app-connected .notification-page-hero .btn-outline-primary,
+  .app-connected .simple-page-hero .btn-outline-primary,
+  .app-connected .dash-hero .btn-outline-primary {
+    border-color: var(--app-blue) !important;
+    background: var(--app-surface) !important;
+    color: var(--app-blue) !important;
+  }
+
+  .app-connected .page-hero .btn-outline-primary:hover,
+  .app-connected .cart-page-hero .btn-outline-primary:hover,
+  .app-connected .orders-page-hero .btn-outline-primary:hover,
+  .app-connected .order-show-hero .btn-outline-primary:hover,
+  .app-connected .profile-page-hero .btn-outline-primary:hover,
+  .app-connected .clients-page-hero .btn-outline-primary:hover,
+  .app-connected .settings-page-hero .btn-outline-primary:hover,
+  .app-connected .import-page-hero .btn-outline-primary:hover,
+  .app-connected .reduction-page-hero .btn-outline-primary:hover,
+  .app-connected .ufd-page-hero .btn-outline-primary:hover,
+  .app-connected .notification-page-hero .btn-outline-primary:hover,
+  .app-connected .simple-page-hero .btn-outline-primary:hover,
+  .app-connected .dash-hero .btn-outline-primary:hover {
+    border-color: var(--app-blue) !important;
+    background: var(--app-blue) !important;
+    color: #fff !important;
+  }
+
+  .app-connected .hero-card {
+    border-left: 4px solid var(--app-orange) !important;
+    border-radius: var(--app-radius) !important;
+    border-color: rgba(255, 255, 255, .22) !important;
+    border-left-color: var(--app-orange) !important;
+    background: linear-gradient(135deg, rgba(16, 46, 99, .64), rgba(var(--brand-blue-rgb), .28)) !important;
+    box-shadow: 0 24px 58px rgba(7, 26, 58, .34) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .app-connected .hero-title {
+    color: var(--app-orange) !important;
+  }
+
+  .app-connected .hero-text {
+    color: rgba(255, 255, 255, .88) !important;
+  }
+
+  .app-connected .card,
+  .app-connected .filters-card,
+  .app-connected .filters-panel,
+  .app-connected .product-card,
+  .app-connected .product-detail-card,
+  .app-connected .related-card,
+  .app-connected .cart-main-card,
+  .app-connected .cart-summary-card,
+  .app-connected .orders-summary-card,
+  .app-connected .orders-table-card,
+  .app-connected .order-stat-card,
+  .app-connected .mobile-order-card,
+  .app-connected .mobile-order-box,
+  .app-connected .order-show-card,
+  .app-connected .summary-box,
+  .app-connected .address-box,
+  .app-connected .customer-box,
+  .app-connected .profile-card,
+  .app-connected .profile-stat-card,
+  .app-connected .profile-status-box,
+  .app-connected .password-side-box,
+  .app-connected .dash-card,
+  .app-connected .dash-kpi,
+  .app-connected .dash-mini-card,
+  .app-connected .clients-main-card,
+  .app-connected .client-switch-card,
+  .app-connected .settings-card,
+  .app-connected .settings-switch-card,
+  .app-connected .settings-side-box,
+  .app-connected .import-card,
+  .app-connected .import-file-box,
+  .app-connected .import-stat-card,
+  .app-connected .import-config-card,
+  .app-connected .import-meta-box,
+  .app-connected .reduction-shell,
+  .app-connected .reduction-toolbar,
+  .app-connected .bulk-panel,
+  .app-connected .reduction-stat,
+  .app-connected .ufd-table-card,
+  .app-connected .ufd-mobile-card,
+  .app-connected .ufd-mobile-box,
+  .app-connected .ufd-page-card,
+  .app-connected .ufd-form-card,
+  .app-connected .notification-card,
+  .app-connected .admin-card {
+    border: 1px solid var(--app-line) !important;
+    border-radius: var(--app-radius) !important;
+    background: var(--app-surface) !important;
+    box-shadow: var(--app-shadow) !important;
+    backdrop-filter: none !important;
+  }
+
+  .app-connected .simple-form-card {
+    padding: 24px;
+    border: 1px solid var(--app-line);
+    border-radius: var(--app-radius);
+    background: var(--app-surface);
+    box-shadow: var(--app-shadow);
+  }
+
+  .app-connected .product-card:hover,
+  .app-connected .related-card:hover,
+  .app-connected .notification-card:hover {
+    border-color: rgba(var(--brand-blue-rgb), .42) !important;
+    box-shadow: 0 18px 38px rgba(var(--brand-anthracite-rgb), .14) !important;
+  }
+
+  .app-connected .card-header {
+    border-bottom: 1px solid rgba(var(--brand-blue-rgb), .16);
+    border-left: 4px solid var(--app-orange);
+    background: var(--app-panel-blue-soft);
+    color: var(--app-blue-dark);
+    font-weight: 550;
+  }
+
+  .app-connected .home-section-head h2,
+  .app-connected .latest-arrivals-title {
+    color: var(--app-ink) !important;
+    font-family: 'Montserrat', 'Arial Black', Arial, sans-serif !important;
+    font-size: clamp(2.15rem, 4vw, 3.75rem) !important;
+    font-weight: 850 !important;
+    line-height: .96 !important;
+    letter-spacing: .045em !important;
+    text-transform: uppercase !important;
+  }
+
+  .app-connected .home-section-head h2::after,
+  .app-connected .latest-arrivals-title::after {
+    display: none !important;
+  }
+
+  .app-connected .latest-arrivals-eyebrow {
+    color: var(--app-orange) !important;
+  }
+
+  .app-connected .latest-arrivals-title .heading-accent {
+    color: var(--app-orange) !important;
+    text-shadow: 0 10px 26px rgba(var(--brand-orange-rgb), .30) !important;
+  }
+
+  .app-connected .chip {
+    border: 1px solid var(--app-line) !important;
+    border-radius: var(--app-radius) !important;
+    background: #fff !important;
+    box-shadow: 0 8px 22px rgba(var(--brand-anthracite-rgb), .06);
+  }
+
+  .app-connected .chip:hover,
+  .app-connected .chip.active {
+    border-color: var(--app-blue) !important;
+    box-shadow: 0 12px 28px rgba(var(--brand-blue-rgb), .14) !important;
+  }
+
+  .app-connected .chip-logoWrap,
+  .app-connected .product-img,
+  .app-connected .related-card__imgwrap,
+  .app-connected .wishlist-button {
+    border-radius: 6px !important;
+  }
+
+  .app-connected .product-card__image,
+  .app-connected .product-img {
+    background: #fff !important;
+  }
+
+  .app-connected .section-title,
+  .app-connected [class\$=\"-section-title\"],
+  .app-connected .filters-panel__title {
+    color: var(--app-ink) !important;
+    font-weight: 600 !important;
+  }
+
+  .app-connected .section-title::before,
+  .app-connected [class\$=\"-section-title\"]::before {
+    content: \"\";
+    display: inline-block;
+    width: 4px;
+    height: 1em;
+    margin-right: 9px;
+    vertical-align: -.08em;
+    background: var(--app-orange);
+  }
+
+  .app-connected .table-responsive {
+    border-radius: 6px;
+  }
+
+  .app-connected .table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--app-ink);
+    margin-bottom: 0;
+  }
+
+  .app-connected .table thead,
+  .app-connected .table thead tr,
+  .app-connected .table thead th {
+    background: var(--bs-gray-100, var(--brand-bg)) !important;
+    background-color: var(--bs-gray-100, var(--brand-bg)) !important;
+    background-image: none !important;
+  }
+
+  .app-connected .table thead th {
+    --bs-table-bg: var(--bs-gray-100, var(--brand-bg));
+    --bs-table-color: var(--bs-gray-600, var(--brand-muted));
+    border-color: var(--bs-gray-200, var(--brand-border)) !important;
+    border-bottom: 1px solid var(--bs-gray-200, var(--brand-border)) !important;
+    color: var(--bs-gray-600, var(--brand-muted)) !important;
+    font-size: .72rem !important;
+    font-weight: 600 !important;
+    letter-spacing: .04em;
+    padding: 12px !important;
+    white-space: nowrap;
+    text-transform: uppercase;
+    box-shadow: none !important;
+  }
+
+  .app-connected .table thead th:first-child {
+    border-top-left-radius: 14px;
+  }
+
+  .app-connected .table thead th:last-child {
+    border-top-right-radius: 14px;
+  }
+
+  .app-connected .table tbody td {
+    border-color: var(--brand-border) !important;
+    background: #fff;
+    color: var(--app-ink) !important;
+  }
+
+  .app-connected .table tbody tr:hover td {
+    background: var(--brand-bg) !important;
+  }
+
+  .app-connected .form-control,
+  .app-connected .form-select,
+  .app-connected textarea,
+  .app-connected .filters-control,
+  .app-connected .ufd-form-control,
+  .app-connected .ufd-form-select {
+    min-height: 44px;
+    border: 1px solid var(--brand-border-strong) !important;
+    border-radius: 6px !important;
+    background: #fff !important;
+    color: var(--app-ink) !important;
+    box-shadow: none !important;
+  }
+
+  .app-connected textarea.form-control,
+  .app-connected textarea {
+    min-height: 96px;
+  }
+
+  .app-connected .form-control:focus,
+  .app-connected .form-select:focus,
+  .app-connected textarea:focus,
+  .app-connected .filters-control:focus,
+  .app-connected .ufd-form-control:focus,
+  .app-connected .ufd-form-select:focus {
+    border-color: var(--app-blue) !important;
+    box-shadow: 0 0 0 3px rgba(var(--brand-blue-rgb), .13) !important;
+  }
+
+  .app-connected .form-check-input:checked {
+    border-color: var(--app-orange);
+    background-color: var(--app-orange);
+  }
+
+  .app-connected .btn {
+    min-height: 40px;
+    border-radius: 6px !important;
+    font-weight: 700 !important;
+    box-shadow: none !important;
+  }
+
+  .app-connected .btn-primary {
+    border-color: var(--app-blue) !important;
+    background: var(--app-blue) !important;
+    color: #fff !important;
+  }
+
+  .app-connected .btn-primary:hover,
+  .app-connected .btn-primary:focus {
+    border-color: var(--app-blue-dark) !important;
+    background: var(--app-blue-dark) !important;
+  }
+
+  .app-connected .btn-warning,
+  .app-connected .btn-secondary {
+    border-color: var(--app-orange) !important;
+    background: var(--app-orange) !important;
+    color: var(--app-ink) !important;
+  }
+
+  .app-connected .btn-warning:hover,
+  .app-connected .btn-secondary:hover {
+    border-color: var(--app-orange-dark) !important;
+    background: var(--app-orange-dark) !important;
+  }
+
+  .app-connected .btn-outline-primary {
+    border-color: var(--app-blue) !important;
+    color: var(--app-blue) !important;
+  }
+
+  .app-connected .btn-outline-primary:hover {
+    background: var(--app-blue) !important;
+    color: #fff !important;
+  }
+
+  .app-connected .btn-outline-secondary {
+    border-color: var(--brand-muted) !important;
+    color: var(--brand-ink) !important;
+  }
+
+  .app-connected .btn-outline-secondary:hover {
+    border-color: var(--app-blue-dark) !important;
+    background: var(--app-blue-dark) !important;
+    color: #fff !important;
+  }
+
+  .app-connected .badge:not(.text-bg-danger):not(.bg-danger) {
+    border-radius: 999px;
+  }
+
+  .app-connected .meta-chip,
+  .app-connected .discount-badge {
+    border-color: var(--app-orange) !important;
+    background: var(--app-orange) !important;
+    color: var(--app-ink) !important;
+  }
+
+  .app-connected .modal-content,
+  .app-connected .offcanvas {
+    border: 1px solid var(--app-line);
+    border-radius: var(--app-radius);
+    background: #fff;
+    color: var(--app-ink);
+    box-shadow: var(--app-shadow);
+  }
+
+  .app-connected .modal-header,
+  .app-connected .offcanvas-header {
+    border-bottom-color: var(--app-line);
+  }
+
+  .app-connected .modal-footer {
+    border-top-color: var(--app-line);
+  }
+
+  .app-connected #cartOffcanvas {
+    --bs-offcanvas-width: min(96vw, 430px);
+    --hd-text: var(--brand-ink);
+    --hd-muted: var(--brand-muted);
+    --hd-border: var(--brand-border);
+    --hd-glass2: var(--brand-bg);
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: auto !important;
+    width: var(--bs-offcanvas-width) !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    z-index: 1085 !important;
+    border-radius: 0 !important;
+    border-left: 1px solid var(--brand-border);
+    background: #fff !important;
+    color: var(--brand-ink) !important;
+  }
+
+  .app-connected #cartOffcanvas .offcanvas-header {
+    flex: 0 0 auto !important;
+    border-bottom: 3px solid var(--app-orange);
+    background: var(--app-panel-blue);
+    color: #fff;
+  }
+
+  .app-connected #cartOffcanvas .offcanvas-title {
+    color: #fff !important;
+  }
+
+  .app-connected #cartOffcanvas .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+    opacity: .9;
+  }
+
+  .app-connected #cartOffcanvas .offcanvas-body {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    background: var(--brand-bg);
+    color: var(--brand-ink);
+  }
+
+  .app-connected .offcanvas-backdrop {
+    z-index: 1075 !important;
+  }
+
+  .app-connected #cartOffcanvas .cart-summary-card {
+    border: 1px solid var(--brand-border) !important;
+    border-top: 4px solid var(--app-orange) !important;
+    background: #fff !important;
+    color: var(--brand-ink) !important;
+  }
+
+  .app-connected #cartOffcanvas .cart-summary-kicker {
+    color: var(--app-orange) !important;
+  }
+
+  .app-connected #cartOffcanvas .cart-summary-title,
+  .app-connected #cartOffcanvas .cart-summary-value,
+  .app-connected #cartOffcanvas .cart-summary-line,
+  .app-connected #cartOffcanvas .cart-summary-total span,
+  .app-connected #cartOffcanvas .cart-summary-total strong,
+  .app-connected #cartOffcanvas .cart-title,
+  .app-connected #cartOffcanvas .cart-qty,
+  .app-connected #cartOffcanvas .cart-subtotal {
+    color: var(--brand-ink) !important;
+  }
+
+  .app-connected #cartOffcanvas .cart-summary-label,
+  .app-connected #cartOffcanvas .cart-summary-foot,
+  .app-connected #cartOffcanvas .cart-ref,
+  .app-connected #cartOffcanvas .text-muted {
+    color: var(--brand-muted) !important;
+  }
+
+  .app-connected #cartOffcanvas .cart-summary-box {
+    border: 1px solid var(--brand-border);
+    background: var(--brand-bg) !important;
+  }
+
+  .app-connected #cartOffcanvas .cart-summary-line {
+    border-top-color: var(--brand-border);
+  }
+
+  .app-connected #cartOffcanvas .cart-summary-total {
+    border: 1px solid rgba(var(--brand-blue-rgb), .22);
+    background: rgba(var(--brand-blue-rgb), .08);
+  }
+
+  .app-connected #cartOffcanvas .cart-item {
+    border: 1px solid var(--brand-border);
+    background: #fff !important;
+    color: var(--brand-ink);
+  }
+
+  .app-connected #cartOffcanvas .cart-thumb {
+    border-color: var(--brand-border);
+    background: #fff !important;
+  }
+
+  .app-connected #cartOffcanvas .cart-qty {
+    border-color: var(--brand-border);
+    background: var(--brand-bg) !important;
+  }
+
+  @media (max-width: 575.98px) {
+    .app-connected #cartOffcanvas {
+      --bs-offcanvas-width: 100vw;
+      width: 100vw !important;
+      max-width: 100vw !important;
+    }
+
+    .app-connected #cartOffcanvas .offcanvas-body {
+      padding: 14px !important;
+    }
+  }
+
+  .app-connected .pagination .page-link {
+    border-color: var(--app-line);
+    color: var(--app-blue);
+  }
+
+  .app-connected .pagination .active .page-link {
+    border-color: var(--app-blue);
+    background: var(--app-blue);
+    color: #fff;
+  }
+
+  .app-connected.theme-dark {
+    --app-ink: var(--brand-bg);
+    --app-muted: #aeb7c4;
+    --app-line: rgba(255, 255, 255, .13);
+    --app-soft: #0f1116;
+    --app-surface: #171a21;
+    --app-shadow: 0 18px 42px rgba(0, 0, 0, .3);
+    background: var(--app-soft);
+    color: var(--app-ink);
+  }
+
+  .app-connected.theme-dark .card,
+  .app-connected.theme-dark .filters-card,
+  .app-connected.theme-dark .filters-panel,
+  .app-connected.theme-dark .product-card,
+  .app-connected.theme-dark .product-detail-card,
+  .app-connected.theme-dark .related-card,
+  .app-connected.theme-dark .cart-main-card,
+  .app-connected.theme-dark .cart-summary-card,
+  .app-connected.theme-dark .orders-summary-card,
+  .app-connected.theme-dark .orders-table-card,
+  .app-connected.theme-dark .order-stat-card,
+  .app-connected.theme-dark .mobile-order-card,
+  .app-connected.theme-dark .mobile-order-box,
+  .app-connected.theme-dark .order-show-card,
+  .app-connected.theme-dark .summary-box,
+  .app-connected.theme-dark .address-box,
+  .app-connected.theme-dark .customer-box,
+  .app-connected.theme-dark .profile-card,
+  .app-connected.theme-dark .profile-stat-card,
+  .app-connected.theme-dark .profile-status-box,
+  .app-connected.theme-dark .password-side-box,
+  .app-connected.theme-dark .dash-card,
+  .app-connected.theme-dark .dash-kpi,
+  .app-connected.theme-dark .dash-mini-card,
+  .app-connected.theme-dark .clients-main-card,
+  .app-connected.theme-dark .client-switch-card,
+  .app-connected.theme-dark .settings-card,
+  .app-connected.theme-dark .settings-switch-card,
+  .app-connected.theme-dark .settings-side-box,
+  .app-connected.theme-dark .import-card,
+  .app-connected.theme-dark .import-file-box,
+  .app-connected.theme-dark .import-stat-card,
+  .app-connected.theme-dark .import-config-card,
+  .app-connected.theme-dark .import-meta-box,
+  .app-connected.theme-dark .reduction-shell,
+  .app-connected.theme-dark .reduction-toolbar,
+  .app-connected.theme-dark .bulk-panel,
+  .app-connected.theme-dark .reduction-stat,
+  .app-connected.theme-dark .ufd-table-card,
+  .app-connected.theme-dark .ufd-mobile-card,
+  .app-connected.theme-dark .ufd-mobile-box,
+  .app-connected.theme-dark .ufd-page-card,
+  .app-connected.theme-dark .ufd-form-card,
+  .app-connected.theme-dark .notification-card,
+  .app-connected.theme-dark .admin-card,
+  .app-connected.theme-dark .chip {
+    background: var(--app-surface) !important;
+  }
+
+  .app-connected.theme-dark .table tbody td {
+    border-color: rgba(255, 255, 255, .08) !important;
+    background: var(--app-surface);
+    color: var(--app-ink) !important;
+  }
+
+  .app-connected.theme-dark .table tbody tr:hover td {
+    background: #1d222b !important;
+  }
+
+  .app-connected.theme-dark .form-control,
+  .app-connected.theme-dark .form-select,
+  .app-connected.theme-dark textarea,
+  .app-connected.theme-dark .filters-control,
+  .app-connected.theme-dark .ufd-form-control,
+  .app-connected.theme-dark .ufd-form-select {
+    border-color: rgba(255, 255, 255, .18) !important;
+    background: #101319 !important;
+    color: #fff !important;
+  }
+
+  @media (max-width: 991.98px) {
+    .app-connected .site__header .header-main-row {
+      min-height: 54px;
+    }
+
+    .app-connected .site__header .brand-box {
+      --logo-panel-height: 52px;
+      --logo-panel-angle: 16px;
+      min-height: var(--logo-panel-height);
+      margin-left: .5rem;
+      margin-right: .75rem;
+      padding: .2rem .55rem;
+    }
+
+    .app-connected .site__header .brand-logo {
+      height: var(--logo-panel-height);
+    }
+
+    .app-connected .site__header .brand-logo img {
+      height: 46px;
+      max-height: 46px;
+    }
+
+    .app-connected .mobile-menu-offcanvas {
+      border-radius: 0;
+    }
+
+    .app-connected .page-hero,
+    .app-connected .cart-page-hero,
+    .app-connected .orders-page-hero,
+    .app-connected .order-show-hero,
+    .app-connected .profile-page-hero,
+    .app-connected .clients-page-hero,
+    .app-connected .settings-page-hero,
+    .app-connected .import-page-hero,
+    .app-connected .reduction-page-hero,
+    .app-connected .ufd-page-hero,
+    .app-connected .notification-page-hero,
+    .app-connected .simple-page-hero,
+    .app-connected .dash-hero {
+      min-height: 0;
+      padding: 20px !important;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .app-connected .container.py-4,
+    .app-connected .container-fluid.py-4,
+    .app-connected .container.py-3,
+    .app-connected .container-fluid.py-3 {
+      padding-right: 14px !important;
+      padding-left: 14px !important;
+    }
+
+    .app-connected .page-hero h1,
+    .app-connected .page-hero h2,
+    .app-connected .page-hero h3,
+    .app-connected .cart-page-hero h1,
+    .app-connected .cart-page-hero h2,
+    .app-connected .cart-page-hero h3,
+    .app-connected .orders-page-hero h1,
+    .app-connected .orders-page-hero h2,
+    .app-connected .orders-page-hero h3,
+    .app-connected .order-show-hero h1,
+    .app-connected .order-show-hero h2,
+    .app-connected .order-show-hero h3,
+    .app-connected .profile-page-hero h1,
+    .app-connected .profile-page-hero h2,
+    .app-connected .profile-page-hero h3,
+    .app-connected .clients-page-hero h1,
+    .app-connected .clients-page-hero h2,
+    .app-connected .clients-page-hero h3,
+    .app-connected .settings-page-hero h1,
+    .app-connected .settings-page-hero h2,
+    .app-connected .settings-page-hero h3,
+    .app-connected .import-page-hero h1,
+    .app-connected .import-page-hero h2,
+    .app-connected .import-page-hero h3,
+    .app-connected .reduction-page-hero h1,
+    .app-connected .reduction-page-hero h2,
+    .app-connected .reduction-page-hero h3,
+    .app-connected .ufd-page-hero h1,
+    .app-connected .ufd-page-hero h2,
+    .app-connected .ufd-page-hero h3,
+    .app-connected .notification-page-hero h1,
+    .app-connected .notification-page-hero h2,
+    .app-connected .notification-page-hero h3,
+    .app-connected .simple-page-hero h1,
+    .app-connected .simple-page-hero h2,
+    .app-connected .simple-page-hero h3,
+    .app-connected .dash-hero h1,
+    .app-connected .dash-hero h2,
+    .app-connected .dash-hero h3 {
+      font-size: 1.45rem;
+    }
+
+    .app-connected .btn {
+      white-space: normal;
+    }
+  }
+</style>
+", "partials/_connected_theme.html.twig", "F:\\3sk\\3sk (1)\\templates\\partials\\_connected_theme.html.twig");
+    }
+}

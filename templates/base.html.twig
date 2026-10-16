@@ -21,10 +21,8 @@
                 align-items: center;
                 justify-content: center;
                 padding: 24px;
-                background:
-                    radial-gradient(circle at 18% 18%, rgba(var(--bs-primary-rgb, 49, 95, 187), .10), transparent 34%),
-                    linear-gradient(180deg, var(--bs-body-bg, #fff), var(--bs-light, #f8f9fa));
-                color: var(--bs-body-color, #101828);
+                background: var(--brand-bg);
+                color: var(--bs-body-color, var(--brand-ink));
                 transition: opacity .28s ease, visibility .28s ease;
             }
 
@@ -50,7 +48,7 @@
 
             .site-page-loader__mark {
                 display: block;
-                width: min(155px, 42%);
+                width: 64px;
                 height: auto;
                 flex-shrink: 0;
                 object-fit: contain;
@@ -63,7 +61,7 @@
 
             .site-page-loader__subtitle {
                 margin: .2rem 0 0;
-                color: var(--bs-secondary-color, #667085);
+                color: var(--bs-secondary-color, var(--brand-muted));
                 font: 500 .82rem/1.35 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             }
 
@@ -71,7 +69,7 @@
                 height: 6px;
                 overflow: hidden;
                 border-radius: 999px;
-                background: rgba(var(--bs-primary-rgb, 49, 95, 187), .12);
+                background: rgba(var(--brand-blue-rgb), .12);
             }
 
             .site-page-loader__bar {
@@ -79,7 +77,7 @@
                 height: 100%;
                 display: block;
                 border-radius: inherit;
-                background: linear-gradient(90deg, var(--bs-primary, #315fbb), var(--bs-warning, #ff9100));
+                background: linear-gradient(90deg, var(--bs-primary, var(--brand-blue)), var(--bs-warning, var(--brand-orange)));
                 transition: width .16s ease;
             }
 
@@ -88,7 +86,7 @@
                 justify-content: space-between;
                 gap: 1rem;
                 margin-top: 10px;
-                color: var(--bs-secondary-color, #667085);
+                color: var(--bs-secondary-color, var(--brand-muted));
                 font: 600 .76rem/1.3 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             }
         </style>
@@ -96,18 +94,24 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
+        <link rel="stylesheet" href="{{ asset('styles/site-footer.css') }}?v=20261016-2">
+
         {% block javascripts %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
             {{ encore_entry_script_tags('app') }}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
+        {% if app.user %}
+            <script type="application/json" id="product-brand-logos">{{ product_brand_logos()|json_encode(constant('JSON_HEX_TAG') b-or constant('JSON_HEX_AMP') b-or constant('JSON_HEX_APOS') b-or constant('JSON_HEX_QUOT'))|raw }}</script>
+            <script src="{{ asset('scripts/product-brand-logos.js') }}?v=20261016-1"></script>
+        {% endif %}
     </head>
     <body class="{{ app.user ? 'app-connected' : 'app-public' }}">
     <div class="site-page-loader" data-site-loader aria-live="polite" aria-label="Chargement du site">
         <div class="site-page-loader__panel">
             <div class="site-page-loader__brand">
-                <img class="site-page-loader__mark" src="{{ optimized_asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto" width="155" height="60" fetchpriority="high">
+                <img class="site-page-loader__mark" src="{{ optimized_asset('img/logo-min.png') }}" alt="3SK" width="106" height="104" fetchpriority="high">
                 <div>
                     <p class="site-page-loader__title">Préparation du site</p>
                     <p class="site-page-loader__subtitle">Optimisation des visuels et du catalogue.</p>
@@ -138,7 +142,7 @@
     font-size: 30px;
     text-decoration: none;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    z-index: 9999;
+    z-index: 1040;
     transition: box-shadow 0.2s ease, transform 0.2s ease;
     touch-action: none;
     user-select: none;
@@ -155,6 +159,7 @@
   <a
     href="https://wa.me/212613577138?text=Bonjour%20je%20souhaite%20avoir%20des%20informations"
     class="whatsapp-float"
+    draggable="false"
     target="_blank"
     rel="noopener noreferrer"
 >
@@ -193,6 +198,11 @@
 {% endif %}
 
 {% include 'partials/_design_system.html.twig' %}
+<link rel="stylesheet" href="{{ asset('styles/typography.css') }}?v=20261016-3">
+{% if app.user %}
+  <link rel="stylesheet" href="{{ asset('styles/connected-ui.css') }}?v=20261016-3">
+{% endif %}
+<link rel="stylesheet" href="{{ asset('styles/header-common.css') }}?v=20261016-2">
 
     </body>
     <script>
@@ -218,7 +228,7 @@ window.addEventListener('DOMContentLoaded', function () {
     if (!Number.isNaN(savedTop)) {
         applyTop(savedTop);
     } else {
-        applyTop(window.innerHeight * 0.5);
+        applyTop(whatsappBtn.getBoundingClientRect().top);
     }
 
     let isDragging = false;

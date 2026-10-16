@@ -1,0 +1,177 @@
+<link rel="stylesheet" href="{{ asset('styles/public-home.css') }}?v=20261016-1">
+<link rel="stylesheet" href="{{ asset('styles/home-about-services.css') }}?v=20261016-4">
+<div class="public-home public-shell">
+  {% include 'partials/_public_header.html.twig' with {
+    public_header_is_home: true,
+    public_header_nav_id: 'publicHomeNav'
+  } %}
+
+  <section id="accueil" class="public-slider-shell">
+    {% include 'home/sections/_showcase.html.twig' %}
+  </section>
+
+  <main class="public-main-v2">
+    <section class="public-intro-v2 section-space">
+      <div class="section-shell">
+        <div class="row intro-layout">
+          <div class="col-12 col-lg-7">
+            <div class="intro-copy">
+              <span class="section-eyebrow">3SK Parts Auto - Casablanca</span>
+              <h2 class="section-heading">Pieces Carrosserie & accessoires <span class="heading-accent">automobile</span></h2>
+              <p class="section-copy">
+                Basée à Casablanca depuis 2014, 3SK Parts Auto accompagne les acteurs de la rechange automobile avec une offre orientée
+                pièces carrosserie et accessoires, ainsi qu'un espace client dédié pour consulter le catalogue et préparer les commandes.
+              </p>
+              <div class="intro-actions">
+                <a href="#contact" class="btn btn-outline-primary"><i class="fa-solid fa-envelope" aria-hidden="true"></i>Nous contacter</a>
+                <a href="{{ path('app_login') }}" class="btn btn-primary"><i class="fa-solid fa-arrow-right-to-bracket" aria-hidden="true"></i>Acceder a l'espace client</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-5">
+            <div class="intro-facts">
+              <div class="intro-fact">
+                <i class="fa-solid fa-car-side"></i>
+                <div>
+                  <strong>Activité</strong>
+                  <span>Importateur et distributeur de pièces carrosseries automobiles.</span>
+                </div>
+              </div>
+              <div class="intro-fact">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                  <strong>Implantation</strong>
+                  <span>Casablanca, au service d'une clientèle professionnelle.</span>
+                </div>
+              </div>
+              <div class="intro-fact">
+                <i class="fa-solid fa-boxes-stacked"></i>
+                <div>
+                  <strong>Espace client</strong>
+                  <span>Catalogue, panier et suivi des commandes dans un seul espace.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% include 'home/sections/_about.html.twig' %}
+    {% include 'home/sections/_services.html.twig' %}
+
+    {% include 'home/sections/_partner_brands.html.twig' %}
+
+    {% include 'home/sections/_contact.html.twig' %}
+  </main>
+
+  <script>
+    (() => {
+      const form = document.querySelector('[data-contact-form]');
+      if (!form) return;
+
+      const submitButton = form.querySelector('[data-contact-submit]');
+      const submitLabel = form.querySelector('[data-contact-submit-label]');
+      const statusBox = form.querySelector('[data-contact-status]');
+      const defaultLabel = submitLabel ? submitLabel.textContent : '';
+
+      const showStatus = (message, type) => {
+        if (!statusBox) return;
+        statusBox.textContent = message;
+        statusBox.className = `contact-form-status is-visible ${type === 'success' ? 'is-success' : 'is-error'}`;
+      };
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (!form.reportValidity()) return;
+
+        if (statusBox) {
+          statusBox.textContent = '';
+          statusBox.className = 'contact-form-status';
+        }
+
+        if (submitButton) submitButton.disabled = true;
+        if (submitLabel) submitLabel.textContent = 'Envoi en cours...';
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+              'Accept': 'application/json',
+              'X-Requested-With': 'XMLHttpRequest'
+            }
+          });
+
+          const data = await response.json().catch(() => ({}));
+          const message = data.message || 'Une erreur est survenue pendant l’envoi.';
+
+          if (!response.ok || !data.ok) {
+            throw new Error(message);
+          }
+
+          form.reset();
+          showStatus(message, 'success');
+        } catch (error) {
+          showStatus(error.message || 'Le message n’a pas pu être envoyé.', 'error');
+        } finally {
+          if (submitButton) submitButton.disabled = false;
+          if (submitLabel) submitLabel.textContent = defaultLabel;
+        }
+      });
+    })();
+  </script>
+
+  {% include 'home/sections/_stats_strip.html.twig' %}
+
+  {% include 'partials/_site_footer.html.twig' with {
+    footer_connected: false,
+    footer_home_href: '#accueil',
+    footer_anchor_prefix: ''
+  } %}
+  <div class="public-cookie-banner" id="publicCookieBanner" role="region" aria-label="Gestion des cookies">
+    <p class="public-cookie-text">
+      Nous utilisons les cookies pour vous offrir une meilleure expérience utilisateur et mesurer l'utilisation du site.
+      En savoir plus dans notre politique de confidentialité.
+    </p>
+    <div class="public-cookie-actions">
+      <button type="button" class="public-cookie-btn is-decline" data-cookie-choice="declined">Refuser</button>
+      <button type="button" class="public-cookie-btn is-accept" data-cookie-choice="accepted">Autoriser</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const banner = document.getElementById('publicCookieBanner');
+      if (!banner) return;
+
+      const storageKey = '3sk_cookie_consent';
+      let savedChoice = null;
+
+      try {
+        savedChoice = window.localStorage.getItem(storageKey);
+      } catch (error) {
+        savedChoice = 'unavailable';
+      }
+
+      if (!savedChoice) {
+        window.setTimeout(function () {
+          banner.classList.add('is-visible');
+        }, 500);
+      }
+
+      banner.addEventListener('click', function (event) {
+        const target = event.target instanceof Element ? event.target : event.target.parentElement;
+        const button = target ? target.closest('[data-cookie-choice]') : null;
+        if (!button) return;
+
+        try {
+          window.localStorage.setItem(storageKey, button.dataset.cookieChoice || 'accepted');
+        } catch (error) {}
+
+        banner.classList.remove('is-visible');
+      });
+    })();
+  </script>
+</div>

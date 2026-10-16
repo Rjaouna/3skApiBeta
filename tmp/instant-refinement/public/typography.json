@@ -1,0 +1,326 @@
+[
+  {
+    "route": "/",
+    "width": 320,
+    "type": {
+      "body": "16px",
+      "headings": [
+        "32px",
+        "32px"
+      ],
+      "paragraphs": [
+        "16px",
+        "16px",
+        "16px",
+        "16px"
+      ],
+      "buttons": [
+        "16px"
+      ],
+      "fields": [],
+      "hero": null
+    }
+  },
+  {
+    "route": "/login",
+    "width": 320,
+    "type": {
+      "body": "16px",
+      "headings": [],
+      "paragraphs": [],
+      "buttons": [],
+      "fields": [
+        "16px",
+        "16px"
+      ]
+    }
+  },
+  {
+    "route": "/",
+    "width": 390,
+    "type": {
+      "body": "16px",
+      "headings": [
+        "32px",
+        "32px"
+      ],
+      "paragraphs": [
+        "16px",
+        "16px",
+        "16px",
+        "16px"
+      ],
+      "buttons": [
+        "16px"
+      ],
+      "fields": [],
+      "hero": null
+    }
+  },
+  {
+    "route": "/login",
+    "width": 390,
+    "type": {
+      "body": "16px",
+      "headings": [],
+      "paragraphs": [],
+      "buttons": [],
+      "fields": [
+        "16px",
+        "16px"
+      ]
+    }
+  },
+  {
+    "route": "/",
+    "width": 575,
+    "type": {
+      "body": "16px",
+      "headings": [
+        "32px",
+        "32px"
+      ],
+      "paragraphs": [
+        "16px",
+        "16px",
+        "16px",
+        "16px"
+      ],
+      "buttons": [
+        "16px"
+      ],
+      "fields": [],
+      "hero": null
+    }
+  },
+  {
+    "route": "/login",
+    "width": 575,
+    "type": {
+      "body": "16px",
+      "headings": [],
+      "paragraphs": [],
+      "buttons": [],
+      "fields": [
+        "16px",
+        "16px"
+      ]
+    }
+  },
+  {
+    "route": "/",
+    "width": 768,
+    "type": {
+      "body": "16px",
+      "headings": [
+        "48px",
+        "48px"
+      ],
+      "paragraphs": [
+        "18px",
+        "18px",
+        "18px",
+        "18px"
+      ],
+      "buttons": [
+        "16px"
+      ],
+      "fields": [],
+      "hero": null
+    }
+  },
+  {
+    "route": "/login",
+    "width": 768,
+    "type": {
+      "body": "16px",
+      "headings": [],
+      "paragraphs": [],
+      "buttons": [],
+      "fields": [
+        "16px",
+        "16px"
+      ]
+    }
+  },
+  {
+    "route": "/",
+    "width": 991,
+    "type": {
+      "body": "16px",
+      "headings": [
+        "48px",
+        "48px"
+      ],
+      "paragraphs": [
+        "18px",
+        "18px",
+        "18px",
+        "18px"
+      ],
+      "buttons": [
+        "16px"
+      ],
+      "fields": [],
+      "hero": null
+    }
+  },
+  {
+    "route": "/login",
+    "width": 991,
+    "type": {
+      "body": "16px",
+      "headings": [],
+      "paragraphs": [],
+      "buttons": [],
+      "fields": [
+        "16px",
+        "16px"
+      ]
+    }
+  },
+  {
+    "route": "/",
+    "width": 1024,
+    "type": {
+      "body": "16px",
+      "headings": [
+        "48px",
+        "48px"
+      ],
+      "paragraphs": [
+        "18px",
+        "18px",
+        "18px",
+        "18px"
+      ],
+      "buttons": [
+        "16px"
+      ],
+      "fields": [],
+      "hero": null
+    }
+  },
+  {
+    "route": "/login",
+    "width": 1024,
+    "type": {
+      "body": "16px",
+      "headings": [],
+      "paragraphs": [],
+      "buttons": [],
+      "fields": [
+        "16px",
+        "16px"
+      ]
+    }
+  },
+  {
+    "route": "/",
+    "width": 1199,
+    "type": {
+      "body": "16px",
+      "headings": [
+        "48px",
+        "48px"
+      ],
+      "paragraphs": [
+        "18px",
+        "18px",
+        "18px",
+        "18px"
+      ],
+      "buttons": [
+        "16px"
+      ],
+      "fields": [],
+      "hero": null
+    }
+  },
+  {
+    "route": "/login",
+    "width": 1199,
+    "type": {
+      "body": "16px",
+      "headings": [],
+      "paragraphs": [],
+      "buttons": [],
+      "fields": [
+        "16px",
+        "16px"
+      ]
+    }
+  },
+  {
+    "route": "/",
+    "width": 1440,
+    "type": {
+      "body": "16px",
+      "headings": [
+        "48px",
+        "48px"
+      ],
+      "paragraphs": [
+        "18px",
+        "18px",
+        "18px",
+        "18px"
+      ],
+      "buttons": [
+        "16px"
+      ],
+      "fields": [],
+      "hero": null
+    }
+  },
+  {
+    "route": "/login",
+    "width": 1440,
+    "type": {
+      "body": "16px",
+      "headings": [],
+      "paragraphs": [],
+      "buttons": [],
+      "fields": [
+        "16px",
+        "16px"
+      ]
+    }
+  },
+  {
+    "route": "/",
+    "width": 1920,
+    "type": {
+      "body": "16px",
+      "headings": [
+        "48px",
+        "48px"
+      ],
+      "paragraphs": [
+        "18px",
+        "18px",
+        "18px",
+        "18px"
+      ],
+      "buttons": [
+        "16px"
+      ],
+      "fields": [],
+      "hero": null
+    }
+  },
+  {
+    "route": "/login",
+    "width": 1920,
+    "type": {
+      "body": "16px",
+      "headings": [],
+      "paragraphs": [],
+      "buttons": [],
+      "fields": [
+        "16px",
+        "16px"
+      ]
+    }
+  }
+]

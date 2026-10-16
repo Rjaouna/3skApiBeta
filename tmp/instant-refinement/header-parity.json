@@ -1,0 +1,290 @@
+{
+  "390": {
+    "contacts": [
+      {
+        "text": "Nous appeler+212 5 22 71 35 72 / 77",
+        "href": null,
+        "style": {
+          "fontFamily": "Montserrat, sans-serif",
+          "fontSize": "12px",
+          "fontWeight": "550",
+          "lineHeight": "16.8px",
+          "color": "rgb(255, 255, 255)"
+        },
+        "children": [
+          {
+            "fontFamily": "Montserrat, sans-serif",
+            "fontSize": "12px",
+            "fontWeight": "500",
+            "lineHeight": "16.8px",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "text": "3sk.partsauto@gmail.com",
+        "href": "mailto:3sk.partsauto@gmail.com",
+        "style": {
+          "fontFamily": "Montserrat, sans-serif",
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "lineHeight": "16.8px",
+          "color": "rgb(255, 255, 255)"
+        },
+        "children": []
+      },
+      {
+        "text": "Casablanca, MarocAu service des professionnels",
+        "href": "https://www.google.com/maps?q=33.528667,-7.550028",
+        "style": {
+          "fontFamily": "Montserrat, sans-serif",
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "lineHeight": "16.8px",
+          "color": "rgb(255, 255, 255)"
+        },
+        "children": [
+          {
+            "fontFamily": "Montserrat, sans-serif",
+            "fontSize": "13px",
+            "fontWeight": "500",
+            "lineHeight": "19.5px",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      }
+    ],
+    "search": {
+      "height": 43,
+      "style": {
+        "fontFamily": "Roboto, Arial, sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "24px",
+        "color": "rgb(35, 43, 56)"
+      }
+    },
+    "logo": {
+      "src": "/img/logo-3sk-partsauto-transparent.png",
+      "width": 170
+    },
+    "topbar": "rgb(49, 95, 183)",
+    "overflow": false
+  },
+  "1024": {
+    "contacts": [
+      {
+        "text": "Nous appeler+212 5 22 71 35 72 / 77",
+        "href": null,
+        "style": {
+          "fontFamily": "Montserrat, sans-serif",
+          "fontSize": "12px",
+          "fontWeight": "550",
+          "lineHeight": "16.8px",
+          "color": "rgb(255, 255, 255)"
+        },
+        "children": [
+          {
+            "fontFamily": "Montserrat, sans-serif",
+            "fontSize": "12px",
+            "fontWeight": "600",
+            "lineHeight": "16.8px",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "text": "3sk.partsauto@gmail.com",
+        "href": "mailto:3sk.partsauto@gmail.com",
+        "style": {
+          "fontFamily": "Montserrat, sans-serif",
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "lineHeight": "16.8px",
+          "color": "rgb(255, 255, 255)"
+        },
+        "children": []
+      },
+      {
+        "text": "Casablanca, MarocAu service des professionnels",
+        "href": "https://www.google.com/maps?q=33.528667,-7.550028",
+        "style": {
+          "fontFamily": "Montserrat, sans-serif",
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "lineHeight": "16.8px",
+          "color": "rgb(255, 255, 255)"
+        },
+        "children": [
+          {
+            "fontFamily": "Montserrat, sans-serif",
+            "fontSize": "13px",
+            "fontWeight": "500",
+            "lineHeight": "19.5px",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      }
+    ],
+    "search": {
+      "height": 50,
+      "style": {
+        "fontFamily": "Roboto, Arial, sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "24px",
+        "color": "rgb(35, 43, 56)"
+      }
+    },
+    "logo": {
+      "src": "/img/logo-3sk-partsauto-transparent.png",
+      "width": 195
+    },
+    "topbar": "rgb(49, 95, 183)",
+    "overflow": false
+  },
+  "1440": {
+    "contacts": [
+      {
+        "text": "Nous appeler+212 5 22 71 35 72 / 77",
+        "href": null,
+        "style": {
+          "fontFamily": "Montserrat, sans-serif",
+          "fontSize": "12px",
+          "fontWeight": "550",
+          "lineHeight": "16.8px",
+          "color": "rgb(255, 255, 255)"
+        },
+        "children": [
+          {
+            "fontFamily": "Montserrat, sans-serif",
+            "fontSize": "12px",
+            "fontWeight": "600",
+            "lineHeight": "16.8px",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "text": "3sk.partsauto@gmail.com",
+        "href": "mailto:3sk.partsauto@gmail.com",
+        "style": {
+          "fontFamily": "Montserrat, sans-serif",
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "lineHeight": "16.8px",
+          "color": "rgb(255, 255, 255)"
+        },
+        "children": []
+      },
+      {
+        "text": "Casablanca, MarocAu service des professionnels",
+        "href": "https://www.google.com/maps?q=33.528667,-7.550028",
+        "style": {
+          "fontFamily": "Montserrat, sans-serif",
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "lineHeight": "16.8px",
+          "color": "rgb(255, 255, 255)"
+        },
+        "children": [
+          {
+            "fontFamily": "Montserrat, sans-serif",
+            "fontSize": "13px",
+            "fontWeight": "500",
+            "lineHeight": "19.5px",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      }
+    ],
+    "search": {
+      "height": 50,
+      "style": {
+        "fontFamily": "Roboto, Arial, sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "24px",
+        "color": "rgb(35, 43, 56)"
+      }
+    },
+    "logo": {
+      "src": "/img/logo-3sk-partsauto-transparent.png",
+      "width": 195
+    },
+    "topbar": "rgb(49, 95, 183)",
+    "overflow": false
+  },
+  "1920": {
+    "contacts": [
+      {
+        "text": "Nous appeler+212 5 22 71 35 72 / 77",
+        "href": null,
+        "style": {
+          "fontFamily": "Montserrat, sans-serif",
+          "fontSize": "12px",
+          "fontWeight": "550",
+          "lineHeight": "16.8px",
+          "color": "rgb(255, 255, 255)"
+        },
+        "children": [
+          {
+            "fontFamily": "Montserrat, sans-serif",
+            "fontSize": "12px",
+            "fontWeight": "600",
+            "lineHeight": "16.8px",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "text": "3sk.partsauto@gmail.com",
+        "href": "mailto:3sk.partsauto@gmail.com",
+        "style": {
+          "fontFamily": "Montserrat, sans-serif",
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "lineHeight": "16.8px",
+          "color": "rgb(255, 255, 255)"
+        },
+        "children": []
+      },
+      {
+        "text": "Casablanca, MarocAu service des professionnels",
+        "href": "https://www.google.com/maps?q=33.528667,-7.550028",
+        "style": {
+          "fontFamily": "Montserrat, sans-serif",
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "lineHeight": "16.8px",
+          "color": "rgb(255, 255, 255)"
+        },
+        "children": [
+          {
+            "fontFamily": "Montserrat, sans-serif",
+            "fontSize": "13px",
+            "fontWeight": "500",
+            "lineHeight": "19.5px",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      }
+    ],
+    "search": {
+      "height": 50,
+      "style": {
+        "fontFamily": "Roboto, Arial, sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "24px",
+        "color": "rgb(35, 43, 56)"
+      }
+    },
+    "logo": {
+      "src": "/img/logo-3sk-partsauto-transparent.png",
+      "width": 230
+    },
+    "topbar": "rgb(49, 95, 183)",
+    "overflow": false
+  }
+}

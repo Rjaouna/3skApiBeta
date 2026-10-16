@@ -1,0 +1,434 @@
+[
+  {
+    "width": 1983,
+    "scrollWidth": 1983,
+    "photo": "/img/optimized/bg-section/stock-entrepot-pieces-carrosserie-automobile-3sk-parts-auto.webp",
+    "values": [
+      "2014",
+      "B2B",
+      "1M"
+    ],
+    "services": 4,
+    "images": [
+      "/img/optimized/bloc/1.webp",
+      "/img/optimized/bloc/2.webp",
+      "/img/optimized/bloc/3.webp",
+      "/img/optimized/bloc/4.webp",
+      "/img/optimized/bloc/5.webp"
+    ],
+    "indicators": 5,
+    "login": "/login",
+    "mainHero": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+    "sections": [
+      {
+        "id": "qui-sommes-nous",
+        "width": 1983,
+        "height": 803.578125,
+        "columns": 2,
+        "headingSize": "64px",
+        "copySize": "22px",
+        "background": "url(\"http://127.0.0.1:8765/img/design/home-about-background.svg\")",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      },
+      {
+        "id": "services",
+        "width": 1983,
+        "height": 1021.53125,
+        "columns": 2,
+        "headingSize": "60px",
+        "copySize": "20px",
+        "background": "none",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 1920,
+    "scrollWidth": 1920,
+    "photo": "/img/optimized/bg-section/stock-entrepot-pieces-carrosserie-automobile-3sk-parts-auto.webp",
+    "values": [
+      "2014",
+      "B2B",
+      "1M"
+    ],
+    "services": 4,
+    "images": [
+      "/img/optimized/bloc/1.webp",
+      "/img/optimized/bloc/2.webp",
+      "/img/optimized/bloc/3.webp",
+      "/img/optimized/bloc/4.webp",
+      "/img/optimized/bloc/5.webp"
+    ],
+    "indicators": 5,
+    "login": "/login",
+    "mainHero": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+    "sections": [
+      {
+        "id": "qui-sommes-nous",
+        "width": 1920,
+        "height": 781.71875,
+        "columns": 2,
+        "headingSize": "64px",
+        "copySize": "22px",
+        "background": "url(\"http://127.0.0.1:8765/img/design/home-about-background.svg\")",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      },
+      {
+        "id": "services",
+        "width": 1920,
+        "height": 1001.59375,
+        "columns": 2,
+        "headingSize": "60px",
+        "copySize": "20px",
+        "background": "none",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 1672,
+    "scrollWidth": 1672,
+    "photo": "/img/optimized/bg-section/stock-entrepot-pieces-carrosserie-automobile-3sk-parts-auto.webp",
+    "values": [
+      "2014",
+      "B2B",
+      "1M"
+    ],
+    "services": 4,
+    "images": [
+      "/img/optimized/bloc/1.webp",
+      "/img/optimized/bloc/2.webp",
+      "/img/optimized/bloc/3.webp",
+      "/img/optimized/bloc/4.webp",
+      "/img/optimized/bloc/5.webp"
+    ],
+    "indicators": 5,
+    "login": "/login",
+    "mainHero": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+    "sections": [
+      {
+        "id": "qui-sommes-nous",
+        "width": 1672,
+        "height": 701.765625,
+        "columns": 2,
+        "headingSize": "56px",
+        "copySize": "20px",
+        "background": "url(\"http://127.0.0.1:8765/img/design/home-about-background.svg\")",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      },
+      {
+        "id": "services",
+        "width": 1672,
+        "height": 949.25,
+        "columns": 2,
+        "headingSize": "60px",
+        "copySize": "20px",
+        "background": "none",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "scrollWidth": 1440,
+    "photo": "/img/optimized/bg-section/stock-entrepot-pieces-carrosserie-automobile-3sk-parts-auto.webp",
+    "values": [
+      "2014",
+      "B2B",
+      "1M"
+    ],
+    "services": 4,
+    "images": [
+      "/img/optimized/bloc/1.webp",
+      "/img/optimized/bloc/2.webp",
+      "/img/optimized/bloc/3.webp",
+      "/img/optimized/bloc/4.webp",
+      "/img/optimized/bloc/5.webp"
+    ],
+    "indicators": 5,
+    "login": "/login",
+    "mainHero": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+    "sections": [
+      {
+        "id": "qui-sommes-nous",
+        "width": 1440,
+        "height": 731.96875,
+        "columns": 2,
+        "headingSize": "56px",
+        "copySize": "20px",
+        "background": "url(\"http://127.0.0.1:8765/img/design/home-about-background.svg\")",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      },
+      {
+        "id": "services",
+        "width": 1440,
+        "height": 920.328125,
+        "columns": 2,
+        "headingSize": "60px",
+        "copySize": "20px",
+        "background": "none",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 1280,
+    "scrollWidth": 1280,
+    "photo": "/img/optimized/bg-section/stock-entrepot-pieces-carrosserie-automobile-3sk-parts-auto.webp",
+    "values": [
+      "2014",
+      "B2B",
+      "1M"
+    ],
+    "services": 4,
+    "images": [
+      "/img/optimized/bloc/1.webp",
+      "/img/optimized/bloc/2.webp",
+      "/img/optimized/bloc/3.webp",
+      "/img/optimized/bloc/4.webp",
+      "/img/optimized/bloc/5.webp"
+    ],
+    "indicators": 5,
+    "login": "/login",
+    "mainHero": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+    "sections": [
+      {
+        "id": "qui-sommes-nous",
+        "width": 1280,
+        "height": 670.8125,
+        "columns": 2,
+        "headingSize": "44px",
+        "copySize": "18px",
+        "background": "url(\"http://127.0.0.1:8765/img/design/home-about-background.svg\")",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      },
+      {
+        "id": "services",
+        "width": 1280,
+        "height": 784.453125,
+        "columns": 2,
+        "headingSize": "44px",
+        "copySize": "18px",
+        "background": "none",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 1024,
+    "scrollWidth": 1024,
+    "photo": "/img/optimized/bg-section/stock-entrepot-pieces-carrosserie-automobile-3sk-parts-auto.webp",
+    "values": [
+      "2014",
+      "B2B",
+      "1M"
+    ],
+    "services": 4,
+    "images": [
+      "/img/optimized/bloc/1.webp",
+      "/img/optimized/bloc/2.webp",
+      "/img/optimized/bloc/3.webp",
+      "/img/optimized/bloc/4.webp",
+      "/img/optimized/bloc/5.webp"
+    ],
+    "indicators": 5,
+    "login": "/login",
+    "mainHero": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+    "sections": [
+      {
+        "id": "qui-sommes-nous",
+        "width": 1024,
+        "height": 721.09375,
+        "columns": 2,
+        "headingSize": "44px",
+        "copySize": "18px",
+        "background": "url(\"http://127.0.0.1:8765/img/design/home-about-background.svg\")",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      },
+      {
+        "id": "services",
+        "width": 1024,
+        "height": 861.078125,
+        "columns": 2,
+        "headingSize": "44px",
+        "copySize": "18px",
+        "background": "none",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 768,
+    "scrollWidth": 768,
+    "photo": "/img/optimized/bg-section/stock-entrepot-pieces-carrosserie-automobile-3sk-parts-auto.webp",
+    "values": [
+      "2014",
+      "B2B",
+      "1M"
+    ],
+    "services": 4,
+    "images": [
+      "/img/optimized/bloc/1.webp",
+      "/img/optimized/bloc/2.webp",
+      "/img/optimized/bloc/3.webp",
+      "/img/optimized/bloc/4.webp",
+      "/img/optimized/bloc/5.webp"
+    ],
+    "indicators": 5,
+    "login": "/login",
+    "mainHero": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+    "sections": [
+      {
+        "id": "qui-sommes-nous",
+        "width": 768,
+        "height": 1192.4375,
+        "columns": 1,
+        "headingSize": "44px",
+        "copySize": "18px",
+        "background": "url(\"http://127.0.0.1:8765/img/design/home-about-background.svg\")",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      },
+      {
+        "id": "services",
+        "width": 768,
+        "height": 1420.53125,
+        "columns": 1,
+        "headingSize": "44px",
+        "copySize": "18px",
+        "background": "none",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 390,
+    "scrollWidth": 390,
+    "photo": "/img/optimized/bg-section/stock-entrepot-pieces-carrosserie-automobile-3sk-parts-auto.webp",
+    "values": [
+      "2014",
+      "B2B",
+      "1M"
+    ],
+    "services": 4,
+    "images": [
+      "/img/optimized/bloc/1.webp",
+      "/img/optimized/bloc/2.webp",
+      "/img/optimized/bloc/3.webp",
+      "/img/optimized/bloc/4.webp",
+      "/img/optimized/bloc/5.webp"
+    ],
+    "indicators": 5,
+    "login": "/login",
+    "mainHero": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+    "sections": [
+      {
+        "id": "qui-sommes-nous",
+        "width": 390,
+        "height": 1257,
+        "columns": 1,
+        "headingSize": "32px",
+        "copySize": "16px",
+        "background": "url(\"http://127.0.0.1:8765/img/design/home-about-background.svg\")",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      },
+      {
+        "id": "services",
+        "width": 390,
+        "height": 1551.40625,
+        "columns": 1,
+        "headingSize": "32px",
+        "copySize": "16px",
+        "background": "none",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 320,
+    "scrollWidth": 320,
+    "photo": "/img/optimized/bg-section/stock-entrepot-pieces-carrosserie-automobile-3sk-parts-auto.webp",
+    "values": [
+      "2014",
+      "B2B",
+      "1M"
+    ],
+    "services": 4,
+    "images": [
+      "/img/optimized/bloc/1.webp",
+      "/img/optimized/bloc/2.webp",
+      "/img/optimized/bloc/3.webp",
+      "/img/optimized/bloc/4.webp",
+      "/img/optimized/bloc/5.webp"
+    ],
+    "indicators": 5,
+    "login": "/login",
+    "mainHero": "/img/optimized/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp",
+    "sections": [
+      {
+        "id": "qui-sommes-nous",
+        "width": 320,
+        "height": 1260.578125,
+        "columns": 1,
+        "headingSize": "32px",
+        "copySize": "16px",
+        "background": "url(\"http://127.0.0.1:8765/img/design/home-about-background.svg\")",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      },
+      {
+        "id": "services",
+        "width": 320,
+        "height": 1660.8125,
+        "columns": 1,
+        "headingSize": "32px",
+        "copySize": "16px",
+        "background": "none",
+        "headingColor": "rgb(35, 43, 56)",
+        "accent": "rgb(49, 95, 183)",
+        "clipped": []
+      }
+    ],
+    "errors": []
+  }
+]

@@ -1,0 +1,1161 @@
+[
+  {
+    "role": "in-memory-preview",
+    "route": "admin-order.html",
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 6,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Commande 3SK-APERCU-DESIGN",
+          "size": "28px",
+          "lineHeight": "35px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [
+        {
+          "label": "Articles",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Infos client",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Résumé",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "labels": [],
+      "fields": [
+        {
+          "label": "Entrez un mot-clé ou un numéro de pièce",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Paramètres",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Retour",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Exporter Excel",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Imprimer",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Passer à En préparation",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Annuler",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [
+        {
+          "label": "Article",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Qté",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "PU TTC",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Remise",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Total",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "body": [
+        {
+          "label": "verification@example.test",
+          "size": "14px",
+          "lineHeight": "22.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    }
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "admin-order.html",
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 7,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Commande 3SK-APERCU-DESIGN",
+          "size": "24px",
+          "lineHeight": "30px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [
+        {
+          "label": "Articles",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Infos client",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Résumé",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "labels": [],
+      "fields": [
+        {
+          "label": "Entrez un mot-clé ou un numéro de pièce",
+          "size": "13.76px",
+          "lineHeight": "20.64px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Paramètres",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Ouvrir le menu",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Retour",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Exporter Excel",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Imprimer",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Passer à En préparation",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Annuler",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [
+        {
+          "label": "verification@example.test",
+          "size": "14px",
+          "lineHeight": "22.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    }
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "client-order.html",
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Commande 3SK-APERCU-DESIGN",
+          "size": "28px",
+          "lineHeight": "35px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [
+        {
+          "label": "Lignes de commande",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Résumé",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Adresse de commande",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "labels": [],
+      "fields": [
+        {
+          "label": "Entrez un mot-clé ou un numéro de pièce",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Retour",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Panier",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [
+        {
+          "label": "Article",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Qté",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "PU TTC",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Total",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "body": [
+        {
+          "label": "Passée le 16/10/2026 18:32",
+          "size": "14px",
+          "lineHeight": "22.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    }
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "client-order.html",
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 3,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Commande 3SK-APERCU-DESIGN",
+          "size": "24px",
+          "lineHeight": "30px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [
+        {
+          "label": "Lignes de commande",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Résumé",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Adresse de commande",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "labels": [],
+      "fields": [
+        {
+          "label": "Entrez un mot-clé ou un numéro de pièce",
+          "size": "13.76px",
+          "lineHeight": "20.64px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Ouvrir le menu",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Retour",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Panier",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [
+        {
+          "label": "Passée le 16/10/2026 18:32",
+          "size": "14px",
+          "lineHeight": "22.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    }
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "error-403.html",
+    "title": "Accès refusé - 3SK Parts Auto",
+    "connected": false,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Vous n’avez pas accès à cette page",
+          "size": "28px",
+          "lineHeight": "35px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [],
+      "labels": [],
+      "fields": [],
+      "buttons": [
+        {
+          "label": "Accueil",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Connexion",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [
+        {
+          "label": "Connectez-vous avec le bon compte ou contactez l’équipe 3SK Parts Auto",
+          "size": "14px",
+          "lineHeight": "22.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    }
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "error-403.html",
+    "title": "Accès refusé - 3SK Parts Auto",
+    "connected": false,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Vous n’avez pas accès à cette page",
+          "size": "24px",
+          "lineHeight": "30px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [],
+      "labels": [],
+      "fields": [],
+      "buttons": [
+        {
+          "label": "Accueil",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Connexion",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [
+        {
+          "label": "Connectez-vous avec le bon compte ou contactez l’équipe 3SK Parts Auto",
+          "size": "14px",
+          "lineHeight": "22.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    }
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "error-404.html",
+    "title": "Page introuvable - 3SK Parts Auto",
+    "connected": false,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Cette page est introuvable",
+          "size": "28px",
+          "lineHeight": "35px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [],
+      "labels": [],
+      "fields": [],
+      "buttons": [
+        {
+          "label": "Accueil",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Catalogue",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [
+        {
+          "label": "Le lien a peut-être changé. Retournez à l’accueil ou utilisez le catal",
+          "size": "14px",
+          "lineHeight": "22.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    }
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "error-404.html",
+    "title": "Page introuvable - 3SK Parts Auto",
+    "connected": false,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Cette page est introuvable",
+          "size": "24px",
+          "lineHeight": "30px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [],
+      "labels": [],
+      "fields": [],
+      "buttons": [
+        {
+          "label": "Accueil",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Catalogue",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [
+        {
+          "label": "Le lien a peut-être changé. Retournez à l’accueil ou utilisez le catal",
+          "size": "14px",
+          "lineHeight": "22.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    }
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "error-500.html",
+    "title": "Erreur serveur - 3SK Parts Auto",
+    "connected": false,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Un problème technique est survenu",
+          "size": "28px",
+          "lineHeight": "35px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [],
+      "labels": [],
+      "fields": [],
+      "buttons": [
+        {
+          "label": "Accueil",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Service client",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [
+        {
+          "label": "Nous n’avons pas pu afficher cette page. Réessayez dans quelques insta",
+          "size": "14px",
+          "lineHeight": "22.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    }
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "error-500.html",
+    "title": "Erreur serveur - 3SK Parts Auto",
+    "connected": false,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Un problème technique est survenu",
+          "size": "24px",
+          "lineHeight": "30px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [],
+      "labels": [],
+      "fields": [],
+      "buttons": [
+        {
+          "label": "Accueil",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Service client",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [
+        {
+          "label": "Nous n’avons pas pu afficher cette page. Réessayez dans quelques insta",
+          "size": "14px",
+          "lineHeight": "22.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    }
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "order-print.html",
+    "title": "Bon de commande 3SK-APERCU-DESIGN",
+    "connected": false,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        ""
+      ],
+      [
+        "--brand-orange",
+        ""
+      ],
+      [
+        "--brand-bg",
+        ""
+      ],
+      [
+        "--brand-anthracite",
+        ""
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [],
+      "sectionTitles": [],
+      "labels": [],
+      "fields": [],
+      "buttons": [],
+      "tableHeaders": [
+        {
+          "label": "Reference",
+          "size": "10px",
+          "lineHeight": "13px",
+          "weight": "700",
+          "family": "Arial, Helvetica, sans-serif"
+        },
+        {
+          "label": "Article",
+          "size": "10px",
+          "lineHeight": "13px",
+          "weight": "700",
+          "family": "Arial, Helvetica, sans-serif"
+        },
+        {
+          "label": "Qte",
+          "size": "10px",
+          "lineHeight": "13px",
+          "weight": "700",
+          "family": "Arial, Helvetica, sans-serif"
+        }
+      ],
+      "body": [],
+      "smallText": [
+        {
+          "label": "IMPORTATEUR ET DISTRIBUTEUR DE PIECES AUTOMOBILES CARROSSERIES ET",
+          "class": "brand-subtitle",
+          "size": "10.5px"
+        },
+        {
+          "label": "Informations client",
+          "class": "box-title",
+          "size": "10px"
+        },
+        {
+          "label": "Commande",
+          "class": "box-title",
+          "size": "10px"
+        },
+        {
+          "label": "Reference",
+          "class": "",
+          "size": "10px"
+        },
+        {
+          "label": "Article",
+          "class": "",
+          "size": "10px"
+        },
+        {
+          "label": "Qte",
+          "class": "text-end",
+          "size": "10px"
+        },
+        {
+          "label": "3SK Parts Auto",
+          "class": "",
+          "size": "10px"
+        },
+        {
+          "label": "Document genere le 16/10/2026 18:32",
+          "class": "",
+          "size": "10px"
+        }
+      ]
+    }
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "order-print.html",
+    "title": "Bon de commande 3SK-APERCU-DESIGN",
+    "connected": false,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        ""
+      ],
+      [
+        "--brand-orange",
+        ""
+      ],
+      [
+        "--brand-bg",
+        ""
+      ],
+      [
+        "--brand-anthracite",
+        ""
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [],
+      "sectionTitles": [],
+      "labels": [],
+      "fields": [],
+      "buttons": [],
+      "tableHeaders": [
+        {
+          "label": "Reference",
+          "size": "10px",
+          "lineHeight": "13px",
+          "weight": "700",
+          "family": "Arial, Helvetica, sans-serif"
+        },
+        {
+          "label": "Article",
+          "size": "10px",
+          "lineHeight": "13px",
+          "weight": "700",
+          "family": "Arial, Helvetica, sans-serif"
+        },
+        {
+          "label": "Qte",
+          "size": "10px",
+          "lineHeight": "13px",
+          "weight": "700",
+          "family": "Arial, Helvetica, sans-serif"
+        }
+      ],
+      "body": [],
+      "smallText": [
+        {
+          "label": "IMPORTATEUR ET DISTRIBUTEUR DE PIECES AUTOMOBILES CARROSSERIES ET",
+          "class": "brand-subtitle",
+          "size": "10.5px"
+        },
+        {
+          "label": "Informations client",
+          "class": "box-title",
+          "size": "10px"
+        },
+        {
+          "label": "Commande",
+          "class": "box-title",
+          "size": "10px"
+        },
+        {
+          "label": "Reference",
+          "class": "",
+          "size": "10px"
+        },
+        {
+          "label": "Article",
+          "class": "",
+          "size": "10px"
+        },
+        {
+          "label": "Qte",
+          "class": "text-end",
+          "size": "10px"
+        },
+        {
+          "label": "3SK Parts Auto",
+          "class": "",
+          "size": "10px"
+        },
+        {
+          "label": "Document genere le 16/10/2026 18:32",
+          "class": "",
+          "size": "10px"
+        }
+      ]
+    }
+  }
+]

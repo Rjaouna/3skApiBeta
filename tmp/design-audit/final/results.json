@@ -1,0 +1,982 @@
+[
+  {
+    "role": "public",
+    "route": "/",
+    "status": 200,
+    "title": "3Sk Parts Auto - Distribution de pieces automobiles",
+    "connected": false,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 11,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "errors": []
+  },
+  {
+    "role": "public",
+    "route": "/",
+    "status": 200,
+    "title": "3Sk Parts Auto - Distribution de pieces automobiles",
+    "connected": false,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 11,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "errors": []
+  },
+  {
+    "role": "public",
+    "route": "/login",
+    "status": 200,
+    "title": "Connexion",
+    "connected": false,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 3,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "errors": []
+  },
+  {
+    "role": "public",
+    "route": "/login",
+    "status": 200,
+    "title": "Connexion",
+    "connected": false,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 3,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "errors": []
+  },
+  {
+    "role": "admin",
+    "route": "/mon-profil",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 6,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "errors": []
+  },
+  {
+    "role": "admin",
+    "route": "/mon-profil",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 7,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "errors": []
+  },
+  {
+    "role": "admin",
+    "route": "/admin/clients",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 44,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "errors": []
+  },
+  {
+    "role": "admin",
+    "route": "client-edit-modal",
+    "width": 1440,
+    "modal": {
+      "top": 20,
+      "bottom": 733,
+      "viewport": 1000,
+      "bodyScrollable": "auto",
+      "fields": 9
+    },
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 46,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "links": [
+      "#",
+      "#",
+      "#",
+      "/mes-notifications",
+      "/mon-profil",
+      "/mes-commandes",
+      "/logout",
+      "/",
+      "javascript:void(0)",
+      "/articles?new=1&newDays=90",
+      "javascript:void(0)",
+      "/articles",
+      "/articles?family=PIECES_CARROSSERIES",
+      "/articles?family=FILTER%2045",
+      "/articles?family=CHAPPE",
+      "/articles?family=FREINAGE",
+      "/articles?family=BILLETTE",
+      "/articles?family=FILTRE%2035",
+      "/articles?family=SUSPENTION",
+      "/articles?family=AMORTISSEUR",
+      "https://wa.me/212613577138?text=Bonjour%20je%20souhaite%20avoir%20des%20informations",
+      "tel:+212522713572",
+      "tel:+212522713577",
+      "tel:+212520842526",
+      "tel:+212520842527",
+      "/",
+      "mailto:3sk.partsauto@gmail.com",
+      "#",
+      "#",
+      "#",
+      "/#qui-sommes-nous",
+      "/#services",
+      "/#contact",
+      "/#accueil",
+      "/#marques",
+      "/#contact",
+      "/mon-profil",
+      "/admin/company-setting",
+      "/admin/category-reductions",
+      "/admin/clients",
+      "/admin/orders",
+      "/admin/hero-slides/",
+      "/admin/import-source",
+      "/admin/import",
+      "/admin/dashboard",
+      "/logout",
+      "/",
+      "/articles",
+      "/articles?new=1&newDays=90",
+      "/admin/dashboard",
+      "/articles?family=PIECES_CARROSSERIES",
+      "/articles?family=FILTER%2045",
+      "/articles?family=CHAPPE",
+      "/articles?family=FREINAGE",
+      "/articles?family=BILLETTE",
+      "/articles?family=FILTRE%2035",
+      "/articles?family=SUSPENTION",
+      "/articles?family=AMORTISSEUR",
+      "/articles",
+      "/articles",
+      "/panier"
+    ]
+  },
+  {
+    "role": "admin",
+    "route": "/admin/clients",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 45,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "errors": []
+  },
+  {
+    "role": "admin",
+    "route": "client-edit-modal",
+    "width": 390,
+    "modal": {
+      "top": 12,
+      "bottom": 832,
+      "viewport": 844,
+      "bodyScrollable": "auto",
+      "fields": 9
+    },
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 47,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "links": [
+      "#",
+      "#",
+      "#",
+      "/mes-notifications",
+      "/mon-profil",
+      "/mes-commandes",
+      "/logout",
+      "/",
+      "javascript:void(0)",
+      "/articles?new=1&newDays=90",
+      "javascript:void(0)",
+      "/articles",
+      "/articles?family=PIECES_CARROSSERIES",
+      "/articles?family=FILTER%2045",
+      "/articles?family=CHAPPE",
+      "/articles?family=FREINAGE",
+      "/articles?family=BILLETTE",
+      "/articles?family=FILTRE%2035",
+      "/articles?family=SUSPENTION",
+      "/articles?family=AMORTISSEUR",
+      "https://wa.me/212613577138?text=Bonjour%20je%20souhaite%20avoir%20des%20informations",
+      "tel:+212522713572",
+      "tel:+212522713577",
+      "tel:+212520842526",
+      "tel:+212520842527",
+      "/",
+      "mailto:3sk.partsauto@gmail.com",
+      "#",
+      "#",
+      "#",
+      "/#qui-sommes-nous",
+      "/#services",
+      "/#contact",
+      "/#accueil",
+      "/#marques",
+      "/#contact",
+      "/mon-profil",
+      "/admin/company-setting",
+      "/admin/category-reductions",
+      "/admin/clients",
+      "/admin/orders",
+      "/admin/hero-slides/",
+      "/admin/import-source",
+      "/admin/import",
+      "/admin/dashboard",
+      "/logout",
+      "/",
+      "/articles",
+      "/articles?new=1&newDays=90",
+      "/admin/dashboard",
+      "/articles?family=PIECES_CARROSSERIES",
+      "/articles?family=FILTER%2045",
+      "/articles?family=CHAPPE",
+      "/articles?family=FREINAGE",
+      "/articles?family=BILLETTE",
+      "/articles?family=FILTRE%2035",
+      "/articles?family=SUSPENTION",
+      "/articles?family=AMORTISSEUR",
+      "/articles",
+      "/articles",
+      "/panier"
+    ]
+  },
+  {
+    "role": "client",
+    "route": "/mon-profil",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 5,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "errors": []
+  },
+  {
+    "role": "client",
+    "route": "/mon-profil",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 6,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "errors": []
+  },
+  {
+    "role": "client",
+    "route": "/articles",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 28,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "errors": []
+  },
+  {
+    "role": "client",
+    "route": "/articles",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 29,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "errors": []
+  },
+  {
+    "role": "client",
+    "route": "/articles/SH8616-R",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 1,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "errors": []
+  },
+  {
+    "role": "client",
+    "route": "/articles/SH8616-R",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "errors": []
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "admin-order.html",
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 6,
+    "contrastProblems": [],
+    "legacyColors": 0
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "admin-order.html",
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 7,
+    "contrastProblems": [],
+    "legacyColors": 0
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "client-order.html",
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 1440,
+    "scrollWidth": 1490,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 7,
+    "contrastProblems": [],
+    "legacyColors": 0
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "client-order.html",
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 390,
+    "scrollWidth": 410,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 7,
+    "contrastProblems": [],
+    "legacyColors": 0
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "error-403.html",
+    "title": "Accès refusé - 3SK Parts Auto",
+    "connected": false,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "error-403.html",
+    "title": "Accès refusé - 3SK Parts Auto",
+    "connected": false,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "error-404.html",
+    "title": "Page introuvable - 3SK Parts Auto",
+    "connected": false,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "error-404.html",
+    "title": "Page introuvable - 3SK Parts Auto",
+    "connected": false,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "error-500.html",
+    "title": "Erreur serveur - 3SK Parts Auto",
+    "connected": false,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "error-500.html",
+    "title": "Erreur serveur - 3SK Parts Auto",
+    "connected": false,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "order-print.html",
+    "title": "Bon de commande 3SK-APERCU-DESIGN",
+    "connected": false,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        ""
+      ],
+      [
+        "--brand-orange",
+        ""
+      ],
+      [
+        "--brand-bg",
+        ""
+      ],
+      [
+        "--brand-anthracite",
+        ""
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0
+  },
+  {
+    "role": "in-memory-preview",
+    "route": "order-print.html",
+    "title": "Bon de commande 3SK-APERCU-DESIGN",
+    "connected": false,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        ""
+      ],
+      [
+        "--brand-orange",
+        ""
+      ],
+      [
+        "--brand-bg",
+        ""
+      ],
+      [
+        "--brand-anthracite",
+        ""
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0
+  }
+]

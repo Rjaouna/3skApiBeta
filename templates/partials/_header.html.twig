@@ -1156,10 +1156,7 @@
   .admin-settings-modal .modal-content{
     border: 0;
     border-radius: 0;
-    background:
-      radial-gradient(900px circle at 6% 0%, rgba(var(--bs-primary-rgb), .12), transparent 38%),
-      radial-gradient(760px circle at 96% 10%, rgba(var(--bs-secondary-rgb), .12), transparent 34%),
-      var(--settings-bg);
+    background: var(--settings-bg);
     color: var(--settings-text);
   }
 
@@ -1219,7 +1216,7 @@
     color: var(--settings-text);
     display: grid;
     place-items: center;
-    box-shadow: 0 10px 24px rgba(16,24,40,.08);
+    box-shadow: 0 10px 24px rgba(var(--brand-anthracite-rgb), .08);
     transition: transform .14s ease, background .14s ease, color .14s ease;
   }
 
@@ -1237,7 +1234,7 @@
 
   .admin-settings-modal__card{
     min-height: 126px;
-    border-radius: 22px;
+    border-radius: 8px;
     border: 1px solid var(--settings-border);
     background: var(--settings-surface);
     color: var(--settings-text);
@@ -1247,7 +1244,7 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 18px;
-    box-shadow: 0 12px 30px rgba(16,24,40,.07);
+    box-shadow: 0 12px 30px rgba(var(--brand-anthracite-rgb), .07);
     transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease, background .16s ease;
   }
 
@@ -1255,10 +1252,8 @@
     color: var(--settings-text);
     transform: translateY(-3px);
     border-color: rgba(var(--bs-primary-rgb), .32);
-    background:
-      linear-gradient(135deg, rgba(var(--bs-primary-rgb), .08), transparent 58%),
-      var(--settings-surface);
-    box-shadow: 0 18px 42px rgba(16,24,40,.12);
+    background: var(--brand-bg);
+    box-shadow: 0 18px 42px rgba(var(--brand-anthracite-rgb), .12);
   }
 
   .admin-settings-modal__card-head{
@@ -1316,25 +1311,23 @@
   .admin-settings-modal__logout{
     width: 100%;
     min-height: 74px;
-    border-radius: 22px;
-    border: 1px solid rgba(var(--bs-danger-rgb), .22);
-    background:
-      linear-gradient(135deg, rgba(var(--bs-danger-rgb), .11), rgba(var(--bs-danger-rgb), .04)),
-      var(--settings-surface);
-    color: var(--bs-danger);
+    border-radius: 8px;
+    border: 1px solid #b42318;
+    background: #b42318;
+    color: #fff;
     padding: 16px 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 14px;
     text-decoration: none;
-    box-shadow: 0 12px 30px rgba(16,24,40,.07);
+    box-shadow: 0 12px 30px rgba(var(--brand-anthracite-rgb), .07);
     transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
   }
 
   .admin-settings-modal__logout:hover{
     color: #fff;
-    background: var(--bs-danger);
+    background: color-mix(in srgb, #b42318 85%, var(--brand-anthracite));
     transform: translateY(-2px);
     box-shadow: 0 18px 42px rgba(var(--bs-danger-rgb), .22);
   }
@@ -1368,7 +1361,7 @@
   .admin-settings-modal__logout-desc{
     display: block;
     margin-top: 4px;
-    color: rgba(var(--bs-danger-rgb), .78);
+    color: rgba(255,255,255,.9);
     font-size: .8rem;
     font-weight: 400;
   }
@@ -1494,7 +1487,7 @@
   }
 
   .account-menu-item--danger{
-    color: rgba(220,53,69,.98) !important;
+    color: #b42318 !important;
   }
 
   .account-menu-item--danger:hover{
@@ -1503,7 +1496,7 @@
 
   .account-menu-item--danger .account-menu-item__icon{
     background: rgba(220,53,69,.10);
-    color: rgba(220,53,69,.98);
+    color: #b42318;
   }
 
   /* ===== MOBILE MENU MODERN ===== */
@@ -1555,12 +1548,12 @@
 
   .mobile-menu-offcanvas{
     --bs-offcanvas-width: min(92vw, 380px);
-    --hd-border: #dfe3e8;
-    --hd-shadow: 0 18px 40px rgba(16,24,40,.14);
+    --hd-border: var(--brand-border);
+    --hd-shadow: 0 18px 40px rgba(var(--brand-anthracite-rgb), .14);
     --hd-glass: #fff;
-    --hd-glass2: #f8f9fa;
-    --hd-text: #101828;
-    --hd-muted: #667085;
+    --hd-glass2: var(--brand-bg);
+    --hd-text: var(--brand-ink);
+    --hd-muted: var(--brand-muted);
     width: var(--bs-offcanvas-width) !important;
     max-width: 92vw;
     min-height: 100dvh;
@@ -1786,7 +1779,7 @@
     background:
       radial-gradient(700px circle at 10% 10%, rgba(var(--bs-primary-rgb), .10), transparent 40%),
       #fff !important;
-    color: #101828 !important;
+    color: var(--brand-ink) !important;
   }
 
   #mainMenuOffcanvas .mobile-menu-hero,
@@ -1798,8 +1791,8 @@
   body.theme-dark #mainMenuOffcanvas .mobile-menu-cats,
   body.theme-dark #mainMenuOffcanvas .mobile-menu-help{
     background: #fff !important;
-    color: #101828 !important;
-    border-color: #dfe3e8 !important;
+    color: var(--brand-ink) !important;
+    border-color: var(--brand-border) !important;
   }
 
   #mainMenuOffcanvas .mobile-menu-brand__title,
@@ -1812,7 +1805,7 @@
   body.theme-dark #mainMenuOffcanvas .mobile-menu-help__title,
   body.theme-dark #mainMenuOffcanvas .mobile-menu-cats .list-group-item,
   body.theme-dark #mainMenuOffcanvas .mobile-menu-quick__item{
-    color: #101828 !important;
+    color: var(--brand-ink) !important;
   }
 
   #mainMenuOffcanvas .mobile-menu-brand__subtitle,
@@ -1821,7 +1814,7 @@
   body.theme-dark #mainMenuOffcanvas .mobile-menu-brand__subtitle,
   body.theme-dark #mainMenuOffcanvas .mobile-menu-section__title span,
   body.theme-dark #mainMenuOffcanvas .mobile-menu-help__text{
-    color: #667085 !important;
+    color: var(--brand-muted) !important;
   }
 
   #mainMenuOffcanvas .mobile-menu-brand__logo,
@@ -1942,24 +1935,13 @@ body.theme-dark .voice-search-btn.is-listening{
 }
 </style>
 
-<header class="site__header">
+<link rel="stylesheet" href="{{ asset('styles/public-showcase.css') }}?v=20261016-9">
+<header class="site__header public-shell connected-showcase-header">
   <div class="header-wrap">
-    <div class="header-topbar">
+    <div class="header-topbar showcase-topbar">
       <div class="container-fluid">
-        <div class="topbar-row">
-          <div class="topbar-welcome">
-            Bienvenue&nbsp;
-            <span class="text-primary account-name text-uppercase">
-              {{ app.user ? (app.user.companyName ?? 'Hopic') : 'Hopic' }}
-            </span>
-          </div>
-
-          <button class="topbar-phone phone-contact-trigger d-none d-md-flex" type="button" data-bs-toggle="modal" data-bs-target="#phoneContactModal">
-            <i class="fa-solid fa-square-phone"></i>
-            <span>Nous appeler</span>
-          </button>
-
-          <div class="topbar-spacer"></div>
+        <div class="topbar-row showcase-topbar__inner">
+          {% include 'partials/_header_contacts.html.twig' %}
 
           <div class="dropdown hd-dropdown">
             <button class="hd-iconbtn position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Notifications">
@@ -1986,8 +1968,8 @@ body.theme-dark .voice-search-btn.is-listening{
           </div>
 
           <div class="dropdown hd-dropdown">
-            <button class="hd-iconbtn" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Compte">
-              <i class="fa-solid fa-user"></i>
+            <button class="showcase-join header-account-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Compte" aria-label="Espace client">
+              <i class="fa-solid fa-user" aria-hidden="true"></i><span>Espace client</span>
             </button>
 
             <ul class="dropdown-menu dropdown-menu-end account-menu">
@@ -2070,7 +2052,7 @@ body.theme-dark .voice-search-btn.is-listening{
 
           {% if is_granted('ROLE_ADMIN') %}
             <div class="admin-settings-dropdown">
-              <button class="btn btn-sm admin-settings-btn" type="button" data-bs-toggle="modal" data-bs-target="#adminSettingsModal" aria-controls="adminSettingsModal">
+              <button class="btn btn-sm admin-settings-btn" type="button" data-bs-toggle="modal" data-bs-target="#adminSettingsModal" aria-controls="adminSettingsModal" aria-label="Paramètres" title="Paramètres">
                 <i class="fa-solid fa-sliders me-2"></i>
                 <span>Paramètres</span>
               </button>
@@ -2080,10 +2062,10 @@ body.theme-dark .voice-search-btn.is-listening{
       </div>
     </div>
 
-    <div>
+    <div class="header-main-shell">
       <div class="container-fluid">
-        <div class="d-flex align-items-center gap-3 header-main-row">
-          <a class="brand-box" href="{{ path('home') }}">
+        <div class="d-flex align-items-center gap-3 header-main-row showcase-navbar">
+          <a class="brand-box showcase-logo" href="{{ path('home') }}">
             <span class="brand-logo">
               <img src="{{ optimized_asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto" onerror="this.style.display='none'">
             </span>
@@ -2112,7 +2094,7 @@ body.theme-dark .voice-search-btn.is-listening{
           </div>
 
         <div class="header-search">
-  <form class="m-0" method="get" action="{{ path('articles_page') }}" id="searchFormHeader">
+  <form class="m-0 showcase-search" method="get" action="{{ path('articles_page') }}" id="searchFormHeader" role="search">
     <div class="search-wrap">
       <i class="fa-solid fa-magnifying-glass search-ico"></i>
 
@@ -2120,7 +2102,8 @@ body.theme-dark .voice-search-btn.is-listening{
              name="q"
              id="InputRechercheProduit"
              type="search"
-             placeholder="Entrez un mot-clé ou un numéro de pièce"
+             placeholder="Rechercher une pièce ou une référence…"
+             aria-label="Rechercher une pièce ou une référence"
              autocomplete="off"
              value="{{ app.request.query.get('q', '')|e('html_attr') }}">
 
@@ -2131,6 +2114,7 @@ body.theme-dark .voice-search-btn.is-listening{
               title="Recherche vocale">
         <i class="fa-solid fa-microphone"></i>
       </button>
+      <button class="header-search-submit" type="submit">Rechercher</button>
     </div>
   </form>
 </div>

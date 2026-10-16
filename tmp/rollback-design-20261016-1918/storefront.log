@@ -1,0 +1,92 @@
+[
+  {
+    "role": "admin",
+    "width": 1920,
+    "scrollWidth": 1920,
+    "cards": 24,
+    "clipped": [],
+    "filtersOpen": true,
+    "exactStockRows": 24
+  },
+  {
+    "role": "admin",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "cards": 24,
+    "clipped": [],
+    "filtersOpen": true,
+    "exactStockRows": 24
+  },
+  {
+    "role": "admin",
+    "width": 768,
+    "scrollWidth": 768,
+    "cards": 24,
+    "clipped": [],
+    "filtersOpen": false,
+    "exactStockRows": 24
+  },
+  {
+    "role": "admin",
+    "width": 390,
+    "scrollWidth": 390,
+    "cards": 24,
+    "clipped": [],
+    "filtersOpen": false,
+    "exactStockRows": 24
+  },
+  {
+    "role": "admin",
+    "width": 320,
+    "scrollWidth": 320,
+    "cards": 24,
+    "clipped": [],
+    "filtersOpen": false,
+    "exactStockRows": 24
+  },
+  {
+    "role": "client",
+    "width": 1920,
+    "scrollWidth": 1920,
+    "cards": 24,
+    "clipped": [],
+    "filtersOpen": true,
+    "exactStockRows": 0
+  },
+  {
+    "role": "client",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "cards": 24,
+    "clipped": [],
+    "filtersOpen": true,
+    "exactStockRows": 0
+  },
+  {
+    "role": "client",
+    "width": 768,
+    "scrollWidth": 768,
+    "cards": 24,
+    "clipped": [],
+    "filtersOpen": false,
+    "exactStockRows": 0
+  },
+  {
+    "role": "client",
+    "width": 390,
+    "scrollWidth": 390,
+    "cards": 24,
+    "clipped": [],
+    "filtersOpen": false,
+    "exactStockRows": 0
+  },
+  {
+    "role": "client",
+    "width": 320,
+    "scrollWidth": 320,
+    "cards": 24,
+    "clipped": [],
+    "filtersOpen": false,
+    "exactStockRows": 0
+  }
+]

@@ -1,0 +1,3300 @@
+[
+  {
+    "role": "public",
+    "route": "/",
+    "status": 200,
+    "title": "3Sk Parts Auto - Distribution de pieces automobiles",
+    "connected": false,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 10,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [],
+      "sectionTitles": [
+        {
+          "label": "Pieces Carrosserie & accessoires automobile",
+          "size": "36px",
+          "lineHeight": "43.2px",
+          "weight": "700",
+          "family": "Montserrat, \"Arial Black\", Arial, sans-serif"
+        },
+        {
+          "label": "3SK Parts Auto",
+          "size": "48px",
+          "lineHeight": "55.2px",
+          "weight": "800",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Une offre pourle terrain",
+          "size": "48px",
+          "lineHeight": "55.2px",
+          "weight": "800",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Nos marques partenaires",
+          "size": "36px",
+          "lineHeight": "42.48px",
+          "weight": "800",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Nous contacter",
+          "size": "32px",
+          "lineHeight": "38.4px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "labels": [],
+      "fields": [],
+      "buttons": [
+        {
+          "label": "Espace client",
+          "size": "14px",
+          "lineHeight": "18.2px",
+          "weight": "600",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Voir nos produits",
+          "size": "14px",
+          "lineHeight": "19.6px",
+          "weight": "600",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Nos marques",
+          "size": "14px",
+          "lineHeight": "19.6px",
+          "weight": "600",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Nous contacter",
+          "size": "16px",
+          "lineHeight": "23.2px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Acceder a l'espace client",
+          "size": "16px",
+          "lineHeight": "23.2px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Espace client",
+          "size": "16px",
+          "lineHeight": "23.2px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Entrer dans l'espace client",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "En savoir plus",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [
+        {
+          "label": "Basée à Casablanca depuis 2014, 3SK Parts Auto accompagne les acteurs ",
+          "size": "16px",
+          "lineHeight": "27.2px",
+          "weight": "400",
+          "family": "Roboto, sans-serif"
+        },
+        {
+          "label": "3SK Parts Auto est une SARL marocaine créée en 2014, spécialisée dans ",
+          "size": "18px",
+          "lineHeight": "29.7px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "L'entreprise intervient également sur les besoins liés aux tracteurs, ",
+          "size": "18px",
+          "lineHeight": "29.7px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "3SK Parts Auto s'adresse aux professionnels qui recherchent un interlo",
+          "size": "18px",
+          "lineHeight": "29.7px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "3SK Parts Auto s'appuie sur une organisation claire des références et ",
+          "size": "18px",
+          "lineHeight": "29.7px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Une sélection de partenaires et de références reconnues pour accompagn",
+          "size": "16px",
+          "lineHeight": "25.6px",
+          "weight": "400",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Retrouvez 3SK Parts Auto à Casablanca pour vos demandes commerciales e",
+          "size": "16px",
+          "lineHeight": "26.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    },
+    "errors": []
+  },
+  {
+    "role": "public",
+    "route": "/",
+    "status": 200,
+    "title": "3Sk Parts Auto - Distribution de pieces automobiles",
+    "connected": false,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 10,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [],
+      "sectionTitles": [
+        {
+          "label": "Pieces Carrosserie & accessoires automobile",
+          "size": "28px",
+          "lineHeight": "33.6px",
+          "weight": "700",
+          "family": "Montserrat, \"Arial Black\", Arial, sans-serif"
+        },
+        {
+          "label": "3SK Parts Auto",
+          "size": "32px",
+          "lineHeight": "36.8px",
+          "weight": "800",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Une offre pourle terrain",
+          "size": "32px",
+          "lineHeight": "36.8px",
+          "weight": "800",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Nos marques partenaires",
+          "size": "28px",
+          "lineHeight": "33.04px",
+          "weight": "800",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Nous contacter",
+          "size": "28px",
+          "lineHeight": "33.6px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "labels": [],
+      "fields": [],
+      "buttons": [
+        {
+          "label": "Espace client",
+          "size": "12px",
+          "lineHeight": "15.6px",
+          "weight": "600",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Voir nos produits",
+          "size": "13px",
+          "lineHeight": "18.2px",
+          "weight": "600",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Nos marques",
+          "size": "13px",
+          "lineHeight": "18.2px",
+          "weight": "600",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Nous contacter",
+          "size": "16px",
+          "lineHeight": "23.2px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Acceder a l'espace client",
+          "size": "16px",
+          "lineHeight": "23.2px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Espace client",
+          "size": "16px",
+          "lineHeight": "23.2px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Entrer dans l'espace client",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "En savoir plus",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [
+        {
+          "label": "Basée à Casablanca depuis 2014, 3SK Parts Auto accompagne les acteurs ",
+          "size": "16px",
+          "lineHeight": "27.2px",
+          "weight": "400",
+          "family": "Roboto, sans-serif"
+        },
+        {
+          "label": "3SK Parts Auto est une SARL marocaine créée en 2014, spécialisée dans ",
+          "size": "16px",
+          "lineHeight": "26.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "L'entreprise intervient également sur les besoins liés aux tracteurs, ",
+          "size": "16px",
+          "lineHeight": "26.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "3SK Parts Auto s'adresse aux professionnels qui recherchent un interlo",
+          "size": "16px",
+          "lineHeight": "26.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "3SK Parts Auto s'appuie sur une organisation claire des références et ",
+          "size": "16px",
+          "lineHeight": "26.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Une sélection de partenaires et de références reconnues pour accompagn",
+          "size": "13px",
+          "lineHeight": "21.45px",
+          "weight": "400",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Retrouvez 3SK Parts Auto à Casablanca pour vos demandes commerciales e",
+          "size": "16px",
+          "lineHeight": "26.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    },
+    "errors": []
+  },
+  {
+    "role": "public",
+    "route": "/login",
+    "status": 200,
+    "title": "Connexion",
+    "connected": false,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Connexion",
+          "size": "28px",
+          "lineHeight": "35px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [],
+      "labels": [
+        {
+          "label": "Email",
+          "size": "13px",
+          "lineHeight": "19.5px",
+          "weight": "400",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Mot de passe",
+          "size": "13px",
+          "lineHeight": "19.5px",
+          "weight": "400",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "fields": [
+        {
+          "label": "ex : client@gmail.com",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Votre mot de passe",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Espace client",
+          "size": "14px",
+          "lineHeight": "18.2px",
+          "weight": "600",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Se connecter",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [
+        {
+          "label": "Accédez à votre compte 3SK Parts Auto",
+          "size": "14px",
+          "lineHeight": "22.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    },
+    "errors": []
+  },
+  {
+    "role": "public",
+    "route": "/login",
+    "status": 200,
+    "title": "Connexion",
+    "connected": false,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Connexion",
+          "size": "24px",
+          "lineHeight": "30px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [],
+      "labels": [
+        {
+          "label": "Email",
+          "size": "13px",
+          "lineHeight": "19.5px",
+          "weight": "400",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Mot de passe",
+          "size": "13px",
+          "lineHeight": "19.5px",
+          "weight": "400",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "fields": [
+        {
+          "label": "ex : client@gmail.com",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Votre mot de passe",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Espace client",
+          "size": "12px",
+          "lineHeight": "15.6px",
+          "weight": "600",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Se connecter",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [
+        {
+          "label": "Accédez à votre compte 3SK Parts Auto",
+          "size": "14px",
+          "lineHeight": "22.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    },
+    "errors": []
+  },
+  {
+    "role": "admin",
+    "route": "/mon-profil",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 7,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Mon profil",
+          "size": "28px",
+          "lineHeight": "35px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [
+        {
+          "label": "Informations du compte",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Mes commandes",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "labels": [],
+      "fields": [
+        {
+          "label": "Rechercher une pièce ou une référence",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "325 rue du bac rzerzer",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "TEXTAREA",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Espace client",
+          "size": "14px",
+          "lineHeight": "18.2px",
+          "weight": "550",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Paramètres",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Mon panier",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Mes commandes",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Enregistrer",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Voir mes commandes",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Retour au panier",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [],
+      "smallText": []
+    },
+    "errors": []
+  },
+  {
+    "role": "admin",
+    "route": "/mon-profil",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 8,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Mon profil",
+          "size": "24px",
+          "lineHeight": "30px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [
+        {
+          "label": "Informations du compte",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Mes commandes",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "labels": [],
+      "fields": [
+        {
+          "label": "Rechercher une pièce ou une référence",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "325 rue du bac rzerzer",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "TEXTAREA",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Espace client",
+          "size": "14px",
+          "lineHeight": "18.2px",
+          "weight": "550",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Paramètres",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Ouvrir le menu",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Mon panier",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Mes commandes",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Enregistrer",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Voir mes commandes",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Retour au panier",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [],
+      "smallText": []
+    },
+    "errors": []
+  },
+  {
+    "role": "admin",
+    "route": "/admin/clients",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 45,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Gestion des clients",
+          "size": "28px",
+          "lineHeight": "35px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [],
+      "labels": [],
+      "fields": [
+        {
+          "label": "Rechercher une pièce ou une référence",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Recherche par email, société, code client, ville...",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Tous les statuts Actifs Inactifs",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Filtrer par ville",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Espace client",
+          "size": "14px",
+          "lineHeight": "18.2px",
+          "weight": "550",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Paramètres",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Nouveau client",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Actualiser",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [
+        {
+          "label": "Client",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Code client",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Ville",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Dernière commande",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Commandes ce mois",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Statut",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Actions",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "body": [
+        {
+          "label": "Administration, recherche et mise à jour des comptes clients.",
+          "size": "14px",
+          "lineHeight": "22.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    },
+    "errors": []
+  },
+  {
+    "role": "admin",
+    "route": "client-edit-modal",
+    "width": 1440,
+    "modal": {
+      "top": 20,
+      "bottom": 740.59375,
+      "viewport": 1000,
+      "bodyScrollable": "auto",
+      "fields": 9
+    },
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 47,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Gestion des clients",
+          "size": "28px",
+          "lineHeight": "35px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [],
+      "labels": [
+        {
+          "label": "Compte actif",
+          "size": "13px",
+          "lineHeight": "19.5px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "fields": [
+        {
+          "label": "Rechercher une pièce ou une référence",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Recherche par email, société, code client, ville...",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Tous les statuts Actifs Inactifs",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Filtrer par ville",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "TEXTAREA",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "TEXTAREA",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Espace client",
+          "size": "14px",
+          "lineHeight": "18.2px",
+          "weight": "550",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Paramètres",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Nouveau client",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Actualiser",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [
+        {
+          "label": "Client",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Code client",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Ville",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Dernière commande",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Commandes ce mois",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Statut",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Actions",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "body": [
+        {
+          "label": "Administration, recherche et mise à jour des comptes clients.",
+          "size": "14px",
+          "lineHeight": "22.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    },
+    "links": [
+      "mailto:3sk.partsauto@gmail.com",
+      "https://www.google.com/maps?q=33.528667,-7.550028",
+      "#",
+      "#",
+      "#",
+      "/mes-notifications",
+      "/mon-profil",
+      "/mes-commandes",
+      "/logout",
+      "/",
+      "javascript:void(0)",
+      "/articles?new=1&newDays=90",
+      "javascript:void(0)",
+      "/articles",
+      "/articles?family=PIECES_CARROSSERIES",
+      "/articles?family=FILTER%2045",
+      "/articles?family=CHAPPE",
+      "/articles?family=FREINAGE",
+      "/articles?family=BILLETTE",
+      "/articles?family=FILTRE%2035",
+      "/articles?family=SUSPENTION",
+      "/articles?family=AMORTISSEUR",
+      "https://wa.me/212613577138?text=Bonjour%20je%20souhaite%20avoir%20des%20informations",
+      "tel:+212522713572",
+      "tel:+212522713577",
+      "tel:+212520842526",
+      "tel:+212520842527",
+      "/",
+      "mailto:3sk.partsauto@gmail.com",
+      "#",
+      "#",
+      "https://wa.me/212613577138",
+      "/#qui-sommes-nous",
+      "/#services",
+      "/#contact",
+      "/#accueil",
+      "/#marques",
+      "/#contact",
+      "/mon-profil",
+      "/admin/company-setting",
+      "/admin/category-reductions",
+      "/admin/clients",
+      "/admin/orders",
+      "/admin/hero-slides/",
+      "/admin/import-source",
+      "/admin/import",
+      "/admin/dashboard",
+      "/logout",
+      "/",
+      "/articles",
+      "/articles?new=1&newDays=90",
+      "/admin/dashboard",
+      "/articles?family=PIECES_CARROSSERIES",
+      "/articles?family=FILTER%2045",
+      "/articles?family=CHAPPE",
+      "/articles?family=FREINAGE",
+      "/articles?family=BILLETTE",
+      "/articles?family=FILTRE%2035",
+      "/articles?family=SUSPENTION",
+      "/articles?family=AMORTISSEUR",
+      "/articles",
+      "/articles",
+      "/panier"
+    ]
+  },
+  {
+    "role": "admin",
+    "route": "/admin/clients",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 46,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Gestion des clients",
+          "size": "24px",
+          "lineHeight": "30px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [],
+      "labels": [],
+      "fields": [
+        {
+          "label": "Rechercher une pièce ou une référence",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Recherche par email, société, code client, ville...",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Tous les statuts Actifs Inactifs",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Filtrer par ville",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Espace client",
+          "size": "14px",
+          "lineHeight": "18.2px",
+          "weight": "550",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Paramètres",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Ouvrir le menu",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Nouveau client",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Actualiser",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [
+        {
+          "label": "Client",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Code client",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Ville",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Dernière commande",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Commandes ce mois",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Statut",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Actions",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "body": [
+        {
+          "label": "Administration, recherche et mise à jour des comptes clients.",
+          "size": "14px",
+          "lineHeight": "22.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    },
+    "errors": []
+  },
+  {
+    "role": "admin",
+    "route": "client-edit-modal",
+    "width": 390,
+    "modal": {
+      "top": 12,
+      "bottom": 832,
+      "viewport": 844,
+      "bodyScrollable": "auto",
+      "fields": 9
+    },
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 48,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Gestion des clients",
+          "size": "24px",
+          "lineHeight": "30px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [],
+      "labels": [
+        {
+          "label": "Compte actif",
+          "size": "13px",
+          "lineHeight": "19.5px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "fields": [
+        {
+          "label": "Rechercher une pièce ou une référence",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Recherche par email, société, code client, ville...",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Tous les statuts Actifs Inactifs",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Filtrer par ville",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "TEXTAREA",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "TEXTAREA",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Espace client",
+          "size": "14px",
+          "lineHeight": "18.2px",
+          "weight": "550",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Paramètres",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Ouvrir le menu",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Nouveau client",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Actualiser",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "BUTTON",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [
+        {
+          "label": "Client",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Code client",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Ville",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Dernière commande",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Commandes ce mois",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Statut",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Actions",
+          "size": "12px",
+          "lineHeight": "18px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "body": [
+        {
+          "label": "Administration, recherche et mise à jour des comptes clients.",
+          "size": "14px",
+          "lineHeight": "22.4px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "smallText": []
+    },
+    "links": [
+      "mailto:3sk.partsauto@gmail.com",
+      "https://www.google.com/maps?q=33.528667,-7.550028",
+      "#",
+      "#",
+      "#",
+      "/mes-notifications",
+      "/mon-profil",
+      "/mes-commandes",
+      "/logout",
+      "/",
+      "javascript:void(0)",
+      "/articles?new=1&newDays=90",
+      "javascript:void(0)",
+      "/articles",
+      "/articles?family=PIECES_CARROSSERIES",
+      "/articles?family=FILTER%2045",
+      "/articles?family=CHAPPE",
+      "/articles?family=FREINAGE",
+      "/articles?family=BILLETTE",
+      "/articles?family=FILTRE%2035",
+      "/articles?family=SUSPENTION",
+      "/articles?family=AMORTISSEUR",
+      "https://wa.me/212613577138?text=Bonjour%20je%20souhaite%20avoir%20des%20informations",
+      "tel:+212522713572",
+      "tel:+212522713577",
+      "tel:+212520842526",
+      "tel:+212520842527",
+      "/",
+      "mailto:3sk.partsauto@gmail.com",
+      "#",
+      "#",
+      "https://wa.me/212613577138",
+      "/#qui-sommes-nous",
+      "/#services",
+      "/#contact",
+      "/#accueil",
+      "/#marques",
+      "/#contact",
+      "/mon-profil",
+      "/admin/company-setting",
+      "/admin/category-reductions",
+      "/admin/clients",
+      "/admin/orders",
+      "/admin/hero-slides/",
+      "/admin/import-source",
+      "/admin/import",
+      "/admin/dashboard",
+      "/logout",
+      "/",
+      "/articles",
+      "/articles?new=1&newDays=90",
+      "/admin/dashboard",
+      "/articles?family=PIECES_CARROSSERIES",
+      "/articles?family=FILTER%2045",
+      "/articles?family=CHAPPE",
+      "/articles?family=FREINAGE",
+      "/articles?family=BILLETTE",
+      "/articles?family=FILTRE%2035",
+      "/articles?family=SUSPENTION",
+      "/articles?family=AMORTISSEUR",
+      "/articles",
+      "/articles",
+      "/panier"
+    ]
+  },
+  {
+    "role": "client",
+    "route": "/mon-profil",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 6,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Mon profil",
+          "size": "28px",
+          "lineHeight": "35px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [
+        {
+          "label": "Informations du compte",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Mes commandes",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "labels": [],
+      "fields": [
+        {
+          "label": "Rechercher une pièce ou une référence",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "TEXTAREA",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "TEXTAREA",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Espace client",
+          "size": "14px",
+          "lineHeight": "18.2px",
+          "weight": "550",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Mon panier",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Mes commandes",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Enregistrer",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Voir mes commandes",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Retour au panier",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [],
+      "smallText": []
+    },
+    "errors": []
+  },
+  {
+    "role": "client",
+    "route": "/mon-profil",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 7,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Mon profil",
+          "size": "24px",
+          "lineHeight": "30px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [
+        {
+          "label": "Informations du compte",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Mes commandes",
+          "size": "18px",
+          "lineHeight": "25.2px",
+          "weight": "600",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "labels": [],
+      "fields": [
+        {
+          "label": "Rechercher une pièce ou une référence",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "TEXTAREA",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "INPUT",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "TEXTAREA",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Espace client",
+          "size": "14px",
+          "lineHeight": "18.2px",
+          "weight": "550",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Ouvrir le menu",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Mon panier",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Mes commandes",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Enregistrer",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Voir mes commandes",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "Retour au panier",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [],
+      "smallText": []
+    },
+    "errors": []
+  },
+  {
+    "role": "client",
+    "route": "/articles",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 26,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [],
+      "sectionTitles": [],
+      "labels": [
+        {
+          "label": "En stock uniquement",
+          "size": "13px",
+          "lineHeight": "18.2px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "fields": [
+        {
+          "label": "Rechercher une pièce ou une référence",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Mot-clé / référence...",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "ToutesAMORTISSEURBILLETTECHAPPEFILTER 45FILTRE 35FREINAGEHORS CATALAGU",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "ToutesALKARASZAYFARBARAN PLASTBUGATTICONTINENTALEDEGADEPOTEUROBUMPGLKG",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "TousALFA ROMEOAUDIBMWBYDCHEVROLETCITROENDACIADAIHATSUFIATFORDHONDAHYUN",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "10 20 24 40 60",
+          "size": "14px",
+          "lineHeight": "21px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Espace client",
+          "size": "14px",
+          "lineHeight": "18.2px",
+          "weight": "550",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "←",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "→",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "←",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "→",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [],
+      "smallText": []
+    },
+    "errors": []
+  },
+  {
+    "role": "client",
+    "route": "/articles",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 27,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [],
+      "sectionTitles": [],
+      "labels": [
+        {
+          "label": "En stock uniquement",
+          "size": "13px",
+          "lineHeight": "18.2px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "fields": [
+        {
+          "label": "Rechercher une pièce ou une référence",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "Mot-clé / référence...",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "ToutesAMORTISSEURBILLETTECHAPPEFILTER 45FILTRE 35FREINAGEHORS CATALAGU",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "ToutesALKARASZAYFARBARAN PLASTBUGATTICONTINENTALEDEGADEPOTEUROBUMPGLKG",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "TousALFA ROMEOAUDIBMWBYDCHEVROLETCITROENDACIADAIHATSUFIATFORDHONDAHYUN",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        },
+        {
+          "label": "10 20 24 40 60",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Espace client",
+          "size": "14px",
+          "lineHeight": "18.2px",
+          "weight": "550",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Ouvrir le menu",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "←",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "→",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "←",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        },
+        {
+          "label": "→",
+          "size": "13px",
+          "lineHeight": "18.85px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [],
+      "smallText": []
+    },
+    "errors": []
+  },
+  {
+    "role": "client",
+    "route": "/articles/SH8616-R",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 2,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Produit",
+          "size": "28px",
+          "lineHeight": "35px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [],
+      "labels": [],
+      "fields": [
+        {
+          "label": "Rechercher une pièce ou une référence",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Espace client",
+          "size": "14px",
+          "lineHeight": "18.2px",
+          "weight": "550",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [],
+      "smallText": []
+    },
+    "errors": []
+  },
+  {
+    "role": "client",
+    "route": "/articles/SH8616-R",
+    "status": 200,
+    "title": "3sk parts auto- Pièces Auto",
+    "connected": true,
+    "width": 390,
+    "scrollWidth": 390,
+    "palette": [
+      [
+        "--brand-blue",
+        "#315FB7"
+      ],
+      [
+        "--brand-orange",
+        "#FF8A00"
+      ],
+      [
+        "--brand-bg",
+        "#F5F6F8"
+      ],
+      [
+        "--brand-anthracite",
+        "#232B38"
+      ]
+    ],
+    "buttons": 3,
+    "contrastProblems": [],
+    "legacyColors": 0,
+    "typography": {
+      "pageTitles": [
+        {
+          "label": "Produit",
+          "size": "24px",
+          "lineHeight": "30px",
+          "weight": "700",
+          "family": "Montserrat, Arial, sans-serif"
+        }
+      ],
+      "sectionTitles": [],
+      "labels": [],
+      "fields": [
+        {
+          "label": "Rechercher une pièce ou une référence",
+          "size": "16px",
+          "lineHeight": "24px",
+          "weight": "400",
+          "family": "Roboto, Arial, sans-serif"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "Espace client",
+          "size": "14px",
+          "lineHeight": "18.2px",
+          "weight": "550",
+          "family": "Montserrat, Arial, sans-serif"
+        },
+        {
+          "label": "Ouvrir le menu",
+          "size": "14px",
+          "lineHeight": "20.3px",
+          "weight": "550",
+          "family": "Montserrat, sans-serif"
+        }
+      ],
+      "tableHeaders": [],
+      "body": [],
+      "smallText": []
+    },
+    "errors": []
+  }
+]

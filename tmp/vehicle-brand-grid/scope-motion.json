@@ -1,0 +1,22 @@
+{
+  "unrelatedStylesUnchanged": true,
+  "headerUnchangedExceptCacheVersion": true,
+  "heroUnchanged": true,
+  "normalMotion": [
+    {
+      "width": 1440,
+      "normalMotionToggleCycles": 3,
+      "horizontalShift": false
+    },
+    {
+      "width": 768,
+      "normalMotionToggleCycles": 3,
+      "horizontalShift": false
+    },
+    {
+      "width": 390,
+      "normalMotionToggleCycles": 3,
+      "horizontalShift": false
+    }
+  ]
+}

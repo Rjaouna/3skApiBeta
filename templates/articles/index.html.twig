@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+  {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/catalog-filters.css') }}?v=20261016-4">
+{% endblock %}
+
 {% block body %}
 
   {% set initial = initial|default({
@@ -52,7 +57,7 @@
   padding: 8px 12px !important;
   font-size: .9rem;
   font-weight: 600;
-  border-color: rgba(49, 95, 187, .35) !important;
+  border-color: rgba(var(--brand-blue-rgb), .35) !important;
   color: var(--app-blue, var(--bs-primary)) !important;
   background: rgba(255,255,255,.86) !important;
   text-indent: 0 !important;
@@ -77,7 +82,7 @@
 .articles-reset-btn:hover,
 .articles-reset-btn:focus{
   border-color: var(--app-blue, var(--bs-primary)) !important;
-  background: rgba(49, 95, 187, .08) !important;
+  background: rgba(var(--brand-blue-rgb), .08) !important;
   color: var(--app-blue, var(--bs-primary)) !important;
 }
 
@@ -108,7 +113,7 @@
       flex-direction:column;
       border-radius: 16px;
       border: 1px solid rgba(var(--bs-primary-rgb), .18);
-      box-shadow: 0 8px 18px rgba(15, 23, 42, .055);
+      box-shadow: 0 8px 18px rgba(var(--brand-anthracite-rgb), .055);
       background: #fff;
       overflow: hidden;
       padding: 12px;
@@ -118,7 +123,7 @@
 
     .product-card:hover{
       transform: translateY(-2px);
-      box-shadow: 0 14px 28px rgba(15, 23, 42, .10);
+      box-shadow: 0 14px 28px rgba(var(--brand-anthracite-rgb), .10);
       border-color: rgba(13,110,253,.22);
     }
 
@@ -264,8 +269,8 @@
       max-width: 100%;
     }
     .meta-chip--family{
-      border-color: rgba(255, 145, 0, .25);
-      background: rgba(255, 145, 0, .10);
+      border-color: rgba(var(--brand-orange-rgb), .25);
+      background: rgba(var(--brand-orange-rgb), .10);
       color: var(--app-orange, #ff8a00);
     }
     .meta-chip--brand-logo{
@@ -275,7 +280,7 @@
       min-width: 48px;
       height: 22px;
       padding: 2px 5px;
-      border-color: rgba(16,24,40,.14);
+      border-color: rgba(var(--brand-anthracite-rgb), .14);
       background: #fff;
     }
     .meta-chip--brand-logo img{
@@ -319,7 +324,7 @@
 
     .catalog-info-list{
       margin-top: 10px;
-      border-top: 1px solid rgba(15, 23, 42, .10);
+      border-top: 1px solid rgba(var(--brand-anthracite-rgb), .10);
     }
     .catalog-info-row{
       display:flex;
@@ -327,7 +332,7 @@
       justify-content:space-between;
       gap: 10px;
       padding: 6px 0;
-      border-bottom: 1px solid rgba(15, 23, 42, .10);
+      border-bottom: 1px solid rgba(var(--brand-anthracite-rgb), .10);
       font-size: .72rem;
       line-height: 1.2;
     }
@@ -336,7 +341,7 @@
       font-weight: 500;
     }
     .catalog-info-value{
-      color: rgba(15, 23, 42, .90);
+      color: rgba(var(--brand-anthracite-rgb), .90);
       text-align:right;
       font-weight: 500;
       max-width: 62%;
@@ -789,46 +794,32 @@ body.theme-dark .empty-results-box{
 }
   </style>
 
-  <div class="container-fluid py-4"
+  <div class="container-fluid py-4 catalog-page"
        data-initial='{{ initial|json_encode(constant("JSON_UNESCAPED_UNICODE"))|e("html_attr") }}'>
 
-    <div class="page-hero mb-3 d-flex align-items-start justify-content-between flex-wrap gap-2">
-      <div>
-        <h3 class="mb-1">Articles</h3>
-        <div class="text-muted small">
-          Recherche instantanée + filtres.
-          {% if initial.new == '1' %}
-            <span class="badge text-bg-success ms-2">Arrivages récents</span>
-          {% endif %}
-        </div>
-      </div>
+    <div class="row g-3 catalog-layout">
+      <div class="col-12 catalog-filters-area">
+  <details class="filters-panel" data-catalog-filters open>
+    <summary class="filters-panel__head">
+      <span class="filters-panel__label">
+        <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+        <span class="filters-panel__title">Filtres produits</span>
+      </span>
+      <span class="filters-meta" id="resultMeta" aria-live="polite"></span>
+      <span class="filters-panel__tools">
+        <a class="filters-arrivals" id="catalogNewArrivals" href="{{ path('articles_page', { new: 1, newDays: 90 }) }}">Arrivages récents</a>
+        <button class="filters-reset" id="resetFilters" type="button" title="Réinitialiser les filtres" aria-label="Réinitialiser les filtres">
+          <i class="fa-solid fa-rotate-left" aria-hidden="true"></i><span>Reset</span>
+        </button>
+      </span>
+      <span class="filters-panel__badge">
+        <i class="fa-solid fa-chevron-down filters-panel__chevron" aria-hidden="true"></i>
+      </span>
+    </summary>
 
-      <div class="d-flex gap-2 flex-wrap">
-        <a class="articles-reset-btn" href="{{ path('articles_page') }}">
-          <i class="fa-solid fa-rotate-left"></i>
-          <span>Reset</span>
-        </a>
-        <a class="btn btn-outline-primary" href="{{ path('articles_page', { new: 1, newDays: 90 }) }}">
-          Arrivages récents
-        </a>
-      </div>
-    </div>
-
-    <div class="row g-3">
-      <div class="col-lg-3">
-  <div class="filters-panel">
-    <div class="filters-panel__head">
-      <div>
-        <div class="filters-panel__kicker">Recherche</div>
-        <div class="filters-panel__title">Filtres produits</div>
-      </div>
-      <div class="filters-panel__badge">
-        <i class="fa-solid fa-sliders"></i>
-      </div>
-    </div>
-
-    <div class="filters-section">
-      <label class="filters-label">Mot-clé</label>
+    <div class="filters-panel__content">
+    <div class="filters-section filters-section--keyword">
+      <label class="filters-label" for="f_q">Mot-clé</label>
       <div class="filters-input-icon">
         <i class="fa-solid fa-magnifying-glass"></i>
         <input class="form-control filters-control filters-control-lg" id="f_q" placeholder="Mot-clé / référence...">
@@ -836,27 +827,27 @@ body.theme-dark .empty-results-box{
     </div>
 
     <div class="filters-section">
-      <label class="filters-label">Famille</label>
+      <label class="filters-label" for="f_family">Famille</label>
       <select class="form-select filters-control" id="f_family">
         <option value="">Toutes</option>
       </select>
     </div>
 
     <div class="filters-section">
-      <label class="filters-label">Marque</label>
+      <label class="filters-label" for="f_brand">Marque</label>
       <select class="form-select filters-control" id="f_brand">
         <option value="">Toutes</option>
       </select>
     </div>
 
     <div class="filters-section">
-      <label class="filters-label">Véhicule</label>
+      <label class="filters-label" for="f_vehicle">Véhicule</label>
       <select class="form-select filters-control" id="f_vehicle">
         <option value="">Tous</option>
       </select>
     </div>
 
-    <div class="filters-section">
+    <div class="filters-section filters-section--year">
       <label class="filters-label d-flex align-items-center justify-content-between">
         <span>Année</span>
         <span class="filters-year-badge" id="anneeBadge">—</span>
@@ -884,22 +875,13 @@ body.theme-dark .empty-results-box{
       </div>
     </div>
 
-    <div class="filters-actions">
-      <button class="btn btn-primary" id="applyFilters" type="button">
-        <i class="fa-solid fa-filter me-2"></i>Appliquer
-      </button>
-      <button class="btn btn-outline-secondary" id="clearFilters" type="button">
-        <i class="fa-solid fa-rotate-left me-2"></i>Effacer
-      </button>
     </div>
-
-    <div class="filters-meta" id="resultMeta">—</div>
-  </div>
+  </details>
 </div>
 
-      <div class="col-lg-9">
+      <div class="col-12 catalog-results-area">
         <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
-          <div class="small text-muted" id="statusLine">—</div>
+          <div class="small text-muted" id="statusLine" role="status" aria-live="polite">—</div>
 
           <div class="d-flex gap-2 align-items-center flex-wrap">
             <div class="d-flex align-items-center gap-2">
@@ -957,11 +939,13 @@ body.theme-dark .empty-results-box{
 
       const yearSliderEl = document.getElementById('yearSlider');
       let yearSlider = null;
+      let sliderYearMin = null;
+      let sliderYearMax = null;
 
       const f_inStock = document.getElementById('f_inStock');
 
-      const applyBtn = document.getElementById('applyFilters');
-      const clearBtn = document.getElementById('clearFilters');
+      const resetBtn = document.getElementById('resetFilters');
+      const newArrivalsLink = document.getElementById('catalogNewArrivals');
       const grid = document.getElementById('grid');
       const infiniteLoader = document.getElementById('infiniteLoader');
       const infiniteScrollSentinel = document.getElementById('infiniteScrollSentinel');
@@ -985,56 +969,7 @@ body.theme-dark .empty-results-box{
 
       const FALLBACK_IMG = "{{ asset('img/default-piece.png')|e('js') }}";
       const NEW_BADGE_IMG = "{{ asset('img/new.png')|e('js') }}";
-      {% set brandLogoFiles = {
-        'MISFAT': 'brand-logos/misfat.png',
-        'ASZ': 'brand-logos/asz.png',
-        'METELLI': 'brand-logos/metelli.png',
-        'DEPO': 'logo-depo-pieces-carrosserie-3sk-parts-auto.jpg',
-        'PHIRA': 'logo-phira-pieces-carrosserie-3sk-parts-auto.jpg',
-        'POLIPLAST': 'logo-poliplast-pieces-carrosserie-3sk-parts-auto.jpg',
-        'YIH SHENG': 'logo-yih-sheng-pieces-carrosserie-3sk-parts-auto.jpg',
-        'EURO BUMP': 'logo-euro-bump-pieces-carrosserie-3sk-parts-auto.jpg',
-        'EUROBUMP': 'logo-euro-bump-pieces-carrosserie-3sk-parts-auto.jpg',
-        'DE-GA': 'logo-de-ga-pieces-carrosserie-3sk-parts-auto.jpg',
-        'DEGA': 'logo-de-ga-pieces-carrosserie-3sk-parts-auto.jpg',
-        'ANTAI': 'logo-antai-pieces-carrosserie-3sk-parts-auto.jpg',
-        'SP': 'logo-sp-pieces-carrosserie-3sk-parts-auto.png',
-        'ISAM': 'logo-isam-pieces-carrosserie-3sk-parts-auto.jpg',
-        'ITSA': 'logo-itsa-passion-for-plastics-pieces-carrosserie-3sk-parts-auto.jpg',
-        'FAROLON': 'logo-farolon-pieces-carrosserie-3sk-parts-auto.jpg',
-        'TURSAN': 'logo-tursan-pieces-carrosserie-3sk-parts-auto.jpg',
-        'AP': 'logo-ap-pieces-carrosserie-3sk-parts-auto.jpg',
-        'EURO STAMP': 'logo-euro-stamp-pieces-carrosserie-3sk-parts-auto.jpg',
-        'MAXEM': 'logo-maxem-pieces-carrosserie-3sk-parts-auto.jpg',
-        'PLEKSAN': 'logo-pleksan-pieces-carrosserie-3sk-parts-auto.jpg',
-        'FOWYAD': 'logo-fowyad-pieces-carrosserie-3sk-parts-auto.jpg',
-        'ORAN': 'logo-oran-pieces-carrosserie-3sk-parts-auto.jpg',
-        'PRASCO': 'logo-prasco-pieces-carrosserie-3sk-parts-auto.jpg',
-        'PULO': 'logo-pulo-pieces-carrosserie-3sk-parts-auto.jpg',
-        'RESHING AUTOPARTS': 'logo-reshing-autoparts-pieces-carrosserie-3sk-parts-auto.jpg',
-        'ROOT': 'logo-root-pieces-carrosserie-3sk-parts-auto.jpg',
-        'ROOT AUTOMOTIVE': 'logo-root-automotive-pieces-carrosserie-3sk-parts-auto.jpg',
-        'TYG': 'logo-tyg-pieces-carrosserie-3sk-parts-auto.jpg',
-        'VIEW MAX': 'logo-view-max-pieces-carrosserie-3sk-parts-auto.jpg'
-      } %}
-      {% set brandLogoUrls = {} %}
-      {% for brandName, logoFile in brandLogoFiles %}
-        {% set logoPath = logoFile starts with 'brand-logos/' ? 'img/' ~ logoFile : 'img/logo-marques-home-hors-ligne/' ~ logoFile %}
-        {% set brandLogoUrls = brandLogoUrls|merge({ (brandName): optimized_asset(logoPath) }) %}
-      {% endfor %}
-      const BRAND_LOGOS = {{ brandLogoUrls|json_encode(constant('JSON_HEX_TAG') b-or constant('JSON_HEX_AMP') b-or constant('JSON_HEX_APOS') b-or constant('JSON_HEX_QUOT'))|raw }};
-
-      function brandBadge(name){
-        const label = String(name || '').trim();
-        if (!label) return '';
-        const key = label.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ').toUpperCase();
-        const logo = BRAND_LOGOS[key];
-        if (!logo) return `<span class="meta-chip">${esc(label)}</span>`;
-        return `<span class="meta-chip meta-chip--brand-logo" title="${esc(label)}">
-          <img src="${esc(logo)}" alt="${esc(label)}" loading="lazy" decoding="async" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
-          <span class="brand-logo-fallback" hidden>${esc(label)}</span>
-        </span>`;
-      }
+      const brandBadge = window.ProductBrandLogos.badge;
 
       const DEFAULT_YEAR_MIN = 1976;
       let dataYearMin = DEFAULT_YEAR_MIN;
@@ -1354,7 +1289,10 @@ body.theme-dark .empty-results-box{
         updateYearUI(c.from, c.to);
 
         if (syncSlider && yearSlider){
-          yearSlider.set([c.from, c.to]);
+          const current = yearSlider.get();
+          if (Number(current[0]) !== c.from || Number(current[1]) !== c.to) {
+            yearSlider.set([c.from, c.to]);
+          }
         }
       }
 
@@ -1371,6 +1309,11 @@ body.theme-dark .empty-results-box{
         });
 
         yearSlider = yearSliderEl.noUiSlider;
+        sliderYearMin = dataYearMin;
+        sliderYearMax = dataYearMax;
+        yearSliderEl.querySelectorAll('.noUi-handle').forEach((handle, index) => {
+          handle.setAttribute('aria-label', index === 0 ? 'Année minimum' : 'Année maximum');
+        });
 
         yearSlider.on('update', (values) => {
           const from = parseInt(values[0], 10);
@@ -1379,6 +1322,8 @@ body.theme-dark .empty-results-box{
           if (f_yearTo)   f_yearTo.value   = String(to);
           updateYearUI(from, to);
         });
+        // A committed drag, tap or keyboard change filters once; API/reset .set() does not.
+        yearSlider.on('change', () => applyFilters());
       }
 
       function updateYearSliderOptions(){
@@ -1388,7 +1333,11 @@ body.theme-dark .empty-results-box{
           return;
         }
 
-        yearSlider.updateOptions({ range: { min: dataYearMin, max: dataYearMax } });
+        if (sliderYearMin !== dataYearMin || sliderYearMax !== dataYearMax) {
+          yearSlider.updateOptions({ range: { min: dataYearMin, max: dataYearMax } });
+          sliderYearMin = dataYearMin;
+          sliderYearMax = dataYearMax;
+        }
         setYearValues(f_yearFrom?.value || dataYearMin, f_yearTo?.value || dataYearMax, true);
       }
 
@@ -1461,6 +1410,13 @@ body.theme-dark .empty-results-box{
         else url.searchParams.delete('limit');
 
         history.replaceState({}, '', url.toString());
+        document.querySelectorAll('#mainMenuDesktop a.main-menu__link').forEach(link => {
+          const target = new URL(link.href, location.origin);
+          const active = target.pathname === url.pathname && (target.searchParams.get('family') || '') === state.family;
+          link.classList.toggle('is-active', active);
+          if (active) link.setAttribute('aria-current', 'page');
+          else link.removeAttribute('aria-current');
+        });
       }
 
       function stockStyle(stock){
@@ -1471,7 +1427,7 @@ body.theme-dark .empty-results-box{
         }
 
         if (stock === 0) return `color: #fff !important; background: #dc3545 !important; border-color: #dc3545 !important;`;
-        if (stock < 5)  return `color: #fff !important; background: #ff8a00 !important; border-color: #ff8a00 !important;`;
+        if (stock < 5)  return `color: var(--brand-anthracite) !important; background: var(--brand-orange) !important; border-color: var(--brand-orange) !important;`;
         return `color: #fff !important; background: #198754 !important; border-color: #198754 !important;`;
       }
 
@@ -1831,6 +1787,8 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
         }
         articleLoadController = new AbortController();
         isLoadingArticles = true;
+        grid?.setAttribute('aria-busy', 'true');
+        updateFilterMeta();
         let loadSucceeded = false;
 
         if (apiError) apiError.classList.add('d-none');
@@ -1913,15 +1871,7 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
             statusLine.textContent = `${shown} / ${total} article(s)`;
           }
 
-          const from = parseInt(f_yearFrom?.value || String(dataYearMin), 10);
-          const to   = parseInt(f_yearTo?.value   || String(dataYearMax), 10);
-          const isAll = (from === dataYearMin && to === dataYearMax);
-
-          if (resultMeta){
-            resultMeta.textContent = isAll
-              ? `Année : toute la plage (${dataYearMin} → ${dataYearMax})`
-              : `Année : ${from} → ${to}`;
-          }
+          updateFilterMeta();
 
           render(data.items || [], data.imagesBaseUrl || '', append);
           initTooltips(grid);
@@ -1939,10 +1889,14 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
           if (!append && grid) grid.innerHTML = '';
           if (append && state.page > 1) state.page--;
         } finally {
-          isLoadingArticles = false;
-          setInfiniteLoader(false);
-          if (loadSucceeded) {
-            window.setTimeout(maybeLoadMoreIfNeeded, 120);
+          // An aborted older request must not unlock a newer filter request.
+          if (currentLoadSerial === articleLoadSerial) {
+            isLoadingArticles = false;
+            grid?.setAttribute('aria-busy', 'false');
+            setInfiniteLoader(false);
+            if (loadSucceeded) {
+              window.setTimeout(maybeLoadMoreIfNeeded, 120);
+            }
           }
         }
       }
@@ -1955,6 +1909,7 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
       if (f_family) f_family.value = state.family;
       if (f_brand)  f_brand.value = state.brand;
       if (f_vehicle)f_vehicle.value = state.vehicle;
+      if (f_inStock) f_inStock.checked = state.inStock === '1';
       if (f_q) f_q.value = state.q;
       if (headerSearchInput && headerSearchInput.value !== state.q) {
         headerSearchInput.value = state.q;
@@ -2001,18 +1956,32 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
         }, 300);
       }
 
-      applyBtn?.addEventListener('click', () => {
+      function updateFilterMeta(){
+        const hasYears = Number(f_yearFrom?.value) !== dataYearMin || Number(f_yearTo?.value) !== dataYearMax;
+        const count = [state.q, state.family, state.brand, state.vehicle, state.inStock === '1', state.onlyNew, hasYears].filter(Boolean).length;
+        if (resultMeta) resultMeta.textContent = count ? `${count} filtre${count > 1 ? 's' : ''} actif${count > 1 ? 's' : ''}` : 'Tous les articles';
+        newArrivalsLink?.classList.toggle('is-active', state.onlyNew);
+      }
+
+      function applyFilters(){
+        clearTimeout(keywordTimer);
         state.page = 1;
         state.q = cleanKeywordQuery(f_q?.value || '');
         state.family = (f_family?.value || '').trim();
         state.brand = (f_brand?.value || '').trim();
         state.vehicle = (f_vehicle?.value || '').trim();
         state.inStock = f_inStock?.checked ? '1' : '';
+        syncKeywordInputs(f_q?.value || '', f_q);
         syncUrlToBrowser();
         load();
-      });
+      }
 
-      clearBtn?.addEventListener('click', () => {
+      [f_family, f_brand, f_vehicle, f_inStock].forEach(control => control?.addEventListener('change', applyFilters));
+
+      resetBtn?.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        clearTimeout(keywordTimer);
         state.page = 1;
         state.q = '';
         state.family = '';
@@ -2033,6 +2002,8 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
         syncUrlToBrowser();
         load();
       });
+
+      newArrivalsLink?.addEventListener('click', event => event.stopPropagation());
 
       prevBtn?.addEventListener('click', () => { if (state.page > 1){ state.page--; load(); } });
       nextBtn?.addEventListener('click', () => { state.page++; load(); });

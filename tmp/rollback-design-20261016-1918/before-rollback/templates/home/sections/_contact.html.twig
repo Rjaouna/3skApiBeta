@@ -1,0 +1,77 @@
+<section id="contact" class="public-contact-v2 section-space" aria-labelledby="client-access-title">
+  <div class="section-shell">
+    <div class="contact-split">
+      <div class="contact-pane contact-pane-dark">
+        <div class="contact-pane-inner">
+          <span class="section-eyebrow">Espace client</span>
+          <h2 class="section-heading" id="client-access-title">Un accès simple pour les <span class="heading-accent">clients déjà référencés</span></h2>
+          <p class="section-copy">L'espace client permet de retrouver rapidement le catalogue, de constituer un panier et de suivre les commandes dans un environnement dédié à l'activité professionnelle.</p>
+          <ul class="contact-benefits">
+            <li><span class="contact-benefit-icon" aria-hidden="true"><i class="fa-solid fa-magnifying-glass"></i></span><span><strong>Catalogue</strong>Retrouver vos pièces et références.</span></li>
+            <li><span class="contact-benefit-icon" aria-hidden="true"><i class="fa-solid fa-cart-shopping"></i></span><span><strong>Panier</strong>Préparer vos achats dans votre espace.</span></li>
+            <li><span class="contact-benefit-icon" aria-hidden="true"><i class="fa-solid fa-clipboard-list"></i></span><span><strong>Commandes</strong>Consulter le suivi de vos commandes.</span></li>
+          </ul>
+          <div class="contact-actions">
+            <a href="{{ path('app_login') }}" class="btn btn-secondary"><i class="fa-solid fa-arrow-right-to-bracket" aria-hidden="true"></i>Entrer dans l'espace client</a>
+            <a href="#qui-sommes-nous" class="btn btn-outline-primary">En savoir plus<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+          <div class="contact-details">
+            <button type="button" class="contact-detail" data-bs-toggle="modal" data-bs-target="#phoneContactModal"><i class="fa-solid fa-phone" aria-hidden="true"></i><span><strong>Nous appeler</strong>+212 5 22 71 35 72 / 77</span><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+            <a class="contact-detail" href="mailto:3sk.partsauto@gmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i><span><strong>Email</strong>3sk.partsauto@gmail.com</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-pane contact-pane-light">
+        <div class="contact-pane-inner">
+          <span class="section-eyebrow">Contact</span>
+          <h2 class="section-heading" id="contact-form-title">Nous <span class="heading-accent">contacter</span></h2>
+          <p class="section-copy">Retrouvez 3SK Parts Auto à Casablanca pour vos demandes commerciales et vos besoins en pièces carrosserie & accessoires.</p>
+            <form class="contact-form" method="post" action="{{ path('home_contact') }}" data-contact-form aria-labelledby="contact-form-title">
+              <input type="hidden" name="_token" value="{{ csrf_token('public_contact') }}">
+
+              <div class="contact-form-honeypot" aria-hidden="true">
+                <label for="contact_website">Site web</label>
+                <input id="contact_website" name="website" type="text" tabindex="-1" autocomplete="off">
+              </div>
+
+              <div class="contact-form-field">
+                <label for="contact_name">Nom / Raison sociale *</label>
+                <input class="contact-form-control" id="contact_name" name="name" type="text" maxlength="150" autocomplete="name" required>
+              </div>
+
+              <div class="contact-form-field">
+                <label for="contact_email">Email *</label>
+                <input class="contact-form-control" id="contact_email" name="email" type="email" maxlength="180" autocomplete="email" required>
+              </div>
+
+              <div class="contact-form-field">
+                <label for="contact_phone">Téléphone</label>
+                <input class="contact-form-control" id="contact_phone" name="phone" type="tel" maxlength="50" autocomplete="tel">
+              </div>
+
+              <div class="contact-form-field">
+                <label for="contact_subject">Sujet *</label>
+                <input class="contact-form-control" id="contact_subject" name="subject" type="text" minlength="3" maxlength="180" required>
+              </div>
+
+              <div class="contact-form-field contact-form-field-wide">
+                <label for="contact_message">Message *</label>
+                <textarea class="contact-form-control" id="contact_message" name="message" minlength="10" maxlength="5000" required></textarea>
+              </div>
+
+              <div class="contact-form-field contact-form-field-wide">
+                <button class="contact-form-submit" type="submit" data-contact-submit>
+                  <i class="fa-solid fa-paper-plane"></i>
+                  <span data-contact-submit-label>Envoyer le message</span>
+                </button>
+              </div>
+
+              <div class="contact-form-field contact-form-field-wide">
+                <div class="contact-form-status" role="status" aria-live="polite" data-contact-status></div>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

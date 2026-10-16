@@ -1,0 +1,46 @@
+{% set public_header_is_home = public_header_is_home|default(false) %}
+{% set public_header_nav_id = public_header_nav_id|default('publicMainNav') %}
+{% set public_header_anchor_prefix = public_header_is_home ? '' : path('home') %}
+<link rel="stylesheet" href="{{ asset('styles/public-showcase.css') }}?v=20261016-9">
+
+<header class="showcase-header">
+  <div class="showcase-topbar">
+    <div class="showcase-topbar__inner">
+      <button class="showcase-contact phone-contact-trigger" type="button" data-bs-toggle="modal" data-bs-target="#phoneContactModal">
+        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+        <span>Nous appeler<strong>+212 5 22 71 35 72 / 77</strong></span>
+      </button>
+      <a class="showcase-contact showcase-contact--email" href="mailto:3sk.partsauto@gmail.com">
+        <i class="fa-solid fa-envelope" aria-hidden="true"></i><span>3sk.partsauto@gmail.com</span>
+      </a>
+      <a class="showcase-contact showcase-contact--location" href="https://www.google.com/maps?q=33.528667,-7.550028" target="_blank" rel="noopener noreferrer">
+        <i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>Casablanca, Maroc<small>Au service des professionnels</small></span>
+      </a>
+      <div class="showcase-topbar__facts" aria-label="3SK Parts Auto">
+        <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i>Pièces et<br>carrosserie</span>
+        <span><i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i>Importateur<br>et distributeur</span>
+        <span><i class="fa-solid fa-headset" aria-hidden="true"></i>Une équipe<br>à votre service</span>
+      </div>
+      <a class="showcase-join" href="{{ path('app_login') }}"><i class="fa-solid fa-user-lock" aria-hidden="true"></i>Espace client</a>
+    </div>
+  </div>
+
+  <div class="showcase-navbar">
+    <a class="showcase-logo" href="{{ path('home') }}" aria-label="3SK Parts Auto, accueil">
+      <img src="{{ optimized_asset('img/logo-3sk-partsauto-transparent.png') }}" alt="3SK Parts Auto" width="242" height="62" fetchpriority="high">
+    </a>
+    <form class="showcase-search" action="{{ path('articles_page') }}" method="get" role="search">
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <input type="search" name="q" aria-label="Rechercher une pièce ou une référence" placeholder="Rechercher une pièce ou une référence…" value="{{ app.request.query.get('q', '') }}" required>
+      <button type="submit">Rechercher</button>
+    </form>
+    <button class="showcase-burger" type="button" data-bs-toggle="collapse" data-bs-target="#{{ public_header_nav_id }}" aria-controls="{{ public_header_nav_id }}" aria-expanded="false" aria-label="Ouvrir le menu">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+    <nav id="{{ public_header_nav_id }}" class="showcase-nav collapse" aria-label="Navigation principale">
+      {% for label, anchor in {'Accueil': 'accueil', 'Qui sommes-nous': 'qui-sommes-nous', 'Services': 'services', 'Marques': 'marques', 'Contact': 'contact'} %}
+        <a class="showcase-nav__link {{ public_header_is_home and anchor == 'accueil' ? 'is-current' : '' }}" href="{{ public_header_anchor_prefix }}#{{ anchor }}" {% if public_header_is_home and anchor == 'accueil' %}aria-current="page"{% endif %}>{{ label }}</a>
+      {% endfor %}
+    </nav>
+  </div>
+</header>

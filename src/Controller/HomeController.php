@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\HeroSlideRepository;
 use App\Service\CompanySettingProvider;
+use App\Service\HomeVehicleBrands;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -20,7 +21,8 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home', methods: ['GET'])]
     public function index(
         HeroSlideRepository $heroSlideRepository,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        HomeVehicleBrands $homeVehicleBrands
     ): Response
     {
         $slides = $heroSlideRepository->findForHomepage();
@@ -38,6 +40,11 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'slides' => $slides,
+            'homeVehicleBrands' => $this->getUser() ? [] : $homeVehicleBrands->fromCatalog(
+                $entityManager->getConnection()->fetchAllAssociative(
+                    "SELECT DISTINCT xx_Vehicule AS vehicle FROM article WHERE xx_Vehicule IS NOT NULL AND xx_Vehicule <> ''"
+                )
+            ),
             'homeStats' => [
                 'totalReferences' => (int) ($catalogStats['total_references'] ?? 0),
                 'stockedReferences' => (int) ($catalogStats['stocked_references'] ?? 0),

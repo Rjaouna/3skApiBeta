@@ -1,0 +1,54 @@
+<section id="services" class="public-services-v2 section-space home-reference-section home-services-reference" aria-labelledby="home-services-title" style="--section-car: url('{{ optimized_asset('img/slides/080920251757318688-69ef174b1e570-6a246a350e402.webp') }}')">
+  <div class="section-shell">
+    <div class="row services-layout">
+      <div class="col-12 services-copy">
+        <span class="section-eyebrow">Services</span>
+        <h2 class="section-heading" id="home-services-title">Une offre pour<br>le <span class="heading-accent">terrain</span></h2>
+        <p class="section-copy services-copy__intro">3SK Parts Auto s'adresse aux professionnels qui recherchent un interlocuteur capable de centraliser l'accès aux références, de fluidifier la préparation des commandes et de simplifier la relation commerciale.</p>
+        <div class="service-lines">
+          <div class="service-line">
+            <span class="service-line__icon" aria-hidden="true"><i class="fa-solid fa-gears"></i></span>
+            <div><h3>Distribution de pièces carrosserie et accessoires pour l'automobile</h3><p>Une large couverture de références pour tous vos besoins.</p></div>
+          </div>
+          <div class="service-line">
+            <span class="service-line__icon" aria-hidden="true"><i class="fa-solid fa-list-check"></i></span>
+            <div><h3>Organisation claire des références pour faciliter la préparation des commandes</h3><p>Un catalogue structuré et des rayonnages optimisés.</p></div>
+          </div>
+          <div class="service-line">
+            <span class="service-line__icon" aria-hidden="true"><i class="fa-solid fa-truck-fast"></i></span>
+            <div><h3>Activité d'import-export pour approvisionner l'offre</h3><p>Un réseau fiable pour garantir la disponibilité produit.</p></div>
+          </div>
+          <div class="service-line">
+            <span class="service-line__icon" aria-hidden="true"><i class="fa-solid fa-user-group"></i></span>
+            <div><h3>Espace client pour consulter le catalogue et préparer les achats</h3><p>Un accès simple et rapide à vos références.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="stock-frame">
+          <div id="stockPhotoCarouselV2" class="carousel slide public-stock-carousel" data-bs-ride="carousel" data-bs-interval="4500" aria-label="Nos marques et pièces automobiles">
+            <div class="carousel-indicators">
+              {% for i in 1..5 %}
+                <button type="button" data-bs-target="#stockPhotoCarouselV2" data-bs-slide-to="{{ loop.index0 }}" class="{{ i == 3 ? 'active' : '' }}" {% if i == 3 %}aria-current="true"{% endif %} aria-label="Photo {{ i }}"></button>
+              {% endfor %}
+            </div>
+            <div class="carousel-inner">
+              {% for i in 1..5 %}
+                <div class="carousel-item {{ i == 3 ? 'active' : '' }}">
+                  <img loading="lazy" decoding="async" src="{{ optimized_asset('img/bloc/' ~ i ~ '.png') }}" alt="Stock 3SK Parts Auto {{ i }}" width="1448" height="1086">
+                </div>
+              {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#stockPhotoCarouselV2" data-bs-slide="prev"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i><span class="visually-hidden">Précédent</span></button>
+            <button class="carousel-control-next" type="button" data-bs-target="#stockPhotoCarouselV2" data-bs-slide="next"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span class="visually-hidden">Suivant</span></button>
+          </div>
+          <div class="stock-frame-copy">
+            <h3>Un stock organisé pour répondre rapidement aux besoins de vos commandes.</h3>
+            <p class="section-copy">3SK Parts Auto s'appuie sur une organisation claire des références et des rayonnages pour faciliter la préparation, la disponibilité produit et la réactivité auprès des professionnels de l'automobile.</p>
+            <a href="{{ path('app_login') }}" class="btn btn-outline-primary">Espace client<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

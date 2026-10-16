@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1983 793" preserveAspectRatio="none">
+  <rect width="1983" height="793" fill="#FFFFFF"/>
+  <rect width="1983" height="793" fill="#315FB7" opacity=".025"/>
+  <g fill="#315FB7">
+    <path d="M-110 278L443 793H530L-110 192Z" opacity=".045"/>
+    <path d="M-55 523L255 793H380L-55 398Z" opacity=".025"/>
+    <path d="M600 95L701 0H790L635 137C598 170 555 135 600 95Z" opacity=".035"/>
+    <path d="M1490 78L1578 0H1668L1536 130C1462 204 1425 143 1490 78Z" opacity=".04"/>
+    <path d="M1550 700L1884 384L1983 340V443L1645 766C1600 811 1504 746 1550 700Z" opacity=".035"/>
+  </g>
+</svg>

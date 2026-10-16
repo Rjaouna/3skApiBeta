@@ -122,8 +122,6 @@ const initHomeScrollEffects = () => {
   const revealTargets = [];
   const revealDefinitions = [
     { selector: '.site-stats-strip__item', direction: 'home-reveal-up', stagger: 45 },
-    { selector: '.public-intro-v2 .intro-copy', direction: 'home-reveal-left' },
-    { selector: '.public-intro-v2 .intro-facts', direction: 'home-reveal-right', delay: 80 },
     { selector: '.public-about-v2 .about-visual', direction: 'home-reveal-left' },
     { selector: '.public-about-v2 .about-copy', direction: 'home-reveal-right', delay: 80 },
     { selector: '.public-services-v2 .row > .col-12:first-child', direction: 'home-reveal-left' },
@@ -216,8 +214,25 @@ const initHomeScrollEffects = () => {
   updateEffects();
 };
 
+const initCatalogLayout = () => {
+  const filters = document.querySelector('[data-catalog-filters]');
+  if (!filters) return;
+  const compact = window.matchMedia('(max-width: 991.98px)');
+  const header = document.querySelector('.site__header');
+  const updateHeader = () => {
+    document.documentElement.style.setProperty('--catalog-header-height', `${header?.offsetHeight || 0}px`);
+  };
+  const updateLayout = () => { filters.open = !compact.matches; };
+  updateHeader();
+  updateLayout();
+  if (header && 'ResizeObserver' in window) new ResizeObserver(updateHeader).observe(header);
+  else window.addEventListener('resize', updateHeader, { passive: true });
+  compact.addEventListener?.('change', updateLayout);
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   initSiteLoader();
   initHeroLazyMedia();
   initHomeScrollEffects();
+  initCatalogLayout();
 });

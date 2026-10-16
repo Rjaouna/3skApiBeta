@@ -1,0 +1,85 @@
+{% if slides|length %}
+{% set firstSlide = slides|first %}
+<div class="showcase carousel slide" id="showcaseCarousel">
+  <div class="carousel-inner">
+    <section class="carousel-item active showcase-hero" aria-label="3SK Parts Auto">
+      <div class="showcase-hero__media">
+        {% if firstSlide.image|split('.')|last|lower in ['mp4', 'webm'] %}
+          <video class="showcase-hero__managed-media" autoplay muted loop playsinline preload="metadata" data-showcase-video>
+            <source src="{{ asset('img/slides/' ~ firstSlide.image) }}" type="{{ firstSlide.image|split('.')|last|lower == 'webm' ? 'video/webm' : 'video/mp4' }}">
+          </video>
+        {% else %}
+          <img src="{{ optimized_asset('img/slides/' ~ firstSlide.image) }}" alt="{{ firstSlide.title|default('3SK Parts Auto', true) }}" width="1600" height="600" fetchpriority="high" decoding="async">
+        {% endif %}
+      </div>
+      <div class="showcase-hero__content">
+        <p class="showcase-eyebrow">Pièces auto · Accessoires · Carrosserie</p>
+        <h1 class="showcase-title">3SK <span>PARTS</span> AUTO</h1>
+        <p class="showcase-description">Votre partenaire en pièces et accessoires automobiles<br class="showcase-desktop-break"> de qualité, au Maroc.</p>
+        <ul class="showcase-benefits">
+          <li><span class="showcase-benefits__icon"><i class="fa-solid fa-award" aria-hidden="true"></i></span><span>Pièces et accessoires<br>pour l’automobile</span></li>
+          <li><span class="showcase-benefits__icon"><i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i></span><span>Importateur<br>et distributeur</span></li>
+          <li><span class="showcase-benefits__icon"><i class="fa-solid fa-headset" aria-hidden="true"></i></span><span>Une équipe<br>à votre service</span></li>
+        </ul>
+        <div class="showcase-actions">
+          <a class="showcase-action showcase-action--primary" href="{{ path('articles_page') }}"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>Voir nos produits<i class="fa-solid fa-circle-chevron-right" aria-hidden="true"></i></a>
+          <a class="showcase-action showcase-action--secondary" href="#marques"><i class="fa-solid fa-tags" aria-hidden="true"></i>Nos marques<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </section>
+    {% for slide in slides|slice(1) %}
+      {% set video = slide.image|split('.')|last|lower in ['mp4', 'webm'] %}
+      <section class="carousel-item showcase-hero showcase-hero--managed" aria-label="{{ slide.title|default('Présentation 3SK', true) }}">
+        {% if video %}
+          <video class="showcase-hero__managed-media" muted loop playsinline preload="none" data-showcase-video>
+            <source src="{{ asset('img/slides/' ~ slide.image) }}" type="{{ slide.image|split('.')|last|lower == 'webm' ? 'video/webm' : 'video/mp4' }}">
+          </video>
+        {% else %}
+          <img class="showcase-hero__managed-media" src="{{ optimized_asset('img/slides/' ~ slide.image) }}" alt="{{ slide.title|default('Présentation 3SK Parts Auto', true) }}" width="1600" height="600" loading="lazy" decoding="async">
+        {% endif %}
+        {% if slide.title or slide.subtitle %}
+          <div class="showcase-hero__content">
+            {% if slide.title %}<h2 class="showcase-managed-title">{{ slide.title }}</h2>{% endif %}
+            {% if slide.subtitle %}<p class="showcase-description">{{ slide.subtitle }}</p>{% endif %}
+            <div class="showcase-actions">
+              {% if slide.primaryLabel and slide.primaryUrl %}<a class="showcase-action showcase-action--primary" href="{{ slide.primaryUrl }}">{{ slide.primaryLabel }}<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>{% endif %}
+              {% if slide.secondaryLabel and slide.secondaryUrl %}<a class="showcase-action showcase-action--secondary" href="{{ slide.secondaryUrl }}">{{ slide.secondaryLabel }}<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>{% endif %}
+            </div>
+          </div>
+        {% endif %}
+      </section>
+    {% endfor %}
+  </div>
+  {% if slides|length > 1 %}
+    <div class="showcase-controls" aria-label="Navigation des slides">
+      <button type="button" data-bs-target="#showcaseCarousel" data-bs-slide="prev" aria-label="Slide précédent"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+      <button type="button" data-bs-target="#showcaseCarousel" data-bs-slide="next" aria-label="Slide suivant"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+    </div>
+  {% endif %}
+</div>
+{% endif %}
+
+{% if homeVehicleBrands|default([])|length %}
+  <section class="showcase-brands" aria-label="Marques de véhicules présentes au catalogue">
+    <div class="showcase-brands__rail">
+      {% for brand in homeVehicleBrands|slice(0, 12) %}
+        <a class="showcase-brand" href="{{ path('articles_page', {vehicle: brand.filter}) }}" aria-label="Voir les pièces {{ brand.label }}">
+          <img src="{{ asset(brand.logo) }}" alt="" width="66" height="42" decoding="async"><span>{{ brand.label }}</span>
+        </a>
+      {% endfor %}
+      {% if homeVehicleBrands|length > 12 %}
+        <button class="showcase-brands__more" type="button" data-bs-toggle="collapse" data-bs-target="#showcaseOtherBrands" aria-expanded="false" aria-controls="showcaseOtherBrands"><span>+ Autres<br>marques</span><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+      {% endif %}
+    </div>
+    {% if homeVehicleBrands|length > 12 %}
+      <div class="collapse" id="showcaseOtherBrands">
+        <div class="showcase-brands__additional">
+          {% for brand in homeVehicleBrands|slice(12) %}
+            <a class="showcase-brand" href="{{ path('articles_page', {vehicle: brand.filter}) }}" aria-label="Voir les pièces {{ brand.label }}"><img src="{{ asset(brand.logo) }}" alt="" width="66" height="42" loading="lazy" decoding="async"><span>{{ brand.label }}</span></a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </section>
+{% endif %}
+<script src="{{ asset('scripts/public-showcase.js') }}?v=20261016-2" defer></script>

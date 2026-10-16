@@ -1,0 +1,96 @@
+{
+  "events": [
+    {
+      "type": "pointermove",
+      "target": "noUi-touch-area",
+      "x": 1022.859375,
+      "y": 312.96875,
+      "buttons": 0
+    },
+    {
+      "type": "pointerdown",
+      "target": "noUi-touch-area",
+      "x": 1022.859375,
+      "y": 312.96875,
+      "buttons": 1
+    },
+    {
+      "type": "mousedown",
+      "target": "noUi-touch-area",
+      "x": 1022,
+      "y": 312,
+      "buttons": 1
+    },
+    {
+      "type": "pointermove",
+      "target": "noUi-handle noUi-handle-lower",
+      "x": 1030.845703125,
+      "y": 312.96875,
+      "buttons": 1
+    },
+    {
+      "type": "pointermove",
+      "target": "noUi-connect",
+      "x": 1038.83203125,
+      "y": 312.96875,
+      "buttons": 1
+    },
+    {
+      "type": "pointermove",
+      "target": "noUi-connect",
+      "x": 1046.818359375,
+      "y": 312.96875,
+      "buttons": 1
+    },
+    {
+      "type": "pointermove",
+      "target": "noUi-connect",
+      "x": 1054.8046875,
+      "y": 312.96875,
+      "buttons": 1
+    },
+    {
+      "type": "pointermove",
+      "target": "noUi-connect",
+      "x": 1062.791015625,
+      "y": 312.96875,
+      "buttons": 1
+    },
+    {
+      "type": "pointermove",
+      "target": "noUi-connect",
+      "x": 1070.77734375,
+      "y": 312.96875,
+      "buttons": 1
+    },
+    {
+      "type": "pointermove",
+      "target": "noUi-connect",
+      "x": 1078.763671875,
+      "y": 312.96875,
+      "buttons": 1
+    },
+    {
+      "type": "pointermove",
+      "target": "noUi-connect",
+      "x": 1086.75,
+      "y": 312.96875,
+      "buttons": 1
+    },
+    {
+      "type": "pointerup",
+      "target": "noUi-connect",
+      "x": 1086.75,
+      "y": 312.96875,
+      "buttons": 0
+    },
+    {
+      "type": "mouseup",
+      "target": "noUi-connect",
+      "x": 1086,
+      "y": 312,
+      "buttons": 0
+    }
+  ],
+  "html": "<div id=\"yearSlider\" class=\"noUi-target noUi-ltr noUi-horizontal noUi-txt-dir-ltr\"><div class=\"noUi-base\"><div class=\"noUi-connects\"><div class=\"noUi-connect\" style=\"transform: translate(0%, 0px) scale(1, 1);\"></div></div><div class=\"noUi-origin\" style=\"transform: translate(-100%, 0px); z-index: 5;\"><div class=\"noUi-handle noUi-handle-lower\" data-handle=\"0\" tabindex=\"0\" role=\"slider\" aria-orientation=\"horizontal\" aria-valuemin=\"1976.0\" aria-valuemax=\"2028.0\" aria-valuenow=\"1976.0\" aria-valuetext=\"1976\" aria-label=\"Année minimum\"><div class=\"noUi-touch-area\"></div></div></div><div class=\"noUi-origin\" style=\"transform: translate(0%, 0px); z-index: 4;\"><div class=\"noUi-handle noUi-handle-upper\" data-handle=\"1\" tabindex=\"0\" role=\"slider\" aria-orientation=\"horizontal\" aria-valuemin=\"1976.0\" aria-valuemax=\"2028.0\" aria-valuenow=\"2028.0\" aria-valuetext=\"2028\" aria-label=\"Année maximum\"><div class=\"noUi-touch-area\"></div></div></div></div></div>"
+}

@@ -1,0 +1,609 @@
+
+> build
+> encore production --progress
+
+Running webpack ...
+
+<s> [webpack.Progress] 0% 
+
+<s> [webpack.Progress] 1% setup before run
+<s> [webpack.Progress] 1% setup before run NodeEnvironmentPlugin
+<s> [webpack.Progress] 1% setup before run
+<s> [webpack.Progress] 2% setup run
+<s> [webpack.Progress] 2% setup run webpack-cli
+<s> [webpack.Progress] 2% setup run WebpackManifestPlugin
+<s> [webpack.Progress] 2% setup run
+<s> [webpack.Progress] 4% setup normal module factory
+<s> [webpack.Progress] 4% setup normal module factory
+<s> [webpack.Progress] 5% setup context module factory
+<s> [webpack.Progress] 5% setup context module factory
+<s> [webpack.Progress] 6% setup before compile
+<s> [webpack.Progress] 6% setup before compile ProgressPlugin
+<s> [webpack.Progress] 6% setup before compile
+<s> [webpack.Progress] 7% setup compile
+<s> [webpack.Progress] 7% setup compile ExternalsPlugin
+<s> [webpack.Progress] 7% setup compile ExternalsPlugin
+<s> [webpack.Progress] 7% setup compile
+<s> [webpack.Progress] 8% setup compilation
+<s> [webpack.Progress] 8% setup compilation mini-css-extract-plugin
+<s> [webpack.Progress] 8% setup compilation ArrayPushCallbackChunkFormatPlugin
+<s> [webpack.Progress] 8% setup compilation JsonpChunkLoadingPlugin
+<s> [webpack.Progress] 8% setup compilation StartupChunkDependenciesPlugin
+<s> [webpack.Progress] 8% setup compilation ImportScriptsChunkLoadingPlugin
+<s> [webpack.Progress] 8% setup compilation WorkerPlugin
+<s> [webpack.Progress] 8% setup compilation SplitChunksPlugin
+<s> [webpack.Progress] 8% setup compilation RuntimeChunkPlugin
+<s> [webpack.Progress] 8% setup compilation ResolverCachePlugin
+<s> [webpack.Progress] 8% setup compilation WebpackManifestPlugin
+<s> [webpack.Progress] 8% setup compilation
+<s> [webpack.Progress] 9% setup compilation
+<s> [webpack.Progress] 9% setup compilation ProgressPlugin
+<s> [webpack.Progress] 9% setup compilation mini-css-extract-plugin
+<s> [webpack.Progress] 9% setup compilation DeleteUnusedEntriesJSPlugin
+<s> [webpack.Progress] 9% setup compilation DefinePlugin
+<s> [webpack.Progress] 9% setup compilation ExternalsPlugin
+<s> [webpack.Progress] 9% setup compilation ExternalsPlugin
+<s> [webpack.Progress] 9% setup compilation ChunkPrefetchPreloadPlugin
+<s> [webpack.Progress] 9% setup compilation JavascriptModulesPlugin
+<s> [webpack.Progress] 9% setup compilation JsonModulesPlugin
+<s> [webpack.Progress] 9% setup compilation AssetModulesPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation RuntimePlugin
+<s> [webpack.Progress] 9% setup compilation InferAsyncModulesPlugin
+<s> [webpack.Progress] 9% setup compilation DataUriPlugin
+<s> [webpack.Progress] 9% setup compilation FileUriPlugin
+<s> [webpack.Progress] 9% setup compilation CompatibilityPlugin
+<s> [webpack.Progress] 9% setup compilation HarmonyModulesPlugin
+<s> [webpack.Progress] 9% setup compilation AMDPlugin
+<s> [webpack.Progress] 9% setup compilation RequireJsStuffPlugin
+<s> [webpack.Progress] 9% setup compilation CommonJsPlugin
+<s> [webpack.Progress] 9% setup compilation LoaderPlugin
+<s> [webpack.Progress] 9% setup compilation LoaderPlugin
+<s> [webpack.Progress] 9% setup compilation NodeStuffPlugin
+<s> [webpack.Progress] 9% setup compilation APIPlugin
+<s> [webpack.Progress] 9% setup compilation ExportsInfoApiPlugin
+<s> [webpack.Progress] 9% setup compilation WebpackIsIncludedPlugin
+<s> [webpack.Progress] 9% setup compilation ConstPlugin
+<s> [webpack.Progress] 9% setup compilation UseStrictPlugin
+<s> [webpack.Progress] 9% setup compilation RequireIncludePlugin
+<s> [webpack.Progress] 9% setup compilation RequireEnsurePlugin
+<s> [webpack.Progress] 9% setup compilation RequireContextPlugin
+<s> [webpack.Progress] 9% setup compilation ImportPlugin
+<s> [webpack.Progress] 9% setup compilation ImportMetaContextPlugin
+<s> [webpack.Progress] 9% setup compilation SystemPlugin
+<s> [webpack.Progress] 9% setup compilation ImportMetaPlugin
+<s> [webpack.Progress] 9% setup compilation URLPlugin
+<s> [webpack.Progress] 9% setup compilation DefaultStatsFactoryPlugin
+<s> [webpack.Progress] 9% setup compilation DefaultStatsPresetPlugin
+<s> [webpack.Progress] 9% setup compilation DefaultStatsPrinterPlugin
+<s> [webpack.Progress] 9% setup compilation JavascriptMetaInfoPlugin
+<s> [webpack.Progress] 9% setup compilation EnsureChunkConditionsPlugin
+<s> [webpack.Progress] 9% setup compilation RemoveEmptyChunksPlugin
+<s> [webpack.Progress] 9% setup compilation MergeDuplicateChunksPlugin
+<s> [webpack.Progress] 9% setup compilation FlagIncludedChunksPlugin
+<s> [webpack.Progress] 9% setup compilation SideEffectsFlagPlugin
+<s> [webpack.Progress] 9% setup compilation FlagDependencyExportsPlugin
+<s> [webpack.Progress] 9% setup compilation FlagDependencyUsagePlugin
+<s> [webpack.Progress] 9% setup compilation InnerGraphPlugin
+<s> [webpack.Progress] 9% setup compilation MangleExportsPlugin
+<s> [webpack.Progress] 9% setup compilation ModuleConcatenationPlugin
+<s> [webpack.Progress] 9% setup compilation NoEmitOnErrorsPlugin
+<s> [webpack.Progress] 9% setup compilation RealContentHashPlugin
+<s> [webpack.Progress] 9% setup compilation WasmFinalizeExportsPlugin
+<s> [webpack.Progress] 9% setup compilation DeterministicModuleIdsPlugin
+<s> [webpack.Progress] 9% setup compilation DeterministicChunkIdsPlugin
+<s> [webpack.Progress] 9% setup compilation DefinePlugin
+<s> [webpack.Progress] 9% setup compilation TerserPlugin
+<s> [webpack.Progress] 9% setup compilation CssMinimizerPlugin
+<s> [webpack.Progress] 9% setup compilation TemplatedPathPlugin
+<s> [webpack.Progress] 9% setup compilation RecordIdsPlugin
+<s> [webpack.Progress] 9% setup compilation WarnCaseSensitiveModulesPlugin
+<s> [webpack.Progress] 9% setup compilation WebpackManifestPlugin
+<s> [webpack.Progress] 9% setup compilation
+<s> [webpack.Progress] 10% building
+<s> [webpack.Progress] 10% building 0/1 entries 0/0 dependencies 0/0 modules
+<s> [webpack.Progress] 10% building import loader ./node_modules/babel-loader/lib/index.js
+<s> [webpack.Progress] 10% building 0/1 entries 1/1 dependencies 0/1 modules
+<s> [webpack.Progress] 10% building 0/1 entries 1/2 dependencies 0/1 modules
+<s> [webpack.Progress] 10% building import loader ./node_modules/mini-css-extract-plugin/dist/loader.js
+<s> [webpack.Progress] 10% building import loader ./node_modules/css-loader/dist/cjs.js
+<s> [webpack.Progress] 10% building 0/1 entries 11/11 dependencies 0/11 modules
+<s> [webpack.Progress] 10% building import loader ./node_modules/resolve-url-loader/index.js
+<s> [webpack.Progress] 10% building import loader ./node_modules/sass-loader/dist/cjs.js
+<s> [webpack.Progress] 10% building 0/1 entries 11/12 dependencies 0/11 modules
+<s> [webpack.Progress] 65% building 1/1 entries 455/455 dependencies 150/150 modules
+<s> [webpack.Progress] 65% building
+<s> [webpack.Progress] 69% building finish
+<s> [webpack.Progress] 69% building finish
+<s> [webpack.Progress] 70% sealing finish module graph
+<s> [webpack.Progress] 70% sealing finish module graph ResolverCachePlugin
+<s> [webpack.Progress] 70% sealing finish module graph InferAsyncModulesPlugin
+<s> [webpack.Progress] 70% sealing finish module graph FlagDependencyExportsPlugin
+<s> [webpack.Progress] 70% sealing finish module graph InnerGraphPlugin
+<s> [webpack.Progress] 70% sealing finish module graph WasmFinalizeExportsPlugin
+<s> [webpack.Progress] 70% sealing finish module graph
+<s> [webpack.Progress] 70% sealing plugins
+<s> [webpack.Progress] 70% sealing plugins WarnCaseSensitiveModulesPlugin
+<s> [webpack.Progress] 70% sealing plugins
+<s> [webpack.Progress] 71% sealing dependencies optimization
+<s> [webpack.Progress] 71% sealing dependencies optimization SideEffectsFlagPlugin
+<s> [webpack.Progress] 71% sealing dependencies optimization FlagDependencyUsagePlugin
+<s> [webpack.Progress] 71% sealing dependencies optimization
+<s> [webpack.Progress] 71% sealing after dependencies optimization
+<s> [webpack.Progress] 71% sealing after dependencies optimization
+<s> [webpack.Progress] 72% sealing chunk graph
+<s> [webpack.Progress] 72% sealing chunk graph
+<s> [webpack.Progress] 73% sealing after chunk graph
+<s> [webpack.Progress] 73% sealing after chunk graph
+<s> [webpack.Progress] 73% sealing optimizing
+<s> [webpack.Progress] 73% sealing optimizing
+<s> [webpack.Progress] 74% sealing module optimization
+<s> [webpack.Progress] 74% sealing module optimization
+<s> [webpack.Progress] 75% sealing after module optimization
+<s> [webpack.Progress] 75% sealing after module optimization
+<s> [webpack.Progress] 75% sealing chunk optimization
+<s> [webpack.Progress] 75% sealing chunk optimization EnsureChunkConditionsPlugin
+<s> [webpack.Progress] 75% sealing chunk optimization RemoveEmptyChunksPlugin
+<s> [webpack.Progress] 75% sealing chunk optimization MergeDuplicateChunksPlugin
+<s> [webpack.Progress] 75% sealing chunk optimization SplitChunksPlugin
+<s> [webpack.Progress] 75% sealing chunk optimization RemoveEmptyChunksPlugin
+<s> [webpack.Progress] 75% sealing chunk optimization
+<s> [webpack.Progress] 76% sealing after chunk optimization
+<s> [webpack.Progress] 76% sealing after chunk optimization
+<s> [webpack.Progress] 77% sealing module and chunk tree optimization
+<s> [webpack.Progress] 77% sealing module and chunk tree optimization
+<s> [webpack.Progress] 77% sealing after module and chunk tree optimization
+<s> [webpack.Progress] 77% sealing after module and chunk tree optimization
+<s> [webpack.Progress] 78% sealing chunk modules optimization
+<s> [webpack.Progress] 78% sealing chunk modules optimization ModuleConcatenationPlugin
+<s> [webpack.Progress] 78% sealing chunk modules optimization
+<s> [webpack.Progress] 78% sealing after chunk modules optimization
+<s> [webpack.Progress] 78% sealing after chunk modules optimization
+<s> [webpack.Progress] 79% sealing module reviving
+<s> [webpack.Progress] 79% sealing module reviving RecordIdsPlugin
+<s> [webpack.Progress] 79% sealing module reviving
+<s> [webpack.Progress] 80% sealing before module ids
+<s> [webpack.Progress] 80% sealing before module ids
+<s> [webpack.Progress] 80% sealing module ids
+<s> [webpack.Progress] 80% sealing module ids DeterministicModuleIdsPlugin
+<s> [webpack.Progress] 80% sealing module ids
+<s> [webpack.Progress] 81% sealing module id optimization
+<s> [webpack.Progress] 81% sealing module id optimization
+<s> [webpack.Progress] 82% sealing module id optimization
+<s> [webpack.Progress] 82% sealing module id optimization
+<s> [webpack.Progress] 82% sealing chunk reviving
+<s> [webpack.Progress] 82% sealing chunk reviving RecordIdsPlugin
+<s> [webpack.Progress] 82% sealing chunk reviving
+<s> [webpack.Progress] 83% sealing before chunk ids
+<s> [webpack.Progress] 83% sealing before chunk ids
+<s> [webpack.Progress] 84% sealing chunk ids
+<s> [webpack.Progress] 84% sealing chunk ids DeterministicChunkIdsPlugin
+<s> [webpack.Progress] 84% sealing chunk ids
+<s> [webpack.Progress] 84% sealing chunk id optimization
+<s> [webpack.Progress] 84% sealing chunk id optimization FlagIncludedChunksPlugin
+<s> [webpack.Progress] 84% sealing chunk id optimization
+<s> [webpack.Progress] 85% sealing after chunk id optimization
+<s> [webpack.Progress] 85% sealing after chunk id optimization
+<s> [webpack.Progress] 86% sealing record modules
+<s> [webpack.Progress] 86% sealing record modules RecordIdsPlugin
+<s> [webpack.Progress] 86% sealing record modules
+<s> [webpack.Progress] 86% sealing record chunks
+<s> [webpack.Progress] 86% sealing record chunks RecordIdsPlugin
+<s> [webpack.Progress] 86% sealing record chunks
+<s> [webpack.Progress] 87% sealing module hashing
+<s> [webpack.Progress] 87% sealing module hashing
+<s> [webpack.Progress] 87% sealing code generation
+<s> [webpack.Progress] 87% sealing code generation
+<s> [webpack.Progress] 88% sealing runtime requirements
+<s> [webpack.Progress] 88% sealing runtime requirements
+<s> [webpack.Progress] 89% sealing hashing
+<s> [webpack.Progress] 89% sealing hashing
+<s> [webpack.Progress] 89% sealing after hashing
+<s> [webpack.Progress] 89% sealing after hashing
+<s> [webpack.Progress] 90% sealing record hash
+<s> [webpack.Progress] 90% sealing record hash
+<s> [webpack.Progress] 91% sealing module assets processing
+<s> [webpack.Progress] 91% sealing module assets processing
+<s> [webpack.Progress] 91% sealing chunk assets processing
+<s> [webpack.Progress] 91% sealing chunk assets processing
+<s> [webpack.Progress] 92% sealing asset processing
+<s> [webpack.Progress] 92% sealing asset processing DeleteUnusedEntriesJsPlugin
+<s> [webpack.Progress] 92% sealing asset processing TerserPlugin
+<s> [webpack.Progress] 92% sealing asset processing CssMinimizerPlugin
+Browserslist: browsers data (caniuse-lite) is 7 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin
+<s> [webpack.Progress] 92% sealing asset processing WebpackManifestPlugin
+<s> [webpack.Progress] 92% sealing asset processing
+<s> [webpack.Progress] 93% sealing after asset optimization
+<s> [webpack.Progress] 93% sealing after asset optimization
+<s> [webpack.Progress] 93% sealing recording
+<s> [webpack.Progress] 93% sealing recording
+<s> [webpack.Progress] 94% sealing after seal
+<s> [webpack.Progress] 94% sealing after seal
+<s> [webpack.Progress] 95% emitting emit
+<s> [webpack.Progress] 95% emitting emit AssetOutputDisplayPlugin
+<s> [webpack.Progress] 95% emitting emit CleanPlugin
+<s> [webpack.Progress] 95% emitting emit
+<s> [webpack.Progress] 98% emitting after emit
+<s> [webpack.Progress] 98% emitting after emit EntryPointsPlugin
+<s> [webpack.Progress] 98% emitting after emit SizeLimitsPlugin
+<s> [webpack.Progress] 98% emitting after emit
+<s> [webpack.Progress] 99% done plugins
+<s> [webpack.Progress] 99% done plugins FriendlyErrorsWebpackPlugin
+ WARN  Compiled with 21 warnings19:23:17
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 0, column 8 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/bootstrap.scss:0:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+0 | @import "mixins/banner";
+
+
+node_modules\bootstrap\scss\bootstrap.scss 1:9  @import
+assets\styles\app.scss 29:9                     root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 2, column 8 of file:///F:/3sk/3sk%20(1)/assets/styles/app.scss:2:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+2 | @import "bootswatch/dist/cosmo/variables";
+
+
+assets\styles\app.scss 3:9  root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 6, column 8 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/bootstrap.scss:6:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+6 | @import "functions";
+
+
+node_modules\bootstrap\scss\bootstrap.scss 7:9  @import
+assets\styles\app.scss 29:9                     root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 10, column 29 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/_functions.scss:10:29:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use math.unit instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+10 |     @if $prev-num == null or unit($num) == "%" or unit($prev-num) == "%" {
+
+
+node_modules\bootstrap\scss\_functions.scss 11:30  -assert-ascending()
+node_modules\bootstrap\scss\_variables.scss 494:1  @import
+node_modules\bootstrap\scss\bootstrap.scss 8:9     @import
+assets\styles\app.scss 29:9                        root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 10, column 50 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/_functions.scss:10:50:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use math.unit instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+10 |     @if $prev-num == null or unit($num) == "%" or unit($prev-num) == "%" {
+
+
+node_modules\bootstrap\scss\_functions.scss 11:51  -assert-ascending()
+node_modules\bootstrap\scss\_variables.scss 494:1  @import
+node_modules\bootstrap\scss\bootstrap.scss 8:9     @import
+assets\styles\app.scss 29:9                        root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 28, column 8 of file:///F:/3sk/3sk%20(1)/assets/styles/app.scss:28:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+28 | @import "bootstrap/scss/bootstrap";
+
+
+assets\styles\app.scss 29:9  root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 32, column 8 of file:///F:/3sk/3sk%20(1)/assets/styles/app.scss:32:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+32 | @import "bootswatch/dist/cosmo/bootswatch";
+
+
+assets\styles\app.scss 33:9  root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 36, column 10 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/_functions.scss:36:10:
+red() is deprecated. Suggestion:
+
+color.channel($color, "red", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+36 |   @return red($value), green($value), blue($value);
+
+
+node_modules\bootstrap\scss\_functions.scss 37:11   to-rgb()
+node_modules\bootstrap\scss\_variables.scss 846:31  @import
+node_modules\bootstrap\scss\bootstrap.scss 8:9      @import
+assets\styles\app.scss 29:9                         root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 36, column 23 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/_functions.scss:36:23:
+green() is deprecated. Suggestion:
+
+color.channel($color, "green", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+36 |   @return red($value), green($value), blue($value);
+
+
+node_modules\bootstrap\scss\_functions.scss 37:24   to-rgb()
+node_modules\bootstrap\scss\_variables.scss 846:31  @import
+node_modules\bootstrap\scss\bootstrap.scss 8:9      @import
+assets\styles\app.scss 29:9                         root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 57, column 29 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/_functions.scss:57:29:
+The Sass if() syntax is deprecated in favor of the modern CSS syntax.
+
+Suggestion: if(sass($arg == "$key"): $key; else: if($arg == "$value", $value, $arg))
+
+More info: https://sass-lang.com/d/if-function
+
+57 |       $_args: append($_args, if($arg == "$key", $key, if($arg == "$value", $value, $arg)));
+
+
+node_modules\bootstrap\scss\_functions.scss 58:30  @import
+node_modules\bootstrap\scss\bootstrap.scss 7:9     @import
+assets\styles\app.scss 29:9                        root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 57, column 54 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/_functions.scss:57:54:
+The Sass if() syntax is deprecated in favor of the modern CSS syntax.
+
+Suggestion: if(sass($arg == "$value"): $value; else: $arg)
+
+More info: https://sass-lang.com/d/if-function
+
+57 |       $_args: append($_args, if($arg == "$key", $key, if($arg == "$value", $value, $arg)));
+
+
+node_modules\bootstrap\scss\_functions.scss 58:55  @import
+node_modules\bootstrap\scss\bootstrap.scss 7:9     @import
+assets\styles\app.scss 29:9                        root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 176, column 10 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/_functions.scss:176:10:
+The Sass if() syntax is deprecated in favor of the modern CSS syntax.
+
+Suggestion: if(sass($l1 > $l2): divide($l1 + 0.05, $l2 + 0.05); else: divide($l2 + 0.05, $l1 + 0.05))
+
+More info: https://sass-lang.com/d/if-function
+
+176 |   @return if($l1 > $l2, divide($l1 + .05, $l2 + .05), divide($l2 + .05, $l1 + .05));
+
+
+node_modules\bootstrap\scss\_functions.scss 177:11  @import
+node_modules\bootstrap\scss\bootstrap.scss 7:9      @import
+assets\styles\app.scss 29:9                         root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 184, column 9 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/_functions.scss:184:9:
+red() is deprecated. Suggestion:
+
+color.channel($color, "red", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+184 |     "r": red($color),
+
+
+node_modules\bootstrap\scss\_functions.scss 185:10  luminance()
+node_modules\bootstrap\scss\_functions.scss 174:8   contrast-ratio()
+node_modules\bootstrap\scss\_functions.scss 159:22  color-contrast()
+node_modules\bootstrap\scss\_variables.scss 846:42  @import
+node_modules\bootstrap\scss\bootstrap.scss 8:9      @import
+assets\styles\app.scss 29:9                         root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 185, column 9 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/_functions.scss:185:9:
+green() is deprecated. Suggestion:
+
+color.channel($color, "green", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+185 |     "g": green($color),
+
+
+node_modules\bootstrap\scss\_functions.scss 186:10  luminance()
+node_modules\bootstrap\scss\_functions.scss 174:8   contrast-ratio()
+node_modules\bootstrap\scss\_functions.scss 159:22  color-contrast()
+node_modules\bootstrap\scss\_variables.scss 846:42  @import
+node_modules\bootstrap\scss\bootstrap.scss 8:9      @import
+assets\styles\app.scss 29:9                         root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 186, column 9 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/_functions.scss:186:9:
+blue() is deprecated. Suggestion:
+
+color.channel($color, "blue", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+186 |     "b": blue($color)
+
+
+node_modules\bootstrap\scss\_functions.scss 187:10  luminance()
+node_modules\bootstrap\scss\_functions.scss 174:8   contrast-ratio()
+node_modules\bootstrap\scss\_functions.scss 159:22  color-contrast()
+node_modules\bootstrap\scss\_variables.scss 846:42  @import
+node_modules\bootstrap\scss\bootstrap.scss 8:9      @import
+assets\styles\app.scss 29:9                         root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 190, column 12 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/_functions.scss:190:12:
+The Sass if() syntax is deprecated in favor of the modern CSS syntax.
+
+Suggestion: if(sass(divide($value, 255) < 0.04045): divide(divide($value, 255), 12.92); else: nth($_luminance-list, $value + 1))
+
+More info: https://sass-lang.com/d/if-function
+
+190 |     $value: if(divide($value, 255) < .04045, divide(divide($value, 255), 12.92), nth($_luminance-list, $value + 1));
+
+
+node_modules\bootstrap\scss\_functions.scss 191:13  @import
+node_modules\bootstrap\scss\bootstrap.scss 7:9      @import
+assets\styles\app.scss 29:9                         root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 206, column 10 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/_functions.scss:206:10:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.mix instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+206 |   @return mix(white, $color, $weight);
+
+
+node_modules\bootstrap\scss\_functions.scss 207:11  tint-color()
+node_modules\bootstrap\scss\_variables.scss 79:12   @import
+node_modules\bootstrap\scss\bootstrap.scss 8:9      @import
+assets\styles\app.scss 29:9                         root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 211, column 10 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/_functions.scss:211:10:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.mix instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+211 |   @return mix(black, $color, $weight);
+
+
+node_modules\bootstrap\scss\_functions.scss 212:11  shade-color()
+node_modules\bootstrap\scss\_variables.scss 84:12   @import
+node_modules\bootstrap\scss\bootstrap.scss 8:9      @import
+assets\styles\app.scss 29:9                         root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 216, column 10 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/_functions.scss:216:10:
+The Sass if() syntax is deprecated in favor of the modern CSS syntax.
+
+Suggestion: if(sass($weight > 0): shade-color($color, $weight); else: tint-color($color, -$weight))
+
+More info: https://sass-lang.com/d/if-function
+
+216 |   @return if($weight > 0, shade-color($color, $weight), tint-color($color, -$weight));
+
+
+node_modules\bootstrap\scss\_functions.scss 217:11  @import
+node_modules\bootstrap\scss\bootstrap.scss 7:9      @import
+assets\styles\app.scss 29:9                         root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+Deprecation Warning on line 341, column 26 of file:///F:/3sk/3sk%20(1)/node_modules/bootstrap/scss/_variables.scss:341:26:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.mix instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+341 | $light-bg-subtle:         mix($gray-100, $white) !default;
+
+
+node_modules\bootstrap\scss\_variables.scss 342:27  @import
+node_modules\bootstrap\scss\bootstrap.scss 8:9      @import
+assets\styles\app.scss 29:9                         root stylesheet
+
+
+ warn  in ./assets/styles/app.scss19:23:17
+
+Module Warning (from ./node_modules/sass-loader/dist/cjs.js):
+310 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+
+<s> [webpack.Progress] 99% done plugins
+<s> [webpack.Progress] 99% 
+
+<s> [webpack.Progress] 99% cache store build dependencies
+<s> [webpack.Progress] 99% cache store build dependencies
+<s> [webpack.Progress] 99% cache begin idle
+<s> [webpack.Progress] 99% cache begin idle
+<s> [webpack.Progress] 100% 
+
+<s> [webpack.Progress] 99% cache shutdown
+<s> [webpack.Progress] 99% cache shutdown
+<s> [webpack.Progress] 100% 
+
+Entrypoint app 240 KiB = runtime.81003d5f.js 1.21 KiB 663.cafdc20d.js 23.9 KiB app.dd586466.css 209 KiB app.5b0974ba.js 5.7 KiB
+webpack compiled with 21 warnings

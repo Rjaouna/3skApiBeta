@@ -1,17 +1,18 @@
-﻿<style>
+<link rel="stylesheet" href="{{ asset('styles/home-about-services.css') }}?v=20261016-5">
+<style>
   html {
     scroll-padding-top: 185px;
   }
 
   .public-home {
-    --public-blue: #315fbb;
-    --public-blue-dark: #102e63;
-    --public-navy: #102e63;
-    --public-navy-2: #23498f;
-    --public-orange: #ff9100;
-    --public-ink: #101828;
-    --public-muted: #667085;
-    --public-border: rgba(16,24,40,.10);
+    --public-blue: var(--brand-blue);
+    --public-blue-dark: var(--brand-blue-dark);
+    --public-navy: var(--brand-blue-dark);
+    --public-navy-2: var(--brand-blue-dark);
+    --public-orange: var(--brand-orange);
+    --public-ink: var(--brand-ink);
+    --public-muted: var(--brand-muted);
+    --public-border: rgba(var(--brand-anthracite-rgb), .10);
     --public-soft: #f4f6fb;
     --public-panel: #fff;
     --public-shadow: 0 22px 58px rgba(5,9,18,.16);
@@ -55,7 +56,7 @@
     background: linear-gradient(135deg, var(--public-blue), var(--public-blue-dark));
     border-color: var(--public-blue);
     font-weight: 550;
-    box-shadow: 0 12px 24px rgba(49,95,187,.18);
+    box-shadow: 0 12px 24px rgba(var(--brand-blue-rgb), .18);
   }
 
   .public-home .btn-primary:hover {
@@ -66,7 +67,7 @@
 
   .public-home .btn-outline-secondary {
     color: var(--public-blue);
-    border-color: rgba(49,95,187,.24);
+    border-color: rgba(var(--brand-blue-rgb), .24);
     background: #fff;
     font-weight: 550;
   }
@@ -108,7 +109,7 @@
     z-index: 3;
     background: #fff;
     color: #fff;
-    border-bottom: 1px solid rgba(16,24,40,.08);
+    border-bottom: 1px solid rgba(var(--brand-anthracite-rgb), .08);
   }
 
   .public-overlay-card {
@@ -135,9 +136,9 @@
     gap: .5rem;
     padding: .45rem .85rem;
     border-radius: 999px;
-    background: rgba(255,145,0,.10);
+    background: rgba(var(--brand-orange-rgb), .10);
     color: var(--public-blue-dark);
-    border: 1px solid rgba(255,145,0,.30);
+    border: 1px solid rgba(var(--brand-orange-rgb), .30);
     font-size: .8rem;
     font-weight: 550;
     letter-spacing: 0;
@@ -173,10 +174,10 @@
   }
 
   .public-pill-stat {
-    border: 1px solid rgba(16,24,40,.10);
+    border: 1px solid rgba(var(--brand-anthracite-rgb), .10);
     border-left: 3px solid var(--public-orange);
     border-radius: 8px;
-    box-shadow: 0 10px 24px rgba(16,24,40,.07);
+    box-shadow: 0 10px 24px rgba(var(--brand-anthracite-rgb), .07);
     background: var(--public-soft);
     height: 100%;
   }
@@ -212,22 +213,12 @@
   .public-home .text-bg-secondary,
   .public-home .bg-secondary {
     background-color: var(--public-orange) !important;
-    color: #111827 !important;
-  }
-
-  #qui-sommes-nous {
-    background: #fff;
-    border-bottom: 1px solid rgba(16,24,40,.08);
-  }
-
-  #qui-sommes-nous img {
-    border-radius: 8px !important;
-    box-shadow: var(--public-shadow) !important;
+    color: var(--brand-ink) !important;
   }
 
   .public-section-dark {
     background:
-      linear-gradient(135deg, rgba(49,95,187,.18), transparent 48%),
+      linear-gradient(135deg, rgba(var(--brand-blue-rgb), .18), transparent 48%),
       var(--public-navy);
     color: #fff;
     border-top: 4px solid var(--public-orange);
@@ -250,7 +241,7 @@
   .public-value-card,
   .public-contact-card,
   .public-news-card {
-    border: 1px solid rgba(16,24,40,.08);
+    border: 1px solid rgba(var(--brand-anthracite-rgb), .08);
     border-radius: 8px;
     overflow: hidden;
     box-shadow: var(--public-shadow);
@@ -280,7 +271,7 @@
   }
 
   .public-section-dark .list-group-item {
-    border-color: rgba(16,24,40,.08);
+    border-color: rgba(var(--brand-anthracite-rgb), .08);
     border-left: 3px solid var(--public-orange);
     color: var(--public-ink);
     font-weight: 750;
@@ -288,7 +279,7 @@
   }
 
   .public-highlight-panel {
-    background: linear-gradient(135deg, rgba(16,46,99,.94), rgba(49,95,187,.72));
+    background: linear-gradient(135deg, rgba(16,46,99,.94), rgba(var(--brand-blue-rgb), .72));
     border: 1px solid rgba(255,255,255,.18);
     border-left: 4px solid var(--public-orange);
     border-radius: 8px;
@@ -340,7 +331,7 @@
     top: 50%;
     transform: translateY(-50%);
     border-radius: 999px;
-    background: rgba(49,95,187,.28);
+    background: rgba(var(--brand-blue-rgb), .28);
     border: 1px solid rgba(255,255,255,.18);
     opacity: .92;
     margin-inline: 14px;
@@ -348,7 +339,7 @@
 
   .public-stock-carousel .carousel-control-prev:hover,
   .public-stock-carousel .carousel-control-next:hover {
-    background: rgba(255,145,0,.92);
+    background: rgba(var(--brand-orange-rgb), .92);
   }
 
   .public-highlight-panel .btn-light:hover {
@@ -357,19 +348,14 @@
     color: #fff !important;
   }
 
-  #marques {
-    background: var(--public-soft);
-    border-bottom: 1px solid rgba(16,24,40,.08);
-  }
-
   .public-logo-strip > div {
     background: #fff;
-    border: 1px solid rgba(16,24,40,.08);
+    border: 1px solid rgba(var(--brand-anthracite-rgb), .08);
     border-radius: 8px;
     min-height: 126px;
     display: grid;
     place-items: center;
-    box-shadow: 0 10px 28px rgba(16,24,40,.06);
+    box-shadow: 0 10px 28px rgba(var(--brand-anthracite-rgb), .06);
   }
 
   .public-logo-strip img {
@@ -389,7 +375,7 @@
 
   #contact {
     background:
-      linear-gradient(135deg, rgba(49,95,187,.22), transparent 45%),
+      linear-gradient(135deg, rgba(var(--brand-blue-rgb), .22), transparent 45%),
       var(--public-navy-2) !important;
     border-top: 0 !important;
     color: #fff;
@@ -423,7 +409,7 @@
     margin-top: 0;
     position: relative;
     overflow: hidden;
-    border-top: 1px solid rgba(16,24,40,.08);
+    border-top: 1px solid rgba(var(--brand-anthracite-rgb), .08);
     padding-top: 3rem !important;
     padding-bottom: 1.3rem !important;
     background: #fff;
@@ -478,7 +464,7 @@
   }
 
   .public-footer hr {
-    border-color: rgba(16,24,40,.10);
+    border-color: rgba(var(--brand-anthracite-rgb), .10);
     opacity: 1;
   }
 
@@ -529,18 +515,18 @@
     gap: .5rem;
     padding: .52rem .78rem;
     border-radius: 999px;
-    border: 1px solid rgba(49,95,187,.12);
+    border: 1px solid rgba(var(--brand-blue-rgb), .12);
     background: #fff;
     color: var(--public-ink) !important;
     font-size: .84rem;
     font-weight: 700;
     text-decoration: none;
-    box-shadow: 0 8px 20px rgba(16,24,40,.06);
+    box-shadow: 0 8px 20px rgba(var(--brand-anthracite-rgb), .06);
   }
 
   .public-footer-pill:hover {
-    background: rgba(49,95,187,.06);
-    border-color: rgba(49,95,187,.24);
+    background: rgba(var(--brand-blue-rgb), .06);
+    border-color: rgba(var(--brand-blue-rgb), .24);
     color: var(--public-blue) !important;
   }
 
@@ -564,7 +550,7 @@
 
   .public-footer-list i {
     width: 17px;
-    color: rgba(49,95,187,.55);
+    color: rgba(var(--brand-blue-rgb), .55);
     text-align: center;
   }
 
@@ -581,9 +567,9 @@
     height: 100%;
     padding: 1.15rem;
     border-radius: 18px;
-    border: 1px solid rgba(16,24,40,.08);
+    border: 1px solid rgba(var(--brand-anthracite-rgb), .08);
     background: #fff;
-    box-shadow: 0 16px 36px rgba(16,24,40,.08);
+    box-shadow: 0 16px 36px rgba(var(--brand-anthracite-rgb), .08);
   }
 
   .public-footer-account p {
@@ -609,13 +595,13 @@
     border-color: var(--public-blue) !important;
     color: #fff !important;
     font-weight: 600;
-    box-shadow: 0 16px 30px rgba(49,95,187,.20);
+    box-shadow: 0 16px 30px rgba(var(--brand-blue-rgb), .20);
   }
 
   .public-footer-login-btn:hover {
     background: var(--public-orange) !important;
     border-color: var(--public-orange) !important;
-    color: #111827 !important;
+    color: var(--brand-ink) !important;
     transform: translateY(-1px);
   }
 
@@ -623,7 +609,7 @@
     width: 36px;
     height: 36px;
     border-radius: 999px;
-    border: 1px solid rgba(16,24,40,.08);
+    border: 1px solid rgba(var(--brand-anthracite-rgb), .08);
     display: grid;
     place-items: center;
     text-decoration: none;
@@ -662,17 +648,17 @@
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    border: 1px solid rgba(16,24,40,.10);
+    border: 1px solid rgba(var(--brand-anthracite-rgb), .10);
     background: #fff;
     color: var(--public-ink);
     font-size: .76rem;
     font-weight: 600;
     letter-spacing: .02em;
-    box-shadow: 0 8px 20px rgba(16,24,40,.06);
+    box-shadow: 0 8px 20px rgba(var(--brand-anthracite-rgb), .06);
   }
 
   .public-payment-badge.is-mastercard {
-    color: #1f2937;
+    color: var(--brand-ink);
     position: relative;
   }
 
@@ -707,9 +693,9 @@
     min-height: 285px;
     border-radius: 20px;
     overflow: hidden;
-    border: 1px solid rgba(16,24,40,.08);
-    background: #dbeafe;
-    box-shadow: 0 18px 42px rgba(16,24,40,.10);
+    border: 1px solid rgba(var(--brand-anthracite-rgb), .08);
+    background: var(--brand-bg);
+    box-shadow: 0 18px 42px rgba(var(--brand-anthracite-rgb), .10);
   }
 
   .public-footer-map iframe {
@@ -729,9 +715,9 @@
     justify-content: center;
     gap: 1.2rem;
     padding: 1rem 1.25rem;
-    background: rgba(15,23,42,.96);
+    background: rgba(var(--brand-anthracite-rgb), .96);
     color: #fff;
-    box-shadow: 0 -18px 42px rgba(15,23,42,.24);
+    box-shadow: 0 -18px 42px rgba(var(--brand-anthracite-rgb), .24);
   }
 
   .public-cookie-banner.is-visible {
@@ -773,7 +759,7 @@
 
   .public-cookie-btn.is-accept {
     background: var(--public-orange);
-    color: #111827;
+    color: var(--brand-ink);
   }
 
   .public-cookie-btn.is-decline {
@@ -816,7 +802,7 @@
   }
 
   .public-main-v2 .section-space {
-    padding: 6.5rem 0;
+    padding: 4.5rem 0;
     scroll-margin-top: 185px;
   }
 
@@ -856,12 +842,12 @@
   .public-main-v2 .section-heading .heading-accent,
   .latest-arrivals-title .heading-accent {
     color: var(--public-orange);
-    text-shadow: 0 10px 26px rgba(255, 145, 0, .30);
+    text-shadow: 0 10px 26px rgba(var(--brand-orange-rgb), .30);
   }
 
   .public-main-v2 .section-copy {
     color: var(--public-muted);
-    font-size: 1.05rem;
+    font-size: 1rem;
     line-height: 1.75;
   }
 
@@ -871,7 +857,7 @@
     isolation: isolate;
     overflow: hidden;
     background: #fff;
-    border-bottom: 1px solid rgba(16,24,40,.08);
+    border-bottom: 1px solid rgba(var(--brand-anthracite-rgb), .08);
   }
 
   .public-intro-v2::after {
@@ -883,7 +869,7 @@
     bottom: -9%;
     width: min(680px, 48vw);
     background: url('{{ optimized_asset('img/bg-section/stock-cartons-depo-pieces-carrosserie-3sk-parts-auto.png') }}') center / cover no-repeat;
-    opacity: .09;
+    opacity: .045;
     -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .45) 24%, #000 52%, #000 100%);
     mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .45) 24%, #000 52%, #000 100%);
     transform: translate3d(0, var(--intro-parallax-y), 0) scale(1.04);
@@ -904,7 +890,7 @@
   }
 
   .public-intro-v2 .intro-facts {
-    border-top: 1px solid rgba(16,24,40,.12);
+    border-top: 1px solid rgba(var(--brand-anthracite-rgb), .12);
   }
 
   .public-intro-v2 .intro-fact {
@@ -912,7 +898,7 @@
     grid-template-columns: 52px 1fr;
     gap: 1rem;
     padding: 1.25rem 0;
-    border-bottom: 1px solid rgba(16,24,40,.12);
+    border-bottom: 1px solid rgba(var(--brand-anthracite-rgb), .12);
   }
 
   .public-intro-v2 .intro-fact i {
@@ -941,218 +927,6 @@
     color: var(--public-muted);
   }
 
-  .public-about-v2 {
-    position: relative;
-    background: #fff;
-  }
-
-  .public-about-v2 .about-visual {
-    position: relative;
-    width: min(100%, 500px);
-    aspect-ratio: 3 / 4;
-    min-height: 0;
-    margin-inline: auto;
-    overflow: hidden;
-    border-radius: 8px;
-    background: #f4f6f8;
-    box-shadow: 0 22px 54px rgba(16,24,40,.13);
-  }
-
-  .public-about-v2 .about-visual img {
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-    display: block;
-    object-fit: cover;
-    object-position: center;
-  }
-
-  .public-about-v2 .about-visual::after {
-    content: "";
-    position: absolute;
-    inset: auto 0 0;
-    height: 7px;
-    background: linear-gradient(90deg, var(--public-blue) 0 58%, var(--public-orange) 58%);
-  }
-
-  .public-about-v2 .about-copy {
-    padding-left: clamp(0px, 3vw, 48px);
-  }
-
-  .public-about-v2 .about-metrics {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    margin-top: 2.25rem;
-    border-top: 1px solid rgba(16,24,40,.12);
-    border-bottom: 1px solid rgba(16,24,40,.12);
-  }
-
-  .public-about-v2 .about-metric {
-    padding: 1.25rem 1rem;
-    border-right: 1px solid rgba(16,24,40,.12);
-  }
-
-  .public-about-v2 .about-metric:first-child {
-    padding-left: 0;
-  }
-
-  .public-about-v2 .about-metric:last-child {
-    border-right: 0;
-  }
-
-  .public-about-v2 .about-metric strong {
-    display: block;
-    color: var(--public-blue);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.65rem;
-  }
-
-  .public-about-v2 .about-metric:nth-child(2) strong {
-    color: var(--public-orange);
-  }
-
-  .public-about-v2 .about-metric span {
-    color: var(--public-muted);
-    font-size: .86rem;
-  }
-
-  .public-services-v2 {
-    position: relative;
-    isolation: isolate;
-    color: #fff;
-    background:
-      linear-gradient(90deg, rgba(0,0,0,.96) 0%, rgba(5,7,13,.94) 48%, rgba(5,7,13,.78) 100%),
-      url('{{ optimized_asset('img/bg-section/services-stock.jpg') }}') center / cover no-repeat;
-    border-top: 4px solid var(--public-orange);
-    border-bottom: 4px solid var(--public-orange);
-  }
-
-  .public-services-v2 .section-heading {
-    color: #fff;
-  }
-
-  .public-services-v2 .section-copy {
-    color: rgba(255,255,255,.72);
-  }
-
-  .public-services-v2 .service-lines {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 1.75rem;
-    margin-top: 2rem;
-  }
-
-  .public-services-v2 .service-line {
-    display: grid;
-    grid-template-columns: 38px 1fr;
-    gap: .8rem;
-    padding: 1.15rem 0;
-    border-top: 1px solid rgba(255,255,255,.16);
-    color: rgba(255,255,255,.88);
-  }
-
-  .public-services-v2 .service-line i {
-    color: var(--public-orange);
-    font-size: 1rem;
-    padding-top: .18rem;
-  }
-
-  .public-services-v2 .stock-frame {
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.20);
-    border-radius: 8px;
-    background: rgba(0,0,0,.42);
-    box-shadow: 0 28px 70px rgba(0,0,0,.34);
-  }
-
-  .public-services-v2 .stock-frame-copy {
-    padding: 2rem;
-    border-top: 1px solid rgba(255,255,255,.16);
-  }
-
-  .public-services-v2 .stock-frame-copy h3 {
-    color: #fff;
-    font-size: 1.55rem;
-    line-height: 1.2;
-  }
-
-  .public-services-v2 .public-stock-carousel {
-    aspect-ratio: 4 / 3;
-    min-height: 0;
-    background: #fff;
-  }
-
-  .public-services-v2 .public-stock-carousel .carousel-inner,
-  .public-services-v2 .public-stock-carousel .carousel-item {
-    height: 100%;
-    min-height: 0;
-  }
-
-  .public-services-v2 .public-stock-carousel img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: contain;
-    object-position: center;
-    background: #fff;
-  }
-
-  .public-brands-v2 {
-    background: #fff !important;
-    border-bottom: 1px solid rgba(16,24,40,.08);
-  }
-
-  .public-brands-v2 .brands-heading {
-    display: grid;
-    justify-items: center;
-    gap: 1rem;
-    margin-bottom: 3rem;
-    text-align: center;
-  }
-
-  .public-brands-v2 .brands-heading .section-heading {
-    max-width: 980px;
-  }
-
-  .public-brands-v2 .brands-heading p {
-    max-width: 650px;
-    margin: 0;
-  }
-
-  .public-brands-v2 .brand-row {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    border-top: 1px solid rgba(16,24,40,.12);
-    border-left: 1px solid rgba(16,24,40,.12);
-  }
-
-  .public-brands-v2 .brand-item {
-    min-height: 150px;
-    display: grid;
-    place-items: center;
-    padding: 1.25rem;
-    border-right: 1px solid rgba(16,24,40,.12);
-    border-bottom: 1px solid rgba(16,24,40,.12);
-    background: #fff;
-    transition: background .15s ease;
-  }
-
-  .public-brands-v2 .brand-item:hover {
-    background: #f7f8fa;
-  }
-
-  .public-brands-v2 .brand-item img {
-    width: 100%;
-    max-width: 150px;
-    max-height: 82px;
-    object-fit: contain;
-    transition: filter .15s ease, opacity .15s ease;
-  }
-
-  .public-brands-v2 .brand-item:hover img {
-    filter: grayscale(100%);
-    opacity: .72;
-  }
 
   .public-contact-v2 {
     padding: 0 !important;
@@ -1195,7 +969,7 @@
     min-height: 320px;
     flex: 1;
     border: 0;
-    border-top: 1px solid rgba(16,24,40,.12);
+    border-top: 1px solid rgba(var(--brand-anthracite-rgb), .12);
   }
 
   .public-contact-v2 .contact-pane-dark {
@@ -1249,11 +1023,13 @@
   .public-contact-v2 .contact-pane-dark .btn-primary {
     background: var(--public-orange) !important;
     border-color: var(--public-orange) !important;
+    color: var(--public-ink) !important;
   }
 
   .public-contact-v2 .contact-pane-dark .btn-primary:hover {
-    background: #e36d0a !important;
-    border-color: #e36d0a !important;
+    background: var(--brand-orange-dark) !important;
+    border-color: var(--brand-orange-dark) !important;
+    color: var(--public-ink) !important;
   }
 
   .public-contact-v2 .contact-pane-dark .btn-outline-secondary {
@@ -1296,7 +1072,7 @@
     width: 100%;
     min-height: 50px;
     padding: .8rem .9rem;
-    border: 1px solid rgba(16,24,40,.16);
+    border: 1px solid rgba(var(--brand-anthracite-rgb), .16);
     border-radius: 4px;
     outline: 0;
     background: #fff;
@@ -1312,7 +1088,7 @@
 
   .public-contact-v2 .contact-form-control:focus {
     border-color: var(--public-blue);
-    box-shadow: 0 0 0 3px rgba(49,95,187,.12);
+    box-shadow: 0 0 0 3px rgba(var(--brand-blue-rgb), .12);
   }
 
   .public-contact-v2 .contact-form-submit {
@@ -1376,19 +1152,7 @@
 
   @media (max-width: 991px) {
     .public-main-v2 .section-space {
-      padding: 4.5rem 0;
-    }
-
-    .public-about-v2 .about-copy {
-      padding-left: 0;
-    }
-
-    .public-services-v2 .service-lines {
-      grid-template-columns: 1fr;
-    }
-
-    .public-brands-v2 .brand-row {
-      grid-template-columns: repeat(3, 1fr);
+      padding: 3.5rem 0;
     }
 
     .public-contact-v2 .contact-split {
@@ -1438,7 +1202,7 @@
     }
 
     .public-main-v2 .section-space {
-      padding: 3.75rem 0;
+      padding: 3rem 0;
     }
 
     .public-main-v2 .section-eyebrow {
@@ -1462,59 +1226,6 @@
       mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .5) 28%, #000 62%, #000 100%);
       transform: none;
       will-change: auto;
-    }
-
-    .public-about-v2 .about-visual,
-    .public-about-v2 .about-visual img {
-      min-height: 0;
-    }
-
-    .public-about-v2 .about-metrics {
-      grid-template-columns: 1fr;
-    }
-
-    .public-about-v2 .about-metric,
-    .public-about-v2 .about-metric:first-child {
-      padding: 1rem 0;
-      border-right: 0;
-      border-bottom: 1px solid rgba(16,24,40,.12);
-    }
-
-    .public-about-v2 .about-metric:last-child {
-      border-bottom: 0;
-    }
-
-    .public-services-v2 .public-stock-carousel,
-    .public-services-v2 .public-stock-carousel .carousel-inner,
-    .public-services-v2 .public-stock-carousel .carousel-item,
-    .public-services-v2 .public-stock-carousel img {
-      min-height: 0;
-    }
-
-    .public-services-v2 .public-stock-carousel {
-      height: auto;
-    }
-
-    .public-services-v2 .public-stock-carousel .carousel-inner,
-    .public-services-v2 .public-stock-carousel .carousel-item,
-    .public-services-v2 .public-stock-carousel img {
-      height: 100%;
-    }
-
-    .public-brands-v2 .brands-heading {
-      display: block;
-    }
-
-    .public-brands-v2 .brands-heading p {
-      margin-top: 1rem;
-    }
-
-    .public-brands-v2 .brand-row {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .public-brands-v2 .brand-item {
-      min-height: 120px;
     }
 
     .public-contact-v2 .contact-pane-inner {
@@ -1618,7 +1329,7 @@
     transform: scaleX(var(--home-scroll-progress, 0));
     transform-origin: left center;
     background: linear-gradient(90deg, var(--public-blue), var(--public-orange));
-    box-shadow: 0 0 18px rgba(255,145,0,.22);
+    box-shadow: 0 0 18px rgba(var(--brand-orange-rgb), .22);
   }
 
   .public-slider-shell.is-home-parallax-ready {
@@ -1748,6 +1459,8 @@
     }
   }
 </style>
+<link rel="stylesheet" href="{{ asset('styles/home-contact.css') }}?v=20261016-1">
+<link rel="stylesheet" href="{{ asset('styles/home-layout.css') }}?v=20261016-1">
 
 <div class="public-home public-shell">
   {% include 'partials/_public_header.html.twig' with {
@@ -1756,7 +1469,7 @@
   } %}
 
   <section id="accueil" class="public-slider-shell">
-    {% include 'home/sections/_hero.html.twig' with { hero_full_width: true } %}
+    {% include 'home/sections/_showcase.html.twig' %}
   </section>
 
   <div class="legacy-public-content" aria-hidden="true">
@@ -2000,7 +1713,7 @@
           <div class="col-12 col-lg-7">
             <div class="intro-copy">
               <span class="section-eyebrow">3SK Parts Auto - Casablanca</span>
-              <h1 class="section-heading">Pieces Carrosserie & accessoires <span class="heading-accent">automobile</span></h1>
+              <h2 class="section-heading">Pieces Carrosserie & accessoires <span class="heading-accent">automobile</span></h2>
               <p class="section-copy mt-4 mb-0">
                 Basée à Casablanca depuis 2014, 3SK Parts Auto accompagne les acteurs de la rechange automobile avec une offre orientée
                 pièces carrosserie et accessoires, ainsi qu'un espace client dédié pour consulter le catalogue et préparer les commandes.
@@ -2040,191 +1753,12 @@
       </div>
     </section>
 
-    <section id="qui-sommes-nous" class="public-about-v2 section-space">
-      <div class="section-shell">
-        <div class="row align-items-center g-5">
-          <div class="col-12 col-lg-6">
-            <div class="about-visual">
-              <img loading="lazy" decoding="async" src="{{ optimized_asset('img/bg-section/stock-entrepot-pieces-carrosserie-automobile-3sk-parts-auto.jpeg') }}"
-                   alt="Stock de pièces carrosserie dans l'entrepôt 3SK Parts Auto">
-            </div>
-          </div>
-          <div class="col-12 col-lg-6">
-            <div class="about-copy">
-              <span class="section-eyebrow">Qui sommes-nous</span>
-              <h2 class="section-heading">3SK Parts <span class="heading-accent">Auto</span></h2>
-              <p class="section-copy mt-4">
-                3SK Parts Auto est une SARL marocaine créée en 2014, spécialisée dans l'achat, la vente,
-                l'importation et l'exportation de pièces carrosserie et accessoires pour automobiles.
-              </p>
-              <p class="section-copy mb-0">
-                L'entreprise intervient également sur les besoins liés aux tracteurs, engins agricoles, motos et cycles,
-                avec une activité orientée représentation, fourniture et distribution de composants pour véhicules.
-              </p>
-              <div class="about-metrics">
-                <div class="about-metric">
-                  <strong>2014</strong>
-                  <span>Année de création</span>
-                </div>
-                <div class="about-metric">
-                  <strong>B2B</strong>
-                  <span>Clientèle professionnelle</span>
-                </div>
-                <div class="about-metric">
-                  <strong>1M</strong>
-                  <span>Capital social en DHS</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="public-services-v2 section-space">
-      <div class="section-shell">
-        <div class="row align-items-center g-5">
-          <div class="col-12 col-lg-6">
-            <span class="section-eyebrow">Services</span>
-            <h2 class="section-heading">Une offre pour le <span class="heading-accent">terrain</span></h2>
-            <p class="section-copy mt-4">
-              3SK Parts Auto s'adresse aux professionnels qui recherchent un interlocuteur capable de centraliser
-              l'accès aux références, de fluidifier la préparation des commandes et de simplifier la relation commerciale.
-            </p>
-            <div class="service-lines">
-              <div class="service-line">
-                <i class="fa-solid fa-gears"></i>
-                <span>Distribution de pièces carrosserie et accessoires pour l'automobile</span>
-              </div>
-              <div class="service-line">
-                <i class="fa-solid fa-list-check"></i>
-                <span>Organisation claire des références pour faciliter la préparation des commandes</span>
-              </div>
-              <div class="service-line">
-                <i class="fa-solid fa-truck-fast"></i>
-                <span>Activité d'import-export pour approvisionner l'offre</span>
-              </div>
-              <div class="service-line">
-                <i class="fa-solid fa-user-lock"></i>
-                <span>Espace client pour consulter le catalogue et préparer les achats</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-lg-6">
-            <div class="stock-frame">
-              <div id="stockPhotoCarouselV2" class="carousel slide public-stock-carousel" data-bs-ride="carousel" data-bs-interval="4500">
-                <div class="carousel-indicators">
-                  {% for i in 1..5 %}
-                    <button type="button"
-                            data-bs-target="#stockPhotoCarouselV2"
-                            data-bs-slide-to="{{ loop.index0 }}"
-                            class="{{ loop.first ? 'active' : '' }}"
-                            {{ loop.first ? 'aria-current="true"' : '' }}
-                            aria-label="Photo {{ i }}"></button>
-                  {% endfor %}
-                </div>
-                <div class="carousel-inner">
-                  {% for i in 1..5 %}
-                    <div class="carousel-item {{ loop.first ? 'active' : '' }}">
-                      <img loading="lazy" decoding="async" src="{{ optimized_asset('img/bloc/' ~ i ~ '.png') }}" alt="Stock 3SK Parts Auto {{ i }}">
-                    </div>
-                  {% endfor %}
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#stockPhotoCarouselV2" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Précédent</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#stockPhotoCarouselV2" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Suivant</span>
-                </button>
-              </div>
-              <div class="stock-frame-copy">
-                <h3 class="mb-3">Un stock organisé pour répondre rapidement aux besoins de vos commandes.</h3>
-                <p class="section-copy mb-4">
-                  3SK Parts Auto s'appuie sur une organisation claire des références et des rayonnages pour faciliter la préparation,
-                  la disponibilité produit et la réactivité auprès des professionnels de l'automobile.
-                </p>
-                <a href="{{ path('app_login') }}" class="btn btn-light px-4 fw-bold">Espace client</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    {% include 'home/sections/_about.html.twig' %}
+    {% include 'home/sections/_services.html.twig' %}
 
     {% include 'home/sections/_partner_brands.html.twig' %}
 
-    <section id="contact" class="public-contact-v2">
-      <div class="contact-split">
-        <div class="contact-pane contact-pane-dark">
-          <div class="contact-pane-inner">
-            <span class="section-eyebrow">Espace client</span>
-            <h2>Un accès simple pour les clients déjà référencés</h2>
-            <p>
-              L'espace client permet de retrouver rapidement le catalogue, de constituer un panier et de suivre les commandes
-              dans un environnement dédié à l'activité professionnelle.
-            </p>
-            <div class="d-flex flex-wrap gap-2">
-              <a href="{{ path('app_login') }}" class="btn btn-primary btn-lg px-4">Entrer dans l'espace client</a>
-              <a href="#qui-sommes-nous" class="btn btn-outline-secondary btn-lg px-4">En savoir plus</a>
-            </div>
-          </div>
-        </div>
-        <div class="contact-pane contact-pane-light">
-          <div class="contact-pane-inner">
-            <span class="section-eyebrow">Contact</span>
-            <h2 class="section-heading">Nous <span class="heading-accent">contacter</span></h2>
-            <p class="section-copy mt-4 mb-0">Retrouvez 3SK Parts Auto à Casablanca pour vos demandes commerciales et vos besoins en pièces carrosserie & accessoires.</p>
-
-            <form class="contact-form" method="post" action="{{ path('home_contact') }}" data-contact-form>
-              <input type="hidden" name="_token" value="{{ csrf_token('public_contact') }}">
-
-              <div class="contact-form-honeypot" aria-hidden="true">
-                <label for="contact_website">Site web</label>
-                <input id="contact_website" name="website" type="text" tabindex="-1" autocomplete="off">
-              </div>
-
-              <div class="contact-form-field">
-                <label for="contact_name">Nom / Raison sociale *</label>
-                <input class="contact-form-control" id="contact_name" name="name" type="text" maxlength="150" autocomplete="name" required>
-              </div>
-
-              <div class="contact-form-field">
-                <label for="contact_email">Email *</label>
-                <input class="contact-form-control" id="contact_email" name="email" type="email" maxlength="180" autocomplete="email" required>
-              </div>
-
-              <div class="contact-form-field">
-                <label for="contact_phone">Téléphone</label>
-                <input class="contact-form-control" id="contact_phone" name="phone" type="tel" maxlength="50" autocomplete="tel">
-              </div>
-
-              <div class="contact-form-field">
-                <label for="contact_subject">Sujet *</label>
-                <input class="contact-form-control" id="contact_subject" name="subject" type="text" minlength="3" maxlength="180" required>
-              </div>
-
-              <div class="contact-form-field contact-form-field-wide">
-                <label for="contact_message">Message *</label>
-                <textarea class="contact-form-control" id="contact_message" name="message" minlength="10" maxlength="5000" required></textarea>
-              </div>
-
-              <div class="contact-form-field contact-form-field-wide">
-                <button class="contact-form-submit" type="submit" data-contact-submit>
-                  <i class="fa-solid fa-paper-plane"></i>
-                  <span data-contact-submit-label>Envoyer le message</span>
-                </button>
-              </div>
-
-              <div class="contact-form-field contact-form-field-wide">
-                <div class="contact-form-status" role="status" aria-live="polite" data-contact-status></div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
+    {% include 'home/sections/_contact.html.twig' %}
   </main>
 
   <script>

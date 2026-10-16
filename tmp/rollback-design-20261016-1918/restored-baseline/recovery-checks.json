@@ -1,0 +1,48 @@
+[
+  {
+    "id": "f3c1f0",
+    "matches": true,
+    "line": 781
+  },
+  {
+    "id": "ae3890",
+    "matches": true,
+    "line": 901
+  },
+  {
+    "id": "08f7d7",
+    "matches": true,
+    "line": 1346
+  },
+  {
+    "id": "deec50",
+    "matches": true,
+    "line": 1904
+  },
+  {
+    "id": "2a80fe",
+    "matches": true,
+    "line": 1701
+  },
+  {
+    "id": "full-source-prefix",
+    "matches": true,
+    "lines": 766
+  },
+  {
+    "id": "base-prefix",
+    "matches": true
+  },
+  {
+    "id": "global-style-prefix",
+    "matches": true
+  },
+  {
+    "id": "scss-original",
+    "matches": true
+  },
+  {
+    "id": "global-public-type",
+    "matches": true
+  }
+]

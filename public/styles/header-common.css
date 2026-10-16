@@ -1,0 +1,76 @@
+/* One brand header in both states; account/cart controls are connected additions. */
+.public-shell .showcase-topbar__inner { gap: 22px; min-height: 54px; padding: 6px 2.65%; }
+.public-shell .showcase-contact,
+.public-shell .showcase-contact strong,
+.public-shell .showcase-contact small,
+.public-shell .showcase-topbar__facts > span { font-size: 12px; line-height: 1.4; letter-spacing: 0; }
+.public-shell .showcase-search input { font: 400 16px/1.5 'Roboto', Arial, sans-serif !important; }
+.public-shell .showcase-topbar__inner > .showcase-join { margin-left: 0; }
+body.app-connected .connected-showcase-header .header-topbar > .container-fluid,
+body.app-connected .connected-showcase-header .header-main-shell > .container-fluid { padding: 0 !important; }
+body.app-connected .connected-showcase-header { font-family: 'Montserrat', Arial, sans-serif; }
+body.app-connected .connected-showcase-header .showcase-topbar__inner { gap: 22px; min-height: 54px; padding: 6px 2.65% !important; flex-wrap: nowrap; }
+body.app-connected .connected-showcase-header .showcase-contact + .hd-dropdown { margin-left: auto; }
+body.app-connected .connected-showcase-header .topbar-row .hd-dropdown + .hd-dropdown,
+body.app-connected .connected-showcase-header .topbar-row .hd-dropdown + .admin-settings-dropdown { margin-left: 0; }
+body.app-connected .connected-showcase-header .header-account-btn { min-height: 46px; padding: 12px 22px; border: 0; border-radius: 25px; background: var(--brand-orange) !important; color: var(--brand-anthracite) !important; font: 600 14px/1.3 'Montserrat', Arial, sans-serif; }
+body.app-connected .connected-showcase-header .header-account-btn:hover { background: var(--brand-orange-dark) !important; }
+body.app-connected .connected-showcase-header .header-main-row { gap: 24px !important; min-height: 96px; padding: 16px 2.65% !important; }
+body.app-connected .connected-showcase-header .brand-box { flex: 0 0 230px !important; width: 230px !important; min-width: 0 !important; padding: 0 !important; margin: 0 !important; border: 0; background: transparent; }
+body.app-connected .connected-showcase-header .brand-logo { display: block; width: 100% !important; max-width: none !important; height: auto !important; }
+body.app-connected .connected-showcase-header .brand-logo img { display: block; width: 100% !important; height: auto !important; max-height: 65px !important; object-fit: contain; }
+body.app-connected .connected-showcase-header .header-search { min-width: 0; }
+body.app-connected .connected-showcase-header .header-search .showcase-search { width: 100%; min-width: 0; height: 50px; border: 1px solid rgba(var(--brand-anthracite-rgb), .16); border-radius: 26px; box-shadow: none; }
+body.app-connected .connected-showcase-header .search-wrap { position: static; display: flex; align-items: center; width: 100%; min-width: 0; height: 100%; }
+body.app-connected .connected-showcase-header .search-ico { position: static; flex-shrink: 0; margin: 0 14px 0 20px; transform: none; color: var(--brand-muted); }
+body.app-connected .connected-showcase-header #InputRechercheProduit { flex: 1 1 0; min-width: 0; height: 100% !important; padding: 10px 0 !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; font: 400 16px/1.5 'Roboto', Arial, sans-serif !important; }
+body.app-connected .connected-showcase-header #InputRechercheProduit::placeholder { color: var(--brand-muted); font-weight: 400 !important; }
+body.app-connected .connected-showcase-header .showcase-search .voice-search-btn { position: static; flex: 0 0 40px; align-self: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--brand-blue); transform: none; }
+body.app-connected .connected-showcase-header .showcase-search .voice-search-btn:hover { background: var(--brand-bg); }
+body.app-connected .connected-showcase-header .voice-search-btn i { font-size: 16px; }
+body.app-connected .connected-showcase-header .showcase-search .voice-search-btn.is-listening { color: #B02A37; background: rgba(176, 42, 55, .08); }
+body.app-connected .connected-showcase-header .header-search-submit { flex: 0 0 auto; align-self: stretch; padding: 0 25px; border: 0; border-radius: 26px; background: var(--brand-blue); color: var(--brand-surface); font: 600 13px/1.4 'Montserrat', Arial, sans-serif; }
+body.app-connected .connected-showcase-header .header-search-submit:hover { background: var(--brand-blue-dark); }
+body.app-connected .connected-showcase-header .indicator-btn { min-height: 60px; border-radius: 8px; }
+body.app-connected .connected-showcase-header .header__navbar { border-bottom: 1px solid rgba(var(--brand-blue-rgb), .14) !important; }
+body.app-connected .connected-showcase-header .header-wrap { border-bottom: 0 !important; }
+
+@media (max-width: 1599px) {
+  .public-shell .showcase-topbar__facts { display: none; }
+  .public-shell .showcase-topbar__inner > .showcase-join { margin-left: auto; }
+}
+@media (max-width: 1530px) {
+  body.app-connected .connected-showcase-header .header-main-row { gap: 18px !important; }
+  body.app-connected .connected-showcase-header .brand-box { flex-basis: 195px !important; width: 195px !important; }
+  body.app-connected .connected-showcase-header .header-search-submit { padding-inline: 18px; }
+}
+@media (max-width: 1199px) {
+  .public-shell .showcase-contact--location { display: none; }
+  body.app-connected .connected-showcase-header .header-main-row .indicator-deals { display: none; }
+}
+@media (max-width: 991px) {
+  .public-shell .showcase-topbar__inner,
+  body.app-connected .connected-showcase-header .showcase-topbar__inner { gap: 8px; min-height: 45px; padding: 8px 12px !important; }
+  .public-shell .showcase-contact { gap: 7px; }
+  .public-shell .showcase-search input { font-size: 16px; }
+  body.app-connected .connected-showcase-header .showcase-contact + .hd-dropdown { margin-left: auto; }
+  body.app-connected .connected-showcase-header .header-account-btn { display: grid; place-items: center; min-width: 36px; width: 36px; min-height: 36px; height: 36px; padding: 0; font-size: 14px; }
+  body.app-connected .connected-showcase-header .header-account-btn span { display: none; }
+  body.app-connected .connected-showcase-header .header-topbar .hd-iconbtn,
+  body.app-connected .connected-showcase-header .header-topbar .admin-settings-btn { min-width: 36px !important; width: 36px !important; min-height: 36px !important; height: 36px !important; padding: 0 !important; }
+  body.app-connected .connected-showcase-header .admin-settings-btn span { display: none; }
+  body.app-connected .connected-showcase-header .admin-settings-btn i { margin: 0 !important; }
+  body.app-connected .connected-showcase-header .header-main-row { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; gap: 14px !important; min-height: 0; padding: 15px 18px !important; }
+  body.app-connected .connected-showcase-header .brand-box { grid-row: 1; grid-column: 1; width: 170px !important; max-width: 100%; }
+  body.app-connected .connected-showcase-header .brand-logo img { max-height: 43px !important; }
+  body.app-connected .connected-showcase-header .mobile-actions { grid-row: 1; grid-column: 2; margin: 0; }
+  body.app-connected .connected-showcase-header .header-search { grid-row: 2; grid-column: 1 / -1; width: 100%; margin-top: 0 !important; }
+  body.app-connected .connected-showcase-header .header-search .showcase-search { height: 43px; }
+  body.app-connected .connected-showcase-header .search-ico { margin-inline: 14px 10px; }
+  body.app-connected .connected-showcase-header .header-search-submit { padding-inline: 14px; font-size: 12px; }
+  body.app-connected .connected-showcase-header .showcase-search .voice-search-btn { flex-basis: 32px; width: 32px; height: 32px; }
+}
+@media (max-width: 360px) {
+  body.app-connected .connected-showcase-header .brand-box { width: 145px !important; }
+  body.app-connected .connected-showcase-header .mobile-actions .hd-iconbtn[aria-controls="cartOffcanvas"] { min-width: 78px !important; width: 78px !important; }
+}

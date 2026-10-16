@@ -14,8 +14,8 @@
 
   .connected-slider-shell {
     padding: 0;
-    background: #102e63;
-    border-bottom: 4px solid #ff9100;
+    background: var(--brand-blue-dark);
+    border-bottom: 4px solid var(--brand-orange);
   }
 
   .connected-slider-shell > .container-fluid {
@@ -44,7 +44,7 @@
     font-weight: 550;
     margin: 0;
     letter-spacing: -.02em;
-    color: #111827;
+    color: var(--brand-ink);
   }
 
   .home-section-head p{
@@ -177,9 +177,9 @@
   }
 
   .chip.active{
-    border: solid 2px #315fbb;
+    border: solid 2px var(--brand-blue);
     box-shadow: 0 10px 20px rgba(13,110,253,.10);
-    color: #315fbb;
+    color: var(--brand-blue);
   }
 
   .chip-top{
@@ -279,75 +279,6 @@
     border-radius:999px;
   }
 
-  .connected-brands .public-brands-v2{
-    padding: 4rem 0;
-    background: #fff;
-    border-top: 1px solid rgba(16,24,40,.08);
-  }
-  .connected-brands .section-shell{
-    width: 100%;
-    padding-inline: clamp(16px, 3vw, 42px);
-  }
-  .connected-brands .brands-heading{
-    display: grid;
-    justify-items: center;
-    gap: 1rem;
-    margin-bottom: 3rem;
-    text-align: center;
-  }
-  .connected-brands .section-eyebrow{
-    color: #f47b20;
-    font-size: .8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-  .connected-brands .section-eyebrow::before{
-    content: '// ';
-  }
-  .connected-brands .section-heading{
-    margin: 1rem 0 0;
-    color: #152238;
-    font-size: 2.5rem;
-    font-weight: 800;
-    text-transform: uppercase;
-  }
-  .connected-brands .heading-accent{
-    color: #f47b20;
-  }
-  .connected-brands .section-copy{
-    max-width: 650px;
-    margin: 0;
-    color: #596579;
-  }
-  .connected-brands .brand-row{
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    border-top: 1px solid rgba(16,24,40,.12);
-    border-left: 1px solid rgba(16,24,40,.12);
-  }
-  .connected-brands .brand-item{
-    min-height: 150px;
-    display: grid;
-    place-items: center;
-    padding: 1.25rem;
-    border-right: 1px solid rgba(16,24,40,.12);
-    border-bottom: 1px solid rgba(16,24,40,.12);
-    background: #fff;
-  }
-  .connected-brands .brand-item img{
-    width: 100%;
-    max-width: 150px;
-    max-height: 82px;
-    object-fit: contain;
-  }
-  @media (max-width: 991px){
-    .connected-brands .brand-row{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  }
-  @media (max-width: 575px){
-    .connected-brands .section-heading{ font-size: 2rem; }
-    .connected-brands .brand-row{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .connected-brands .brand-item{ min-height: 120px; }
-  }
 </style>
 
 <section class="connected-slider-shell">
@@ -365,24 +296,25 @@
            data-order-b='["vehicle","brand"]'
            data-title="Véhicules par marque">
 
-    <div class="home-section-head">
-      <h2 data-titlebox></h2>
-      <p>Choisissez une marque de véhicule puis une sous-marque</p>
-    </div>
-
-    <div class="home-toolbar">
-      <div class="input-group input-group-sm">
-        <span class="input-group-text">🔎</span>
-        <input class="form-control" placeholder="Rechercher une marque ou une sous-marque…" data-search>
+    <div class="home-section-top">
+      <div class="home-section-head">
+        <h2 data-titlebox></h2>
+        <p>Choisissez une marque de véhicule puis une sous-marque</p>
+      </div>
+      <div class="home-toolbar">
+        <div class="input-group input-group-sm">
+          <span class="input-group-text"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span>
+          <input class="form-control" placeholder="Rechercher une marque ou une sous-marque…" data-search>
+        </div>
       </div>
     </div>
 
     <div class="home-grid" data-grid></div>
 
     <div class="home-actions">
-      <button class="btn btn-outline-secondary home-btn-soft" data-back disabled>← Retour</button>
-      <button class="btn btn-outline-danger home-btn-soft" data-reset>Reset</button>
-      <button class="btn btn-primary home-btn-soft" data-go disabled>Voir les articles →</button>
+      <button class="btn btn-outline-secondary home-btn-soft" data-back disabled><i class="fa-solid fa-arrow-left" aria-hidden="true"></i>Retour</button>
+      <button class="btn btn-outline-secondary home-btn-soft" data-reset><i class="fa-solid fa-rotate-left" aria-hidden="true"></i>Reset</button>
+      <button class="btn btn-primary home-btn-soft" data-go disabled>Voir les articles<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
     </div>
 
     <div class="home-hidden-ui">

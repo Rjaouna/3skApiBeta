@@ -1,0 +1,76 @@
+public 1440 /: HTTP 200, contrast 0, old colors 0
+public 390 /: HTTP 200, contrast 0, old colors 0
+public 1440 /login: HTTP 200, contrast 0, old colors 0
+public 390 /login: HTTP 200, contrast 0, old colors 0
+admin 1440 /: HTTP 200, contrast 0, old colors 0
+admin 390 /: HTTP 200, contrast 0, old colors 0
+admin 1440 /articles: HTTP 200, contrast 0, old colors 0
+admin 390 /articles: HTTP 200, contrast 0, old colors 0
+admin 1440 /panier: HTTP 200, contrast 0, old colors 0
+admin 390 /panier: HTTP 200, contrast 0, old colors 0
+admin 1440 /mes-commandes: HTTP 200, contrast 0, old colors 0
+admin 390 /mes-commandes: HTTP 200, contrast 0, old colors 0
+admin 1440 /mon-profil: HTTP 200, contrast 0, old colors 0
+admin 390 /mon-profil: HTTP 200, contrast 0, old colors 0
+admin 1440 /profil: HTTP 200, contrast 0, old colors 0
+admin 390 /profil: HTTP 200, contrast 0, old colors 0
+admin 1440 /mes-notifications: HTTP 200, contrast 0, old colors 0
+admin 390 /mes-notifications: HTTP 200, contrast 0, old colors 0
+admin 1440 /admin/dashboard: HTTP 200, contrast 0, old colors 0
+admin 390 /admin/dashboard: HTTP 200, contrast 0, old colors 0
+admin 1440 /admin/orders: HTTP 200, contrast 0, old colors 0
+admin 390 /admin/orders: HTTP 200, contrast 0, old colors 0
+admin 1440 /admin/clients: HTTP 200, contrast 0, old colors 0
+admin 390 /admin/clients: HTTP 200, contrast 0, old colors 0
+admin 1440 /admin/company-setting: HTTP 200, contrast 0, old colors 0
+admin 390 /admin/company-setting: HTTP 200, contrast 0, old colors 0
+admin 1440 /admin/import: HTTP 200, contrast 0, old colors 0
+admin 390 /admin/import: HTTP 200, contrast 0, old colors 0
+admin 1440 /admin/import-source: HTTP 200, contrast 0, old colors 0
+admin 390 /admin/import-source: HTTP 200, contrast 0, old colors 0
+admin 1440 /admin/category-reductions: HTTP 200, contrast 0, old colors 0
+admin 390 /admin/category-reductions: HTTP 200, contrast 0, old colors 0
+admin 1440 /admin/user-family-discounts: HTTP 200, contrast 0, old colors 0
+admin 390 /admin/user-family-discounts: HTTP 200, contrast 0, old colors 0
+admin 1440 /admin/user-family-discounts/new: HTTP 200, contrast 0, old colors 0
+admin 390 /admin/user-family-discounts/new: HTTP 200, contrast 0, old colors 0
+admin 1440 /admin/hero-slides/: HTTP 200, contrast 0, old colors 0
+admin 390 /admin/hero-slides/: HTTP 200, contrast 0, old colors 0
+admin 1440 /admin/hero-slides/new: HTTP 200, contrast 0, old colors 0
+admin 390 /admin/hero-slides/new: HTTP 200, contrast 0, old colors 0
+admin 1440 /admin/users/import-wordpress: HTTP 200, contrast 0, old colors 0
+admin 390 /admin/users/import-wordpress: HTTP 200, contrast 0, old colors 0
+admin 1440 /admin/hero-slides/1/edit: HTTP 200, contrast 0, old colors 0
+admin 390 /admin/hero-slides/1/edit: HTTP 200, contrast 0, old colors 0
+admin 1440 /articles/SH8616-R: HTTP 200, contrast 0, old colors 0
+admin 390 /articles/SH8616-R: HTTP 200, contrast 0, old colors 0
+admin 1440 /admin/orders/2: HTTP 404, contrast 0, old colors 0
+admin 390 /admin/orders/2: HTTP 404, contrast 0, old colors 0
+client 1440 /: HTTP 200, contrast 0, old colors 0
+client 390 /: HTTP 200, contrast 0, old colors 0
+client 1440 /articles: HTTP 200, contrast 0, old colors 0
+client 390 /articles: HTTP 200, contrast 0, old colors 0
+client 1440 /panier: HTTP 200, contrast 0, old colors 0
+client 390 /panier: HTTP 200, contrast 0, old colors 0
+client 1440 /mes-commandes: HTTP 200, contrast 0, old colors 0
+client 390 /mes-commandes: HTTP 200, contrast 0, old colors 0
+client 1440 /mon-profil: HTTP 200, contrast 0, old colors 0
+client 390 /mon-profil: HTTP 200, contrast 0, old colors 0
+client 1440 /profil: HTTP 200, contrast 0, old colors 0
+client 390 /profil: HTTP 200, contrast 0, old colors 0
+client 1440 /mes-notifications: HTTP 200, contrast 0, old colors 0
+client 390 /mes-notifications: HTTP 200, contrast 0, old colors 0
+client 1440 /articles/SH8616-R: HTTP 200, contrast 0, old colors 0
+client 390 /articles/SH8616-R: HTTP 200, contrast 0, old colors 0
+preview 1440 admin-order.html: contrast 0
+preview 390 admin-order.html: contrast 0
+preview 1440 client-order.html: contrast 0
+preview 390 client-order.html: contrast 0
+preview 1440 error-403.html: contrast 0
+preview 390 error-403.html: contrast 0
+preview 1440 error-404.html: contrast 0
+preview 390 error-404.html: contrast 0
+preview 1440 error-500.html: contrast 0
+preview 390 error-500.html: contrast 0
+preview 1440 order-print.html: contrast 0
+preview 390 order-print.html: contrast 0

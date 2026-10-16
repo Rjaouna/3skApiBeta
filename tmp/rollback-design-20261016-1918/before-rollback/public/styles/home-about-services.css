@@ -1,0 +1,68 @@
+body.app-public .public-main-v2 .home-reference-section { position: relative; background: var(--brand-bg); }
+.home-reference-section .row { display: grid; align-items: center; margin: 0; }
+.home-reference-section .row > .col-12 { width: auto; min-width: 0; padding: 0; }
+.home-about-reference .about-layout { grid-template-columns: minmax(0, .4fr) minmax(0, .6fr); gap: 64px; }
+.home-about-reference .about-visual { position: relative; isolation: isolate; width: 100%; padding: 12px 0 0 12px; }
+.home-about-reference .about-visual::before { content: ''; position: absolute; z-index: -1; top: 0; left: 0; width: 110px; height: 110px; border-radius: var(--brand-radius); background: var(--brand-blue); }
+.home-about-reference .about-visual img { display: block; width: 100%; height: auto; aspect-ratio: 1; border: 1px solid var(--brand-border); border-radius: var(--brand-radius); object-fit: cover; object-position: center; }
+.home-about-reference .about-visual__badge { position: absolute; right: 16px; bottom: 16px; display: grid; place-items: center; width: 52px; height: 52px; border-radius: var(--brand-radius); color: var(--brand-ink); background: var(--brand-orange); font-size: 24px; }
+.home-about-reference .about-copy__text { margin-top: 24px; }
+.home-about-reference .about-copy__text p { margin: 0; }
+.home-about-reference .about-copy__text p + p { margin-top: 16px; }
+.home-about-reference .about-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+.home-about-reference .about-metric { display: flex; align-items: start; gap: 14px; min-width: 0; padding: 20px; border: 1px solid var(--brand-border); border-radius: var(--brand-radius); background: var(--brand-surface); }
+.home-about-reference .about-metric__icon { display: grid; flex: 0 0 40px; place-items: center; width: 40px; height: 40px; border-radius: var(--brand-radius); color: var(--brand-blue); background: var(--brand-blue-soft); font-size: 20px; }
+.home-about-reference .about-metric:nth-child(2) .about-metric__icon { color: var(--brand-orange); background: var(--brand-orange-soft); }
+.home-about-reference .about-metric__text { min-width: 0; }
+.home-about-reference .about-metric strong { display: block; color: var(--brand-blue); font-size: 28px; font-weight: 700 !important; line-height: 1.2; }
+.home-about-reference .about-metric__text > span { display: block; margin-top: 6px; color: var(--brand-muted); font-size: 14px; line-height: 1.5; }
+body.app-public .public-main-v2 .home-services-reference { background: var(--brand-surface); }
+.home-services-reference .services-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; }
+.home-services-reference .services-copy__intro { max-width: 65ch; margin: 20px 0 0; }
+.home-services-reference .service-lines { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 28px; }
+.home-services-reference .service-line { display: grid; grid-template-columns: 40px minmax(0, 1fr); align-content: start; gap: 12px; min-width: 0; }
+.home-services-reference .service-line__icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--brand-radius); color: var(--brand-orange); background: var(--brand-orange-soft); font-size: 20px; }
+body.app-public .public-main-v2 .home-services-reference .service-line h3 { margin: 0 0 8px; color: var(--brand-ink); font-size: 16px !important; font-weight: 600 !important; line-height: 1.5; }
+.home-services-reference .service-line p { margin: 0; color: var(--brand-muted); font-size: 15px; line-height: 1.5; }
+.home-services-reference .stock-frame { overflow: hidden; border: 1px solid var(--brand-border); border-radius: var(--brand-radius); background: var(--brand-surface); box-shadow: var(--brand-shadow); }
+.home-services-reference .public-stock-carousel { width: 100%; height: auto; max-height: 380px; aspect-ratio: 1.6; background: var(--brand-surface); border-bottom: 1px solid var(--brand-border); }
+.home-services-reference .public-stock-carousel .carousel-inner, .home-services-reference .public-stock-carousel .carousel-item { height: 100%; }
+.home-services-reference .public-stock-carousel img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
+.home-services-reference .public-stock-carousel .carousel-control-prev, .home-services-reference .public-stock-carousel .carousel-control-next { top: 50%; bottom: auto; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--brand-border); border-radius: 50%; color: var(--brand-blue); background: var(--brand-surface); opacity: 1; transform: translateY(-50%); font-size: 18px; box-shadow: var(--brand-shadow-sm); transition: color var(--brand-motion), border-color var(--brand-motion); }
+.home-services-reference .public-stock-carousel .carousel-control-prev { left: 16px; }
+.home-services-reference .public-stock-carousel .carousel-control-next { right: 16px; }
+.home-services-reference .public-stock-carousel .carousel-control-prev:hover, .home-services-reference .public-stock-carousel .carousel-control-next:hover { color: var(--brand-blue-dark); border-color: var(--brand-blue); }
+.home-services-reference .public-stock-carousel .carousel-indicators { right: 0; bottom: 8px; left: 0; align-items: center; gap: 4px; margin: 0; }
+.home-services-reference .public-stock-carousel .carousel-indicators button { position: relative; flex: 0 0 28px; width: 28px; height: 28px; margin: 0; padding: 0; border: 0; background: transparent; opacity: 1; }
+.home-services-reference .public-stock-carousel .carousel-indicators button::before { content: ''; position: absolute; top: 12px; left: 4px; width: 20px; height: 4px; border-radius: 2px; background: var(--brand-border-strong); }
+.home-services-reference .public-stock-carousel .carousel-indicators button.active::before { background: var(--brand-orange); }
+.home-services-reference .stock-frame-copy { padding: 24px; }
+body.app-public .public-main-v2 .home-services-reference .stock-frame-copy h3 { margin: 0 0 12px; color: var(--brand-ink); font-size: 22px !important; font-weight: 700 !important; line-height: 1.35; }
+.home-services-reference .stock-frame-copy p { margin: 0; font-size: 15px; line-height: 1.6; }
+.home-services-reference .stock-frame-copy .btn { margin-top: 20px; }
+
+@media (max-width: 1199px) {
+  .home-about-reference .about-layout { gap: 32px; }
+  .home-about-reference .about-metric { flex-direction: column; gap: 12px; padding: 16px; }
+  .home-services-reference .services-layout { gap: 32px; }
+  .home-services-reference .service-lines { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .home-services-reference .public-stock-carousel { aspect-ratio: 4 / 3; }
+}
+@media (max-width: 991px) {
+  .home-about-reference .about-layout, .home-services-reference .services-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .home-about-reference .about-visual { max-width: 600px; margin-inline: auto; }
+  .home-about-reference .about-metric { flex-direction: row; }
+  .home-services-reference .service-lines { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .home-services-reference .public-stock-carousel { max-height: 420px; }
+}
+@media (max-width: 767px) {
+  .home-about-reference .about-metrics { grid-template-columns: minmax(0, 1fr); gap: 12px; margin-top: 24px; }
+  .home-about-reference .about-metric { align-items: center; gap: 16px; }
+  .home-about-reference .about-metric strong { font-size: 24px; }
+  .home-about-reference .about-visual__badge { width: 44px; height: 44px; font-size: 22px; }
+  .home-services-reference .service-lines { grid-template-columns: minmax(0, 1fr); }
+  .home-services-reference .stock-frame-copy { padding: 20px; }
+  body.app-public .public-main-v2 .home-services-reference .stock-frame-copy h3 { font-size: 20px !important; }
+  .home-services-reference .public-stock-carousel .carousel-control-prev { left: 8px; }
+  .home-services-reference .public-stock-carousel .carousel-control-next { right: 8px; }
+}

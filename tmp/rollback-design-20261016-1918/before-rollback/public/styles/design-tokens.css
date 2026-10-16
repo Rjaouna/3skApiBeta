@@ -1,0 +1,65 @@
+:root {
+  --brand-surface: #FFFFFF;
+  --brand-bg: #F6F8FB;
+  --brand-gray: #F5F6F8;
+  --brand-anthracite: #232B38;
+  --brand-anthracite-rgb: 35, 43, 56;
+  --brand-blue: #315FB7;
+  --brand-blue-rgb: 49, 95, 183;
+  --brand-orange: #FF8A00;
+  --brand-orange-rgb: 255, 138, 0;
+  --brand-ink: var(--brand-anthracite);
+  --brand-black: var(--brand-anthracite);
+  --brand-muted: #627187;
+  --brand-blue-dark: color-mix(in srgb, var(--brand-blue) 85%, var(--brand-anthracite));
+  --brand-blue-soft: rgba(var(--brand-blue-rgb), .06);
+  --brand-orange-dark: color-mix(in srgb, var(--brand-orange) 85%, var(--brand-anthracite));
+  --brand-orange-soft: rgba(var(--brand-orange-rgb), .09);
+  --brand-surface-soft: var(--brand-bg);
+  --brand-border: #E5E9F0;
+  --brand-border-strong: color-mix(in srgb, var(--brand-muted) 55%, var(--brand-surface));
+  --brand-shadow: 0 6px 20px rgba(var(--brand-anthracite-rgb), .06);
+  --brand-shadow-sm: 0 2px 8px rgba(var(--brand-anthracite-rgb), .035);
+  --brand-radius: 8px;
+  --brand-radius-sm: 6px;
+  --brand-control-height: 46px;
+  --brand-focus: 0 0 0 3px rgba(var(--brand-blue-rgb), .16);
+  --brand-font: 'Roboto', Arial, sans-serif;
+  --brand-gutter: 40px;
+  --brand-section-space: 64px;
+  --brand-motion: 160ms ease;
+  --bs-primary: var(--brand-blue);
+  --bs-primary-rgb: var(--brand-blue-rgb);
+  --bs-secondary: var(--brand-orange);
+  --bs-secondary-rgb: var(--brand-orange-rgb);
+  --bs-warning: var(--brand-orange);
+  --bs-warning-rgb: var(--brand-orange-rgb);
+  --bs-body-bg: var(--brand-bg);
+  --bs-body-color: var(--brand-ink);
+  --bs-body-font-family: var(--brand-font);
+  --bs-secondary-color: var(--brand-muted);
+  --bs-tertiary-bg: var(--brand-bg);
+  --bs-gray-100: var(--brand-bg);
+  --bs-gray-200: var(--brand-border);
+  --bs-gray-600: var(--brand-muted);
+  --bs-link-color: var(--brand-blue);
+  --bs-link-color-rgb: var(--brand-blue-rgb);
+  --bs-link-hover-color: var(--brand-blue-dark);
+  --bs-link-hover-color-rgb: var(--brand-blue-rgb);
+  --bs-border-color: var(--brand-border);
+  --public-blue: var(--brand-blue);
+  --public-navy: var(--brand-blue-dark);
+  --public-orange: var(--brand-orange);
+  --public-ink: var(--brand-ink);
+  --public-muted: var(--brand-muted);
+}
+
+@media (max-width: 1199px) {
+  :root { --brand-gutter: 24px; --brand-section-space: 48px; }
+}
+@media (max-width: 767px) {
+  :root { --brand-gutter: 20px; --brand-section-space: 40px; }
+}
+@media (max-width: 374px) {
+  :root { --brand-gutter: 16px; }
+}
