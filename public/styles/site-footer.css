@@ -77,7 +77,7 @@ body .site-footer.site-footer--showcase {
 .site-footer--showcase .site-footer__social a { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%; background: var(--brand-surface); color: var(--brand-blue); box-shadow: 0 8px 20px rgba(var(--brand-blue-rgb), .05); font-size: 23px; }
 .site-footer--showcase .site-footer__social a:hover { background: var(--brand-blue); color: var(--brand-surface); }
 .site-footer--showcase .site-footer__support { display: grid; gap: 28px; }
-.site-footer--showcase .site-footer__panel { padding: 24px; border: 1px solid rgba(255, 255, 255, .95); border-radius: 16px; background: rgba(255, 255, 255, .88); box-shadow: 0 12px 30px rgba(var(--brand-blue-rgb), .025); }
+.site-footer--showcase .site-footer__panel { padding: 24px;  }
 .site-footer--showcase .site-footer__heading-row { display: flex; align-items: start; gap: 16px; margin-bottom: 22px; }
 .site-footer--showcase .site-footer__heading-row > i { flex: 0 0 30px; color: var(--brand-blue); font-size: 30px; text-align: center; }
 .site-footer--showcase .site-footer__heading { margin: 1px 0 0; color: var(--brand-anthracite); font: 600 18px/1.4 'Roboto', Arial, sans-serif !important; text-transform: uppercase; }
