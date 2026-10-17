@@ -200,7 +200,7 @@
 
   .catalog-anomalies-table {
     width: 100%;
-    min-width: 800px;
+    min-width: 920px;
     margin: 0;
     border-collapse: collapse;
   }
@@ -230,6 +230,13 @@
   .catalog-anomalies-ref {
     color: var(--brand-blue);
     font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .catalog-anomalies-unique-id {
+    color: var(--anomaly-muted);
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 12px;
     white-space: nowrap;
   }
 
@@ -365,6 +372,7 @@
         <thead>
           <tr>
             <th>Référence</th>
+            <th>UniqueId</th>
             <th>Article</th>
             <th>Marque</th>
             <th>Véhicule</th>
@@ -373,7 +381,7 @@
           </tr>
         </thead>
         <tbody data-rows>
-          <tr><td colspan="6" class="catalog-anomalies-empty">Chargement des anomalies...</td></tr>
+          <tr><td colspan="7" class="catalog-anomalies-empty">Chargement des anomalies...</td></tr>
         </tbody>
       </table>
     </div>
@@ -463,13 +471,14 @@
   function render(items) {
     if (!items.length) {
       const label = state.type === 'missing_image' ? 'Aucun article sans photo.' : 'Aucun article à prix nul.';
-      rows.innerHTML = `<tr><td colspan="6" class="catalog-anomalies-empty">${label}</td></tr>`;
+      rows.innerHTML = `<tr><td colspan="7" class="catalog-anomalies-empty">${label}</td></tr>`;
       return;
     }
 
     rows.innerHTML = items.map(item => `
       <tr data-row data-unique-id="${escapeHtml(item.uniqueId)}">
         <td><span class="catalog-anomalies-ref">${escapeHtml(item.code || item.uniqueId)}</span></td>
+        <td><span class="catalog-anomalies-unique-id">${escapeHtml(item.uniqueId)}</span></td>
         <td><span class="catalog-anomalies-designation" title="${escapeHtml(item.designation)}">${escapeHtml(item.designation || '-')}</span></td>
         <td class="catalog-anomalies-meta">${escapeHtml(item.brand || '-')}</td>
         <td class="catalog-anomalies-meta">${escapeHtml(item.vehicle || '-')}</td>
@@ -489,7 +498,7 @@
   }
 
   async function load() {
-    rows.innerHTML = '<tr><td colspan="6" class="catalog-anomalies-empty">Chargement des anomalies...</td></tr>';
+    rows.innerHTML = '<tr><td colspan="7" class="catalog-anomalies-empty">Chargement des anomalies...</td></tr>';
     const url = new URL(endpoint, window.location.origin);
     url.searchParams.set('type', state.type);
     url.searchParams.set('page', String(state.page));
@@ -506,7 +515,7 @@
       render(data.items || []);
       updatePage();
     } catch {
-      rows.innerHTML = '<tr><td colspan="6" class="catalog-anomalies-empty">Chargement temporairement indisponible.</td></tr>';
+      rows.innerHTML = '<tr><td colspan="7" class="catalog-anomalies-empty">Chargement temporairement indisponible.</td></tr>';
     }
   }
 
