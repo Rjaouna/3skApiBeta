@@ -71,22 +71,6 @@
     }
   }
 
-  .home-actions{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:.6rem;
-    flex-wrap:wrap;
-    margin-top: 1.1rem;
-  }
-
-  .home-btn-soft{
-    border-radius: 999px;
-    min-width: 140px;
-    font-weight: 700;
-    box-shadow: 0 8px 22px rgba(0,0,0,.05);
-  }
-
   .home-hidden-ui{
     display:none !important;
   }
@@ -193,7 +177,8 @@
     white-space:nowrap;
   }
 
-  .chip-vehicle{
+  .chip-vehicle,
+  .chip-supplier{
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -201,19 +186,22 @@
     padding: .70rem .70rem;
   }
 
-  .chip-vehicle .chip-left{
+  .chip-vehicle .chip-left,
+  .chip-supplier .chip-left{
     min-width:0;
     flex:1;
   }
 
-  .chip-vehicle .chip-label{
+  .chip-vehicle .chip-label,
+  .chip-supplier .chip-label{
     display:-webkit-box;
     -webkit-line-clamp:2;
     -webkit-box-orient:vertical;
     overflow:hidden;
   }
 
-  .chip-vehicle .chip-mini{
+  .chip-vehicle .chip-mini,
+  .chip-supplier .chip-mini{
     margin-top:.22rem;
   }
 
@@ -293,12 +281,6 @@
 
     <div class="home-grid" data-grid></div>
 
-    <div class="home-actions">
-      <button class="btn btn-outline-secondary home-btn-soft" data-back disabled><i class="fa-solid fa-arrow-left" aria-hidden="true"></i>Retour</button>
-      <button class="btn btn-outline-secondary home-btn-soft" data-reset><i class="fa-solid fa-rotate-left" aria-hidden="true"></i>Reset</button>
-      <button class="btn btn-primary home-btn-soft" data-go disabled>Voir les articles<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
-    </div>
-
     <div class="home-hidden-ui">
       <span data-badge></span>
       <div data-stepper></div>
@@ -339,10 +321,6 @@ class FacetBlock {
     this.search = root.querySelector('[data-search]');
     this.grid = root.querySelector('[data-grid]');
 
-    this.backBtn = root.querySelector('.home-actions [data-back]');
-    this.resetBtn = root.querySelector('.home-actions [data-reset]');
-    this.goBtn = root.querySelector('.home-actions [data-go]');
-
     const title = root.dataset.title || '';
     const titleBox = root.querySelector('[data-titlebox]');
     if (titleBox) titleBox.textContent = title;
@@ -367,9 +345,12 @@ class FacetBlock {
     });
 
     if (this.search) this.search.addEventListener('input', ()=> this.applyFilter());
-    if (this.backBtn) this.backBtn.addEventListener('click', ()=> this.back());
-    if (this.resetBtn) this.resetBtn.addEventListener('click', ()=> this.reset());
-    if (this.goBtn) this.goBtn.addEventListener('click', ()=> this.go());
+    root.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !this.search?.value && this.stepIndex > 0) {
+        event.preventDefault();
+        this.back();
+      }
+    });
 
     this.renderOrderButtons();
     this.refresh();
@@ -493,9 +474,6 @@ class FacetBlock {
     this.renderStepper();
     this.renderCrumbs();
 
-    if (this.backBtn) this.backBtn.disabled = this.stepIndex === 0;
-    if (this.goBtn) this.goBtn.disabled = !this.goAllowed();
-
     this.setBadge('CHARGEMENT', 'light');
     this.skeleton();
 
@@ -513,14 +491,11 @@ class FacetBlock {
       this.renderCrumbs();
       this.renderGrid();
 
-      if (this.goBtn) this.goBtn.disabled = !this.goAllowed();
-      if (this.backBtn) this.backBtn.disabled = this.stepIndex === 0;
     } catch(e){
       this.setBadge('ERROR', 'danger');
       if (this.grid) {
         this.grid.innerHTML = `<div class="text-danger small">Erreur: ${this.escape(e.message || e)}</div>`;
       }
-      if (this.goBtn) this.goBtn.disabled = true;
     }
   }
 
@@ -598,7 +573,14 @@ class FacetBlock {
       btn.type = 'button';
 
       const isVehicleChip = (key === 'vehicle' || key === 'vehicleBrand');
-      btn.className = 'chip' + (isVehicleChip ? ' chip-vehicle' : '') + (v === selected ? ' active' : '');
+      const supplierLogo = key === 'brand'
+        ? (window.ProductBrandLogos?.source?.(pretty) || '')
+        : '';
+      const isSupplierChip = !!supplierLogo;
+      btn.className = 'chip'
+        + (isVehicleChip ? ' chip-vehicle' : '')
+        + (isSupplierChip ? ' chip-supplier' : '')
+        + (v === selected ? ' active' : '');
 
       if (isVehicleChip){
         const imageKey = item.imageKey || pretty;
@@ -649,6 +631,26 @@ class FacetBlock {
           </div>
           <div class="chip-mini">${miniText}</div>
         `;
+
+        if (supplierLogo) {
+          btn.innerHTML = `
+            <div class="chip-left">
+              <div class="chip-top">
+                <div class="chip-label">${this.escape(pretty)}</div>
+                <span class="chip-tag">${count} art.</span>
+              </div>
+              <div class="chip-mini">${miniText}</div>
+            </div>
+            <div class="chip-logoWrap" aria-hidden="true">
+              <img class="chip-logo" src="${this.escape(supplierLogo)}" alt="" loading="lazy">
+            </div>
+          `;
+        }
+      }
+
+      const chipLogo = btn.querySelector('.chip-logo');
+      if (chipLogo) {
+        chipLogo.addEventListener('error', () => chipLogo.closest('.chip-logoWrap')?.remove(), { once: true });
       }
 
       btn.addEventListener('click', ()=> this.select(v));
@@ -699,8 +701,7 @@ class FacetBlock {
           this.renderCrumbs();
           this.renderGrid();
 
-          if (this.goBtn) this.goBtn.disabled = !this.goAllowed();
-          if (this.backBtn) this.backBtn.disabled = this.stepIndex === 0;
+          this.go();
           return;
         }
 
@@ -714,7 +715,7 @@ class FacetBlock {
       }
     }
 
-    await this.refresh();
+    this.go();
   }
 
   back(){
@@ -732,21 +733,14 @@ class FacetBlock {
     this.refresh();
   }
 
-  reset(){
-    this.state = { brand:'', family:'', vehicle:'', vehicleBrand:'' };
-    this.stepIndex = 0;
-    this.unavailableKey = null;
-    this.refresh();
-  }
-
   go(){
     if (!this.goAllowed()) return;
 
     const url = new URL('{{ path("articles_page") }}', window.location.origin);
 
     if (this.state.family) url.searchParams.set('family', this.state.family);
-    if (this.state.brand) url.searchParams.set('brand', this.state.brand);
     if (this.state.vehicle) url.searchParams.set('vehicle', this.state.vehicle);
+    if (this.state.brand) url.searchParams.set('brand', this.state.brand);
 
     window.location.href = url.toString();
   }

@@ -104,7 +104,7 @@
         {% endblock %}
         {% if app.user %}
             <script type="application/json" id="product-brand-logos">{{ product_brand_logos()|json_encode(constant('JSON_HEX_TAG') b-or constant('JSON_HEX_AMP') b-or constant('JSON_HEX_APOS') b-or constant('JSON_HEX_QUOT'))|raw }}</script>
-            <script src="{{ asset('scripts/product-brand-logos.js') }}?v=20261016-1"></script>
+            <script src="{{ asset('scripts/product-brand-logos.js') }}?v=20261017-1"></script>
         {% endif %}
     </head>
     <body class="{{ app.user ? 'app-connected' : 'app-public' }}">
@@ -200,7 +200,7 @@
 {% include 'partials/_design_system.html.twig' %}
 <link rel="stylesheet" href="{{ asset('styles/typography.css') }}?v=20261016-5">
 {% if app.user %}
-  <link rel="stylesheet" href="{{ asset('styles/connected-ui.css') }}?v=20261017-1">
+  <link rel="stylesheet" href="{{ asset('styles/connected-ui.css') }}?v=20261017-3">
 {% endif %}
 <link rel="stylesheet" href="{{ asset('styles/header-common.css') }}?v=20261016-2">
 

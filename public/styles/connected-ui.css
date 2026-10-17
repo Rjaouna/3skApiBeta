@@ -113,10 +113,13 @@ body.app-connected .home-grid .chip { border-color: var(--workspace-line) !impor
 body.app-connected .home-grid .chip:is(:hover, .active) { border-color: var(--brand-blue) !important; background: rgba(var(--brand-blue-rgb), .025) !important; }
 body.app-connected .product-grid .product-card { border-color: var(--workspace-line) !important; border-radius: 8px !important; }
 body.app-connected .product-grid .product-card:hover { border-color: rgba(var(--brand-blue-rgb), .4) !important; box-shadow: 0 4px 16px rgba(var(--brand-blue-rgb), .07) !important; }
-/* Keep the original ribbon readable in its own row, below the discount and stock. */
-body.app-connected .product-grid:has(.badge-newimg) .product-card__image { padding-top: 76px; }
-body.app-connected .product-grid .badge-newimg { top: 40px; width: min(144px, 100%); aspect-ratio: 1072 / 223; }
+/* Keep the original ribbon at the top of the image, clear of the product photo. */
+body.app-connected .product-grid:has(.badge-newimg) .product-card__image { padding-top: 54px; }
+body.app-connected .product-grid .badge-newimg { top: 5px; width: min(144px, 100%); aspect-ratio: 1072 / 223; }
 body.app-connected .product-grid .badge-newimg img { display: block; width: 100%; height: auto; filter: none; }
+/* One measured step larger without changing the cards' information hierarchy. */
+body.app-connected .product-grid .product-card__image { overflow: hidden; }
+body.app-connected .product-grid .product-img { padding: 4px !important; transform: scale(1.05); }
 body.app-connected .product-grid .meta-chip { border-radius: 4px !important; }
 body.app-connected .product-grid .meta-chip--brand-logo { display: inline-flex; align-items: center; justify-content: center; width: 80px; min-width: 80px; height: 30px; padding: 3px 5px; border-radius: 4px; background: var(--brand-surface) !important; }
 body.app-connected .product-grid .meta-chip--brand-logo img { display: block; width: 100%; height: 100%; max-width: 70px; max-height: 24px; object-fit: contain; }

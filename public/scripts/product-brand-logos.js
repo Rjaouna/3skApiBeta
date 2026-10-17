@@ -9,10 +9,15 @@
     .replace(/œ/g, 'oe').replace(/æ/g, 'ae')
     .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
+  function source(name) {
+    const label = String(name || '').trim();
+    return label ? (logos[slug(label)] || '') : '';
+  }
+
   function badge(name) {
     const label = String(name || '').trim();
     if (!label) return '';
-    const logo = logos[slug(label)];
+    const logo = source(label);
     if (!logo) return `<span class="meta-chip">${escape(label)}</span>`;
     return `<span class="meta-chip meta-chip--brand-logo" title="${escape(label)}">
       <img src="${escape(logo)}" alt="${escape(label)}" loading="lazy" decoding="async">
@@ -29,5 +34,5 @@
     }
   }, true);
 
-  window.ProductBrandLogos = Object.freeze({ badge, slug });
+  window.ProductBrandLogos = Object.freeze({ badge, slug, source });
 })();
