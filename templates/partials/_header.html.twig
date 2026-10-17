@@ -2058,9 +2058,8 @@ body.theme-dark .voice-search-btn.is-listening{
               </button>
             </div>
 
-            <a class="hd-iconbtn position-relative" href="{{ path('admin_catalog_anomalies_index') }}" title="Anomalies catalogue" aria-label="Anomalies catalogue">
+            <a class="hd-iconbtn" href="{{ path('admin_catalog_anomalies_index') }}" title="Anomalies catalogue" aria-label="Anomalies catalogue">
               <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
-              <span class="badge text-bg-danger hd-badge d-none" id="catalogAnomalyCount" aria-label="Anomalies catalogue">0</span>
             </a>
           {% endif %}
         </div>
@@ -2501,30 +2500,6 @@ body.theme-dark .voice-search-btn.is-listening{
   });
 })();
 </script>
-
-{% if is_granted('ROLE_ADMIN') %}
-<script>
-(function(){
-  const catalogAnomalyCount = document.getElementById('catalogAnomalyCount');
-  if (catalogAnomalyCount) {
-    const setCatalogAnomalyCount = count => {
-      const safeCount = Math.max(0, Number(count) || 0);
-      catalogAnomalyCount.textContent = String(safeCount);
-      catalogAnomalyCount.classList.toggle('d-none', safeCount === 0);
-    };
-
-    fetch({{ path('api_admin_catalog_anomalies_summary')|json_encode|raw }}, { headers: { Accept: 'application/json' } })
-      .then(response => response.ok ? response.json() : null)
-      .then(data => { if (data?.ok) setCatalogAnomalyCount(data.summary?.total); })
-      .catch(() => {});
-
-    window.addEventListener('admin:catalog-anomaly-count', event => {
-      setCatalogAnomalyCount(event.detail?.count);
-    });
-  }
-})();
-</script>
-{% endif %}
 
 <script>
 (function(){

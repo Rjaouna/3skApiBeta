@@ -397,7 +397,6 @@
 <script>
 (() => {
   const endpoint = {{ path('api_admin_catalog_anomalies_list')|json_encode|raw }};
-  const summaryEndpoint = {{ path('api_admin_catalog_anomalies_summary')|json_encode|raw }};
   const refreshEndpoint = {{ path('api_admin_catalog_anomalies_refresh')|json_encode|raw }};
   const checkEndpoint = {{ path('api_admin_catalog_anomalies_check_image', { uniqueId: '00000000-0000-0000-0000-000000000000' })|json_encode|raw }};
   const actionToken = {{ actionToken|json_encode|raw }};
@@ -442,7 +441,6 @@
     totalValue.textContent = `${state.summary.total} article${state.summary.total > 1 ? 's' : ''} concerné${state.summary.total > 1 ? 's' : ''}`;
     missingCount.textContent = String(state.summary.missingImageCount);
     zeroPriceCount.textContent = String(state.summary.zeroPriceCount);
-    window.dispatchEvent(new CustomEvent('admin:catalog-anomaly-count', { detail: { count: state.summary.total } }));
   }
 
   function updatePage() {
@@ -488,13 +486,6 @@
     `).join('');
 
     rows.querySelectorAll('[data-check]').forEach(button => button.addEventListener('click', checkImage));
-  }
-
-  async function loadSummary() {
-    const response = await fetch(summaryEndpoint, { headers: { Accept: 'application/json' } });
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok || !data.ok) throw new Error('summary-failed');
-    applySummary(data.summary);
   }
 
   async function load() {
@@ -620,7 +611,6 @@
   });
 
   refreshButton?.addEventListener('click', refresh);
-  loadSummary().catch(() => {});
   load();
 })();
 </script>
