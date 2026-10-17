@@ -4,6 +4,7 @@ namespace App\Tests\Controller;
 
 use App\Controller\Api\ArticleApiController;
 use App\Entity\Article;
+use App\Repository\CategoryReductionRepository;
 use App\Repository\CartItemRepository;
 use App\Repository\UserFamilyDiscountRepository;
 use App\Service\PricingService;
@@ -47,7 +48,10 @@ final class ArticleLatestListTest extends TestCase
         $this->cartItems = $this->createStub(CartItemRepository::class);
         $this->cartItems->method('getPressureMapForArticleCodes')->willReturn([]);
 
-        $this->controller = new ArticleApiController(new PricingService($this->createStub(UserFamilyDiscountRepository::class)));
+        $this->controller = new ArticleApiController(new PricingService(
+            $this->createStub(UserFamilyDiscountRepository::class),
+            $this->createStub(CategoryReductionRepository::class),
+        ));
         $container = new Container();
         $container->set('security.token_storage', new TokenStorage());
         $this->controller->setContainer($container);

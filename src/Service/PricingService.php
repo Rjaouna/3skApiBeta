@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\Article;
 use App\Entity\User;
+use App\Repository\CategoryReductionRepository;
 use App\Repository\UserFamilyDiscountRepository;
 
 class PricingService
@@ -13,8 +14,14 @@ class PricingService
      */
     private array $userDiscountMapCache = [];
 
+    /**
+     * @var array<string, float>|null
+     */
+    private ?array $categoryDiscountMapCache = null;
+
     public function __construct(
-        private readonly UserFamilyDiscountRepository $userFamilyDiscountRepository
+        private readonly UserFamilyDiscountRepository $userFamilyDiscountRepository,
+        private readonly CategoryReductionRepository $categoryReductionRepository,
     ) {
     }
 
@@ -23,7 +30,8 @@ class PricingService
         $unitPriceBeforeDiscountTtc = $this->toFloat($article->getSalePriceVatIncluded());
         $unitPriceBeforeDiscountHt = $this->toFloat($article->getSalePriceVatExcluded());
 
-        $baseReduction = $this->normalizeRate($article->getReduction());
+        $categoryReduction = $this->getCategoryReductionForArticle($article);
+        $baseReduction = $categoryReduction ?? $this->normalizeRate($article->getReduction());
         $personalReduction = $this->getPersonalReductionForArticle($article, $user);
         $globalReduction = $this->clampRate($baseReduction + $personalReduction);
 
@@ -157,6 +165,26 @@ class PricingService
         $key = $this->normalizeFamilyKey($familyName);
 
         return $map[$key] ?? 0.0;
+    }
+
+    private function getCategoryReductionForArticle(Article $article): ?float
+    {
+        $familyName = $article->getFamilyName();
+        if (!is_string($familyName) || trim($familyName) === '') {
+            return null;
+        }
+
+        if ($this->categoryDiscountMapCache === null) {
+            $this->categoryDiscountMapCache = [];
+
+            foreach ($this->categoryReductionRepository->findDiscountRateMap() as $family => $rate) {
+                $this->categoryDiscountMapCache[$this->normalizeFamilyKey($family)] = $this->normalizeRate($rate);
+            }
+        }
+
+        $key = $this->normalizeFamilyKey($familyName);
+
+        return $this->categoryDiscountMapCache[$key] ?? null;
     }
 
     /**

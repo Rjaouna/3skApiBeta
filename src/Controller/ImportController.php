@@ -426,7 +426,6 @@ class ImportController extends AbstractController
             'FamilyName' => $get('FamilyName'),
             'ExportStartedAt' => $sql('ExportStartedAt'),
             'FtpFinishedAt' => $sql('FtpFinishedAt'),
-            'reduction' => $get('reduction') !== '' ? $get('reduction') : $get('Reduction'),
         ];
     }
 
@@ -474,10 +473,6 @@ class ImportController extends AbstractController
         if (!$this->sameDate($a->getFtpFinishedAt(), $n['FtpFinishedAt'])) {
             return false;
         }
-        if (($a->getReduction() ?? '') !== $n['reduction']) {
-            return false;
-        }
-
         return true;
     }
 
@@ -497,7 +492,6 @@ class ImportController extends AbstractController
         $a->setFamilyName($n['FamilyName'] !== '' ? $n['FamilyName'] : null);
         $a->setExportStartedAt($n['ExportStartedAt']);
         $a->setFtpFinishedAt($n['FtpFinishedAt']);
-        $a->setReduction($n['reduction'] !== '' ? $n['reduction'] : null);
     }
 
     private function sameDate(?\DateTimeImmutable $a, ?\DateTimeImmutable $b): bool

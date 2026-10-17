@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Repository\ArticleRepository;
+use App\Repository\CategoryReductionRepository;
 use App\Repository\CartItemRepository;
 use App\Repository\CartRepository;
 use App\Repository\CustomerOrderLineRepository;
@@ -18,6 +19,7 @@ class AdminDashboardService
         private readonly CustomerOrderRepository $customerOrderRepository,
         private readonly CustomerOrderLineRepository $customerOrderLineRepository,
         private readonly ArticleRepository $articleRepository,
+        private readonly CategoryReductionRepository $categoryReductionRepository,
     ) {
         $this->timezone = new \DateTimeZone('Europe/Paris');
     }
@@ -174,14 +176,17 @@ class AdminDashboardService
         $valueHtWithReduction = 0.0;
 
         $familyMap = [];
+        $categoryReductionMap = $this->categoryReductionRepository->findDiscountRateMap();
 
         foreach ($rows as $row) {
             $articlesCount++;
 
             $stock = max(0, (int) ($row['realStock'] ?? 0));
-            $reduction = $this->normalizeReduction($row['reduction'] ?? null);
             $familyName = trim((string) ($row['familyName'] ?? ''));
             $familyName = $familyName !== '' ? $familyName : 'Non classée';
+            $reduction = $this->normalizeReduction(
+                $categoryReductionMap[$this->normalizeFamilyKey($familyName)] ?? $row['reduction'] ?? null
+            );
 
             $unitTtc = $this->toMoneyFloat($row['salePriceVatIncluded'] ?? 0);
             $unitHt = $this->toMoneyFloat($row['salePriceVatExcluded'] ?? 0);
@@ -470,6 +475,13 @@ class AdminDashboardService
         }
 
         return round($number, 2);
+    }
+
+    private function normalizeFamilyKey(string $familyName): string
+    {
+        $familyName = preg_replace('/\s+/u', ' ', trim($familyName)) ?? '';
+
+        return mb_strtoupper($familyName, 'UTF-8');
     }
 
     private function roundMoney(float $value): float
