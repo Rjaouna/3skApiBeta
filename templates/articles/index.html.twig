@@ -903,7 +903,15 @@ body.theme-dark .empty-results-box{
         </div>
 
         <div id="grid" class="product-grid"></div>
-        <div class="alert alert-danger mt-3 d-none" id="apiError"></div>
+        <div class="alert alert-warning mt-3 d-none" id="apiError" role="status">
+          <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
+            <div>
+              <div class="fw-semibold">Chargement temporairement indisponible</div>
+              <div class="small">Réessayez dans quelques instants.</div>
+            </div>
+            <button type="button" class="btn btn-outline-secondary btn-sm" id="apiErrorRetry">Réessayer</button>
+          </div>
+        </div>
 
         <div class="articles-infinite-loader d-none" id="infiniteLoader" aria-live="polite">
           <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
@@ -964,6 +972,7 @@ body.theme-dark .empty-results-box{
       const statusLine = document.getElementById('statusLine');
       const resultMeta = document.getElementById('resultMeta');
       const apiError = document.getElementById('apiError');
+      const apiErrorRetry = document.getElementById('apiErrorRetry');
       const headerSearchInput = document.getElementById('InputRechercheProduit');
       const headerSearchForm = document.getElementById('searchFormHeader');
       const canSeeExactStock = {{ is_granted('ROLE_ADMIN') ? 'true' : 'false' }};
@@ -984,6 +993,8 @@ body.theme-dark .empty-results-box{
       let totalPages = 1;
       let isLoadingArticles = false;
       let infiniteObserver = null;
+      let appendLoadPaused = false;
+      let lastFailedLoad = null;
 
       let state = {
         page: 1,
@@ -1218,7 +1229,7 @@ body.theme-dark .empty-results-box{
       }
 
       function canLoadMoreArticles(){
-        return !isLoadingArticles && state.page < totalPages;
+        return !isLoadingArticles && !appendLoadPaused && state.page < totalPages;
       }
 
       function loadNextArticlesPage(){
@@ -1804,6 +1815,7 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
         let loadSucceeded = false;
 
         if (apiError) apiError.classList.add('d-none');
+        lastFailedLoad = null;
         if (append) {
           setInfiniteLoader(true);
         } else {
@@ -1827,16 +1839,17 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
           if (!res.ok || !data.ok){
             if (apiError){
               apiError.classList.remove('d-none');
-              apiError.innerHTML = `<div class="fw-bold">Erreur API</div>
-                <div class="small">Status: ${res.status}</div>
-                <div class="small">Début: <code>${esc(text.slice(0, 280))}</code></div>`;
             }
-            if (statusLine) statusLine.textContent = 'Erreur API';
+            lastFailedLoad = { append };
+            if (append) appendLoadPaused = true;
+            if (statusLine) statusLine.textContent = append
+              ? `${countVisibleCards()} article(s) affiché(s)`
+              : 'Chargement temporairement indisponible';
             if (!append && grid) grid.innerHTML = '';
-            if (prevBtn) prevBtn.disabled = true;
-            if (nextBtn) nextBtn.disabled = true;
-            if (prevBtnBottom) prevBtnBottom.disabled = true;
-            if (nextBtnBottom) nextBtnBottom.disabled = true;
+            if (!append && prevBtn) prevBtn.disabled = true;
+            if (!append && nextBtn) nextBtn.disabled = true;
+            if (!append && prevBtnBottom) prevBtnBottom.disabled = true;
+            if (!append && nextBtnBottom) nextBtnBottom.disabled = true;
             return;
           }
 
@@ -1887,6 +1900,7 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
 
           render(data.items || [], data.imagesBaseUrl || '', append);
           initTooltips(grid);
+          appendLoadPaused = false;
           loadSucceeded = true;
         } catch(e){
           if (e.name === 'AbortError') {
@@ -1895,11 +1909,13 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
 
           if (apiError){
             apiError.classList.remove('d-none');
-            apiError.innerHTML = `<div class="fw-bold">Erreur JS</div><div class="small">${esc(e.message || e)}</div>`;
           }
-          if (statusLine) statusLine.textContent = 'Erreur JS';
+          lastFailedLoad = { append };
+          if (append) appendLoadPaused = true;
+          if (statusLine) statusLine.textContent = append
+            ? `${countVisibleCards()} article(s) affiché(s)`
+            : 'Chargement temporairement indisponible';
           if (!append && grid) grid.innerHTML = '';
-          if (append && state.page > 1) state.page--;
         } finally {
           // An aborted older request must not unlock a newer filter request.
           if (currentLoadSerial === articleLoadSerial) {
@@ -1912,6 +1928,13 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
           }
         }
       }
+
+      apiErrorRetry?.addEventListener('click', () => {
+        if (!lastFailedLoad || isLoadingArticles) return;
+
+        appendLoadPaused = false;
+        load({ append: lastFailedLoad.append });
+      });
 
       ensureYearSlider();
       updateYearSliderOptions();

@@ -442,7 +442,15 @@
     {% endfor %}
   </div>
 
-  <div class="alert alert-danger mt-3 d-none" data-new-error></div>
+  <div class="alert alert-warning mt-3 d-none" data-new-error role="status">
+    <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
+      <div>
+        <div class="fw-semibold">Chargement temporairement indisponible</div>
+        <div class="small">Réessayez dans quelques instants.</div>
+      </div>
+      <button type="button" class="btn btn-outline-secondary btn-sm" data-new-retry>Réessayer</button>
+    </div>
+  </div>
 
 </section>
 
@@ -532,6 +540,7 @@
 
   const grid = section.querySelector('[data-new-grid]');
   const err  = section.querySelector('[data-new-error]');
+  const retryBtn = section.querySelector('[data-new-retry]');
 
   const DEFAULT_IMG   = "{{ asset('img/default-piece.png')|e('js') }}";
   const NEW_BADGE_IMG = "{{ asset('img/new.png')|e('js') }}";
@@ -686,9 +695,6 @@ function stockLabel(stock){
       if (!res.ok || !data.ok){
         if (err){
           err.classList.remove('d-none');
-          err.innerHTML = `<div class="fw-bold">Erreur API</div>
-            <div class="small">Status: ${res.status}</div>
-            <div class="small">Début: <code>${esc(text.slice(0, 220))}</code></div>`;
         }
         if (grid) grid.innerHTML = '';
         return;
@@ -946,13 +952,12 @@ card.innerHTML = `
     } catch(e){
       if (err){
         err.classList.remove('d-none');
-        err.innerHTML = `<div class="fw-bold">Erreur JS</div><div class="small">${esc(e.message || e)}</div>`;
       }
       if (grid) grid.innerHTML = '';
-      console.error(e);
     }
   }
 
+  retryBtn?.addEventListener('click', loadNew);
   loadNew();
 })();
 </script>
