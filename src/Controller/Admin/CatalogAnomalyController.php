@@ -8,15 +8,15 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/admin/articles/sans-image', name: 'admin_missing_images_')]
+#[Route('/admin/anomalies-catalogue', name: 'admin_catalog_anomalies_')]
 #[IsGranted('ROLE_ADMIN')]
-final class MissingArticleImageController extends AbstractController
+final class CatalogAnomalyController extends AbstractController
 {
     #[Route('', name: 'index', methods: ['GET'])]
     public function index(CsrfTokenManagerInterface $csrfTokenManager): Response
     {
-        return $this->render('admin/missing_images/index.html.twig', [
-            'checkToken' => $csrfTokenManager->getToken('admin-missing-image-check')->getValue(),
+        return $this->render('admin/catalog_anomalies/index.html.twig', [
+            'actionToken' => $csrfTokenManager->getToken('admin-catalog-anomalies-action')->getValue(),
         ]);
     }
 }

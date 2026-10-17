@@ -2058,9 +2058,9 @@ body.theme-dark .voice-search-btn.is-listening{
               </button>
             </div>
 
-            <a class="hd-iconbtn position-relative" href="{{ path('admin_missing_images_index') }}" title="Articles sans photo" aria-label="Articles sans photo">
-              <i class="fa-regular fa-image" aria-hidden="true"></i>
-              <span class="badge text-bg-danger hd-badge d-none" id="missingImageCount" aria-label="Articles sans photo">0</span>
+            <a class="hd-iconbtn position-relative" href="{{ path('admin_catalog_anomalies_index') }}" title="Anomalies catalogue" aria-label="Anomalies catalogue">
+              <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+              <span class="badge text-bg-danger hd-badge d-none" id="catalogAnomalyCount" aria-label="Anomalies catalogue">0</span>
             </a>
           {% endif %}
         </div>
@@ -2505,21 +2505,21 @@ body.theme-dark .voice-search-btn.is-listening{
 {% if is_granted('ROLE_ADMIN') %}
 <script>
 (function(){
-  const missingImageCount = document.getElementById('missingImageCount');
-  if (missingImageCount) {
-    const setMissingImageCount = count => {
+  const catalogAnomalyCount = document.getElementById('catalogAnomalyCount');
+  if (catalogAnomalyCount) {
+    const setCatalogAnomalyCount = count => {
       const safeCount = Math.max(0, Number(count) || 0);
-      missingImageCount.textContent = String(safeCount);
-      missingImageCount.classList.toggle('d-none', safeCount === 0);
+      catalogAnomalyCount.textContent = String(safeCount);
+      catalogAnomalyCount.classList.toggle('d-none', safeCount === 0);
     };
 
-    fetch({{ path('api_admin_missing_images_count')|json_encode|raw }}, { headers: { Accept: 'application/json' } })
+    fetch({{ path('api_admin_catalog_anomalies_summary')|json_encode|raw }}, { headers: { Accept: 'application/json' } })
       .then(response => response.ok ? response.json() : null)
-      .then(data => { if (data?.ok) setMissingImageCount(data.count); })
+      .then(data => { if (data?.ok) setCatalogAnomalyCount(data.summary?.total); })
       .catch(() => {});
 
-    window.addEventListener('admin:missing-image-detected', event => {
-      setMissingImageCount(event.detail?.count);
+    window.addEventListener('admin:catalog-anomaly-count', event => {
+      setCatalogAnomalyCount(event.detail?.count);
     });
   }
 })();

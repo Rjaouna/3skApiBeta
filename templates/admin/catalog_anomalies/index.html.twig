@@ -1,0 +1,618 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Anomalies catalogue | 3SK Parts Auto{% endblock %}
+
+{% block body %}
+<style>
+  .catalog-anomalies-page {
+    --anomaly-line: rgba(35, 43, 56, .14);
+    --anomaly-muted: rgba(35, 43, 56, .68);
+    padding-block: 1.5rem 2.5rem;
+  }
+
+  .catalog-anomalies-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .catalog-anomalies-heading h1 {
+    margin: 0;
+    color: var(--brand-anthracite);
+    font: 700 28px/1.15 Montserrat, Arial, sans-serif;
+  }
+
+  .catalog-anomalies-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0 0 .4rem;
+    color: var(--brand-blue);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .catalog-anomalies-kicker::before {
+    width: 26px;
+    height: 2px;
+    content: '';
+    background: var(--brand-orange);
+  }
+
+  .catalog-anomalies-total {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    min-height: 38px;
+    padding: .45rem .7rem;
+    border: 1px solid var(--anomaly-line);
+    border-radius: 6px;
+    background: var(--brand-surface);
+    color: var(--brand-anthracite);
+    font-size: 13px;
+    font-weight: 700;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .catalog-anomalies-total i { color: var(--brand-orange); }
+
+  .catalog-anomalies-summary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .85rem;
+    margin-bottom: 1rem;
+  }
+
+  .catalog-anomaly-tab {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    min-height: 86px;
+    padding: 1rem;
+    border: 1px solid var(--anomaly-line);
+    border-radius: 8px;
+    background: var(--brand-surface);
+    color: var(--brand-anthracite);
+    text-align: left;
+    transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
+  }
+
+  .catalog-anomaly-tab:hover,
+  .catalog-anomaly-tab:focus-visible,
+  .catalog-anomaly-tab[aria-selected="true"] {
+    border-color: var(--brand-blue);
+    background: rgba(49, 95, 183, .04);
+    box-shadow: 0 0 0 3px rgba(49, 95, 183, .08);
+    outline: 0;
+  }
+
+  .catalog-anomaly-tab__icon {
+    display: inline-grid;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 138, 0, .12);
+    color: var(--brand-orange);
+  }
+
+  .catalog-anomaly-tab__copy { min-width: 0; }
+
+  .catalog-anomaly-tab__label {
+    display: block;
+    color: var(--brand-anthracite);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .catalog-anomaly-tab__hint {
+    display: block;
+    margin-top: .15rem;
+    color: var(--anomaly-muted);
+    font-size: 12px;
+  }
+
+  .catalog-anomaly-tab__count {
+    min-width: 32px;
+    margin-left: auto;
+    color: var(--brand-blue);
+    font: 700 24px/1 Montserrat, Arial, sans-serif;
+    text-align: right;
+  }
+
+  .catalog-anomalies-panel {
+    overflow: hidden;
+    border: 1px solid var(--anomaly-line);
+    border-radius: 8px;
+    background: var(--brand-surface);
+  }
+
+  .catalog-anomalies-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    padding: .85rem;
+    border-bottom: 1px solid var(--anomaly-line);
+    background: var(--brand-bg);
+  }
+
+  .catalog-anomalies-search {
+    position: relative;
+    width: min(420px, 100%);
+  }
+
+  .catalog-anomalies-search i {
+    position: absolute;
+    top: 50%;
+    left: .8rem;
+    color: var(--brand-blue);
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+
+  .catalog-anomalies-search input {
+    width: 100%;
+    min-height: 40px;
+    padding: .5rem .75rem .5rem 2.35rem;
+    border: 1px solid var(--anomaly-line);
+    border-radius: 6px;
+    background: var(--brand-surface);
+    color: var(--brand-anthracite);
+    font-size: 14px;
+  }
+
+  .catalog-anomalies-search input:focus {
+    outline: 0;
+    border-color: var(--brand-blue);
+    box-shadow: 0 0 0 3px rgba(49, 95, 183, .12);
+  }
+
+  .catalog-anomalies-refresh {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    min-height: 40px;
+    padding: .5rem .8rem;
+    border: 1px solid var(--brand-orange);
+    border-radius: 6px;
+    background: var(--brand-orange);
+    color: var(--brand-anthracite);
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .catalog-anomalies-refresh:hover,
+  .catalog-anomalies-refresh:focus-visible {
+    border-color: var(--brand-anthracite);
+    outline: 0;
+  }
+
+  .catalog-anomalies-refresh:disabled { cursor: wait; opacity: .68; }
+  .catalog-anomalies-table-wrap { overflow-x: auto; }
+
+  .catalog-anomalies-table {
+    width: 100%;
+    min-width: 800px;
+    margin: 0;
+    border-collapse: collapse;
+  }
+
+  .catalog-anomalies-table th {
+    padding: .7rem .85rem;
+    border-bottom: 1px solid var(--anomaly-line);
+    background: var(--brand-bg);
+    color: var(--anomaly-muted);
+    font-size: 12px;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  .catalog-anomalies-table td {
+    padding: .78rem .85rem;
+    border-bottom: 1px solid var(--anomaly-line);
+    color: var(--brand-anthracite);
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+  .catalog-anomalies-table tbody tr:last-child td { border-bottom: 0; }
+  .catalog-anomalies-table tbody tr.is-detected { background: rgba(25, 135, 84, .08); }
+
+  .catalog-anomalies-ref {
+    color: var(--brand-blue);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .catalog-anomalies-designation {
+    display: block;
+    max-width: 340px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+
+  .catalog-anomalies-meta {
+    color: var(--anomaly-muted);
+    font-size: 13px;
+  }
+
+  .catalog-anomaly-status {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    color: var(--anomaly-muted);
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .catalog-anomaly-status--price { color: var(--brand-orange); }
+  .catalog-anomalies-actions { display: flex; justify-content: flex-end; gap: .4rem; }
+
+  .catalog-anomalies-icon-button {
+    display: inline-grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    padding: 0;
+    border: 1px solid var(--anomaly-line);
+    border-radius: 6px;
+    background: var(--brand-surface);
+    color: var(--brand-blue);
+    text-decoration: none;
+  }
+
+  .catalog-anomalies-icon-button:hover,
+  .catalog-anomalies-icon-button:focus-visible {
+    border-color: var(--brand-blue);
+    background: rgba(49, 95, 183, .08);
+    color: var(--brand-blue);
+  }
+
+  .catalog-anomalies-icon-button:disabled { cursor: wait; opacity: .65; }
+
+  .catalog-anomalies-empty {
+    padding: 2.5rem 1rem;
+    color: var(--anomaly-muted);
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .catalog-anomalies-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .55rem;
+    padding: .85rem;
+    border-top: 1px solid var(--anomaly-line);
+  }
+
+  .catalog-anomalies-pagination span {
+    min-width: 58px;
+    color: var(--anomaly-muted);
+    font-size: 13px;
+    text-align: center;
+  }
+
+  @media (max-width: 575.98px) {
+    .catalog-anomalies-page { padding-top: 1rem; }
+    .catalog-anomalies-heading h1 { font-size: 24px; }
+    .catalog-anomalies-heading { align-items: center; }
+    .catalog-anomalies-total { min-height: 34px; font-size: 12px; }
+    .catalog-anomalies-summary { grid-template-columns: 1fr; }
+    .catalog-anomalies-toolbar { align-items: stretch; flex-direction: column; padding: .65rem; }
+    .catalog-anomalies-search { width: 100%; }
+    .catalog-anomalies-refresh { width: 100%; }
+  }
+</style>
+
+<main class="container-fluid catalog-anomalies-page">
+  <div class="catalog-anomalies-heading">
+    <div>
+      <div class="catalog-anomalies-kicker">Contrôle catalogue</div>
+      <h1>Anomalies catalogue</h1>
+    </div>
+    <span class="catalog-anomalies-total" data-total aria-live="polite">
+      <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+      <span data-total-value>Chargement</span>
+    </span>
+  </div>
+
+  <div class="catalog-anomalies-summary" role="tablist" aria-label="Types d’anomalies">
+    <button class="catalog-anomaly-tab" type="button" role="tab" aria-selected="true" data-type="missing_image">
+      <span class="catalog-anomaly-tab__icon"><i class="fa-regular fa-image" aria-hidden="true"></i></span>
+      <span class="catalog-anomaly-tab__copy">
+        <span class="catalog-anomaly-tab__label">Photos absentes</span>
+        <span class="catalog-anomaly-tab__hint">Fichier PNG non détecté</span>
+      </span>
+      <span class="catalog-anomaly-tab__count" data-missing-count>0</span>
+    </button>
+    <button class="catalog-anomaly-tab" type="button" role="tab" aria-selected="false" data-type="zero_price">
+      <span class="catalog-anomaly-tab__icon"><i class="fa-solid fa-tag" aria-hidden="true"></i></span>
+      <span class="catalog-anomaly-tab__copy">
+        <span class="catalog-anomaly-tab__label">Prix à 0,00 DH</span>
+        <span class="catalog-anomaly-tab__hint">Prix TTC à contrôler</span>
+      </span>
+      <span class="catalog-anomaly-tab__count" data-zero-price-count>0</span>
+    </button>
+  </div>
+
+  <section class="catalog-anomalies-panel" aria-label="Liste des anomalies du catalogue">
+    <div class="catalog-anomalies-toolbar">
+      <label class="visually-hidden" for="catalogAnomalySearch">Rechercher un article</label>
+      <div class="catalog-anomalies-search">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <input id="catalogAnomalySearch" type="search" autocomplete="off" placeholder="Référence, désignation, marque ou véhicule">
+      </div>
+      <button class="catalog-anomalies-refresh" type="button" data-refresh title="Rechercher les nouvelles photos dans le dossier configuré">
+        <i class="fa-solid fa-rotate" aria-hidden="true"></i>
+        <span>Vérifier les photos</span>
+      </button>
+    </div>
+
+    <div class="catalog-anomalies-table-wrap">
+      <table class="catalog-anomalies-table">
+        <thead>
+          <tr>
+            <th>Référence</th>
+            <th>Article</th>
+            <th>Marque</th>
+            <th>Véhicule</th>
+            <th>État</th>
+            <th aria-label="Actions"></th>
+          </tr>
+        </thead>
+        <tbody data-rows>
+          <tr><td colspan="6" class="catalog-anomalies-empty">Chargement des anomalies...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="catalog-anomalies-pagination" data-pagination>
+      <button class="catalog-anomalies-icon-button" type="button" data-prev aria-label="Page précédente" title="Page précédente" disabled><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+      <span data-page>1 / 1</span>
+      <button class="catalog-anomalies-icon-button" type="button" data-next aria-label="Page suivante" title="Page suivante" disabled><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const endpoint = {{ path('api_admin_catalog_anomalies_list')|json_encode|raw }};
+  const summaryEndpoint = {{ path('api_admin_catalog_anomalies_summary')|json_encode|raw }};
+  const refreshEndpoint = {{ path('api_admin_catalog_anomalies_refresh')|json_encode|raw }};
+  const checkEndpoint = {{ path('api_admin_catalog_anomalies_check_image', { uniqueId: '00000000-0000-0000-0000-000000000000' })|json_encode|raw }};
+  const actionToken = {{ actionToken|json_encode|raw }};
+  const articleUrl = {{ path('article_show', { code: '__ARTICLE_CODE__' })|json_encode|raw }};
+  const search = document.getElementById('catalogAnomalySearch');
+  const rows = document.querySelector('[data-rows]');
+  const totalValue = document.querySelector('[data-total-value]');
+  const missingCount = document.querySelector('[data-missing-count]');
+  const zeroPriceCount = document.querySelector('[data-zero-price-count]');
+  const refreshButton = document.querySelector('[data-refresh]');
+  const pageLabel = document.querySelector('[data-page]');
+  const previous = document.querySelector('[data-prev]');
+  const next = document.querySelector('[data-next]');
+  const tabs = [...document.querySelectorAll('[data-type]')];
+  let timer = null;
+  let state = {
+    type: 'missing_image',
+    page: 1,
+    pages: 1,
+    total: 0,
+    q: '',
+    summary: { total: 0, missingImageCount: 0, zeroPriceCount: 0 },
+  };
+
+  const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+  }[char]));
+  const articleHref = code => articleUrl.replace('__ARTICLE_CODE__', encodeURIComponent(code || ''));
+  const checkHref = uniqueId => checkEndpoint.replace('00000000-0000-0000-0000-000000000000', encodeURIComponent(uniqueId));
+
+  function formatPrice(value) {
+    const amount = Number.parseFloat(String(value ?? '0').replace(',', '.')) || 0;
+    return `${amount.toFixed(2)} DH`;
+  }
+
+  function applySummary(summary) {
+    state.summary = {
+      total: Math.max(0, Number(summary?.total) || 0),
+      missingImageCount: Math.max(0, Number(summary?.missingImageCount) || 0),
+      zeroPriceCount: Math.max(0, Number(summary?.zeroPriceCount) || 0),
+    };
+    totalValue.textContent = `${state.summary.total} article${state.summary.total > 1 ? 's' : ''} concerné${state.summary.total > 1 ? 's' : ''}`;
+    missingCount.textContent = String(state.summary.missingImageCount);
+    zeroPriceCount.textContent = String(state.summary.zeroPriceCount);
+    window.dispatchEvent(new CustomEvent('admin:catalog-anomaly-count', { detail: { count: state.summary.total } }));
+  }
+
+  function updatePage() {
+    pageLabel.textContent = `${state.page} / ${state.pages}`;
+    previous.disabled = state.page <= 1;
+    next.disabled = state.page >= state.pages;
+  }
+
+  function statusCell(item) {
+    if (state.type === 'zero_price') {
+      return `<span class="catalog-anomaly-status catalog-anomaly-status--price"><i class="fa-solid fa-tag" aria-hidden="true"></i>${escapeHtml(formatPrice(item.price))}</span>`;
+    }
+
+    return '<span class="catalog-anomaly-status" data-status><i class="fa-regular fa-image" aria-hidden="true"></i>Photo absente</span>';
+  }
+
+  function actionCell(item) {
+    const details = `<a class="catalog-anomalies-icon-button" href="${articleHref(item.code)}" aria-label="Voir l’article" title="Voir l’article"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>`;
+    if (state.type !== 'missing_image') {
+      return details;
+    }
+
+    return `${details}<button class="catalog-anomalies-icon-button" type="button" data-check aria-label="Vérifier la photo" title="Vérifier la photo" data-check-url="${checkHref(item.uniqueId)}" data-zero-price="${item.hasZeroPrice ? '1' : '0'}"><i class="fa-solid fa-circle-check" aria-hidden="true"></i></button>`;
+  }
+
+  function render(items) {
+    if (!items.length) {
+      const label = state.type === 'missing_image' ? 'Aucun article sans photo.' : 'Aucun article à prix nul.';
+      rows.innerHTML = `<tr><td colspan="6" class="catalog-anomalies-empty">${label}</td></tr>`;
+      return;
+    }
+
+    rows.innerHTML = items.map(item => `
+      <tr data-row data-unique-id="${escapeHtml(item.uniqueId)}">
+        <td><span class="catalog-anomalies-ref">${escapeHtml(item.code || item.uniqueId)}</span></td>
+        <td><span class="catalog-anomalies-designation" title="${escapeHtml(item.designation)}">${escapeHtml(item.designation || '-')}</span></td>
+        <td class="catalog-anomalies-meta">${escapeHtml(item.brand || '-')}</td>
+        <td class="catalog-anomalies-meta">${escapeHtml(item.vehicle || '-')}</td>
+        <td>${statusCell(item)}</td>
+        <td><div class="catalog-anomalies-actions">${actionCell(item)}</div></td>
+      </tr>
+    `).join('');
+
+    rows.querySelectorAll('[data-check]').forEach(button => button.addEventListener('click', checkImage));
+  }
+
+  async function loadSummary() {
+    const response = await fetch(summaryEndpoint, { headers: { Accept: 'application/json' } });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || !data.ok) throw new Error('summary-failed');
+    applySummary(data.summary);
+  }
+
+  async function load() {
+    rows.innerHTML = '<tr><td colspan="6" class="catalog-anomalies-empty">Chargement des anomalies...</td></tr>';
+    const url = new URL(endpoint, window.location.origin);
+    url.searchParams.set('type', state.type);
+    url.searchParams.set('page', String(state.page));
+    url.searchParams.set('limit', '50');
+    if (state.q) url.searchParams.set('q', state.q);
+
+    try {
+      const response = await fetch(url, { headers: { Accept: 'application/json' } });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.ok) throw new Error('load-failed');
+
+      state = { ...state, page: data.page, pages: data.pages, total: data.total };
+      applySummary(data.summary);
+      render(data.items || []);
+      updatePage();
+    } catch {
+      rows.innerHTML = '<tr><td colspan="6" class="catalog-anomalies-empty">Chargement temporairement indisponible.</td></tr>';
+    }
+  }
+
+  async function refresh() {
+    if (refreshButton.disabled) return;
+    refreshButton.disabled = true;
+    refreshButton.innerHTML = '<span class="spinner-border spinner-border-sm" aria-hidden="true"></span><span>Vérification...</span>';
+
+    try {
+      const response = await fetch(refreshEndpoint, {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'X-CSRF-TOKEN': actionToken },
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.ok) throw new Error('refresh-failed');
+
+      applySummary(data.summary);
+      state.page = 1;
+      await load();
+    } finally {
+      refreshButton.disabled = false;
+      refreshButton.innerHTML = '<i class="fa-solid fa-rotate" aria-hidden="true"></i><span>Vérifier les photos</span>';
+    }
+  }
+
+  async function checkImage(event) {
+    const button = event.currentTarget;
+    const row = button.closest('[data-row]');
+    const status = row?.querySelector('[data-status]');
+    if (!row || !status || button.disabled) return;
+
+    button.disabled = true;
+    button.innerHTML = '<span class="spinner-border spinner-border-sm" aria-hidden="true"></span>';
+
+    try {
+      const response = await fetch(button.dataset.checkUrl, {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'X-CSRF-TOKEN': actionToken },
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.ok) throw new Error('check-failed');
+
+      if (data.imageDetected) {
+        status.className = 'catalog-anomaly-status text-success';
+        status.innerHTML = '<i class="fa-solid fa-circle-check" aria-hidden="true"></i>Photo détectée';
+        row.classList.add('is-detected');
+        state.total = Math.max(0, state.total - 1);
+        state.summary.missingImageCount = Math.max(0, state.summary.missingImageCount - 1);
+        if (button.dataset.zeroPrice !== '1') {
+          state.summary.total = Math.max(0, state.summary.total - 1);
+        }
+        applySummary(state.summary);
+        updatePage();
+        window.setTimeout(() => {
+          row.remove();
+          if (!rows.querySelector('[data-row]')) render([]);
+        }, 650);
+        return;
+      }
+
+      status.className = 'catalog-anomaly-status text-danger';
+      status.innerHTML = '<i class="fa-regular fa-circle-xmark" aria-hidden="true"></i>Photo non détectée';
+    } catch {
+      status.className = 'catalog-anomaly-status text-danger';
+      status.innerHTML = '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>Vérification indisponible';
+    } finally {
+      if (!row.classList.contains('is-detected')) {
+        button.disabled = false;
+        button.innerHTML = '<i class="fa-solid fa-circle-check" aria-hidden="true"></i>';
+      }
+    }
+  }
+
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    if (tab.dataset.type === state.type) return;
+    state.type = tab.dataset.type;
+    state.page = 1;
+    tabs.forEach(item => item.setAttribute('aria-selected', String(item === tab)));
+    refreshButton.hidden = state.type !== 'missing_image';
+    load();
+  }));
+
+  search?.addEventListener('input', () => {
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => {
+      state.page = 1;
+      state.q = search.value.trim();
+      load();
+    }, 220);
+  });
+
+  previous?.addEventListener('click', () => {
+    if (state.page <= 1) return;
+    state.page--;
+    load();
+  });
+
+  next?.addEventListener('click', () => {
+    if (state.page >= state.pages) return;
+    state.page++;
+    load();
+  });
+
+  refreshButton?.addEventListener('click', refresh);
+  loadSummary().catch(() => {});
+  load();
+})();
+</script>
+{% endblock %}

@@ -5,7 +5,7 @@ namespace App\Tests\Service;
 use App\Entity\Article;
 use App\Entity\ImportSource;
 use App\Service\ArticleImageLocator;
-use App\Service\MissingArticleImageService;
+use App\Service\CatalogAnomalyService;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -15,15 +15,16 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Filesystem\Filesystem;
 
-final class MissingArticleImageServiceTest extends TestCase
+final class CatalogAnomalyServiceTest extends TestCase
 {
     private const PRESENT_ID = '11111111-1111-1111-1111-111111111111';
     private const MISSING_ID = '22222222-2222-2222-2222-222222222222';
+    private const ZERO_PRICE_ID = '33333333-3333-3333-3333-333333333333';
     private const PNG = "\x89PNG\r\n\x1a\nfixture";
 
     private string $root;
     private EntityManager $entityManager;
-    private MissingArticleImageService $service;
+    private CatalogAnomalyService $service;
 
     protected function setUp(): void
     {
@@ -31,9 +32,8 @@ final class MissingArticleImageServiceTest extends TestCase
             self::markTestSkipped('This isolated database test requires pdo_sqlite.');
         }
 
-        $this->root = sys_get_temp_dir() . '/3sk-missing-image-test-' . bin2hex(random_bytes(8));
+        $this->root = sys_get_temp_dir() . '/3sk-catalog-anomaly-test-' . bin2hex(random_bytes(8));
         mkdir($this->root . '/project/public/ebpsynch', 0777, true);
-        mkdir($this->root . '/project/export_images', 0777, true);
         mkdir($this->root . '/configured-export', 0777, true);
 
         $connection = DriverManager::getConnection(['driver' => 'pdo_sqlite', 'memory' => true]);
@@ -46,18 +46,19 @@ final class MissingArticleImageServiceTest extends TestCase
         $sourceMetadata->customRepositoryClassName = EntityRepository::class;
         (new SchemaTool($this->entityManager))->createSchema([$articleMetadata, $sourceMetadata]);
 
-        $source = (new ImportSource())
-            ->setDirectoryPath($this->root . '/configured-export')
-            ->setFileName('items.csv');
-        $this->entityManager->persist($source);
-
-        $this->persistArticle(self::PRESENT_ID, 'PRESENT-REF', 'Pièce avec photo');
-        $this->persistArticle(self::MISSING_ID, 'MISSING-REF', 'Pièce sans photo');
+        $this->entityManager->persist(
+            (new ImportSource())
+                ->setDirectoryPath($this->root . '/configured-export')
+                ->setFileName('items.csv'),
+        );
+        $this->persistArticle(self::PRESENT_ID, 'PRESENT-REF', 'Pièce avec photo', '10.00');
+        $this->persistArticle(self::MISSING_ID, 'MISSING-REF', 'Pièce sans photo', '10.00');
+        $this->persistArticle(self::ZERO_PRICE_ID, 'ZERO-REF', 'Pièce à prix nul', '0.00');
         $this->entityManager->flush();
 
         file_put_contents($this->root . '/configured-export/' . self::PRESENT_ID . '.png', self::PNG);
 
-        $this->service = new MissingArticleImageService(
+        $this->service = new CatalogAnomalyService(
             $this->entityManager,
             new ArticleImageLocator($this->root . '/project'),
             new ArrayAdapter(),
@@ -76,28 +77,40 @@ final class MissingArticleImageServiceTest extends TestCase
         }
     }
 
-    public function testExistingImagesAreExcludedAndNewlyDetectedImagesInvalidateTheCachedList(): void
+    public function testItGroupsMissingImagesAndZeroPricesWithoutDoubleCountingArticles(): void
     {
-        $page = $this->service->getPage(1, 50);
+        self::assertSame(
+            ['total' => 2, 'missingImageCount' => 2, 'zeroPriceCount' => 1],
+            $this->service->getSummary(),
+        );
 
-        self::assertSame(1, $page['total']);
-        self::assertSame(['MISSING-REF'], array_column($page['items'], 'code'));
-        self::assertFalse($this->service->check(self::MISSING_ID));
+        $missingImagePage = $this->service->getPage(CatalogAnomalyService::TYPE_MISSING_IMAGE, 1, 50);
+        self::assertSame(['MISSING-REF', 'ZERO-REF'], array_column($missingImagePage['items'], 'code'));
+        self::assertTrue($missingImagePage['items'][1]['hasZeroPrice']);
+
+        $zeroPricePage = $this->service->getPage(CatalogAnomalyService::TYPE_ZERO_PRICE, 1, 50);
+        self::assertSame(['ZERO-REF'], array_column($zeroPricePage['items'], 'code'));
+    }
+
+    public function testCheckingAnImageInvalidatesTheSnapshotWhenTheFileIsPresent(): void
+    {
+        self::assertFalse($this->service->checkImage(self::MISSING_ID)['imageDetected']);
 
         file_put_contents($this->root . '/configured-export/' . self::MISSING_ID . '.png', self::PNG);
 
-        self::assertTrue($this->service->check(self::MISSING_ID));
-        self::assertSame([], $this->service->getMissingArticles());
+        self::assertTrue($this->service->checkImage(self::MISSING_ID)['imageDetected']);
+        self::assertSame(1, $this->service->getSummary()['missingImageCount']);
     }
 
-    private function persistArticle(string $uniqueId, string $code, string $designation): void
+    private function persistArticle(string $uniqueId, string $code, string $designation, string $price): void
     {
         $this->entityManager->persist(
             (new Article())
                 ->setUniqueId($uniqueId)
                 ->setId($code)
                 ->setDesComClear($designation)
-                ->setSysModifiedDate(new \DateTimeImmutable('now')),
+                ->setSalePriceVatIncluded($price)
+                ->setSysModifiedDate(new \DateTimeImmutable('2026-10-17 12:00:00')),
         );
     }
 }
