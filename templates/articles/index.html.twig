@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
   {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('styles/catalog-filters.css') }}?v=20261016-4">
+    <link rel="stylesheet" href="{{ asset('styles/catalog-filters.css') }}?v=20261020-1">
 {% endblock %}
 
 {% block body %}
@@ -410,15 +410,92 @@
       border-color: rgba(255,255,255,.14);
     }
 
-    .skeleton{
-      height: 380px;
-      border-radius: var(--pc-radius);
-      border: 1px solid rgba(0,0,0,.06);
-      background: linear-gradient(90deg, rgba(0,0,0,.04), rgba(0,0,0,.08), rgba(0,0,0,.04));
-      background-size: 200% 100%;
-      animation: sk 1.2s infinite;
+    .product-card--skeleton{
+      min-height: 378px;
+      pointer-events: none;
     }
-    @keyframes sk { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .product-card--skeleton:hover{
+      transform: none;
+      box-shadow: 0 8px 18px rgba(var(--brand-anthracite-rgb), .055);
+      border-color: rgba(var(--bs-primary-rgb), .18);
+    }
+    .catalog-skeleton__media,
+    .catalog-skeleton__chip,
+    .catalog-skeleton__line,
+    .catalog-skeleton__price,
+    .catalog-skeleton__action{
+      background: linear-gradient(90deg, rgba(var(--brand-anthracite-rgb), .06), rgba(var(--brand-anthracite-rgb), .13), rgba(var(--brand-anthracite-rgb), .06));
+      background-size: 220% 100%;
+      animation: catalog-skeleton-shimmer 1.35s ease-in-out infinite;
+    }
+    .catalog-skeleton__media{
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 15px;
+      border: 1px solid rgba(var(--bs-primary-rgb), .12);
+    }
+    .catalog-skeleton__chips{
+      display: flex;
+      gap: 6px;
+      margin-top: 12px;
+    }
+    .catalog-skeleton__chip{
+      width: 54px;
+      height: 18px;
+      border-radius: 999px;
+    }
+    .catalog-skeleton__chip:nth-child(2){ width: 46px; }
+    .catalog-skeleton__chip:nth-child(3){ width: 62px; }
+    .catalog-skeleton__line{
+      height: 10px;
+      margin-top: 11px;
+      border-radius: 999px;
+    }
+    .catalog-skeleton__line--title{ width: 88%; height: 12px; }
+    .catalog-skeleton__line--title-short{ width: 61%; margin-top: 7px; }
+    .catalog-skeleton__line--vehicle{ width: 54%; margin-top: 13px; }
+    .catalog-skeleton__price-row{
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .catalog-skeleton__price{ width: 42%; height: 20px; border-radius: 6px; }
+    .catalog-skeleton__price-label{ width: 24px; height: 9px; margin-bottom: 2px; }
+    .catalog-skeleton__details{
+      display: grid;
+      gap: 8px;
+      margin-top: 13px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(var(--brand-anthracite-rgb), .10);
+    }
+    .catalog-skeleton__detail{
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .catalog-skeleton__detail .catalog-skeleton__line{ margin: 0; }
+    .catalog-skeleton__detail .catalog-skeleton__line:first-child{ width: 39%; }
+    .catalog-skeleton__detail .catalog-skeleton__line:last-child{ width: 31%; }
+    .catalog-skeleton__actions{
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 6px;
+      margin-top: auto;
+      padding-top: 14px;
+    }
+    .catalog-skeleton__action{ height: 30px; border-radius: 4px; }
+    @keyframes catalog-skeleton-shimmer {
+      0% { background-position: 210% 0; }
+      100% { background-position: -20% 0; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .catalog-skeleton__media,
+      .catalog-skeleton__chip,
+      .catalog-skeleton__line,
+      .catalog-skeleton__price,
+      .catalog-skeleton__action{ animation: none; }
+    }
 
     #yearSlider{ margin-top: 8px; margin-bottom: 10px; }
     .noUi-target{
@@ -799,106 +876,102 @@ body.theme-dark .empty-results-box{
        data-initial='{{ initial|json_encode(constant("JSON_UNESCAPED_UNICODE"))|e("html_attr") }}'>
 
     <div class="row g-3 catalog-layout">
-      <div class="col-12 catalog-filters-area">
-  <details class="filters-panel" data-catalog-filters open>
-    <summary class="filters-panel__head">
-      <span class="filters-panel__label">
-        <i class="fa-solid fa-sliders" aria-hidden="true"></i>
-        <span class="filters-panel__title">Filtres produits</span>
-      </span>
-      <span class="filters-meta" id="resultMeta" aria-live="polite"></span>
-      <span class="filters-panel__tools">
-        <a class="filters-arrivals" id="catalogNewArrivals" href="{{ path('articles_page', { new: 1, newDays: 90 }) }}">Arrivages récents</a>
-        <button class="filters-reset" id="resetFilters" type="button" title="Réinitialiser les filtres" aria-label="Réinitialiser les filtres">
-          <i class="fa-solid fa-rotate-left" aria-hidden="true"></i><span>Reset</span>
-        </button>
-      </span>
-      <span class="filters-panel__badge">
-        <i class="fa-solid fa-chevron-down filters-panel__chevron" aria-hidden="true"></i>
-      </span>
-    </summary>
+      <div class="col-12 catalog-filters-area" data-catalog-filters>
+        <section class="catalog-toolbar" aria-label="Filtres du catalogue">
+          <div class="catalog-toolbar__main">
+            <div class="catalog-toolbar__identity">
+              <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+              <span class="catalog-toolbar__title">Filtres</span>
+              <span class="catalog-toolbar__meta" id="resultMeta" aria-live="polite"></span>
+            </div>
 
-    <div class="filters-panel__content">
-    <div class="filters-section filters-section--keyword">
-      <label class="filters-label" for="f_q">Mot-clé</label>
-      <div class="filters-input-icon">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input class="form-control filters-control filters-control-lg" id="f_q" placeholder="Mot-clé / référence...">
+            <div class="catalog-toolbar__filters">
+              <label class="catalog-toolbar__field" for="f_family">
+                <span class="visually-hidden">Famille</span>
+                <select class="form-select catalog-toolbar__control" id="f_family">
+                  <option value="">Toutes les familles</option>
+                </select>
+              </label>
+
+              <label class="catalog-toolbar__field" for="f_brand">
+                <span class="visually-hidden">Marque</span>
+                <select class="form-select catalog-toolbar__control" id="f_brand">
+                  <option value="">Toutes les marques</option>
+                </select>
+              </label>
+
+              <label class="catalog-toolbar__field" for="f_vehicle">
+                <span class="visually-hidden">Véhicule</span>
+                <select class="form-select catalog-toolbar__control" id="f_vehicle">
+                  <option value="">Tous les véhicules</option>
+                </select>
+              </label>
+
+              <label class="catalog-toolbar__stock" for="f_inStock">
+                <input class="form-check-input" type="checkbox" id="f_inStock">
+                <span>En stock</span>
+              </label>
+            </div>
+
+            <details class="catalog-toolbar__more" id="catalogMoreFilters">
+              <summary>
+                <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+                <span>Plus de filtres</span>
+                <i class="fa-solid fa-chevron-down catalog-toolbar__more-arrow" aria-hidden="true"></i>
+              </summary>
+              <div class="catalog-toolbar__more-panel">
+                <div class="catalog-toolbar__year">
+                  <div class="catalog-toolbar__year-head">
+                    <span>Année</span>
+                    <span id="anneeBadge">—</span>
+                  </div>
+                  <div class="catalog-toolbar__year-slider"><div id="yearSlider"></div></div>
+                  <div class="catalog-toolbar__year-range">
+                    <span id="yearMinLabel">—</span>
+                    <span id="yearMaxLabel">—</span>
+                  </div>
+                </div>
+                <button class="catalog-toolbar__arrivals" id="catalogNewArrivals" type="button">
+                  <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                  <span>Arrivages récents</span>
+                </button>
+              </div>
+            </details>
+
+            <button class="catalog-toolbar__reset" id="resetFilters" type="button" title="Réinitialiser les filtres" aria-label="Réinitialiser les filtres">
+              <i class="fa-solid fa-rotate-left" aria-hidden="true"></i><span>Réinitialiser</span>
+            </button>
+          </div>
+
+          <div class="catalog-toolbar__active" id="activeFilters" hidden aria-label="Filtres actifs"></div>
+        </section>
+
+        <input type="hidden" id="f_q" value="">
+        <input type="hidden" id="f_yearFrom" value="1976">
+        <input type="hidden" id="f_yearTo" value="2030">
       </div>
-    </div>
-
-    <div class="filters-section">
-      <label class="filters-label" for="f_family">Famille</label>
-      <select class="form-select filters-control" id="f_family">
-        <option value="">Toutes</option>
-      </select>
-    </div>
-
-    <div class="filters-section">
-      <label class="filters-label" for="f_brand">Marque</label>
-      <select class="form-select filters-control" id="f_brand">
-        <option value="">Toutes</option>
-      </select>
-    </div>
-
-    <div class="filters-section">
-      <label class="filters-label" for="f_vehicle">Véhicule</label>
-      <select class="form-select filters-control" id="f_vehicle">
-        <option value="">Tous</option>
-      </select>
-    </div>
-
-    <div class="filters-section filters-section--year">
-      <label class="filters-label d-flex align-items-center justify-content-between">
-        <span>Année</span>
-        <span class="filters-year-badge" id="anneeBadge">—</span>
-      </label>
-
-      <div class="filters-year-box">
-        <div id="yearSlider"></div>
-      </div>
-
-      <input type="hidden" id="f_yearFrom" value="1976">
-      <input type="hidden" id="f_yearTo" value="2030">
-
-      <div class="filters-year-range">
-        <span id="yearMinLabel">—</span>
-        <span id="yearMaxLabel">—</span>
-      </div>
-    </div>
-
-    <div class="filters-switch-box">
-      <div class="form-check form-switch m-0">
-        <input class="form-check-input" type="checkbox" id="f_inStock">
-        <label class="form-check-label small fw-bold" for="f_inStock">
-          En stock uniquement
-        </label>
-      </div>
-    </div>
-
-    </div>
-  </details>
-</div>
 
       <div class="col-12 catalog-results-area">
-        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
-          <div class="small text-muted" id="statusLine" role="status" aria-live="polite">—</div>
+        <div class="catalog-results-toolbar">
+          <div class="catalog-results-toolbar__count" id="statusLine" role="status" aria-live="polite">—</div>
 
-          <div class="d-flex gap-2 align-items-center flex-wrap">
-            <div class="d-flex align-items-center gap-2">
-              <span class="small text-muted">Articles / page :</span>
-              <select class="form-select form-select-sm" id="limitSelect" style="width:auto;">
+          <div class="catalog-results-toolbar__actions">
+            <label class="catalog-results-toolbar__limit" for="limitSelect">
+              <span>Articles par page</span>
+              <select class="form-select form-select-sm" id="limitSelect">
                 <option value="10">10</option>
                 <option value="20">20</option>
                 <option value="24" selected>24</option>
                 <option value="40">40</option>
                 <option value="60">60</option>
               </select>
-            </div>
+            </label>
 
-            <button class="btn btn-outline-secondary btn-sm" id="prevBtn" disabled>←</button>
-            <span class="small" id="pageLabel">1</span>
-            <button class="btn btn-outline-secondary btn-sm" id="nextBtn" disabled>→</button>
+            <nav class="catalog-results-toolbar__pagination" aria-label="Pagination du catalogue">
+              <button class="btn btn-outline-secondary btn-sm" id="prevBtn" type="button" aria-label="Page précédente" disabled>←</button>
+              <span class="small" id="pageLabel" aria-live="polite">1</span>
+              <button class="btn btn-outline-secondary btn-sm" id="nextBtn" type="button" aria-label="Page suivante" disabled>→</button>
+            </nav>
           </div>
         </div>
 
@@ -971,6 +1044,7 @@ body.theme-dark .empty-results-box{
 
       const statusLine = document.getElementById('statusLine');
       const resultMeta = document.getElementById('resultMeta');
+      const activeFilters = document.getElementById('activeFilters');
       const apiError = document.getElementById('apiError');
       const apiErrorRetry = document.getElementById('apiErrorRetry');
       const headerSearchInput = document.getElementById('InputRechercheProduit');
@@ -1215,7 +1289,21 @@ body.theme-dark .empty-results-box{
         grid.innerHTML = '';
         for (let i=0; i<8; i++){
           const d = document.createElement('div');
-          d.className = 'skeleton';
+          d.className = 'product-card product-card--skeleton';
+          d.setAttribute('aria-hidden', 'true');
+          d.innerHTML = `
+            <div class="catalog-skeleton__media"></div>
+            <div class="catalog-skeleton__chips"><span class="catalog-skeleton__chip"></span><span class="catalog-skeleton__chip"></span><span class="catalog-skeleton__chip"></span></div>
+            <div class="catalog-skeleton__line catalog-skeleton__line--title"></div>
+            <div class="catalog-skeleton__line catalog-skeleton__line--title-short"></div>
+            <div class="catalog-skeleton__line catalog-skeleton__line--vehicle"></div>
+            <div class="catalog-skeleton__price-row"><span class="catalog-skeleton__price"></span><span class="catalog-skeleton__line catalog-skeleton__price-label"></span></div>
+            <div class="catalog-skeleton__details">
+              <div class="catalog-skeleton__detail"><span class="catalog-skeleton__line"></span><span class="catalog-skeleton__line"></span></div>
+              <div class="catalog-skeleton__detail"><span class="catalog-skeleton__line"></span><span class="catalog-skeleton__line"></span></div>
+            </div>
+            <div class="catalog-skeleton__actions"><span class="catalog-skeleton__action"></span><span class="catalog-skeleton__action"></span></div>
+          `;
           grid.appendChild(d);
         }
       }
@@ -1526,7 +1614,7 @@ body.theme-dark .empty-results-box{
 const reduction = String(a.reduction ?? '').trim();
 const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
 
-          const img = (base && uid) ? (base + '/' + uid + '.png') : FALLBACK_IMG;
+          const img = a.imageUrl || ((base && uid) ? (base + '/' + uid + '.png') : FALLBACK_IMG);
 
           const stock = Math.max(0, Number(a.RealStock || 0));
           const inCartQty = getCartQtyFromObj(cartObj, code);
@@ -1767,6 +1855,7 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
           });
 
           setUI();
+          window.CatalogPhotoRefresh?.attach(card, {uniqueId: uid, fallback: FALLBACK_IMG});
           grid.appendChild(card);
         });
 
@@ -1996,6 +2085,80 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
         const count = [state.q, state.family, state.brand, state.vehicle, state.inStock === '1', state.onlyNew, hasYears].filter(Boolean).length;
         if (resultMeta) resultMeta.textContent = count ? `${count} filtre${count > 1 ? 's' : ''} actif${count > 1 ? 's' : ''}` : (state.sort ? 'Derniers articles ajoutés' : 'Tous les articles');
         newArrivalsLink?.classList.toggle('is-active', state.onlyNew);
+        newArrivalsLink?.setAttribute('aria-pressed', state.onlyNew ? 'true' : 'false');
+        renderActiveFilters(hasYears);
+      }
+
+      function renderActiveFilters(hasYears){
+        if (!activeFilters) return;
+
+        const filters = [];
+        const add = (key, label) => filters.push({ key, label });
+        if (state.q) add('q', `Recherche : ${state.q}`);
+        if (state.family) add('family', `Famille : ${state.family}`);
+        if (state.brand) add('brand', `Marque : ${state.brand}`);
+        if (state.vehicle) add('vehicle', `Véhicule : ${state.vehicle}`);
+        if (state.inStock === '1') add('inStock', 'En stock');
+        if (hasYears) add('year', `Année : ${f_yearFrom?.value} – ${f_yearTo?.value}`);
+        if (state.onlyNew) add('new', 'Arrivages récents');
+
+        activeFilters.replaceChildren();
+        activeFilters.hidden = filters.length === 0;
+        filters.forEach(({ key, label }) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'catalog-filter-chip';
+          button.dataset.filter = key;
+          button.setAttribute('aria-label', `Retirer le filtre ${label}`);
+
+          const text = document.createElement('span');
+          text.textContent = label;
+          const icon = document.createElement('i');
+          icon.className = 'fa-solid fa-xmark';
+          icon.setAttribute('aria-hidden', 'true');
+          button.append(text, icon);
+          activeFilters.appendChild(button);
+        });
+      }
+
+      function clearActiveFilter(key){
+        clearTimeout(keywordTimer);
+        state.page = 1;
+
+        switch (key) {
+          case 'q':
+            state.q = '';
+            syncKeywordInputs('', null);
+            break;
+          case 'family':
+            state.family = '';
+            if (f_family) f_family.value = '';
+            break;
+          case 'brand':
+            state.brand = '';
+            if (f_brand) f_brand.value = '';
+            break;
+          case 'vehicle':
+            state.vehicle = '';
+            if (f_vehicle) f_vehicle.value = '';
+            break;
+          case 'inStock':
+            state.inStock = '';
+            if (f_inStock) f_inStock.checked = false;
+            break;
+          case 'year':
+            setYearValues(dataYearMin, dataYearMax, true);
+            break;
+          case 'new':
+            state.onlyNew = false;
+            state.sort = '';
+            break;
+          default:
+            return;
+        }
+
+        syncUrlToBrowser();
+        load();
       }
 
       function applyFilters(){
@@ -2039,7 +2202,23 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
         load();
       });
 
-      newArrivalsLink?.addEventListener('click', event => event.stopPropagation());
+      activeFilters?.addEventListener('click', (event) => {
+        const target = event.target;
+        const button = target instanceof Element ? target.closest('[data-filter]') : null;
+        if (button instanceof HTMLButtonElement) {
+          clearActiveFilter(button.dataset.filter || '');
+        }
+      });
+
+      newArrivalsLink?.addEventListener('click', (event) => {
+        event.preventDefault();
+        state.page = 1;
+        state.onlyNew = !state.onlyNew;
+        state.sort = '';
+        if (state.onlyNew) state.newDays = 90;
+        syncUrlToBrowser();
+        load();
+      });
 
       prevBtn?.addEventListener('click', () => { if (state.page > 1){ state.page--; load(); } });
       nextBtn?.addEventListener('click', () => { state.page++; load(); });
@@ -2062,6 +2241,10 @@ const hasReduction = reduction !== '' && !Number.isNaN(Number(reduction));
       });
 
       syncUrlToBrowser();
+
+      skeletons();
+      grid?.setAttribute('aria-busy', 'true');
+      if (statusLine) statusLine.textContent = 'Chargement du catalogue…';
 
       syncCartFromServer({emit:true}).finally(() => {
         load();

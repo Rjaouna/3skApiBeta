@@ -4,9 +4,12 @@ namespace App\Tests\Controller;
 
 use App\Controller\Api\ArticleApiController;
 use App\Entity\Article;
+use App\Entity\CatalogImageConfiguration;
 use App\Repository\CategoryReductionRepository;
 use App\Repository\CartItemRepository;
 use App\Repository\UserFamilyDiscountRepository;
+use App\Repository\CatalogImageConfigurationRepository;
+use App\Service\CatalogImageBaseUrlProvider;
 use App\Service\PricingService;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
@@ -15,10 +18,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\SchemaTool;
+use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 final class ArticleLatestListTest extends TestCase
 {
@@ -26,6 +31,7 @@ final class ArticleLatestListTest extends TestCase
     private EntityManagerInterface $entityManager;
     private CartItemRepository $cartItems;
     private ArticleApiController $controller;
+    private CatalogImageBaseUrlProvider $images;
 
     protected function setUp(): void
     {
@@ -37,7 +43,7 @@ final class ArticleLatestListTest extends TestCase
         $this->orm = new EntityManager($connection, $configuration);
         $metadata = $this->orm->getClassMetadata(Article::class);
         $metadata->customRepositoryClassName = EntityRepository::class;
-        (new SchemaTool($this->orm))->createSchema([$metadata]);
+        (new SchemaTool($this->orm))->createSchema([$metadata, $this->orm->getClassMetadata(CatalogImageConfiguration::class)]);
 
         // The controller's MySQL year-bound query is unrelated to article ordering.
         $yearBounds = $this->createStub(Connection::class);
@@ -48,10 +54,13 @@ final class ArticleLatestListTest extends TestCase
         $this->cartItems = $this->createStub(CartItemRepository::class);
         $this->cartItems->method('getPressureMapForArticleCodes')->willReturn([]);
 
+        $registry = $this->createStub(ManagerRegistry::class);
+        $registry->method('getManagerForClass')->willReturn($this->orm);
+        $this->images = new CatalogImageBaseUrlProvider(new CatalogImageConfigurationRepository($registry), $this->orm, '/ebpsynch', new ArrayAdapter());
         $this->controller = new ArticleApiController(new PricingService(
             $this->createStub(UserFamilyDiscountRepository::class),
             $this->createStub(CategoryReductionRepository::class),
-        ));
+        ), $this->images);
         $container = new Container();
         $container->set('security.token_storage', new TokenStorage());
         $this->controller->setContainer($container);
@@ -127,6 +136,19 @@ final class ArticleLatestListTest extends TestCase
 
         self::assertSame([true, false], array_column($latest['items'], 'isNew'));
         self::assertSame(['REF-2'], array_column($this->listing(['new' => 1, 'newDays' => 90])['items'], 'Id'));
+    }
+
+    public function testPurgeRefreshesImageUrlsWithoutChangingTheCatalogue(): void
+    {
+        $this->article(1, '-1 day', '-1 day', 5);
+        $before = $this->listing([])['items'][0];
+        $this->images->purgeCache();
+        $after = $this->listing([])['items'][0];
+
+        self::assertNotSame($before['imageUrl'], $after['imageUrl']);
+        self::assertSame(parse_url($before['imageUrl'], PHP_URL_PATH), parse_url($after['imageUrl'], PHP_URL_PATH));
+        unset($before['imageUrl'], $after['imageUrl']);
+        self::assertSame($before, $after);
     }
 
     private function article(int $index, ?string $created, string $modified, int $stock = 0): void

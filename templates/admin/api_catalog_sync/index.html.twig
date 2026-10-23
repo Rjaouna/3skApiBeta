@@ -1,0 +1,379 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% set initialRun = lastRun ?? {} %}
+{% set initialStatus = initialRun.status|default('IDLE') %}
+<style>
+  .catalog-sync-page{--sync-ink:#232B38;--sync-blue:#315FB7;--sync-orange:#FF8A00;--sync-bg:#F5F6F8;--sync-line:rgba(49,95,183,.16);--sync-muted:#667085;max-width:1240px}
+  .catalog-sync-page .sync-hero,.catalog-sync-page .sync-card{background:#fff;border:1px solid var(--sync-line);box-shadow:0 10px 28px rgba(35,43,56,.06)}
+  .catalog-sync-page .sync-hero{border-radius:20px;padding:26px 28px}.catalog-sync-page .sync-card{border-radius:18px;padding:24px;height:100%}
+  .catalog-sync-page .sync-kicker{color:var(--sync-orange);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.catalog-sync-page h1{color:var(--sync-ink);font-size:28px;font-weight:700;margin:0 0 6px}.catalog-sync-page h2{color:var(--sync-ink);font-size:20px;font-weight:700;margin:0}.catalog-sync-page p{color:var(--sync-muted)}
+  .catalog-sync-page .sync-state{align-items:center;border-radius:999px;display:inline-flex;font-size:12px;font-weight:700;gap:7px;padding:7px 10px;white-space:nowrap}.catalog-sync-page .sync-state::before{background:currentColor;border-radius:50%;content:'';height:7px;width:7px}.catalog-sync-page .sync-state--ready{background:#e7f6ed;color:#167044}.catalog-sync-page .sync-state--running{background:#fff3dd;color:#a55a00}.catalog-sync-page .sync-state--error{background:#fff1f2;color:#b4233c}.catalog-sync-page .sync-state--muted{background:#f0f2f5;color:#586174}
+  .catalog-sync-page .sync-primary{background:var(--sync-orange);border-color:var(--sync-orange);color:var(--sync-ink);font-weight:700;border-radius:10px;min-height:46px;padding-inline:18px}.catalog-sync-page .sync-primary:hover{background:#e87d00;border-color:#e87d00;color:var(--sync-ink)}.catalog-sync-page .sync-primary:disabled{background:#ffd18d;border-color:#ffd18d;color:#6d4820;opacity:1}
+  .catalog-sync-page .sync-alert{display:none;border-radius:12px;padding:12px 14px;margin-top:18px}.catalog-sync-page .sync-alert.is-visible{display:block}.catalog-sync-page .sync-alert--error{background:#fff1f2;border:1px solid #fecdd3;color:#a6172d}.catalog-sync-page .sync-alert--success{background:#edf9f1;border:1px solid #b9e7c8;color:#17673d}
+  .catalog-sync-page .sync-progress{background:var(--sync-bg);border:1px solid var(--sync-line);border-radius:16px;margin-top:22px;padding:18px}.catalog-sync-page .sync-progress__top{align-items:baseline;display:flex;gap:16px;justify-content:space-between}.catalog-sync-page .sync-progress__label{color:var(--sync-ink);font-size:14px;font-weight:700}.catalog-sync-page .sync-progress__percent{color:var(--sync-blue);font-size:22px;font-weight:700}.catalog-sync-page .sync-progress__track{background:#dfe6f3;border-radius:999px;height:10px;margin:12px 0;overflow:hidden}.catalog-sync-page .sync-progress__bar{background:linear-gradient(90deg,var(--sync-blue),#4d79cf);border-radius:inherit;height:100%;transition:width .55s ease;width:0}.catalog-sync-page .sync-progress__detail{color:var(--sync-muted);font-size:13px;line-height:1.5}.catalog-sync-page .sync-progress__detail strong{color:var(--sync-ink)}
+  .catalog-sync-page .sync-stat-grid{display:grid;gap:10px;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:18px}.catalog-sync-page .sync-stat{background:var(--sync-bg);border-radius:12px;padding:14px}.catalog-sync-page .sync-stat__label{color:var(--sync-muted);display:block;font-size:12px;margin-bottom:5px}.catalog-sync-page .sync-stat strong{color:var(--sync-ink);display:block;font-size:22px;line-height:1.1}.catalog-sync-page .sync-stat__hint{color:var(--sync-muted);display:block;font-size:11px;margin-top:4px}
+  .catalog-sync-page .sync-section-head{align-items:start;display:flex;gap:14px;justify-content:space-between}.catalog-sync-page .sync-section-head p{font-size:13px;margin:6px 0 0}.catalog-sync-page .sync-source{border-bottom:1px solid var(--sync-line);display:grid;gap:14px;grid-template-columns:1fr auto 1fr;margin:20px 0;padding-bottom:20px}.catalog-sync-page .sync-source__node{min-width:0}.catalog-sync-page .sync-source__eyebrow{color:var(--sync-muted);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}.catalog-sync-page .sync-source__count{color:var(--sync-ink);font-size:28px;font-weight:700;line-height:1.2;margin-top:3px}.catalog-sync-page .sync-source__caption{color:var(--sync-muted);font-size:12px}.catalog-sync-page .sync-source__arrow{align-items:center;color:var(--sync-blue);display:flex;font-size:18px}.catalog-sync-page .sync-run-info{color:var(--sync-muted);font-size:13px;margin:0}.catalog-sync-page .sync-run-info strong{color:var(--sync-ink)}
+  .catalog-sync-page .sync-activity{list-style:none;margin:18px 0 0;padding:0}.catalog-sync-page .sync-activity li{align-items:flex-start;border-top:1px solid var(--sync-line);color:var(--sync-muted);display:flex;font-size:13px;gap:10px;line-height:1.45;padding:12px 0}.catalog-sync-page .sync-activity li:first-child{border-top:0;padding-top:0}.catalog-sync-page .sync-activity i{color:var(--sync-blue);font-size:12px;margin-top:4px;width:14px}.catalog-sync-page .sync-activity li.is-current i{color:var(--sync-orange)}.catalog-sync-page .sync-link{color:var(--sync-blue);font-weight:700;text-decoration:none}.catalog-sync-page .sync-link:hover{text-decoration:underline}.catalog-sync-page .sync-live{color:var(--sync-muted);font-size:12px;margin:18px 0 0}.catalog-sync-page .sync-live i{color:var(--sync-orange);margin-right:5px}.catalog-sync-page .sync-live[hidden]{display:none}
+  .catalog-sync-page .sync-current{border-left:3px solid var(--sync-orange);background:var(--sync-bg);border-radius:0 10px 10px 0;margin-top:18px;padding:14px 16px;min-width:0}.catalog-sync-page .sync-current__label{color:var(--sync-muted);font-size:12px;display:flex;justify-content:space-between;gap:10px}.catalog-sync-page .sync-current strong{display:block;color:var(--sync-ink);font-size:17px;margin-top:5px;overflow-wrap:anywhere}.catalog-sync-page .sync-current p{font-size:13px;margin:4px 0 0;overflow-wrap:anywhere}.catalog-sync-page .sync-current code{display:block;color:var(--sync-muted);font-size:11px;overflow-wrap:anywhere;margin-top:5px}
+  .catalog-sync-page .sync-log-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.catalog-sync-page .sync-log-tools select{min-width:160px;width:auto;font-size:13px}.catalog-sync-page .sync-log-tools .btn{font-size:13px;white-space:nowrap}.catalog-sync-page .sync-console{background:var(--sync-ink);color:var(--sync-bg);border-radius:12px;margin-top:18px;height:320px;overflow:auto;padding:14px 16px;font:12px/1.7 Consolas,monospace;scrollbar-color:#667085 var(--sync-ink);overflow-wrap:anywhere}.catalog-sync-page .sync-log-line{display:grid;grid-template-columns:65px 60px minmax(0,1fr);gap:10px;padding:3px 0}.catalog-sync-page .sync-log-line time{color:rgba(245,246,248,.7)}.catalog-sync-page .sync-log-line__type{color:var(--sync-orange)}.catalog-sync-page .sync-log-line--error{color:#fda4af}.catalog-sync-page .sync-console:focus-visible{outline:3px solid var(--sync-blue);outline-offset:3px}.catalog-sync-page .sync-log-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--sync-muted);margin-top:12px}.catalog-sync-page .sync-log-footer label{display:flex;align-items:center;gap:7px}.catalog-sync-page .sync-log-footer p{font-size:12px;margin:0}.catalog-sync-page .sync-observation--warning{color:#a55a00}
+  @media(max-width:575.98px){.catalog-sync-page .sync-log-tools{margin-top:12px;width:100%}.catalog-sync-page .sync-log-tools select{flex:1;min-width:0}.catalog-sync-page .sync-console{padding:12px;height:300px}.catalog-sync-page .sync-log-line{grid-template-columns:57px minmax(0,1fr);gap:7px;font-size:11px}.catalog-sync-page .sync-log-line__type{display:none}.catalog-sync-page .sync-current__label{flex-wrap:wrap}}
+  @media(max-width:767.98px){.catalog-sync-page .sync-hero,.catalog-sync-page .sync-card{border-radius:14px;padding:18px}.catalog-sync-page h1{font-size:24px}.catalog-sync-page .sync-source{gap:9px}.catalog-sync-page .sync-source__count{font-size:23px}.catalog-sync-page .sync-section-head{display:block}.catalog-sync-page .sync-state{margin-top:12px}.catalog-sync-page .sync-progress__top{align-items:flex-start}.catalog-sync-page .sync-progress__percent{font-size:20px}}
+</style>
+
+<main
+  class="container py-4 catalog-sync-page"
+  data-token="{{ runToken|e('html_attr') }}"
+  data-run-url="{{ path('admin_api_catalog_sync_run') }}"
+  data-status-url="{{ path('admin_api_catalog_sync_status') }}"
+  data-initial-status="{{ initialStatus|e('html_attr') }}"
+>
+  <section class="sync-hero mb-3 d-flex justify-content-between align-items-start gap-3 flex-wrap">
+    <div>
+      <div class="sync-kicker">Catalogue local</div>
+      <h1>Synchronisation du catalogue</h1>
+      <p class="mb-0">Suivez l’arrivée des articles ApiRecept en direct. Les catégories de <strong>dbo.ItemFamily</strong>, les réductions et les images déjà configurées sur le site sont conservées.</p>
+    </div>
+    <span id="syncConnectionState" class="sync-state {% if connection.enabled and connection.hasApiKey and connection.baseUrl %}sync-state--ready{% else %}sync-state--muted{% endif %}">{% if connection.enabled and connection.hasApiKey and connection.baseUrl %}Connexion prête{% else %}Configuration requise{% endif %}</span>
+  </section>
+
+  <div class="row g-3">
+    <div class="col-lg-7">
+      <section class="sync-card">
+        <div class="sync-section-head">
+          <div>
+            <h2>Avancement de la synchronisation</h2>
+            <p id="syncStage">Lecture du dernier état enregistré.</p>
+          </div>
+          <span id="syncStatus" class="sync-state sync-state--muted">En attente</span>
+        </div>
+
+        <div class="sync-progress" aria-live="polite">
+          <div class="sync-progress__top">
+            <span id="syncProgressLabel" class="sync-progress__label">Prêt à synchroniser</span>
+            <strong id="syncProgressPercent" class="sync-progress__percent">—</strong>
+          </div>
+          <div class="sync-progress__track" role="progressbar" aria-label="Avancement de la synchronisation" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="syncProgressBar" class="sync-progress__bar"></div></div>
+          <div id="syncProgressDetail" class="sync-progress__detail">Aucune synchronisation en cours.</div>
+        </div>
+
+        <div class="sync-stat-grid" aria-live="polite">
+          <div class="sync-stat"><span class="sync-stat__label">Articles traités / total</span><strong id="syncReceived">0</strong><span id="syncReceivedHint" class="sync-stat__hint">—</span></div>
+          <div class="sync-stat"><span class="sync-stat__label">Restants</span><strong id="syncRemaining">—</strong><span id="syncRemainingHint" class="sync-stat__hint">—</span></div>
+          <div class="sync-stat"><span class="sync-stat__label">Créés</span><strong id="syncCreated">0</strong><span class="sync-stat__hint">Nouveaux articles locaux</span></div>
+          <div class="sync-stat"><span class="sync-stat__label">Mis à jour</span><strong id="syncUpdated">0</strong><span id="syncUpdatedHint" class="sync-stat__hint">Modifications EBP appliquées</span></div>
+        </div>
+
+        <div class="sync-current">
+          <div class="sync-current__label"><span id="syncArticleLabel">Article en cours</span><span id="syncArticlePosition">—</span></div>
+          <strong id="syncArticleReference">En attente d’une synchronisation</strong>
+          <p id="syncArticleDesignation">La référence et la désignation apparaîtront ici.</p>
+          <code id="syncArticleUniqueId"></code>
+        </div>
+
+        <div class="d-flex align-items-center gap-3 flex-wrap mt-4">
+          <button id="runSync" class="btn sync-primary" type="button" {% if not connection.enabled or not connection.hasApiKey or not connection.baseUrl %}disabled{% endif %}><i class="fa-solid fa-rotate me-1"></i> Synchroniser maintenant</button>
+          <span id="syncLive" class="sync-live" hidden><i class="fa-solid fa-circle-notch fa-spin"></i>Mise à jour automatique toutes les 2 secondes</span>
+        </div>
+        <div id="syncMessage" class="sync-alert" role="status" aria-live="polite"></div>
+        {% if not connection.enabled or not connection.hasApiKey or not connection.baseUrl %}<p class="mt-3 mb-0"><a class="sync-link" href="{{ path('admin_api_reception_index') }}">Configurer la connexion ApiRecept</a> avant le premier envoi.</p>{% endif %}
+      </section>
+    </div>
+
+    <div class="col-lg-5">
+      <section class="sync-card">
+        <div class="sync-section-head"><div><h2>Flux du catalogue</h2><p>Volumes contrôlés pendant chaque mise à jour.</p></div></div>
+        <div class="sync-source">
+          <div class="sync-source__node"><div class="sync-source__eyebrow">ApiRecept</div><div id="syncRemoteTotal" class="sync-source__count">—</div><div class="sync-source__caption">articles à distance</div></div>
+          <div class="sync-source__arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+          <div class="sync-source__node"><div class="sync-source__eyebrow">Base du site</div><div id="syncLocalTotal" class="sync-source__count">{{ localArticleCount }}</div><div class="sync-source__caption">articles enregistrés</div></div>
+        </div>
+        <p id="syncRunInfo" class="sync-run-info">Aucune synchronisation n’a encore été exécutée.</p>
+        <ul id="syncActivity" class="sync-activity"></ul>
+      </section>
+    </div>
+  </div>
+
+  <section class="sync-card mt-3" aria-labelledby="syncLogTitle">
+    <div class="sync-section-head">
+      <div><h2 id="syncLogTitle"><i class="fa-solid fa-terminal me-2" aria-hidden="true"></i>Journal en direct</h2><p>Dernières actions et erreurs de la synchronisation. Les articles sont confirmés après leur enregistrement.</p></div>
+      <div class="sync-log-tools">
+        <select id="syncLogFilter" class="form-select" aria-label="Filtrer le journal"><option value="all">Toutes les actions</option><option value="article">Articles uniquement</option><option value="error">Erreurs uniquement</option></select>
+        <button id="syncClearLogs" class="btn btn-outline-secondary" type="button"><i class="fa-solid fa-eraser me-1" aria-hidden="true"></i>Effacer l’affichage</button>
+      </div>
+    </div>
+    <div id="syncConsole" class="sync-console" role="region" aria-label="Journal de synchronisation" tabindex="0"><div>Aucune activité enregistrée.</div></div>
+    <div class="sync-log-footer">
+      <label><input id="syncAutoScroll" type="checkbox" checked>Défilement automatique</label>
+      <p id="syncLogCount">Les 200 dernières lignes sont conservées.</p>
+      <p id="syncObservation" role="status">Actualisation toutes les 2 secondes.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const root = document.querySelector('.catalog-sync-page');
+  if (!root) return;
+
+  const $ = (selector) => root.querySelector(selector);
+  const button = $('#runSync');
+  const message = $('#syncMessage');
+  const statusUrl = root.dataset.statusUrl;
+  const number = new Intl.NumberFormat('fr-FR');
+  let pollingTimer = null;
+  let runRequestPending = false;
+  let lastSnapshot = null;
+  let refreshInFlight = false;
+  let displayedRunId = null;
+  let clearedThrough = 0;
+  let logSignature = null;
+
+  const formatDuration = (seconds) => {
+    if (!Number.isFinite(seconds) || seconds < 0) return '—';
+    if (seconds < 60) return `${Math.max(1, Math.round(seconds))} s`;
+    const minutes = Math.floor(seconds / 60);
+    if (minutes >= 60) return `${Math.floor(minutes / 60)} h ${minutes % 60} min`;
+    const remaining = Math.round(seconds % 60);
+    return `${minutes} min${remaining ? ` ${remaining} s` : ''}`;
+  };
+
+  const elapsedSeconds = (startedAt, finishedAt = null) => {
+    if (!startedAt) return null;
+    const started = Date.parse(startedAt);
+    return Number.isNaN(started) ? null : Math.max(0, ((finishedAt ? Date.parse(finishedAt) : Date.now()) - started) / 1000);
+  };
+
+  const showMessage = (text, type) => {
+    if (!text) return;
+    message.textContent = text;
+    message.className = `sync-alert is-visible sync-alert--${type}`;
+  };
+
+  const clearMessage = () => {
+    message.textContent = '';
+    message.className = 'sync-alert';
+  };
+
+  const state = (element, label, variant) => {
+    element.className = `sync-state sync-state--${variant}`;
+    element.textContent = label;
+  };
+
+  const appendActivity = (text, current = false, icon = 'fa-check') => {
+    const item = document.createElement('li');
+    if (current) item.classList.add('is-current');
+    const iconElement = document.createElement('i');
+    iconElement.className = `fa-solid ${icon}`;
+    const label = document.createElement('span');
+    label.textContent = text;
+    item.append(iconElement, label);
+    $('#syncActivity').append(item);
+  };
+
+  const renderLogs = (snapshot) => {
+    const runId = snapshot.run?.id ?? null;
+    if (displayedRunId !== runId) {
+      displayedRunId = runId;
+      clearedThrough = 0;
+      logSignature = null;
+    }
+    const entries = Array.isArray(snapshot.logs) ? snapshot.logs : [];
+    const filter = $('#syncLogFilter').value;
+    const visible = entries.filter(entry => entry.id > clearedThrough && (filter === 'all' || entry.type === filter));
+    const signature = JSON.stringify([runId, filter, clearedThrough, visible]);
+    if (signature === logSignature) return;
+    logSignature = signature;
+    const consoleElement = $('#syncConsole');
+    const oldScroll = consoleElement.scrollTop;
+    const wasAtEnd = consoleElement.scrollHeight - consoleElement.clientHeight - oldScroll < 45;
+    const fragment = document.createDocumentFragment();
+    for (const entry of visible) {
+      const line = document.createElement('div');
+      line.className = `sync-log-line${entry.type === 'error' ? ' sync-log-line--error' : ''}`;
+      const time = document.createElement('time');
+      time.dateTime = entry.at;
+      time.textContent = new Date(entry.at).toLocaleTimeString('fr-FR');
+      const type = document.createElement('span');
+      type.className = 'sync-log-line__type';
+      type.textContent = entry.type === 'article' ? 'ARTICLE' : (entry.type === 'error' ? 'ERREUR' : 'ÉTAPE');
+      const text = document.createElement('span');
+      text.textContent = entry.message;
+      line.append(time, type, text);
+      fragment.append(line);
+    }
+    if (!visible.length) {
+      const empty = document.createElement('div');
+      empty.textContent = filter === 'error' ? 'Aucune erreur enregistrée dans les dernières lignes.' : (clearedThrough ? 'Affichage effacé. Les prochaines actions apparaîtront ici.' : 'Aucune activité enregistrée pour ce filtre.');
+      fragment.append(empty);
+    }
+    consoleElement.replaceChildren(fragment);
+    consoleElement.scrollTop = $('#syncAutoScroll').checked && wasAtEnd ? consoleElement.scrollHeight : oldScroll;
+    $('#syncLogCount').textContent = `${number.format(visible.length)} ligne(s) affichée(s) · 200 dernières conservées`;
+  };
+
+  const render = (snapshot) => {
+    lastSnapshot = snapshot;
+    const run = snapshot.run || null;
+    const progress = snapshot.progress || {};
+    const isRunning = run && run.status === 'RUNNING';
+    const isDone = run && run.status === 'DONE';
+    const isError = run && run.status === 'ERROR';
+    const remoteTotal = Number(run?.remoteTotal || 0);
+    const totalKnown = Boolean(progress.totalKnown || remoteTotal > 0 || isDone);
+    const received = Number(run?.receivedRows || 0);
+    const created = Number(run?.createdRows || 0);
+    const updated = Number(run?.updatedRows || 0);
+    const unchanged = Number(run?.unchangedRows || 0);
+    const removed = Number(run?.removedRows || 0);
+    const percent = Number(progress.percent || 0);
+    const seconds = elapsedSeconds(run?.startedAt, run?.finishedAt);
+    const speed = seconds && seconds > 0 && received > 0 ? received / seconds : null;
+    const remainingSeconds = speed && progress.remainingRows > 0 ? progress.remainingRows / speed : null;
+
+    $('#syncRemoteTotal').textContent = totalKnown ? number.format(remoteTotal) : '—';
+    $('#syncLocalTotal').textContent = number.format(Number(snapshot.localArticleCount || 0));
+    $('#syncReceived').textContent = totalKnown ? `${number.format(received)} / ${number.format(remoteTotal)}` : number.format(received);
+    $('#syncCreated').textContent = number.format(created);
+    $('#syncUpdated').textContent = number.format(updated);
+    $('#syncProgressBar').style.width = `${percent}%`;
+    $('.sync-progress__track').setAttribute('aria-valuenow', String(percent));
+    $('#syncProgressPercent').textContent = totalKnown ? `${isDone && remoteTotal === 0 ? 100 : percent} %` : '—';
+    $('#syncReceivedHint').textContent = remoteTotal > 0 ? `sur ${number.format(remoteTotal)} à distance` : (isRunning ? 'Connexion à ApiRecept…' : 'Volume distant inconnu');
+    $('#syncRemaining').textContent = totalKnown ? number.format(Number(progress.remainingRows || 0)) : '—';
+    $('#syncRemainingHint').textContent = remainingSeconds ? `Estimation : ${formatDuration(remainingSeconds)}` : (isRunning ? 'Estimation dès la première page' : '—');
+    $('#syncUpdatedHint').textContent = unchanged > 0 ? `${number.format(unchanged)} déjà à jour` : 'Modifications EBP appliquées';
+    const article = progress.currentArticle;
+    $('#syncArticleLabel').textContent = isRunning ? 'Article en cours' : 'Dernier article observé';
+    $('#syncArticleReference').textContent = article?.reference || (isRunning ? 'Réception des articles…' : 'Aucun article observé');
+    $('#syncArticleDesignation').textContent = article?.designation || (isRunning ? progress.phase || 'Préparation de la synchronisation…' : 'La référence et la désignation apparaîtront ici.');
+    $('#syncArticleUniqueId').textContent = article?.uniqueId || '';
+    $('#syncArticlePosition').textContent = article?.position ? `Article ${number.format(article.position)}${totalKnown ? ` / ${number.format(remoteTotal)}` : ''}` : '—';
+    renderLogs(snapshot);
+
+    const activity = $('#syncActivity');
+    activity.replaceChildren();
+    if (isRunning) {
+      const phase = progress.phase || 'Préparation de la synchronisation';
+      $('#syncStage').textContent = phase;
+      $('#syncProgressLabel').textContent = remoteTotal > 0 ? `Page ${progress.currentPage || 1} sur ${progress.totalPages}` : (totalKnown ? 'Finalisation du catalogue' : 'Connexion à ApiRecept');
+      $('#syncProgressDetail').textContent = remoteTotal > 0
+        ? `${number.format(received)} articles traités sur ${number.format(remoteTotal)}. ${speed ? `${number.format(Math.round(speed))} article(s) par seconde.` : 'Calcul de la vitesse en cours.'}`
+        : 'Chargement des catégories et lecture du volume distant…';
+      state($('#syncStatus'), 'Synchronisation en cours', 'running');
+      state($('#syncConnectionState'), 'Synchronisation active', 'running');
+      $('#syncLive').hidden = false;
+      appendActivity('Connexion à ApiRecept et lecture des catégories dbo.ItemFamily.', false, 'fa-plug');
+      if (remoteTotal > 0) appendActivity(`Page ${progress.currentPage || 1}/${progress.totalPages} : ${number.format(received)} article(s) reçus et enregistrés.`, true, 'fa-spinner fa-spin');
+      if (created || updated || unchanged) appendActivity(`${number.format(created)} créé(s), ${number.format(updated)} mis à jour et ${number.format(unchanged)} inchangé(s) jusqu’ici.`, false, 'fa-database');
+      $('#syncRunInfo').textContent = `Démarrée il y a ${formatDuration(seconds)} · La base locale est mise à jour par pages de 100 articles.`;
+    } else if (isDone) {
+      $('#syncStage').textContent = 'La dernière synchronisation est terminée.';
+      $('#syncProgressLabel').textContent = 'Synchronisation terminée';
+      $('#syncProgressDetail').textContent = run.message || 'Les données locales sont à jour.';
+      state($('#syncStatus'), 'Terminée', 'ready');
+      state($('#syncConnectionState'), 'Connexion prête', 'ready');
+      $('#syncLive').hidden = true;
+      appendActivity(`${number.format(received)} article(s) reçus depuis ApiRecept.`, false, 'fa-cloud-arrow-down');
+      appendActivity(`${number.format(created)} créé(s), ${number.format(updated)} mis à jour, ${number.format(unchanged)} inchangé(s).`, false, 'fa-database');
+      if (removed) appendActivity(`${number.format(removed)} article(s) absent(s) de la source retiré(s).`, false, 'fa-trash-can');
+      const completedAt = run.finishedAt ? new Date(run.finishedAt).toLocaleString('fr-FR') : '—';
+      $('#syncRunInfo').textContent = `Dernière exécution : ${completedAt} · Durée ${formatDuration(seconds)}.`;
+    } else if (isError) {
+      $('#syncStage').textContent = 'La dernière synchronisation a rencontré une erreur.';
+      $('#syncProgressLabel').textContent = 'Synchronisation interrompue';
+      $('#syncProgressDetail').textContent = run.message || 'Consultez le message ci-dessous avant de relancer la synchronisation.';
+      state($('#syncStatus'), 'Erreur', 'error');
+      state($('#syncConnectionState'), 'Connexion à vérifier', 'error');
+      $('#syncLive').hidden = true;
+      appendActivity(run.message || 'La synchronisation n’a pas pu être finalisée.', true, 'fa-triangle-exclamation');
+      $('#syncRunInfo').textContent = run.finishedAt ? `Dernière tentative : ${new Date(run.finishedAt).toLocaleString('fr-FR')}.` : 'Dernière tentative interrompue.';
+    } else {
+      $('#syncStage').textContent = 'Lancez une synchronisation pour comparer ApiRecept avec le catalogue local.';
+      $('#syncProgressLabel').textContent = 'Prêt à synchroniser';
+      $('#syncProgressDetail').textContent = 'Le volume distant sera vérifié avant toute modification du catalogue local.';
+      state($('#syncStatus'), 'En attente', 'muted');
+      $('#syncLive').hidden = true;
+      $('#syncRunInfo').textContent = 'Aucune synchronisation n’a encore été exécutée.';
+    }
+
+    if (button) {
+      button.disabled = isRunning || runRequestPending || button.dataset.configured === 'false';
+      button.innerHTML = isRunning
+        ? '<i class="fa-solid fa-spinner fa-spin me-1"></i> Synchronisation en cours'
+        : '<i class="fa-solid fa-rotate me-1"></i> Synchroniser maintenant';
+    }
+
+    const observedAt = snapshot.observedAt ? new Date(snapshot.observedAt).toLocaleTimeString('fr-FR') : '—';
+    const idleSeconds = elapsedSeconds(progress.updatedAt);
+    const quiet = isRunning && idleSeconds !== null && idleSeconds > 30;
+    $('#syncObservation').textContent = quiet ? `Aucune nouvelle activité depuis ${formatDuration(idleSeconds)} · Suivi actif` : `Actualisé à ${observedAt} · Toutes les 2 secondes`;
+    $('#syncObservation').className = quiet ? 'sync-observation--warning' : '';
+  };
+
+  const stopPolling = () => {
+    if (!pollingTimer) return;
+    window.clearInterval(pollingTimer);
+    pollingTimer = null;
+  };
+
+  const refresh = async () => {
+    if (refreshInFlight) return;
+    refreshInFlight = true;
+    try {
+      const response = await fetch(statusUrl, {headers: {'Accept': 'application/json'}, cache: 'no-store', signal: AbortSignal.timeout(10000)});
+      if (!response.ok) throw new Error('Le statut de synchronisation est indisponible.');
+      render(await response.json());
+    } catch (error) {
+      $('#syncObservation').textContent = 'Suivi momentanément indisponible · Nouvelle tentative automatique';
+      $('#syncObservation').className = 'sync-observation--warning';
+      if (!lastSnapshot) showMessage(error.message || 'Impossible de charger le statut de synchronisation.', 'error');
+    } finally {
+      refreshInFlight = false;
+    }
+  };
+
+  const startPolling = () => {
+    if (pollingTimer) return;
+    pollingTimer = window.setInterval(refresh, 2000);
+  };
+
+  if (button && !button.disabled) {
+    button.addEventListener('click', async () => {
+      runRequestPending = true;
+      clearMessage();
+      button.disabled = true;
+      button.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Démarrage…';
+      startPolling();
+      try {
+        const response = await fetch(root.dataset.runUrl, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+          body: JSON.stringify({_token: root.dataset.token}),
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok) throw new Error(payload.message || 'La synchronisation a échoué.');
+        showMessage(payload.message || 'Synchronisation terminée.', 'success');
+      } catch (error) {
+        showMessage(error.message || 'La synchronisation a échoué.', 'error');
+      } finally {
+        runRequestPending = false;
+        await refresh();
+      }
+    });
+  }
+
+  button?.setAttribute('data-configured', button?.disabled ? 'false' : 'true');
+  $('#syncLogFilter').addEventListener('change', () => lastSnapshot && renderLogs(lastSnapshot));
+  $('#syncClearLogs').addEventListener('click', () => {
+    clearedThrough = Math.max(clearedThrough, ...(lastSnapshot?.logs || []).map(entry => entry.id));
+    if (lastSnapshot) renderLogs(lastSnapshot);
+  });
+  window.addEventListener('pagehide', stopPolling, {once: true});
+  document.addEventListener('turbo:before-cache', stopPolling, {once: true});
+  refresh();
+  startPolling();
+})();
+</script>
+{% endblock %}
+

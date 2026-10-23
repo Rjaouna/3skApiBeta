@@ -23,6 +23,22 @@ class ArticleRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    /** @param list<string> $uniqueIds
+     *  @return list<Article>
+     */
+    public function findByUniqueIds(array $uniqueIds): array
+    {
+        if ($uniqueIds === []) {
+            return [];
+        }
+
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.uniqueId IN (:uniqueIds)')
+            ->setParameter('uniqueIds', $uniqueIds)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findAvailableByBusinessId(string $id): ?Article
     {
         return $this->createQueryBuilder('a')

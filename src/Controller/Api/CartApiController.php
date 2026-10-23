@@ -8,6 +8,7 @@ use App\Entity\CartItem;
 use App\Entity\User;
 use App\Repository\CartItemRepository;
 use App\Repository\CartRepository;
+use App\Service\CatalogImageBaseUrlProvider;
 use App\Service\PricingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +20,8 @@ use Symfony\Component\Routing\Attribute\Route;
 class CartApiController extends AbstractController
 {
     public function __construct(
-        private readonly PricingService $pricingService
+        private readonly PricingService $pricingService,
+        private readonly CatalogImageBaseUrlProvider $images,
     ) {
     }
 
@@ -50,7 +52,7 @@ class CartApiController extends AbstractController
                 'totalTtc' => '0.00',
                 'summaryReductionText' => null,
                 'hasReduction' => false,
-                'imagesBaseUrl' => $this->resolveImagesBaseUrl(),
+                'imagesBaseUrl' => $this->images->baseUrl(),
                 'hasStockIssue' => false,
                 'issuesCount' => 0,
             ]);
@@ -316,7 +318,7 @@ class CartApiController extends AbstractController
         $totalDiscount = 0.0;
         $totalFinal = 0.0;
         $issuesCount = 0;
-        $imagesBaseUrl = $this->resolveImagesBaseUrl();
+        $imagesBaseUrl = $this->images->baseUrl();
 
         $reductionValues = [];
 
@@ -347,7 +349,7 @@ class CartApiController extends AbstractController
 
             $imageUrl = null;
             if ($imagesBaseUrl !== '' && $article->getUniqueId()) {
-                $imageUrl = rtrim($imagesBaseUrl, '/') . '/' . $article->getUniqueId() . '.png';
+                $imageUrl = $this->images->imageUrl($article->getUniqueId());
             }
 
             $items[] = [
@@ -433,16 +435,4 @@ class CartApiController extends AbstractController
         return $request->request->all();
     }
 
-    private function resolveImagesBaseUrl(): string
-    {
-        try {
-            $value = (string) $this->getParameter('e_url');
-            if ($value !== '') {
-                return $value;
-            }
-        } catch (\Throwable) {
-        }
-
-        return (string) ($_ENV['IMAGES_BASE_URL'] ?? getenv('IMAGES_BASE_URL') ?? '/ebpsynch');
-    }
 }

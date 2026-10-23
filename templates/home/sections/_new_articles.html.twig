@@ -719,7 +719,7 @@ function stockLabel(stock){
         const desFull = a.DesComClear || '';
         const des = truncate(desFull, 30);
 
-        const img = (base && uid) ? (base + '/' + uid + '.png') : DEFAULT_IMG;
+        const img = a.imageUrl || ((base && uid) ? (base + '/' + uid + '.png') : DEFAULT_IMG);
 
 const stock = Math.max(0, Number(a.RealStock || 0));
 const inCartQty = getCartQtyFromObj(cartObj, code);
@@ -943,6 +943,7 @@ card.innerHTML = `
         });
 
         setUI();
+        window.CatalogPhotoRefresh?.attach(card, {uniqueId: uid, fallback: DEFAULT_IMG});
         grid.appendChild(card);
       });
 

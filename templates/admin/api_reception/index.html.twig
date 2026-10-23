@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+  .api-reception-page{--api-ink:#232B38;--api-blue:#315FB7;--api-orange:#FF8A00;--api-line:#dfe4ec;--api-muted:#667085;max-width:1120px}
+  .api-reception-page .api-hero{background:#fff;border:1px solid var(--api-line);border-radius:20px;padding:24px;box-shadow:0 10px 28px rgba(35,43,56,.07)}
+  .api-reception-page h1{color:var(--api-ink);font-size:28px;font-weight:700;margin:0 0 6px}.api-reception-page .api-kicker{color:var(--api-orange);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.api-reception-page .api-subtitle{color:var(--api-muted);margin:0}
+  .api-reception-page .api-card{background:#fff;border:1px solid var(--api-line);border-radius:18px;height:100%;padding:22px}.api-reception-page .api-card h2{font-size:18px;color:var(--api-ink);margin:0 0 6px;font-weight:700}.api-reception-page .api-card p{color:var(--api-muted);font-size:14px}
+  .api-reception-page label{color:var(--api-ink);font-size:13px;font-weight:700;margin-bottom:7px}.api-reception-page .form-control,.api-reception-page .form-select{border-color:var(--api-line);border-radius:10px;min-height:46px;color:var(--api-ink)}.api-reception-page .form-control:focus,.api-reception-page .form-select:focus{border-color:var(--api-blue);box-shadow:0 0 0 .2rem rgba(49,95,183,.12)}
+  .api-reception-page .api-help{color:var(--api-muted);font-size:12px;line-height:1.45;margin-top:6px}.api-reception-page .api-primary{background:var(--api-orange);border-color:var(--api-orange);color:#232B38;font-weight:700}.api-reception-page .api-primary:hover{background:#e87d00;border-color:#e87d00;color:#232B38}.api-reception-page .btn{border-radius:10px;min-height:42px;font-weight:700}
+  .api-reception-page .api-status{display:grid;gap:10px;margin:0;padding:0;list-style:none}.api-reception-page .api-status li{align-items:center;border-bottom:1px solid #eef1f5;color:var(--api-ink);display:flex;font-size:14px;gap:10px;justify-content:space-between;padding:10px 0}.api-reception-page .api-status li:last-child{border-bottom:0}.api-reception-page .api-status span{color:var(--api-muted)}.api-reception-page .api-badge{border-radius:999px;font-size:12px;font-weight:700;padding:5px 9px}.api-reception-page .api-badge--ok{background:#e7f6ed;color:#167044}.api-reception-page .api-badge--muted{background:#f0f2f5;color:#586174}.api-reception-page .api-alert{border-radius:12px;display:none;margin-bottom:18px;padding:12px 14px}.api-reception-page .api-alert.is-visible{display:block}.api-reception-page .api-alert--error{background:#fff1f2;border:1px solid #fecdd3;color:#a6172d}.api-reception-page .api-alert--success{background:#edf9f1;border:1px solid #b9e7c8;color:#17673d}.api-reception-page .api-required{color:#d92d20}.api-reception-page .api-profile-list{margin:14px 0 0;padding-left:20px;color:var(--api-muted);font-size:13px}.api-reception-page .api-profile-list li+li{margin-top:7px}
+  @media (max-width:575.98px){.api-reception-page .api-hero,.api-reception-page .api-card{border-radius:14px;padding:18px}.api-reception-page h1{font-size:24px}.api-reception-page .api-status li{align-items:flex-start;flex-direction:column;gap:4px}}
+</style>
+
+<main class="container py-4 api-reception-page" data-save-token="{{ saveToken|e('html_attr') }}" data-test-token="{{ testToken|e('html_attr') }}">
+  <section class="api-hero mb-3">
+    <div class="api-kicker">Connecteur catalogue</div>
+    <h1>Connexion à ApiRecept</h1>
+    <p class="api-subtitle">Le site récupère les articles depuis votre API EBP, côté serveur et à la fréquence configurée.</p>
+  </section>
+
+  <div class="row g-3">
+    <div class="col-lg-8">
+      <section class="api-card">
+        <div id="apiMessage" class="api-alert" role="status" aria-live="polite"></div>
+        <h2>Paramètres de l’instance</h2>
+        <p>La clé est chiffrée avant son enregistrement. Elle n’est jamais renvoyée au navigateur.</p>
+
+        <form id="apiConnectionForm" novalidate>
+          <div class="row g-3">
+            <div class="col-12">
+              <label for="apiBaseUrl">URL ApiRecept <span class="api-required">*</span></label>
+              <input id="apiBaseUrl" class="form-control" type="url" inputmode="url" autocomplete="url" placeholder="https://api.exemple.fr" value="{{ connection.baseUrl ?? '' }}" required>
+              <div class="api-help">Saisissez la racine de l’API, sans <code>/healthz</code>. HTTPS est requis, sauf lors d’un test local.</div>
+            </div>
+            <div class="col-md-7">
+              <label for="apiKey">Clé API de l’entreprise {% if connection.hasApiKey %}<span class="text-success">· déjà enregistrée</span>{% endif %}</label>
+              <input id="apiKey" class="form-control" type="password" autocomplete="new-password" placeholder="{% if connection.hasApiKey %}Laissez vide pour conserver la clé actuelle{% else %}Clé générée par ApiRecept{% endif %}">
+              <div class="api-help">Une nouvelle valeur remplace la clé enregistrée.</div>
+            </div>
+            <div class="col-md-5">
+              <label for="apiInterval">Fréquence de synchronisation</label>
+              <select id="apiInterval" class="form-select">
+                {% for minutes, label in {1:'Chaque minute',5:'Toutes les 5 minutes',15:'Toutes les 15 minutes',30:'Toutes les 30 minutes',60:'Chaque heure',180:'Toutes les 3 heures',360:'Toutes les 6 heures',720:'Toutes les 12 heures',1440:'Chaque jour'} %}
+                  <option value="{{ minutes }}" {% if connection.syncIntervalMinutes == minutes %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+              </select>
+              <div class="api-help">Le cron du serveur vérifie cette fréquence.</div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check form-switch mt-2">
+                <input class="form-check-input" type="checkbox" id="apiEnabled" {% if connection.enabled %}checked{% endif %}>
+                <label class="form-check-label" for="apiEnabled">Activer la synchronisation du catalogue</label>
+              </div>
+              <div class="api-help">Désactivez-la pour suspendre les mises à jour sans supprimer les articles existants.</div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check mt-2">
+                <input class="form-check-input" type="checkbox" id="removeApiKey">
+                <label class="form-check-label" for="removeApiKey">Supprimer la clé enregistrée</label>
+              </div>
+              <div class="api-help">La synchronisation sera désactivée tant qu’une nouvelle clé ne sera pas enregistrée.</div>
+            </div>
+          </div>
+          <div class="d-flex flex-wrap gap-2 mt-4">
+            <button id="saveApiConnection" class="btn api-primary" type="submit"><i class="fa-solid fa-floppy-disk me-1"></i> Enregistrer</button>
+            <button id="testApiConnection" class="btn btn-outline-primary" type="button"><i class="fa-solid fa-plug me-1"></i> Tester la connexion</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <div class="col-lg-4">
+      <section class="api-card mb-3">
+        <h2>État de la connexion</h2>
+        <ul class="api-status">
+          <li><span>Synchronisation</span><strong id="statusEnabled" class="api-badge {% if connection.enabled %}api-badge--ok{% else %}api-badge--muted{% endif %}">{% if connection.enabled %}Active{% else %}En pause{% endif %}</strong></li>
+          <li><span>Clé API</span><strong id="statusKey" class="api-badge {% if connection.hasApiKey %}api-badge--ok{% else %}api-badge--muted{% endif %}">{% if connection.hasApiKey %}Enregistrée{% else %}Manquante{% endif %}</strong></li>
+          <li><span>Dernier test</span><strong id="statusTest">{{ connection.lastTestedAt ? connection.lastTestedAt|date('d/m/Y H:i') : 'Jamais' }}</strong></li>
+          <li><span>Dernière synchro</span><strong>{{ connection.lastSyncedAt ? connection.lastSyncedAt|date('d/m/Y H:i') : 'Jamais' }}</strong></li>
+        </ul>
+        {% if connection.lastError %}<div id="statusError" class="api-help text-danger mt-3">Dernière erreur : {{ connection.lastError }}</div>{% else %}<div id="statusError" class="api-help mt-3"></div>{% endif %}
+      </section>
+      <section class="api-card">
+        <h2>Profil ApiLocal requis</h2>
+        <p>Créez et activez ces deux profils ApiLocal pour alimenter le catalogue :</p>
+        <ul class="api-profile-list">
+          <li><strong>dbo.ItemFamily</strong> : <strong>Id</strong> et <strong>Caption</strong>.</li>
+          <li><strong>dbo.Item</strong> : <strong>Id</strong>, <strong>UniqueId</strong>, <strong>Caption</strong>, <strong>FamilyId</strong>, <strong>RealStock</strong>, <strong>SalePriceVatIncluded</strong> et <strong>SalePriceVatExcluded</strong>.</li>
+          <li>Ajoutez marque, véhicule, année et position sur le profil Articles pour les filtres du catalogue.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</main>
+
+<script>
+(() => {
+  const root = document.querySelector('.api-reception-page');
+  const form = document.getElementById('apiConnectionForm');
+  const message = document.getElementById('apiMessage');
+  const saveButton = document.getElementById('saveApiConnection');
+  const testButton = document.getElementById('testApiConnection');
+  const fields = { baseUrl: document.getElementById('apiBaseUrl'), apiKey: document.getElementById('apiKey'), interval: document.getElementById('apiInterval'), enabled: document.getElementById('apiEnabled'), removeApiKey: document.getElementById('removeApiKey') };
+  const show = (text, type) => { message.textContent = text; message.className = `api-alert is-visible api-alert--${type}`; };
+  const toDate = value => value ? new Intl.DateTimeFormat('fr-FR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(value)) : 'Jamais';
+  const setBusy = busy => { saveButton.disabled = busy; testButton.disabled = busy; };
+  const updateStatus = connection => {
+    const enabled = document.getElementById('statusEnabled'); const key = document.getElementById('statusKey');
+    enabled.textContent = connection.enabled ? 'Active' : 'En pause'; enabled.className = `api-badge ${connection.enabled ? 'api-badge--ok' : 'api-badge--muted'}`;
+    key.textContent = connection.apiKeyConfigured ? 'Enregistrée' : 'Manquante'; key.className = `api-badge ${connection.apiKeyConfigured ? 'api-badge--ok' : 'api-badge--muted'}`;
+    document.getElementById('statusTest').textContent = toDate(connection.lastTestedAt);
+    document.getElementById('statusError').textContent = connection.lastError ? `Dernière erreur : ${connection.lastError}` : '';
+  };
+  const post = async (url, body) => {
+    const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(body) });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || !data.ok) throw new Error(data.message || 'Une erreur est survenue.');
+    return data;
+  };
+  form.addEventListener('submit', async event => {
+    event.preventDefault(); setBusy(true);
+    try {
+      const data = await post('{{ path('admin_api_reception_save') }}', { _token: root.dataset.saveToken, baseUrl: fields.baseUrl.value, apiKey: fields.apiKey.value, syncIntervalMinutes: fields.interval.value, enabled: fields.enabled.checked, removeApiKey: fields.removeApiKey.checked });
+      fields.apiKey.value = ''; fields.removeApiKey.checked = false; updateStatus(data.connection); show(data.message, 'success');
+    } catch (error) { show(error.message, 'error'); } finally { setBusy(false); }
+  });
+  testButton.addEventListener('click', async () => {
+    setBusy(true);
+    try { const data = await post('{{ path('admin_api_reception_test') }}', { _token: root.dataset.testToken }); updateStatus(data.connection); show(data.message, 'success'); }
+    catch (error) { show(error.message, 'error'); } finally { setBusy(false); }
+  });
+})();
+</script>
+{% endblock %}

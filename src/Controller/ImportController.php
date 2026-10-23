@@ -10,12 +10,15 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
+#[IsGranted('ROLE_ADMIN')]
 class ImportController extends AbstractController
 {
     public function __construct(
@@ -25,15 +28,9 @@ class ImportController extends AbstractController
     }
 
     #[Route('/admin/import', name: 'import_index', methods: ['GET'])]
-    public function index(EntityManagerInterface $em): Response
+    public function index(): RedirectResponse
     {
-        $source = $em->getRepository(ImportSource::class)->findOneBy([]);
-        $csrf = $this->csrfTokenManager->getToken('import_run')->getValue();
-
-        return $this->render('import/index.html.twig', [
-            'source' => $source,
-            'csrf' => $csrf,
-        ]);
+        return $this->redirectToRoute('admin_api_catalog_sync_index');
     }
 
     #[Route('/admin/import/start', name: 'import_start', methods: ['POST'])]

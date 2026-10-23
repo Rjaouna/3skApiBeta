@@ -2276,33 +2276,44 @@ body.theme-dark .voice-search-btn.is-listening{
                 </span>
               </a>
 
-              <a class="admin-settings-modal__card" href="{{ path('import_source_index') }}">
+              <a class="admin-settings-modal__card" href="{{ path('admin_api_reception_index') }}">
                 <span class="admin-settings-modal__card-head">
                   <span class="admin-settings-modal__icon">
-                    <i class="fa-solid fa-folder-tree"></i>
+                    <i class="fa-solid fa-plug"></i>
                   </span>
                   <span class="admin-settings-modal__arrow">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                   </span>
                 </span>
                 <span>
-                  <span class="admin-settings-modal__label">Configuration import</span>
-                  <span class="admin-settings-modal__desc">Sources catalogue, mapping et paramètres d’intégration.</span>
+                  <span class="admin-settings-modal__label">Connexion API EBP</span>
+                  <span class="admin-settings-modal__desc">Adresse ApiRecept, clé d’entreprise et fréquence de mise à jour.</span>
                 </span>
               </a>
 
-              <a class="admin-settings-modal__card" href="{{ path('import_index') }}">
+              <a class="admin-settings-modal__card" href="{{ path('admin_catalog_images_index') }}">
+                <span class="admin-settings-modal__card-head">
+                  <span class="admin-settings-modal__icon"><i class="fa-solid fa-images"></i></span>
+                  <span class="admin-settings-modal__arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                </span>
+                <span>
+                  <span class="admin-settings-modal__label">Images du catalogue</span>
+                  <span class="admin-settings-modal__desc">URL publique des photos publiées par ApiLocal et test de miniatures.</span>
+                </span>
+              </a>
+
+              <a class="admin-settings-modal__card" href="{{ path('admin_api_catalog_sync_index') }}">
                 <span class="admin-settings-modal__card-head">
                   <span class="admin-settings-modal__icon">
-                    <i class="fa-solid fa-file-import"></i>
+                    <i class="fa-solid fa-rotate"></i>
                   </span>
                   <span class="admin-settings-modal__arrow">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                   </span>
                 </span>
                 <span>
-                  <span class="admin-settings-modal__label">Lancer l’import</span>
-                  <span class="admin-settings-modal__desc">Importer ou mettre à jour les données catalogue.</span>
+                  <span class="admin-settings-modal__label">Synchroniser le catalogue</span>
+                  <span class="admin-settings-modal__desc">Mettre à jour les articles depuis l’API EBP.</span>
                 </span>
               </a>
 

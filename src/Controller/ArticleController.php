@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Entity\User;
 use App\Service\PricingService;
+use App\Service\CatalogImageBaseUrlProvider;
 use App\ViewModel\ArticlePricingView;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +16,8 @@ use Symfony\Component\Routing\Attribute\Route;
 class ArticleController extends AbstractController
 {
     public function __construct(
-        private readonly PricingService $pricingService
+        private readonly PricingService $pricingService,
+        private readonly CatalogImageBaseUrlProvider $images,
     ) {
     }
 
@@ -86,6 +88,8 @@ class ArticleController extends AbstractController
         return $this->render('articles/show.html.twig', [
             'article' => $articleView,
             'relatedArticles' => $relatedArticles,
+            'imagesBaseUrl' => $this->images->baseUrl(),
+            'imagesCacheVersion' => $this->images->cacheVersion(),
         ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Entity\Article;
 use App\Entity\User;
 use App\Repository\CartItemRepository;
+use App\Service\CatalogImageBaseUrlProvider;
 use App\Service\PricingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
@@ -17,7 +18,8 @@ use Symfony\Component\Routing\Attribute\Route;
 class ArticleApiController extends AbstractController
 {
     public function __construct(
-        private readonly PricingService $pricingService
+        private readonly PricingService $pricingService,
+        private readonly CatalogImageBaseUrlProvider $images,
     ) {
     }
 
@@ -176,7 +178,7 @@ class ArticleApiController extends AbstractController
             'total' => $total,
             'pages' => (int) ceil($total / $limit),
             'items' => $norm,
-            'imagesBaseUrl' => $this->resolveImagesBaseUrl(),
+            'imagesBaseUrl' => $this->images->baseUrl(),
             'yearMin' => $yearMin,
             'yearMax' => $yearMax,
             'new' => $onlyNew ? 1 : 0,
@@ -300,6 +302,7 @@ class ArticleApiController extends AbstractController
 
         return [
             'UniqueId' => $article->getUniqueId(),
+            'imageUrl' => $this->images->imageUrl((string) $article->getUniqueId()),
             'Id' => $article->getId(),
             'DesComClear' => $article->getDesComClear(),
             'RealStock' => $article->getRealStock(),
@@ -526,19 +529,6 @@ SQL;
             'brands' => array_values($brands),
             'vehicles' => array_values($vehicles),
         ];
-    }
-
-    private function resolveImagesBaseUrl(): string
-    {
-        try {
-            $value = (string) $this->getParameter('e_url');
-            if ($value !== '') {
-                return $value;
-            }
-        } catch (\Throwable) {
-        }
-
-        return (string) ($_ENV['IMAGES_BASE_URL'] ?? getenv('IMAGES_BASE_URL') ?? '/ebpsynch');
     }
 
     private function normalizeSuggestion(Article $article, int $score): array

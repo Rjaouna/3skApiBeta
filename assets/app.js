@@ -1,51 +1,41 @@
 import './styles/app.css';
 import './styles/app.scss';
 
-const initSiteLoader = () => {
-  if (window.__siteLoaderInitialized) return;
-  window.__siteLoaderInitialized = true;
+const initNavigationProgress = () => {
+  if (window.__navigationProgressInitialized) return;
+  window.__navigationProgressInitialized = true;
 
   const root = document.documentElement;
-  const loader = document.querySelector('[data-site-loader]');
-  const bar = document.querySelector('[data-site-loader-bar]');
-  const percent = document.querySelector('[data-site-loader-percent]');
+  const finish = () => root.classList.remove('site-is-navigating');
+  const startsNavigation = (event, link) => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return false;
+    if (link.target && link.target !== '_self') return false;
+    if (link.hasAttribute('download') || link.dataset.navigationProgress === 'off') return false;
 
-  if (!loader || !bar || !percent) {
-    root.classList.remove('site-is-loading');
-    return;
-  }
+    const href = link.getAttribute('href') || '';
+    if (!href || href.startsWith('#') || /^(?:mailto:|tel:|javascript:)/i.test(href)) return false;
 
-  let progress = 4;
-  let done = false;
+    let destination;
+    try {
+      destination = new URL(link.href, window.location.href);
+    } catch {
+      return false;
+    }
 
-  const render = (value) => {
-    const safeValue = Math.max(0, Math.min(100, Math.round(value)));
-    bar.style.width = `${safeValue}%`;
-    percent.textContent = `${safeValue}%`;
+    if (destination.origin !== window.location.origin) return false;
+    return destination.href !== window.location.href;
   };
 
-  const timer = window.setInterval(() => {
-    if (done) return;
-    const step = progress < 62 ? 7 : progress < 86 ? 3 : 1;
-    progress = Math.min(94, progress + step);
-    render(progress);
-  }, 120);
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    const link = target instanceof Element ? target.closest('a[href]') : null;
+    if (link && startsNavigation(event, link)) {
+      root.classList.add('site-is-navigating');
+    }
+  });
 
-  const finish = () => {
-    if (done) return;
-    done = true;
-    window.clearInterval(timer);
-    render(100);
-
-    window.setTimeout(() => {
-      root.classList.remove('site-is-loading');
-      loader.setAttribute('aria-hidden', 'true');
-    }, 220);
-  };
-
+  window.addEventListener('pageshow', finish);
   window.addEventListener('load', finish, { once: true });
-  window.setTimeout(finish, 4500);
-  render(progress);
 };
 
 const loadHeroMedia = (scope) => {
@@ -215,23 +205,19 @@ const initHomeScrollEffects = () => {
 };
 
 const initCatalogLayout = () => {
-  const filters = document.querySelector('[data-catalog-filters]');
-  if (!filters) return;
-  const compact = window.matchMedia('(max-width: 991.98px)');
+  const catalog = document.querySelector('.catalog-page');
+  if (!catalog) return;
   const header = document.querySelector('.site__header');
   const updateHeader = () => {
     document.documentElement.style.setProperty('--catalog-header-height', `${header?.offsetHeight || 0}px`);
   };
-  const updateLayout = () => { filters.open = !compact.matches; };
   updateHeader();
-  updateLayout();
   if (header && 'ResizeObserver' in window) new ResizeObserver(updateHeader).observe(header);
   else window.addEventListener('resize', updateHeader, { passive: true });
-  compact.addEventListener?.('change', updateLayout);
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  initSiteLoader();
+  initNavigationProgress();
   initHeroLazyMedia();
   initHomeScrollEffects();
   initCatalogLayout();
