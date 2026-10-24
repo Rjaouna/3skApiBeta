@@ -10,6 +10,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[ORM\UniqueConstraint(name: 'uniq_user_ebp_unique_id', fields: ['ebpUniqueId'])]
+#[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -49,6 +51,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $city = null;
+
+    #[ORM\Column(length: 36, nullable: true)]
+    private ?string $ebpUniqueId = null;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, name: 'created_at', nullable: true)]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, name: 'updated_at', nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\PrePersist]
+    public function onPrePersist(): void
+    {
+        $now = new \DateTimeImmutable();
+        $this->createdAt ??= $now;
+        $this->updatedAt = $now;
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate(): void
+    {
+        $this->updatedAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -201,5 +226,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->city = $city;
 
         return $this;
+    }
+
+    public function getEbpUniqueId(): ?string
+    {
+        return $this->ebpUniqueId;
+    }
+
+    public function setEbpUniqueId(?string $ebpUniqueId): static
+    {
+        $this->ebpUniqueId = $ebpUniqueId;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

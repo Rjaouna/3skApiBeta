@@ -1,0 +1,16 @@
+<div class="invoice-document-counts" aria-label="Répartition des documents filtrés">
+  <div class="invoice-stat-card"><span class="invoice-stat-card__icon"><i class="fa-solid fa-file-invoice"></i></span><span><small>Factures</small><strong>{{ statistics.counts.invoice }}</strong></span></div>
+  <div class="invoice-stat-card"><span class="invoice-stat-card__icon invoice-stat-card__icon--credit"><i class="fa-solid fa-arrow-rotate-left"></i></span><span><small>Avoirs</small><strong>{{ statistics.counts.credit_note }}</strong></span></div>
+  <div class="invoice-stat-card"><span class="invoice-stat-card__icon invoice-stat-card__icon--delivery"><i class="fa-solid fa-truck-ramp-box"></i></span><span><small>Bons de livraison</small><strong>{{ statistics.counts.delivery_note }}</strong></span></div>
+</div>
+<div class="invoice-financial-summary" aria-label="Synthèse financière des documents filtrés">
+  <div class="invoice-financial-card"><span>Total factures</span><strong>{{ statistics.amounts.filteredInvoice|number_format(2, ',', ' ') }} DH</strong></div>
+  <div class="invoice-financial-card invoice-financial-card--credit"><span>Total avoirs</span><strong>{{ statistics.amounts.filteredCreditNote|number_format(2, ',', ' ') }} DH</strong></div>
+  <div class="invoice-financial-card invoice-financial-card--net"><span>Net des documents</span><strong>{{ statistics.amounts.filteredNet|number_format(2, ',', ' ') }} DH</strong></div>
+</div>
+<div class="invoice-financial-summary invoice-financial-summary--monthly" aria-label="Synthèse mensuelle des documents filtrés">
+  <div class="invoice-financial-card"><span>Facturé ce mois</span><strong>{{ statistics.amounts.currentMonthInvoice|number_format(2, ',', ' ') }} DH</strong></div>
+  <div class="invoice-financial-card"><span>Facturé le mois dernier</span><strong>{{ statistics.amounts.previousMonthInvoice|number_format(2, ',', ' ') }} DH</strong></div>
+  <div class="invoice-financial-card invoice-financial-card--credit"><span>Avoirs ce mois</span><strong>{{ statistics.amounts.currentMonthCreditNote|number_format(2, ',', ' ') }} DH</strong></div>
+</div>
+<p class="invoice-summary-note"><i class="fa-solid fa-sliders"></i> Les indicateurs ci-dessus suivent la recherche, le type de document et la période sélectionnés.</p>

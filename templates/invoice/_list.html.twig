@@ -1,0 +1,63 @@
+{% if listing.total == 0 %}
+  <div class="invoice-empty">
+    <i class="fa-solid fa-file-invoice"></i>
+    <div class="fw-bold mb-1">{% if query %}Aucun document ne correspond à votre recherche{% else %}Aucun document disponible{% endif %}</div>
+    <div>{% if filters.query %}Essayez un numéro de document, une référence article ou un mot de la désignation.{% else %}Utilisez « Synchroniser mes documents » pour lancer la première récupération depuis EBP.{% endif %}</div>
+  </div>
+{% else %}
+  <div class="invoice-list-summary">
+    <span><strong>{{ listing.total }} résultat{{ listing.total > 1 ? 's' : '' }}</strong><small>{{ listing.total }} document{{ listing.total > 1 ? 's' : '' }}</small></span>
+    <span>Affichage {{ listing.from }}–{{ listing.to }}</span>
+  </div>
+  <div class="table-responsive">
+    <table class="table invoice-table align-middle mb-0">
+      <thead><tr><th>Document</th><th>Type</th><th>Date</th><th>État EBP</th><th>Échéance</th><th>Lignes</th><th class="text-end">Total TTC</th><th class="text-end">Actions</th></tr></thead>
+      <tbody>
+      {% for invoice in listing.items %}
+        {% set documentIcon = invoice.creditMemo ? 'fa-arrow-rotate-left' : (invoice.deliveryNote ? 'fa-truck-ramp-box' : 'fa-file-invoice') %}
+        <tr>
+          <td>
+            <div class="invoice-number-line">
+              <div class="invoice-number">{{ invoice.documentNumber ?: invoice.sourceId }}</div>
+              {% if invoice.newDocument %}<span class="invoice-new-badge" title="Document émis depuis moins de cinq jours"><i class="fa-solid fa-star" aria-hidden="true"></i>Nouveau</span>{% endif %}
+            </div>
+            <small class="invoice-muted{{ invoice.creditMemo ? ' invoice-credit-note' : '' }}">{{ invoice.documentLabel }} EBP</small>
+          </td>
+          <td><span class="invoice-document-badge invoice-document-badge--{{ invoice.documentKind }}"><i class="fa-solid {{ documentIcon }}"></i>{{ invoice.documentLabel }}</span></td>
+          <td>{{ invoice.documentDate ? invoice.documentDate|date('d/m/Y') : '—' }}</td>
+          <td><span class="invoice-state">{{ invoice.documentState ?: '—' }}</span></td>
+          <td>{{ invoice.dueDate ? invoice.dueDate|date('d/m/Y') : '—' }}</td>
+          <td>{{ invoice.lines|length }}</td>
+          <td class="text-end"><span class="invoice-total">{{ invoice.totalTtc is not null ? invoice.totalTtc|number_format(2, ',', ' ') ~ ' DH' : '—' }}</span></td>
+          <td class="text-end">
+            <div class="invoice-row-actions">
+              <a class="btn btn-outline-primary btn-sm invoice-button" href="{{ path('invoice_show', {id: invoice.id}) }}"><i class="fa-solid fa-eye me-1"></i>Voir</a>
+              <a class="btn btn-outline-secondary btn-sm invoice-icon-button" href="{{ path('invoice_pdf', {id: invoice.id}) }}" title="Télécharger le PDF" aria-label="Télécharger {{ invoice.documentLabel|lower }} {{ invoice.documentNumber ?: invoice.sourceId }} en PDF"><i class="fa-solid fa-file-pdf"></i></a>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% if listing.pages > 1 %}
+    {% set start = listing.page > 3 ? listing.page - 2 : 1 %}
+    {% set end = start + 4 > listing.pages ? listing.pages : start + 4 %}
+    <nav class="invoice-pagination" aria-label="Pagination des documents">
+      <span class="invoice-muted">Page {{ listing.page }} sur {{ listing.pages }}</span>
+      <div class="invoice-pagination-actions">
+        {% if listing.page > 1 %}
+          <a data-invoice-page="{{ listing.page - 1 }}" href="{{ path('invoice_index', queryParameters|merge({page: listing.page - 1})) }}" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-arrow-left"></i><span class="visually-hidden">Page précédente</span></a>
+        {% endif %}
+        {% if start > 1 %}<a data-invoice-page="1" href="{{ path('invoice_index', queryParameters|merge({page: 1})) }}" class="btn btn-outline-primary btn-sm">1</a>{% if start > 2 %}<span class="invoice-pagination-ellipsis">…</span>{% endif %}{% endif %}
+        {% for page in start..end %}
+          {% if page == listing.page %}<span class="btn btn-primary btn-sm disabled" aria-current="page">{{ page }}</span>{% else %}<a data-invoice-page="{{ page }}" href="{{ path('invoice_index', queryParameters|merge({page: page})) }}" class="btn btn-outline-primary btn-sm">{{ page }}</a>{% endif %}
+        {% endfor %}
+        {% if end < listing.pages %}{% if end + 1 < listing.pages %}<span class="invoice-pagination-ellipsis">…</span>{% endif %}<a data-invoice-page="{{ listing.pages }}" href="{{ path('invoice_index', queryParameters|merge({page: listing.pages})) }}" class="btn btn-outline-primary btn-sm">{{ listing.pages }}</a>{% endif %}
+        {% if listing.page < listing.pages %}
+          <a data-invoice-page="{{ listing.page + 1 }}" href="{{ path('invoice_index', queryParameters|merge({page: listing.page + 1})) }}" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-arrow-right"></i><span class="visually-hidden">Page suivante</span></a>
+        {% endif %}
+      </div>
+    </nav>
+  {% endif %}
+{% endif %}

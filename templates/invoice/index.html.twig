@@ -1,0 +1,358 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+  .invoice-page { --invoice-ink:#232B38; --invoice-blue:#315FB7; --invoice-orange:#FF8A00; --invoice-bg:#F5F6F8; color:var(--invoice-ink); }
+  .invoice-hero,.invoice-card { background:#fff; border:1px solid rgba(35,43,56,.12); border-radius:20px; box-shadow:0 10px 28px rgba(35,43,56,.07); }
+  .invoice-hero { padding:22px; display:flex; justify-content:space-between; gap:18px; align-items:flex-start; flex-wrap:wrap; }
+  .invoice-eyebrow,.invoice-label { color:var(--invoice-orange); letter-spacing:.08em; text-transform:uppercase; font-size:.75rem; font-weight:700; }
+  .invoice-hero h1 { font-size:1.75rem; margin:5px 0; font-weight:700; color:var(--invoice-ink); }
+  .invoice-muted { color:rgba(35,43,56,.65); }
+  .invoice-credit-note { color:#C66A00; font-weight:700; }
+  .invoice-button { min-height:38px; border-radius:10px; font-weight:700; padding:0 13px; white-space:nowrap; }
+  .invoice-button-primary { min-height:44px; border-radius:12px; padding:0 16px; background:var(--invoice-orange); border-color:var(--invoice-orange); color:var(--invoice-ink); }
+  .invoice-button-primary:hover,.invoice-button-primary:focus { background:#e97e00; border-color:#e97e00; color:var(--invoice-ink); }
+  .invoice-button-primary:disabled { background:#f7c985; border-color:#f7c985; color:rgba(35,43,56,.7); }
+  .invoice-sync { display:grid; grid-template-columns:auto minmax(0,1fr); gap:15px; padding:18px; align-items:start; }
+  .invoice-sync-icon { align-items:center; background:rgba(49,95,183,.1); border-radius:12px; color:var(--invoice-blue); display:flex; font-size:1.05rem; height:40px; justify-content:center; width:40px; }
+  .invoice-sync-head { align-items:center; display:flex; gap:10px; flex-wrap:wrap; }
+  .invoice-status-pill { border-radius:999px; padding:6px 10px; font-size:.78rem; font-weight:700; background:rgba(49,95,183,.1); color:var(--invoice-blue); }
+  .invoice-status-pill.status-completed { color:#146c43; background:rgba(25,135,84,.12); }
+  .invoice-status-pill.status-failed { color:#b42318; background:rgba(220,53,69,.1); }
+  .invoice-progress { align-items:center; background:var(--invoice-bg); border:1px solid rgba(49,95,183,.16); border-radius:12px; display:flex; gap:10px; margin-top:12px; padding:11px 12px; }
+  .invoice-progress i { color:var(--invoice-orange); }
+  .invoice-sync-dates { display:flex; flex-wrap:wrap; gap:8px 22px; margin-top:12px; font-size:.8rem; color:rgba(35,43,56,.68); }
+  .invoice-sync-dates strong { color:var(--invoice-ink); font-weight:700; }
+  .invoice-dashboard { padding:18px; }
+  .invoice-document-counts,.invoice-financial-summary { display:grid; gap:10px; }
+  .invoice-document-counts { grid-template-columns:repeat(3,minmax(0,1fr)); margin-bottom:12px; }
+  .invoice-financial-summary { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .invoice-financial-summary--monthly { margin-top:10px; }
+  .invoice-stat-card,.invoice-financial-card { align-items:center; background:var(--invoice-bg); border:1px solid rgba(35,43,56,.06); border-radius:13px; display:flex; gap:10px; min-height:75px; padding:12px; }
+  .invoice-stat-card__icon { align-items:center; background:rgba(49,95,183,.10); border-radius:10px; color:var(--invoice-blue); display:flex; height:34px; justify-content:center; width:34px; }
+  .invoice-stat-card__icon--credit { background:rgba(255,138,0,.14); color:#a95900; }
+  .invoice-stat-card__icon--delivery { background:rgba(35,43,56,.08); color:var(--invoice-ink); }
+  .invoice-stat-card small,.invoice-financial-card span { color:rgba(35,43,56,.65); display:block; font-size:.74rem; }
+  .invoice-stat-card strong,.invoice-financial-card strong { color:var(--invoice-ink); display:block; font-size:1.15rem; line-height:1.25; }
+  .invoice-financial-card { align-items:flex-start; display:block; min-height:70px; }
+  .invoice-financial-card strong { margin-top:6px; white-space:nowrap; }
+  .invoice-financial-card--credit strong { color:#a95900; }
+  .invoice-financial-card--net { background:rgba(49,95,183,.07); border-color:rgba(49,95,183,.16); }
+  .invoice-financial-card--net strong { color:var(--invoice-blue); }
+  .invoice-summary-note { color:rgba(35,43,56,.62); font-size:.76rem; margin:12px 0 0; }
+  .invoice-summary-note i { color:var(--invoice-blue); margin-right:5px; }
+  .invoice-tools { padding:24px 24px 20px; }
+  .invoice-filter-grid { align-items:start; display:grid; grid-template-columns:minmax(300px,1.05fr) minmax(405px,1fr) minmax(435px,1fr); gap:0; }
+  .invoice-filter-group { min-width:0; padding:4px 30px; }
+  .invoice-filter-group + .invoice-filter-group { border-left:1px solid rgba(35,43,56,.12); }
+  .invoice-filter-group--search { padding-left:0; }
+  .invoice-filter-group--period { padding-right:0; }
+  .invoice-search { max-width:660px; position:relative; }
+  .invoice-search .form-control { border-color:rgba(49,95,183,.44); border-radius:12px; box-shadow:0 0 0 2px rgba(49,95,183,.08); min-height:54px; padding-left:48px; }
+  .invoice-search .form-control:focus { border-color:var(--invoice-blue); box-shadow:0 0 0 3px rgba(49,95,183,.18); }
+  .invoice-search .fa-magnifying-glass { color:var(--invoice-blue); font-size:1.12rem; left:16px; position:absolute; top:18px; }
+  .invoice-search-clear { align-items:center; background:transparent; border:0; color:var(--invoice-blue); display:none; height:46px; justify-content:center; position:absolute; right:4px; top:4px; width:42px; }
+  .invoice-search.has-value .invoice-search-clear { display:flex; }
+  .invoice-search-hint { color:rgba(35,43,56,.58); font-size:.78rem; margin-top:7px; }
+  .invoice-filter-label { color:var(--invoice-ink); display:block; font-size:.88rem; font-weight:700; letter-spacing:0; margin-bottom:9px; text-transform:none; }
+  .invoice-type-filters { border:0; display:flex; flex-wrap:wrap; gap:9px; margin:0; padding:0; }
+  .invoice-type-filter { cursor:pointer; margin:0; position:relative; }
+  .invoice-type-filter input { height:1px; opacity:0; position:absolute; width:1px; }
+  .invoice-type-filter span { align-items:center; border:1px solid rgba(35,43,56,.16); border-radius:999px; color:rgba(35,43,56,.72); display:flex; font-size:.78rem; font-weight:700; gap:6px; min-height:52px; padding:0 17px; transition:background .15s,border-color .15s,color .15s; white-space:nowrap; }
+  .invoice-type-filter input:checked + span { background:rgba(49,95,183,.10); border-color:var(--invoice-blue); box-shadow:inset 0 0 0 1px rgba(49,95,183,.1); color:var(--invoice-blue); }
+  .invoice-type-filter input:focus-visible + span { box-shadow:0 0 0 3px rgba(49,95,183,.22); }
+  .invoice-date-filters { align-items:center; display:grid; gap:10px; grid-template-columns:minmax(120px,1fr) minmax(120px,1fr) auto; }
+  .invoice-date-filters .form-control { border-color:rgba(49,95,183,.24); border-radius:10px; min-height:52px; }
+  .invoice-filter-reset { align-self:stretch; border-color:rgba(49,95,183,.55); border-radius:10px; color:var(--invoice-blue); font-weight:700; min-height:52px; padding-inline:16px; white-space:nowrap; }
+  .invoice-filter-reset:hover,.invoice-filter-reset:focus { background:rgba(49,95,183,.08); border-color:var(--invoice-blue); color:var(--invoice-blue); }
+  .invoice-list-summary { align-items:center; border-top:1px solid rgba(35,43,56,.08); border-bottom:1px solid rgba(35,43,56,.08); color:rgba(35,43,56,.68); display:flex; font-size:.82rem; justify-content:space-between; padding:14px 24px; }
+  .invoice-list-summary strong { color:var(--invoice-ink); display:block; font-size:1rem; }
+  .invoice-list-summary small { display:block; font-size:.8rem; margin-top:2px; }
+  .invoice-table th { background:var(--invoice-bg); font-size:.72rem; color:rgba(35,43,56,.68); letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; border-bottom-color:rgba(35,43,56,.12); }
+  .invoice-table td { padding:15px 12px; vertical-align:middle; border-color:rgba(35,43,56,.08); }
+  .invoice-table th:first-child,.invoice-table td:first-child { padding-left:18px; }
+  .invoice-table th:last-child,.invoice-table td:last-child { padding-right:18px; }
+  .invoice-number { color:var(--invoice-blue); font-weight:700; }
+  .invoice-number-line { align-items:center; display:flex; flex-wrap:wrap; gap:7px; }
+  .invoice-new-badge { align-items:center; background:rgba(255,138,0,.14); border-radius:999px; color:#a95900; display:inline-flex; font-size:.67rem; font-weight:700; gap:4px; letter-spacing:.035em; padding:4px 7px; text-transform:uppercase; white-space:nowrap; }
+  .invoice-document-badge { align-items:center; border-radius:999px; display:inline-flex; font-size:.72rem; font-weight:700; gap:5px; padding:5px 9px; white-space:nowrap; }
+  .invoice-document-badge--invoice { background:rgba(49,95,183,.10); color:var(--invoice-blue); }
+  .invoice-document-badge--credit-note { background:rgba(255,138,0,.14); color:#a95900; }
+  .invoice-document-badge--delivery_note { background:rgba(35,43,56,.08); color:var(--invoice-ink); }
+  .invoice-total { font-weight:700; white-space:nowrap; }
+  .invoice-state { border-radius:999px; background:rgba(49,95,183,.08); color:var(--invoice-blue); display:inline-block; font-size:.77rem; font-weight:700; padding:5px 8px; white-space:nowrap; }
+  .invoice-row-actions { display:flex; gap:6px; justify-content:flex-end; }
+  .invoice-icon-button { align-items:center; border-radius:10px; display:inline-flex; height:38px; justify-content:center; width:38px; }
+  .invoice-pagination { align-items:center; display:flex; justify-content:space-between; gap:14px; padding:15px 18px; flex-wrap:wrap; }
+  .invoice-pagination-actions { display:flex; align-items:center; gap:5px; }
+  .invoice-pagination-actions .btn { min-width:34px; }
+  .invoice-pagination-ellipsis { color:rgba(35,43,56,.55); padding:0 3px; }
+  .invoice-empty { text-align:center; padding:48px 16px; color:rgba(35,43,56,.65); }
+  .invoice-empty i { font-size:2rem; color:var(--invoice-blue); display:block; margin-bottom:12px; }
+  .invoice-list-loading { opacity:.55; pointer-events:none; }
+  @media(max-width:1399px) {
+    .invoice-filter-grid { grid-template-columns:minmax(0,1fr) minmax(0,1fr); row-gap:20px; }
+    .invoice-filter-group--search { border-bottom:1px solid rgba(35,43,56,.12); grid-column:1 / -1; padding:4px 0 20px; }
+    .invoice-filter-group--type { border-left:0 !important; padding-left:0; }
+    .invoice-filter-group--period { padding-right:0; }
+  }
+  @media(max-width:767px) {
+    .invoice-hero .invoice-button-primary { width:100%; }
+    .invoice-sync { grid-template-columns:1fr; }
+    .invoice-sync-icon { display:none; }
+    .invoice-filter-grid,.invoice-document-counts,.invoice-financial-summary { grid-template-columns:1fr; }
+    .invoice-filter-group,.invoice-filter-group--period { border-left:0 !important; padding:0; }
+    .invoice-filter-group--type { border-top:1px solid rgba(35,43,56,.12); padding-top:18px; }
+    .invoice-filter-group--period { border-top:1px solid rgba(35,43,56,.12); padding-top:18px; }
+    .invoice-date-filters { grid-template-columns:1fr 1fr; }
+    .invoice-filter-reset { grid-column:1 / -1; }
+    .invoice-tools { align-items:stretch; }
+    .invoice-search { max-width:none; }
+    .invoice-list-summary { padding-inline:18px; }
+    .invoice-pagination { align-items:stretch; }
+    .invoice-pagination-actions { flex-wrap:wrap; }
+    .invoice-row-actions { justify-content:flex-start; }
+  }
+</style>
+
+<main class="container py-4 invoice-page"
+      data-invoice-token="{{ syncToken|e('html_attr') }}"
+      data-invoice-list-url="{{ path('invoice_list') }}"
+      data-page="{{ listing.page }}"
+      data-sync-status="{{ sync ? sync.status|e('html_attr') : '' }}"
+      data-sync-message="{{ sync ? (sync.message ?: '')|e('html_attr') : '' }}"
+      data-requested-at="{{ sync ? sync.requestedAt|e('html_attr') : '' }}"
+      data-last-synced-at="{{ sync ? (sync.lastSyncedAt ?: '')|e('html_attr') : '' }}"
+      data-completed-at="{{ sync ? (sync.completedAt ?: '')|e('html_attr') : '' }}">
+  <section class="invoice-hero mb-3">
+    <div>
+      <div class="invoice-eyebrow">Mon espace EBP</div>
+      <h1>Mes documents</h1>
+      <p class="invoice-muted mb-0">Retrouvez vos factures, avoirs et bons de livraison synchronisés depuis EBP.</p>
+    </div>
+    <div>
+      <button type="button" class="btn invoice-button invoice-button-primary" id="invoiceRefresh">
+        <i class="fa-solid fa-rotate me-2"></i>Synchroniser mes documents
+      </button>
+    </div>
+  </section>
+
+  <section class="invoice-card invoice-sync mb-3" id="invoiceSyncStatus" aria-live="polite">
+    <div class="invoice-sync-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+    <div>
+      <div class="invoice-sync-head">
+        <span class="invoice-status-pill" id="invoiceStatusPill">Prêt à synchroniser</span>
+        <span class="invoice-muted small" id="invoiceStatusText">Vos documents déjà synchronisés restent disponibles pendant une mise à jour.</span>
+      </div>
+      <div class="invoice-progress" id="invoiceProgress" hidden>
+        <i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>
+        <div><strong>Synchronisation des documents EBP en cours</strong><div class="invoice-muted small">Estimation habituelle : 1 à 3 minutes. Le délai peut augmenter selon le nombre de documents.</div></div>
+      </div>
+      <div class="invoice-sync-dates">
+        <span>Demande : <strong id="invoiceRequestedAt">—</strong></span>
+        <span>Dernière synchronisation : <strong id="invoiceLastSyncedAt">—</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="invoice-card invoice-dashboard mb-3" id="invoiceSummary" aria-live="polite">
+    {% include 'invoice/_summary.html.twig' with {statistics: statistics} only %}
+  </section>
+
+  <section class="invoice-card">
+    <div class="invoice-tools">
+      <form id="invoiceFilterForm" method="get" action="{{ path('invoice_index') }}">
+        <div class="invoice-filter-grid">
+          <div class="invoice-filter-group invoice-filter-group--search">
+            <label class="invoice-filter-label" for="invoiceSearch">Rechercher un document</label>
+            <div class="invoice-search" id="invoiceSearchWrap">
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+              <input id="invoiceSearch" class="form-control" type="search" name="q" value="{{ filters.query }}" maxlength="120" autocomplete="off" placeholder="N° document, référence ou désignation">
+              <button class="invoice-search-clear" id="invoiceSearchClear" type="button" aria-label="Effacer la recherche"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="invoice-search-hint">Recherche dans les numéros, les lignes et les désignations.</div>
+          </div>
+          <div class="invoice-filter-group invoice-filter-group--type">
+            <span class="invoice-filter-label" id="invoiceTypeLegend">Type de document</span>
+            <fieldset class="invoice-type-filters" aria-labelledby="invoiceTypeLegend">
+              <label class="invoice-type-filter"><input type="radio" name="type" value="" {{ filters.kind is null ? 'checked' : '' }}><span><i class="fa-solid fa-layer-group"></i>Tous</span></label>
+              <label class="invoice-type-filter"><input type="radio" name="type" value="invoice" {{ filters.kind == 'invoice' ? 'checked' : '' }}><span><i class="fa-solid fa-file-invoice"></i>Factures</span></label>
+              <label class="invoice-type-filter"><input type="radio" name="type" value="credit_note" {{ filters.kind == 'credit_note' ? 'checked' : '' }}><span><i class="fa-solid fa-arrow-rotate-left"></i>Avoirs</span></label>
+              <label class="invoice-type-filter"><input type="radio" name="type" value="delivery_note" {{ filters.kind == 'delivery_note' ? 'checked' : '' }}><span><i class="fa-solid fa-truck-ramp-box"></i>BL</span></label>
+            </fieldset>
+          </div>
+          <div class="invoice-filter-group invoice-filter-group--period">
+            <span class="invoice-filter-label">Période</span>
+            <div class="invoice-date-filters">
+              <div><label class="visually-hidden" for="invoiceDateFrom">À partir du</label><input id="invoiceDateFrom" class="form-control" type="date" name="from" value="{{ filters.from ? filters.from|date('Y-m-d') : '' }}"></div>
+              <div><label class="visually-hidden" for="invoiceDateTo">Jusqu’au</label><input id="invoiceDateTo" class="form-control" type="date" name="to" value="{{ filters.to ? filters.to|date('Y-m-d') : '' }}"></div>
+              <button class="btn btn-outline-secondary btn-sm invoice-filter-reset" id="invoiceFiltersReset" type="button"><i class="fa-solid fa-rotate-left me-1"></i>Réinitialiser</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <span class="invoice-muted small d-block mt-3" id="invoiceListFeedback" aria-live="polite"></span>
+    </div>
+    <div id="invoiceList" aria-live="polite">
+      {% include 'invoice/_list.html.twig' with {listing: listing, filters: filters, queryParameters: queryParameters} only %}
+    </div>
+  </section>
+</main>
+<script>
+(() => {
+  const root = document.querySelector('[data-invoice-token]');
+  if (!root) return;
+  const refreshButton = document.getElementById('invoiceRefresh');
+  const pill = document.getElementById('invoiceStatusPill');
+  const statusText = document.getElementById('invoiceStatusText');
+  const progress = document.getElementById('invoiceProgress');
+  const requestedAt = document.getElementById('invoiceRequestedAt');
+  const lastSyncedAt = document.getElementById('invoiceLastSyncedAt');
+  const filterForm = document.getElementById('invoiceFilterForm');
+  const searchInput = document.getElementById('invoiceSearch');
+  const searchWrap = document.getElementById('invoiceSearchWrap');
+  const searchClear = document.getElementById('invoiceSearchClear');
+  const typeInputs = document.querySelectorAll('input[name="type"]');
+  const dateFrom = document.getElementById('invoiceDateFrom');
+  const dateTo = document.getElementById('invoiceDateTo');
+  const filtersReset = document.getElementById('invoiceFiltersReset');
+  const list = document.getElementById('invoiceList');
+  const summary = document.getElementById('invoiceSummary');
+  const feedback = document.getElementById('invoiceListFeedback');
+  const token = root.dataset.invoiceToken || '';
+  let pollTimer = null;
+  let searchTimer = null;
+  let listController = null;
+  let currentPage = Number(root.dataset.page || 1) || 1;
+  let previousSyncStatus = root.dataset.syncStatus || '';
+  let completionHandled = false;
+
+  const dateFormat = new Intl.DateTimeFormat('fr-FR', {dateStyle:'medium', timeStyle:'short'});
+  const formatDate = value => {
+    if (!value) return '—';
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? '—' : dateFormat.format(date);
+  };
+  const updateSearchState = () => searchWrap?.classList.toggle('has-value', Boolean(searchInput?.value.trim()));
+  const filterParameters = () => {
+    const params = new URLSearchParams();
+    const query = searchInput?.value.trim() || '';
+    const type = [...typeInputs].find(input => input.checked)?.value || '';
+    if (query) params.set('q', query);
+    if (type) params.set('type', type);
+    if (dateFrom?.value) params.set('from', dateFrom.value);
+    if (dateTo?.value) params.set('to', dateTo.value);
+    return params;
+  };
+  const initialStatus = () => root.dataset.syncStatus ? {
+    status: root.dataset.syncStatus,
+    message: root.dataset.syncMessage || '',
+    requestedAt: root.dataset.requestedAt || '',
+    lastSyncedAt: root.dataset.lastSyncedAt || '',
+    completedAt: root.dataset.completedAt || ''
+  } : null;
+
+  function displaySync(status) {
+    const state = status?.status || '';
+    pill.className = 'invoice-status-pill' + (state ? ' status-' + state : '');
+    requestedAt.textContent = formatDate(status?.requestedAt);
+    lastSyncedAt.textContent = formatDate(status?.lastSyncedAt || (state === 'completed' ? status?.completedAt : ''));
+    progress.hidden = state !== 'pending';
+    if (state === 'pending') {
+      pill.textContent = 'Synchronisation en cours';
+      statusText.textContent = 'Votre demande a été transmise à EBP. Vos documents restent consultables pendant le chargement.';
+      refreshButton.disabled = true;
+      poll();
+    } else if (state === 'failed') {
+      pill.textContent = 'Synchronisation à relancer';
+      statusText.textContent = status.message || 'La récupération EBP a échoué. Vous pouvez relancer la synchronisation.';
+      refreshButton.disabled = false;
+    } else if (state === 'completed') {
+      pill.textContent = 'Synchronisé';
+      statusText.textContent = `${status.documentCount ?? status.invoiceCount ?? 0} document(s) ont été reçu(s).`;
+      refreshButton.disabled = false;
+      if (previousSyncStatus === 'pending' && !completionHandled) { completionHandled = true; refreshList(currentPage, true); }
+    } else {
+      pill.textContent = 'Prêt à synchroniser';
+      statusText.textContent = 'Vos documents déjà synchronisés restent disponibles pendant une mise à jour.';
+      refreshButton.disabled = false;
+    }
+    previousSyncStatus = state;
+  }
+
+  async function poll() {
+    if (pollTimer) return;
+    pollTimer = window.setTimeout(async () => {
+      pollTimer = null;
+      try {
+        const response = await fetch('{{ path('invoice_status') }}', {headers:{Accept:'application/json'}});
+        const data = await response.json();
+        if (response.ok && data.ok) displaySync(data.status);
+        else if (data.message) statusText.textContent = data.message;
+      } catch (_) { poll(); }
+    }, 5000);
+  }
+
+  async function refreshList(page = 1, preserveFocus = false) {
+    if (!list) return;
+    listController?.abort();
+    listController = new AbortController();
+    const params = filterParameters();
+    params.set('page', String(page));
+    list.classList.add('invoice-list-loading');
+    if (feedback) feedback.textContent = 'Recherche en cours…';
+    try {
+      const response = await fetch(`${root.dataset.invoiceListUrl}?${params.toString()}`, {headers:{Accept:'application/json'}, signal:listController.signal});
+      const data = await response.json();
+      if (!response.ok || !data.ok) throw new Error('La liste des documents ne peut pas être actualisée.');
+      list.innerHTML = data.html;
+      if (summary && typeof data.statisticsHtml === 'string') summary.innerHTML = data.statisticsHtml;
+      currentPage = Number(data.page || 1);
+      root.dataset.page = String(currentPage);
+      const url = new URL(window.location.href);
+      for (const name of ['q', 'type', 'from', 'to', 'page']) url.searchParams.delete(name);
+      for (const [name, value] of params.entries()) url.searchParams.set(name, value);
+      window.history.replaceState({}, '', url);
+      if (feedback) feedback.textContent = `${data.total} résultat(s).`;
+      if (!preserveFocus) searchInput?.focus({preventScroll:true});
+    } catch (error) {
+      if (error?.name !== 'AbortError' && feedback) feedback.textContent = error?.message || 'Erreur de recherche.';
+    } finally { list.classList.remove('invoice-list-loading'); }
+  }
+
+  refreshButton?.addEventListener('click', async () => {
+    refreshButton.disabled = true;
+    completionHandled = false;
+    try {
+      const response = await fetch('{{ path('invoice_refresh') }}', {method:'POST', headers:{'Content-Type':'application/json',Accept:'application/json'}, body:JSON.stringify({_token:token})});
+      const data = await response.json();
+      if (!response.ok || !data.ok) throw new Error(data.message || 'La demande de documents a échoué.');
+      displaySync(data.status);
+    } catch (error) {
+      refreshButton.disabled = false;
+      pill.className = 'invoice-status-pill status-failed';
+      pill.textContent = 'Synchronisation à relancer';
+      statusText.textContent = error?.message || 'La demande de documents a échoué.';
+    }
+  });
+  filterForm?.addEventListener('submit', event => { event.preventDefault(); refreshList(1); });
+  searchInput?.addEventListener('input', () => { updateSearchState(); window.clearTimeout(searchTimer); searchTimer = window.setTimeout(() => refreshList(1), 280); });
+  searchClear?.addEventListener('click', () => { if (searchInput) searchInput.value = ''; updateSearchState(); refreshList(1); });
+  typeInputs.forEach(input => input.addEventListener('change', () => refreshList(1)));
+  dateFrom?.addEventListener('change', () => refreshList(1));
+  dateTo?.addEventListener('change', () => refreshList(1));
+  filtersReset?.addEventListener('click', () => {
+    if (searchInput) searchInput.value = '';
+    if (dateFrom) dateFrom.value = '';
+    if (dateTo) dateTo.value = '';
+    const all = [...typeInputs].find(input => input.value === '');
+    if (all) all.checked = true;
+    updateSearchState();
+    refreshList(1);
+  });
+  list?.addEventListener('click', event => { const link = event.target.closest('[data-invoice-page]'); if (!link) return; event.preventDefault(); refreshList(Number(link.dataset.invoicePage || 1)); });
+  updateSearchState();
+  displaySync(initialStatus());
+})();
+</script>
+{% endblock %}

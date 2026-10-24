@@ -57,6 +57,28 @@
     padding: 18px;
   }
 
+  .ebp-import-card{
+    border-top: 3px solid rgba(var(--bs-primary-rgb), .55);
+  }
+
+  .ebp-import-status{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 999px;
+    padding: 5px 9px;
+    font-size: .76rem;
+    font-weight: 700;
+  }
+
+  .ebp-import-status--pending{ background: rgba(255,193,7,.16); color: #8a5a00; }
+  .ebp-import-status--failed{ background: rgba(220,53,69,.12); color: #b42332; }
+  .ebp-import-status--created{ background: rgba(25,135,84,.13); color: #0a7041; }
+
+  body.theme-dark .ebp-import-status--pending{ color: #ffd166; }
+  body.theme-dark .ebp-import-status--failed{ color: #ff9aa5; }
+  body.theme-dark .ebp-import-status--created{ color: #6ee7ae; }
+
   .clients-toolbar{
     display: flex;
     align-items: center;
@@ -131,6 +153,7 @@
     margin: 0;
     border-collapse: separate;
     border-spacing: 0;
+    min-width: 1280px;
   }
 
   .clients-table thead,
@@ -210,6 +233,20 @@
     font-weight: 550;
     color: var(--oc-text);
   }
+
+  .client-source{
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 5px 8px;
+    font-size: .74rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .client-source--ebp{ background: rgba(var(--bs-primary-rgb), .12); color: var(--bs-primary); }
+  .client-source--site{ background: rgba(108,117,125,.13); color: #59636e; }
+  .client-date{ white-space: nowrap; color: var(--oc-muted); font-size: .80rem; }
 
   .clients-filter-select{
     min-height: 44px;
@@ -411,6 +448,32 @@
     cursor: pointer;
   }
 
+  .client-metadata{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    padding: 14px;
+    border: 1px solid var(--oc-border);
+    border-radius: 16px;
+    background: rgba(255,255,255,.52);
+  }
+
+  .client-metadata small{
+    display: block;
+    margin-bottom: 4px;
+    color: var(--oc-muted);
+    font-size: .72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .client-metadata strong{
+    color: var(--oc-text);
+    font-size: .84rem;
+  }
+
+  body.theme-dark .client-metadata{ background: rgba(255,255,255,.04); }
+
   @media (max-width: 767.98px){
     .client-modal .modal-dialog{
       margin: .75rem;
@@ -458,6 +521,11 @@
       width: 100%;
       text-align: center;
     }
+
+    .client-metadata{
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
   }
 </style>
 
@@ -468,9 +536,17 @@
       <div class="subtitle">Administration, recherche et mise à jour des comptes clients.</div>
     </div>
 
-    <button class="btn btn-primary clients-btn" id="btnNewClient" type="button">
-      <i class="fa-solid fa-plus me-2"></i>Nouveau client
-    </button>
+    <div class="d-flex gap-2 flex-wrap">
+      <button class="btn btn-outline-primary clients-btn" id="btnEbpInvoicesSync" type="button">
+        <i class="fa-solid fa-file-invoice me-2"></i>Charger les documents EBP
+      </button>
+      <button class="btn btn-outline-primary clients-btn" id="btnEbpImportFocus" type="button">
+        <i class="fa-solid fa-database me-2"></i>Importer depuis EBP
+      </button>
+      <button class="btn btn-primary clients-btn" id="btnNewClient" type="button">
+        <i class="fa-solid fa-plus me-2"></i>Nouveau client
+      </button>
+    </div>
   </div>
 
   <div class="clients-main-card">
@@ -517,7 +593,10 @@
             <tr>
               <th>Client</th>
               <th>Code client</th>
+              <th>Source</th>
               <th>Ville</th>
+              <th>Créé le</th>
+              <th>Modifié le</th>
               <th>Dernière commande</th>
               <th>Commandes ce mois</th>
               <th>Statut</th>
@@ -526,7 +605,7 @@
           </thead>
           <tbody id="clientsTbody">
             <tr>
-              <td colspan="7" class="text-muted">Chargement…</td>
+              <td colspan="10" class="text-muted">Chargement…</td>
             </tr>
           </tbody>
         </table>
@@ -535,6 +614,50 @@
       <div class="clients-pagination d-none" id="clientsPagination"></div>
     </div>
   </div>
+
+  <section class="clients-main-card ebp-import-card mt-3" aria-labelledby="ebp-import-title">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-3">
+        <div>
+          <h5 class="mb-1" id="ebp-import-title"><i class="fa-solid fa-database text-primary me-2"></i>Imports clients EBP</h5>
+          <p class="mb-0 text-muted small">Demandez une fiche avec son UniqueId. ApiLocal lit uniquement ce client, puis le compte est créé ici dès réception.</p>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+          <button class="btn btn-outline-secondary btn-sm" id="btnEbpRefresh" type="button"><i class="fa-solid fa-rotate-right me-1"></i>Vérifier les demandes</button>
+          <button class="btn btn-outline-danger btn-sm" id="btnEbpClear" type="button"><i class="fa-solid fa-trash-can me-1"></i>Vider la liste</button>
+        </div>
+      </div>
+
+      <div class="row g-2 align-items-end">
+        <div class="col-lg-8">
+          <label class="form-label fw-semibold small" for="ebpUniqueId">UniqueId client EBP</label>
+          <input class="form-control clients-search" id="ebpUniqueId" maxlength="36" placeholder="Ex. 7A4F31A8-1AA1-4B3D-8AA1-123456789ABC" autocomplete="off">
+        </div>
+        <div class="col-lg-4 d-grid">
+          <button class="btn btn-primary clients-btn" id="btnEbpRequest" type="button"><i class="fa-solid fa-cloud-arrow-down me-2"></i>Demander l’import</button>
+        </div>
+      </div>
+      <p class="small text-muted mt-2 mb-3">Le mot de passe du nouveau compte est généré de façon sécurisée. Il peut ensuite être remplacé depuis sa fiche client.</p>
+
+      <div class="alert d-none mb-3" id="ebpImportMessage" role="status"></div>
+      <div class="table-responsive">
+        <table class="table clients-table align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Client EBP</th>
+              <th>Informations reçues</th>
+              <th>Statut</th>
+              <th>Dernière mise à jour</th>
+              <th class="text-end">Action</th>
+            </tr>
+          </thead>
+          <tbody id="ebpImportsTbody">
+            <tr><td colspan="5" class="text-muted">Chargement des demandes…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 </div>
 
 <div class="modal fade client-modal" id="clientModal" tabindex="-1" aria-hidden="true">
@@ -597,6 +720,14 @@
                 </div>
               </div>
             </div>
+
+            <div class="col-12 d-none" id="clientMetadata">
+              <div class="client-metadata">
+                <div><small>Source</small><strong id="clientSource">—</strong></div>
+                <div><small>Créé le</small><strong id="clientCreatedAt">—</strong></div>
+                <div><small>Modifié le</small><strong id="clientUpdatedAt">—</strong></div>
+              </div>
+            </div>
           </div>
         </form>
       </div>
@@ -625,8 +756,20 @@
   const btnReload = document.getElementById('btnReload');
   const btnNewClient = document.getElementById('btnNewClient');
   const btnSaveClient = document.getElementById('btnSaveClient');
+  const btnEbpImportFocus = document.getElementById('btnEbpImportFocus');
+  const btnEbpInvoicesSync = document.getElementById('btnEbpInvoicesSync');
+  const btnEbpRequest = document.getElementById('btnEbpRequest');
+  const btnEbpRefresh = document.getElementById('btnEbpRefresh');
+  const btnEbpClear = document.getElementById('btnEbpClear');
+  const ebpUniqueId = document.getElementById('ebpUniqueId');
+  const ebpImportsTbody = document.getElementById('ebpImportsTbody');
+  const ebpImportMessage = document.getElementById('ebpImportMessage');
 
   const clientId = document.getElementById('clientId');
+  const clientMetadata = document.getElementById('clientMetadata');
+  const clientSource = document.getElementById('clientSource');
+  const clientCreatedAt = document.getElementById('clientCreatedAt');
+  const clientUpdatedAt = document.getElementById('clientUpdatedAt');
   const f_email = document.getElementById('f_email');
   const f_password = document.getElementById('f_password');
   const f_companyName = document.getElementById('f_companyName');
@@ -650,10 +793,17 @@
   const API_CREATE = "{{ path('admin_clients_create') }}";
   const API_UPDATE_PATTERN = "{{ path('admin_clients_update', {id: 999999}) }}";
   const API_DELETE_PATTERN = "{{ path('admin_clients_delete', {id: 999999}) }}";
+  const API_EBP_IMPORTS = "{{ path('admin_clients_ebp_import_list') }}";
+  const API_EBP_REFRESH = "{{ path('admin_clients_ebp_import_refresh') }}";
+  const API_EBP_CLEAR = "{{ path('admin_clients_ebp_import_clear') }}";
+  const API_EBP_DELETE_PATTERN = "{{ path('admin_clients_ebp_import_delete', {id: 999999}) }}";
+  const API_EBP_INVOICES_SYNC = "{{ path('admin_clients_invoices_sync_all') }}";
 
   let currentItems = [];
   let currentPage = 1;
   let searchTimer = null;
+  let ebpImportItems = [];
+  let ebpRefreshing = false;
 
   function esc(s){
     return String(s ?? '').replace(/[&<>"']/g, m => ({
@@ -668,7 +818,20 @@
       pageError.textContent = '';
       return;
     }
-    pageError.classList.remove('d-none');
+    pageError.classList.remove('d-none', 'alert-success');
+    pageError.classList.add('alert-danger');
+    pageError.textContent = message;
+  }
+
+  function setPageNotice(message){
+    if (!pageError) return;
+    if (!message) {
+      pageError.classList.add('d-none');
+      pageError.textContent = '';
+      return;
+    }
+    pageError.classList.remove('d-none', 'alert-danger');
+    pageError.classList.add('alert-success');
     pageError.textContent = message;
   }
 
@@ -693,7 +856,14 @@
     f_address2.value = '';
     f_city.value = '';
     f_isActive.checked = true;
+    clientMetadata?.classList.add('d-none');
     setFormError('');
+  }
+
+  function displayClientDate(value, dateStyle = 'medium'){
+    if (!value) return '—';
+    const parsed = new Date(value);
+    return Number.isNaN(parsed.getTime()) ? '—' : parsed.toLocaleString('fr-FR', { dateStyle, timeStyle:'short' });
   }
 
   function fillForm(item){
@@ -706,6 +876,10 @@
     f_address2.value = item.address2 ?? '';
     f_city.value = item.city ?? '';
     f_isActive.checked = !!item.isActive;
+    clientSource.textContent = item.source === 'EBP' ? 'EBP' : 'Site';
+    clientCreatedAt.textContent = displayClientDate(item.createdAt);
+    clientUpdatedAt.textContent = displayClientDate(item.updatedAt);
+    clientMetadata?.classList.remove('d-none');
   }
 
   function getPayload(){
@@ -728,6 +902,119 @@
 
   function deleteUrl(id){
     return API_DELETE_PATTERN.replace('999999', String(id));
+  }
+
+  function ebpDeleteUrl(id){
+    return API_EBP_DELETE_PATTERN.replace('999999', String(id));
+  }
+
+  function setEbpMessage(message, type = 'success'){
+    if (!ebpImportMessage) return;
+    if (!message) {
+      ebpImportMessage.className = 'alert d-none mb-3';
+      ebpImportMessage.textContent = '';
+      return;
+    }
+    ebpImportMessage.className = 'alert alert-' + type + ' mb-3';
+    ebpImportMessage.textContent = message;
+  }
+
+  function ebpStatus(status){
+    const labels = {
+      pending: ['En attente EBP', 'pending', 'fa-hourglass-half'],
+      failed: ['Erreur', 'failed', 'fa-triangle-exclamation'],
+      created: ['Compte créé', 'created', 'fa-circle-check']
+    };
+    const value = labels[status] || ['Inconnu', 'failed', 'fa-circle-question'];
+    return `<span class="ebp-import-status ebp-import-status--${value[1]}"><i class="fa-solid ${value[2]}"></i>${value[0]}</span>`;
+  }
+
+  function importDate(value){
+    if (!value) return '—';
+    const parsed = new Date(value);
+    return Number.isNaN(parsed.getTime()) ? '—' : parsed.toLocaleString('fr-FR', { dateStyle:'short', timeStyle:'short' });
+  }
+
+  function renderEbpImports(items){
+    ebpImportItems = Array.isArray(items) ? items : [];
+    if (btnEbpClear) btnEbpClear.disabled = !ebpImportItems.length;
+    if (!ebpImportsTbody) return;
+    if (!ebpImportItems.length) {
+      ebpImportsTbody.innerHTML = '<tr><td colspan="5"><div class="clients-empty my-2"><i class="fa-solid fa-inbox"></i><div class="fw-bold mb-1">Aucune demande d’import</div><div class="small">Saisissez l’UniqueId d’un client EBP pour commencer.</div></div></td></tr>';
+      return;
+    }
+    ebpImportsTbody.innerHTML = ebpImportItems.map(item => {
+      const customer = item.customer && typeof item.customer === 'object' ? item.customer : {};
+      const identity = customer.companyName || customer.customerCode || 'Client EBP';
+      const details = [customer.email, customer.phone, customer.city].filter(Boolean).map(esc).join(' · ');
+      const message = item.message ? `<div class="small ${item.status === 'failed' ? 'text-danger' : 'text-muted'} mt-1">${esc(item.message)}</div>` : '';
+      return `<tr>
+        <td><div class="client-code">${esc(item.uniqueId || '—')}</div><small class="text-muted">Demande #${esc(item.id || '—')}</small></td>
+        <td><div class="client-primary-name">${esc(identity)}</div><div class="client-secondary-email">${details || 'En attente des informations EBP'}</div>${message}</td>
+        <td>${ebpStatus(item.status)}</td>
+        <td>${importDate(item.updatedAt)}</td>
+        <td class="text-end"><button class="btn btn-outline-danger btn-sm client-action-btn" type="button" data-ebp-delete="${esc(item.id)}" title="Supprimer cette demande"><i class="fa-solid fa-trash"></i></button></td>
+      </tr>`;
+    }).join('');
+    ebpImportsTbody.querySelectorAll('[data-ebp-delete]').forEach(button => {
+      button.addEventListener('click', async () => {
+        const id = Number(button.getAttribute('data-ebp-delete'));
+        if (!Number.isInteger(id) || !confirm('Supprimer cette demande d’import ?')) return;
+        button.disabled = true;
+        try {
+          const response = await fetch(ebpDeleteUrl(id), {
+            method: 'POST',
+            headers: {'Content-Type':'application/json', 'Accept':'application/json'},
+            body: JSON.stringify({_token: CRUD_TOKEN})
+          });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok || !data.ok) throw new Error(data.message || 'Suppression impossible');
+          setEbpMessage(data.message || 'Demande supprimée.');
+          await loadEbpImports();
+        } catch (error) {
+          setEbpMessage(error.message || 'Erreur réseau.', 'danger');
+          button.disabled = false;
+        }
+      });
+    });
+  }
+
+  async function loadEbpImports(){
+    try {
+      const response = await fetch(API_EBP_IMPORTS, {headers:{'Accept':'application/json'}});
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.ok) throw new Error(data.message || 'Impossible de charger les demandes EBP.');
+      renderEbpImports(data.items);
+    } catch (error) {
+      if (ebpImportsTbody) ebpImportsTbody.innerHTML = '<tr><td colspan="5" class="text-danger">Impossible de charger les demandes EBP.</td></tr>';
+      setEbpMessage(error.message || 'Erreur réseau.', 'danger');
+    }
+  }
+
+  async function refreshEbpImports(silent = false){
+    if (ebpRefreshing) return;
+    ebpRefreshing = true;
+    if (btnEbpRefresh) btnEbpRefresh.disabled = true;
+    try {
+      const response = await fetch(API_EBP_REFRESH, {
+        method:'POST',
+        headers:{'Content-Type':'application/json', 'Accept':'application/json'},
+        body:JSON.stringify({_token:CRUD_TOKEN})
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.ok) throw new Error(data.message || 'Vérification impossible.');
+      renderEbpImports(data.items);
+      if ((data.summary?.created || 0) > 0 || (data.summary?.updated || 0) > 0) await loadClients();
+      if (!silent) {
+        const summary = data.summary || {};
+        setEbpMessage((summary.created || 0) + ' compte(s) créé(s), ' + (summary.updated || 0) + ' fiche(s) mise(s) à jour, ' + (summary.pending || 0) + ' demande(s) en attente et ' + (summary.failed || 0) + ' erreur(s).');
+      }
+    } catch (error) {
+      if (!silent) setEbpMessage(error.message || 'Erreur réseau.', 'danger');
+    } finally {
+      ebpRefreshing = false;
+      if (btnEbpRefresh) btnEbpRefresh.disabled = false;
+    }
   }
 
   function renderPagination(meta){
@@ -780,7 +1067,7 @@
     if (!currentItems.length) {
       tbody.innerHTML = `
         <tr>
-          <td colspan="7">
+          <td colspan="10">
             <div class="clients-empty my-2">
               <i class="fa-solid fa-user-slash"></i>
               <div class="fw-bold mb-1">Aucun client trouvé</div>
@@ -796,6 +1083,7 @@
     tbody.innerHTML = currentItems.map(item => {
       const displayName = item.companyName || item.email || '—';
       const secondaryEmail = item.companyName && item.email ? item.email : '';
+      const source = item.source === 'EBP' ? 'EBP' : 'Site';
 
       return `
       <tr>
@@ -807,9 +1095,12 @@
         <td>
           <div class="client-code">${esc(item.customerCode || '—')}</div>
         </td>
+        <td><span class="client-source client-source--${source === 'EBP' ? 'ebp' : 'site'}">${source}</span></td>
         <td>
           <div class="client-city">${esc(item.city || '—')}</div>
         </td>
+        <td class="client-date">${displayClientDate(item.createdAt, 'short')}</td>
+        <td class="client-date">${displayClientDate(item.updatedAt, 'short')}</td>
         <td>${item.lastOrderAt ? esc(new Date(item.lastOrderAt.replace(' ', 'T')).toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' })) : '—'}</td>
         <td>${Number(item.monthlyOrders) || 0}</td>
         <td>
@@ -936,6 +1227,78 @@
   });
 
   btnReload?.addEventListener('click', () => loadClients(currentPage));
+  btnEbpInvoicesSync?.addEventListener('click', async () => {
+    if (!confirm('Lancer la récupération des factures pour tous les clients EBP actifs ?')) return;
+    btnEbpInvoicesSync.disabled = true;
+    try {
+      const response = await fetch(API_EBP_INVOICES_SYNC, {
+        method:'POST',
+        headers:{'Content-Type':'application/json', 'Accept':'application/json'},
+        body:JSON.stringify({_token:CRUD_TOKEN})
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.ok) throw new Error(data.message || 'Chargement global impossible.');
+      const failed = Number(data.queued?.failed || 0);
+      setPageNotice((data.message || 'Demandes de factures envoyées.') + (failed ? ' ' + failed + ' demande(s) n’ont pas pu être envoyée(s).' : ''));
+    } catch (error) {
+      setPageError(error.message || 'Erreur réseau lors du chargement global des factures.');
+    } finally {
+      btnEbpInvoicesSync.disabled = false;
+    }
+  });
+  btnEbpImportFocus?.addEventListener('click', () => {
+    ebpUniqueId?.focus({preventScroll:false});
+  });
+  btnEbpRequest?.addEventListener('click', async () => {
+    const uniqueId = ebpUniqueId?.value.trim().toUpperCase() || '';
+    if (!/^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/.test(uniqueId)) {
+      setEbpMessage('Saisissez un UniqueId EBP valide.', 'danger');
+      ebpUniqueId?.focus();
+      return;
+    }
+    btnEbpRequest.disabled = true;
+    try {
+      const response = await fetch(API_EBP_IMPORTS, {
+        method:'POST',
+        headers:{'Content-Type':'application/json', 'Accept':'application/json'},
+        body:JSON.stringify({_token:CRUD_TOKEN, uniqueId})
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.ok) throw new Error(data.message || 'Demande impossible.');
+      if (ebpUniqueId) ebpUniqueId.value = '';
+      setEbpMessage(data.message || 'Demande envoyée à ApiRecept.');
+      await loadEbpImports();
+    } catch (error) {
+      setEbpMessage(error.message || 'Erreur réseau.', 'danger');
+    } finally {
+      btnEbpRequest.disabled = false;
+    }
+  });
+  ebpUniqueId?.addEventListener('keydown', event => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      btnEbpRequest?.click();
+    }
+  });
+  btnEbpRefresh?.addEventListener('click', () => refreshEbpImports());
+  btnEbpClear?.addEventListener('click', async () => {
+    if (!ebpImportItems.length || !confirm('Vider toute la liste des demandes d’import EBP ? Les comptes déjà créés ne seront pas supprimés.')) return;
+    btnEbpClear.disabled = true;
+    try {
+      const response = await fetch(API_EBP_CLEAR, {
+        method:'POST',
+        headers:{'Content-Type':'application/json', 'Accept':'application/json'},
+        body:JSON.stringify({_token:CRUD_TOKEN})
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.ok) throw new Error(data.message || 'Nettoyage impossible.');
+      renderEbpImports([]);
+      setEbpMessage(data.message || 'Liste des demandes vidée.');
+    } catch (error) {
+      setEbpMessage(error.message || 'Erreur réseau.', 'danger');
+      btnEbpClear.disabled = false;
+    }
+  });
 
   searchInput?.addEventListener('input', () => {
     clearTimeout(searchTimer);
@@ -993,6 +1356,10 @@
   });
 
   loadClients();
+  loadEbpImports();
+  window.setInterval(() => {
+    if (document.visibilityState === 'visible' && ebpImportItems.some(item => item.status === 'pending')) refreshEbpImports(true);
+  }, 15000);
 })();
 </script>
 {% endblock %}

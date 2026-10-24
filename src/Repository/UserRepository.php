@@ -39,5 +39,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getQuery()
             ->getResult();
     }
+
+    /** @return list<User> */
+    public function findEbpLinkedActiveClients(): array
+    {
+        return $this->createQueryBuilder('user')
+            ->andWhere('user.ebpUniqueId IS NOT NULL')
+            ->andWhere('(user.isActive = :active OR user.isActive IS NULL)')
+            ->setParameter('active', true)
+            ->orderBy('user.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
     
 }

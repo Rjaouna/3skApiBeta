@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+  .invoice-detail { --invoice-ink:#232B38; --invoice-blue:#315FB7; --invoice-orange:#FF8A00; --invoice-bg:#F5F6F8; color:var(--invoice-ink); }
+  .invoice-detail-card { background:#fff; border:1px solid rgba(35,43,56,.12); border-radius:18px; box-shadow:0 10px 28px rgba(35,43,56,.07); }
+  .invoice-detail-title { color:var(--invoice-ink); font-size:1.7rem; font-weight:700; margin:5px 0; }
+  .invoice-detail-kicker { color:var(--invoice-orange); font-size:.75rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+  .invoice-detail-meta { color:rgba(35,43,56,.65); }
+  .invoice-detail-status { background:rgba(49,95,183,.1); border-radius:999px; color:var(--invoice-blue); display:inline-block; font-size:.8rem; font-weight:700; padding:6px 10px; }
+  .invoice-detail-label { color:rgba(35,43,56,.62); font-size:.72rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
+  .invoice-detail-value { color:var(--invoice-ink); font-size:1rem; font-weight:700; margin-top:4px; }
+  .invoice-detail-table th { background:var(--invoice-bg); color:rgba(35,43,56,.68); font-size:.72rem; letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; }
+  .invoice-detail-table td { border-color:rgba(35,43,56,.08); padding:14px 12px; vertical-align:middle; }
+  .invoice-detail-table th:first-child,.invoice-detail-table td:first-child { padding-left:20px; }
+  .invoice-detail-table th:last-child,.invoice-detail-table td:last-child { padding-right:20px; }
+  .invoice-total-box { background:var(--invoice-bg); border-radius:14px; margin-left:auto; max-width:300px; padding:15px 18px; }
+  .invoice-total-box__row { display:flex; justify-content:space-between; margin-bottom:8px; }
+  .invoice-total-box__row:last-child { border-top:1px solid rgba(35,43,56,.14); color:var(--invoice-blue); font-size:1.06rem; font-weight:700; margin:11px -18px -15px; padding:13px 18px; }
+</style>
+<main class="container py-4 invoice-detail">
+  <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
+    <div>
+      <div class="invoice-detail-kicker">{{ invoice.documentLabel }} EBP</div>
+      <h1 class="invoice-detail-title">{{ invoice.documentNumber ?: invoice.sourceId }}</h1>
+      <p class="invoice-detail-meta mb-0">{{ invoice.documentDate ? 'Document émis le ' ~ invoice.documentDate|date('d/m/Y') : 'Date non transmise par EBP' }}</p>
+    </div>
+    <div class="d-flex gap-2 flex-wrap">
+      <a class="btn btn-outline-primary" href="{{ path('invoice_pdf', {id: invoice.id}) }}"><i class="fa-solid fa-file-pdf me-2"></i>Télécharger le PDF</a>
+      <a class="btn btn-outline-secondary" href="{{ path('invoice_index') }}"><i class="fa-solid fa-arrow-left me-2"></i>Mes documents</a>
+    </div>
+  </div>
+  <section class="invoice-detail-card mb-3"><div class="p-4">
+    <div class="row g-4">
+      <div class="col-6 col-lg-3"><div class="invoice-detail-label">État EBP</div><div class="invoice-detail-value"><span class="invoice-detail-status">{{ invoice.documentState ?: '—' }}</span></div></div>
+      <div class="col-6 col-lg-3"><div class="invoice-detail-label">Date d’échéance</div><div class="invoice-detail-value">{{ invoice.dueDate ? invoice.dueDate|date('d/m/Y') : '—' }}</div></div>
+      <div class="col-6 col-lg-3"><div class="invoice-detail-label">Total HT</div><div class="invoice-detail-value">{{ invoice.totalHt is not null ? invoice.totalHt|number_format(2, ',', ' ') ~ ' DH' : '—' }}</div></div>
+      <div class="col-6 col-lg-3"><div class="invoice-detail-label">Total TTC</div><div class="invoice-detail-value">{{ invoice.totalTtc is not null ? invoice.totalTtc|number_format(2, ',', ' ') ~ ' DH' : '—' }}</div></div>
+    </div>
+  </div></section>
+  <section class="invoice-detail-card"><div class="p-4 border-bottom d-flex align-items-center justify-content-between gap-3 flex-wrap"><div><h2 class="h5 mb-1">Lignes de {{ invoice.documentLabel|lower }}</h2><p class="invoice-detail-meta small mb-0">{{ invoice.lines|length }} ligne{{ invoice.lines|length > 1 ? 's' : '' }} transmise{{ invoice.lines|length > 1 ? 's' : '' }} par EBP.</p></div></div>
+    {% if invoice.lines is empty %}<div class="p-4 invoice-detail-meta">Aucune ligne n’a été transmise par EBP.</div>{% else %}
+    <div class="table-responsive"><table class="table invoice-detail-table align-middle mb-0"><thead><tr><th>Référence</th><th>Désignation</th><th>Qté</th><th class="text-end">PU HT</th><th class="text-end">Total HT</th><th class="text-end">Total TTC</th></tr></thead><tbody>{% for line in invoice.lines %}<tr><td>{{ line.itemId ?: '—' }}</td><td>{{ line.designation ?: '—' }}</td><td>{{ line.quantity ?: '—' }}</td><td class="text-end">{{ line.unitPriceHt is defined and line.unitPriceHt ? line.unitPriceHt|number_format(2, ',', ' ') ~ ' DH' : '—' }}</td><td class="text-end">{{ line.totalHt is defined and line.totalHt ? line.totalHt|number_format(2, ',', ' ') ~ ' DH' : '—' }}</td><td class="text-end">{{ line.totalTtc is defined and line.totalTtc ? line.totalTtc|number_format(2, ',', ' ') ~ ' DH' : '—' }}</td></tr>{% endfor %}</tbody></table></div>
+    {% endif %}
+    <div class="p-4"><div class="invoice-total-box"><div class="invoice-total-box__row"><span>Total HT</span><strong>{{ invoice.totalHt is not null ? invoice.totalHt|number_format(2, ',', ' ') ~ ' DH' : '—' }}</strong></div>{% if invoice.totalVat is not null %}<div class="invoice-total-box__row"><span>TVA</span><strong>{{ invoice.totalVat|number_format(2, ',', ' ') ~ ' DH' }}</strong></div>{% endif %}<div class="invoice-total-box__row"><span>Total TTC</span><strong>{{ invoice.totalTtc is not null ? invoice.totalTtc|number_format(2, ',', ' ') ~ ' DH' : '—' }}</strong></div></div></div>
+  </section>
+</main>
+{% endblock %}

@@ -96,6 +96,42 @@ final class ApiReceptionClient
         return $this->requestJson($connection, '/api/v1/photo-requests', $this->apiKey($connection), 'POST', ['uniqueId' => $uniqueId]);
     }
 
+    /** @return array<string, mixed> */
+    public function requestCustomerImport(ApiReceptionConnection $connection, string $uniqueId): array
+    {
+        return $this->requestJson($connection, '/api/v1/customer-imports', $this->apiKey($connection), 'POST', ['uniqueId' => $uniqueId]);
+    }
+
+    /** @return array<string, mixed> */
+    public function customerImport(ApiReceptionConnection $connection, int $id): array
+    {
+        return $this->requestJson($connection, '/api/v1/customer-imports/' . $id, $this->apiKey($connection));
+    }
+
+    /** @return array<string, mixed> */
+    public function deleteCustomerImport(ApiReceptionConnection $connection, int $id): array
+    {
+        return $this->requestJson($connection, '/api/v1/customer-imports/' . $id, $this->apiKey($connection), 'DELETE');
+    }
+
+    /** @return array<string, mixed> */
+    public function clearCustomerImports(ApiReceptionConnection $connection): array
+    {
+        return $this->requestJson($connection, '/api/v1/customer-imports', $this->apiKey($connection), 'DELETE');
+    }
+
+    /** @return array<string, mixed> */
+    public function requestInvoiceImport(ApiReceptionConnection $connection, string $uniqueId): array
+    {
+        return $this->requestJson($connection, '/api/v1/invoice-imports', $this->apiKey($connection), 'POST', ['uniqueId' => $uniqueId]);
+    }
+
+    /** @return array<string, mixed> */
+    public function invoiceImport(ApiReceptionConnection $connection, int $id): array
+    {
+        return $this->requestJson($connection, '/api/v1/invoice-imports/' . $id, $this->apiKey($connection));
+    }
+
     public function photoPublicationRevision(ApiReceptionConnection $connection): string
     {
         $data = $this->requestJson($connection, '/api/v1/photo-requests/revision', $this->apiKey($connection), timeout: 2);
@@ -187,12 +223,17 @@ final class ApiReceptionClient
             $response = $this->httpClient->request($method, $url, [
                 'headers' => $headers,
                 'timeout' => $timeout,
-                ...($method === 'POST' || $timeout < 20 ? ['max_duration' => $timeout] : []),
+                ...($method === 'POST' || $method === 'DELETE' || $timeout < 20 ? ['max_duration' => $timeout] : []),
                 'max_redirects' => 0,
                 ...($body === null ? [] : ['json' => $body]),
             ]);
             $statusCode = $response->getStatusCode();
-            if (!in_array($statusCode, $method === 'POST' ? [200, 201] : [200], true)) {
+            $accepted = match ($method) {
+                'POST' => [200, 201, 202],
+                'DELETE' => [200],
+                default => [200],
+            };
+            if (!in_array($statusCode, $accepted, true)) {
                 if ($statusCode === 401 || $statusCode === 403) {
                     throw new ApiReceptionException('ApiRecept a refusé la clé API enregistrée.');
                 }
