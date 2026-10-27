@@ -29,6 +29,7 @@ class PricingService
     {
         $unitPriceBeforeDiscountTtc = $this->toFloat($article->getSalePriceVatIncluded());
         $unitPriceBeforeDiscountHt = $this->toFloat($article->getSalePriceVatExcluded());
+        $vatRate = $this->vatRate($unitPriceBeforeDiscountTtc, $unitPriceBeforeDiscountHt);
 
         $categoryReduction = $this->getCategoryReductionForArticle($article);
         $baseReduction = $categoryReduction ?? $this->normalizeRate($article->getReduction());
@@ -51,6 +52,9 @@ class PricingService
 
             'unitPriceBeforeDiscountHt' => $unitPriceBeforeDiscountHt,
             'unitPriceBeforeDiscountHtFormatted' => $this->formatMoney($unitPriceBeforeDiscountHt),
+
+            'vatRate' => $vatRate,
+            'vatRateFormatted' => $this->formatMoney($vatRate),
 
             'unitPriceFinalTtc' => $unitPriceFinalTtc,
             'unitPriceFinalTtcFormatted' => $this->formatMoney($unitPriceFinalTtc),
@@ -78,6 +82,7 @@ class PricingService
         $globalReduction = (float) $articlePricing['globalReduction'];
 
         $unitPriceFinalTtc = $this->applyRate($unitPriceBeforeDiscountTtc, $globalReduction);
+        $unitPriceBeforeDiscountHt = $this->removeVat($unitPriceBeforeDiscountTtc, (float) $articlePricing['vatRate']);
         $lineTotalBeforeDiscount = round($unitPriceBeforeDiscountTtc * $quantity, 2);
         $lineDiscountAmount = round($lineTotalBeforeDiscount * ($globalReduction / 100), 2);
         $lineTotalFinal = round($lineTotalBeforeDiscount - $lineDiscountAmount, 2);
@@ -87,6 +92,9 @@ class PricingService
 
             'unitPriceBeforeDiscount' => $unitPriceBeforeDiscountTtc,
             'unitPriceBeforeDiscountFormatted' => $this->formatMoney($unitPriceBeforeDiscountTtc),
+
+            'unitPriceBeforeDiscountHt' => $unitPriceBeforeDiscountHt,
+            'unitPriceBeforeDiscountHtFormatted' => $this->formatMoney($unitPriceBeforeDiscountHt),
 
             'unitPriceFinal' => $unitPriceFinalTtc,
             'unitPriceFinalFormatted' => $this->formatMoney($unitPriceFinalTtc),
@@ -247,5 +255,19 @@ class PricingService
     private function applyRate(float $amount, float $rate): float
     {
         return round($amount * (1 - ($rate / 100)), 2);
+    }
+
+    private function vatRate(float $ttc, float $ht): float
+    {
+        if ($ttc <= 0 || $ht <= 0) {
+            return 0.0;
+        }
+
+        return round(max(0.0, (($ttc / $ht) - 1) * 100), 2);
+    }
+
+    private function removeVat(float $ttc, float $vatRate): float
+    {
+        return round($ttc / (1 + (max(0.0, $vatRate) / 100)), 2);
     }
 }

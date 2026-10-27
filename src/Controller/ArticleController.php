@@ -74,9 +74,15 @@ class ArticleController extends AbstractController
         );
 
         $relatedArticles = [];
+        $relatedImageUrls = [];
         foreach ($relatedArticlesRaw as $related) {
             if (!$related instanceof Article) {
                 continue;
+            }
+
+            $uniqueId = $related->getUniqueId();
+            if ($uniqueId !== null && $uniqueId !== '') {
+                $relatedImageUrls[$uniqueId] = $this->images->imageUrl($uniqueId, $related->getSysModifiedDate());
             }
 
             $relatedArticles[] = new ArticlePricingView(
@@ -88,8 +94,8 @@ class ArticleController extends AbstractController
         return $this->render('articles/show.html.twig', [
             'article' => $articleView,
             'relatedArticles' => $relatedArticles,
-            'imagesBaseUrl' => $this->images->baseUrl(),
-            'imagesCacheVersion' => $this->images->cacheVersion(),
+            'imageUrl' => $this->images->imageUrl((string) $article->getUniqueId(), $article->getSysModifiedDate()),
+            'relatedImageUrls' => $relatedImageUrls,
         ]);
     }
 }

@@ -18,16 +18,18 @@
 
 {% set statusClass =
   order.status == 'new' ? 'status-new' :
+  (order.status == 'exported' ? 'status-exported' :
   (order.status == 'preparing' ? 'status-preparing' :
   (order.status == 'shipping' ? 'status-shipping' :
-  (order.status == 'completed' ? 'status-completed' : 'status-cancelled')))
+  (order.status == 'completed' ? 'status-completed' : 'status-cancelled'))))
 %}
 
 {% set statusIcon =
   order.status == 'new' ? 'fa-file-circle-plus' :
+  (order.status == 'exported' ? 'fa-paper-plane' :
   (order.status == 'preparing' ? 'fa-boxes-packing' :
   (order.status == 'shipping' ? 'fa-truck-fast' :
-  (order.status == 'completed' ? 'fa-circle-check' : 'fa-ban')))
+  (order.status == 'completed' ? 'fa-circle-check' : 'fa-ban'))))
 %}
 
 <style>
@@ -285,6 +287,13 @@
     border-color: rgba(13,110,253,.18);
   }
 
+
+  .status-exported{
+    background: rgba(49,95,183,.16);
+    color: #315FB7;
+    border-color: rgba(49,95,183,.28);
+  }
+
   .status-preparing{
     background: rgba(255,193,7,.16);
     color: rgba(176,117,0,.98);
@@ -434,9 +443,12 @@
       <i class="fa-solid fa-arrow-left me-2"></i>Retour
     </a>
 
-    <a class="btn btn-outline-success" href="{{ path('admin_orders_export_excel', {id: order.id}) }}">
-      <i class="fa-solid fa-file-excel me-2"></i>Exporter Excel
-    </a>
+    <form method="post" action="{{ path('admin_orders_export_ebp', {id: order.id}) }}">
+      <input type="hidden" name="_token" value="{{ csrf_token('export_order_ebp_' ~ order.id) }}">
+      <button class="btn btn-outline-success" type="submit">
+        <i class="fa-solid fa-paper-plane me-2"></i>Exporter vers EBP
+      </button>
+    </form>
 
     <a class="btn btn-outline-primary" href="{{ path('admin_orders_print', {id: order.id}) }}" target="_blank" rel="noopener">
       <i class="fa-solid fa-print me-2"></i>Imprimer
@@ -637,6 +649,19 @@
                 <span class="status-pill {{ statusClass }}">
                   <i class="fa-solid {{ statusIcon }}"></i>
                   {{ order.statusLabel }}
+                </span>
+              </div>
+
+              <div class="summary-row">
+                <span class="summary-label">Transmission EBP</span>
+                <span class="summary-value">
+                  <i class="fa-solid {{ order.ebpTransferStatus == 'available_in_ebp' ? 'fa-circle-check text-success' : (order.ebpTransferStatus == 'failed' ? 'fa-triangle-exclamation text-danger' : 'fa-arrows-rotate text-primary') }} me-1"></i>
+                  {{ order.ebpTransferLabel }}
+                  {% if order.ebpAvailableAt %}
+                    <small class="d-block text-muted mt-1">Disponible le {{ order.ebpAvailableAt|date('d/m/Y à H:i') }}</small>
+                  {% elseif order.ebpTransferMessage %}
+                    <small class="d-block text-muted mt-1">{{ order.ebpTransferMessage }}</small>
+                  {% endif %}
                 </span>
               </div>
 

@@ -302,7 +302,7 @@ class ArticleApiController extends AbstractController
 
         return [
             'UniqueId' => $article->getUniqueId(),
-            'imageUrl' => $this->images->imageUrl((string) $article->getUniqueId()),
+            'imageUrl' => $this->images->imageUrl((string) $article->getUniqueId(), $article->getSysModifiedDate()),
             'Id' => $article->getId(),
             'DesComClear' => $article->getDesComClear(),
             'RealStock' => $article->getRealStock(),

@@ -56,6 +56,18 @@ class CustomerOrderLine
     private string $unitPriceBeforeDiscountTtc = '0.00';
 
     /**
+     * Prix unitaire HT avant remise, figé pour l'import EBP.
+     */
+    #[ORM\Column(name: 'unit_price_before_discount_ht', type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    private ?string $unitPriceBeforeDiscountHt = null;
+
+    /**
+     * Taux de TVA de la ligne, par exemple 20.00.
+     */
+    #[ORM\Column(name: 'vat_rate', type: Types::DECIMAL, precision: 5, scale: 2, nullable: true)]
+    private ?string $vatRate = null;
+
+    /**
      * Taux de remise de la ligne
      * ex: 35.00
      */
@@ -176,6 +188,30 @@ class CustomerOrderLine
     public function setUnitPriceBeforeDiscountTtc(string $unitPriceBeforeDiscountTtc): static
     {
         $this->unitPriceBeforeDiscountTtc = $unitPriceBeforeDiscountTtc;
+        return $this;
+    }
+
+    public function getUnitPriceBeforeDiscountHt(): ?string
+    {
+        return $this->unitPriceBeforeDiscountHt;
+    }
+
+    public function setUnitPriceBeforeDiscountHt(?string $unitPriceBeforeDiscountHt): static
+    {
+        $this->unitPriceBeforeDiscountHt = $unitPriceBeforeDiscountHt;
+
+        return $this;
+    }
+
+    public function getVatRate(): ?string
+    {
+        return $this->vatRate;
+    }
+
+    public function setVatRate(?string $vatRate): static
+    {
+        $this->vatRate = $vatRate;
+
         return $this;
     }
 

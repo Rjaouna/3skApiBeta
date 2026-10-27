@@ -52,6 +52,9 @@ class Article
     #[ORM\Column(name: 'FamilyName', type: Types::STRING, length: 100, nullable: true)]
     private ?string $familyName = null;
 
+    #[ORM\Column(name: 'FamilyId', type: Types::STRING, length: 191, nullable: true)]
+    private ?string $familyId = null;
+
     #[ORM\Column(name: 'ExportStartedAt', type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $exportStartedAt = null;
 
@@ -201,6 +204,18 @@ class Article
     public function setFamilyName(?string $familyName): static
     {
         $this->familyName = $familyName;
+        return $this;
+    }
+
+    public function getFamilyId(): ?string
+    {
+        return $this->familyId;
+    }
+
+    public function setFamilyId(?string $familyId): static
+    {
+        $this->familyId = $familyId;
+
         return $this;
     }
 

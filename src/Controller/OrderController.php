@@ -9,8 +9,10 @@ use App\Entity\User;
 use App\Repository\CartRepository;
 use App\Repository\CustomerOrderRepository;
 use App\Service\NotificationService;
+use App\Service\EbpOrderExportService;
 use App\Service\OrderMailer;
 use App\Service\PricingService;
+use App\Service\CompanySettingProvider;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,6 +38,8 @@ class OrderController extends AbstractController
         CustomerOrderRepository $orderRepository,
         OrderMailer $orderMailer,
         NotificationService $notificationService,
+        EbpOrderExportService $ebpOrderExports,
+        CompanySettingProvider $companySettings,
     ): RedirectResponse {
         if (!$this->isCsrfTokenValid('checkout_order', (string) $request->request->get('_token'))) {
             $this->addFlash('danger', 'Action refusée (token invalide).');
@@ -91,6 +95,8 @@ class OrderController extends AbstractController
             $order->setAddress1($user->getAddress1());
             $order->setAddress2($user->getAddress2());
             $order->setCity($user->getCity());
+            $order->setBillingCountryCode($this->countryCode($companySettings->get()->getCountry()));
+            $ebpOrderExports->queue($order);
 
             $em->persist($order);
 
@@ -141,6 +147,8 @@ class OrderController extends AbstractController
                 $line->setQuantity($qty);
 
                 $line->setUnitPriceBeforeDiscountTtc($pricing['unitPriceBeforeDiscountFormatted']);
+                $line->setUnitPriceBeforeDiscountHt($pricing['unitPriceBeforeDiscountHtFormatted']);
+                $line->setVatRate($pricing['vatRateFormatted']);
                 $line->setLineTotalBeforeDiscountTtc($pricing['lineTotalBeforeDiscountFormatted']);
 
                 $line->setDiscountRate(
@@ -219,6 +227,14 @@ class OrderController extends AbstractController
         }
 
         $mailReport = $orderMailer->sendOrderCreatedEmails($createdOrder);
+
+        try {
+            $ebpOrderExports->dispatch($createdOrder);
+        } catch (\Throwable) {
+            // The order is already confirmed. The scheduled synchronizer keeps
+            // retrying its technical transmission without blocking the buyer.
+            $this->addFlash('info', 'Votre commande est créée. Sa transmission vers EBP sera relancée automatiquement.');
+        }
 
 if (!$mailReport['admin_sent'] && !$mailReport['customer_sent']) {
     $details = !empty($mailReport['errors'])
@@ -302,6 +318,28 @@ if (!$mailReport['admin_sent'] && !$mailReport['customer_sent']) {
         }
 
         return $missing;
+    }
+
+    /**
+     * The EBP import format requires an ISO 3166-1 alpha-2 country code.
+     * Existing installations are Moroccan by default, while a configured
+     * two-letter code takes precedence for reusable deployments.
+     */
+    private function countryCode(?string $country): string
+    {
+        $country = strtoupper(trim((string) $country));
+        if (preg_match('/^[A-Z]{2}$/D', $country) === 1) {
+            return $country;
+        }
+
+        return match (mb_strtolower($country, 'UTF-8')) {
+            'maroc', 'morocco' => 'MA',
+            'france' => 'FR',
+            'espagne', 'spain' => 'ES',
+            'portugal' => 'PT',
+            'italie', 'italy' => 'IT',
+            default => 'MA',
+        };
     }
 
     private function generateOrderNumber(CustomerOrderRepository $orderRepository): string

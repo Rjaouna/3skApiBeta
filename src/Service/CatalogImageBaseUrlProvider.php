@@ -21,7 +21,6 @@ final class CatalogImageBaseUrlProvider
         private readonly string $fallbackBaseUrl,
         #[Autowire(service: 'cache.app')]
         private readonly CacheItemPoolInterface $imageCache,
-        private readonly ?CatalogPhotoPublicationVersion $publications = null,
     ) {
     }
 
@@ -51,16 +50,41 @@ final class CatalogImageBaseUrlProvider
         return rtrim($this->fallbackBaseUrl ?: '/ebpsynch', '/');
     }
 
-    public function imageUrl(string $uniqueId, ?string $baseUrl = null): string
+    public function imageUrl(
+        string $uniqueId,
+        \DateTimeInterface|string|null $modifiedAt = null,
+        ?string $baseUrl = null
+    ): string
     {
-        return rtrim($baseUrl ?? $this->baseUrl(), '/') . '/' . rawurlencode($uniqueId) . '.png?v=' . $this->cacheVersion();
+        // Keep the former imageUrl($uniqueId, $baseUrl) call valid for any
+        // integration still using the provider directly.
+        if (is_string($modifiedAt)) {
+            $baseUrl = $modifiedAt;
+            $modifiedAt = null;
+        }
+
+        return rtrim($baseUrl ?? $this->baseUrl(), '/') . '/' . rawurlencode($uniqueId) . '.png?v=' . $this->imageVersion($uniqueId, $modifiedAt);
+    }
+
+    /**
+     * The manual cache purge stays global, while the article modification date
+     * makes a browser revalidate only the image whose EBP record changed.
+     */
+    public function imageVersion(string $uniqueId, ?\DateTimeInterface $modifiedAt = null): string
+    {
+        $globalPurgeVersion = $this->cacheVersion();
+        if ($modifiedAt === null) {
+            return $globalPurgeVersion;
+        }
+
+        $articleVersion = substr(hash('sha256', strtoupper(trim($uniqueId)) . '|' . $modifiedAt->format('U.u')), 0, 20);
+
+        return $globalPurgeVersion . '-' . $articleVersion;
     }
 
     public function cacheVersion(): string
     {
-        $local = $this->localCacheVersion();
-
-        return $this->publications === null ? $local : $local . '-' . $this->publications->current();
+        return $this->localCacheVersion();
     }
 
     private function localCacheVersion(): string

@@ -55,12 +55,9 @@ final class ApiCatalogRecordMapperTest extends TestCase
         ], []);
     }
 
-    public function testItRequiresTheMatchingItemFamilyForAnArticle(): void
+    public function testItPlacesAnArticleWithAMissingFamilyInTheOtherCategory(): void
     {
-        $this->expectException(ApiReceptionException::class);
-        $this->expectExceptionMessage('dbo.ItemFamily');
-
-        (new ApiCatalogRecordMapper())->normalize([
+        $row = (new ApiCatalogRecordMapper())->normalize([
             'data' => [
                 'Id' => 'REF-1',
                 'UniqueId' => '11111111-1111-1111-1111-111111111111',
@@ -70,6 +67,26 @@ final class ApiCatalogRecordMapperTest extends TestCase
                 'FamilyId' => 'FREINAGE',
             ],
         ], []);
+
+        self::assertSame('FREINAGE', $row['FamilyId']);
+        self::assertSame('Autres', $row['FamilyName']);
+    }
+
+    public function testItPlacesAnArticleWithoutAnyFamilyInTheOtherCategory(): void
+    {
+        $row = (new ApiCatalogRecordMapper())->normalize([
+            'data' => [
+                'Id' => 'REF-1',
+                'UniqueId' => '11111111-1111-1111-1111-111111111111',
+                'RealStock' => 1,
+                'SalePriceVatIncluded' => 10,
+                'SalePriceVatExcluded' => 8.33,
+                'FamilyId' => null,
+            ],
+        ], []);
+
+        self::assertNull($row['FamilyId']);
+        self::assertSame('Autres', $row['FamilyName']);
     }
 
     public function testItMatchesANumericFamilyIdentifierWithLeadingZeros(): void
@@ -86,5 +103,24 @@ final class ApiCatalogRecordMapperTest extends TestCase
         ], [ApiCatalogFamilyKey::numericAlias('11') => 'Freinage']);
 
         self::assertSame('Freinage', $row['FamilyName']);
+    }
+
+    public function testItUsesTheSourceSpecificFamilyKeyForMergedEbpDatabases(): void
+    {
+        $sourceFamilyId = 'aaaaaaaaaaaaaaaa:FREINAGE';
+        $row = (new ApiCatalogRecordMapper())->normalize([
+            'data' => [
+                'Id' => 'REF-1',
+                'UniqueId' => '11111111-1111-1111-1111-111111111111',
+                'RealStock' => 1,
+                'SalePriceVatIncluded' => 10,
+                'SalePriceVatExcluded' => 8.33,
+                'FamilyId' => 'FREINAGE',
+                '__apilocalFamilySourceId' => $sourceFamilyId,
+            ],
+        ], ['FREINAGE' => 'Freinage principal', $sourceFamilyId => 'Freinage seconde société']);
+
+        self::assertSame($sourceFamilyId, $row['FamilyId']);
+        self::assertSame('Freinage seconde société', $row['FamilyName']);
     }
 }

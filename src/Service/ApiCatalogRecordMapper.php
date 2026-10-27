@@ -8,6 +8,8 @@ use App\Exception\ApiReceptionException;
 /** Converts the stable ApiRecept item contract into the site's Article projection. */
 final class ApiCatalogRecordMapper
 {
+    private const UNCLASSIFIED_FAMILY_NAME = 'Autres';
+
     /** @var list<string> */
     private const REQUIRED_FIELDS = [
         'Id',
@@ -51,15 +53,41 @@ final class ApiCatalogRecordMapper
         }
 
         $familyId = $this->nullableText($data['FamilyId'], 191);
-        $familyName = null;
+        // Une famille absente d'EBP ne doit pas empêcher la publication de
+        // tout le catalogue. Les articles concernés restent visibles dans la
+        // catégorie stable « Autres » et retrouveront automatiquement leur
+        // libellé EBP dès que la famille sera exportée ultérieurement.
+        $familyName = self::UNCLASSIFIED_FAMILY_NAME;
         if ($familyId !== null) {
-            $familyName = $familyNamesById[$familyId] ?? null;
+            // Lorsque deux sociétés EBP sont fusionnées, leur code de famille
+            // peut être identique. ApiLocal transmet alors une clé de liaison
+            // propre à la source sans modifier le code métier EBP affiché.
+            $sourceFamilyId = $this->nullableText($data['__apilocalFamilySourceId'] ?? null, 191);
+            $familyLookupId = $sourceFamilyId ?? $familyId;
+            $familyName = $familyNamesById[$familyLookupId] ?? null;
             if ($familyName === null) {
                 $numericAlias = ApiCatalogFamilyKey::numericAlias($familyId);
                 $familyName = $numericAlias === null ? null : ($familyNamesById[$numericAlias] ?? null);
+                // Some EBP databases expose numeric family keys once as 011
+                // and once as 11. Store the resolved canonical key locally so
+                // later incremental family-caption updates target the same rows.
+                if ($familyName !== null && $numericAlias !== null) {
+                    $familyId = $numericAlias;
+                }
+            }
+            if ($familyName !== null && $sourceFamilyId !== null) {
+                // Cette valeur n'est utilisée qu'en interne par le site pour
+                // isoler les mises à jour de familles homonymes entre sociétés.
+                $familyId = $sourceFamilyId;
             }
             if ($familyName === null) {
-                throw new ApiReceptionException(sprintf('La famille « %s » d’un article est absente de dbo.ItemFamily. Exportez le profil Familles avec « Id » et « Caption », puis relancez son export.', $familyId));
+                // Sur un export multi-sociétés, conserver la clé technique
+                // garantit que l'arrivée différée de la bonne famille mettra
+                // à jour uniquement les articles de cette société.
+                if ($sourceFamilyId !== null) {
+                    $familyId = $sourceFamilyId;
+                }
+                $familyName = self::UNCLASSIFIED_FAMILY_NAME;
             }
         }
 
@@ -76,6 +104,7 @@ final class ApiCatalogRecordMapper
             'xx_Marque' => $this->nullableText($data['xx_Marque'] ?? null, 100),
             'sysModifiedDate' => $this->date($data['sysModifiedDate'] ?? null, 'sysModifiedDate'),
             'sysCreatedDate' => $this->date($data['sysCreatedDate'] ?? null, 'sysCreatedDate'),
+            'FamilyId' => $familyId,
             'FamilyName' => $familyName,
             'ExportStartedAt' => $this->date($data['ExportStartedAt'] ?? null, 'ExportStartedAt'),
             'FtpFinishedAt' => $this->date($data['FtpFinishedAt'] ?? null, 'FtpFinishedAt'),
@@ -96,6 +125,7 @@ final class ApiCatalogRecordMapper
         $article->setXxMarque($row['xx_Marque']);
         $article->setSysModifiedDate($row['sysModifiedDate']);
         $article->setSysCreatedDate($row['sysCreatedDate']);
+        $article->setFamilyId($row['FamilyId']);
         $article->setFamilyName($row['FamilyName']);
         $article->setExportStartedAt($row['ExportStartedAt']);
         $article->setFtpFinishedAt($row['FtpFinishedAt']);
@@ -115,6 +145,7 @@ final class ApiCatalogRecordMapper
             && ($article->getXxMarque() ?? null) === $row['xx_Marque']
             && $this->sameDate($article->getSysModifiedDate(), $row['sysModifiedDate'])
             && $this->sameDate($article->getSysCreatedDate(), $row['sysCreatedDate'])
+            && ($article->getFamilyId() ?? null) === $row['FamilyId']
             && ($article->getFamilyName() ?? null) === $row['FamilyName']
             && $this->sameDate($article->getExportStartedAt(), $row['ExportStartedAt'])
             && $this->sameDate($article->getFtpFinishedAt(), $row['FtpFinishedAt']);

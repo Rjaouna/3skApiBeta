@@ -53,6 +53,15 @@ class ApiCatalogSyncRun
     #[ORM\Column(name: 'finished_at', nullable: true)]
     private ?\DateTimeImmutable $finishedAt = null;
 
+    /**
+     * Etat de reprise réservé au traitement par lots : page suivante,
+     * catégories déjà chargées et identifiants du snapshot reçu.
+     *
+     * @var array<string, mixed>
+     */
+    #[ORM\Column(name: 'progress_data', type: 'json')]
+    private array $progressData = [];
+
     public function __construct(ApiReceptionConnection $connection)
     {
         $this->connection = $connection;
@@ -67,6 +76,32 @@ class ApiCatalogSyncRun
     public function getStatus(): string
     {
         return $this->status;
+    }
+
+    public function getConnection(): ApiReceptionConnection
+    {
+        return $this->connection;
+    }
+
+    /** @return array<string, mixed> */
+    public function getProgressData(): array
+    {
+        return $this->progressData;
+    }
+
+    /** @param array<string, mixed> $progressData */
+    public function setProgressData(array $progressData): self
+    {
+        $this->progressData = $progressData;
+
+        return $this;
+    }
+
+    public function clearProgressData(): self
+    {
+        $this->progressData = [];
+
+        return $this;
     }
 
     public function isStale(int $timeoutSeconds, ?\DateTimeImmutable $now = null): bool
@@ -123,6 +158,13 @@ class ApiCatalogSyncRun
     public function setRemovedRows(int $count): self
     {
         $this->removedRows = max(0, $count);
+
+        return $this;
+    }
+
+    public function addRemovedRows(int $count): self
+    {
+        $this->removedRows += max(0, $count);
 
         return $this;
     }

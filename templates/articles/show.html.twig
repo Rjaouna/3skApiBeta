@@ -470,8 +470,6 @@
   }
 </style>
 
-{% set imageRoot = imagesBaseUrl ends with '/' ? imagesBaseUrl|slice(0, -1) : imagesBaseUrl %}
-{% set imageUrl = (imageRoot ~ '/' ~ article.uniqueId ~ '.png?v=' ~ imagesCacheVersion) %}
 {% set fallbackImg = asset('img/default-piece.png') %}
 
 {% set stock = article.realStock %}
@@ -657,7 +655,7 @@
     {% if relatedArticles is not empty %}
       <div class="related-grid">
         {% for rel in relatedArticles %}
-          {% set relImage = (imageRoot ~ '/' ~ rel.uniqueId ~ '.png?v=' ~ imagesCacheVersion) %}
+          {% set relImage = relatedImageUrls[rel.uniqueId]|default(fallbackImg) %}
           {% set relReductionRate = rel.reduction is not empty ? (rel.reduction|replace({',': '.'}) + 0) : 0 %}
           {% set relHasReduction = relReductionRate > 0 %}
           {% set relReducedPriceTtc = relHasReduction ? (rel.salePriceVatIncluded * (1 - relReductionRate / 100)) : rel.salePriceVatIncluded %}

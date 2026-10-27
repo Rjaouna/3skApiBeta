@@ -128,4 +128,50 @@ class CustomerOrderRepository extends ServiceEntityRepository
             ->getQuery()
             ->getArrayResult();
     }
+
+    /**
+     * Orders that have never been accepted by ApiRecept. The commercial
+     * `new` state is deliberately used here so the admin's bulk action never
+     * replays an order that has already been exported.
+     *
+     * @return list<CustomerOrder>
+     */
+    public function findNewForEbpExport(): array
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.customer', 'c')->addSelect('c')
+            ->leftJoin('o.lines', 'l')->addSelect('l')
+            ->leftJoin('l.article', 'a')->addSelect('a')
+            ->andWhere('o.status = :status')
+            ->setParameter('status', CustomerOrder::STATUS_NEW)
+            ->orderBy('o.createdAt', 'ASC')
+            ->getQuery()->getResult();
+    }
+
+    /** @return list<CustomerOrder> */
+    public function awaitingEbpDispatch(int $limit = 50): array
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.customer', 'c')->addSelect('c')
+            ->leftJoin('o.lines', 'l')->addSelect('l')
+            ->andWhere('o.ebpTransferStatus IN (:statuses)')
+            ->setParameter('statuses', [CustomerOrder::EBP_STATUS_PENDING_API, CustomerOrder::EBP_STATUS_FAILED])
+            ->orderBy('o.createdAt', 'ASC')
+            ->setMaxResults(max(1, min(200, $limit)))
+            ->getQuery()->getResult();
+    }
+
+    /** @return list<CustomerOrder> */
+    public function awaitingEbpStatus(int $limit = 100): array
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.customer', 'c')->addSelect('c')
+            ->leftJoin('o.lines', 'l')->addSelect('l')
+            ->andWhere('o.ebpTransferStatus IN (:statuses)')
+            ->andWhere('o.apiReceptionOrderId IS NOT NULL')
+            ->setParameter('statuses', [CustomerOrder::EBP_STATUS_EXPORTED, CustomerOrder::EBP_STATUS_FAILED])
+            ->orderBy('o.ebpTransferUpdatedAt', 'ASC')
+            ->setMaxResults(max(1, min(200, $limit)))
+            ->getQuery()->getResult();
+    }
 }

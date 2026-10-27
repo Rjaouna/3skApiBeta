@@ -18,4 +18,9 @@ final class ApiCatalogSyncRunRepository extends ServiceEntityRepository
     {
         return $this->findOneBy([], ['id' => 'DESC']);
     }
+
+    public function findRunning(): ?ApiCatalogSyncRun
+    {
+        return $this->findOneBy(['status' => ApiCatalogSyncRun::STATUS_RUNNING], ['id' => 'DESC']);
+    }
 }

@@ -36,6 +36,7 @@ final class ApiCatalogSyncProgress
 
     public function phase(ApiCatalogSyncRun $run, string $phase, ?int $page = null, bool $totalKnown = false): void
     {
+        $this->hydrate($run);
         $this->state['phase'] = $phase;
         if ($page !== null) {
             $this->state['currentPage'] = $page;
@@ -45,9 +46,26 @@ final class ApiCatalogSyncProgress
         $this->publish($run);
     }
 
+    /** Records an informational event without changing the current processing phase. */
+    public function notice(ApiCatalogSyncRun $run, string $message): void
+    {
+        $this->hydrate($run);
+        $this->log('info', $message);
+        $this->publish($run);
+    }
+
+    public function retrying(ApiCatalogSyncRun $run, int $retry, int $maxAttempts, int $delayMs): void
+    {
+        $this->hydrate($run);
+        $delay = number_format($delayMs / 1000, $delayMs % 1000 === 0 ? 0 : 1, ',', '');
+        $this->log('info', sprintf('Connexion ApiRecept momentanément instable : nouvelle tentative %d/%d dans %s s.', min($maxAttempts, $retry + 1), $maxAttempts, $delay));
+        $this->publish($run);
+    }
+
     /** @param array<string, mixed> $row */
     public function article(ApiCatalogSyncRun $run, array $row, int $position): void
     {
+        $this->hydrate($run);
         $this->state['currentArticle'] = [
             'reference' => $this->text($row['Id'] ?? '', 64),
             'designation' => $this->text($row['DesComClear'] ?? $row['Caption'] ?? '', 255),
@@ -66,8 +84,13 @@ final class ApiCatalogSyncProgress
     /** @param list<array{reference: string, designation: string, outcome: string}> $articles */
     public function committed(ApiCatalogSyncRun $run, array $articles): void
     {
+        $this->hydrate($run);
         foreach ($articles as $article) {
-            $this->log('article', sprintf('%s · %s — %s', $article['reference'], $article['designation'], $article['outcome']));
+            $this->log(
+                'article',
+                sprintf('%s · %s — %s', $article['reference'], $article['designation'], $article['outcome']),
+                ['article' => $article],
+            );
         }
         $summary = $run->toSummary();
         $this->log('step', sprintf('%d / %d articles enregistrés · %d restants.', $summary['receivedRows'], $summary['remoteTotal'], max(0, $summary['remoteTotal'] - $summary['receivedRows'])));
@@ -76,9 +99,7 @@ final class ApiCatalogSyncProgress
 
     public function finish(ApiCatalogSyncRun $run): void
     {
-        if ($this->state === []) {
-            $this->state = $this->read($run) + ['sequence' => 0, 'logs' => []];
-        }
+        $this->hydrate($run);
         $summary = $run->toSummary();
         $failed = $run->getStatus() === ApiCatalogSyncRun::STATUS_ERROR;
         $this->state['phase'] = $failed ? 'Synchronisation interrompue' : 'Synchronisation terminée';
@@ -94,14 +115,15 @@ final class ApiCatalogSyncProgress
         return $item->isHit() && is_array($item->get()) ? $item->get() : [];
     }
 
-    private function log(string $type, string $message): void
+    /** @param array<string, mixed> $details */
+    private function log(string $type, string $message, array $details = []): void
     {
         $this->state['logs'][] = [
             'id' => ++$this->state['sequence'],
             'at' => (new \DateTimeImmutable())->format(DATE_ATOM),
             'type' => $type,
             'message' => $message,
-        ];
+        ] + $details;
         $this->state['logs'] = array_slice($this->state['logs'], -self::LOG_LIMIT);
     }
 
@@ -116,6 +138,19 @@ final class ApiCatalogSyncProgress
     private function key(ApiCatalogSyncRun $run): string
     {
         return 'api_catalog_sync_progress.' . $run->getId();
+    }
+
+    private function hydrate(ApiCatalogSyncRun $run): void
+    {
+        if ($this->state !== []) {
+            return;
+        }
+
+        $this->state = $this->read($run);
+        $this->state['logs'] ??= [];
+        $this->state['sequence'] ??= 0;
+        $this->state['currentArticle'] ??= null;
+        $this->state['totalKnown'] ??= false;
     }
 
     private function text(mixed $value, int $limit): string

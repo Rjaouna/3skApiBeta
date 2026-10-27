@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\CustomerOrder;
 use App\Entity\User;
 use App\Repository\CustomerOrderRepository;
+use App\Exception\ApiReceptionException;
+use App\Service\EbpOrderExportService;
 use App\Service\NotificationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -48,7 +50,50 @@ class AdminOrderController extends AbstractController
             'labels' => CustomerOrder::getStatusLabels(),
             'statuses' => CustomerOrder::getAvailableStatuses(),
             'totalOrders' => $orderRepository->count([]),
+            'newOrdersCount' => $orderRepository->count(['status' => CustomerOrder::STATUS_NEW]),
         ]);
+    }
+
+    #[Route('/export-new-to-ebp', name: 'export_new_ebp', methods: ['POST'])]
+    public function exportNewOrdersToEbp(Request $request, EbpOrderExportService $exports): RedirectResponse
+    {
+        if (!$this->isCsrfTokenValid('export_new_orders_ebp', (string) $request->request->get('_token'))) {
+            $this->addFlash('danger', 'Action refusée (token invalide).');
+
+            return $this->redirectToRoute('admin_orders_index');
+        }
+
+        try {
+            $result = $exports->exportAllNewOrders();
+        } catch (ApiReceptionException $exception) {
+            $this->addFlash('warning', 'L’export des commandes vers ApiRecept n’a pas pu démarrer : ' . $exception->getMessage());
+
+            return $this->redirectToRoute('admin_orders_index');
+        }
+
+        if ($result['total'] === 0) {
+            $this->addFlash('info', 'Aucune commande au statut Nouveau à exporter.');
+        } elseif ($result['exported'] > 0) {
+            $this->addFlash('success', sprintf(
+                '%d commande%s exportée%s vers ApiRecept.',
+                $result['exported'],
+                $result['exported'] > 1 ? 's' : '',
+                $result['exported'] > 1 ? 's' : ''
+            ));
+        }
+
+        if ($result['failed'] > 0) {
+            $this->addFlash('warning', sprintf(
+                '%d commande%s n’%s pas encore été acceptée%s par ApiRecept et reste%s au statut Nouveau.',
+                $result['failed'],
+                $result['failed'] > 1 ? 's' : '',
+                $result['failed'] > 1 ? 'ont' : 'a',
+                $result['failed'] > 1 ? 's' : '',
+                $result['failed'] > 1 ? 'nt' : ''
+            ));
+        }
+
+        return $this->redirectToRoute('admin_orders_index');
     }
 
     #[Route('/{id}', name: 'show', methods: ['GET'], requirements: ['id' => '\d+'])]
@@ -61,6 +106,31 @@ class AdminOrderController extends AbstractController
             'nextStatus' => $nextStatus,
             'statusLabels' => CustomerOrder::getStatusLabels(),
         ]);
+    }
+
+    #[Route('/{id}/export-ebp', name: 'export_ebp', methods: ['POST'], requirements: ['id' => '\d+'])]
+    public function exportToEbp(
+        CustomerOrder $order,
+        Request $request,
+        EbpOrderExportService $exports,
+    ): RedirectResponse {
+        if (!$this->isCsrfTokenValid('export_order_ebp_' . $order->getId(), (string) $request->request->get('_token'))) {
+            $this->addFlash('danger', 'Action refusée (token invalide).');
+
+            return $this->redirectToRoute('admin_orders_show', ['id' => $order->getId()]);
+        }
+
+        // This explicit action is useful before cron is configured: it also
+        // permits a deliberate re-export after a correction in EBP.
+        $exports->queue($order);
+        try {
+            $exports->dispatch($order);
+            $this->addFlash('success', 'Commande exportée vers ApiRecept. Son statut est maintenant « Exportée ». ApiLocal peut créer son CSV EBP.');
+        } catch (ApiReceptionException $exception) {
+            $this->addFlash('warning', 'Commande mise en attente pour EBP : ' . $exception->getMessage());
+        }
+
+        return $this->redirectToRoute('admin_orders_show', ['id' => $order->getId()]);
     }
 
     #[Route('/{id}/export-excel', name: 'export_excel', methods: ['GET'], requirements: ['id' => '\d+'])]

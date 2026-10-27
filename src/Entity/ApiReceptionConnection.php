@@ -32,6 +32,10 @@ class ApiReceptionConnection
     #[ORM\Column(name: 'last_synced_at', nullable: true)]
     private ?\DateTimeImmutable $lastSyncedAt = null;
 
+    /** Last ApiRecept catalogue revision committed by this site. */
+    #[ORM\Column(name: 'catalog_revision', options: ['default' => 0])]
+    private int $catalogRevision = 0;
+
     #[ORM\Column(name: 'last_error', type: 'text', nullable: true)]
     private ?string $lastError = null;
 
@@ -137,6 +141,26 @@ class ApiReceptionConnection
         $this->lastSyncedAt = new \DateTimeImmutable();
         $this->lastError = null;
         $this->touch();
+
+        return $this;
+    }
+
+    public function getCatalogRevision(): int
+    {
+        return $this->catalogRevision;
+    }
+
+    public function setCatalogRevision(int $catalogRevision): self
+    {
+        $this->catalogRevision = max(0, $catalogRevision);
+
+        return $this;
+    }
+
+    public function resetCatalogRevision(): self
+    {
+        $this->catalogRevision = 0;
+        $this->lastSyncedAt = null;
 
         return $this;
     }

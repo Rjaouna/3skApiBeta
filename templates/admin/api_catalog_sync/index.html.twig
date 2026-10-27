@@ -6,18 +6,19 @@
 <style>
   .catalog-sync-page{--sync-ink:#232B38;--sync-blue:#315FB7;--sync-orange:#FF8A00;--sync-bg:#F5F6F8;--sync-line:rgba(49,95,183,.16);--sync-muted:#667085;max-width:1240px}
   .catalog-sync-page .sync-hero,.catalog-sync-page .sync-card{background:#fff;border:1px solid var(--sync-line);box-shadow:0 10px 28px rgba(35,43,56,.06)}
-  .catalog-sync-page .sync-hero{border-radius:20px;padding:26px 28px}.catalog-sync-page .sync-card{border-radius:18px;padding:24px;height:100%}
+  .catalog-sync-page .sync-hero{border-radius:20px;padding:26px 28px}.catalog-sync-page .sync-card{border-radius:18px;padding:24px}
   .catalog-sync-page .sync-kicker{color:var(--sync-orange);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.catalog-sync-page h1{color:var(--sync-ink);font-size:28px;font-weight:700;margin:0 0 6px}.catalog-sync-page h2{color:var(--sync-ink);font-size:20px;font-weight:700;margin:0}.catalog-sync-page p{color:var(--sync-muted)}
   .catalog-sync-page .sync-state{align-items:center;border-radius:999px;display:inline-flex;font-size:12px;font-weight:700;gap:7px;padding:7px 10px;white-space:nowrap}.catalog-sync-page .sync-state::before{background:currentColor;border-radius:50%;content:'';height:7px;width:7px}.catalog-sync-page .sync-state--ready{background:#e7f6ed;color:#167044}.catalog-sync-page .sync-state--running{background:#fff3dd;color:#a55a00}.catalog-sync-page .sync-state--error{background:#fff1f2;color:#b4233c}.catalog-sync-page .sync-state--muted{background:#f0f2f5;color:#586174}
   .catalog-sync-page .sync-primary{background:var(--sync-orange);border-color:var(--sync-orange);color:var(--sync-ink);font-weight:700;border-radius:10px;min-height:46px;padding-inline:18px}.catalog-sync-page .sync-primary:hover{background:#e87d00;border-color:#e87d00;color:var(--sync-ink)}.catalog-sync-page .sync-primary:disabled{background:#ffd18d;border-color:#ffd18d;color:#6d4820;opacity:1}
-  .catalog-sync-page .sync-alert{display:none;border-radius:12px;padding:12px 14px;margin-top:18px}.catalog-sync-page .sync-alert.is-visible{display:block}.catalog-sync-page .sync-alert--error{background:#fff1f2;border:1px solid #fecdd3;color:#a6172d}.catalog-sync-page .sync-alert--success{background:#edf9f1;border:1px solid #b9e7c8;color:#17673d}
+  .catalog-sync-page .sync-alert{display:none;border-radius:12px;padding:12px 14px;margin-top:18px}.catalog-sync-page .sync-alert.is-visible{display:block}.catalog-sync-page .sync-alert--error{background:#fff1f2;border:1px solid #fecdd3;color:#a6172d}.catalog-sync-page .sync-alert--success{background:#edf9f1;border:1px solid #b9e7c8;color:#17673d}.catalog-sync-page .sync-alert--info{background:#eef4ff;border:1px solid rgba(49,95,183,.22);color:#244a8f}
   .catalog-sync-page .sync-progress{background:var(--sync-bg);border:1px solid var(--sync-line);border-radius:16px;margin-top:22px;padding:18px}.catalog-sync-page .sync-progress__top{align-items:baseline;display:flex;gap:16px;justify-content:space-between}.catalog-sync-page .sync-progress__label{color:var(--sync-ink);font-size:14px;font-weight:700}.catalog-sync-page .sync-progress__percent{color:var(--sync-blue);font-size:22px;font-weight:700}.catalog-sync-page .sync-progress__track{background:#dfe6f3;border-radius:999px;height:10px;margin:12px 0;overflow:hidden}.catalog-sync-page .sync-progress__bar{background:linear-gradient(90deg,var(--sync-blue),#4d79cf);border-radius:inherit;height:100%;transition:width .55s ease;width:0}.catalog-sync-page .sync-progress__detail{color:var(--sync-muted);font-size:13px;line-height:1.5}.catalog-sync-page .sync-progress__detail strong{color:var(--sync-ink)}
   .catalog-sync-page .sync-stat-grid{display:grid;gap:10px;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:18px}.catalog-sync-page .sync-stat{background:var(--sync-bg);border-radius:12px;padding:14px}.catalog-sync-page .sync-stat__label{color:var(--sync-muted);display:block;font-size:12px;margin-bottom:5px}.catalog-sync-page .sync-stat strong{color:var(--sync-ink);display:block;font-size:22px;line-height:1.1}.catalog-sync-page .sync-stat__hint{color:var(--sync-muted);display:block;font-size:11px;margin-top:4px}
   .catalog-sync-page .sync-section-head{align-items:start;display:flex;gap:14px;justify-content:space-between}.catalog-sync-page .sync-section-head p{font-size:13px;margin:6px 0 0}.catalog-sync-page .sync-source{border-bottom:1px solid var(--sync-line);display:grid;gap:14px;grid-template-columns:1fr auto 1fr;margin:20px 0;padding-bottom:20px}.catalog-sync-page .sync-source__node{min-width:0}.catalog-sync-page .sync-source__eyebrow{color:var(--sync-muted);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}.catalog-sync-page .sync-source__count{color:var(--sync-ink);font-size:28px;font-weight:700;line-height:1.2;margin-top:3px}.catalog-sync-page .sync-source__caption{color:var(--sync-muted);font-size:12px}.catalog-sync-page .sync-source__arrow{align-items:center;color:var(--sync-blue);display:flex;font-size:18px}.catalog-sync-page .sync-run-info{color:var(--sync-muted);font-size:13px;margin:0}.catalog-sync-page .sync-run-info strong{color:var(--sync-ink)}
   .catalog-sync-page .sync-activity{list-style:none;margin:18px 0 0;padding:0}.catalog-sync-page .sync-activity li{align-items:flex-start;border-top:1px solid var(--sync-line);color:var(--sync-muted);display:flex;font-size:13px;gap:10px;line-height:1.45;padding:12px 0}.catalog-sync-page .sync-activity li:first-child{border-top:0;padding-top:0}.catalog-sync-page .sync-activity i{color:var(--sync-blue);font-size:12px;margin-top:4px;width:14px}.catalog-sync-page .sync-activity li.is-current i{color:var(--sync-orange)}.catalog-sync-page .sync-link{color:var(--sync-blue);font-weight:700;text-decoration:none}.catalog-sync-page .sync-link:hover{text-decoration:underline}.catalog-sync-page .sync-live{color:var(--sync-muted);font-size:12px;margin:18px 0 0}.catalog-sync-page .sync-live i{color:var(--sync-orange);margin-right:5px}.catalog-sync-page .sync-live[hidden]{display:none}
   .catalog-sync-page .sync-current{border-left:3px solid var(--sync-orange);background:var(--sync-bg);border-radius:0 10px 10px 0;margin-top:18px;padding:14px 16px;min-width:0}.catalog-sync-page .sync-current__label{color:var(--sync-muted);font-size:12px;display:flex;justify-content:space-between;gap:10px}.catalog-sync-page .sync-current strong{display:block;color:var(--sync-ink);font-size:17px;margin-top:5px;overflow-wrap:anywhere}.catalog-sync-page .sync-current p{font-size:13px;margin:4px 0 0;overflow-wrap:anywhere}.catalog-sync-page .sync-current code{display:block;color:var(--sync-muted);font-size:11px;overflow-wrap:anywhere;margin-top:5px}
+  .catalog-sync-page .sync-arrivals{border-top:1px solid var(--sync-line);margin-top:18px;padding-top:16px}.catalog-sync-page .sync-arrivals__head{align-items:center;display:flex;justify-content:space-between;gap:12px}.catalog-sync-page .sync-arrivals__head h3{color:var(--sync-ink);font-size:14px;font-weight:700;margin:0}.catalog-sync-page .sync-arrivals__hint{color:var(--sync-muted);font-size:11px}.catalog-sync-page .sync-arrivals__feed{display:grid;gap:8px;margin-top:11px}.catalog-sync-page .sync-arrival{align-items:center;background:#fff;border:1px solid var(--sync-line);border-radius:10px;display:grid;gap:9px;grid-template-columns:minmax(0,1fr) auto;padding:10px 11px}.catalog-sync-page .sync-arrival.is-live{animation:sync-arrival-in .42s ease both}.catalog-sync-page .sync-arrival__reference{color:var(--sync-blue);display:block;font-size:12px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.catalog-sync-page .sync-arrival__designation{color:var(--sync-muted);display:block;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.catalog-sync-page .sync-arrival__outcome{background:#edf9f1;border-radius:999px;color:#17673d;font-size:11px;font-weight:700;padding:4px 7px;white-space:nowrap}.catalog-sync-page .sync-arrival__empty{background:#fff;border:1px dashed var(--sync-line);border-radius:10px;color:var(--sync-muted);font-size:12px;padding:12px}.catalog-sync-page.is-running .sync-current{box-shadow:0 0 0 3px rgba(255,138,0,.10)}.catalog-sync-page.is-running .sync-progress__bar{background:linear-gradient(90deg,var(--sync-blue) 0%,#4d79cf 45%,#fff 50%,#4d79cf 55%,var(--sync-blue) 100%);background-size:200% 100%;animation:sync-progress-flow 1.8s linear infinite}.catalog-sync-page.is-running .sync-live{color:#a55a00;font-weight:700}@keyframes sync-progress-flow{to{background-position:-200% 0}}@keyframes sync-arrival-in{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
   .catalog-sync-page .sync-log-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.catalog-sync-page .sync-log-tools select{min-width:160px;width:auto;font-size:13px}.catalog-sync-page .sync-log-tools .btn{font-size:13px;white-space:nowrap}.catalog-sync-page .sync-console{background:var(--sync-ink);color:var(--sync-bg);border-radius:12px;margin-top:18px;height:320px;overflow:auto;padding:14px 16px;font:12px/1.7 Consolas,monospace;scrollbar-color:#667085 var(--sync-ink);overflow-wrap:anywhere}.catalog-sync-page .sync-log-line{display:grid;grid-template-columns:65px 60px minmax(0,1fr);gap:10px;padding:3px 0}.catalog-sync-page .sync-log-line time{color:rgba(245,246,248,.7)}.catalog-sync-page .sync-log-line__type{color:var(--sync-orange)}.catalog-sync-page .sync-log-line--error{color:#fda4af}.catalog-sync-page .sync-console:focus-visible{outline:3px solid var(--sync-blue);outline-offset:3px}.catalog-sync-page .sync-log-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--sync-muted);margin-top:12px}.catalog-sync-page .sync-log-footer label{display:flex;align-items:center;gap:7px}.catalog-sync-page .sync-log-footer p{font-size:12px;margin:0}.catalog-sync-page .sync-observation--warning{color:#a55a00}
-  @media(max-width:575.98px){.catalog-sync-page .sync-log-tools{margin-top:12px;width:100%}.catalog-sync-page .sync-log-tools select{flex:1;min-width:0}.catalog-sync-page .sync-console{padding:12px;height:300px}.catalog-sync-page .sync-log-line{grid-template-columns:57px minmax(0,1fr);gap:7px;font-size:11px}.catalog-sync-page .sync-log-line__type{display:none}.catalog-sync-page .sync-current__label{flex-wrap:wrap}}
+  @media(max-width:575.98px){.catalog-sync-page .sync-log-tools{margin-top:12px;width:100%}.catalog-sync-page .sync-log-tools select{flex:1;min-width:0}.catalog-sync-page .sync-console{padding:12px;height:300px}.catalog-sync-page .sync-log-line{grid-template-columns:57px minmax(0,1fr);gap:7px;font-size:11px}.catalog-sync-page .sync-log-line__type{display:none}.catalog-sync-page .sync-current__label{flex-wrap:wrap}.catalog-sync-page .sync-arrival{grid-template-columns:minmax(0,1fr)}.catalog-sync-page .sync-arrival__outcome{justify-self:start}}
   @media(max-width:767.98px){.catalog-sync-page .sync-hero,.catalog-sync-page .sync-card{border-radius:14px;padding:18px}.catalog-sync-page h1{font-size:24px}.catalog-sync-page .sync-source{gap:9px}.catalog-sync-page .sync-source__count{font-size:23px}.catalog-sync-page .sync-section-head{display:block}.catalog-sync-page .sync-state{margin-top:12px}.catalog-sync-page .sync-progress__top{align-items:flex-start}.catalog-sync-page .sync-progress__percent{font-size:20px}}
 </style>
 
@@ -25,6 +26,7 @@
   class="container py-4 catalog-sync-page"
   data-token="{{ runToken|e('html_attr') }}"
   data-run-url="{{ path('admin_api_catalog_sync_run') }}"
+  data-step-url-template="{{ path('admin_api_catalog_sync_step', {id: '__run_id__'}) }}"
   data-status-url="{{ path('admin_api_catalog_sync_status') }}"
   data-initial-status="{{ initialStatus|e('html_attr') }}"
 >
@@ -64,16 +66,9 @@
           <div class="sync-stat"><span class="sync-stat__label">Mis à jour</span><strong id="syncUpdated">0</strong><span id="syncUpdatedHint" class="sync-stat__hint">Modifications EBP appliquées</span></div>
         </div>
 
-        <div class="sync-current">
-          <div class="sync-current__label"><span id="syncArticleLabel">Article en cours</span><span id="syncArticlePosition">—</span></div>
-          <strong id="syncArticleReference">En attente d’une synchronisation</strong>
-          <p id="syncArticleDesignation">La référence et la désignation apparaîtront ici.</p>
-          <code id="syncArticleUniqueId"></code>
-        </div>
-
         <div class="d-flex align-items-center gap-3 flex-wrap mt-4">
           <button id="runSync" class="btn sync-primary" type="button" {% if not connection.enabled or not connection.hasApiKey or not connection.baseUrl %}disabled{% endif %}><i class="fa-solid fa-rotate me-1"></i> Synchroniser maintenant</button>
-          <span id="syncLive" class="sync-live" hidden><i class="fa-solid fa-circle-notch fa-spin"></i>Mise à jour automatique toutes les 2 secondes</span>
+          <span id="syncLive" class="sync-live" hidden><i class="fa-solid fa-circle-notch fa-spin"></i>Mise à jour automatique en direct</span>
         </div>
         <div id="syncMessage" class="sync-alert" role="status" aria-live="polite"></div>
         {% if not connection.enabled or not connection.hasApiKey or not connection.baseUrl %}<p class="mt-3 mb-0"><a class="sync-link" href="{{ path('admin_api_reception_index') }}">Configurer la connexion ApiRecept</a> avant le premier envoi.</p>{% endif %}
@@ -90,6 +85,18 @@
         </div>
         <p id="syncRunInfo" class="sync-run-info">Aucune synchronisation n’a encore été exécutée.</p>
         <ul id="syncActivity" class="sync-activity"></ul>
+
+        <div class="sync-current">
+          <div class="sync-current__label"><span id="syncArticleLabel">Article en cours</span><span id="syncArticlePosition">—</span></div>
+          <strong id="syncArticleReference">En attente d’une synchronisation</strong>
+          <p id="syncArticleDesignation">La référence et la désignation apparaîtront ici.</p>
+          <code id="syncArticleUniqueId"></code>
+        </div>
+
+        <div class="sync-arrivals" aria-live="polite">
+          <div class="sync-arrivals__head"><h3><i class="fa-solid fa-box-open me-1" aria-hidden="true"></i>Articles confirmés</h3><span id="syncArrivalsHint" class="sync-arrivals__hint">Les derniers enregistrements apparaîtront ici.</span></div>
+          <div id="syncArticleFeed" class="sync-arrivals__feed"><div class="sync-arrival__empty">Aucun article confirmé pour le moment.</div></div>
+        </div>
       </section>
     </div>
   </div>
@@ -122,7 +129,10 @@
   const statusUrl = root.dataset.statusUrl;
   const number = new Intl.NumberFormat('fr-FR');
   let pollingTimer = null;
+  let stepTimer = null;
   let runRequestPending = false;
+  let stepRequestPending = false;
+  let activeRunId = null;
   let lastSnapshot = null;
   let refreshInFlight = false;
   let displayedRunId = null;
@@ -212,6 +222,44 @@
     $('#syncLogCount').textContent = `${number.format(visible.length)} ligne(s) affichée(s) · 200 dernières conservées`;
   };
 
+  const renderArticleFeed = (snapshot, isRunning) => {
+    const entries = Array.isArray(snapshot.logs) ? snapshot.logs : [];
+    const articles = entries
+      .filter(entry => entry.type === 'article' && entry.article && typeof entry.article === 'object')
+      .slice(-4)
+      .reverse();
+    const feed = $('#syncArticleFeed');
+    feed.replaceChildren();
+    if (!articles.length) {
+      const empty = document.createElement('div');
+      empty.className = 'sync-arrival__empty';
+      empty.textContent = isRunning ? 'Le premier lot est en cours de validation…' : 'Aucun article confirmé pour le moment.';
+      feed.append(empty);
+      $('#syncArrivalsHint').textContent = isRunning ? 'Les articles apparaissent après leur enregistrement.' : 'Les 4 derniers articles validés seront affichés ici.';
+      return;
+    }
+
+    $('#syncArrivalsHint').textContent = 'Derniers articles enregistrés dans la base du site.';
+    for (const entry of articles) {
+      const article = entry.article;
+      const row = document.createElement('div');
+      row.className = `sync-arrival${isRunning ? ' is-live' : ''}`;
+      const content = document.createElement('div');
+      const reference = document.createElement('span');
+      reference.className = 'sync-arrival__reference';
+      reference.textContent = article.reference || 'Référence EBP';
+      const designation = document.createElement('span');
+      designation.className = 'sync-arrival__designation';
+      designation.textContent = article.designation || 'Article sans désignation';
+      content.append(reference, designation);
+      const outcome = document.createElement('span');
+      outcome.className = 'sync-arrival__outcome';
+      outcome.textContent = article.outcome || 'Enregistré';
+      row.append(content, outcome);
+      feed.append(row);
+    }
+  };
+
   const render = (snapshot) => {
     lastSnapshot = snapshot;
     const run = snapshot.run || null;
@@ -219,6 +267,9 @@
     const isRunning = run && run.status === 'RUNNING';
     const isDone = run && run.status === 'DONE';
     const isError = run && run.status === 'ERROR';
+    root.classList.toggle('is-running', Boolean(isRunning));
+    if (isRunning && run?.id && activeRunId === null) activeRunId = Number(run.id);
+    if (!isRunning && run?.id && Number(run.id) === activeRunId) activeRunId = null;
     const remoteTotal = Number(run?.remoteTotal || 0);
     const totalKnown = Boolean(progress.totalKnown || remoteTotal > 0 || isDone);
     const received = Number(run?.receivedRows || 0);
@@ -250,6 +301,7 @@
     $('#syncArticleUniqueId').textContent = article?.uniqueId || '';
     $('#syncArticlePosition').textContent = article?.position ? `Article ${number.format(article.position)}${totalKnown ? ` / ${number.format(remoteTotal)}` : ''}` : '—';
     renderLogs(snapshot);
+    renderArticleFeed(snapshot, Boolean(isRunning));
 
     const activity = $('#syncActivity');
     activity.replaceChildren();
@@ -307,14 +359,21 @@
     const observedAt = snapshot.observedAt ? new Date(snapshot.observedAt).toLocaleTimeString('fr-FR') : '—';
     const idleSeconds = elapsedSeconds(progress.updatedAt);
     const quiet = isRunning && idleSeconds !== null && idleSeconds > 30;
-    $('#syncObservation').textContent = quiet ? `Aucune nouvelle activité depuis ${formatDuration(idleSeconds)} · Suivi actif` : `Actualisé à ${observedAt} · Toutes les 2 secondes`;
+    $('#syncObservation').textContent = quiet ? `Aucune nouvelle activité depuis ${formatDuration(idleSeconds)} · Suivi actif` : `Actualisé à ${observedAt} · Flux en direct`;
     $('#syncObservation').className = quiet ? 'sync-observation--warning' : '';
+    if (isRunning && activeRunId && !stepRequestPending) scheduleNextStep(180);
   };
 
   const stopPolling = () => {
     if (!pollingTimer) return;
     window.clearInterval(pollingTimer);
     pollingTimer = null;
+  };
+
+  const stopStepLoop = () => {
+    if (!stepTimer) return;
+    window.clearTimeout(stepTimer);
+    stepTimer = null;
   };
 
   const refresh = async () => {
@@ -335,7 +394,39 @@
 
   const startPolling = () => {
     if (pollingTimer) return;
-    pollingTimer = window.setInterval(refresh, 2000);
+    pollingTimer = window.setInterval(refresh, 800);
+  };
+
+  const stepUrl = (runId) => root.dataset.stepUrlTemplate.replace('__run_id__', encodeURIComponent(String(runId)));
+
+  const scheduleNextStep = (delay = 180) => {
+    if (stepTimer || stepRequestPending || !activeRunId) return;
+    stepTimer = window.setTimeout(async () => {
+      stepTimer = null;
+      if (stepRequestPending || !activeRunId) return;
+      const runId = activeRunId;
+      stepRequestPending = true;
+      try {
+        const response = await fetch(stepUrl(runId), {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+          body: JSON.stringify({_token: root.dataset.token}),
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok) throw new Error(payload.message || 'Le lot de synchronisation a échoué.');
+      } catch (error) {
+        showMessage(error.message || 'La synchronisation a échoué.', 'error');
+        activeRunId = null;
+      } finally {
+        stepRequestPending = false;
+        await refresh();
+        const current = lastSnapshot?.run;
+        if (current?.status === 'RUNNING' && Number(current.id) === Number(runId)) {
+          activeRunId = Number(runId);
+          scheduleNextStep();
+        }
+      }
+    }, delay);
   };
 
   if (button && !button.disabled) {
@@ -353,12 +444,14 @@
         });
         const payload = await response.json().catch(() => ({}));
         if (!response.ok || !payload.ok) throw new Error(payload.message || 'La synchronisation a échoué.');
-        showMessage(payload.message || 'Synchronisation terminée.', 'success');
+        activeRunId = Number(payload.run?.id || 0) || null;
+        showMessage(payload.message || 'Synchronisation démarrée.', 'info');
+        await refresh();
+        scheduleNextStep(80);
       } catch (error) {
         showMessage(error.message || 'La synchronisation a échoué.', 'error');
       } finally {
         runRequestPending = false;
-        await refresh();
       }
     });
   }
@@ -369,9 +462,9 @@
     clearedThrough = Math.max(clearedThrough, ...(lastSnapshot?.logs || []).map(entry => entry.id));
     if (lastSnapshot) renderLogs(lastSnapshot);
   });
-  window.addEventListener('pagehide', stopPolling, {once: true});
-  document.addEventListener('turbo:before-cache', stopPolling, {once: true});
-  refresh();
+  window.addEventListener('pagehide', () => { stopPolling(); stopStepLoop(); }, {once: true});
+  document.addEventListener('turbo:before-cache', () => { stopPolling(); stopStepLoop(); }, {once: true});
+  refresh().then(() => scheduleNextStep(120));
   startPolling();
 })();
 </script>

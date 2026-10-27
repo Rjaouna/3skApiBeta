@@ -66,6 +66,9 @@ final class ApiCatalogSyncLiveTest extends TestCase
         $this->entityManager->flush();
 
         $http = new MockHttpClient(function (string $method, string $url) use ($rows): MockResponse {
+            if (str_contains($url, '/catalog/changes?')) {
+                return $this->changesResponse(0, 0, 0, false, []);
+            }
             if (str_contains($url, '/item_families?')) {
                 return $this->response('item_families', 0, []);
             }
@@ -103,6 +106,7 @@ final class ApiCatalogSyncLiveTest extends TestCase
         $invalid = $this->record(2);
         $invalid['data']['UniqueId'] = 'invalid';
         $http = new MockHttpClient([
+            $this->changesResponse(0, 0, 0, false, []),
             $this->response('item_families', 0, []),
             $this->response('items', 2, [$this->record(1), $invalid]),
         ]);
@@ -121,6 +125,57 @@ final class ApiCatalogSyncLiveTest extends TestCase
         self::assertSame('REF-2', $live['currentArticle']['reference']);
         self::assertSame('error', $live['logs'][array_key_last($live['logs'])]['type']);
         self::assertSame([], array_values(array_filter($live['logs'], static fn (array $entry): bool => $entry['type'] === 'article')));
+    }
+
+    public function testInteractiveSynchronizationReturnsBetweenEachPage(): void
+    {
+        $rows = [$this->record(1), $this->record(2)];
+        $synchronizer = $this->synchronizer(new MockHttpClient([
+            $this->changesResponse(0, 0, 0, false, []),
+            $this->response('item_families', 0, []),
+            $this->response('items', 2, $rows),
+        ]));
+
+        $run = $synchronizer->start();
+        self::assertSame(ApiCatalogSyncRun::STATUS_RUNNING, $run->getStatus());
+        self::assertSame(0, $run->toSummary()['receivedRows']);
+
+        $run = $synchronizer->advance((int) $run->getId());
+        self::assertSame(0, $run->toSummary()['receivedRows']);
+
+        $run = $synchronizer->advance((int) $run->getId());
+        self::assertSame(0, $run->toSummary()['receivedRows']);
+
+        $run = $synchronizer->advance((int) $run->getId());
+        self::assertSame(2, $run->toSummary()['receivedRows']);
+        self::assertSame(ApiCatalogSyncRun::STATUS_RUNNING, $run->getStatus());
+
+        $run = $synchronizer->advance((int) $run->getId());
+        self::assertSame(ApiCatalogSyncRun::STATUS_DONE, $run->getStatus());
+        self::assertSame(2, (int) $this->entityManager->getConnection()->fetchOne('SELECT COUNT(*) FROM article'));
+    }
+
+    public function testInteractiveStartResumesItsExistingRun(): void
+    {
+        $synchronizer = $this->synchronizer(new MockHttpClient());
+        $first = $synchronizer->start();
+        $resumed = $synchronizer->startOrResume();
+
+        self::assertSame($first->getId(), $resumed->getId());
+        self::assertSame(ApiCatalogSyncRun::STATUS_RUNNING, $resumed->getStatus());
+    }
+
+    public function testInteractiveStartReplacesAnOldNonResumableRun(): void
+    {
+        $legacy = new ApiCatalogSyncRun($this->entityManager->find(ApiReceptionConnection::class, 1));
+        $this->entityManager->persist($legacy);
+        $this->entityManager->flush();
+
+        $run = $this->synchronizer(new MockHttpClient())->startOrResume();
+
+        self::assertNotSame($legacy->getId(), $run->getId());
+        self::assertSame(ApiCatalogSyncRun::STATUS_ERROR, $legacy->getStatus());
+        self::assertSame(ApiCatalogSyncRun::STATUS_RUNNING, $run->getStatus());
     }
 
     public function testJournalIsBoundedAndDoesNotLeakBetweenRuns(): void
@@ -183,6 +238,7 @@ final class ApiCatalogSyncLiveTest extends TestCase
     public function testAnEmptyRemoteCatalogueFinishesWithNoRemainingArticles(): void
     {
         $run = $this->synchronizer(new MockHttpClient([
+            $this->changesResponse(0, 0, 0, false, []),
             $this->response('item_families', 0, []),
             $this->response('items', 0, []),
         ]))->synchronize();
@@ -198,6 +254,71 @@ final class ApiCatalogSyncLiveTest extends TestCase
         self::assertTrue($data['progress']['totalKnown']);
     }
 
+    public function testIncrementalRunAppliesOnlyChangedArticlesAndDeletesThenCommitsCursor(): void
+    {
+        $connection = $this->entityManager->find(ApiReceptionConnection::class, 1);
+        $connection->setCatalogRevision(10);
+        $existing = (new Article())->setUniqueId('00000000-0000-4000-8000-000000000099');
+        (new ApiCatalogRecordMapper())->apply($existing, (new ApiCatalogRecordMapper())->normalize($this->record(99), []));
+        $this->entityManager->persist($existing);
+        $this->entityManager->flush();
+
+        $changed = $this->record(1)['data'];
+        $changed['RealStock'] = 9;
+        $synchronizer = $this->synchronizer(new MockHttpClient([
+            $this->response('item_families', 0, []),
+            $this->changesResponse(12, 12, 2, false, [
+                ['revision' => 11, 'resource' => 'items', 'sourceId' => $changed['UniqueId'], 'operation' => 'upsert', 'data' => $changed],
+                ['revision' => 12, 'resource' => 'items', 'sourceId' => '00000000-0000-4000-8000-000000000099', 'operation' => 'delete'],
+            ]),
+            $this->changesResponse(12, 12, 0, false, []),
+        ]));
+
+        $run = $synchronizer->start();
+        $run = $synchronizer->advance((int) $run->getId());
+        $run = $synchronizer->advance((int) $run->getId());
+        self::assertSame(10, $connection->getCatalogRevision(), 'The cursor stays unchanged until the empty confirmation page and finalization.');
+        $run = $synchronizer->advance((int) $run->getId());
+        $run = $synchronizer->advance((int) $run->getId());
+
+        self::assertSame(ApiCatalogSyncRun::STATUS_DONE, $run->getStatus());
+        self::assertSame(12, $connection->getCatalogRevision());
+        self::assertSame(1, $run->toSummary()['createdRows']);
+        self::assertSame(1, $run->toSummary()['removedRows']);
+        self::assertSame(9, $this->entityManager->find(Article::class, $changed['UniqueId'])->getRealStock());
+        self::assertNull($this->entityManager->find(Article::class, '00000000-0000-4000-8000-000000000099'));
+    }
+
+    public function testItFallsBackToAFullSyncUntilTheApiChangeFeedIsDeployed(): void
+    {
+        $row = $this->record(1);
+        $run = $this->synchronizer(new MockHttpClient([
+            new MockResponse('{"error":"Not found"}', ['http_code' => 404]),
+            $this->response('item_families', 0, []),
+            $this->response('items', 1, [$row]),
+        ]))->synchronize();
+
+        $connection = $this->entityManager->find(ApiReceptionConnection::class, 1);
+        self::assertSame(ApiCatalogSyncRun::STATUS_DONE, $run->getStatus());
+        self::assertSame(0, $connection->getCatalogRevision());
+        self::assertNotNull($this->entityManager->find(Article::class, $row['data']['UniqueId']));
+        self::assertStringContainsString('mode catalogue historique', implode("\n", array_column($this->progress->read($run)['logs'], 'message')));
+    }
+
+    public function testLiveProgressReportsATransientApiRetryAndThenCompletes(): void
+    {
+        $row = $this->record(1);
+        $run = $this->synchronizer(new MockHttpClient([
+            $this->changesResponse(0, 0, 0, false, []),
+            $this->response('item_families', 0, []),
+            new MockResponse('{"error":"Temporarily unavailable"}', ['http_code' => 503]),
+            $this->response('items', 1, [$row]),
+        ]))->synchronize();
+
+        self::assertSame(ApiCatalogSyncRun::STATUS_DONE, $run->getStatus());
+        self::assertStringContainsString('nouvelle tentative 2/4', implode("\n", array_column($this->progress->read($run)['logs'], 'message')));
+    }
+
     private function synchronizer(MockHttpClient $http): ApiCatalogSynchronizer
     {
         return new ApiCatalogSynchronizer(
@@ -205,6 +326,7 @@ final class ApiCatalogSyncLiveTest extends TestCase
             new ApiReceptionClient($http, $this->cipher),
             new ApiCatalogRecordMapper(),
             new ArticleRepository($this->registry),
+            new ApiCatalogSyncRunRepository($this->registry),
             $this->entityManager,
             new LockFactory(new InMemoryStore()),
             $this->progress,
@@ -227,5 +349,16 @@ final class ApiCatalogSyncLiveTest extends TestCase
     private function response(string $resource, int $total, array $items): MockResponse
     {
         return new MockResponse(json_encode(['resource' => $resource, 'total' => $total, 'items' => $items], JSON_THROW_ON_ERROR));
+    }
+
+    private function changesResponse(int $through, int $nextCursor, int $total, bool $hasMore, array $items): MockResponse
+    {
+        return new MockResponse(json_encode([
+            'through' => $through,
+            'nextCursor' => $nextCursor,
+            'total' => $total,
+            'hasMore' => $hasMore,
+            'items' => $items,
+        ], JSON_THROW_ON_ERROR));
     }
 }

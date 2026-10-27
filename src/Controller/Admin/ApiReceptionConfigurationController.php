@@ -53,6 +53,9 @@ final class ApiReceptionConfigurationController extends AbstractController
             $connection = $connections->get();
             $apiKey = trim((string) ($payload['apiKey'] ?? ''));
             $removeApiKey = $this->boolean($payload['removeApiKey'] ?? false);
+            // A new endpoint or a replaced credential may point to another
+            // company. Its revision cursor is therefore never reusable.
+            $resetCatalogCursor = $connection->getBaseUrl() !== $baseUrl || $apiKey !== '' || $removeApiKey;
             if ($removeApiKey && $apiKey !== '') {
                 throw new ApiReceptionException('Saisissez une nouvelle clé ou demandez sa suppression, mais pas les deux à la fois.');
             }
@@ -75,6 +78,9 @@ final class ApiReceptionConfigurationController extends AbstractController
                 ->setSyncIntervalMinutes((int) $interval)
                 ->setEnabled($enabled)
                 ->touch();
+            if ($resetCatalogCursor) {
+                $connection->resetCatalogRevision();
+            }
 
             $entityManager->flush();
 

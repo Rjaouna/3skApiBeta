@@ -73,4 +73,92 @@ final class ApiReceptionClientTest extends TestCase
         $families = $client->itemFamilyNames($connection);
         self::assertSame('Freinage', $families[ApiCatalogFamilyKey::numericAlias('011')]);
     }
+
+    public function testItPrefersTheCanonicalFamilyOverAnOldSourceNamespacedRecord(): void
+    {
+        $cipher = new ApiReceptionCredentialCipher('test-application-secret');
+        $connection = (new ApiReceptionConnection())
+            ->setBaseUrl('https://api.example.test')
+            ->setApiKeyCiphertext($cipher->encrypt('apr_live_0123456789abcdefghijklmnopqrstuvwxyz'));
+        $client = new ApiReceptionClient(new MockHttpClient([
+            new MockResponse('{"resource":"item_families","total":2,"items":[{"sourceId":"e1a2b3c4d5e6f7a8:FAR00005","data":{"Id":"FAR00005","Caption":"Ancien libellé"}},{"sourceId":"FAR00005","data":{"Id":"FAR00005","Caption":"Libellé catalogue"}}]}'),
+        ]), $cipher);
+
+        self::assertSame('Libellé catalogue', $client->itemFamilyNames($connection)['FAR00005']);
+    }
+
+    public function testItIndexesEachSourceSpecificFamilyKey(): void
+    {
+        $cipher = new ApiReceptionCredentialCipher('test-application-secret');
+        $connection = (new ApiReceptionConnection())
+            ->setBaseUrl('https://api.example.test')
+            ->setApiKeyCiphertext($cipher->encrypt('apr_live_0123456789abcdefghijklmnopqrstuvwxyz'));
+        $client = new ApiReceptionClient(new MockHttpClient([
+            new MockResponse('{"resource":"item_families","total":2,"items":[{"sourceId":"aaaaaaaaaaaaaaaa:FAR00005","data":{"Id":"FAR00005","Caption":"Famille A"}},{"sourceId":"bbbbbbbbbbbbbbbb:FAR00005","data":{"Id":"FAR00005","Caption":"Famille B"}}]}'),
+        ]), $cipher);
+
+        $families = $client->itemFamilyNames($connection);
+        self::assertSame('Famille A', $families['aaaaaaaaaaaaaaaa:FAR00005']);
+        self::assertSame('Famille B', $families['bbbbbbbbbbbbbbbb:FAR00005']);
+    }
+
+    public function testItValidatesAndReadsABoundedCatalogChangePage(): void
+    {
+        $cipher = new ApiReceptionCredentialCipher('test-application-secret');
+        $connection = (new ApiReceptionConnection())
+            ->setBaseUrl('https://api.example.test')
+            ->setApiKeyCiphertext($cipher->encrypt('apr_live_0123456789abcdefghijklmnopqrstuvwxyz'));
+        $client = new ApiReceptionClient(new MockHttpClient([
+            new MockResponse(json_encode([
+                'through' => 42,
+                'nextCursor' => 42,
+                'total' => 1,
+                'hasMore' => false,
+                'items' => [[
+                    'revision' => 42,
+                    'resource' => 'items',
+                    'sourceId' => '00000000-0000-4000-8000-000000000042',
+                    'operation' => 'upsert',
+                    'data' => ['Id' => 'REF-42'],
+                ]],
+            ], JSON_THROW_ON_ERROR)),
+        ]), $cipher);
+
+        $page = $client->catalogChanges($connection, 41, 42);
+
+        self::assertSame(42, $page['through']);
+        self::assertSame(42, $page['nextCursor']);
+        self::assertSame('items', $page['items'][0]['resource']);
+    }
+
+    public function testItKeepsWorkingWithAnApiReceptBeforeTheChangeFeedWasDeployed(): void
+    {
+        $cipher = new ApiReceptionCredentialCipher('test-application-secret');
+        $connection = (new ApiReceptionConnection())
+            ->setBaseUrl('https://api.example.test')
+            ->setApiKeyCiphertext($cipher->encrypt('apr_live_0123456789abcdefghijklmnopqrstuvwxyz'));
+        $client = new ApiReceptionClient(new MockHttpClient([
+            new MockResponse('{"error":"Not found"}', ['http_code' => 404]),
+        ]), $cipher);
+
+        self::assertNull($client->catalogHead($connection));
+    }
+
+    public function testItRetriesATransientCatalogReadBeforeFailing(): void
+    {
+        $cipher = new ApiReceptionCredentialCipher('test-application-secret');
+        $connection = (new ApiReceptionConnection())
+            ->setBaseUrl('https://api.example.test')
+            ->setApiKeyCiphertext($cipher->encrypt('apr_live_0123456789abcdefghijklmnopqrstuvwxyz'));
+        $retries = [];
+        $client = new ApiReceptionClient(new MockHttpClient([
+            new MockResponse('{"error":"Temporarily unavailable"}', ['http_code' => 503]),
+            new MockResponse('{"through":42,"nextCursor":42,"total":0,"hasMore":false,"items":[]}'),
+        ]), $cipher);
+
+        self::assertSame(42, $client->catalogHead($connection, static function (int $retry, int $maxAttempts, int $delayMs) use (&$retries): void {
+            $retries[] = [$retry, $maxAttempts, $delayMs];
+        }));
+        self::assertSame([[1, 4, 500]], $retries);
+    }
 }

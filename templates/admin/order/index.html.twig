@@ -312,6 +312,13 @@
     border-color: rgba(13,110,253,.18);
   }
 
+
+  .status-exported{
+    background: rgba(49,95,183,.16);
+    color: #315FB7;
+    border-color: rgba(49,95,183,.28);
+  }
+
   .status-preparing{
     background: rgba(255,193,7,.16);
     color: rgba(176,117,0,.98);
@@ -457,6 +464,16 @@
         <span>{{ orders|length }} commande{{ orders|length > 1 ? 's' : '' }}</span>
       </div>
 
+      {% if newOrdersCount|default(0) > 0 %}
+        <form method="post" action="{{ path('admin_orders_export_new_ebp') }}" data-export-new-orders-form>
+          <input type="hidden" name="_token" value="{{ csrf_token('export_new_orders_ebp') }}">
+          <button class="btn btn-primary orders-danger-btn" type="submit" data-export-new-orders-button>
+            <i class="fa-solid fa-paper-plane me-2"></i>
+            Exporter {{ newOrdersCount }} commande{{ newOrdersCount > 1 ? 's' : '' }} nouvelle{{ newOrdersCount > 1 ? 's' : '' }}
+          </button>
+        </form>
+      {% endif %}
+
       {% if totalOrders|default(0) > 0 %}
         <button class="btn btn-outline-danger orders-danger-btn" type="button" data-bs-toggle="modal" data-bs-target="#deleteAllOrdersModal">
           <i class="fa-solid fa-trash-can me-2"></i>Supprimer toutes
@@ -558,15 +575,17 @@
               {% for order in orders %}
                 {% set statusClass =
                   order.status == 'new' ? 'status-new' :
+                  (order.status == 'exported' ? 'status-exported' :
                   (order.status == 'preparing' ? 'status-preparing' :
                   (order.status == 'shipping' ? 'status-shipping' :
-                  (order.status == 'completed' ? 'status-completed' : 'status-cancelled')))
+                  (order.status == 'completed' ? 'status-completed' : 'status-cancelled'))))
                 %}
                 {% set statusIcon =
                   order.status == 'new' ? 'fa-file-circle-plus' :
+                  (order.status == 'exported' ? 'fa-paper-plane' :
                   (order.status == 'preparing' ? 'fa-boxes-packing' :
                   (order.status == 'shipping' ? 'fa-truck-fast' :
-                  (order.status == 'completed' ? 'fa-circle-check' : 'fa-ban')))
+                  (order.status == 'completed' ? 'fa-circle-check' : 'fa-ban'))))
                 %}
 
                 <tr>
@@ -789,6 +808,19 @@
 
 <script>
 (function () {
+  document.querySelectorAll('[data-export-new-orders-form]').forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      const button = form.querySelector('[data-export-new-orders-button]');
+      if (!button || button.disabled) {
+        event.preventDefault();
+        return;
+      }
+
+      button.disabled = true;
+      button.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-2"></i>Export en cours…';
+    });
+  });
+
   const deleteOrderModal = document.getElementById('deleteOrderModal');
   const deleteOrderForm = document.getElementById('deleteOrderForm');
 

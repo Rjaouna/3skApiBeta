@@ -5,16 +5,18 @@
 
 {% set statusClass =
   order.status == 'new' ? 'status-new' :
+  (order.status == 'exported' ? 'status-exported' :
   (order.status == 'preparing' ? 'status-preparing' :
   (order.status == 'shipping' ? 'status-shipping' :
-  (order.status == 'completed' ? 'status-completed' : 'status-cancelled')))
+  (order.status == 'completed' ? 'status-completed' : 'status-cancelled'))))
 %}
 
 {% set statusIcon =
   order.status == 'new' ? 'fa-file-circle-plus' :
+  (order.status == 'exported' ? 'fa-paper-plane' :
   (order.status == 'preparing' ? 'fa-boxes-packing' :
   (order.status == 'shipping' ? 'fa-truck-fast' :
-  (order.status == 'completed' ? 'fa-circle-check' : 'fa-ban')))
+  (order.status == 'completed' ? 'fa-circle-check' : 'fa-ban'))))
 %}
 
 <style>
@@ -241,6 +243,13 @@
     background: rgba(13,110,253,.12);
     color: rgba(13,110,253,1);
     border-color: rgba(13,110,253,.18);
+  }
+
+
+  .status-exported{
+    background: rgba(49,95,183,.16);
+    color: #315FB7;
+    border-color: rgba(49,95,183,.28);
   }
 
   .status-preparing{
@@ -499,6 +508,19 @@
                 <span class="status-pill {{ statusClass }}">
                   <i class="fa-solid {{ statusIcon }}"></i>
                   {{ order.statusLabel }}
+                </span>
+              </div>
+
+              <div class="summary-row">
+                <span class="summary-label">Transmission EBP</span>
+                <span class="summary-value">
+                  <i class="fa-solid {{ order.ebpTransferStatus == 'available_in_ebp' ? 'fa-circle-check text-success' : (order.ebpTransferStatus == 'failed' ? 'fa-triangle-exclamation text-danger' : 'fa-arrows-rotate text-primary') }} me-1"></i>
+                  {{ order.ebpTransferLabel }}
+                  {% if order.ebpAvailableAt %}
+                    <small class="d-block text-muted mt-1">Disponible le {{ order.ebpAvailableAt|date('d/m/Y à H:i') }}</small>
+                  {% elseif order.ebpTransferMessage %}
+                    <small class="d-block text-muted mt-1">{{ order.ebpTransferMessage }}</small>
+                  {% endif %}
                 </span>
               </div>
 

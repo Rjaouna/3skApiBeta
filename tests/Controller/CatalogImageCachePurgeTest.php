@@ -14,6 +14,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\Persistence\ManagerRegistry;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
@@ -62,7 +63,27 @@ final class CatalogImageCachePurgeTest extends TestCase
         self::assertSame($this->images->imageUrl('PHOTO-A'), $this->provider($this->cache)->imageUrl('PHOTO-A'));
         self::assertSame('preserved', $this->cache->getItem('unrelated_catalogue_data')->get());
         self::assertNotSame($version, $this->images->purgeCache());
-        self::assertSame('/local/PHOTO-A.png', parse_url($this->images->imageUrl('PHOTO-A', '/local/'), PHP_URL_PATH));
+        self::assertSame('/local/PHOTO-A.png', parse_url($this->images->imageUrl('PHOTO-A', null, '/local/'), PHP_URL_PATH));
+    }
+
+    public function testOnlyTheModifiedArticleGetsANewImageVersion(): void
+    {
+        $firstModification = new DateTimeImmutable('2026-10-20 08:30:00.000000 UTC');
+        $secondModification = new DateTimeImmutable('2026-10-21 09:45:00.000000 UTC');
+
+        $firstArticleUrl = $this->images->imageUrl('PHOTO-A', $firstModification);
+        $secondArticleUrl = $this->images->imageUrl('PHOTO-B', $secondModification);
+
+        self::assertSame($firstArticleUrl, $this->provider($this->cache)->imageUrl('PHOTO-A', $firstModification));
+        self::assertNotSame($firstArticleUrl, $secondArticleUrl);
+
+        $updatedFirstArticleUrl = $this->images->imageUrl(
+            'PHOTO-A',
+            new DateTimeImmutable('2026-10-22 12:00:00.000000 UTC')
+        );
+
+        self::assertNotSame($firstArticleUrl, $updatedFirstArticleUrl);
+        self::assertSame($secondArticleUrl, $this->images->imageUrl('PHOTO-B', $secondModification));
     }
 
     public function testEndpointRejectsAnInvalidCsrfTokenWithoutPurging(): void

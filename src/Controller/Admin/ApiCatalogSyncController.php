@@ -82,6 +82,52 @@ final class ApiCatalogSyncController extends AbstractController
     #[Route('/run', name: 'run', methods: ['POST'])]
     public function run(Request $request, ApiCatalogSynchronizer $synchronizer): JsonResponse
     {
+        if (!$this->validPayload($request)) {
+            return $this->json(['ok' => false, 'message' => 'Jeton de sécurité invalide. Actualisez la page puis réessayez.'], 403);
+        }
+
+        if ($request->hasSession()) {
+            $request->getSession()->save();
+        }
+
+        try {
+            $run = $synchronizer->startOrResume();
+
+            return $this->json([
+                'ok' => true,
+                'message' => 'Synchronisation prête. Les articles vont apparaître au fur et à mesure de leur enregistrement.',
+                'run' => $run->toSummary(),
+            ], 202);
+        } catch (ApiReceptionException $exception) {
+            return $this->json(['ok' => false, 'message' => $exception->getMessage()], 422);
+        }
+    }
+
+    #[Route('/step/{id}', name: 'step', methods: ['POST'])]
+    public function step(int $id, Request $request, ApiCatalogSynchronizer $synchronizer): JsonResponse
+    {
+        if (!$this->validPayload($request)) {
+            return $this->json(['ok' => false, 'message' => 'Jeton de sécurité invalide. Actualisez la page puis réessayez.'], 403);
+        }
+        if ($request->hasSession()) {
+            $request->getSession()->save();
+        }
+
+        try {
+            $run = $synchronizer->advance($id);
+
+            return $this->json([
+                'ok' => true,
+                'done' => $run->getStatus() !== 'RUNNING',
+                'run' => $run->toSummary(),
+            ]);
+        } catch (ApiReceptionException $exception) {
+            return $this->json(['ok' => false, 'message' => $exception->getMessage()], 422);
+        }
+    }
+
+    private function validPayload(Request $request): bool
+    {
         try {
             $payload = json_decode((string) $request->getContent(), true, 512, JSON_THROW_ON_ERROR);
         } catch (\JsonException) {
@@ -91,26 +137,6 @@ final class ApiCatalogSyncController extends AbstractController
             $payload = $request->request->all();
         }
 
-        if (!$this->isCsrfTokenValid('api_catalog_sync_run', (string) ($payload['_token'] ?? ''))) {
-            return $this->json(['ok' => false, 'message' => 'Jeton de sécurité invalide. Actualisez la page puis réessayez.'], 403);
-        }
-
-        // La synchronisation peut prendre plusieurs minutes. Libère le verrou de session
-        // afin que les requêtes /status du même administrateur puissent lire l'avancement.
-        if ($request->hasSession()) {
-            $request->getSession()->save();
-        }
-
-        try {
-            $run = $synchronizer->synchronize();
-
-            return $this->json([
-                'ok' => true,
-                'message' => (string) $run->toSummary()['message'],
-                'run' => $run->toSummary(),
-            ]);
-        } catch (ApiReceptionException $exception) {
-            return $this->json(['ok' => false, 'message' => $exception->getMessage()], 422);
-        }
+        return $this->isCsrfTokenValid('api_catalog_sync_run', (string) ($payload['_token'] ?? ''));
     }
 }

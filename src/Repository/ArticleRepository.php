@@ -39,6 +39,18 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function updateFamilyName(string $familyId, string $familyName): int
+    {
+        return $this->createQueryBuilder('a')
+            ->update()
+            ->set('a.familyName', ':familyName')
+            ->where('a.familyId = :familyId')
+            ->setParameter('familyId', $familyId)
+            ->setParameter('familyName', $familyName)
+            ->getQuery()
+            ->execute();
+    }
+
     public function findAvailableByBusinessId(string $id): ?Article
     {
         return $this->createQueryBuilder('a')

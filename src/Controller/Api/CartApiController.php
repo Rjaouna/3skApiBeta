@@ -349,7 +349,7 @@ class CartApiController extends AbstractController
 
             $imageUrl = null;
             if ($imagesBaseUrl !== '' && $article->getUniqueId()) {
-                $imageUrl = $this->images->imageUrl($article->getUniqueId());
+                $imageUrl = $this->images->imageUrl($article->getUniqueId(), $article->getSysModifiedDate());
             }
 
             $items[] = [

@@ -147,7 +147,7 @@ final class CatalogImageConfigurationController extends AbstractController
             $items[] = [
                 'uniqueId' => $article->getUniqueId(),
                 'label' => trim((string) $article->getId()) ?: $article->getUniqueId(),
-                'url' => $images->imageUrl($article->getUniqueId(), $baseUrl),
+                'url' => $images->imageUrl($article->getUniqueId(), $article->getSysModifiedDate(), $baseUrl),
             ];
         }
 
