@@ -23,6 +23,14 @@
   .invoice-progress i { color:var(--invoice-orange); }
   .invoice-sync-dates { display:flex; flex-wrap:wrap; gap:8px 22px; margin-top:12px; font-size:.8rem; color:rgba(35,43,56,.68); }
   .invoice-sync-dates strong { color:var(--invoice-ink); font-weight:700; }
+  .invoice-import-period { border-top:1px solid rgba(35,43,56,.10); margin-top:16px; padding-top:15px; }
+  .invoice-import-period__head { align-items:center; display:flex; gap:8px; justify-content:space-between; flex-wrap:wrap; }
+  .invoice-import-period__label { color:var(--invoice-ink); font-size:.86rem; font-weight:700; }
+  .invoice-import-period__hint { color:rgba(35,43,56,.62); font-size:.76rem; }
+  .invoice-import-period__controls { align-items:end; display:grid; gap:10px; grid-template-columns:minmax(210px,1.25fr) minmax(135px,.75fr) minmax(135px,.75fr); margin-top:10px; max-width:760px; }
+  .invoice-import-period .form-select,.invoice-import-period .form-control { border-color:rgba(49,95,183,.25); border-radius:10px; min-height:42px; }
+  .invoice-import-period .form-select:focus,.invoice-import-period .form-control:focus { border-color:var(--invoice-blue); box-shadow:0 0 0 3px rgba(49,95,183,.13); }
+  .invoice-import-period__custom[hidden] { display:none; }
   .invoice-dashboard { padding:18px; }
   .invoice-document-counts,.invoice-financial-summary { display:grid; gap:10px; }
   .invoice-document-counts { grid-template-columns:repeat(3,minmax(0,1fr)); margin-bottom:12px; }
@@ -106,6 +114,8 @@
     .invoice-filter-group--period { border-top:1px solid rgba(35,43,56,.12); padding-top:18px; }
     .invoice-date-filters { grid-template-columns:1fr 1fr; }
     .invoice-filter-reset { grid-column:1 / -1; }
+    .invoice-import-period__controls { grid-template-columns:1fr 1fr; }
+    .invoice-import-period__controls > :first-child { grid-column:1 / -1; }
     .invoice-tools { align-items:stretch; }
     .invoice-search { max-width:none; }
     .invoice-list-summary { padding-inline:18px; }
@@ -123,7 +133,9 @@
       data-sync-message="{{ sync ? (sync.message ?: '')|e('html_attr') : '' }}"
       data-requested-at="{{ sync ? sync.requestedAt|e('html_attr') : '' }}"
       data-last-synced-at="{{ sync ? (sync.lastSyncedAt ?: '')|e('html_attr') : '' }}"
-      data-completed-at="{{ sync ? (sync.completedAt ?: '')|e('html_attr') : '' }}">
+      data-completed-at="{{ sync ? (sync.completedAt ?: '')|e('html_attr') : '' }}"
+      data-sync-from-date="{{ sync ? (sync.fromDate ?: '')|e('html_attr') : '' }}"
+      data-sync-to-date="{{ sync ? (sync.toDate ?: '')|e('html_attr') : '' }}">
   <section class="invoice-hero mb-3">
     <div>
       <div class="invoice-eyebrow">Mon espace EBP</div>
@@ -151,6 +163,32 @@
       <div class="invoice-sync-dates">
         <span>Demande : <strong id="invoiceRequestedAt">—</strong></span>
         <span>Dernière synchronisation : <strong id="invoiceLastSyncedAt">—</strong></span>
+        <span>Période EBP : <strong id="invoiceRequestedPeriod">—</strong></span>
+      </div>
+      <div class="invoice-import-period">
+        <div class="invoice-import-period__head">
+          <label class="invoice-import-period__label" for="invoiceImportRange">Période à récupérer depuis EBP</label>
+          <span class="invoice-import-period__hint" id="invoiceImportRangeHint">Par défaut, les 10 derniers jours sont récupérés.</span>
+        </div>
+        <div class="invoice-import-period__controls">
+          <div>
+            <select class="form-select" id="invoiceImportRange" aria-describedby="invoiceImportRangeHint">
+              <option value="recent" selected>10 derniers jours — mise à jour rapide</option>
+              <option value="threeMonths">3 derniers mois</option>
+              <option value="sixMonths">6 derniers mois</option>
+              <option value="currentYear">Année en cours</option>
+              <option value="custom">Période personnalisée</option>
+            </select>
+          </div>
+          <div class="invoice-import-period__custom" id="invoiceImportFromWrap" hidden>
+            <label class="visually-hidden" for="invoiceImportFrom">Du</label>
+            <input class="form-control" id="invoiceImportFrom" type="date" aria-label="Date de début de l’import EBP" disabled>
+          </div>
+          <div class="invoice-import-period__custom" id="invoiceImportToWrap" hidden>
+            <label class="visually-hidden" for="invoiceImportTo">Au</label>
+            <input class="form-control" id="invoiceImportTo" type="date" aria-label="Date de fin de l’import EBP" disabled>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -208,6 +246,13 @@
   const progress = document.getElementById('invoiceProgress');
   const requestedAt = document.getElementById('invoiceRequestedAt');
   const lastSyncedAt = document.getElementById('invoiceLastSyncedAt');
+  const requestedPeriod = document.getElementById('invoiceRequestedPeriod');
+  const importRange = document.getElementById('invoiceImportRange');
+  const importRangeHint = document.getElementById('invoiceImportRangeHint');
+  const importFrom = document.getElementById('invoiceImportFrom');
+  const importTo = document.getElementById('invoiceImportTo');
+  const importFromWrap = document.getElementById('invoiceImportFromWrap');
+  const importToWrap = document.getElementById('invoiceImportToWrap');
   const filterForm = document.getElementById('invoiceFilterForm');
   const searchInput = document.getElementById('invoiceSearch');
   const searchWrap = document.getElementById('invoiceSearchWrap');
@@ -233,6 +278,49 @@
     const date = new Date(value);
     return Number.isNaN(date.getTime()) ? '—' : dateFormat.format(date);
   };
+  const formatDateOnly = value => {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value || '')) return '—';
+    const [year, month, day] = value.split('-').map(Number);
+    return new Intl.DateTimeFormat('fr-FR', {dateStyle:'medium', timeZone:'UTC'}).format(new Date(Date.UTC(year, month - 1, day)));
+  };
+  const localDate = date => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  const subtractMonths = months => {
+    const today = new Date();
+    return localDate(new Date(today.getFullYear(), today.getMonth() - months, today.getDate()));
+  };
+  const selectedImportPeriod = () => {
+    const today = localDate(new Date());
+    switch (importRange?.value) {
+      case 'threeMonths': return { fromDate:subtractMonths(3), toDate:today, label:'3 derniers mois' };
+      case 'sixMonths': return { fromDate:subtractMonths(6), toDate:today, label:'6 derniers mois' };
+      case 'currentYear': return { fromDate:`${new Date().getFullYear()}-01-01`, toDate:today, label:'année en cours' };
+      case 'custom': {
+        const fromDate = importFrom?.value || '';
+        const toDate = importTo?.value || '';
+        if (!fromDate || !toDate) throw new Error('Choisissez une date de début et une date de fin pour l’import EBP.');
+        if (fromDate > toDate) throw new Error('La date de début doit être antérieure à la date de fin.');
+        return { fromDate, toDate, label:`du ${formatDateOnly(fromDate)} au ${formatDateOnly(toDate)}` };
+      }
+      default: {
+        const start = new Date();
+        start.setDate(start.getDate() - 9);
+        return { fromDate:localDate(start), toDate:today, label:'10 derniers jours' };
+      }
+    }
+  };
+  const displayPeriod = status => status?.fromDate && status?.toDate ? `du ${formatDateOnly(status.fromDate)} au ${formatDateOnly(status.toDate)}` : '—';
+  function updateImportRange() {
+    const custom = importRange?.value === 'custom';
+    [importFromWrap, importToWrap].forEach(wrap => { if (wrap) wrap.hidden = !custom; });
+    [importFrom, importTo].forEach(input => { if (input) input.disabled = !custom; });
+    if (!importRangeHint) return;
+    if (custom) {
+      importRangeHint.textContent = 'Choisissez une période précise. Les documents hors de cette période restent conservés.';
+      return;
+    }
+    const period = selectedImportPeriod();
+    importRangeHint.textContent = `Import EBP : ${period.label}. Les documents déjà chargés hors de cette période restent conservés.`;
+  }
   const updateSearchState = () => searchWrap?.classList.toggle('has-value', Boolean(searchInput?.value.trim()));
   const filterParameters = () => {
     const params = new URLSearchParams();
@@ -249,7 +337,9 @@
     message: root.dataset.syncMessage || '',
     requestedAt: root.dataset.requestedAt || '',
     lastSyncedAt: root.dataset.lastSyncedAt || '',
-    completedAt: root.dataset.completedAt || ''
+    completedAt: root.dataset.completedAt || '',
+    fromDate: root.dataset.syncFromDate || '',
+    toDate: root.dataset.syncToDate || ''
   } : null;
 
   function displaySync(status) {
@@ -257,6 +347,7 @@
     pill.className = 'invoice-status-pill' + (state ? ' status-' + state : '');
     requestedAt.textContent = formatDate(status?.requestedAt);
     lastSyncedAt.textContent = formatDate(status?.lastSyncedAt || (state === 'completed' ? status?.completedAt : ''));
+    requestedPeriod.textContent = displayPeriod(status);
     progress.hidden = state !== 'pending';
     if (state === 'pending') {
       pill.textContent = 'Synchronisation en cours';
@@ -321,10 +412,11 @@
   }
 
   refreshButton?.addEventListener('click', async () => {
-    refreshButton.disabled = true;
-    completionHandled = false;
     try {
-      const response = await fetch('{{ path('invoice_refresh') }}', {method:'POST', headers:{'Content-Type':'application/json',Accept:'application/json'}, body:JSON.stringify({_token:token})});
+      const period = selectedImportPeriod();
+      refreshButton.disabled = true;
+      completionHandled = false;
+      const response = await fetch('{{ path('invoice_refresh') }}', {method:'POST', headers:{'Content-Type':'application/json',Accept:'application/json'}, body:JSON.stringify({_token:token,fromDate:period.fromDate,toDate:period.toDate})});
       const data = await response.json();
       if (!response.ok || !data.ok) throw new Error(data.message || 'La demande de documents a échoué.');
       displaySync(data.status);
@@ -335,6 +427,9 @@
       statusText.textContent = error?.message || 'La demande de documents a échoué.';
     }
   });
+  importRange?.addEventListener('change', updateImportRange);
+  importFrom?.addEventListener('change', updateImportRange);
+  importTo?.addEventListener('change', updateImportRange);
   filterForm?.addEventListener('submit', event => { event.preventDefault(); refreshList(1); });
   searchInput?.addEventListener('input', () => { updateSearchState(); window.clearTimeout(searchTimer); searchTimer = window.setTimeout(() => refreshList(1), 280); });
   searchClear?.addEventListener('click', () => { if (searchInput) searchInput.value = ''; updateSearchState(); refreshList(1); });
@@ -352,6 +447,7 @@
   });
   list?.addEventListener('click', event => { const link = event.target.closest('[data-invoice-page]'); if (!link) return; event.preventDefault(); refreshList(Number(link.dataset.invoicePage || 1)); });
   updateSearchState();
+  updateImportRange();
   displaySync(initialStatus());
 })();
 </script>

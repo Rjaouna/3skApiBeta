@@ -48,6 +48,12 @@ class EbpInvoiceImport
     #[ORM\Column(name: 'last_synced_at', nullable: true)]
     private ?\DateTimeImmutable $lastSyncedAt = null;
 
+    #[ORM\Column(name: 'period_from', type: Types::DATE_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $periodFrom = null;
+
+    #[ORM\Column(name: 'period_to', type: Types::DATE_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $periodTo = null;
+
     public function __construct(User $user)
     {
         $this->user = $user;
@@ -65,6 +71,7 @@ class EbpInvoiceImport
         $this->requestedAt = new \DateTimeImmutable();
         $this->updatedAt = $this->requestedAt;
         $this->completedAt = null;
+        $this->applyPeriod($remote);
     }
 
     /** @param array<string, mixed> $remote */
@@ -77,6 +84,7 @@ class EbpInvoiceImport
         $this->status = $status;
         $this->invoiceCount = max(0, (int) ($remote['invoiceCount'] ?? 0));
         $this->message = $this->nullableText($remote['message'] ?? null);
+        $this->applyPeriod($remote);
         $this->updatedAt = new \DateTimeImmutable();
         $this->completedAt = $status === self::STATUS_PENDING ? null : $this->updatedAt;
         if ($status === self::STATUS_COMPLETED) {
@@ -94,6 +102,8 @@ class EbpInvoiceImport
     public function getUpdatedAt(): \DateTimeImmutable { return $this->updatedAt; }
     public function getCompletedAt(): ?\DateTimeImmutable { return $this->completedAt; }
     public function getLastSyncedAt(): ?\DateTimeImmutable { return $this->lastSyncedAt; }
+    public function getPeriodFrom(): ?\DateTimeImmutable { return $this->periodFrom; }
+    public function getPeriodTo(): ?\DateTimeImmutable { return $this->periodTo; }
 
     /** @return array<string, mixed> */
     public function toArray(): array
@@ -108,6 +118,8 @@ class EbpInvoiceImport
             'updatedAt' => $this->updatedAt->format(DATE_ATOM),
             'completedAt' => $this->completedAt?->format(DATE_ATOM),
             'lastSyncedAt' => $this->lastSyncedAt?->format(DATE_ATOM),
+            'fromDate' => $this->periodFrom?->format('Y-m-d'),
+            'toDate' => $this->periodTo?->format('Y-m-d'),
         ];
     }
 
@@ -117,5 +129,28 @@ class EbpInvoiceImport
         $text = mb_substr(trim((string) $value), 0, 1000);
 
         return $text === '' ? null : $text;
+    }
+
+    /** @param array<string, mixed> $remote */
+    private function applyPeriod(array $remote): void
+    {
+        if (!array_key_exists('fromDate', $remote) && !array_key_exists('toDate', $remote)) return;
+        $this->periodFrom = $this->periodDate($remote['fromDate'] ?? null);
+        $this->periodTo = $this->periodDate($remote['toDate'] ?? null);
+        if (($this->periodFrom === null) !== ($this->periodTo === null) || ($this->periodFrom !== null && $this->periodFrom > $this->periodTo)) {
+            throw new \DomainException('La période des documents retournée par ApiRecept est invalide.');
+        }
+    }
+
+    private function periodDate(mixed $value): ?\DateTimeImmutable
+    {
+        if ($value === null || trim((string) $value) === '') return null;
+        $date = \DateTimeImmutable::createFromFormat('!Y-m-d', (string) $value, new \DateTimeZone('UTC'));
+        $errors = \DateTimeImmutable::getLastErrors();
+        if ($date === false || ($errors !== false && ($errors['warning_count'] > 0 || $errors['error_count'] > 0))) {
+            throw new \DomainException('La période des documents retournée par ApiRecept est invalide.');
+        }
+
+        return $date;
     }
 }

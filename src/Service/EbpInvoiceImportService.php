@@ -25,10 +25,11 @@ final class EbpInvoiceImportService
     ) {}
 
     /** @return array<string, mixed> */
-    public function request(User $user): array
+    public function request(User $user, ?string $fromDate = null, ?string $toDate = null): array
     {
         $uniqueId = $this->uniqueId($user);
-        $remote = $this->api->requestInvoiceImport($this->connections->get(), $uniqueId);
+        [$fromDate, $toDate] = $this->period($fromDate, $toDate);
+        $remote = $this->api->requestInvoiceImport($this->connections->get(), $uniqueId, $fromDate, $toDate);
         $item = $remote['item'] ?? null;
         if (($remote['ok'] ?? false) !== true || !is_array($item) || !is_int($item['id'] ?? null) || strtoupper((string) ($item['uniqueId'] ?? '')) !== $uniqueId) {
             throw new ApiReceptionException('ApiRecept n’a pas confirmé la demande de documents.');
@@ -54,9 +55,11 @@ final class EbpInvoiceImportService
         }
         try {
             $result = ['requested' => 0, 'failed' => 0];
+            $toDate = new \DateTimeImmutable('today', new \DateTimeZone('UTC'));
+            $fromDate = $toDate->modify('-9 days');
             foreach ($this->users->findEbpLinkedActiveClients() as $user) {
                 try {
-                    $this->request($user);
+                    $this->request($user, $fromDate->format('Y-m-d'), $toDate->format('Y-m-d'));
                     ++$result['requested'];
                 } catch (\Throwable) {
                     ++$result['failed'];
@@ -107,7 +110,8 @@ final class EbpInvoiceImportService
                     if ($status !== EbpInvoiceImport::STATUS_COMPLETED || !is_array($item['invoices'] ?? null)) {
                         throw new \DomainException('ApiRecept a retourné un statut de documents invalide.');
                     }
-                    $result['invoices'] += $this->storeInvoices($import->getUser(), $item['invoices']);
+                    [$fromDate, $toDate] = $this->period($item['fromDate'] ?? null, $item['toDate'] ?? null);
+                    $result['invoices'] += $this->storeInvoices($import->getUser(), $item['invoices'], $fromDate, $toDate);
                     $import->applyRemote($item);
                     ++$result['completed'];
                 } catch (ApiReceptionException $exception) {
@@ -132,7 +136,7 @@ final class EbpInvoiceImportService
     }
 
     /** @param list<mixed> $payload */
-    private function storeInvoices(User $user, array $payload): int
+    private function storeInvoices(User $user, array $payload, ?string $fromDate = null, ?string $toDate = null): int
     {
         $uniqueId = $this->uniqueId($user);
         $sourceIds = [];
@@ -156,7 +160,10 @@ final class EbpInvoiceImportService
             ++$stored;
         }
         $this->entityManager->flush();
-        $this->invoices->removeMissingForCustomer($user, $sourceIds);
+        $timezone = new \DateTimeZone('UTC');
+        $from = $fromDate === null ? null : new \DateTimeImmutable($fromDate . ' 00:00:00', $timezone);
+        $to = $toDate === null ? null : new \DateTimeImmutable($toDate . ' 00:00:00', $timezone);
+        $this->invoices->removeMissingForCustomer($user, $sourceIds, $from, $to);
 
         return $stored;
     }
@@ -169,5 +176,26 @@ final class EbpInvoiceImportService
         }
 
         return $uniqueId;
+    }
+
+    /** @return array{0: ?string, 1: ?string} */
+    private function period(?string $fromDate, ?string $toDate): array
+    {
+        $fromDate = $fromDate === null ? null : trim($fromDate);
+        $toDate = $toDate === null ? null : trim($toDate);
+        if (($fromDate === null || $fromDate === '') && ($toDate === null || $toDate === '')) return [null, null];
+        if ($fromDate === null || $fromDate === '' || $toDate === null || $toDate === '') {
+            throw new \DomainException('Indiquez une date de début et une date de fin pour l’import des documents.');
+        }
+        $timezone = new \DateTimeZone('UTC');
+        $from = \DateTimeImmutable::createFromFormat('!Y-m-d', $fromDate, $timezone);
+        $fromErrors = \DateTimeImmutable::getLastErrors();
+        $to = \DateTimeImmutable::createFromFormat('!Y-m-d', $toDate, $timezone);
+        $toErrors = \DateTimeImmutable::getLastErrors();
+        if ($from === false || $to === false || ($fromErrors !== false && ($fromErrors['warning_count'] > 0 || $fromErrors['error_count'] > 0)) || ($toErrors !== false && ($toErrors['warning_count'] > 0 || $toErrors['error_count'] > 0)) || $from > $to) {
+            throw new \DomainException('La période des documents est invalide.');
+        }
+
+        return [$from->format('Y-m-d'), $to->format('Y-m-d')];
     }
 }

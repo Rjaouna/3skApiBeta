@@ -62,9 +62,10 @@ final class InvoiceController extends AbstractController
     #[Route('/mes-factures/refresh', name: 'invoice_refresh', methods: ['POST'])]
     public function refresh(Request $request, EbpInvoiceImportService $imports): JsonResponse
     {
-        if (!$this->validToken($request)) return $this->forbidden();
+        $payload = $this->requestPayload($request);
+        if (!$this->validToken($payload)) return $this->forbidden();
         try {
-            $imports->request($this->user());
+            $imports->request($this->user(), $this->requestedDate($payload, 'fromDate'), $this->requestedDate($payload, 'toDate'));
             $summary = $imports->refresh();
         } catch (\DomainException $exception) {
             return $this->json(['ok' => false, 'message' => $exception->getMessage()], 422, ['Cache-Control' => 'no-store']);
@@ -126,11 +127,31 @@ final class InvoiceController extends AbstractController
         return $user;
     }
 
-    private function validToken(Request $request): bool
+    /** @return array<string, mixed> */
+    private function requestPayload(Request $request): array
     {
         $payload = json_decode((string) $request->getContent(), true);
 
-        return $this->isCsrfTokenValid('customer_invoice_sync', (string) ($payload['_token'] ?? ''));
+        return is_array($payload) && !array_is_list($payload) ? $payload : [];
+    }
+
+    /** @param array<string, mixed> $payload */
+    private function validToken(array $payload): bool
+    {
+        $token = $payload['_token'] ?? '';
+
+        return $this->isCsrfTokenValid('customer_invoice_sync', is_string($token) ? $token : '');
+    }
+
+    /** @param array<string, mixed> $payload */
+    private function requestedDate(array $payload, string $key): ?string
+    {
+        if (!array_key_exists($key, $payload) || $payload[$key] === null || $payload[$key] === '') return null;
+        if (!is_string($payload[$key])) {
+            throw new \DomainException('La période des documents est invalide.');
+        }
+
+        return trim($payload[$key]);
     }
 
     private function forbidden(): JsonResponse

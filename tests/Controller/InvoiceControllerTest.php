@@ -21,19 +21,30 @@ final class InvoiceControllerTest extends WebTestCase
     private $browser;
     private EntityManagerInterface $em;
     private User $user;
+    /** @var array<string, mixed> */
+    private array $invoiceImportRequest = [];
 
     protected function setUp(): void
     {
         $this->browser = static::createClient();
         $this->browser->disableReboot();
         $container = static::getContainer();
-        $container->set(HttpClientInterface::class, new MockHttpClient(function (string $method, string $url): MockResponse {
+        $container->set(HttpClientInterface::class, new MockHttpClient(function (string $method, string $url, array $options = []): MockResponse {
             if ($method === 'POST' && str_ends_with($url, '/api/v1/invoice-imports')) {
-                return new MockResponse(json_encode(['ok' => true, 'item' => ['id' => 74, 'uniqueId' => self::UID, 'status' => 'pending']], JSON_THROW_ON_ERROR), ['http_code' => 201]);
+                $this->invoiceImportRequest = is_array($options['json'] ?? null) ? $options['json'] : [];
+                return new MockResponse(json_encode(['ok' => true, 'item' => [
+                    'id' => 74,
+                    'uniqueId' => self::UID,
+                    'status' => 'pending',
+                    'fromDate' => $this->invoiceImportRequest['fromDate'] ?? null,
+                    'toDate' => $this->invoiceImportRequest['toDate'] ?? null,
+                ]], JSON_THROW_ON_ERROR), ['http_code' => 201]);
             }
             if ($method === 'GET' && str_ends_with($url, '/api/v1/invoice-imports/74')) {
                 return new MockResponse(json_encode(['ok' => true, 'item' => [
                     'id' => 74, 'uniqueId' => self::UID, 'status' => 'completed', 'invoiceCount' => 1,
+                    'fromDate' => $this->invoiceImportRequest['fromDate'] ?? null,
+                    'toDate' => $this->invoiceImportRequest['toDate'] ?? null,
                     'invoices' => [[
                         'sourceId' => 'FA-74', 'customerUniqueId' => self::UID, 'documentNumber' => 'FA2026-0074',
                         'documentType' => '2', 'documentKind' => 'invoice', 'documentDate' => '2026-10-23T10:00:00+00:00', 'state' => '1',
@@ -63,12 +74,27 @@ final class InvoiceControllerTest extends WebTestCase
         self::assertNotNull($session);
         $session->set('_csrf/customer_invoice_sync', $token);
         $session->save();
+        $outsideRequestedPeriod = new CustomerInvoice($this->user, [
+            'sourceId' => 'primary:FA-2025',
+            'documentNumber' => 'FA2025-0001',
+            'documentType' => '2',
+            'documentKind' => 'invoice',
+            'documentDate' => '2025-12-31T10:00:00+00:00',
+            'state' => 'Validé',
+            'totalTtc' => '100.00',
+            'lines' => [],
+        ]);
+        $this->em->persist($outsideRequestedPeriod);
+        $this->em->flush();
 
-        $this->browser->request('POST', '/mes-factures/refresh', server: ['CONTENT_TYPE' => 'application/json'], content: json_encode(['_token' => $token], JSON_THROW_ON_ERROR));
+        $this->browser->request('POST', '/mes-factures/refresh', server: ['CONTENT_TYPE' => 'application/json'], content: json_encode(['_token' => $token, 'fromDate' => '2026-01-01', 'toDate' => '2026-12-31'], JSON_THROW_ON_ERROR));
         self::assertResponseStatusCodeSame(202);
         $body = json_decode($this->browser->getResponse()->getContent(), true, flags: JSON_THROW_ON_ERROR);
         self::assertTrue($body['ok']);
         self::assertSame('completed', $body['status']['status']);
+        self::assertSame(['uniqueId' => self::UID, 'fromDate' => '2026-01-01', 'toDate' => '2026-12-31'], $this->invoiceImportRequest);
+        self::assertSame('2026-01-01', $body['status']['fromDate']);
+        self::assertSame('2026-12-31', $body['status']['toDate']);
         $invoice = static::getContainer()->get(CustomerInvoiceRepository::class)->findOneBy(['customer' => $this->user]);
         self::assertInstanceOf(CustomerInvoice::class, $invoice);
         self::assertSame('FA2026-0074', $invoice->getDocumentNumber());
@@ -77,11 +103,12 @@ final class InvoiceControllerTest extends WebTestCase
         self::assertSame('Facture', $invoice->getDocumentLabel());
         self::assertSame('Garage EBP', $invoice->getBilling()['companyName']);
         self::assertSame('CLI-74', $invoice->getBilling()['customerCode']);
+        self::assertInstanceOf(CustomerInvoice::class, static::getContainer()->get(CustomerInvoiceRepository::class)->findOneBy(['customer' => $this->user, 'sourceId' => 'primary:FA-2025']));
 
         $this->browser->request('GET', '/mes-factures/status');
         self::assertResponseIsSuccessful();
         $status = json_decode($this->browser->getResponse()->getContent(), true, flags: JSON_THROW_ON_ERROR);
-        self::assertSame(1, $status['documentCount']);
+        self::assertSame(2, $status['documentCount']);
         self::assertNotEmpty($status['status']['lastSyncedAt']);
 
         $this->browser->request('GET', '/mes-factures/' . $invoice->getId() . '/pdf');

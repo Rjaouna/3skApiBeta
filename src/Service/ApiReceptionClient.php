@@ -231,9 +231,13 @@ final class ApiReceptionClient
     }
 
     /** @return array<string, mixed> */
-    public function requestInvoiceImport(ApiReceptionConnection $connection, string $uniqueId): array
+    public function requestInvoiceImport(ApiReceptionConnection $connection, string $uniqueId, ?string $fromDate = null, ?string $toDate = null): array
     {
-        return $this->requestJson($connection, '/api/v1/invoice-imports', $this->apiKey($connection), 'POST', ['uniqueId' => $uniqueId]);
+        return $this->requestJson($connection, '/api/v1/invoice-imports', $this->apiKey($connection), 'POST', [
+            'uniqueId' => $uniqueId,
+            'fromDate' => $fromDate,
+            'toDate' => $toDate,
+        ]);
     }
 
     /** @return array<string, mixed> */

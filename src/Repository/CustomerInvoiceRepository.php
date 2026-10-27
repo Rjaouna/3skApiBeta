@@ -136,10 +136,16 @@ final class CustomerInvoiceRepository extends ServiceEntityRepository
     }
 
     /** @param list<string> $sourceIds */
-    public function removeMissingForCustomer(User $user, array $sourceIds): int
+    public function removeMissingForCustomer(User $user, array $sourceIds, ?\DateTimeImmutable $from = null, ?\DateTimeImmutable $to = null): int
     {
+        if (($from === null) !== ($to === null)) throw new \InvalidArgumentException('La période de suppression des documents est incomplète.');
         $builder = $this->createQueryBuilder('invoice')->delete()
             ->where('invoice.customer = :customer')->setParameter('customer', $user);
+        if ($from !== null && $to !== null) {
+            $builder->andWhere('invoice.documentDate >= :from AND invoice.documentDate <= :to')
+                ->setParameter('from', $from)
+                ->setParameter('to', $to->setTime(23, 59, 59));
+        }
         if ($sourceIds !== []) $builder->andWhere('invoice.sourceId NOT IN (:sourceIds)')->setParameter('sourceIds', $sourceIds);
 
         return $builder->getQuery()->execute();

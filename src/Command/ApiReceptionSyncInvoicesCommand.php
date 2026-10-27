@@ -18,7 +18,7 @@ final class ApiReceptionSyncInvoicesCommand extends Command
 
     protected function configure(): void
     {
-        $this->addOption('request-all', null, InputOption::VALUE_NONE, 'Demande d’abord le chargement des factures pour tous les clients EBP actifs.');
+        $this->addOption('request-all', null, InputOption::VALUE_NONE, 'Demande d’abord les documents des 10 derniers jours pour tous les clients EBP actifs.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
